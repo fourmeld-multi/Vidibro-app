@@ -24,9 +24,12 @@ export default function ChatDrawer({
 
   useEffect(() => {
     return subscribe("chat", (msg) => {
-      const { text } = msg.payload as ChatPayload;
-      setMessages((prev) => [...prev, { id: `${Date.now()}-${Math.random()}`, text, mine: false }]);
-      if (!open) setUnread((u) => u + 1);
+      const payload = msg.payload as ChatPayload;
+      const textStr = payload.text || "";
+      if (textStr) {
+        setMessages((prev) => [...prev, { id: `${Date.now()}-${Math.random()}`, text: textStr, mine: false }]);
+        if (!open) setUnread((u) => u + 1);
+      }
     });
   }, [subscribe, open]);
 

@@ -11,6 +11,8 @@ import MiniGameOverlay from "@/components/MiniGameOverlay";
 import ChatDrawer from "@/components/ChatDrawer";
 import PhoneMockup from "@/components/PhoneMockup";
 import FeatureShowcase from "@/components/FeatureShowcase";
+import TextChatContainer from "@/components/TextChatContainer";
+import AudioChatContainer from "@/components/AudioChatContainer";
 import { useWebRTC, type ChatMode } from "@/hooks/useWebRTC";
 
 const BADGES = [
@@ -190,67 +192,27 @@ export default function Home() {
             )}
 
             {mode === "audio" && (
-              <div className="glass flex flex-col items-center gap-4 rounded-3xl px-6 py-10 text-center mx-auto my-auto max-w-md">
-                <div className="btn-gradient flex h-16 w-16 items-center justify-center rounded-full shadow-lg">
-                  <PhoneCall size={26} className="text-white" />
-                </div>
-                <p className="text-sm font-semibold text-white">
-                  {connectionState === "waiting" && "Looking for someone to chat with…"}
-                  {connectionState === "connecting" && "Establishing connection…"}
-                  {connectionState === "connected" && "Audio call connected"}
-                  {connectionState === "disconnected" && "Stranger disconnected"}
-                </p>
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={toggleMic}
-                    className={`flex h-11 w-11 items-center justify-center rounded-full transition ${
-                      micEnabled ? "bg-white/15 text-white hover:bg-white/25" : "bg-red-500 text-white shadow-lg"
-                    }`}
-                  >
-                    {micEnabled ? <Mic size={18} /> : <MicOff size={18} />}
-                  </button>
-                  <button
-                    onClick={skipToNext}
-                    className="btn-gradient px-6 py-2.5 rounded-full text-xs font-bold text-white shadow-md flex items-center gap-1.5"
-                  >
-                    <SkipForward size={15} /> Next
-                  </button>
-                  <button
-                    onClick={leaveMatch}
-                    className="flex h-11 w-11 items-center justify-center rounded-full bg-red-600 hover:bg-red-700 text-white shadow-lg"
-                    title="End Call"
-                  >
-                    <PhoneCall size={18} className="rotate-[135deg]" />
-                  </button>
-                </div>
-              </div>
+              <AudioChatContainer
+                localStream={localStream}
+                remoteStream={remoteStream}
+                connectionState={connectionState}
+                dataChannelOpen={dataChannelOpen}
+                sendMessage={sendMessage}
+                subscribe={subscribe}
+                skipToNext={skipToNext}
+                leaveMatch={leaveMatch}
+              />
             )}
 
             {mode === "text" && (
-              <div className="glass flex flex-col items-center gap-3 rounded-3xl px-6 py-8 text-center mx-auto my-auto max-w-md">
-                <MessageSquare size={26} className="text-purple-300" />
-                <p className="text-sm font-semibold text-white">
-                  {connectionState === "waiting" && "Looking for someone to chat with…"}
-                  {connectionState === "connecting" && "Connecting…"}
-                  {connectionState === "connected" && "Connected — say hi in the chat below"}
-                  {connectionState === "disconnected" && "Stranger disconnected"}
-                </p>
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={skipToNext}
-                    className="btn-gradient px-6 py-2.5 rounded-full text-xs font-bold text-white shadow-md flex items-center gap-1.5"
-                  >
-                    <SkipForward size={15} /> Next
-                  </button>
-                  <button
-                    onClick={leaveMatch}
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-red-600 hover:bg-red-700 text-white shadow-lg"
-                    title="End Call"
-                  >
-                    <PhoneCall size={16} className="rotate-[135deg]" />
-                  </button>
-                </div>
-              </div>
+              <TextChatContainer
+                connectionState={connectionState}
+                dataChannelOpen={dataChannelOpen}
+                sendMessage={sendMessage}
+                subscribe={subscribe}
+                skipToNext={skipToNext}
+                leaveMatch={leaveMatch}
+              />
             )}
 
             {mode !== "video" && (
@@ -276,7 +238,7 @@ export default function Home() {
         )}
       </main>
 
-      {isActive && mode !== "video" && (
+      {isActive && mode === "audio" && (
         <ChatDrawer sendMessage={sendMessage} subscribe={subscribe} connected={dataChannelOpen} />
       )}
     </div>

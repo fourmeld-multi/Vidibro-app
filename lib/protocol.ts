@@ -21,7 +21,9 @@ export interface Envelope<T = unknown> {
 }
 
 export interface ChatPayload {
-  text: string;
+  text?: string;
+  imageUrl?: string;
+  sticker?: string;
 }
 
 export type ReactionId = "boom" | "wow" | "lol" | "heart" | "fire";

@@ -8,7 +8,6 @@ import {
   Video as VideoIcon,
   VideoOff,
   PhoneOff,
-  SkipForward,
   MessageSquare,
   Sparkles,
   Send,
@@ -17,6 +16,7 @@ import {
   Volume2,
   VolumeX,
   SwitchCamera,
+  SkipForward,
 } from "lucide-react";
 import LogoMark from "@/components/LogoMark";
 import type { MessageType, ReactionId, ReactionPayload, ChatPayload, SubtitlePayload } from "@/lib/protocol";
@@ -68,6 +68,7 @@ export default function VideoContainer({
 }: Props) {
   const localVideoRef = useRef<HTMLVideoElement | null>(null);
   const remoteVideoRef = useRef<HTMLVideoElement | null>(null);
+  const videoScreenRef = useRef<HTMLDivElement | null>(null);
   const chatListRef = useRef<HTMLDivElement | null>(null);
 
   // Audio/Video/Speaker controls
@@ -79,7 +80,6 @@ export default function VideoContainer({
 
   // Google Meet Auto-Hiding Controls Bar state
   const [showControls, setShowControls] = useState(true);
-  const controlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Chat & Reactions popups state
   const [chatOpen, setChatOpen] = useState(false);
@@ -101,23 +101,21 @@ export default function VideoContainer({
     }
   }, [remoteStream, speakerEnabled]);
 
-  // Auto-hide controls timer
-  const resetControlsTimer = () => {
-    setShowControls(true);
-    if (controlsTimeoutRef.current) clearTimeout(controlsTimeoutRef.current);
-    controlsTimeoutRef.current = setTimeout(() => {
-      if (!chatOpen && !reactionsOpen) {
-        setShowControls(false);
-      }
-    }, 4500);
-  };
-
+  // Google Meet 4-second auto-hide timer
   useEffect(() => {
-    resetControlsTimer();
-    return () => {
-      if (controlsTimeoutRef.current) clearTimeout(controlsTimeoutRef.current);
-    };
-  }, [chatOpen, reactionsOpen]);
+    if (!showControls || chatOpen || reactionsOpen) return;
+    const timer = setTimeout(() => {
+      setShowControls(false);
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, [showControls, chatOpen, reactionsOpen]);
+
+  // Toggle controls on screen tap
+  const handleTapScreen = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowControls((prev) => !prev);
+    if (reactionsOpen) setReactionsOpen(false);
+  };
 
   // Listen for incoming chat messages over WebRTC data channel
   useEffect(() => {
@@ -208,7 +206,7 @@ export default function VideoContainer({
         localVideoRef.current.srcObject = newStream;
       }
     } catch {
-      // Ignore if device single camera
+      // Ignore if single camera device
     }
   }
 
@@ -243,35 +241,28 @@ export default function VideoContainer({
     setTimeout(() => {
       setFloatingParticles((prev) => prev.filter((p) => p.id !== newParticle.id));
     }, 2500);
-
-    // Keep reaction panel open continuously until explicit user tap!
   }
 
   const isConnected = connectionState === "connected";
 
   return (
-    <div
-      onMouseMove={resetControlsTimer}
-      onTouchStart={resetControlsTimer}
-      onClick={resetControlsTimer}
-      className="relative flex flex-col w-full h-[100dvh] overflow-hidden bg-[#070414] select-none"
-    >
+    <div className="relative flex flex-col w-full h-[100dvh] overflow-hidden bg-[#070414] select-none">
       {/* Dynamic Viewport Container */}
       <div className={`relative flex-1 w-full overflow-hidden flex ${chatOpen ? "flex-col sm:flex-row" : ""}`}>
         
         {/* Main Video Screen (Stranger's Video taking main stage) */}
-        <div className={`relative flex-1 h-full w-full bg-black overflow-hidden ${chatOpen ? "h-[45%] sm:h-full" : "h-full"}`}>
+        <div ref={videoScreenRef} className={`relative flex-1 h-full w-full bg-black overflow-hidden ${chatOpen ? "h-[40%] sm:h-full" : "h-full"}`}>
           {isConnected && remoteStream ? (
             <video
               ref={remoteVideoRef}
               autoPlay
               playsInline
-              className="h-full w-full object-cover object-center"
+              className="h-full w-full object-cover object-center pointer-events-none"
             />
           ) : (
             /* Radar Orb Matching Indicator */
-            <div className="flex flex-col items-center justify-center h-full w-full px-6 text-center bg-gradient-to-b from-[#140b2e] via-[#0d0722] to-[#070414]">
-              <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-purple-600/20 border border-purple-400/30 mb-5">
+            <div className="flex flex-col items-center justify-center h-full w-full px-6 text-center bg-gradient-to-b from-[#140b2e] via-[#0d0722] to-[#070414] pointer-events-none">
+              <div className="relative flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-full bg-purple-600/20 border border-purple-400/30 mb-3 sm:mb-5">
                 <motion.span
                   animate={{ scale: [1, 2.2, 1], opacity: [0.6, 0, 0.6] }}
                   transition={{ repeat: Infinity, duration: 2.4, ease: "easeInOut" }}
@@ -282,25 +273,31 @@ export default function VideoContainer({
                   transition={{ repeat: Infinity, duration: 1.7, ease: "easeInOut" }}
                   className="absolute inset-0 rounded-full bg-pink-500/30"
                 />
-                <div className="relative flex h-14 w-14 items-center justify-center rounded-full btn-gradient shadow-xl shadow-purple-500/40">
-                  <Sparkles className="text-white animate-spin-slow" size={26} />
+                <div className="relative flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full btn-gradient shadow-xl shadow-purple-500/40">
+                  <Sparkles className="text-white animate-spin-slow" size={22} />
                 </div>
               </div>
 
-              <p className="text-base sm:text-lg font-black text-white tracking-wide">
+              <p className="text-sm sm:text-lg font-black text-white tracking-wide">
                 {connectionState === "waiting" && "Looking for someone to chat with…"}
                 {connectionState === "connecting" && "Establishing encrypted WebRTC connection…"}
                 {connectionState === "disconnected" && "Stranger left the match."}
                 {connectionState === "idle" && "Press Start to match with a stranger."}
               </p>
-              <p className="text-xs text-purple-200/70 mt-1 max-w-sm">
+              <p className="text-[11px] sm:text-xs text-purple-200/70 mt-1 max-w-sm">
                 Vidibro matches you instantly with online strangers in HD video & encrypted audio.
               </p>
             </div>
           )}
 
+          {/* Clean Screen Tap Overlay */}
+          <div
+            onClick={handleTapScreen}
+            className="absolute inset-0 z-10 cursor-pointer"
+          />
+
           {/* Static Top-Left Vidibro Logo Badge (Overlapping video screen) */}
-          <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-30 flex items-center gap-2 bg-black/65 backdrop-blur-xl px-3 py-1.5 rounded-full border border-white/15 shadow-xl">
+          <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-30 flex items-center gap-2 bg-black/65 backdrop-blur-xl px-3 py-1.5 rounded-full border border-white/15 shadow-xl pointer-events-none">
             <div className="btn-gradient flex h-7 w-7 items-center justify-center rounded-xl shadow-md">
               <LogoMark size={14} className="text-white" />
             </div>
@@ -310,9 +307,25 @@ export default function VideoContainer({
             <span className="text-[10px] sm:text-xs font-medium text-purple-200">{isConnected ? "Stranger" : "Matching…"}</span>
           </div>
 
+          {/* SPEAKER / SOUND OPTION ALWAYS ON TOP-RIGHT CORNER */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              if (reactionsOpen) setReactionsOpen(false);
+              toggleSpeaker();
+            }}
+            className={`absolute top-3 right-3 sm:top-4 sm:right-4 z-50 flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full transition border border-white/20 shadow-2xl backdrop-blur-xl ${
+              speakerEnabled ? "bg-black/75 hover:bg-black/90 text-purple-300" : "bg-red-500 text-white shadow-lg shadow-red-500/40"
+            }`}
+            aria-label="Toggle speaker sound"
+            title={speakerEnabled ? "Mute Speaker Sound" : "Unmute Speaker Sound"}
+          >
+            {speakerEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
+          </button>
+
           {/* Floating Speech Subtitles */}
           {remoteSubtitle && (
-            <div className="absolute bottom-24 left-1/2 -translate-x-1/2 max-w-[85%] z-20 rounded-2xl bg-black/80 backdrop-blur-md px-4 py-2 text-center text-xs sm:text-sm font-medium text-white border border-white/15">
+            <div className="absolute bottom-24 left-1/2 -translate-x-1/2 max-w-[85%] z-20 rounded-2xl bg-black/80 backdrop-blur-md px-4 py-2 text-center text-xs sm:text-sm font-medium text-white border border-white/15 pointer-events-none">
               {remoteSubtitle}
             </div>
           )}
@@ -331,49 +344,55 @@ export default function VideoContainer({
             </motion.div>
           ))}
 
-          {/* Small Floating "You" PIP Card (Overlapping Top-Right Corner) */}
+          {/* DRAGGABLE "YOU" PIP CARD */}
           <motion.div
             drag
-            dragConstraints={{ top: 10, left: 10, right: 300, bottom: 400 }}
-            className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 w-28 sm:w-44 aspect-video rounded-xl sm:rounded-2xl overflow-hidden border-2 border-white/20 bg-black shadow-2xl group cursor-grab active:cursor-grabbing"
+            dragConstraints={videoScreenRef}
+            dragElastic={0.05}
+            dragMomentum={false}
+            className="absolute top-16 right-3 sm:top-16 sm:right-4 z-30 w-24 sm:w-44 aspect-video rounded-xl sm:rounded-2xl overflow-hidden border-2 border-white/20 bg-black shadow-2xl group cursor-grab active:cursor-grabbing"
           >
             <video
               ref={localVideoRef}
               autoPlay
               muted
               playsInline
-              className={`h-full w-full object-cover ${!camEnabled ? "hidden" : ""}`}
+              className={`h-full w-full object-cover pointer-events-none ${!camEnabled ? "hidden" : ""}`}
             />
             {!camEnabled && (
-              <div className="flex h-full w-full items-center justify-center bg-gray-900 text-xs text-gray-400 font-medium">
+              <div className="flex h-full w-full items-center justify-center bg-gray-900 text-xs text-gray-400 font-medium pointer-events-none">
                 Cam Off
               </div>
             )}
 
-            {/* Flip Camera Button on Your PIP Video Box! */}
+            {/* Flip Camera Button on Your PIP Video Box */}
             <button
-              onClick={flipCamera}
-              className="absolute top-1.5 right-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-black/70 hover:bg-black/90 text-cyan-300 backdrop-blur-md border border-white/20 z-40 shadow-md transition transform hover:scale-110"
+              onClick={(e) => {
+                e.stopPropagation();
+                if (reactionsOpen) setReactionsOpen(false);
+                flipCamera();
+              }}
+              className="absolute top-1 right-1 flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-black/75 hover:bg-black/95 text-cyan-300 backdrop-blur-md border border-white/20 z-40 shadow-md transition transform hover:scale-110"
               aria-label="Flip Camera"
               title="Flip Camera"
             >
-              <SwitchCamera size={12} />
+              <SwitchCamera size={11} />
             </button>
 
-            {/* Persistent GMeet Mic Status Indicator on PIP Card */}
-            <div className="absolute bottom-1.5 left-1.5 flex items-center gap-1 bg-black/70 backdrop-blur-md px-2 py-0.5 rounded-md text-[9px] sm:text-[10px] font-bold text-white border border-white/10">
+            {/* Mic Status Indicator on PIP Card */}
+            <div className="absolute bottom-1 left-1 flex items-center gap-1 bg-black/70 backdrop-blur-md px-1.5 py-0.5 rounded-md text-[8px] sm:text-[10px] font-bold text-white border border-white/10 pointer-events-none">
               {micEnabled ? (
-                <Mic size={10} className="text-emerald-400" />
+                <Mic size={9} className="text-emerald-400" />
               ) : (
-                <MicOff size={10} className="text-red-400" />
+                <MicOff size={9} className="text-red-400" />
               )}
               <span>You</span>
             </div>
           </motion.div>
 
-          {/* Google Meet Floating Controls Bar (Perfectly aligned on all devices!) */}
+          {/* Google Meet Floating Controls Bar */}
           <AnimatePresence>
-            {showControls && (
+            {showControls && !chatOpen && (
               <motion.div
                 initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -381,9 +400,13 @@ export default function VideoContainer({
                 transition={{ duration: 0.25 }}
                 className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 sm:gap-3 bg-black/80 backdrop-blur-2xl px-4 py-2.5 rounded-full border border-white/15 shadow-2xl max-w-[95vw]"
               >
-                {/* 1. Mute / Unmute Mic */}
+                {/* 1. Mic Mute / Unmute */}
                 <button
-                  onClick={toggleMic}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (reactionsOpen) setReactionsOpen(false);
+                    toggleMic();
+                  }}
                   className={`flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full transition ${
                     micEnabled ? "bg-white/15 hover:bg-white/25 text-white" : "bg-red-500 text-white shadow-lg shadow-red-500/30"
                   }`}
@@ -395,7 +418,11 @@ export default function VideoContainer({
 
                 {/* 2. Camera On / Off */}
                 <button
-                  onClick={toggleCam}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (reactionsOpen) setReactionsOpen(false);
+                    toggleCam();
+                  }}
                   className={`flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full transition ${
                     camEnabled ? "bg-white/15 hover:bg-white/25 text-white" : "bg-red-500 text-white shadow-lg shadow-red-500/30"
                   }`}
@@ -405,16 +432,16 @@ export default function VideoContainer({
                   {camEnabled ? <VideoIcon size={18} /> : <VideoOff size={18} />}
                 </button>
 
-                {/* 3. Speaker Sound On / Off */}
+                {/* 3. NEXT BUTTON ALWAYS IN MIDDLE */}
                 <button
-                  onClick={toggleSpeaker}
-                  className={`flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full transition ${
-                    speakerEnabled ? "bg-white/15 hover:bg-white/25 text-purple-300" : "bg-red-500 text-white shadow-lg"
-                  }`}
-                  aria-label="Toggle speaker sound"
-                  title={speakerEnabled ? "Mute Speaker Sound" : "Unmute Speaker Sound"}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (reactionsOpen) setReactionsOpen(false);
+                    skipToNext();
+                  }}
+                  className="btn-gradient flex items-center justify-center px-6 py-2.5 rounded-full text-xs sm:text-sm font-extrabold text-white shadow-xl hover:scale-105 transition tracking-wider uppercase"
                 >
-                  {speakerEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
+                  NEXT
                 </button>
 
                 {/* 4. 3D Emoji Reactions Toggle */}
@@ -436,6 +463,7 @@ export default function VideoContainer({
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
+                    if (reactionsOpen) setReactionsOpen(false);
                     setChatOpen((v) => !v);
                     setUnreadCount(0);
                   }}
@@ -453,18 +481,13 @@ export default function VideoContainer({
                   )}
                 </button>
 
-                {/* 6. Next Person */}
+                {/* 6. End Call (RED CIRCLE ICON) */}
                 <button
-                  onClick={skipToNext}
-                  className="btn-gradient flex items-center gap-1.5 px-4 py-2.5 rounded-full text-xs sm:text-sm font-bold text-white shadow-lg hover:scale-105 transition"
-                >
-                  <SkipForward size={16} />
-                  <span className="hidden sm:inline">Next</span>
-                </button>
-
-                {/* 7. End Call (RED CIRCLE ICON - NO TEXT!) */}
-                <button
-                  onClick={leaveMatch}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (reactionsOpen) setReactionsOpen(false);
+                    leaveMatch();
+                  }}
                   className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-red-600 hover:bg-red-700 text-white shadow-xl shadow-red-600/30 transition transform hover:scale-105 active:scale-95"
                   aria-label="End call"
                   title="End call"
@@ -475,7 +498,7 @@ export default function VideoContainer({
             )}
           </AnimatePresence>
 
-          {/* 3D Animated Emoji Picker (Stays open for continuous tapping!) */}
+          {/* 3D Animated Emoji Picker */}
           <AnimatePresence>
             {reactionsOpen && (
               <motion.div
@@ -488,7 +511,10 @@ export default function VideoContainer({
                 {EMOJI_REACTIONS.map((r) => (
                   <button
                     key={r.id}
-                    onClick={() => sendReaction(r.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      sendReaction(r.id);
+                    }}
                     className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 hover:bg-white/25 text-2xl sm:text-3xl transition transform hover:scale-125 active:scale-90 shadow-md"
                     title={r.label}
                   >
@@ -508,8 +534,9 @@ export default function VideoContainer({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 40 }}
               transition={{ duration: 0.3 }}
-              className={`z-30 flex flex-col bg-[#090518]/90 backdrop-blur-2xl border-purple-500/20 ${
-                "w-full sm:w-80 lg:w-96 border-t sm:border-t-0 sm:border-l h-[55%] sm:h-full"
+              onClick={(e) => e.stopPropagation()}
+              className={`z-30 flex flex-col bg-[#090518]/95 backdrop-blur-2xl border-purple-500/20 ${
+                "w-full sm:w-80 lg:w-96 border-t sm:border-t-0 sm:border-l h-[60%] sm:h-full"
               }`}
             >
               {/* Chat Header */}
@@ -518,12 +545,20 @@ export default function VideoContainer({
                   <MessageSquare size={16} className="text-cyan-400" />
                   <span className="text-sm font-bold text-white">In-call messages</span>
                 </div>
-                <button
-                  onClick={() => setChatOpen(false)}
-                  className="rounded-full p-1 text-purple-300 hover:bg-white/10 hover:text-white"
-                >
-                  <X size={18} />
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={skipToNext}
+                    className="btn-gradient px-3 py-1 rounded-full text-[11px] font-bold text-white shadow-md flex items-center gap-1"
+                  >
+                    <SkipForward size={12} /> NEXT
+                  </button>
+                  <button
+                    onClick={() => setChatOpen(false)}
+                    className="rounded-full p-1 text-purple-300 hover:bg-white/10 hover:text-white"
+                  >
+                    <X size={18} />
+                  </button>
+                </div>
               </div>
 
               {/* Notice Banner */}
