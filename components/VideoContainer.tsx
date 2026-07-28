@@ -111,16 +111,10 @@ export default function VideoContainer({
 
   // Web Audio API Voice Speech Detector
   useEffect(() => {
-    if (!localStream || !micEnabled) {
-      setIsSpeaking(false);
-      return;
-    }
+    if (!localStream || !micEnabled) return;
 
     const audioTrack = localStream.getAudioTracks()[0];
-    if (!audioTrack || !audioTrack.enabled) {
-      setIsSpeaking(false);
-      return;
-    }
+    if (!audioTrack || !audioTrack.enabled) return;
 
     let audioContext: AudioContext | null = null;
     let animationId: number | null = null;
@@ -157,6 +151,7 @@ export default function VideoContainer({
       if (audioContext && audioContext.state !== "closed") {
         audioContext.close();
       }
+      setIsSpeaking(false);
     };
   }, [localStream, micEnabled]);
 
@@ -296,11 +291,16 @@ export default function VideoContainer({
     const meta = EMOJI_REACTIONS.find((r) => r.id === reactionId);
     const emojiSymbol = meta ? meta.emoji : "🔥";
 
+    // sendReaction only ever runs from the emoji button's onClick — never
+    // during render — so the randomized horizontal drift here is safe
+    // despite the purity rule's static (render-agnostic) heuristic.
+    /* eslint-disable react-hooks/purity */
     const newParticle: FloatingParticle = {
       id: crypto.randomUUID(),
       emoji: emojiSymbol,
       x: 25 + Math.random() * 50,
     };
+    /* eslint-enable react-hooks/purity */
 
     setFloatingParticles((prev) => [...prev.slice(-12), newParticle]);
     setTimeout(() => {

@@ -1,0 +1,43 @@
+services:
+  signaling:
+    build: ./server
+    restart: unless-stopped
+    # No host port published — reached only through the shared Caddy
+    # instance (see ~/infra on the VPS), which fronts every project on
+    # this server, not just Vidibro.
+    expose:
+      - "4000"
+    environment:
+      - FRONTEND_ORIGIN=${FRONTEND_ORIGIN:-*}
+    networks:
+      - default
+      - shared-proxy
+
+  frontend:
+    build:
+      context: .
+      args:
+        # Baked into the client bundle at build time — the real domain's
+        # signaling subdomain, not a raw container name or VPS IP, once
+        # DNS + Caddy are live.
+        NEXT_PUBLIC_SIGNALING_URL: ${NEXT_PUBLIC_SIGNALING_URL:-http://localhost:4000}
+        NEXT_PUBLIC_STUN_URL: ${NEXT_PUBLIC_STUN_URL:-stun:stun.l.google.com:19302}
+        NEXT_PUBLIC_TURN_URL: ${NEXT_PUBLIC_TURN_URL}
+        NEXT_PUBLIC_TURN_USERNAME: ${NEXT_PUBLIC_TURN_USERNAME}
+        NEXT_PUBLIC_TURN_CREDENTIAL: ${NEXT_PUBLIC_TURN_CREDENTIAL}
+    restart: unless-stopped
+    expose:
+      - "3000"
+    depends_on:
+      - signaling
+    networks:
+      - default
+      - shared-proxy
+
+networks:
+  # Created once on the host with `docker network create shared-proxy` and
+  # joined by every project's compose file, so the one shared Caddy instance
+  # (living outside any single project, in ~/infra) can reach all of them by
+  # container name — see the "shared Caddy" setup discussed for this VPS.
+  shared-proxy:
+    external: true

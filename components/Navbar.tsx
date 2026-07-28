@@ -8,13 +8,18 @@ import LogoMark from "@/components/LogoMark";
 import { LANGUAGES, type LanguageCode } from "@/lib/translations";
 
 type Props = {
-  currentLang: LanguageCode;
-  onSelectLang: (lang: LanguageCode) => void;
+  currentLang?: LanguageCode;
+  onSelectLang?: (lang: LanguageCode) => void;
   onStartTextChat?: () => void;
   onStartVideoChat?: () => void;
 };
 
-export default function Navbar({ currentLang, onSelectLang, onStartTextChat, onStartVideoChat }: Props) {
+export default function Navbar({
+  currentLang = "EN",
+  onSelectLang,
+  onStartTextChat,
+  onStartVideoChat,
+}: Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
 
@@ -112,7 +117,7 @@ export default function Navbar({ currentLang, onSelectLang, onStartTextChat, onS
                     <button
                       key={lang.code}
                       onClick={() => {
-                        onSelectLang(lang.code);
+                        onSelectLang?.(lang.code);
                         setLangOpen(false);
                       }}
                       className={`w-full text-left px-3 py-2 rounded-xl transition flex items-center justify-between ${

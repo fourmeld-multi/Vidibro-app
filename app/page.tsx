@@ -1,36 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 import { Video, Sparkles, MessageSquare, PhoneCall, ShieldCheck, Zap, Globe2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import VideoContainer from "@/components/VideoContainer";
-import TextChatContainer from "@/components/TextChatContainer";
-import AudioChatContainer from "@/components/AudioChatContainer";
-import ImpactReactionOverlay from "@/components/ImpactReactionOverlay";
-import MiniGameOverlay from "@/components/MiniGameOverlay";
 import PhoneMockup from "@/components/PhoneMockup";
 import FeatureShowcase from "@/components/FeatureShowcase";
-import { useWebRTC, type ChatMode } from "@/hooks/useWebRTC";
 import { TRANSLATIONS, type LanguageCode } from "@/lib/translations";
 
 export default function Home() {
-  const {
-    connectionState,
-    isHost,
-    mode,
-    localStream,
-    remoteStream,
-    dataChannelOpen,
-    joinQueue,
-    leaveMatch,
-    skipToNext,
-    sendMessage,
-    subscribe,
-  } = useWebRTC();
-
-  const [starting, setStarting] = useState(false);
+  const router = useRouter();
   const [lang, setLang] = useState<LanguageCode>("EN");
 
   const t = TRANSLATIONS[lang] || TRANSLATIONS.EN;
@@ -41,37 +22,18 @@ export default function Home() {
     { icon: Globe2, label: t.freePrivate },
   ];
 
-  async function handleStart(chatMode: ChatMode) {
-    setStarting(true);
-    try {
-      await joinQueue(chatMode);
-    } catch {
-      // Camera/mic permission denied or unavailable
-    } finally {
-      setStarting(false);
-    }
-  }
-
-  const isActive = connectionState !== "idle";
-  const overlaysReady = connectionState === "connected" && dataChannelOpen;
-
   return (
     <div className="relative flex min-h-screen flex-1 flex-col font-sans bg-[#070414]">
-      {/* Navbar Header with Working Language Switcher */}
-      {!isActive && (
-        <Navbar
-          currentLang={lang}
-          onSelectLang={setLang}
-          onStartTextChat={() => handleStart("text")}
-          onStartVideoChat={() => handleStart("video")}
-        />
-      )}
+      <Navbar
+        currentLang={lang}
+        onSelectLang={setLang}
+        onStartTextChat={() => router.push("/text-chat")}
+        onStartVideoChat={() => router.push("/video-chat")}
+      />
 
-      <main className={`w-full flex-1 flex flex-col ${isActive ? "p-0 max-w-none" : "mx-auto max-w-6xl px-4 sm:px-6"}`}>
-        {!isActive ? (
-          <>
-            {/* Hero Section */}
-            <div className="grid flex-1 items-center gap-8 py-6 sm:py-16 lg:grid-cols-2 lg:py-20">
+      <main className="w-full flex-1 flex flex-col mx-auto max-w-6xl px-4 sm:px-6">
+        {/* Hero Section */}
+        <div className="grid flex-1 items-center gap-8 py-6 sm:py-16 lg:grid-cols-2 lg:py-20">
               <div className="flex flex-col items-center gap-4 sm:gap-6 text-center lg:items-start lg:text-left">
                 <motion.div
                   initial={{ opacity: 0, y: 12 }}
@@ -110,20 +72,18 @@ export default function Home() {
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
-                    onClick={() => handleStart("video")}
-                    disabled={starting}
-                    className="btn-gradient glow-pulse flex w-full sm:w-auto items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm sm:text-base font-bold text-white shadow-xl shadow-purple-500/25 transition disabled:opacity-50"
+                    onClick={() => router.push("/video-chat")}
+                    className="btn-gradient glow-pulse flex w-full sm:w-auto items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm sm:text-base font-bold text-white shadow-xl shadow-purple-500/25 transition"
                   >
                     <Video size={18} />
-                    {starting ? t.connecting : t.startVideo}
+                    {t.startVideo}
                   </motion.button>
 
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
-                    onClick={() => handleStart("audio")}
-                    disabled={starting}
-                    className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 px-6 py-3.5 text-sm sm:text-base font-bold text-white backdrop-blur-xl transition disabled:opacity-50"
+                    onClick={() => router.push("/audio-chat")}
+                    className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 px-6 py-3.5 text-sm sm:text-base font-bold text-white backdrop-blur-xl transition"
                   >
                     <PhoneCall size={17} className="text-cyan-300" />
                     {t.startAudio}
@@ -132,9 +92,8 @@ export default function Home() {
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
-                    onClick={() => handleStart("text")}
-                    disabled={starting}
-                    className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 px-6 py-3.5 text-sm sm:text-base font-bold text-white backdrop-blur-xl transition disabled:opacity-50"
+                    onClick={() => router.push("/text-chat")}
+                    className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 px-6 py-3.5 text-sm sm:text-base font-bold text-white backdrop-blur-xl transition"
                   >
                     <MessageSquare size={17} className="text-purple-300" />
                     {t.startText}
@@ -148,79 +107,17 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Feature Showcase & Why Vidibro is the Best Free Tool */}
-            <div id="features">
-              <FeatureShowcase currentLang={lang} />
-            </div>
-          </>
-        ) : (
-          /* Active Call State - Pure Full Viewport */
-          <div className="w-full h-dvh flex flex-col overflow-hidden">
-            {mode === "video" && (
-              <VideoContainer
-                localStream={localStream}
-                remoteStream={remoteStream}
-                connectionState={connectionState}
-                dataChannelOpen={dataChannelOpen}
-                sendMessage={sendMessage}
-                subscribe={subscribe}
-                skipToNext={skipToNext}
-                leaveMatch={leaveMatch}
-                isHost={isHost}
-              />
-            )}
-
-            {mode === "audio" && (
-              <AudioChatContainer
-                localStream={localStream}
-                remoteStream={remoteStream}
-                connectionState={connectionState}
-                dataChannelOpen={dataChannelOpen}
-                sendMessage={sendMessage}
-                subscribe={subscribe}
-                skipToNext={skipToNext}
-                leaveMatch={leaveMatch}
-              />
-            )}
-
-            {mode === "text" && (
-              <TextChatContainer
-                connectionState={connectionState}
-                dataChannelOpen={dataChannelOpen}
-                sendMessage={sendMessage}
-                subscribe={subscribe}
-                skipToNext={skipToNext}
-                leaveMatch={leaveMatch}
-              />
-            )}
-
-            {mode !== "video" && mode !== "text" && mode !== "audio" && (
-              <AnimatePresence>
-                {overlaysReady && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    className="flex flex-col gap-4"
-                  >
-                    <ImpactReactionOverlay sendMessage={sendMessage} subscribe={subscribe} />
-                    <MiniGameOverlay isHost={isHost} sendMessage={sendMessage} subscribe={subscribe} />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            )}
-          </div>
-        )}
+        {/* Feature Showcase & Why Vidibro is the Best Free Tool */}
+        <div id="features">
+          <FeatureShowcase currentLang={lang} />
+        </div>
       </main>
 
-      {/* Multi-column Footer with Working Redirects */}
-      {!isActive && (
-        <Footer
-          onStartVideoChat={() => handleStart("video")}
-          onStartTextChat={() => handleStart("text")}
-          onStartAudioChat={() => handleStart("audio")}
-        />
-      )}
+      <Footer
+        onStartVideoChat={() => router.push("/video-chat")}
+        onStartTextChat={() => router.push("/text-chat")}
+        onStartAudioChat={() => router.push("/audio-chat")}
+      />
     </div>
   );
 }

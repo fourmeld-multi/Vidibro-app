@@ -286,7 +286,7 @@ export default function AudioChatContainer({
               <span>Icebreaker Card</span>
             </div>
             <p className="text-xs sm:text-sm font-semibold text-white leading-relaxed">
-              "{ICEBREAKER_QUESTIONS[icebreakerIndex]}"
+              &quot;{ICEBREAKER_QUESTIONS[icebreakerIndex]}&quot;
             </p>
             <button
               onClick={handleNextIcebreaker}
