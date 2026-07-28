@@ -21,7 +21,6 @@ import {
   MessageSquare,
   Send,
   X,
-  ShieldCheck,
 } from "lucide-react";
 import LogoMark from "@/components/LogoMark";
 import type { MessageType, ChatPayload } from "@/lib/protocol";
@@ -220,8 +219,8 @@ export default function AudioChatContainer({
         </div>
       </header>
 
-      {/* Main Center Stage: 3D Voice Orb Visualizer */}
-      <main className="relative flex-1 flex flex-col items-center justify-between p-6 text-center bg-gradient-to-b from-[#140a32] via-[#0b061d] to-[#070414] overflow-hidden">
+      {/* Main Center Stage: 3D Voice Orb Visualizer & Icebreaker Card */}
+      <main className="relative flex-1 flex flex-col items-center justify-between p-4 sm:p-6 text-center bg-gradient-to-b from-[#140a32] via-[#0b061d] to-[#070414] overflow-hidden">
         
         {/* Floating Sound FX Popup Banner */}
         <AnimatePresence>
@@ -239,75 +238,62 @@ export default function AudioChatContainer({
         </AnimatePresence>
 
         {/* Center Glowing Audio Orb */}
-        <div className="relative flex flex-col items-center justify-center flex-1 my-auto">
+        <div className="relative flex flex-col items-center justify-center my-auto">
           {/* Animated Waveform Rings */}
-          <div className="relative flex h-40 w-40 sm:h-52 sm:w-52 items-center justify-center">
+          <div className="relative flex h-32 w-32 sm:h-44 sm:w-44 items-center justify-center">
             {isConnected && (
               <>
                 <motion.span
-                  animate={{ scale: [1, 2.3, 1], opacity: [0.6, 0.1, 0.6] }}
+                  animate={{ scale: [1, 2.2, 1], opacity: [0.6, 0.1, 0.6] }}
                   transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
                   className="absolute inset-0 rounded-full bg-purple-500/30 border border-purple-400/40"
                 />
                 <motion.span
-                  animate={{ scale: [1, 1.8, 1], opacity: [0.8, 0.2, 0.8] }}
+                  animate={{ scale: [1, 1.7, 1], opacity: [0.8, 0.2, 0.8] }}
                   transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
                   className="absolute inset-0 rounded-full bg-pink-500/30 border border-pink-400/40"
-                />
-                <motion.span
-                  animate={{ scale: [1, 1.4, 1], opacity: [0.9, 0.4, 0.9] }}
-                  transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
-                  className="absolute inset-0 rounded-full bg-cyan-500/20"
                 />
               </>
             )}
 
             {/* Center Avatar Orb */}
-            <div className="relative flex h-28 w-28 sm:h-36 sm:w-36 items-center justify-center rounded-full btn-gradient shadow-2xl shadow-purple-500/50 border-4 border-white/20">
+            <div className="relative flex h-24 w-24 sm:h-32 sm:w-32 items-center justify-center rounded-full btn-gradient shadow-2xl shadow-purple-500/50 border-4 border-white/20">
               {isConnected ? (
-                <Radio className="text-white animate-pulse" size={48} />
+                <Radio className="text-white animate-pulse" size={40} />
               ) : (
-                <Sparkles className="text-white animate-spin-slow" size={42} />
+                <Sparkles className="text-white animate-spin-slow" size={36} />
               )}
             </div>
           </div>
 
-          {/* Status Label */}
-          <p className="text-lg sm:text-2xl font-black text-white mt-6 tracking-wide">
+          <p className="text-base sm:text-xl font-black text-white mt-4 tracking-wide">
             {connectionState === "waiting" && "Searching for Voice Stranger…"}
             {connectionState === "connecting" && "Establishing Encrypted Audio…"}
             {connectionState === "connected" && "Voice Call Connected 🎙️"}
             {connectionState === "disconnected" && "Stranger Disconnected"}
           </p>
-
-          <p className="text-xs sm:text-sm text-purple-200/80 mt-1 max-w-sm">
-            {isConnected
-              ? "Encrypted HD Audio Stream Active. Talk freely without video pressure!"
-              : "Vidibro matches you with online strangers instantly in crystal clear audio."}
-          </p>
         </div>
 
-        {/* Icebreaker Question Card (Prevents awkward silence!) */}
+        {/* Icebreaker Questions Card */}
         {isConnected && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="w-full max-w-md bg-white/5 backdrop-blur-2xl border border-white/15 rounded-2xl p-3.5 mb-4 shadow-xl flex flex-col items-center gap-2"
+            className="w-full max-w-md bg-white/5 backdrop-blur-2xl border border-white/15 rounded-2xl p-4 mb-3 shadow-2xl flex flex-col items-center gap-2 z-30"
           >
-            <div className="flex items-center justify-between w-full">
-              <span className="text-[11px] font-extrabold uppercase tracking-wider text-cyan-300 flex items-center gap-1.5">
-                <Lightbulb size={14} className="text-yellow-400" /> Icebreaker Topic
-              </span>
-              <button
-                onClick={handleNextIcebreaker}
-                className="text-[11px] font-bold text-pink-300 hover:text-white transition bg-white/10 px-2.5 py-1 rounded-full border border-white/10"
-              >
-                🎲 New Question
-              </button>
+            <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-pink-300">
+              <Lightbulb size={15} className="text-yellow-400 animate-pulse" />
+              <span>Icebreaker Card</span>
             </div>
             <p className="text-xs sm:text-sm font-semibold text-white leading-relaxed">
-              &quot;{ICEBREAKER_QUESTIONS[icebreakerIndex]}&quot;
+              "{ICEBREAKER_QUESTIONS[icebreakerIndex]}"
             </p>
+            <button
+              onClick={handleNextIcebreaker}
+              className="text-[11px] font-bold text-purple-300 hover:text-white transition bg-white/10 px-3 py-1 rounded-full border border-white/10 mt-1"
+            >
+              🎲 Next Icebreaker
+            </button>
           </motion.div>
         )}
 
@@ -384,7 +370,7 @@ export default function AudioChatContainer({
               </div>
 
               {/* Form Input */}
-              <form onSubmit={sendChatMessage} className="flex items-center gap-2 pt-2 border-t border-white/10">
+              <form onSubmit={sendChatMessage} className="p-3 border-t border-white/10 flex items-center gap-2">
                 <input
                   type="text"
                   value={chatDraft}
