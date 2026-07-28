@@ -111,6 +111,14 @@ export default function VideoContainer({
   // Real-Time Audio Level Detection for Speaking Visualizer
   const [isSpeaking, setIsSpeaking] = useState(false);
 
+  // Issue 1 Fix: Clear chat messages whenever matching resets to waiting or idle
+  useEffect(() => {
+    if (connectionState === "waiting" || connectionState === "idle") {
+      setMessages([]);
+      setUnreadCount(0);
+    }
+  }, [connectionState]);
+
   // Web Audio API Voice Speech Detector
   useEffect(() => {
     if (!localStream || !micEnabled) return;
@@ -138,7 +146,6 @@ export default function VideoContainer({
           sum += dataArray[i];
         }
         const average = sum / dataArray.length;
-        // Sensitivity threshold for detecting user speech
         setIsSpeaking(average > 10);
         animationId = requestAnimationFrame(checkVolume);
       };
@@ -165,10 +172,6 @@ export default function VideoContainer({
     }
   }, [localStream]);
 
-  // Browsers block autoplay of unmuted media without a fresh user gesture —
-  // start every remote element muted (always allowed) so playback actually
-  // begins, then unmute once it's confirmed playing. Muting/unmuting an
-  // already-playing element doesn't need a new gesture, unlike starting one.
   useEffect(() => {
     if (!remoteStream) return;
     for (const el of [remoteVideoRef.current, desktopRemoteVideoRef.current]) {
@@ -182,11 +185,34 @@ export default function VideoContainer({
           el.muted = !speakerEnabled;
         })
         .catch(() => {
-          // Retry playing
           el.play().catch(() => {});
         });
     }
   }, [remoteStream, isConnected]);
+
+  // Issue 5 Fix: Re-play remote video stream when stranger flips camera tracks to prevent freezing
+  useEffect(() => {
+    if (!remoteStream) return;
+
+    const handleTrackChange = () => {
+      for (const el of [remoteVideoRef.current, desktopRemoteVideoRef.current]) {
+        if (el) {
+          el.srcObject = remoteStream;
+          el.play().catch(() => {});
+        }
+      }
+    };
+
+    remoteStream.onaddtrack = handleTrackChange;
+    remoteStream.onremovetrack = handleTrackChange;
+
+    return () => {
+      if (remoteStream) {
+        remoteStream.onaddtrack = null;
+        remoteStream.onremovetrack = null;
+      }
+    };
+  }, [remoteStream]);
 
   useEffect(() => {
     if (remoteVideoRef.current) remoteVideoRef.current.muted = !speakerEnabled;
@@ -257,10 +283,36 @@ export default function VideoContainer({
     setMicEnabled(next);
   }
 
-  function toggleCam() {
+  // Issue 3 Fix: Turn off physical camera hardware LED completely when turning off camera
+  async function toggleCam() {
     const next = !camEnabled;
-    localStream?.getVideoTracks().forEach((t) => (t.enabled = next));
-    setCamEnabled(next);
+    if (!next) {
+      localStream?.getVideoTracks().forEach((t) => {
+        t.enabled = false;
+        t.stop();
+      });
+      setCamEnabled(false);
+    } else {
+      try {
+        const constraints = { video: { facingMode } };
+        const newStream = await navigator.mediaDevices.getUserMedia(constraints);
+        const newTrack = newStream.getVideoTracks()[0];
+        if (newTrack) {
+          if (localStream) {
+            localStream.getVideoTracks().forEach((t) => localStream.removeTrack(t));
+            localStream.addTrack(newTrack);
+          }
+          if (replaceOutgoingVideoTrack) {
+            await replaceOutgoingVideoTrack(newTrack);
+          }
+          if (localVideoRef.current) localVideoRef.current.srcObject = localStream;
+          if (desktopLocalVideoRef.current) desktopLocalVideoRef.current.srcObject = localStream;
+        }
+        setCamEnabled(true);
+      } catch {
+        setCamEnabled(false);
+      }
+    }
   }
 
   function toggleSpeaker() {
@@ -308,9 +360,6 @@ export default function VideoContainer({
     const meta = EMOJI_REACTIONS.find((r) => r.id === reactionId);
     const emojiSymbol = meta ? meta.emoji : "🔥";
 
-    // sendReaction only ever runs from the emoji button's onClick — never
-    // during render — so the randomized horizontal drift here is safe
-    // despite the purity rule's static (render-agnostic) heuristic.
     /* eslint-disable react-hooks/purity */
     const newParticle: FloatingParticle = {
       id: crypto.randomUUID(),
@@ -325,6 +374,19 @@ export default function VideoContainer({
     }, 2500);
   }
 
+  // Issue 4 Fix: Touch/click screen dismisses emoji tray & toggles controls
+  function handleScreenClick() {
+    setShowControls((prev) => !prev);
+    setReactionsOpen(false);
+  }
+
+  function handleNextClick(e: React.MouseEvent) {
+    e.stopPropagation();
+    setMessages([]);
+    setUnreadCount(0);
+    skipToNext();
+  }
+
   return (
     <div className="relative flex flex-col w-full h-[100dvh] overflow-hidden bg-[#070414] select-none">
       {/* Viewport Container */}
@@ -337,7 +399,7 @@ export default function VideoContainer({
           {/* 1. DESKTOP VIEW: Dual Equal 50/50 Side-by-Side Video Grid (md:grid)      */}
           {/* ========================================================================= */}
           <div
-            onClick={() => setShowControls((prev) => !prev)}
+            onClick={handleScreenClick}
             className="hidden md:grid grid-cols-2 gap-4 p-4 w-full h-full bg-[#070414] overflow-hidden cursor-pointer"
           >
             {/* Left Box (50% Equal Width): Stranger's Video */}
@@ -424,7 +486,7 @@ export default function VideoContainer({
                 )}
                 <span className="text-xs font-bold text-white">You</span>
                 
-                {/* Real-time speaking animated audio sound waves on your video screen */}
+                {/* Real-time speaking animated audio sound waves */}
                 {isSpeaking && micEnabled && (
                   <div className="flex items-end gap-0.5 h-3 ml-1">
                     <span className="w-0.5 h-full bg-emerald-400 animate-bounce rounded-full" />
@@ -489,9 +551,9 @@ export default function VideoContainer({
               </div>
             )}
 
-            {/* Clean Screen Tap Overlay */}
+            {/* Clean Screen Tap Overlay (Dismisses Emoji Tray) */}
             <div
-              onClick={() => setShowControls((prev) => !prev)}
+              onClick={handleScreenClick}
               className="absolute inset-0 z-10 cursor-pointer"
             />
 
@@ -583,7 +645,7 @@ export default function VideoContainer({
             </motion.div>
           ))}
 
-          {/* Floating Controls Bar (Standard Mic Button - No Green Pulse!) */}
+          {/* Floating Controls Bar */}
           <AnimatePresence>
             {showControls && !chatOpen && (
               <motion.div
@@ -593,7 +655,7 @@ export default function VideoContainer({
                 transition={{ duration: 0.25 }}
                 className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 sm:gap-3 bg-black/80 backdrop-blur-2xl px-4 py-2.5 rounded-full border border-white/15 shadow-2xl max-w-[95vw]"
               >
-                {/* 1. Mic Mute / Unmute (Standard Clean Styling) */}
+                {/* 1. Mic Mute / Unmute */}
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
@@ -623,10 +685,7 @@ export default function VideoContainer({
 
                 {/* 3. Centered NEXT Text Button */}
                 <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    skipToNext();
-                  }}
+                  onClick={handleNextClick}
                   className="btn-gradient flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-extrabold text-white shadow-xl hover:scale-105 transition tracking-wider uppercase gap-1.5"
                 >
                   <SkipForward size={14} /> NEXT
@@ -719,26 +778,18 @@ export default function VideoContainer({
               onClick={(e) => e.stopPropagation()}
               className="absolute bottom-0 left-0 right-0 md:relative md:bottom-auto md:left-auto md:right-auto md:w-80 lg:w-96 h-[60%] md:h-full z-40 flex flex-col bg-[#090518]/95 backdrop-blur-3xl border-t md:border-t-0 md:border-l border-white/15 shadow-2xl flex-shrink-0"
             >
-              {/* Chat Header */}
+              {/* Chat Header (Issue 6 Fix: Removed NEXT Button) */}
               <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
                 <div className="flex items-center gap-2">
                   <MessageSquare size={16} className="text-cyan-400" />
                   <span className="text-sm font-bold text-white">In-call messages</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={skipToNext}
-                    className="btn-gradient px-3 py-1 rounded-full text-[11px] font-bold text-white shadow-md flex items-center gap-1"
-                  >
-                    <SkipForward size={12} /> NEXT
-                  </button>
-                  <button
-                    onClick={() => setChatOpen(false)}
-                    className="rounded-full p-1 text-purple-300 hover:bg-white/10 hover:text-white"
-                  >
-                    <X size={18} />
-                  </button>
-                </div>
+                <button
+                  onClick={() => setChatOpen(false)}
+                  className="rounded-full p-1 text-purple-300 hover:bg-white/10 hover:text-white"
+                >
+                  <X size={18} />
+                </button>
               </div>
 
               {/* Notice Banner */}
@@ -747,7 +798,7 @@ export default function VideoContainer({
                 <span>Messages won&apos;t be saved when the call ends</span>
               </div>
 
-              {/* Scrollable Messages Feed */}
+              {/* Scrollable Messages Feed (Issue 8 Fix: break-words [word-break:break-word] overflow-hidden) */}
               <div ref={chatListRef} className="flex-1 overflow-y-auto p-3 space-y-2.5 min-h-[140px]">
                 {messages.length === 0 && (
                   <p className="pt-8 text-center text-xs text-purple-300/60">
@@ -765,7 +816,7 @@ export default function VideoContainer({
                       <span>• {m.time}</span>
                     </div>
                     <div
-                      className={`max-w-[85%] rounded-2xl px-3.5 py-2 text-xs leading-relaxed ${
+                      className={`max-w-[85%] rounded-2xl px-3.5 py-2 text-xs leading-relaxed break-words [word-break:break-word] overflow-hidden ${
                         m.mine
                           ? "btn-gradient text-white rounded-br-none font-medium shadow-md"
                           : "bg-white/10 text-purple-100 rounded-bl-none border border-white/10 backdrop-blur-md"

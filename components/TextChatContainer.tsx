@@ -71,6 +71,13 @@ export default function TextChatContainer({
 
   const isConnected = connectionState === "connected" && dataChannelOpen;
 
+  // Clear messages on new match
+  useEffect(() => {
+    if (connectionState === "waiting" || connectionState === "idle") {
+      setMessages([]);
+    }
+  }, [connectionState]);
+
   // Listen for incoming messages
   useEffect(() => {
     return subscribe("chat", (msg) => {
@@ -361,7 +368,7 @@ export default function TextChatContainer({
                 ) : (
                   /* Standard Text Message Bubble */
                   <div
-                    className={`max-w-[85%] sm:max-w-[70%] rounded-2xl px-4 py-2.5 text-xs sm:text-sm leading-relaxed ${
+                    className={`max-w-[85%] sm:max-w-[70%] rounded-2xl px-4 py-2.5 text-xs sm:text-sm leading-relaxed break-words [word-break:break-word] overflow-hidden ${
                       m.mine
                         ? "btn-gradient text-white rounded-br-none font-medium shadow-lg shadow-purple-500/20"
                         : "bg-white/10 text-purple-100 rounded-bl-none border border-white/15 backdrop-blur-md shadow-md"

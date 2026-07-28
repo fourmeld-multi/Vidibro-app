@@ -202,6 +202,12 @@ export function useWebRTC() {
     const socket = io(SIGNALING_URL, { transports: ["websocket"] });
     socketRef.current = socket;
 
+    socket.on("connect", () => {
+      if (modeRef.current) {
+        socket.emit("queue:join");
+      }
+    });
+
     socket.on("match:found", async ({ roomId, role: myRole }: { roomId: string; role: PeerRole }) => {
       roomIdRef.current = roomId;
       setRole(myRole);

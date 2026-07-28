@@ -117,6 +117,14 @@ export default function AudioChatContainer({
     if (remoteAudioRef.current) remoteAudioRef.current.muted = !speakerEnabled;
   }, [speakerEnabled]);
 
+  // Clear messages on new match
+  useEffect(() => {
+    if (connectionState === "waiting" || connectionState === "idle") {
+      setMessages([]);
+      setUnreadCount(0);
+    }
+  }, [connectionState]);
+
   // Listen for incoming chat messages over WebRTC
   useEffect(() => {
     return subscribe("chat", (msg) => {
@@ -377,7 +385,7 @@ export default function AudioChatContainer({
                       <span>• {m.time}</span>
                     </div>
                     <div
-                      className={`max-w-[85%] rounded-xl px-3 py-1.5 text-xs ${
+                      className={`max-w-[85%] rounded-xl px-3 py-1.5 text-xs break-words [word-break:break-word] overflow-hidden ${
                         m.mine ? "btn-gradient text-white" : "bg-white/10 text-purple-100 border border-white/10"
                       }`}
                     >
