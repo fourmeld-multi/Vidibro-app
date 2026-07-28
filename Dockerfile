@@ -20,6 +20,11 @@ RUN npm run build
 FROM node:20-slim AS runner
 WORKDIR /app
 ENV NODE_ENV=production
+# Docker auto-sets HOSTNAME to the container ID, and the standalone server
+# binds to whatever HOSTNAME says — without this override it ends up
+# listening only on that container-ID hostname instead of all interfaces,
+# so nothing outside the container (e.g. Caddy) can reach it.
+ENV HOSTNAME="0.0.0.0"
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
