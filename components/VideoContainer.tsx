@@ -18,13 +18,14 @@ import {
   VolumeX,
   SwitchCamera,
 } from "lucide-react";
+import LogoMark from "@/components/LogoMark";
 import type { MessageType, ReactionId, ReactionPayload, ChatPayload, SubtitlePayload } from "@/lib/protocol";
 
 const EMOJI_REACTIONS: { id: ReactionId; emoji: string; label: string }[] = [
   { id: "fire", emoji: "🔥", label: "Fire" },
   { id: "heart", emoji: "❤️", label: "Heart" },
   { id: "boom", emoji: "💥", label: "Boom" },
-  { id: "wow", emoji: "😮", label: "Wow" },
+  { id: "wow", emoji: "🤩", label: "Star Eyes" },
   { id: "lol", emoji: "😂", label: "LOL" },
 ];
 
@@ -207,7 +208,7 @@ export default function VideoContainer({
         localVideoRef.current.srcObject = newStream;
       }
     } catch {
-      // Ignore if device does not support camera flip
+      // Ignore if device single camera
     }
   }
 
@@ -235,15 +236,15 @@ export default function VideoContainer({
     const newParticle: FloatingParticle = {
       id: `${Date.now()}-${Math.random()}`,
       emoji: emojiSymbol,
-      x: 30 + Math.random() * 40,
+      x: 25 + Math.random() * 50,
     };
 
-    setFloatingParticles((prev) => [...prev.slice(-10), newParticle]);
+    setFloatingParticles((prev) => [...prev.slice(-12), newParticle]);
     setTimeout(() => {
       setFloatingParticles((prev) => prev.filter((p) => p.id !== newParticle.id));
     }, 2500);
 
-    setReactionsOpen(false);
+    // Keep reaction panel open continuously until explicit user tap!
   }
 
   const isConnected = connectionState === "connected";
@@ -253,7 +254,7 @@ export default function VideoContainer({
       onMouseMove={resetControlsTimer}
       onTouchStart={resetControlsTimer}
       onClick={resetControlsTimer}
-      className="relative flex flex-col w-full h-[calc(100dvh-75px)] max-h-[820px] overflow-hidden rounded-2xl sm:rounded-3xl bg-[#090516] border border-purple-500/20 shadow-2xl select-none"
+      className="relative flex flex-col w-full h-[100dvh] overflow-hidden bg-[#070414] select-none"
     >
       {/* Dynamic Viewport Container */}
       <div className={`relative flex-1 w-full overflow-hidden flex ${chatOpen ? "flex-col sm:flex-row" : ""}`}>
@@ -268,7 +269,7 @@ export default function VideoContainer({
               className="h-full w-full object-cover object-center"
             />
           ) : (
-            /* Attractive Radar Orb Matching Indicator (Replaces speaker icon!) */
+            /* Radar Orb Matching Indicator */
             <div className="flex flex-col items-center justify-center h-full w-full px-6 text-center bg-gradient-to-b from-[#140b2e] via-[#0d0722] to-[#070414]">
               <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-purple-600/20 border border-purple-400/30 mb-5">
                 <motion.span
@@ -298,34 +299,39 @@ export default function VideoContainer({
             </div>
           )}
 
-          {/* Stranger Name Badge */}
-          <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 flex items-center gap-2 bg-black/65 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-xs font-semibold text-white">
+          {/* Static Top-Left Vidibro Logo Badge (Overlapping video screen) */}
+          <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-30 flex items-center gap-2 bg-black/65 backdrop-blur-xl px-3 py-1.5 rounded-full border border-white/15 shadow-xl">
+            <div className="btn-gradient flex h-7 w-7 items-center justify-center rounded-xl shadow-md">
+              <LogoMark size={14} className="text-white" />
+            </div>
+            <span className="text-xs sm:text-sm font-bold text-white font-mono tracking-tight">Vidibro</span>
+            <span className="h-3 w-px bg-white/20 mx-0.5" />
             <span className={`h-2 w-2 rounded-full ${isConnected ? "bg-emerald-400 animate-pulse" : "bg-yellow-400"}`} />
-            <span>{isConnected ? "Stranger" : "Matching…"}</span>
+            <span className="text-[10px] sm:text-xs font-medium text-purple-200">{isConnected ? "Stranger" : "Matching…"}</span>
           </div>
 
           {/* Floating Speech Subtitles */}
           {remoteSubtitle && (
-            <div className="absolute bottom-20 left-1/2 -translate-x-1/2 max-w-[85%] z-20 rounded-2xl bg-black/80 backdrop-blur-md px-4 py-2 text-center text-xs sm:text-sm font-medium text-white border border-white/15">
+            <div className="absolute bottom-24 left-1/2 -translate-x-1/2 max-w-[85%] z-20 rounded-2xl bg-black/80 backdrop-blur-md px-4 py-2 text-center text-xs sm:text-sm font-medium text-white border border-white/15">
               {remoteSubtitle}
             </div>
           )}
 
-          {/* Floating Emoji Particles Burst */}
+          {/* Floating 3D Animated Emoji Particles Burst */}
           {floatingParticles.map((particle) => (
             <motion.div
               key={particle.id}
-              initial={{ opacity: 0, y: 300, scale: 0.5 }}
-              animate={{ opacity: [0, 1, 1, 0], y: -50, scale: 1.4 }}
+              initial={{ opacity: 0, y: 300, scale: 0.5, rotate: -15 }}
+              animate={{ opacity: [0, 1, 1, 0], y: -80, scale: [0.8, 1.5, 1.2], rotate: 15 }}
               transition={{ duration: 2.3, ease: "easeOut" }}
-              className="pointer-events-none absolute bottom-12 z-40 text-4xl sm:text-5xl drop-shadow-[0_0_15px_rgba(236,72,153,0.9)]"
+              className="pointer-events-none absolute bottom-16 z-40 text-5xl sm:text-6xl drop-shadow-[0_0_20px_rgba(236,72,153,0.9)]"
               style={{ left: `${particle.x}%` }}
             >
               {particle.emoji}
             </motion.div>
           ))}
 
-          {/* Small Floating "You" Picture-in-Picture PIP Card */}
+          {/* Small Floating "You" PIP Card (Overlapping Top-Right Corner) */}
           <motion.div
             drag
             dragConstraints={{ top: 10, left: 10, right: 300, bottom: 400 }}
@@ -343,12 +349,29 @@ export default function VideoContainer({
                 Cam Off
               </div>
             )}
-            <span className="absolute bottom-1.5 left-2 bg-black/70 backdrop-blur-md px-2 py-0.5 rounded-md text-[9px] sm:text-[10px] font-bold text-white">
-              You
-            </span>
+
+            {/* Flip Camera Button on Your PIP Video Box! */}
+            <button
+              onClick={flipCamera}
+              className="absolute top-1.5 right-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-black/70 hover:bg-black/90 text-cyan-300 backdrop-blur-md border border-white/20 z-40 shadow-md transition transform hover:scale-110"
+              aria-label="Flip Camera"
+              title="Flip Camera"
+            >
+              <SwitchCamera size={12} />
+            </button>
+
+            {/* Persistent GMeet Mic Status Indicator on PIP Card */}
+            <div className="absolute bottom-1.5 left-1.5 flex items-center gap-1 bg-black/70 backdrop-blur-md px-2 py-0.5 rounded-md text-[9px] sm:text-[10px] font-bold text-white border border-white/10">
+              {micEnabled ? (
+                <Mic size={10} className="text-emerald-400" />
+              ) : (
+                <MicOff size={10} className="text-red-400" />
+              )}
+              <span>You</span>
+            </div>
           </motion.div>
 
-          {/* Google Meet Floating Controls Bar (Fully aligned across all devices!) */}
+          {/* Google Meet Floating Controls Bar (Perfectly aligned on all devices!) */}
           <AnimatePresence>
             {showControls && (
               <motion.div
@@ -356,122 +379,117 @@ export default function VideoContainer({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 25 }}
                 transition={{ duration: 0.25 }}
-                className="absolute bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1.5 sm:gap-3 bg-black/80 backdrop-blur-2xl px-3 sm:px-5 py-2 sm:py-2.5 rounded-full border border-white/15 shadow-2xl max-w-[95vw]"
+                className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 sm:gap-3 bg-black/80 backdrop-blur-2xl px-4 py-2.5 rounded-full border border-white/15 shadow-2xl max-w-[95vw]"
               >
                 {/* 1. Mute / Unmute Mic */}
                 <button
                   onClick={toggleMic}
-                  className={`flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full transition ${
+                  className={`flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full transition ${
                     micEnabled ? "bg-white/15 hover:bg-white/25 text-white" : "bg-red-500 text-white shadow-lg shadow-red-500/30"
                   }`}
                   aria-label="Toggle mic"
                   title={micEnabled ? "Mute Mic" : "Unmute Mic"}
                 >
-                  {micEnabled ? <Mic size={17} /> : <MicOff size={17} />}
+                  {micEnabled ? <Mic size={18} /> : <MicOff size={18} />}
                 </button>
 
                 {/* 2. Camera On / Off */}
                 <button
                   onClick={toggleCam}
-                  className={`flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full transition ${
+                  className={`flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full transition ${
                     camEnabled ? "bg-white/15 hover:bg-white/25 text-white" : "bg-red-500 text-white shadow-lg shadow-red-500/30"
                   }`}
                   aria-label="Toggle camera"
                   title={camEnabled ? "Turn Off Camera" : "Turn On Camera"}
                 >
-                  {camEnabled ? <VideoIcon size={17} /> : <VideoOff size={17} />}
+                  {camEnabled ? <VideoIcon size={18} /> : <VideoOff size={18} />}
                 </button>
 
                 {/* 3. Speaker Sound On / Off */}
                 <button
                   onClick={toggleSpeaker}
-                  className={`flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full transition ${
+                  className={`flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full transition ${
                     speakerEnabled ? "bg-white/15 hover:bg-white/25 text-purple-300" : "bg-red-500 text-white shadow-lg"
                   }`}
                   aria-label="Toggle speaker sound"
                   title={speakerEnabled ? "Mute Speaker Sound" : "Unmute Speaker Sound"}
                 >
-                  {speakerEnabled ? <Volume2 size={17} /> : <VolumeX size={17} />}
+                  {speakerEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
                 </button>
 
-                {/* 4. Flip Camera (Mobile/Tablet camera switch) */}
+                {/* 4. 3D Emoji Reactions Toggle */}
                 <button
-                  onClick={flipCamera}
-                  className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white/15 hover:bg-white/25 text-cyan-300 transition"
-                  aria-label="Flip Camera"
-                  title="Flip Camera"
-                >
-                  <SwitchCamera size={17} />
-                </button>
-
-                {/* 5. Reaction Emojis Toggle */}
-                <button
-                  onClick={() => setReactionsOpen((v) => !v)}
-                  className={`flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full transition ${
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setReactionsOpen((v) => !v);
+                  }}
+                  className={`flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full transition ${
                     reactionsOpen ? "bg-pink-500 text-white" : "bg-white/15 hover:bg-white/25 text-pink-300"
                   }`}
                   aria-label="Send reaction"
-                  title="Send Reaction"
+                  title="3D Emojis"
                 >
-                  <Sparkles size={17} />
+                  <Sparkles size={18} />
                 </button>
 
-                {/* 6. Transparent Chat Toggle */}
+                {/* 5. Transparent Chat Toggle */}
                 <button
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     setChatOpen((v) => !v);
                     setUnreadCount(0);
                   }}
-                  className={`relative flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full transition ${
+                  className={`relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full transition ${
                     chatOpen ? "bg-purple-600 text-white" : "bg-white/15 hover:bg-white/25 text-cyan-300"
                   }`}
                   aria-label="Toggle chat"
                   title="Chat"
                 >
-                  <MessageSquare size={17} />
+                  <MessageSquare size={18} />
                   {unreadCount > 0 && !chatOpen && (
-                    <span className="absolute -top-1 -right-1 flex h-4 w-4 sm:h-5 sm:w-5 items-center justify-center rounded-full bg-red-500 text-[9px] sm:text-[10px] font-bold text-white">
+                    <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
                       {unreadCount}
                     </span>
                   )}
                 </button>
 
-                {/* 7. Next Person */}
+                {/* 6. Next Person */}
                 <button
                   onClick={skipToNext}
-                  className="btn-gradient flex items-center gap-1 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold text-white shadow-lg hover:scale-105 transition"
+                  className="btn-gradient flex items-center gap-1.5 px-4 py-2.5 rounded-full text-xs sm:text-sm font-bold text-white shadow-lg hover:scale-105 transition"
                 >
-                  <SkipForward size={15} />
+                  <SkipForward size={16} />
                   <span className="hidden sm:inline">Next</span>
                 </button>
 
-                {/* 8. End Call (RED CIRCLE ICON - NO TEXT!) */}
+                {/* 7. End Call (RED CIRCLE ICON - NO TEXT!) */}
                 <button
                   onClick={leaveMatch}
-                  className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-red-600 hover:bg-red-700 text-white shadow-xl shadow-red-600/30 transition transform hover:scale-105 active:scale-95"
+                  className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-red-600 hover:bg-red-700 text-white shadow-xl shadow-red-600/30 transition transform hover:scale-105 active:scale-95"
                   aria-label="End call"
                   title="End call"
                 >
-                  <PhoneOff size={17} />
+                  <PhoneOff size={18} />
                 </button>
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* Reaction Emoji Floating Picker Bar */}
+          {/* 3D Animated Emoji Picker (Stays open for continuous tapping!) */}
           <AnimatePresence>
             {reactionsOpen && (
               <motion.div
                 initial={{ opacity: 0, y: 15, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 15, scale: 0.9 }}
-                className="absolute bottom-20 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 bg-black/85 backdrop-blur-2xl px-4 py-2.5 rounded-full border border-white/20 shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+                className="absolute bottom-20 sm:bottom-24 left-1/2 -translate-x-1/2 z-[60] flex items-center gap-3 bg-black/90 backdrop-blur-2xl px-5 py-3 rounded-2xl border border-white/20 shadow-2xl"
               >
                 {EMOJI_REACTIONS.map((r) => (
                   <button
                     key={r.id}
                     onClick={() => sendReaction(r.id)}
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-white/25 text-xl transition transform hover:scale-125"
+                    className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 hover:bg-white/25 text-2xl sm:text-3xl transition transform hover:scale-125 active:scale-90 shadow-md"
                     title={r.label}
                   >
                     {r.emoji}
@@ -482,7 +500,7 @@ export default function VideoContainer({
           </AnimatePresence>
         </div>
 
-        {/* Google Meet Mobile & Desktop Transparent Chat Window (Matches Image 2!) */}
+        {/* Google Meet Mobile & Desktop Transparent Chat Window */}
         <AnimatePresence>
           {chatOpen && (
             <motion.div
@@ -508,13 +526,13 @@ export default function VideoContainer({
                 </button>
               </div>
 
-              {/* Google Meet Notice Banner (Matching Image 2!) */}
+              {/* Notice Banner */}
               <div className="mx-3 mt-3 flex items-center gap-2.5 rounded-2xl bg-white/5 border border-white/10 p-3 text-xs text-purple-200/90">
                 <ShieldAlert size={16} className="text-cyan-400 shrink-0" />
                 <span>Messages won't be saved when the call ends</span>
               </div>
 
-              {/* Scrollable Messages Feed (Compact 3-4 messages visible) */}
+              {/* Scrollable Messages Feed */}
               <div ref={chatListRef} className="flex-1 overflow-y-auto p-3 space-y-2.5 min-h-[140px]">
                 {messages.length === 0 && (
                   <p className="pt-8 text-center text-xs text-purple-300/60">

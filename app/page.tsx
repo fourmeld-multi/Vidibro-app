@@ -60,31 +60,33 @@ export default function Home() {
 
   return (
     <div className="relative flex min-h-screen flex-1 flex-col font-sans">
-      {/* Sleek Top Header */}
-      <header className="sticky top-0 z-50 border-b border-purple-500/10 backdrop-blur-2xl bg-[#090614]/75">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="btn-gradient flex h-10 w-10 items-center justify-center rounded-2xl shadow-lg shadow-purple-500/25 group-hover:scale-105 transition">
-              <LogoMark size={20} className="text-white" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-xl font-bold tracking-tight text-white font-mono">
-                Vidibro
-              </span>
-            </div>
-          </Link>
+      {/* Sleek Top Header (Only visible on home page when not in call) */}
+      {!isActive && (
+        <header className="sticky top-0 z-50 border-b border-purple-500/10 backdrop-blur-2xl bg-[#090614]/75">
+          <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="btn-gradient flex h-10 w-10 items-center justify-center rounded-2xl shadow-lg shadow-purple-500/25 group-hover:scale-105 transition">
+                <LogoMark size={20} className="text-white" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-xl font-bold tracking-tight text-white font-mono">
+                  Vidibro
+                </span>
+              </div>
+            </Link>
 
-          {/* Navigation Links */}
-          <nav className="flex items-center gap-6 sm:gap-8 text-xs sm:text-sm font-medium text-purple-200/80">
-            <a href="#features" className="hover:text-white transition">Features</a>
-            <a href="#faq" className="hover:text-white transition">FAQ</a>
-            <a href="#blog" className="hover:text-white transition">Blog</a>
-            <a href="#privacy" className="hover:text-white transition">Privacy Policy</a>
-          </nav>
-        </div>
-      </header>
+            {/* Navigation Links */}
+            <nav className="flex items-center gap-6 sm:gap-8 text-xs sm:text-sm font-medium text-purple-200/80">
+              <a href="#features" className="hover:text-white transition">Features</a>
+              <a href="#faq" className="hover:text-white transition">FAQ</a>
+              <a href="#blog" className="hover:text-white transition">Blog</a>
+              <a href="#privacy" className="hover:text-white transition">Privacy Policy</a>
+            </nav>
+          </div>
+        </header>
+      )}
 
-      <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 sm:px-6">
+      <main className={`w-full flex-1 flex flex-col ${isActive ? "p-0 max-w-none" : "mx-auto max-w-6xl px-4 sm:px-6"}`}>
         {!isActive ? (
           <>
             {/* Hero Section inspired by Whisperly (Image 2) */}
@@ -171,8 +173,8 @@ export default function Home() {
             </div>
           </>
         ) : (
-          /* Active Call State */
-          <div className="py-3 sm:py-6 flex flex-col gap-4">
+          /* Active Call State - Pure Full Viewport */
+          <div className="w-full h-dvh flex flex-col overflow-hidden">
             {mode === "video" && (
               <VideoContainer
                 localStream={localStream}
@@ -188,7 +190,7 @@ export default function Home() {
             )}
 
             {mode === "audio" && (
-              <div className="glass flex flex-col items-center gap-4 rounded-3xl px-6 py-10 text-center">
+              <div className="glass flex flex-col items-center gap-4 rounded-3xl px-6 py-10 text-center mx-auto my-auto max-w-md">
                 <div className="btn-gradient flex h-16 w-16 items-center justify-center rounded-full shadow-lg">
                   <PhoneCall size={26} className="text-white" />
                 </div>
@@ -225,7 +227,7 @@ export default function Home() {
             )}
 
             {mode === "text" && (
-              <div className="glass flex flex-col items-center gap-3 rounded-3xl px-6 py-8 text-center">
+              <div className="glass flex flex-col items-center gap-3 rounded-3xl px-6 py-8 text-center mx-auto my-auto max-w-md">
                 <MessageSquare size={26} className="text-purple-300" />
                 <p className="text-sm font-semibold text-white">
                   {connectionState === "waiting" && "Looking for someone to chat with…"}
