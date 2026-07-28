@@ -183,6 +183,12 @@ export function useWebRTC() {
   const leaveMatch = useCallback(() => {
     teardownPeerConnection();
     socketRef.current?.emit("queue:leave");
+    // "End Call" is a full exit, not a rematch — release the camera/mic so
+    // the device's recording indicator actually turns off (unlike
+    // skipToNext, which intentionally keeps the stream alive for reuse).
+    localStreamRef.current?.getTracks().forEach((t) => t.stop());
+    localStreamRef.current = null;
+    setLocalStream(null);
     setConnectionState("idle");
   }, [teardownPeerConnection]);
 

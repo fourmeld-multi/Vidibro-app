@@ -1,25 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { SkipForward, Video, Sparkles, MessageSquare, PhoneCall, Mic, MicOff, ShieldCheck, Zap, Globe2 } from "lucide-react";
-import LogoMark from "@/components/LogoMark";
+import { Video, Sparkles, MessageSquare, PhoneCall, ShieldCheck, Zap, Globe2 } from "lucide-react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import VideoContainer from "@/components/VideoContainer";
-import ImpactReactionOverlay from "@/components/ImpactReactionOverlay";
-import MiniGameOverlay from "@/components/MiniGameOverlay";
-import ChatDrawer from "@/components/ChatDrawer";
-import PhoneMockup from "@/components/PhoneMockup";
-import FeatureShowcase from "@/components/FeatureShowcase";
 import TextChatContainer from "@/components/TextChatContainer";
 import AudioChatContainer from "@/components/AudioChatContainer";
+import ImpactReactionOverlay from "@/components/ImpactReactionOverlay";
+import MiniGameOverlay from "@/components/MiniGameOverlay";
+import PhoneMockup from "@/components/PhoneMockup";
+import FeatureShowcase from "@/components/FeatureShowcase";
 import { useWebRTC, type ChatMode } from "@/hooks/useWebRTC";
-
-const BADGES = [
-  { icon: ShieldCheck, label: "No signup, ever" },
-  { icon: Zap, label: "Instant match" },
-  { icon: Globe2, label: "100% Free & Private" },
-];
+import { TRANSLATIONS, type LanguageCode } from "@/lib/translations";
 
 export default function Home() {
   const {
@@ -37,61 +31,46 @@ export default function Home() {
   } = useWebRTC();
 
   const [starting, setStarting] = useState(false);
-  const [micEnabled, setMicEnabled] = useState(true);
+  const [lang, setLang] = useState<LanguageCode>("EN");
+
+  const t = TRANSLATIONS[lang] || TRANSLATIONS.EN;
+
+  const BADGES = [
+    { icon: ShieldCheck, label: t.noSignup },
+    { icon: Zap, label: t.instantMatch },
+    { icon: Globe2, label: t.freePrivate },
+  ];
 
   async function handleStart(chatMode: ChatMode) {
     setStarting(true);
     try {
       await joinQueue(chatMode);
     } catch {
-      // Camera/mic permission denied or unavailable — connectionState stays
-      // "idle" so the Start button remains visible to retry.
+      // Camera/mic permission denied or unavailable
     } finally {
       setStarting(false);
     }
-  }
-
-  function toggleMic() {
-    const next = !micEnabled;
-    localStream?.getAudioTracks().forEach((t) => (t.enabled = next));
-    setMicEnabled(next);
   }
 
   const isActive = connectionState !== "idle";
   const overlaysReady = connectionState === "connected" && dataChannelOpen;
 
   return (
-    <div className="relative flex min-h-screen flex-1 flex-col font-sans">
-      {/* Sleek Top Header (Only visible on home page when not in call) */}
+    <div className="relative flex min-h-screen flex-1 flex-col font-sans bg-[#070414]">
+      {/* Navbar Header with Working Language Switcher */}
       {!isActive && (
-        <header className="sticky top-0 z-50 border-b border-purple-500/10 backdrop-blur-2xl bg-[#090614]/75">
-          <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="btn-gradient flex h-10 w-10 items-center justify-center rounded-2xl shadow-lg shadow-purple-500/25 group-hover:scale-105 transition">
-                <LogoMark size={20} className="text-white" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xl font-bold tracking-tight text-white font-mono">
-                  Vidibro
-                </span>
-              </div>
-            </Link>
-
-            {/* Navigation Links */}
-            <nav className="flex items-center gap-6 sm:gap-8 text-xs sm:text-sm font-medium text-purple-200/80">
-              <a href="#features" className="hover:text-white transition">Features</a>
-              <a href="#faq" className="hover:text-white transition">FAQ</a>
-              <a href="#blog" className="hover:text-white transition">Blog</a>
-              <a href="#privacy" className="hover:text-white transition">Privacy Policy</a>
-            </nav>
-          </div>
-        </header>
+        <Navbar
+          currentLang={lang}
+          onSelectLang={setLang}
+          onStartTextChat={() => handleStart("text")}
+          onStartVideoChat={() => handleStart("video")}
+        />
       )}
 
       <main className={`w-full flex-1 flex flex-col ${isActive ? "p-0 max-w-none" : "mx-auto max-w-6xl px-4 sm:px-6"}`}>
         {!isActive ? (
           <>
-            {/* Hero Section inspired by Whisperly (Image 2) */}
+            {/* Hero Section */}
             <div className="grid flex-1 items-center gap-8 py-6 sm:py-16 lg:grid-cols-2 lg:py-20">
               <div className="flex flex-col items-center gap-4 sm:gap-6 text-center lg:items-start lg:text-left">
                 <motion.div
@@ -101,16 +80,16 @@ export default function Home() {
                   className="glass-pill flex w-fit items-center gap-2 rounded-full px-3.5 py-1 text-[11px] sm:text-xs font-medium text-purple-200 shadow-lg"
                 >
                   <Sparkles size={13} className="text-pink-400 animate-spin-slow" />
-                  <span>1,000s of active people online now</span>
+                  <span>{t.heroTag}</span>
                 </motion.div>
 
                 <h1 className="text-3xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.15]">
-                  Talk to Strangers <br className="hidden sm:inline" />
-                  by <span className="gradient-text">Video</span> or <span className="gradient-text">Text</span>
+                  {t.heroTitle1} <br className="hidden sm:inline" />
+                  <span className="gradient-text">{t.heroTitleVideo}</span>, <span className="gradient-text">{t.heroTitleVoice}</span> or <span className="gradient-text">{t.heroTitleText}</span>
                 </h1>
 
                 <p className="max-w-lg text-sm sm:text-base text-purple-200/80 leading-relaxed font-normal">
-                  Start a free random chat by video, voice or text. Meet new people, make friends, and talk to online strangers instantly without video pressure.
+                  {t.heroSubtitle}
                 </p>
 
                 {/* Trust Badges */}
@@ -136,7 +115,7 @@ export default function Home() {
                     className="btn-gradient glow-pulse flex w-full sm:w-auto items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm sm:text-base font-bold text-white shadow-xl shadow-purple-500/25 transition disabled:opacity-50"
                   >
                     <Video size={18} />
-                    {starting ? "Connecting…" : "Start a Video Chat"}
+                    {starting ? t.connecting : t.startVideo}
                   </motion.button>
 
                   <motion.button
@@ -147,7 +126,7 @@ export default function Home() {
                     className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 px-6 py-3.5 text-sm sm:text-base font-bold text-white backdrop-blur-xl transition disabled:opacity-50"
                   >
                     <PhoneCall size={17} className="text-cyan-300" />
-                    Start an Audio Chat
+                    {t.startAudio}
                   </motion.button>
 
                   <motion.button
@@ -158,7 +137,7 @@ export default function Home() {
                     className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 px-6 py-3.5 text-sm sm:text-base font-bold text-white backdrop-blur-xl transition disabled:opacity-50"
                   >
                     <MessageSquare size={17} className="text-purple-300" />
-                    Start a Text Chat
+                    {t.startText}
                   </motion.button>
                 </div>
               </div>
@@ -169,9 +148,9 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Feature Showcase (Image 3 inspired video card carousel) */}
+            {/* Feature Showcase & Why Vidibro is the Best Free Tool */}
             <div id="features">
-              <FeatureShowcase />
+              <FeatureShowcase currentLang={lang} />
             </div>
           </>
         ) : (
@@ -215,9 +194,9 @@ export default function Home() {
               />
             )}
 
-            {mode !== "video" && (
+            {mode !== "video" && mode !== "text" && mode !== "audio" && (
               <AnimatePresence>
-                {overlaysReady ? (
+                {overlaysReady && (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -227,10 +206,6 @@ export default function Home() {
                     <ImpactReactionOverlay sendMessage={sendMessage} subscribe={subscribe} />
                     <MiniGameOverlay isHost={isHost} sendMessage={sendMessage} subscribe={subscribe} />
                   </motion.div>
-                ) : (
-                  <p className="text-center text-xs text-purple-300/60">
-                    Reactions and mini-games appear here once you&apos;re matched with a stranger.
-                  </p>
                 )}
               </AnimatePresence>
             )}
@@ -238,10 +213,14 @@ export default function Home() {
         )}
       </main>
 
-      {isActive && mode === "audio" && (
-        <ChatDrawer sendMessage={sendMessage} subscribe={subscribe} connected={dataChannelOpen} />
+      {/* Multi-column Footer with Working Redirects */}
+      {!isActive && (
+        <Footer
+          onStartVideoChat={() => handleStart("video")}
+          onStartTextChat={() => handleStart("text")}
+          onStartAudioChat={() => handleStart("audio")}
+        />
       )}
     </div>
   );
 }
-

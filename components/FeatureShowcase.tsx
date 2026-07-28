@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { Video, MessageSquare, Mic, Volume2, Radio, Send, Shield } from "lucide-react";
+import { Video, MessageSquare, Mic, Volume2, Radio, Send, Shield, Zap, Lock, Globe, Smartphone } from "lucide-react";
+import { TRANSLATIONS, type LanguageCode } from "@/lib/translations";
 
 const SCENES = [
   { id: "video-call", label: "Video Call", icon: Video, durationMs: 5000 },
@@ -20,7 +21,6 @@ function VideoLoopCall() {
   const [seconds, setSeconds] = useState(1);
   const [speaker, setSpeaker] = useState<"girl" | "boy">("girl");
 
-  // Video timer + alternating speaker state (Girl & Boy talking to each other)
   useEffect(() => {
     const timer = setInterval(() => {
       setSeconds((s) => (s >= 5 ? 1 : s + 1));
@@ -37,9 +37,8 @@ function VideoLoopCall() {
   }, []);
 
   return (
-    <div className="relative h-full w-full overflow-hidden rounded-2xl sm:rounded-3xl bg-[#090518] p-3 sm:p-5 border border-purple-500/30 shadow-xl">
-      {/* Top Video Player HUD Status Bar */}
-      <div className="flex items-center justify-between mb-2.5 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/10 text-[10px] sm:text-xs z-20 relative">
+    <div className="relative h-full w-full overflow-hidden rounded-2xl sm:rounded-3xl bg-[#090518] p-3 sm:p-5 border border-purple-500/30 shadow-xl flex flex-col justify-between">
+      <div className="flex items-center justify-between mb-2 bg-black/60 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 text-[10px] sm:text-xs z-20 relative">
         <div className="flex items-center gap-1.5">
           <span className="h-2 w-2 rounded-full bg-red-500 animate-ping" />
           <span className="font-bold text-white uppercase tracking-wider font-mono">● LIVE STREAM</span>
@@ -51,9 +50,7 @@ function VideoLoopCall() {
         </div>
       </div>
 
-      {/* Dual Video Stream Grid (Boy & Girl Talking Live) */}
-      <div className="grid grid-cols-2 gap-2 sm:gap-3 h-[185px] sm:h-[220px]">
-        {/* Girl Video Stream (Emma) */}
+      <div className="grid grid-cols-2 gap-2 sm:gap-3 h-[180px] sm:h-[200px]">
         <div className="relative overflow-hidden rounded-xl sm:rounded-2xl border border-purple-400/30 shadow-md">
           <motion.div
             animate={{
@@ -71,13 +68,6 @@ function VideoLoopCall() {
               className="object-cover object-center"
             />
           </motion.div>
-
-          {/* Dynamic Light Reflection Flare */}
-          <motion.div
-            animate={{ x: ["-100%", "200%"] }}
-            transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-12 pointer-events-none"
-          />
 
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
 
@@ -97,7 +87,6 @@ function VideoLoopCall() {
           )}
         </div>
 
-        {/* Boy Video Stream (Alex) */}
         <div className="relative overflow-hidden rounded-xl sm:rounded-2xl border border-indigo-400/30 shadow-md">
           <motion.div
             animate={{
@@ -115,13 +104,6 @@ function VideoLoopCall() {
               className="object-cover object-center"
             />
           </motion.div>
-
-          {/* Dynamic Light Reflection Flare */}
-          <motion.div
-            animate={{ x: ["-100%", "200%"] }}
-            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1.5 }}
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-12 pointer-events-none"
-          />
 
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
 
@@ -161,7 +143,6 @@ function VideoLoopChat() {
 
   const [messages, setMessages] = useState(initialMessages);
 
-  // Auto-typing message loop simulation
   useEffect(() => {
     let step = 0;
     const timer = setInterval(() => {
@@ -181,10 +162,9 @@ function VideoLoopChat() {
   }, []);
 
   return (
-    <div className="relative h-full w-full overflow-hidden rounded-2xl sm:rounded-3xl bg-[#0a0518] p-3 sm:p-5 border border-indigo-500/30 shadow-xl">
-      <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 h-full items-center">
-        {/* Left: Person holding mobile in hand texting live */}
-        <div className="relative sm:col-span-5 hidden sm:block overflow-hidden rounded-2xl border border-white/10 h-[210px]">
+    <div className="relative h-full w-full overflow-hidden rounded-2xl sm:rounded-3xl bg-[#0a0518] p-3 sm:p-5 border border-indigo-500/30 shadow-xl flex flex-col justify-between">
+      <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 h-[225px] sm:h-[235px] items-center">
+        <div className="relative sm:col-span-5 hidden sm:block overflow-hidden rounded-2xl border border-white/10 h-full">
           <motion.div
             animate={{ scale: [1, 1.04, 1], y: [0, -3, 0] }}
             transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
@@ -193,21 +173,13 @@ function VideoLoopChat() {
             <Image src="/images/chat_person.png" alt="Person holding phone texting" fill className="object-cover" />
           </motion.div>
           
-          {/* Animated screen glow reflection */}
-          <motion.div
-            animate={{ opacity: [0.3, 0.7, 0.4] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-            className="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 via-transparent to-purple-500/20 pointer-events-none"
-          />
-
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
           <span className="absolute bottom-2 left-2 text-[10px] font-bold text-white bg-indigo-500/40 px-2 py-0.5 rounded-full border border-indigo-400/30 backdrop-blur-xs">
             ● Person Texting Live
           </span>
         </div>
 
-        {/* Right: Scrolling messages container */}
-        <div className="relative sm:col-span-7 flex flex-col justify-between h-[210px] bg-[#120a28] rounded-xl sm:rounded-2xl p-3 border border-white/10">
+        <div className="relative sm:col-span-7 flex flex-col justify-between h-full bg-[#120a28] rounded-xl sm:rounded-2xl p-3 border border-white/10">
           <div className="flex items-center justify-between pb-1.5 border-b border-white/10 text-[10px] sm:text-xs">
             <span className="font-bold text-white">Stranger</span>
             <span className="text-emerald-400 font-mono animate-pulse">● Live Chat</span>
@@ -263,8 +235,7 @@ function VideoLoopVoice() {
         <span className="text-cyan-300 font-mono">Encrypted</span>
       </div>
 
-      <div className="my-2 flex items-center justify-center gap-6 sm:gap-12 py-3">
-        {/* Person 1 Avatar */}
+      <div className="my-auto flex items-center justify-center gap-6 sm:gap-12 py-3">
         <div className="flex flex-col items-center gap-1.5">
           <div className="relative flex h-16 w-16 items-center justify-center">
             <motion.span
@@ -279,7 +250,6 @@ function VideoLoopVoice() {
           <span className="text-[10px] font-bold text-white">Emma</span>
         </div>
 
-        {/* Audio Spectrum */}
         <div className="flex items-end gap-1 h-12 px-3 py-1.5 bg-white/5 rounded-xl border border-white/10 backdrop-blur-md">
           {[14, 28, 40, 18, 48, 30, 15, 38, 52, 24].map((h, i) => (
             <motion.span
@@ -291,7 +261,6 @@ function VideoLoopVoice() {
           ))}
         </div>
 
-        {/* Person 2 Avatar */}
         <div className="flex flex-col items-center gap-1.5">
           <div className="relative flex h-16 w-16 items-center justify-center">
             <motion.span
@@ -321,13 +290,18 @@ const PREVIEWS: Record<SceneId, () => React.JSX.Element> = {
   "voice-room": VideoLoopVoice,
 };
 
-export default function FeatureShowcase() {
+type Props = {
+  currentLang?: LanguageCode;
+};
+
+export default function FeatureShowcase({ currentLang = "EN" }: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const currentScene = SCENES[activeIndex];
   const ActiveComponent = PREVIEWS[currentScene.id];
 
-  // Auto-advancing Carousel (Advances every 5s)
+  const t = TRANSLATIONS[currentLang] || TRANSLATIONS.EN;
+
   useEffect(() => {
     if (isPaused) return;
     const timer = setInterval(() => {
@@ -337,75 +311,132 @@ export default function FeatureShowcase() {
   }, [activeIndex, isPaused, currentScene.durationMs]);
 
   return (
-    <section className="relative mx-auto w-full max-w-3xl px-3 sm:px-6 py-10 sm:py-16">
+    <section className="relative mx-auto w-full max-w-5xl px-3 sm:px-6 py-10 sm:py-16 space-y-16">
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-72 w-[90%] rounded-full bg-purple-600/10 blur-[90px]" />
 
-      {/* Clean Header */}
+      {/* 1. Carousel Feature Preview */}
       <div className="text-center max-w-xl mx-auto">
-        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
-          Everything happens <span className="gradient-text">live, together</span>
+        <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
+          {t.featureTitle1} <span className="gradient-text">{t.featureTitle2}</span>
         </h2>
         <p className="mt-1.5 text-xs sm:text-sm text-purple-200/80">
-          Auto-advancing 5-second previews of Video Call, Text Chat, and Voice Rooms.
+          {t.featureSubtitle}
         </p>
-      </div>
 
-      {/* Clean Short Tab Pills */}
-      <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-        {SCENES.map((scene, index) => {
-          const Icon = scene.icon;
-          const isActive = activeIndex === index;
+        {/* Clean Short Tab Pills */}
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+          {SCENES.map((scene, index) => {
+            const Icon = scene.icon;
+            const isActive = activeIndex === index;
 
-          return (
-            <button
-              key={scene.id}
-              onClick={() => {
-                setActiveIndex(index);
-                setIsPaused(false);
-              }}
-              className={`relative overflow-hidden flex items-center gap-2 rounded-full px-5 py-2 text-xs font-semibold transition-all duration-300 ${
-                isActive
-                  ? "btn-gradient text-white shadow-md scale-105"
-                  : "glass-pill text-purple-200/70 hover:text-white"
-              }`}
+            return (
+              <button
+                key={scene.id}
+                onClick={() => {
+                  setActiveIndex(index);
+                  setIsPaused(false);
+                }}
+                className={`relative overflow-hidden flex items-center gap-2 rounded-full px-5 py-2 text-xs font-semibold transition-all duration-300 ${
+                  isActive
+                    ? "btn-gradient text-white shadow-md scale-105"
+                    : "glass-pill text-purple-200/70 hover:text-white"
+                }`}
+              >
+                <Icon size={14} />
+                <span>{scene.label}</span>
+
+                {isActive && !isPaused && (
+                  <motion.div
+                    key={activeIndex}
+                    initial={{ width: "0%" }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: scene.durationMs / 1000, ease: "linear" }}
+                    className="absolute bottom-0 left-0 h-0.5 bg-white"
+                  />
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* FIXED HEIGHT CONTAINER (h-[265px] sm:h-[300px]) so switching tabs NEVER pushes content down! */}
+        <div
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          className="mt-5 relative mx-auto w-full max-w-2xl h-[265px] sm:h-[300px] flex items-center justify-center"
+        >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentScene.id}
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.3 }}
+              className="w-full h-full"
             >
-              <Icon size={14} />
-              <span>{scene.label}</span>
-
-              {/* Progress fill bar */}
-              {isActive && !isPaused && (
-                <motion.div
-                  key={activeIndex}
-                  initial={{ width: "0%" }}
-                  animate={{ width: "100%" }}
-                  transition={{ duration: scene.durationMs / 1000, ease: "linear" }}
-                  className="absolute bottom-0 left-0 h-0.5 bg-white"
-                />
-              )}
-            </button>
-          );
-        })}
+              <ActiveComponent />
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
 
-      {/* 5-Sec Video Viewport Frame */}
-      <div
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-        className="mt-5 relative mx-auto w-full max-w-2xl"
-      >
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentScene.id}
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.98 }}
-            transition={{ duration: 0.3 }}
-            className="w-full"
-          >
-            <ActiveComponent />
-          </motion.div>
-        </AnimatePresence>
+      {/* 2. WHY VIDIBRO IS THE BEST FREE TOOL (Dynamic Language Translation) */}
+      <div className="w-full pt-8 text-center">
+        <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-white mb-2">
+          {t.whyTitle1} <span className="gradient-text">{t.whyTitle2}</span>
+        </h2>
+        <p className="text-sm text-purple-200/80 max-w-md mx-auto mb-8 font-medium">
+          {t.whySubtitle}
+        </p>
+
+        {/* 4 Feature Cards with Dynamic Language Translation */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+          
+          {/* Card 1: Instant Processing */}
+          <div className="bg-amber-500/10 border border-amber-400/30 rounded-3xl p-6 backdrop-blur-xl shadow-xl flex flex-col items-start hover:scale-[1.02] transition min-h-[170px]">
+            <div className="h-10 w-10 rounded-2xl bg-amber-400/20 border border-amber-300/40 flex items-center justify-center text-amber-300 mb-4 shadow-md">
+              <Zap size={22} />
+            </div>
+            <h3 className="text-base font-bold text-white mb-1">{t.card1Title}</h3>
+            <p className="text-xs text-purple-200/80 leading-relaxed">
+              {t.card1Desc}
+            </p>
+          </div>
+
+          {/* Card 2: Private & Secure */}
+          <div className="bg-emerald-500/10 border border-emerald-400/30 rounded-3xl p-6 backdrop-blur-xl shadow-xl flex flex-col items-start hover:scale-[1.02] transition min-h-[170px]">
+            <div className="h-10 w-10 rounded-2xl bg-emerald-400/20 border border-emerald-300/40 flex items-center justify-center text-emerald-300 mb-4 shadow-md">
+              <Lock size={22} />
+            </div>
+            <h3 className="text-base font-bold text-white mb-1">{t.card2Title}</h3>
+            <p className="text-xs text-purple-200/80 leading-relaxed">
+              {t.card2Desc}
+            </p>
+          </div>
+
+          {/* Card 3: 2.5 Million+ Users */}
+          <div className="bg-cyan-500/10 border border-cyan-400/30 rounded-3xl p-6 backdrop-blur-xl shadow-xl flex flex-col items-start hover:scale-[1.02] transition min-h-[170px]">
+            <div className="h-10 w-10 rounded-2xl bg-cyan-400/20 border border-cyan-300/40 flex items-center justify-center text-cyan-300 mb-4 shadow-md">
+              <Globe size={22} />
+            </div>
+            <h3 className="text-base font-bold text-white mb-1">{t.card3Title}</h3>
+            <p className="text-xs text-purple-200/80 leading-relaxed">
+              {t.card3Desc}
+            </p>
+          </div>
+
+          {/* Card 4: Works on Any Device */}
+          <div className="bg-pink-500/10 border border-pink-400/30 rounded-3xl p-6 backdrop-blur-xl shadow-xl flex flex-col items-start hover:scale-[1.02] transition min-h-[170px]">
+            <div className="h-10 w-10 rounded-2xl bg-pink-400/20 border border-pink-300/40 flex items-center justify-center text-pink-300 mb-4 shadow-md">
+              <Smartphone size={22} />
+            </div>
+            <h3 className="text-base font-bold text-white mb-1">{t.card4Title}</h3>
+            <p className="text-xs text-purple-200/80 leading-relaxed">
+              {t.card4Desc}
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
