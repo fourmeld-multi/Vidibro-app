@@ -89,6 +89,8 @@ export default function VideoContainer({
   const chatListRef = useRef<HTMLDivElement | null>(null);
   const videoScreenRef = useRef<HTMLDivElement | null>(null);
 
+  const isConnected = connectionState === "connected";
+
   const [micEnabled, setMicEnabled] = useState(true);
   const [camEnabled, setCamEnabled] = useState(true);
   const [speakerEnabled, setSpeakerEnabled] = useState(true);
@@ -322,8 +324,6 @@ export default function VideoContainer({
       setFloatingParticles((prev) => prev.filter((p) => p.id !== newParticle.id));
     }, 2500);
   }
-
-  const isConnected = connectionState === "connected";
 
   return (
     <div className="relative flex flex-col w-full h-[100dvh] overflow-hidden bg-[#070414] select-none">
