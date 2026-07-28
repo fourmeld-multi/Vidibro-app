@@ -17,13 +17,14 @@ export type ConnectionState =
   | "disconnected";
 
 export type PeerRole = "initiator" | "receiver";
+export type ChatMode = "video" | "audio" | "text";
 
 const SIGNALING_URL =
   process.env.NEXT_PUBLIC_SIGNALING_URL?.replace(/\/$/, "") || "http://localhost:4000";
 
 // Kept strictly at 480p per the app's bandwidth/CPU budget — every peer,
 // regardless of device, sends and receives at the same modest resolution.
-const MEDIA_CONSTRAINTS: MediaStreamConstraints = {
+const VIDEO_CONSTRAINTS: MediaStreamConstraints = {
   video: {
     width: { ideal: 640, max: 640 },
     height: { ideal: 480, max: 480 },
@@ -31,6 +32,8 @@ const MEDIA_CONSTRAINTS: MediaStreamConstraints = {
   },
   audio: true,
 };
+
+const AUDIO_ONLY_CONSTRAINTS: MediaStreamConstraints = { audio: true };
 
 function iceServers(): RTCIceServer[] {
   return [
@@ -53,12 +56,13 @@ export function useWebRTC() {
   const [localStream, setLocalStream] = useState<MediaStream | null>(null);
   const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
   const [dataChannelOpen, setDataChannelOpen] = useState(false);
+  const [mode, setMode] = useState<ChatMode>("video");
 
   const socketRef = useRef<Socket | null>(null);
   const pcRef = useRef<RTCPeerConnection | null>(null);
   const dcRef = useRef<RTCDataChannel | null>(null);
-  const videoSenderRef = useRef<RTCRtpSender | null>(null);
   const roomIdRef = useRef<string | null>(null);
+  const modeRef = useRef<ChatMode>("video");
   const pendingCandidatesRef = useRef<RTCIceCandidateInit[]>([]);
   const listenersRef = useRef<Map<MessageType, Set<Listener>>>(new Map());
   const localStreamRef = useRef<MediaStream | null>(null);
@@ -82,7 +86,6 @@ export function useWebRTC() {
   const teardownPeerConnection = useCallback(() => {
     dcRef.current?.close();
     dcRef.current = null;
-    videoSenderRef.current = null;
     pcRef.current?.getSenders().forEach((s) => s.track?.stop());
     pcRef.current?.close();
     pcRef.current = null;
@@ -113,8 +116,7 @@ export function useWebRTC() {
     const pc = new RTCPeerConnection({ iceServers: iceServers() });
 
     localStreamRef.current?.getTracks().forEach((track) => {
-      const sender = pc.addTrack(track, localStreamRef.current as MediaStream);
-      if (track.kind === "video") videoSenderRef.current = sender;
+      pc.addTrack(track, localStreamRef.current as MediaStream);
     });
 
     pc.onicecandidate = (e) => {
@@ -154,21 +156,29 @@ export function useWebRTC() {
     pendingCandidatesRef.current = [];
   }, []);
 
-  /** Acquire the camera/mic once, kept alive across matches so the local
-   * preview never flickers between "Next" clicks. */
-  const ensureLocalStream = useCallback(async () => {
+  /** Acquire media for the given mode once, kept alive across matches so the
+   * local preview never flickers between "Next" clicks. Text mode never
+   * touches getUserMedia at all — pure signaling + data channel. */
+  const ensureLocalStream = useCallback(async (mode: ChatMode) => {
+    if (mode === "text") return null;
     if (localStreamRef.current) return localStreamRef.current;
-    const stream = await navigator.mediaDevices.getUserMedia(MEDIA_CONSTRAINTS);
+    const constraints = mode === "audio" ? AUDIO_ONLY_CONSTRAINTS : VIDEO_CONSTRAINTS;
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
     localStreamRef.current = stream;
     setLocalStream(stream);
     return stream;
   }, []);
 
-  const joinQueue = useCallback(async () => {
-    await ensureLocalStream();
-    setConnectionState("waiting");
-    socketRef.current?.emit("queue:join");
-  }, [ensureLocalStream]);
+  const joinQueue = useCallback(
+    async (newMode: ChatMode = "video") => {
+      modeRef.current = newMode;
+      setMode(newMode);
+      await ensureLocalStream(newMode);
+      setConnectionState("waiting");
+      socketRef.current?.emit("queue:join");
+    },
+    [ensureLocalStream]
+  );
 
   const leaveMatch = useCallback(() => {
     teardownPeerConnection();
@@ -181,17 +191,6 @@ export function useWebRTC() {
     setConnectionState("waiting");
     socketRef.current?.emit("queue:join");
   }, [teardownPeerConnection]);
-
-  /** Swaps the outgoing video track (e.g. a MediaPipe-blurred canvas stream)
-   * without renegotiating — this is what makes background blur visible to
-   * the stranger, not just the local preview. Pass null to revert to the
-   * raw camera track. */
-  const replaceOutgoingVideoTrack = useCallback(async (track: MediaStreamTrack | null) => {
-    const sender = videoSenderRef.current;
-    if (!sender) return;
-    const fallback = localStreamRef.current?.getVideoTracks()[0] ?? null;
-    await sender.replaceTrack(track ?? fallback);
-  }, []);
 
   useEffect(() => {
     const socket = io(SIGNALING_URL, { transports: ["websocket"] });
@@ -261,6 +260,7 @@ export function useWebRTC() {
     connectionState,
     role,
     isHost: role === "initiator",
+    mode,
     localStream,
     remoteStream,
     dataChannelOpen,
@@ -269,6 +269,5 @@ export function useWebRTC() {
     skipToNext,
     sendMessage: emit,
     subscribe,
-    replaceOutgoingVideoTrack,
   };
 }

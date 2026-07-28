@@ -10,9 +10,11 @@ type ChatEntry = { id: string; text: string; mine: boolean };
 export default function ChatDrawer({
   sendMessage,
   subscribe,
+  connected,
 }: {
   sendMessage: <T>(type: MessageType, payload: T) => void;
   subscribe: (type: MessageType, cb: (msg: { payload: unknown }) => void) => () => void;
+  connected: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<ChatEntry[]>([]);
@@ -39,7 +41,7 @@ export default function ChatDrawer({
 
   function send() {
     const text = draft.trim();
-    if (!text) return;
+    if (!text || !connected) return;
     sendMessage<ChatPayload>("chat", { text });
     setMessages((prev) => [...prev, { id: `${Date.now()}-${Math.random()}`, text, mine: true }]);
     setDraft("");
@@ -77,7 +79,9 @@ export default function ChatDrawer({
             </div>
             <div ref={listRef} className="flex-1 space-y-2 overflow-y-auto px-3 py-3">
               {messages.length === 0 && (
-                <p className="pt-6 text-center text-xs text-[var(--muted)]">Say hi 👋</p>
+                <p className="pt-6 text-center text-xs text-[var(--muted)]">
+                  {connected ? "Say hi 👋" : "Waiting to connect to a stranger…"}
+                </p>
               )}
               {messages.map((m) => (
                 <div
@@ -97,13 +101,14 @@ export default function ChatDrawer({
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && send()}
-                placeholder="Message the stranger…"
+                placeholder={connected ? "Message the stranger…" : "Waiting to connect…"}
                 maxLength={500}
-                className="min-w-0 flex-1 rounded-full border border-[var(--border)] bg-[var(--background)] px-3.5 py-2 text-sm outline-none focus:border-[var(--accent)]"
+                disabled={!connected}
+                className="min-w-0 flex-1 rounded-full border border-[var(--border)] bg-[var(--background)] px-3.5 py-2 text-sm outline-none focus:border-[var(--accent)] disabled:opacity-50"
               />
               <button
                 onClick={send}
-                disabled={!draft.trim()}
+                disabled={!draft.trim() || !connected}
                 className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full btn-gradient text-black/80 disabled:opacity-40"
                 aria-label="Send message"
               >

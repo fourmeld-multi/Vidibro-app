@@ -1,25 +1,31 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { Loader2, ScanFace, Captions, Mic, MicOff, Video, VideoOff } from "lucide-react";
-import type { MessageType } from "@/lib/protocol";
-import type { SubtitlePayload } from "@/lib/protocol";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Mic,
+  MicOff,
+  Video as VideoIcon,
+  VideoOff,
+  PhoneOff,
+  SkipForward,
+  MessageSquare,
+  Sparkles,
+  Captions,
+  Send,
+  X,
+  ShieldAlert,
+  Volume2,
+} from "lucide-react";
+import type { MessageType, ReactionId, ReactionPayload, ChatPayload, SubtitlePayload } from "@/lib/protocol";
 
-// Loaded lazily so users who never enable blur don't pay for the WASM/model
-// download on every page load.
-type ImageSegmenterModule = typeof import("@mediapipe/tasks-vision");
-let mediapipeModulePromise: Promise<ImageSegmenterModule> | null = null;
-function loadMediapipe() {
-  if (!mediapipeModulePromise) {
-    mediapipeModulePromise = import("@mediapipe/tasks-vision");
-  }
-  return mediapipeModulePromise;
-}
-
-const SEGMENTER_WASM_BASE =
-  "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm";
-const SEGMENTER_MODEL_URL =
-  "https://storage.googleapis.com/mediapipe-models/image_segmenter/selfie_segmenter/float16/latest/selfie_segmenter.tflite";
+const EMOJI_REACTIONS: { id: ReactionId; emoji: string; label: string }[] = [
+  { id: "fire", emoji: "🔥", label: "Fire" },
+  { id: "heart", emoji: "❤️", label: "Heart" },
+  { id: "boom", emoji: "💥", label: "Boom" },
+  { id: "wow", emoji: "😮", label: "Wow" },
+  { id: "lol", emoji: "😂", label: "LOL" },
+];
 
 type Props = {
   localStream: MediaStream | null;
@@ -28,7 +34,23 @@ type Props = {
   dataChannelOpen: boolean;
   sendMessage: <T>(type: MessageType, payload: T) => void;
   subscribe: (type: MessageType, cb: (msg: { payload: unknown }) => void) => () => void;
-  replaceOutgoingVideoTrack: (track: MediaStreamTrack | null) => Promise<void>;
+  replaceOutgoingVideoTrack?: (track: MediaStreamTrack | null) => Promise<void>;
+  skipToNext: () => void;
+  leaveMatch: () => void;
+  isHost?: boolean;
+};
+
+type ChatMessage = {
+  id: string;
+  text: string;
+  mine: boolean;
+  time: string;
+};
+
+type FloatingParticle = {
+  id: string;
+  emoji: string;
+  x: number;
 };
 
 export default function VideoContainer({
@@ -38,28 +60,32 @@ export default function VideoContainer({
   dataChannelOpen,
   sendMessage,
   subscribe,
-  replaceOutgoingVideoTrack,
+  skipToNext,
+  leaveMatch,
 }: Props) {
   const localVideoRef = useRef<HTMLVideoElement | null>(null);
   const remoteVideoRef = useRef<HTMLVideoElement | null>(null);
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const rafRef = useRef<number | null>(null);
-  const segmenterRef = useRef<import("@mediapipe/tasks-vision").ImageSegmenter | null>(null);
+  const chatListRef = useRef<HTMLDivElement | null>(null);
 
+  // Audio/Video controls
   const [micEnabled, setMicEnabled] = useState(true);
   const [camEnabled, setCamEnabled] = useState(true);
-  const [blurEnabled, setBlurEnabled] = useState(false);
-  const [blurLoading, setBlurLoading] = useState(false);
   const [subtitlesEnabled, setSubtitlesEnabled] = useState(false);
-  // Lazy initializer: a one-time browser-feature check, safe on the server
-  // (falls back to false) and correct on the client's first render.
-  const [subtitlesSupported] = useState(
-    () =>
-      typeof window !== "undefined" &&
-      ("webkitSpeechRecognition" in window || "SpeechRecognition" in window)
-  );
   const [remoteSubtitle, setRemoteSubtitle] = useState("");
 
+  // Google Meet Auto-Hiding Controls Bar state
+  const [showControls, setShowControls] = useState(true);
+  const controlsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Chat & Reactions popups state
+  const [chatOpen, setChatOpen] = useState(false);
+  const [reactionsOpen, setReactionsOpen] = useState(false);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [chatDraft, setChatDraft] = useState("");
+  const [unreadCount, setUnreadCount] = useState(0);
+  const [floatingParticles, setFloatingParticles] = useState<FloatingParticle[]>([]);
+
+  // Attach media streams to video elements
   useEffect(() => {
     if (localVideoRef.current) localVideoRef.current.srcObject = localStream;
   }, [localStream]);
@@ -68,160 +94,79 @@ export default function VideoContainer({
     if (remoteVideoRef.current) remoteVideoRef.current.srcObject = remoteStream;
   }, [remoteStream]);
 
-  // ---- Received subtitles (the remote peer's speech) ----
+  // Google Meet Auto-hide controls timer
+  const resetControlsTimer = () => {
+    setShowControls(true);
+    if (controlsTimeoutRef.current) clearTimeout(controlsTimeoutRef.current);
+    controlsTimeoutRef.current = setTimeout(() => {
+      // Don't hide if chat or reactions popover is actively open
+      if (!chatOpen && !reactionsOpen) {
+        setShowControls(false);
+      }
+    }, 4500);
+  };
+
+  useEffect(() => {
+    resetControlsTimer();
+    return () => {
+      if (controlsTimeoutRef.current) clearTimeout(controlsTimeoutRef.current);
+    };
+  }, [chatOpen, reactionsOpen]);
+
+  // Listen for incoming chat messages over WebRTC data channel
+  useEffect(() => {
+    const unsub = subscribe("chat", (msg) => {
+      const payload = msg.payload as ChatPayload;
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      setMessages((prev) => [
+        ...prev,
+        { id: `${Date.now()}-${Math.random()}`, text: payload.text, mine: false, time: timeStr },
+      ]);
+      if (!chatOpen) setUnreadCount((count) => count + 1);
+    });
+    return unsub;
+  }, [subscribe, chatOpen]);
+
+  // Listen for incoming emoji reactions over WebRTC data channel
+  useEffect(() => {
+    const unsub = subscribe("reaction", (msg) => {
+      const payload = msg.payload as ReactionPayload;
+      const meta = EMOJI_REACTIONS.find((r) => r.id === payload.reactionId);
+      const emojiSymbol = meta ? meta.emoji : "🔥";
+      
+      const newParticle: FloatingParticle = {
+        id: `${Date.now()}-${Math.random()}`,
+        emoji: emojiSymbol,
+        x: 20 + Math.random() * 60,
+      };
+
+      setFloatingParticles((prev) => [...prev.slice(-10), newParticle]);
+      setTimeout(() => {
+        setFloatingParticles((prev) => prev.filter((p) => p.id !== newParticle.id));
+      }, 2500);
+    });
+    return unsub;
+  }, [subscribe]);
+
+  // Listen for speech subtitles
   useEffect(() => {
     const unsub = subscribe("subtitle", (msg) => {
       const payload = msg.payload as SubtitlePayload;
       setRemoteSubtitle(payload.text);
       if (payload.isFinal) {
-        window.setTimeout(() => setRemoteSubtitle((cur) => (cur === payload.text ? "" : cur)), 3000);
+        window.setTimeout(() => setRemoteSubtitle((cur) => (cur === payload.text ? "" : cur)), 3500);
       }
     });
     return unsub;
   }, [subscribe]);
 
-  // ---- Local speech recognition -> broadcast over the data channel ----
+  // Auto-scroll chat list
   useEffect(() => {
-    if (!subtitlesEnabled || !subtitlesSupported) return;
-
-    const Ctor =
-      (window as unknown as { SpeechRecognition?: new () => SpeechRecognition }).SpeechRecognition ||
-      (window as unknown as { webkitSpeechRecognition?: new () => SpeechRecognition }).webkitSpeechRecognition;
-    if (!Ctor) return;
-
-    const recognizer = new Ctor();
-    recognizer.continuous = true;
-    recognizer.interimResults = true;
-    recognizer.lang = "en-US";
-
-    let lastSent = "";
-    recognizer.onresult = (e: SpeechRecognitionEvent) => {
-      const result = e.results[e.results.length - 1];
-      const text = result[0].transcript.trim();
-      if (!text || text === lastSent) return;
-      lastSent = text;
-      sendMessage<SubtitlePayload>("subtitle", { text, isFinal: result.isFinal });
-    };
-    recognizer.onerror = () => {};
-    recognizer.onend = () => {
-      // Chrome stops the recognizer after periods of silence — restart while toggled on.
-      if (subtitlesEnabled) {
-        try {
-          recognizer.start();
-        } catch {
-          // already running
-        }
-      }
-    };
-
-    try {
-      recognizer.start();
-    } catch {
-      // ignore double-start races
+    if (chatListRef.current) {
+      chatListRef.current.scrollTo({ top: chatListRef.current.scrollHeight, behavior: "smooth" });
     }
-
-    return () => {
-      recognizer.onend = null;
-      recognizer.stop();
-    };
-  }, [subtitlesEnabled, subtitlesSupported, sendMessage]);
-
-  // ---- MediaPipe background blur ----
-  const stopBlurLoop = useCallback(() => {
-    if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    rafRef.current = null;
-  }, []);
-
-  // A self-recursive rAF loop can't reference its own `useCallback` binding
-  // directly (that binding doesn't exist yet inside its own initializer) —
-  // routing the recursive call through a ref sidesteps that entirely.
-  const runBlurLoopRef = useRef<() => void>(() => {});
-
-  const runBlurLoop = useCallback(() => {
-    const video = localVideoRef.current;
-    const canvas = canvasRef.current;
-    const segmenter = segmenterRef.current;
-    if (!video || !canvas || !segmenter || video.videoWidth === 0) {
-      rafRef.current = requestAnimationFrame(() => runBlurLoopRef.current());
-      return;
-    }
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const result = segmenter.segmentForVideo(video, performance.now());
-    const categoryMask = result.categoryMask;
-    const mask = categoryMask?.getAsFloat32Array();
-
-    // Layer 1: heavily blurred full frame as the background.
-    ctx.filter = "blur(14px)";
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    ctx.filter = "none";
-
-    // Layer 2: sharp frame, masked to just the person region, on top.
-    // The mask's native resolution rarely matches the video's actual
-    // resolution — building the alpha mask at the video's size while
-    // reading `mask[i]` as if it were a 1:1 index (the original bug here)
-    // scrambles the composite, since row/column boundaries don't line up.
-    // Build it at the MASK's own reported width/height instead, then let
-    // drawImage's scaling parameters upsize it onto the real canvas.
-    if (mask && categoryMask) {
-      const maskW = categoryMask.width;
-      const maskH = categoryMask.height;
-      const sharp = document.createElement("canvas");
-      sharp.width = maskW;
-      sharp.height = maskH;
-      const sctx = sharp.getContext("2d")!;
-      sctx.drawImage(video, 0, 0, maskW, maskH);
-      const frame = sctx.getImageData(0, 0, maskW, maskH);
-      // MediaPipe's selfie segmenter: category 1 = person, category 0 =
-      // background — keep person pixels opaque (sharp), make background
-      // pixels transparent so the blurred layer underneath shows through.
-      for (let i = 0; i < mask.length; i++) {
-        if (mask[i] < 0.5) frame.data[i * 4 + 3] = 0;
-      }
-      sctx.putImageData(frame, 0, 0);
-      ctx.drawImage(sharp, 0, 0, maskW, maskH, 0, 0, canvas.width, canvas.height);
-    }
-
-    result.close();
-    rafRef.current = requestAnimationFrame(() => runBlurLoopRef.current());
-  }, []);
-
-  useEffect(() => {
-    runBlurLoopRef.current = runBlurLoop;
-  }, [runBlurLoop]);
-
-  const toggleBlur = useCallback(async () => {
-    if (blurEnabled) {
-      stopBlurLoop();
-      setBlurEnabled(false);
-      await replaceOutgoingVideoTrack(null);
-      return;
-    }
-
-    setBlurLoading(true);
-    try {
-      if (!segmenterRef.current) {
-        const { FilesetResolver, ImageSegmenter } = await loadMediapipe();
-        const fileset = await FilesetResolver.forVisionTasks(SEGMENTER_WASM_BASE);
-        segmenterRef.current = await ImageSegmenter.createFromOptions(fileset, {
-          baseOptions: { modelAssetPath: SEGMENTER_MODEL_URL, delegate: "GPU" },
-          runningMode: "VIDEO",
-          outputCategoryMask: true,
-        });
-      }
-      setBlurEnabled(true);
-      runBlurLoop();
-      const canvasStream = canvasRef.current!.captureStream(24);
-      await replaceOutgoingVideoTrack(canvasStream.getVideoTracks()[0]);
-    } finally {
-      setBlurLoading(false);
-    }
-  }, [blurEnabled, replaceOutgoingVideoTrack, runBlurLoop, stopBlurLoop]);
-
-  useEffect(() => stopBlurLoop, [stopBlurLoop]);
+  }, [messages.length]);
 
   function toggleMic() {
     const next = !micEnabled;
@@ -235,92 +180,323 @@ export default function VideoContainer({
     setCamEnabled(next);
   }
 
-  return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-      <div className="relative aspect-video overflow-hidden rounded-2xl bg-black ring-2 ring-[var(--accent-4)]/50">
-        <video
-          ref={localVideoRef}
-          autoPlay
-          muted
-          playsInline
-          className={`h-full w-full object-cover ${blurEnabled ? "invisible" : ""}`}
-        />
-        <canvas
-          ref={canvasRef}
-          className={`absolute inset-0 h-full w-full object-cover ${blurEnabled ? "" : "hidden"}`}
-        />
-        <span className="glass absolute left-3 top-3 rounded-full px-2.5 py-1 text-xs font-medium text-[var(--foreground)]">
-          You
-        </span>
-        <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center gap-2">
-          <button
-            onClick={toggleMic}
-            className={`flex h-9 w-9 items-center justify-center rounded-full ${
-              micEnabled ? "bg-black/60 text-white" : "bg-red-500 text-white"
-            }`}
-            aria-label="Toggle microphone"
-          >
-            {micEnabled ? <Mic size={15} /> : <MicOff size={15} />}
-          </button>
-          <button
-            onClick={toggleCam}
-            className={`flex h-9 w-9 items-center justify-center rounded-full ${
-              camEnabled ? "bg-black/60 text-white" : "bg-red-500 text-white"
-            }`}
-            aria-label="Toggle camera"
-          >
-            {camEnabled ? <Video size={15} /> : <VideoOff size={15} />}
-          </button>
-          <button
-            onClick={toggleBlur}
-            disabled={blurLoading}
-            className={`flex h-9 w-9 items-center justify-center rounded-full ${
-              blurEnabled ? "btn-gradient text-black/80" : "bg-black/60 text-white"
-            }`}
-            aria-label="Toggle background blur"
-            title="Background blur (visible to the stranger too)"
-          >
-            {blurLoading ? <Loader2 size={15} className="animate-spin" /> : <ScanFace size={15} />}
-          </button>
-          {subtitlesSupported && (
-            <button
-              onClick={() => setSubtitlesEnabled((v) => !v)}
-              className={`flex h-9 w-9 items-center justify-center rounded-full ${
-                subtitlesEnabled ? "btn-gradient text-black/80" : "bg-black/60 text-white"
-              }`}
-              aria-label="Toggle live subtitles"
-              title="Broadcast live subtitles of your speech"
-            >
-              <Captions size={15} />
-            </button>
-          )}
-        </div>
-      </div>
+  function sendChatMessage(e?: React.FormEvent) {
+    if (e) e.preventDefault();
+    const text = chatDraft.trim();
+    if (!text || connectionState !== "connected") return;
 
-      <div className="relative aspect-video overflow-hidden rounded-2xl bg-black ring-2 ring-[var(--accent)]/50">
-        {connectionState === "connected" && remoteStream ? (
-          <video ref={remoteVideoRef} autoPlay playsInline className="h-full w-full object-cover" />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center text-sm text-[var(--muted)]">
-            {connectionState === "waiting" && "Looking for someone to chat with…"}
-            {connectionState === "connecting" && "Connecting…"}
-            {connectionState === "idle" && "Press Start to find a stranger"}
-            {connectionState === "disconnected" && "Stranger disconnected"}
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+    sendMessage<ChatPayload>("chat", { text });
+    setMessages((prev) => [
+      ...prev,
+      { id: `${Date.now()}-${Math.random()}`, text, mine: true, time: timeStr },
+    ]);
+    setChatDraft("");
+  }
+
+  function sendReaction(reactionId: ReactionId) {
+    sendMessage<ReactionPayload>("reaction", { reactionId });
+    const meta = EMOJI_REACTIONS.find((r) => r.id === reactionId);
+    const emojiSymbol = meta ? meta.emoji : "🔥";
+
+    const newParticle: FloatingParticle = {
+      id: `${Date.now()}-${Math.random()}`,
+      emoji: emojiSymbol,
+      x: 30 + Math.random() * 40,
+    };
+
+    setFloatingParticles((prev) => [...prev.slice(-10), newParticle]);
+    setTimeout(() => {
+      setFloatingParticles((prev) => prev.filter((p) => p.id !== newParticle.id));
+    }, 2500);
+
+    setReactionsOpen(false);
+  }
+
+  const isConnected = connectionState === "connected";
+
+  return (
+    <div
+      onMouseMove={resetControlsTimer}
+      onTouchStart={resetControlsTimer}
+      onClick={resetControlsTimer}
+      className="relative flex flex-col w-full h-[calc(100vh-80px)] max-h-[840px] overflow-hidden rounded-2xl sm:rounded-3xl bg-[#090516] border border-purple-500/20 shadow-2xl select-none"
+    >
+      {/* Dynamic Viewport Container (Google Meet Style) */}
+      <div className={`relative flex-1 w-full overflow-hidden flex ${chatOpen ? "flex-col sm:flex-row" : ""}`}>
+        
+        {/* Main Video Screen (Stranger's Video taking main stage) */}
+        <div className={`relative flex-1 h-full w-full bg-black overflow-hidden ${chatOpen ? "h-[45%] sm:h-full" : "h-full"}`}>
+          {isConnected && remoteStream ? (
+            <video
+              ref={remoteVideoRef}
+              autoPlay
+              playsInline
+              className="h-full w-full object-cover object-center"
+            />
+          ) : (
+            <div className="flex flex-col items-center justify-center h-full w-full px-6 text-center bg-gradient-to-b from-[#140b2e] to-[#0a0518]">
+              <div className="relative flex h-20 w-20 items-center justify-center rounded-full bg-purple-500/10 border border-purple-400/30 mb-4">
+                <span className="h-10 w-10 rounded-full bg-purple-500/30 animate-ping absolute" />
+                <Volume2 className="text-purple-300 animate-pulse" size={32} />
+              </div>
+              <p className="text-base sm:text-lg font-bold text-white tracking-wide">
+                {connectionState === "waiting" && "Looking for someone to chat with…"}
+                {connectionState === "connecting" && "Establishing encrypted WebRTC connection…"}
+                {connectionState === "disconnected" && "Stranger left the match."}
+                {connectionState === "idle" && "Press Start to match with a stranger."}
+              </p>
+              <p className="text-xs text-purple-300/70 mt-1 max-w-sm">
+                Vidibro matches you instantly with online strangers in HD video & encrypted audio.
+              </p>
+            </div>
+          )}
+
+          {/* Stranger Name Badge */}
+          <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 flex items-center gap-2 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-xs font-semibold text-white">
+            <span className={`h-2 w-2 rounded-full ${isConnected ? "bg-emerald-400 animate-pulse" : "bg-yellow-400"}`} />
+            <span>{isConnected ? "Stranger" : "Matching…"}</span>
           </div>
-        )}
-        <span className="glass absolute left-3 top-3 rounded-full px-2.5 py-1 text-xs font-medium text-[var(--foreground)]">
-          Stranger
-        </span>
-        {remoteSubtitle && (
-          <p className="absolute bottom-3 left-1/2 max-w-[90%] -translate-x-1/2 rounded-lg bg-black/70 px-3 py-1.5 text-center text-sm text-white">
-            {remoteSubtitle}
-          </p>
-        )}
-        {!dataChannelOpen && connectionState === "connected" && (
-          <span className="absolute right-3 top-3 rounded-full bg-black/60 px-2 py-1 text-[10px] text-white">
-            Syncing…
-          </span>
-        )}
+
+          {/* Floating Speech Subtitles */}
+          {remoteSubtitle && (
+            <div className="absolute bottom-20 left-1/2 -translate-x-1/2 max-w-[85%] z-20 rounded-2xl bg-black/80 backdrop-blur-md px-4 py-2 text-center text-xs sm:text-sm font-medium text-white border border-white/15">
+              {remoteSubtitle}
+            </div>
+          )}
+
+          {/* Floating Emoji Reaction Particles Burst */}
+          {floatingParticles.map((particle) => (
+            <motion.div
+              key={particle.id}
+              initial={{ opacity: 0, y: 300, scale: 0.5 }}
+              animate={{ opacity: [0, 1, 1, 0], y: -50, scale: 1.4 }}
+              transition={{ duration: 2.3, ease: "easeOut" }}
+              className="pointer-events-none absolute bottom-12 z-40 text-4xl sm:text-5xl drop-shadow-[0_0_15px_rgba(236,72,153,0.9)]"
+              style={{ left: `${particle.x}%` }}
+            >
+              {particle.emoji}
+            </motion.div>
+          ))}
+
+          {/* Small Floating "You" Picture-in-Picture PIP Card (Overlapping Top Corner) */}
+          <motion.div
+            drag
+            dragConstraints={{ top: 10, left: 10, right: 300, bottom: 400 }}
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 w-28 sm:w-44 aspect-video rounded-xl sm:rounded-2xl overflow-hidden border-2 border-white/20 bg-black shadow-2xl group cursor-grab active:cursor-grabbing"
+          >
+            <video
+              ref={localVideoRef}
+              autoPlay
+              muted
+              playsInline
+              className={`h-full w-full object-cover ${!camEnabled ? "hidden" : ""}`}
+            />
+            {!camEnabled && (
+              <div className="flex h-full w-full items-center justify-center bg-gray-900 text-xs text-gray-400 font-medium">
+                Cam Off
+              </div>
+            )}
+            <span className="absolute bottom-1.5 left-2 bg-black/70 backdrop-blur-md px-2 py-0.5 rounded-md text-[9px] sm:text-[10px] font-bold text-white">
+              You
+            </span>
+          </motion.div>
+
+          {/* Google Meet Auto-Hiding Floating Controls Bar */}
+          <AnimatePresence>
+            {showControls && (
+              <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 25 }}
+                transition={{ duration: 0.25 }}
+                className="absolute bottom-4 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 sm:gap-3 bg-black/75 backdrop-blur-2xl px-4 py-2.5 rounded-full border border-white/15 shadow-2xl"
+              >
+                {/* 1. Mute / Unmute */}
+                <button
+                  onClick={toggleMic}
+                  className={`flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full transition ${
+                    micEnabled ? "bg-white/15 hover:bg-white/25 text-white" : "bg-red-500 text-white shadow-lg shadow-red-500/30"
+                  }`}
+                  aria-label="Toggle mic"
+                >
+                  {micEnabled ? <Mic size={18} /> : <MicOff size={18} />}
+                </button>
+
+                {/* 2. Camera On / Off */}
+                <button
+                  onClick={toggleCam}
+                  className={`flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full transition ${
+                    camEnabled ? "bg-white/15 hover:bg-white/25 text-white" : "bg-red-500 text-white shadow-lg shadow-red-500/30"
+                  }`}
+                  aria-label="Toggle camera"
+                >
+                  {camEnabled ? <VideoIcon size={18} /> : <VideoOff size={18} />}
+                </button>
+
+                {/* 3. Reaction Emojis Toggle */}
+                <button
+                  onClick={() => setReactionsOpen((v) => !v)}
+                  className={`flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full transition ${
+                    reactionsOpen ? "bg-pink-500 text-white" : "bg-white/15 hover:bg-white/25 text-pink-300"
+                  }`}
+                  aria-label="Send reaction"
+                >
+                  <Sparkles size={18} />
+                </button>
+
+                {/* 4. Transparent Chat Toggle */}
+                <button
+                  onClick={() => {
+                    setChatOpen((v) => !v);
+                    setUnreadCount(0);
+                  }}
+                  className={`relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full transition ${
+                    chatOpen ? "bg-purple-600 text-white" : "bg-white/15 hover:bg-white/25 text-cyan-300"
+                  }`}
+                  aria-label="Toggle chat"
+                >
+                  <MessageSquare size={18} />
+                  {unreadCount > 0 && !chatOpen && (
+                    <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
+                      {unreadCount}
+                    </span>
+                  )}
+                </button>
+
+                {/* 5. Next Person */}
+                <button
+                  onClick={skipToNext}
+                  className="btn-gradient flex items-center gap-1.5 px-4 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold text-white shadow-lg hover:scale-105 transition"
+                >
+                  <SkipForward size={16} />
+                  <span className="hidden sm:inline">Next</span>
+                </button>
+
+                {/* 6. End Call (RED CIRCLE ICON - NO TEXT!) */}
+                <button
+                  onClick={leaveMatch}
+                  className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-red-600 hover:bg-red-700 text-white shadow-xl shadow-red-600/30 transition transform hover:scale-105 active:scale-95"
+                  aria-label="End call"
+                  title="End call"
+                >
+                  <PhoneOff size={18} />
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Reaction Emoji Floating Picker Bar */}
+          <AnimatePresence>
+            {reactionsOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: 15, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 15, scale: 0.9 }}
+                className="absolute bottom-20 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 bg-black/85 backdrop-blur-2xl px-4 py-2.5 rounded-full border border-white/20 shadow-2xl"
+              >
+                {EMOJI_REACTIONS.map((r) => (
+                  <button
+                    key={r.id}
+                    onClick={() => sendReaction(r.id)}
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-white/25 text-xl transition transform hover:scale-125"
+                    title={r.label}
+                  >
+                    {r.emoji}
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Google Meet Mobile & Desktop Transparent Chat Window (Matches Image 2!) */}
+        <AnimatePresence>
+          {chatOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 40 }}
+              transition={{ duration: 0.3 }}
+              className={`z-30 flex flex-col bg-[#090518]/90 backdrop-blur-2xl border-purple-500/20 ${
+                // Mobile layout: bottom 55% height. Desktop layout: right side 320px width
+                "w-full sm:w-80 lg:w-96 border-t sm:border-t-0 sm:border-l h-[55%] sm:h-full"
+              }`}
+            >
+              {/* Chat Header */}
+              <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+                <div className="flex items-center gap-2">
+                  <MessageSquare size={16} className="text-cyan-400" />
+                  <span className="text-sm font-bold text-white">In-call messages</span>
+                </div>
+                <button
+                  onClick={() => setChatOpen(false)}
+                  className="rounded-full p-1 text-purple-300 hover:bg-white/10 hover:text-white"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              {/* Google Meet Notice Banner (Matching Image 2!) */}
+              <div className="mx-3 mt-3 flex items-center gap-2.5 rounded-2xl bg-white/5 border border-white/10 p-3 text-xs text-purple-200/90">
+                <ShieldAlert size={16} className="text-cyan-400 shrink-0" />
+                <span>Messages won't be saved when the call ends</span>
+              </div>
+
+              {/* Scrollable Messages Feed (Compact 3-4 messages visible) */}
+              <div ref={chatListRef} className="flex-1 overflow-y-auto p-3 space-y-2.5 min-h-[140px]">
+                {messages.length === 0 && (
+                  <p className="pt-8 text-center text-xs text-purple-300/60">
+                    {isConnected ? "Everyone will see your message" : "Waiting to match with a stranger…"}
+                  </p>
+                )}
+
+                {messages.map((m) => (
+                  <div
+                    key={m.id}
+                    className={`flex flex-col ${m.mine ? "items-end" : "items-start"}`}
+                  >
+                    <div className="flex items-center gap-1.5 text-[10px] text-purple-300/60 px-1 mb-0.5">
+                      <span>{m.mine ? "You" : "Stranger"}</span>
+                      <span>• {m.time}</span>
+                    </div>
+                    <div
+                      className={`max-w-[85%] rounded-2xl px-3.5 py-2 text-xs leading-relaxed ${
+                        m.mine
+                          ? "btn-gradient text-white rounded-br-none font-medium shadow-md"
+                          : "bg-white/10 text-purple-100 rounded-bl-none border border-white/10 backdrop-blur-md"
+                      }`}
+                    >
+                      {m.text}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Transparent Chat Input Bar (Matches Image 2!) */}
+              <form onSubmit={sendChatMessage} className="p-3 border-t border-white/10 flex items-center gap-2">
+                <input
+                  type="text"
+                  value={chatDraft}
+                  onChange={(e) => setChatDraft(e.target.value)}
+                  placeholder={isConnected ? "Send message…" : "Waiting to connect…"}
+                  disabled={!isConnected}
+                  className="flex-1 rounded-full bg-white/5 border border-white/15 px-4 py-2 text-xs text-white placeholder-purple-300/40 focus:outline-none focus:border-cyan-400 disabled:opacity-50"
+                />
+                <button
+                  type="submit"
+                  disabled={!chatDraft.trim() || !isConnected}
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full btn-gradient text-white shadow-md disabled:opacity-40 hover:scale-105 transition"
+                  aria-label="Send"
+                >
+                  <Send size={14} />
+                </button>
+              </form>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

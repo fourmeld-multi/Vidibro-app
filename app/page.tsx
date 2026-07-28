@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { SkipForward, Video, Sparkles, MessageSquare, PhoneCall, ShieldCheck, Zap, Globe2 } from "lucide-react";
+import { SkipForward, Video, Sparkles, MessageSquare, PhoneCall, Mic, MicOff, ShieldCheck, Zap, Globe2 } from "lucide-react";
 import LogoMark from "@/components/LogoMark";
 import VideoContainer from "@/components/VideoContainer";
 import ImpactReactionOverlay from "@/components/ImpactReactionOverlay";
@@ -11,7 +11,7 @@ import MiniGameOverlay from "@/components/MiniGameOverlay";
 import ChatDrawer from "@/components/ChatDrawer";
 import PhoneMockup from "@/components/PhoneMockup";
 import FeatureShowcase from "@/components/FeatureShowcase";
-import { useWebRTC } from "@/hooks/useWebRTC";
+import { useWebRTC, type ChatMode } from "@/hooks/useWebRTC";
 
 const BADGES = [
   { icon: ShieldCheck, label: "No signup, ever" },
@@ -23,6 +23,7 @@ export default function Home() {
   const {
     connectionState,
     isHost,
+    mode,
     localStream,
     remoteStream,
     dataChannelOpen,
@@ -31,21 +32,27 @@ export default function Home() {
     skipToNext,
     sendMessage,
     subscribe,
-    replaceOutgoingVideoTrack,
   } = useWebRTC();
 
   const [starting, setStarting] = useState(false);
+  const [micEnabled, setMicEnabled] = useState(true);
 
-  async function handleStart() {
+  async function handleStart(chatMode: ChatMode) {
     setStarting(true);
     try {
-      await joinQueue();
+      await joinQueue(chatMode);
     } catch {
       // Camera/mic permission denied or unavailable — connectionState stays
       // "idle" so the Start button remains visible to retry.
     } finally {
       setStarting(false);
     }
+  }
+
+  function toggleMic() {
+    const next = !micEnabled;
+    localStream?.getAudioTracks().forEach((t) => (t.enabled = next));
+    setMicEnabled(next);
   }
 
   const isActive = connectionState !== "idle";
@@ -120,18 +127,29 @@ export default function Home() {
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
-                    onClick={handleStart}
+                    onClick={() => handleStart("video")}
                     disabled={starting}
                     className="btn-gradient glow-pulse flex w-full sm:w-auto items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm sm:text-base font-bold text-white shadow-xl shadow-purple-500/25 transition disabled:opacity-50"
                   >
                     <Video size={18} />
-                    {starting ? "Connecting Camera…" : "Start a Video Chat"}
+                    {starting ? "Connecting…" : "Start a Video Chat"}
                   </motion.button>
 
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
-                    onClick={handleStart}
+                    onClick={() => handleStart("audio")}
+                    disabled={starting}
+                    className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 px-6 py-3.5 text-sm sm:text-base font-bold text-white backdrop-blur-xl transition disabled:opacity-50"
+                  >
+                    <PhoneCall size={17} className="text-cyan-300" />
+                    Start an Audio Chat
+                  </motion.button>
+
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={() => handleStart("text")}
                     disabled={starting}
                     className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 px-6 py-3.5 text-sm sm:text-base font-bold text-white backdrop-blur-xl transition disabled:opacity-50"
                   >
@@ -154,52 +172,111 @@ export default function Home() {
           </>
         ) : (
           /* Active Call State */
-          <div className="py-6 flex flex-col gap-6">
-            <VideoContainer
-              localStream={localStream}
-              remoteStream={remoteStream}
-              connectionState={connectionState}
-              dataChannelOpen={dataChannelOpen}
-              sendMessage={sendMessage}
-              subscribe={subscribe}
-              replaceOutgoingVideoTrack={replaceOutgoingVideoTrack}
-            />
+          <div className="py-3 sm:py-6 flex flex-col gap-4">
+            {mode === "video" && (
+              <VideoContainer
+                localStream={localStream}
+                remoteStream={remoteStream}
+                connectionState={connectionState}
+                dataChannelOpen={dataChannelOpen}
+                sendMessage={sendMessage}
+                subscribe={subscribe}
+                skipToNext={skipToNext}
+                leaveMatch={leaveMatch}
+                isHost={isHost}
+              />
+            )}
 
-            <div className="flex items-center justify-center gap-4">
-              <motion.button
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.97 }}
-                onClick={skipToNext}
-                className="flex items-center gap-2 rounded-full btn-gradient px-8 py-3 text-sm font-bold text-white shadow-lg"
-              >
-                <SkipForward size={17} /> Next Person
-              </motion.button>
-              <button
-                onClick={leaveMatch}
-                className="rounded-full border border-red-500/40 bg-red-500/10 px-6 py-3 text-sm font-semibold text-red-300 transition hover:bg-red-500/20"
-              >
-                End Call
-              </button>
-            </div>
+            {mode === "audio" && (
+              <div className="glass flex flex-col items-center gap-4 rounded-3xl px-6 py-10 text-center">
+                <div className="btn-gradient flex h-16 w-16 items-center justify-center rounded-full shadow-lg">
+                  <PhoneCall size={26} className="text-white" />
+                </div>
+                <p className="text-sm font-semibold text-white">
+                  {connectionState === "waiting" && "Looking for someone to chat with…"}
+                  {connectionState === "connecting" && "Establishing connection…"}
+                  {connectionState === "connected" && "Audio call connected"}
+                  {connectionState === "disconnected" && "Stranger disconnected"}
+                </p>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={toggleMic}
+                    className={`flex h-11 w-11 items-center justify-center rounded-full transition ${
+                      micEnabled ? "bg-white/15 text-white hover:bg-white/25" : "bg-red-500 text-white shadow-lg"
+                    }`}
+                  >
+                    {micEnabled ? <Mic size={18} /> : <MicOff size={18} />}
+                  </button>
+                  <button
+                    onClick={skipToNext}
+                    className="btn-gradient px-6 py-2.5 rounded-full text-xs font-bold text-white shadow-md flex items-center gap-1.5"
+                  >
+                    <SkipForward size={15} /> Next
+                  </button>
+                  <button
+                    onClick={leaveMatch}
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-red-600 hover:bg-red-700 text-white shadow-lg"
+                    title="End Call"
+                  >
+                    <PhoneCall size={18} className="rotate-[135deg]" />
+                  </button>
+                </div>
+              </div>
+            )}
 
-            <AnimatePresence>
-              {overlaysReady && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  className="flex flex-col gap-4"
-                >
-                  <ImpactReactionOverlay sendMessage={sendMessage} subscribe={subscribe} />
-                  <MiniGameOverlay isHost={isHost} sendMessage={sendMessage} subscribe={subscribe} />
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {mode === "text" && (
+              <div className="glass flex flex-col items-center gap-3 rounded-3xl px-6 py-8 text-center">
+                <MessageSquare size={26} className="text-purple-300" />
+                <p className="text-sm font-semibold text-white">
+                  {connectionState === "waiting" && "Looking for someone to chat with…"}
+                  {connectionState === "connecting" && "Connecting…"}
+                  {connectionState === "connected" && "Connected — say hi in the chat below"}
+                  {connectionState === "disconnected" && "Stranger disconnected"}
+                </p>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={skipToNext}
+                    className="btn-gradient px-6 py-2.5 rounded-full text-xs font-bold text-white shadow-md flex items-center gap-1.5"
+                  >
+                    <SkipForward size={15} /> Next
+                  </button>
+                  <button
+                    onClick={leaveMatch}
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-red-600 hover:bg-red-700 text-white shadow-lg"
+                    title="End Call"
+                  >
+                    <PhoneCall size={16} className="rotate-[135deg]" />
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {mode !== "video" && (
+              <AnimatePresence>
+                {overlaysReady ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    className="flex flex-col gap-4"
+                  >
+                    <ImpactReactionOverlay sendMessage={sendMessage} subscribe={subscribe} />
+                    <MiniGameOverlay isHost={isHost} sendMessage={sendMessage} subscribe={subscribe} />
+                  </motion.div>
+                ) : (
+                  <p className="text-center text-xs text-purple-300/60">
+                    Reactions and mini-games appear here once you&apos;re matched with a stranger.
+                  </p>
+                )}
+              </AnimatePresence>
+            )}
           </div>
         )}
       </main>
 
-      {overlaysReady && <ChatDrawer sendMessage={sendMessage} subscribe={subscribe} />}
+      {isActive && mode !== "video" && (
+        <ChatDrawer sendMessage={sendMessage} subscribe={subscribe} connected={dataChannelOpen} />
+      )}
     </div>
   );
 }
