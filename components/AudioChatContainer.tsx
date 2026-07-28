@@ -91,13 +91,31 @@ export default function AudioChatContainer({
 
   const isConnected = connectionState === "connected";
 
-  // Attach remote stream
+  // Browsers block autoplay of unmuted media without a fresh user gesture —
+  // start muted (always allowed) so playback actually begins, then unmute
+  // once confirmed playing. Muting/unmuting an already-playing element
+  // doesn't need a new gesture, unlike starting one.
   useEffect(() => {
-    if (remoteAudioRef.current) {
-      remoteAudioRef.current.srcObject = remoteStream;
-      remoteAudioRef.current.muted = !speakerEnabled;
-    }
-  }, [remoteStream, speakerEnabled]);
+    const el = remoteAudioRef.current;
+    if (!el || !remoteStream) return;
+    el.srcObject = remoteStream;
+    el.muted = true;
+    el.play()
+      .then(() => {
+        el.muted = !speakerEnabled;
+      })
+      .catch(() => {
+        // Still blocked even muted (rare) — leave muted; the speaker
+        // toggle button lets the user retry with a real gesture.
+      });
+    // Only (re)attach the stream here — speakerEnabled is handled below so
+    // toggling it doesn't restart playback.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [remoteStream]);
+
+  useEffect(() => {
+    if (remoteAudioRef.current) remoteAudioRef.current.muted = !speakerEnabled;
+  }, [speakerEnabled]);
 
   // Listen for incoming chat messages over WebRTC
   useEffect(() => {

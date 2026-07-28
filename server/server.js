@@ -23,6 +23,12 @@ const io = new Server(server, {
   // Pure WebSocket transport only — no long-polling fallback, which removes
   // the per-request HTTP header overhead polling would otherwise add.
   transports: ['websocket'],
+  // Defaults (25s interval / 20s timeout) mean an abruptly-closed tab or
+  // dropped connection can take up to ~45s to be detected server-side,
+  // leaving the remaining peer staring at a stale "connected" stranger.
+  // Tightened so the other side finds out within a few seconds instead.
+  pingInterval: 5000,
+  pingTimeout: 4000,
 });
 
 /** @type {string[]} FIFO queue of waiting socket ids. */

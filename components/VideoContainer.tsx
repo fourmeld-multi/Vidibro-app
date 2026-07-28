@@ -163,18 +163,34 @@ export default function VideoContainer({
     }
   }, [localStream]);
 
+  // Browsers block autoplay of unmuted media without a fresh user gesture —
+  // start every remote element muted (always allowed) so playback actually
+  // begins, then unmute once it's confirmed playing. Muting/unmuting an
+  // already-playing element doesn't need a new gesture, unlike starting one.
   useEffect(() => {
-    if (remoteStream) {
-      if (remoteVideoRef.current) {
-        remoteVideoRef.current.srcObject = remoteStream;
-        remoteVideoRef.current.muted = !speakerEnabled;
-      }
-      if (desktopRemoteVideoRef.current) {
-        desktopRemoteVideoRef.current.srcObject = remoteStream;
-        desktopRemoteVideoRef.current.muted = !speakerEnabled;
-      }
+    if (!remoteStream) return;
+    for (const el of [remoteVideoRef.current, desktopRemoteVideoRef.current]) {
+      if (!el) continue;
+      el.srcObject = remoteStream;
+      el.muted = true;
+      el.play()
+        .then(() => {
+          el.muted = !speakerEnabled;
+        })
+        .catch(() => {
+          // Still blocked even muted (rare) — leave muted; the speaker
+          // toggle button lets the user retry with a real gesture.
+        });
     }
-  }, [remoteStream, speakerEnabled]);
+    // Only (re)attach the stream itself here — speakerEnabled is handled by
+    // the effect below so toggling it doesn't restart playback.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [remoteStream]);
+
+  useEffect(() => {
+    if (remoteVideoRef.current) remoteVideoRef.current.muted = !speakerEnabled;
+    if (desktopRemoteVideoRef.current) desktopRemoteVideoRef.current.muted = !speakerEnabled;
+  }, [speakerEnabled]);
 
   // Listen for incoming chat messages over WebRTC
   useEffect(() => {
