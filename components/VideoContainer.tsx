@@ -171,21 +171,20 @@ export default function VideoContainer({
     if (!remoteStream) return;
     for (const el of [remoteVideoRef.current, desktopRemoteVideoRef.current]) {
       if (!el) continue;
-      el.srcObject = remoteStream;
+      if (el.srcObject !== remoteStream) {
+        el.srcObject = remoteStream;
+      }
       el.muted = true;
       el.play()
         .then(() => {
           el.muted = !speakerEnabled;
         })
         .catch(() => {
-          // Still blocked even muted (rare) — leave muted; the speaker
-          // toggle button lets the user retry with a real gesture.
+          // Retry playing
+          el.play().catch(() => {});
         });
     }
-    // Only (re)attach the stream itself here — speakerEnabled is handled by
-    // the effect below so toggling it doesn't restart playback.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [remoteStream]);
+  }, [remoteStream, isConnected]);
 
   useEffect(() => {
     if (remoteVideoRef.current) remoteVideoRef.current.muted = !speakerEnabled;
@@ -343,14 +342,13 @@ export default function VideoContainer({
           >
             {/* Left Box (50% Equal Width): Stranger's Video */}
             <div className="relative h-full w-full rounded-3xl overflow-hidden bg-black border border-white/15 shadow-2xl flex items-center justify-center">
-              {isConnected && remoteStream ? (
-                <video
-                  ref={desktopRemoteVideoRef}
-                  autoPlay
-                  playsInline
-                  className="h-full w-full object-cover object-center pointer-events-none"
-                />
-              ) : (
+              <video
+                ref={desktopRemoteVideoRef}
+                autoPlay
+                playsInline
+                className={`h-full w-full object-cover object-center pointer-events-none ${isConnected && remoteStream ? "block" : "hidden"}`}
+              />
+              {(!isConnected || !remoteStream) && (
                 /* Radar Orb Matching Indicator */
                 <div className="flex flex-col items-center justify-center h-full w-full px-6 text-center bg-gradient-to-b from-[#140b2e] via-[#0d0722] to-[#070414] pointer-events-none">
                   <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-purple-600/20 border border-purple-400/30 mb-4">
@@ -454,14 +452,13 @@ export default function VideoContainer({
           {/* 2. MOBILE VIEW: Full-stage Stranger Video + Draggable PIP (md:hidden)    */}
           {/* ========================================================================= */}
           <div ref={videoScreenRef} className="md:hidden relative flex-1 h-full w-full bg-black overflow-hidden">
-            {isConnected && remoteStream ? (
-              <video
-                ref={remoteVideoRef}
-                autoPlay
-                playsInline
-                className="h-full w-full object-cover object-center pointer-events-none"
-              />
-            ) : (
+            <video
+              ref={remoteVideoRef}
+              autoPlay
+              playsInline
+              className={`h-full w-full object-cover object-center pointer-events-none ${isConnected && remoteStream ? "block" : "hidden"}`}
+            />
+            {(!isConnected || !remoteStream) && (
               /* Radar Orb Matching Indicator */
               <div className="flex flex-col items-center justify-center h-full w-full px-6 text-center bg-gradient-to-b from-[#140b2e] via-[#0d0722] to-[#070414] pointer-events-none">
                 <div className="relative flex h-20 w-20 items-center justify-center rounded-full bg-purple-600/20 border border-purple-400/30 mb-3">
