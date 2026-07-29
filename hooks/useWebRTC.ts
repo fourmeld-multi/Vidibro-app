@@ -156,6 +156,13 @@ export function useWebRTC() {
         setConnectionState("connected");
       } else if (state === "failed" || state === "disconnected" || state === "closed") {
         setConnectionState("disconnected");
+        setTimeout(() => {
+          if (modeRef.current && (pcRef.current === null || pcRef.current.iceConnectionState !== "connected")) {
+            teardownPeerConnection();
+            setConnectionState("waiting");
+            socketRef.current?.emit("queue:join");
+          }
+        }, 2000);
       }
     };
 
@@ -306,6 +313,13 @@ export function useWebRTC() {
     socket.on("peer:left", () => {
       teardownPeerConnection();
       setConnectionState("disconnected");
+      // Auto-rematch 1.5s after stranger leaves or ends call
+      setTimeout(() => {
+        if (modeRef.current) {
+          setConnectionState("waiting");
+          socketRef.current?.emit("queue:join");
+        }
+      }, 1500);
     });
 
     return () => {
