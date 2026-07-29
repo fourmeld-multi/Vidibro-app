@@ -45,6 +45,19 @@ const COUNT = SHOWCASE_ITEMS.length;
 export default function AppShowcaseCarousel() {
   const [index, setIndex] = useState(0);
   const [autoPlaying, setAutoPlaying] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    // Reading real viewport state safely requires waiting for the client —
+    // window/matchMedia don't exist during SSR, so this can't be a lazy
+    // useState initializer without risking a server/client mismatch.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsMobile(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
   useEffect(() => {
     if (!autoPlaying) return;
@@ -72,18 +85,27 @@ export default function AppShowcaseCarousel() {
 
       {/* Layered 3D deck: one focal card up front, the other two fanned out
           behind it — deliberately not a flat side-by-side grid, since this
-          section sits right below Vidibro's 3D phone-mockup hero. */}
-      <div className="relative h-[440px] sm:h-[480px] w-full max-w-md mx-auto" style={{ perspective: "1400px" }}>
+          section sits right below Vidibro's 3D phone-mockup hero. Sized down
+          (not just scaled) on mobile so the peeking side cards fit on
+          screen instead of clipping at the viewport edge. */}
+      <div
+        className="relative mx-auto px-10 sm:px-0"
+        style={{ perspective: "1400px", height: isMobile ? 320 : 480 }}
+      >
+        <div className="relative h-full w-full max-w-[280px] sm:max-w-md mx-auto">
         {SHOWCASE_ITEMS.map((item, idx) => {
           const diff = (idx - index + COUNT) % COUNT;
           const isFront = diff === 0;
           const isRight = diff === 1;
 
+          const peek = isMobile ? 34 : 70;
+          const rotateDeg = isMobile ? 6 : 9;
+
           const style = isFront
             ? { x: 0, rotate: 0, scale: 1, opacity: 1, zIndex: 30 }
             : isRight
-              ? { x: 70, rotate: 9, scale: 0.86, opacity: 0.5, zIndex: 20 }
-              : { x: -70, rotate: -9, scale: 0.86, opacity: 0.5, zIndex: 20 };
+              ? { x: peek, rotate: rotateDeg, scale: 0.86, opacity: 0.5, zIndex: 20 }
+              : { x: -peek, rotate: -rotateDeg, scale: 0.86, opacity: 0.5, zIndex: 20 };
 
           return (
             <motion.button
@@ -102,14 +124,14 @@ export default function AppShowcaseCarousel() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
               {isFront && (
-                <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7 flex flex-col gap-2">
-                  <span className="text-3xl">{item.emoji}</span>
-                  <h3 className="text-xl sm:text-2xl font-extrabold text-white leading-tight">{item.title}</h3>
-                  <p className="text-xs sm:text-sm text-white/80 leading-relaxed max-w-xs">{item.description}</p>
+                <div className="absolute inset-x-0 bottom-0 p-4 sm:p-7 flex flex-col gap-1.5 sm:gap-2">
+                  <span className="text-xl sm:text-3xl">{item.emoji}</span>
+                  <h3 className="text-base sm:text-2xl font-extrabold text-white leading-tight">{item.title}</h3>
+                  <p className="text-[11px] sm:text-sm text-white/80 leading-relaxed max-w-xs">{item.description}</p>
                   <Link
                     href={item.href}
                     onClick={(e) => e.stopPropagation()}
-                    className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-full bg-white px-4 py-2 text-xs sm:text-sm font-bold text-[#12082e] shadow-lg transition hover:scale-105"
+                    className="mt-1.5 sm:mt-2 inline-flex w-fit items-center gap-1.5 rounded-full bg-white px-3 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-sm font-bold text-[#12082e] shadow-lg transition hover:scale-105"
                   >
                     {item.cta} →
                   </Link>
@@ -118,6 +140,7 @@ export default function AppShowcaseCarousel() {
             </motion.button>
           );
         })}
+        </div>
       </div>
 
       {/* Dot indicators — deliberately dots, not a linear progress bar */}
