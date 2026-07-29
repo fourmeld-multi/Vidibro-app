@@ -129,7 +129,25 @@ export function useWebRTC() {
     };
 
     pc.ontrack = (e) => {
-      setRemoteStream(e.streams[0]);
+      const incomingTrack = e.track;
+      let stream = e.streams[0];
+
+      if (!stream) {
+        stream = new MediaStream([incomingTrack]);
+      } else {
+        if (incomingTrack.kind === "video") {
+          stream.getVideoTracks().forEach((oldTrack) => {
+            if (oldTrack !== incomingTrack) {
+              stream.removeTrack(oldTrack);
+            }
+          });
+          if (!stream.getVideoTracks().includes(incomingTrack)) {
+            stream.addTrack(incomingTrack);
+          }
+        }
+      }
+
+      setRemoteStream(new MediaStream(stream.getTracks()));
     };
 
     pc.oniceconnectionstatechange = () => {
@@ -268,6 +286,36 @@ export function useWebRTC() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const replaceOutgoingVideoTrack = useCallback(async (newTrack: MediaStreamTrack) => {
+    // 1. Update localStreamRef so new matches use the updated track
+    if (localStreamRef.current) {
+      localStreamRef.current.getVideoTracks().forEach((t) => {
+        if (t !== newTrack) {
+          localStreamRef.current?.removeTrack(t);
+        }
+      });
+      if (!localStreamRef.current.getVideoTracks().includes(newTrack)) {
+        localStreamRef.current.addTrack(newTrack);
+      }
+    }
+
+    const pc = pcRef.current;
+    if (!pc) return;
+
+    // 2. Find video sender across senders and transceivers
+    const senders = pc.getSenders();
+    let videoSender = senders.find((s) => s.track && s.track.kind === "video");
+    if (!videoSender) {
+      videoSender = pc.getTransceivers().find((t) => t.sender.track?.kind === "video" || t.receiver.track?.kind === "video")?.sender;
+    }
+
+    if (videoSender) {
+      await videoSender.replaceTrack(newTrack);
+    } else if (localStreamRef.current) {
+      pc.addTrack(newTrack, localStreamRef.current);
+    }
+  }, []);
+
   return {
     connectionState,
     role,
@@ -281,5 +329,6 @@ export function useWebRTC() {
     skipToNext,
     sendMessage: emit,
     subscribe,
+    replaceOutgoingVideoTrack,
   };
 }

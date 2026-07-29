@@ -18,6 +18,7 @@ export default function VideoChatPage() {
     skipToNext,
     sendMessage,
     subscribe,
+    replaceOutgoingVideoTrack,
   } = useWebRTC();
 
   useEffect(() => {
@@ -45,6 +46,7 @@ export default function VideoChatPage() {
         skipToNext={skipToNext}
         leaveMatch={handleLeave}
         isHost={isHost}
+        replaceOutgoingVideoTrack={replaceOutgoingVideoTrack}
       />
     </div>
   );

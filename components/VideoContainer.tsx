@@ -190,27 +190,39 @@ export default function VideoContainer({
     }
   }, [remoteStream, isConnected]);
 
-  // Issue 5 Fix: Re-play remote video stream when stranger flips camera tracks to prevent freezing
+  // Re-play remote video stream when stranger flips camera or toggles cam off/on
   useEffect(() => {
     if (!remoteStream) return;
 
-    const handleTrackChange = () => {
+    const rebindVideoElements = () => {
       for (const el of [remoteVideoRef.current, desktopRemoteVideoRef.current]) {
         if (el) {
-          el.srcObject = remoteStream;
+          if (el.srcObject !== remoteStream) {
+            el.srcObject = remoteStream;
+          }
           el.play().catch(() => {});
         }
       }
     };
 
-    remoteStream.onaddtrack = handleTrackChange;
-    remoteStream.onremovetrack = handleTrackChange;
+    const videoTracks = remoteStream.getVideoTracks();
+    videoTracks.forEach((track) => {
+      track.onunmute = rebindVideoElements;
+      track.onmute = rebindVideoElements;
+      track.onended = rebindVideoElements;
+    });
+
+    remoteStream.onaddtrack = rebindVideoElements;
+    remoteStream.onremovetrack = rebindVideoElements;
 
     return () => {
-      if (remoteStream) {
-        remoteStream.onaddtrack = null;
-        remoteStream.onremovetrack = null;
-      }
+      videoTracks.forEach((track) => {
+        track.onunmute = null;
+        track.onmute = null;
+        track.onended = null;
+      });
+      remoteStream.onaddtrack = null;
+      remoteStream.onremovetrack = null;
     };
   }, [remoteStream]);
 
@@ -329,11 +341,21 @@ export default function VideoContainer({
       const constraints = { video: { facingMode: nextFacingMode } };
       const newStream = await navigator.mediaDevices.getUserMedia(constraints);
       const newTrack = newStream.getVideoTracks()[0];
-      if (replaceOutgoingVideoTrack && newTrack) {
-        await replaceOutgoingVideoTrack(newTrack);
+      if (newTrack) {
+        // Stop old local video tracks
+        localStream?.getVideoTracks().forEach((t) => {
+          t.stop();
+          if (localStream) localStream.removeTrack(t);
+        });
+        if (localStream) {
+          localStream.addTrack(newTrack);
+        }
+        if (replaceOutgoingVideoTrack) {
+          await replaceOutgoingVideoTrack(newTrack);
+        }
+        if (localVideoRef.current) localVideoRef.current.srcObject = newStream;
+        if (desktopLocalVideoRef.current) desktopLocalVideoRef.current.srcObject = newStream;
       }
-      if (localVideoRef.current) localVideoRef.current.srcObject = newStream;
-      if (desktopLocalVideoRef.current) desktopLocalVideoRef.current.srcObject = newStream;
     } catch {
       // Ignore if single camera device
     }
@@ -631,14 +653,14 @@ export default function VideoContainer({
             </motion.div>
           </div>
 
-          {/* Floating 3D Animated Emoji Particles Burst */}
+          {/* Floating 3D Animated Emoji Particles Burst (Upper Video Screen) */}
           {floatingParticles.map((particle) => (
             <motion.div
               key={particle.id}
-              initial={{ opacity: 0, y: 300, scale: 0.5, rotate: -15 }}
-              animate={{ opacity: [0, 1, 1, 0], y: -80, scale: [0.8, 1.5, 1.2], rotate: 15 }}
-              transition={{ duration: 2.3, ease: "easeOut" }}
-              className="pointer-events-none absolute bottom-16 z-40 text-5xl sm:text-6xl drop-shadow-[0_0_20px_rgba(236,72,153,0.9)]"
+              initial={{ opacity: 0, y: 30, scale: 0.6, rotate: -15 }}
+              animate={{ opacity: [0, 1, 1, 0], y: -220, scale: [0.9, 1.4, 1.1], rotate: 15 }}
+              transition={{ duration: 2.2, ease: "easeOut" }}
+              className="pointer-events-none absolute top-1/3 z-40 text-5xl sm:text-6xl drop-shadow-[0_0_25px_rgba(236,72,153,0.9)]"
               style={{ left: `${particle.x}%` }}
             >
               {particle.emoji}
