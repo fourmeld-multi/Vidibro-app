@@ -179,12 +179,42 @@ export function useWebRTC() {
    * touches getUserMedia at all — pure signaling + data channel. */
   const ensureLocalStream = useCallback(async (mode: ChatMode) => {
     if (mode === "text") return null;
-    if (localStreamRef.current) return localStreamRef.current;
+    
+    // If local stream exists and is active, reuse it
+    if (localStreamRef.current && localStreamRef.current.active) {
+      const vTracks = localStreamRef.current.getVideoTracks();
+      const aTracks = localStreamRef.current.getAudioTracks();
+      if (mode === "video" && vTracks.length > 0 && vTracks[0].readyState === "live") {
+        return localStreamRef.current;
+      }
+      if (mode === "audio" && aTracks.length > 0 && aTracks[0].readyState === "live") {
+        return localStreamRef.current;
+      }
+    }
+
     const constraints = mode === "audio" ? AUDIO_ONLY_CONSTRAINTS : VIDEO_CONSTRAINTS;
-    const stream = await navigator.mediaDevices.getUserMedia(constraints);
-    localStreamRef.current = stream;
-    setLocalStream(stream);
-    return stream;
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      localStreamRef.current = stream;
+      setLocalStream(stream);
+      return stream;
+    } catch {
+      // Mobile fallback if specific width/height constraints failed on mobile browser
+      if (mode === "video") {
+        try {
+          const fallbackStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: true });
+          localStreamRef.current = fallbackStream;
+          setLocalStream(fallbackStream);
+          return fallbackStream;
+        } catch {
+          const basicStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+          localStreamRef.current = basicStream;
+          setLocalStream(basicStream);
+          return basicStream;
+        }
+      }
+      throw new Error("Unable to acquire media stream");
+    }
   }, []);
 
   const joinQueue = useCallback(

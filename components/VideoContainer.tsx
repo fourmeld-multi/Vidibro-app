@@ -78,13 +78,12 @@ export default function VideoContainer({
   leaveMatch,
   replaceOutgoingVideoTrack,
 }: Props) {
-  // Mobile Refs
+  // Mobile & Desktop Refs
   const localVideoRef = useRef<HTMLVideoElement | null>(null);
   const remoteVideoRef = useRef<HTMLVideoElement | null>(null);
-
-  // Desktop Equal Split Grid Refs
   const desktopLocalVideoRef = useRef<HTMLVideoElement | null>(null);
   const desktopRemoteVideoRef = useRef<HTMLVideoElement | null>(null);
+  const remoteAudioRef = useRef<HTMLAudioElement | null>(null);
 
   const chatListRef = useRef<HTMLDivElement | null>(null);
   const videoScreenRef = useRef<HTMLDivElement | null>(null);
@@ -172,6 +171,18 @@ export default function VideoContainer({
     }
   }, [localStream]);
 
+  // Attach Remote Audio Stream to Dedicated Audio Element
+  useEffect(() => {
+    if (remoteAudioRef.current) {
+      remoteAudioRef.current.srcObject = remoteStream;
+      remoteAudioRef.current.muted = !speakerEnabled;
+      if (remoteStream) {
+        remoteAudioRef.current.play().catch(() => {});
+      }
+    }
+  }, [remoteStream, speakerEnabled]);
+
+  // Attach Remote Stream to Mobile & Desktop Video Elements (Always Muted for Unblocked Mobile Playback)
   useEffect(() => {
     if (!remoteStream) return;
     for (const el of [remoteVideoRef.current, desktopRemoteVideoRef.current]) {
@@ -180,13 +191,7 @@ export default function VideoContainer({
         el.srcObject = remoteStream;
       }
       el.muted = true;
-      el.play()
-        .then(() => {
-          el.muted = !speakerEnabled;
-        })
-        .catch(() => {
-          el.play().catch(() => {});
-        });
+      el.play().catch(() => {});
     }
   }, [remoteStream, isConnected]);
 
@@ -200,6 +205,7 @@ export default function VideoContainer({
           if (el.srcObject !== remoteStream) {
             el.srcObject = remoteStream;
           }
+          el.muted = true;
           el.play().catch(() => {});
         }
       }
@@ -225,11 +231,6 @@ export default function VideoContainer({
       remoteStream.onremovetrack = null;
     };
   }, [remoteStream]);
-
-  useEffect(() => {
-    if (remoteVideoRef.current) remoteVideoRef.current.muted = !speakerEnabled;
-    if (desktopRemoteVideoRef.current) desktopRemoteVideoRef.current.muted = !speakerEnabled;
-  }, [speakerEnabled]);
 
   // Listen for incoming chat messages over WebRTC
   useEffect(() => {
@@ -411,6 +412,9 @@ export default function VideoContainer({
 
   return (
     <div className="relative flex flex-col w-full h-[100dvh] overflow-hidden bg-[#070414] select-none">
+      {/* Hidden Dedicated Audio Element for Remote Stream */}
+      <audio ref={remoteAudioRef} autoPlay playsInline />
+
       {/* Viewport Container */}
       <div className="relative flex-1 w-full h-full overflow-hidden flex flex-row">
         
