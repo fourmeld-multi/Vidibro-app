@@ -177,16 +177,32 @@ export default function VideoContainer({
     }
   }, [localStream]);
 
-  // Attach Remote Audio Stream to Dedicated Audio Element
+  // Attach Remote Audio Stream to Dedicated Audio Element. Browsers block
+  // autoplay of unmuted media without a fresh user gesture — start muted
+  // (always allowed) so playback actually begins, then unmute once
+  // confirmed playing. Muting/unmuting an already-playing element doesn't
+  // need a new gesture, unlike starting one.
   useEffect(() => {
-    if (remoteAudioRef.current) {
-      remoteAudioRef.current.srcObject = remoteStream;
-      remoteAudioRef.current.muted = !speakerEnabled;
-      if (remoteStream) {
-        remoteAudioRef.current.play().catch(() => {});
-      }
-    }
-  }, [remoteStream, speakerEnabled]);
+    const el = remoteAudioRef.current;
+    if (!el || !remoteStream) return;
+    el.srcObject = remoteStream;
+    el.muted = true;
+    el.play()
+      .then(() => {
+        el.muted = !speakerEnabled;
+      })
+      .catch(() => {
+        // Still blocked even muted (rare) — leave muted; the speaker
+        // toggle button lets the user retry with a real gesture.
+      });
+    // Only (re)attach the stream here — speakerEnabled is handled below so
+    // toggling it doesn't restart playback.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [remoteStream]);
+
+  useEffect(() => {
+    if (remoteAudioRef.current) remoteAudioRef.current.muted = !speakerEnabled;
+  }, [speakerEnabled]);
 
   // Attach Remote Stream to Mobile & Desktop Video Elements (Always Muted for Unblocked Mobile Playback)
   useEffect(() => {
