@@ -7,7 +7,7 @@ import { Sparkles, Globe2, Users, Video, PhoneCall, MessageSquare, Check } from 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AppShowcaseCarousel from "@/components/AppShowcaseCarousel";
-import LiveActivitySection from "@/components/LiveActivitySection";
+import PrivacyFlowSection from "@/components/PrivacyFlowSection";
 import HowItWorks from "@/components/HowItWorks";
 import WhyVidibro from "@/components/WhyVidibro";
 import { TRANSLATIONS, type LanguageCode } from "@/lib/translations";
@@ -141,8 +141,8 @@ export default function Home() {
         {/* Auto-advancing carousel: Video Calling / Text Chat / Audio Chat */}
         <AppShowcaseCarousel />
 
-        {/* Live activity ticker + animated stats */}
-        <LiveActivitySection />
+        {/* Honest, factual privacy-architecture explainer — not social proof */}
+        <PrivacyFlowSection />
 
         {/* Section 2: How Vidibro Works */}
         <HowItWorks />
