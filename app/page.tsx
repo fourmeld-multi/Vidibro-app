@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Sparkles, Globe2, Users, Video, PhoneCall, MessageSquare, Check } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AppShowcaseCarousel from "@/components/AppShowcaseCarousel";
 import ModeShowcaseSection from "@/components/ModeShowcaseSection";
 import HowItWorks from "@/components/HowItWorks";
 import WhyVidibro from "@/components/WhyVidibro";
@@ -136,6 +137,9 @@ export default function Home() {
             </span>
           </div>
         </div>
+
+        {/* Auto-advancing carousel: Video Calling / Text Chat / Audio Chat */}
+        <AppShowcaseCarousel />
 
         {/* Feature Section 1: Chat With Strangers Your Way (Voice & Text Showcase) */}
         <ModeShowcaseSection />
