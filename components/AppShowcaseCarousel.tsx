@@ -2,44 +2,45 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 const SHOWCASE_ITEMS = [
   {
     id: "video",
     emoji: "🎥",
     title: "Face-to-Face Video Calls",
-    description:
-      "Connect instantly with real people over HD video. No signup, no filters — just genuine face-to-face conversations with strangers worldwide.",
+    description: "Connect over HD video — no signup, no filters, just genuine conversations.",
     image:
       "https://images.unsplash.com/photo-1752650733337-cb0189176fb9?auto=format&fit=crop&w=800&q=80",
     cta: "Start Video Chat",
     href: "/video-chat",
+    accent: "from-pink-500/80 to-purple-600/80",
   },
   {
     id: "text",
     emoji: "💬",
     title: "Anonymous Text Chat",
-    description:
-      "Prefer typing over talking? Chat by text with strangers instantly — casual, private, and completely free.",
+    description: "Prefer typing? Chat by text with strangers instantly — casual and private.",
     image:
       "https://images.unsplash.com/photo-1758874383881-cd90c326058e?auto=format&fit=crop&w=800&q=80",
     cta: "Start Text Chat",
     href: "/text-chat",
+    accent: "from-cyan-500/80 to-blue-600/80",
   },
   {
     id: "audio",
     emoji: "🎧",
     title: "Voice-Only Audio Calls",
-    description:
-      "Just want to talk? Skip the camera and have a real voice conversation with someone new, anywhere in the world.",
+    description: "Skip the camera and just talk — a real voice conversation, anywhere.",
     image:
       "https://images.unsplash.com/photo-1555965435-f88618f05915?auto=format&fit=crop&w=800&q=80",
     cta: "Start Audio Chat",
     href: "/audio-chat",
+    accent: "from-amber-500/80 to-orange-600/80",
   },
 ];
+
+const COUNT = SHOWCASE_ITEMS.length;
 
 export default function AppShowcaseCarousel() {
   const [index, setIndex] = useState(0);
@@ -48,87 +49,89 @@ export default function AppShowcaseCarousel() {
   useEffect(() => {
     if (!autoPlaying) return;
     const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % SHOWCASE_ITEMS.length);
-    }, 4000);
+      setIndex((prev) => (prev + 1) % COUNT);
+    }, 4500);
     return () => clearInterval(interval);
   }, [autoPlaying]);
 
   function goTo(next: number) {
     setAutoPlaying(false);
-    setIndex((next + SHOWCASE_ITEMS.length) % SHOWCASE_ITEMS.length);
+    setIndex((next + COUNT) % COUNT);
   }
-
-  const visible = [SHOWCASE_ITEMS[index], SHOWCASE_ITEMS[(index + 1) % SHOWCASE_ITEMS.length]];
 
   return (
     <section className="w-full py-16 sm:py-24">
-      <div className="text-center max-w-2xl mx-auto mb-12">
+      <div className="text-center max-w-2xl mx-auto mb-14">
         <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-3">
-          See What <span className="gradient-text">Vidibro</span> Can Do
+          Three Ways to <span className="gradient-text">Connect</span>
         </h2>
         <p className="text-sm sm:text-base text-purple-200/80 font-normal">
-          Three ways to connect. Real people, real conversations, zero cost.
+          Real people, real conversations, zero cost.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-        <AnimatePresence mode="popLayout">
-          {visible.map((item) => (
-            <motion.div
+      {/* Layered 3D deck: one focal card up front, the other two fanned out
+          behind it — deliberately not a flat side-by-side grid, since this
+          section sits right below Vidibro's 3D phone-mockup hero. */}
+      <div className="relative h-[440px] sm:h-[480px] w-full max-w-md mx-auto" style={{ perspective: "1400px" }}>
+        {SHOWCASE_ITEMS.map((item, idx) => {
+          const diff = (idx - index + COUNT) % COUNT;
+          const isFront = diff === 0;
+          const isRight = diff === 1;
+
+          const style = isFront
+            ? { x: 0, rotate: 0, scale: 1, opacity: 1, zIndex: 30 }
+            : isRight
+              ? { x: 70, rotate: 9, scale: 0.86, opacity: 0.5, zIndex: 20 }
+              : { x: -70, rotate: -9, scale: 0.86, opacity: 0.5, zIndex: 20 };
+
+          return (
+            <motion.button
               key={item.id}
-              layout
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-              className="overflow-hidden rounded-3xl border border-purple-500/20 bg-[#0d0724]/90 shadow-2xl"
+              onClick={() => goTo(idx)}
+              animate={style}
+              transition={{ type: "spring", stiffness: 220, damping: 26 }}
+              className="absolute inset-0 overflow-hidden rounded-[2rem] border border-white/15 shadow-2xl text-left"
+              style={{ transformOrigin: "center" }}
+              aria-label={item.title}
+              tabIndex={isFront ? 0 : -1}
             >
-              <div className="relative h-56 sm:h-64 w-full overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-              </div>
-              <div className="p-6 flex flex-col gap-2.5">
-                <span className="text-2xl">{item.emoji}</span>
-                <h3 className="text-lg sm:text-xl font-extrabold text-white">{item.title}</h3>
-                <p className="text-sm text-purple-200/75 leading-relaxed">{item.description}</p>
-                <Link
-                  href={item.href}
-                  className="text-sm font-bold text-pink-400 hover:text-pink-300 transition pt-1"
-                >
-                  {item.cta} →
-                </Link>
-              </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={item.image} alt={item.title} className="absolute inset-0 h-full w-full object-cover" />
+              <div className={`absolute inset-0 bg-gradient-to-t ${item.accent} mix-blend-multiply opacity-40`} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+
+              {isFront && (
+                <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7 flex flex-col gap-2">
+                  <span className="text-3xl">{item.emoji}</span>
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-white leading-tight">{item.title}</h3>
+                  <p className="text-xs sm:text-sm text-white/80 leading-relaxed max-w-xs">{item.description}</p>
+                  <Link
+                    href={item.href}
+                    onClick={(e) => e.stopPropagation()}
+                    className="mt-2 inline-flex w-fit items-center gap-1.5 rounded-full bg-white px-4 py-2 text-xs sm:text-sm font-bold text-[#12082e] shadow-lg transition hover:scale-105"
+                  >
+                    {item.cta} →
+                  </Link>
+                </div>
+              )}
+            </motion.button>
+          );
+        })}
       </div>
 
-      {/* Slider navigation: prev/next + progress bar, matching the auto-advancing carousel pattern */}
-      <div className="flex items-center justify-center gap-4 mt-10">
-        <button
-          onClick={() => goTo(index - 1)}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-600/80 hover:bg-purple-600 text-white transition shadow-lg"
-          aria-label="Previous"
-        >
-          <ChevronLeft size={18} />
-        </button>
-
-        <div className="relative h-1 w-40 rounded-full bg-white/15 overflow-hidden">
-          <motion.div
-            className="absolute inset-y-0 left-0 rounded-full bg-purple-500"
-            animate={{ width: `${((index + 1) / SHOWCASE_ITEMS.length) * 100}%` }}
-            transition={{ duration: 0.3 }}
+      {/* Dot indicators — deliberately dots, not a linear progress bar */}
+      <div className="flex items-center justify-center gap-2 mt-8">
+        {SHOWCASE_ITEMS.map((item, idx) => (
+          <button
+            key={item.id}
+            onClick={() => goTo(idx)}
+            aria-label={`Show ${item.title}`}
+            className={`h-2 rounded-full transition-all ${
+              idx === index ? "w-7 bg-white" : "w-2 bg-white/25 hover:bg-white/40"
+            }`}
           />
-        </div>
-
-        <button
-          onClick={() => goTo(index + 1)}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-600/80 hover:bg-purple-600 text-white transition shadow-lg"
-          aria-label="Next"
-        >
-          <ChevronRight size={18} />
-        </button>
+        ))}
       </div>
     </section>
   );
