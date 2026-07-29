@@ -1,29 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Video, Sparkles, MessageSquare, PhoneCall, ShieldCheck, Zap, Globe2 } from "lucide-react";
+import { Sparkles, Globe2, Users, Video, PhoneCall, MessageSquare, Check } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import PhoneMockup from "@/components/PhoneMockup";
-import FeatureShowcase from "@/components/FeatureShowcase";
+import ModeShowcaseSection from "@/components/ModeShowcaseSection";
+import HowItWorks from "@/components/HowItWorks";
+import WhyVidibro from "@/components/WhyVidibro";
 import { TRANSLATIONS, type LanguageCode } from "@/lib/translations";
 
 export default function Home() {
   const router = useRouter();
   const [lang, setLang] = useState<LanguageCode>("EN");
+  const [onlineCount, setOnlineCount] = useState(24910);
 
   const t = TRANSLATIONS[lang] || TRANSLATIONS.EN;
 
-  const BADGES = [
-    { icon: ShieldCheck, label: t.noSignup },
-    { icon: Zap, label: t.instantMatch },
-    { icon: Globe2, label: t.freePrivate },
-  ];
+  // Realistic subtle fluctuating live online user counter
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const delta = Math.floor(Math.random() * 11) - 5;
+      setOnlineCount((prev) => Math.max(18000, prev + delta));
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="relative flex min-h-screen flex-1 flex-col font-sans bg-[#070414]">
+    <div className="relative flex min-h-screen flex-1 flex-col font-sans bg-gradient-to-b from-[#0e0526] via-[#140836] via-[#1b0840] to-[#0a041c] text-white overflow-hidden">
+      {/* Background Ambient Aurora Mesh Light Glows */}
+      <div className="absolute top-0 left-1/4 -translate-x-1/2 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-pink-500/25 via-purple-600/20 to-transparent blur-[120px] pointer-events-none animate-pulse" />
+      <div className="absolute top-1/3 right-10 h-[450px] w-[450px] rounded-full bg-gradient-to-tr from-cyan-500/20 via-pink-500/20 to-transparent blur-[110px] pointer-events-none" />
+      <div className="absolute bottom-10 left-10 h-[500px] w-[500px] rounded-full bg-gradient-to-r from-purple-600/25 via-indigo-500/20 to-transparent blur-[130px] pointer-events-none" />
+
       <Navbar
         currentLang={lang}
         onSelectLang={setLang}
@@ -31,86 +41,110 @@ export default function Home() {
         onStartVideoChat={() => router.push("/video-chat")}
       />
 
-      <main className="w-full flex-1 flex flex-col mx-auto max-w-6xl px-4 sm:px-6">
+      <main className="relative z-10 w-full flex-1 flex flex-col mx-auto max-w-5xl px-4 sm:px-6">
         {/* Hero Section */}
-        <div className="grid flex-1 items-center gap-8 py-6 sm:py-16 lg:grid-cols-2 lg:py-20">
-              <div className="flex flex-col items-center gap-4 sm:gap-6 text-center lg:items-start lg:text-left">
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1, duration: 0.5 }}
-                  className="glass-pill flex w-fit items-center gap-2 rounded-full px-3.5 py-1 text-[11px] sm:text-xs font-medium text-purple-200 shadow-lg"
-                >
-                  <Sparkles size={13} className="text-pink-400 animate-spin-slow" />
-                  <span>{t.heroTag}</span>
-                </motion.div>
+        <div className="flex flex-col items-center justify-center text-center py-16 sm:py-24 max-w-3xl mx-auto gap-6 sm:gap-7">
+          
+          {/* Top Tagline Pill Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
+            className="glass-pill flex items-center gap-2 rounded-full px-5 py-2 text-xs sm:text-sm font-semibold text-purple-100 shadow-xl border border-purple-500/30 bg-purple-950/40"
+          >
+            <Sparkles size={15} className="text-pink-400 animate-spin-slow" />
+            <span>✨ Next-Generation 1-on-1 Social Discovery</span>
+          </motion.div>
 
-                <h1 className="text-3xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl leading-[1.15]">
-                  {t.heroTitle1} <br className="hidden sm:inline" />
-                  <span className="gradient-text">{t.heroTitleVideo}</span>, <span className="gradient-text">{t.heroTitleVoice}</span> or <span className="gradient-text">{t.heroTitleText}</span>
-                </h1>
+          {/* Main Headline Title */}
+          <h1 className="text-5xl font-black tracking-tight text-white sm:text-7xl lg:text-8xl leading-none">
+            <span className="gradient-text">Vidibro</span>
+          </h1>
 
-                <p className="max-w-lg text-sm sm:text-base text-purple-200/80 leading-relaxed font-normal">
-                  {t.heroSubtitle}
-                </p>
+          {/* Subtitle */}
+          <div className="flex flex-col gap-2.5 sm:gap-1.5 text-base sm:text-xl text-purple-200/80 font-normal leading-relaxed max-w-2xl px-3">
+            <p className="block">Meet amazing people around the globe in real-time.</p>
+            <p className="block text-purple-300/90 font-medium">Free, anonymous, and protected by smart AI moderation.</p>
+          </div>
 
-                {/* Trust Badges */}
-                <div className="flex flex-wrap items-center justify-center gap-2 lg:justify-start">
-                  {BADGES.map((b) => (
-                    <span
-                      key={b.label}
-                      className="glass-pill flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] sm:text-xs font-medium text-purple-100"
-                    >
-                      <b.icon size={13} className="text-cyan-400" />
-                      {b.label}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Primary Action Buttons */}
-                <div className="mt-1 flex flex-col sm:flex-row items-center justify-center gap-3 lg:justify-start w-full max-w-sm sm:max-w-none">
-                  <motion.button
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    onClick={() => router.push("/video-chat")}
-                    className="btn-gradient glow-pulse flex w-full sm:w-auto items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm sm:text-base font-bold text-white shadow-xl shadow-purple-500/25 transition"
-                  >
-                    <Video size={18} />
-                    {t.startVideo}
-                  </motion.button>
-
-                  <motion.button
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    onClick={() => router.push("/audio-chat")}
-                    className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 px-6 py-3.5 text-sm sm:text-base font-bold text-white backdrop-blur-xl transition"
-                  >
-                    <PhoneCall size={17} className="text-cyan-300" />
-                    {t.startAudio}
-                  </motion.button>
-
-                  <motion.button
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    onClick={() => router.push("/text-chat")}
-                    className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 px-6 py-3.5 text-sm sm:text-base font-bold text-white backdrop-blur-xl transition"
-                  >
-                    <MessageSquare size={17} className="text-purple-300" />
-                    {t.startText}
-                  </motion.button>
-                </div>
-              </div>
-
-              {/* Right Side: 3D Smartphone Mockup */}
-              <div className="w-full flex justify-center overflow-visible">
-                <PhoneMockup />
-              </div>
+          {/* Dual Pill Badges Row */}
+          <div className="flex items-center justify-center gap-3 pt-1">
+            <div className="glass-pill flex items-center gap-2 rounded-2xl px-5 py-2.5 text-xs sm:text-sm font-bold text-white border border-emerald-500/30 bg-emerald-950/30 shadow-lg">
+              <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-ping" />
+              <span>{onlineCount.toLocaleString()}+ Active Users</span>
             </div>
 
-        {/* Feature Showcase & Why Vidibro is the Best Free Tool */}
-        <div id="features">
-          <FeatureShowcase currentLang={lang} />
+            <div className="glass-pill flex items-center gap-2 rounded-2xl px-5 py-2.5 text-xs sm:text-sm font-bold text-white border border-cyan-500/30 bg-cyan-950/30 shadow-lg">
+              <Globe2 size={16} className="text-cyan-400" />
+              <span>180+ Countries</span>
+            </div>
+          </div>
+
+          {/* Primary Mode Action Buttons (Concept 1: Hero Video + Side-by-Side Cards on Mobile) */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full max-w-md sm:max-w-none pt-2">
+            {/* Full-Width Featured Video Match Button */}
+            <motion.button
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              onClick={() => router.push("/video-chat")}
+              className="btn-gradient glow-pulse flex w-full sm:w-auto items-center justify-center gap-3 rounded-full px-9 py-4 text-base sm:text-lg font-extrabold text-white shadow-2xl shadow-purple-500/30 transition uppercase tracking-wider"
+            >
+              <Video size={22} />
+              START VIDEO MATCH
+            </motion.button>
+
+            {/* Side-by-Side Cards Grid for Mobile (Voice Chat & Text Chat) */}
+            <div className="grid grid-cols-2 gap-3 w-full sm:flex sm:w-auto">
+              {/* Voice Chat Button with Cyan/Blue Gradient Border */}
+              <motion.button
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+                onClick={() => router.push("/audio-chat")}
+                className="relative p-[2px] rounded-2xl sm:rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/50 transition w-full sm:w-auto"
+              >
+                <div className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl sm:rounded-full bg-[#130835] hover:bg-[#1a0b47] px-3 sm:px-7 py-3.5 text-xs sm:text-base font-bold text-white backdrop-blur-xl transition">
+                  <PhoneCall size={16} className="text-cyan-300 animate-pulse shrink-0" />
+                  <span>Voice Chat</span>
+                </div>
+              </motion.button>
+
+              {/* Text Chat Button with Pink/Purple Gradient Border */}
+              <motion.button
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+                onClick={() => router.push("/text-chat")}
+                className="relative p-[2px] rounded-2xl sm:rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-400 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/50 transition w-full sm:w-auto"
+              >
+                <div className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl sm:rounded-full bg-[#130835] hover:bg-[#1a0b47] px-3 sm:px-7 py-3.5 text-xs sm:text-base font-bold text-white backdrop-blur-xl transition">
+                  <MessageSquare size={16} className="text-pink-300 shrink-0" />
+                  <span>Text Chat</span>
+                </div>
+              </motion.button>
+            </div>
+          </div>
+
+          {/* Bottom Assurance Badges */}
+          <div className="flex flex-wrap items-center justify-center gap-5 text-xs sm:text-sm text-purple-200/90 font-medium pt-3">
+            <span className="flex items-center gap-1.5">
+              <Check size={16} className="text-emerald-400" /> Zero Signup Required
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Check size={16} className="text-emerald-400" /> P2P Encrypted Streams
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Check size={16} className="text-emerald-400" /> Instant Matching
+            </span>
+          </div>
         </div>
+
+        {/* Feature Section 1: Chat With Strangers Your Way (Voice & Text Showcase) */}
+        <ModeShowcaseSection />
+
+        {/* Section 2: How Vidibro Works */}
+        <HowItWorks />
+
+        {/* Section 3: Why Vidibro is the Best Omegle Alternative */}
+        <WhyVidibro />
       </main>
 
       <Footer

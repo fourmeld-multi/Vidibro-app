@@ -5,24 +5,27 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Mic,
   MicOff,
-  PhoneOff,
-  SkipForward,
   Volume2,
   VolumeX,
-  Sparkles,
-  Radio,
-  Lightbulb,
+  PhoneOff,
+  MessageSquare,
+  SkipForward,
   Music,
-  Laugh,
+  Sparkles,
+  ShieldCheck,
+  Send,
+  X,
+  Flag,
   PartyPopper,
+  Laugh,
   Flame,
   Drum,
   Zap,
-  MessageSquare,
-  Send,
-  X,
+  Radio,
+  Lightbulb,
 } from "lucide-react";
 import LogoMark from "@/components/LogoMark";
+import ReportModal from "@/components/ReportModal";
 import type { MessageType, ChatPayload } from "@/lib/protocol";
 
 const ICEBREAKER_QUESTIONS = [
@@ -79,6 +82,7 @@ export default function AudioChatContainer({
 
   const [micEnabled, setMicEnabled] = useState(true);
   const [speakerEnabled, setSpeakerEnabled] = useState(true);
+  const [reportOpen, setReportOpen] = useState(false);
   const [icebreakerIndex, setIcebreakerIndex] = useState(0);
   const [activeSoundFX, setActiveSoundFX] = useState<string | null>(null);
   const [soundboardOpen, setSoundboardOpen] = useState(false);
@@ -230,17 +234,11 @@ export default function AudioChatContainer({
         {/* Right Header Controls */}
         <div className="flex items-center gap-2">
           <button
-            onClick={skipToNext}
-            className="btn-gradient flex items-center justify-center px-4 py-2 rounded-full text-xs font-extrabold text-white shadow-xl hover:scale-105 transition tracking-wider uppercase gap-1.5"
+            onClick={() => setReportOpen(true)}
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-red-500/25 hover:bg-red-600/50 text-white transition border-2 border-red-500 shadow-md shadow-red-500/30 hover:scale-105 active:scale-95"
+            title="Report User"
           >
-            <SkipForward size={14} /> NEXT
-          </button>
-          <button
-            onClick={leaveMatch}
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-red-600 hover:bg-red-700 text-white shadow-lg transition transform hover:scale-105 active:scale-95"
-            title="End Audio Call"
-          >
-            <PhoneOff size={16} />
+            <Flag size={15} className="text-white fill-red-500/30" />
           </button>
         </div>
       </header>
@@ -469,19 +467,7 @@ export default function AudioChatContainer({
             )}
           </button>
 
-          {/* 5. Soundboard FX Toggle */}
-          <button
-            onClick={() => setSoundboardOpen((v) => !v)}
-            disabled={!isConnected}
-            className={`flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full transition shadow-lg ${
-              soundboardOpen ? "bg-pink-500 text-white" : "bg-white/15 hover:bg-white/25 text-pink-300"
-            }`}
-            title="Interactive Soundboard"
-          >
-            <Music size={19} />
-          </button>
-
-          {/* 6. End Call */}
+          {/* 5. End Call */}
           <button
             onClick={leaveMatch}
             className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-red-600 hover:bg-red-700 text-white shadow-xl shadow-red-600/30 transition transform hover:scale-105 active:scale-95"
@@ -491,6 +477,14 @@ export default function AudioChatContainer({
           </button>
         </div>
       </main>
+
+      <ReportModal
+        isOpen={reportOpen}
+        onClose={() => setReportOpen(false)}
+        onReportSubmitted={() => {
+          skipToNext();
+        }}
+      />
     </div>
   );
 }

@@ -3,19 +3,24 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  MessageSquare,
   Send,
   X,
-  SkipForward,
+  RefreshCw,
   PhoneOff,
   Camera,
   Image as ImageIcon,
   Sticker as StickerIcon,
   Sparkles,
-  ShieldCheck,
+  Lock,
   User,
+  Check,
+  CheckCheck,
+  Settings,
+  Flag,
+  Paperclip,
+  Plus,
 } from "lucide-react";
-import LogoMark from "@/components/LogoMark";
+import ReportModal from "@/components/ReportModal";
 import type { ChatPayload, MessageType } from "@/lib/protocol";
 
 const BEAUTIFUL_STICKERS = [
@@ -49,6 +54,7 @@ type ChatMessage = {
   sticker?: string;
   mine: boolean;
   time: string;
+  status: "sent" | "read";
 };
 
 export default function TextChatContainer({
@@ -62,7 +68,9 @@ export default function TextChatContainer({
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [draft, setDraft] = useState("");
   const [stickersOpen, setStickersOpen] = useState(false);
+  const [attachmentOpen, setAttachmentOpen] = useState(false);
   const [showCameraModal, setShowCameraModal] = useState(false);
+  const [reportOpen, setReportOpen] = useState(false);
 
   const listRef = useRef<HTMLDivElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -78,211 +86,249 @@ export default function TextChatContainer({
     }
   }, [connectionState]);
 
-  // Listen for incoming messages
+  // Listen for incoming messages and read receipt acknowledgments
   useEffect(() => {
     return subscribe("chat", (msg) => {
       const payload = msg.payload as ChatPayload;
+
+      // Handle WhatsApp Read Receipt Acknowledgment
+      if (payload.ackId) {
+        setMessages((prev) =>
+          prev.map((m) => (m.id === payload.ackId ? { ...m, status: "read" } : m))
+        );
+        return;
+      }
+
+      // Handle Regular Message
+      if (payload.text || payload.imageUrl || payload.sticker) {
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+        // Send Read Receipt Acknowledgment immediately back to peer over WebRTC
+        if (payload.msgId) {
+          sendMessage<ChatPayload>("chat", { ackId: payload.msgId });
+        }
+
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: payload.msgId || `${Date.now()}-${Math.random()}`,
+            text: payload.text,
+            imageUrl: payload.imageUrl,
+            sticker: payload.sticker,
+            mine: false,
+            time: timeStr,
+            status: "read",
+          },
+        ]);
+      }
+    });
+  }, [subscribe, sendMessage]);
+
+  // Auto scroll message feed
+  useEffect(() => {
+    if (listRef.current) {
+      listRef.current.scrollTo({
+        top: listRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [messages]);
+
+  function handleSendText(e?: React.FormEvent) {
+    if (e) e.preventDefault();
+    const clean = draft.trim();
+    if (!clean || !isConnected) return;
+
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    const msgId = `${Date.now()}-${Math.random()}`;
+
+    sendMessage<ChatPayload>("chat", { msgId, text: clean });
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: msgId,
+        text: clean,
+        mine: true,
+        time: timeStr,
+        status: "sent", // Single tick until read ack received
+      },
+    ]);
+
+    setDraft("");
+  }
+
+  function handleSendSticker(emoji: string) {
+    if (!isConnected) return;
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    const msgId = `${Date.now()}-${Math.random()}`;
+
+    sendMessage<ChatPayload>("chat", { msgId, sticker: emoji });
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: msgId,
+        sticker: emoji,
+        mine: true,
+        time: timeStr,
+        status: "sent",
+      },
+    ]);
+
+    setStickersOpen(false);
+  }
+
+  function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file || !isConnected) return;
+
+    if (file.size > 2 * 1024 * 1024) {
+      alert("Image size should be less than 2MB");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = reader.result as string;
       const now = new Date();
       const timeStr = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      const msgId = `${Date.now()}-${Math.random()}`;
+
+      sendMessage<ChatPayload>("chat", { msgId, imageUrl: dataUrl });
 
       setMessages((prev) => [
         ...prev,
         {
-          id: `${Date.now()}-${Math.random()}`,
-          text: payload.text,
-          imageUrl: payload.imageUrl,
-          sticker: payload.sticker,
-          mine: false,
+          id: msgId,
+          imageUrl: dataUrl,
+          mine: true,
           time: timeStr,
+          status: "sent",
         },
       ]);
-    });
-  }, [subscribe]);
-
-  // Auto-scroll message list
-  useEffect(() => {
-    listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages.length, stickersOpen]);
-
-  // Send Text Message
-  function handleSendText(e?: React.FormEvent) {
-    if (e) e.preventDefault();
-    const text = draft.trim();
-    if (!text || !isConnected) return;
-
-    const now = new Date();
-    const timeStr = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-
-    sendMessage<ChatPayload>("chat", { text });
-    setMessages((prev) => [
-      ...prev,
-      { id: `${Date.now()}-${Math.random()}`, text, mine: true, time: timeStr },
-    ]);
-    setDraft("");
+    };
+    reader.readAsDataURL(file);
   }
 
-  // Send 3D Sticker
-  function handleSendSticker(stickerEmoji: string) {
-    if (!isConnected) return;
-    const now = new Date();
-    const timeStr = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-
-    sendMessage<ChatPayload>("chat", { sticker: stickerEmoji });
-    setMessages((prev) => [
-      ...prev,
-      { id: `${Date.now()}-${Math.random()}`, sticker: stickerEmoji, mine: true, time: timeStr },
-    ]);
-    setStickersOpen(false);
-  }
-
-  // Open Camera Stream Modal for Snapshot
-  async function handleOpenCameraModal() {
-    if (!isConnected) return;
-    setShowCameraModal(true);
+  async function openLiveCamera() {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "user", width: { ideal: 1280 } },
+      });
       cameraStreamRef.current = stream;
-      if (localVideoRef.current) {
-        localVideoRef.current.srcObject = stream;
-      }
+      setShowCameraModal(true);
+      setTimeout(() => {
+        if (localVideoRef.current) {
+          localVideoRef.current.srcObject = stream;
+        }
+      }, 100);
     } catch {
-      setShowCameraModal(false);
+      alert("Could not access camera for photo capture");
     }
   }
 
-  function handleCloseCameraModal() {
+  function closeLiveCamera() {
     if (cameraStreamRef.current) {
-      cameraStreamRef.current.getTracks().forEach((track) => track.stop());
+      cameraStreamRef.current.getTracks().forEach((t) => t.stop());
       cameraStreamRef.current = null;
     }
     setShowCameraModal(false);
   }
 
-  // Capture Photo Snapshot from Camera Stream Modal
-  function handleTakeCameraSnapshot() {
+  function captureAndSendPhoto() {
     if (!localVideoRef.current || !isConnected) return;
-    try {
-      const videoEl = localVideoRef.current;
-      const canvas = document.createElement("canvas");
-      canvas.width = videoEl.videoWidth || 640;
-      canvas.height = videoEl.videoHeight || 480;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return;
+    const video = localVideoRef.current;
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth || 640;
+    canvas.height = video.videoHeight || 480;
 
-      ctx.drawImage(videoEl, 0, 0, canvas.width, canvas.height);
-      const dataUrl = canvas.toDataURL("image/jpeg", 0.75);
+    const ctx = canvas.getContext("2d");
+    if (ctx) {
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
 
       const now = new Date();
       const timeStr = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      const msgId = `${Date.now()}-${Math.random()}`;
 
-      sendMessage<ChatPayload>("chat", { imageUrl: dataUrl, text: "📷 Camera Snap" });
+      sendMessage<ChatPayload>("chat", { msgId, imageUrl: dataUrl });
+
       setMessages((prev) => [
         ...prev,
-        { id: `${Date.now()}-${Math.random()}`, imageUrl: dataUrl, text: "📷 Camera Snap", mine: true, time: timeStr },
+        {
+          id: msgId,
+          imageUrl: dataUrl,
+          mine: true,
+          time: timeStr,
+          status: "sent",
+        },
       ]);
-      handleCloseCameraModal();
-    } catch {
-      handleCloseCameraModal();
     }
-  }
-
-  // Upload Photo File from Device Gallery
-  function handleSelectPhoto(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file || !isConnected) return;
-
-    const reader = new FileReader();
-    reader.onload = (evt) => {
-      const result = evt.target?.result as string;
-      if (!result) return;
-
-      const img = new Image();
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const maxDim = 800;
-        let width = img.width;
-        let height = img.height;
-
-        if (width > maxDim || height > maxDim) {
-          if (width > height) {
-            height = Math.round((height * maxDim) / width);
-            width = maxDim;
-          } else {
-            width = Math.round((width * maxDim) / height);
-            height = maxDim;
-          }
-        }
-
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext("2d");
-        if (ctx) {
-          ctx.drawImage(img, 0, 0, width, height);
-          const resizedUrl = canvas.toDataURL("image/jpeg", 0.75);
-
-          const now = new Date();
-          const timeStr = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-
-          sendMessage<ChatPayload>("chat", { imageUrl: resizedUrl, text: "🖼️ Uploaded Photo" });
-          setMessages((prev) => [
-            ...prev,
-            { id: `${Date.now()}-${Math.random()}`, imageUrl: resizedUrl, text: "🖼️ Uploaded Photo", mine: true, time: timeStr },
-          ]);
-        }
-      };
-      img.src = result;
-    };
-    reader.readAsDataURL(file);
-    if (fileInputRef.current) fileInputRef.current.value = "";
+    closeLiveCamera();
   }
 
   return (
-    <div className="relative flex flex-col w-full h-[100dvh] max-w-4xl mx-auto overflow-hidden bg-[#070414] select-none shadow-2xl sm:rounded-3xl sm:my-auto border border-purple-500/20">
-      {/* Hidden File Input for Photo Upload */}
+    <div
+      onClick={() => {
+        setAttachmentOpen(false);
+        setStickersOpen(false);
+      }}
+      className="relative flex flex-col h-full w-full bg-[#f6f2ff] text-gray-900 rounded-3xl overflow-hidden shadow-2xl border border-purple-200"
+    >
+      {/* Hidden File Input */}
       <input
         type="file"
         ref={fileInputRef}
-        onChange={handleSelectPhoto}
         accept="image/*"
+        onChange={handleFileUpload}
         className="hidden"
       />
 
-      {/* Top Header Bar */}
-      <header className="flex items-center justify-between border-b border-white/10 bg-[#0c0622]/90 backdrop-blur-2xl px-4 py-3 z-30">
+      {/* Reference Image Styled Header Bar */}
+      <header className="flex items-center justify-between bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#ec4899] px-5 py-3.5 z-30 shadow-md text-white">
         <div className="flex items-center gap-3">
-          <div className="btn-gradient flex h-9 w-9 items-center justify-center rounded-xl shadow-md">
-            <LogoMark size={16} className="text-white" />
+          <div className="relative flex h-11 w-11 items-center justify-center rounded-full bg-white/20 border-2 border-white/40 shadow-inner overflow-hidden">
+            <User size={24} className="text-white" />
+            <span className={`absolute bottom-0.5 right-0.5 h-3 w-3 rounded-full border-2 border-purple-600 ${isConnected ? "bg-emerald-400" : "bg-amber-400"}`} />
           </div>
-          <div className="flex flex-col">
+
+          <div className="flex flex-col text-left">
             <div className="flex items-center gap-1.5">
-              <span className="text-sm font-extrabold text-white font-mono tracking-tight">Vidibro Chat</span>
-              <span className={`h-2 w-2 rounded-full ${isConnected ? "bg-emerald-400 animate-pulse" : "bg-yellow-400"}`} />
+              <span className="text-base font-extrabold text-white tracking-wide">
+                Vidibro Chat
+              </span>
+              <span className={`h-2.5 w-2.5 rounded-full ${isConnected ? "bg-emerald-400 animate-ping" : "bg-amber-300"}`} />
             </div>
-            <span className="text-[11px] text-purple-300/80 font-medium">
-              {connectionState === "waiting" && "Looking for stranger…"}
-              {connectionState === "connecting" && "Connecting encrypted chat…"}
-              {connectionState === "connected" && "Matched with Stranger"}
-              {connectionState === "disconnected" && "Stranger left chat"}
-              {connectionState === "idle" && "Press Start"}
+            <span className="text-xs text-white/90 font-medium flex items-center gap-1.5">
+              <Lock size={11} />
+              <span>
+                {connectionState === "waiting" && "Looking for stranger…"}
+                {connectionState === "connecting" && "Connecting encrypted chat…"}
+                {connectionState === "connected" && "Matched with Stranger"}
+                {connectionState === "disconnected" && "Stranger left chat"}
+                {connectionState === "idle" && "Press Start"}
+              </span>
             </span>
           </div>
         </div>
 
-        {/* Right Header Buttons */}
+        {/* Right Header Action Controls */}
         <div className="flex items-center gap-2">
-          {/* Centered NEXT Button */}
           <button
-            onClick={skipToNext}
-            className="btn-gradient flex items-center justify-center px-4 py-2 rounded-full text-xs font-extrabold text-white shadow-xl hover:scale-105 transition tracking-wider uppercase gap-1.5"
+            onClick={() => setReportOpen(true)}
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-red-500/25 hover:bg-red-600/50 text-white transition border-2 border-red-500 shadow-md shadow-red-500/30 hover:scale-105 active:scale-95"
+            title="Report Stranger"
           >
-            <SkipForward size={14} /> NEXT
+            <Flag size={15} className="text-white fill-red-500/30" />
           </button>
-
-          {/* End Call / Leave Button */}
           <button
             onClick={leaveMatch}
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-red-600 hover:bg-red-700 text-white shadow-lg transition transform hover:scale-105 active:scale-95"
-            title="End Chat"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition border border-white/20"
+            title="Leave Match"
           >
             <PhoneOff size={16} />
           </button>
@@ -290,47 +336,43 @@ export default function TextChatContainer({
       </header>
 
       {/* Main Chat Area */}
-      <main className="relative flex-1 flex flex-col overflow-hidden bg-gradient-to-b from-[#090518] via-[#0c0722] to-[#070414]">
+      <main className="relative flex-1 flex flex-col overflow-hidden bg-[#f4efff]">
         
-        {/* Waiting / Matching Radar Orb Screen */}
+        {/* Security & Privacy Notice Card (Matching Reference Screenshot) */}
+        <div className="mt-3 mx-auto flex items-center gap-2 bg-emerald-50 border border-emerald-200/80 px-4 py-2 rounded-full text-xs font-semibold text-emerald-700 shadow-sm z-10">
+          <Lock size={14} className="text-emerald-600 shrink-0" />
+          <span>Your messages are secured and private. Safety first!</span>
+        </div>
+
+        {/* Searching / Connecting Screen */}
         {!isConnected ? (
           <div className="flex flex-col items-center justify-center h-full w-full px-6 text-center">
-            <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-purple-600/20 border border-purple-400/30 mb-5">
+            <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-purple-100 border-2 border-purple-300 mb-4 shadow-xl">
               <motion.span
                 animate={{ scale: [1, 2.2, 1], opacity: [0.6, 0, 0.6] }}
                 transition={{ repeat: Infinity, duration: 2.4, ease: "easeInOut" }}
-                className="absolute inset-0 rounded-full bg-purple-500/30 border border-purple-400/40"
+                className="absolute inset-0 rounded-full bg-pink-400/30 border border-pink-400/40"
               />
-              <motion.span
-                animate={{ scale: [1, 1.6, 1], opacity: [0.8, 0.1, 0.8] }}
-                transition={{ repeat: Infinity, duration: 1.7, ease: "easeInOut" }}
-                className="absolute inset-0 rounded-full bg-pink-500/30"
-              />
-              <div className="relative flex h-14 w-14 items-center justify-center rounded-full btn-gradient shadow-xl shadow-purple-500/40">
-                <Sparkles className="text-white animate-spin-slow" size={26} />
+              <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-[#6366f1] to-[#ec4899] text-white shadow-lg">
+                <Sparkles className="animate-spin-slow" size={26} />
               </div>
             </div>
 
-            <p className="text-base sm:text-lg font-black text-white tracking-wide">
+            <p className="text-base sm:text-lg font-black text-gray-800 tracking-wide">
               {connectionState === "waiting" && "Searching for someone to text chat with…"}
-              {connectionState === "connecting" && "Establishing encrypted WebRTC text session…"}
-              {connectionState === "disconnected" && "Stranger left the chat room."}
+              {connectionState === "connecting" && "Establishing encrypted WebRTC connection…"}
+              {connectionState === "disconnected" && "Stranger left the chat."}
             </p>
-            <p className="text-xs text-purple-200/70 mt-1 max-w-sm">
+            <p className="text-xs sm:text-sm text-purple-700/80 mt-1 max-w-sm font-medium">
               Enjoy 100% private text chat, send 3D stickers, and share photos instantly!
             </p>
           </div>
         ) : (
-          /* Messages Feed */
-          <div ref={listRef} className="flex-1 overflow-y-auto p-4 space-y-3">
-            <div className="flex items-center justify-center gap-2 rounded-2xl bg-white/5 border border-white/10 p-2.5 text-xs text-purple-200/90 mb-4 max-w-md mx-auto">
-              <ShieldCheck size={16} className="text-cyan-400 shrink-0" />
-              <span>You are connected! Messages expire when chat ends.</span>
-            </div>
-
+          /* Active Messages Feed (Reference Screenshot Styled Bubbles) */
+          <div ref={listRef} className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-3.5">
             {messages.length === 0 && (
-              <p className="pt-10 text-center text-xs text-purple-300/60 font-medium">
-                Say hello 👋 or send a sticker to break the ice!
+              <p className="pt-10 text-center text-xs text-purple-600 font-semibold">
+                Say hello 👋 or send a sticker to start talking!
               </p>
             )}
 
@@ -339,42 +381,57 @@ export default function TextChatContainer({
                 key={m.id}
                 className={`flex flex-col ${m.mine ? "items-end" : "items-start"}`}
               >
-                <div className="flex items-center gap-1 text-[10px] text-purple-300/60 px-1 mb-0.5">
-                  <span className="font-bold">{m.mine ? "You" : "Stranger"}</span>
-                  <span>• {m.time}</span>
-                </div>
-
                 {/* Sticker Message */}
                 {m.sticker ? (
                   <motion.div
                     initial={{ scale: 0.5, rotate: -15 }}
                     animate={{ scale: 1, rotate: 0 }}
-                    className="text-6xl p-2 drop-shadow-[0_0_20px_rgba(236,72,153,0.8)] cursor-default"
+                    className="text-6xl p-2 drop-shadow-md cursor-default"
                   >
                     {m.sticker}
                   </motion.div>
                 ) : m.imageUrl ? (
                   /* Photo Image Message */
-                  <div className="max-w-[80%] sm:max-w-[60%] rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-black/70 p-1.5">
+                  <div className="max-w-[80%] sm:max-w-[60%] rounded-2xl overflow-hidden border border-purple-200 shadow-xl bg-white p-1.5">
                     <img
                       src={m.imageUrl}
                       alt="Shared Photo"
-                      className="w-full max-h-64 object-cover rounded-xl"
+                      className="w-full max-h-72 object-cover rounded-xl"
                     />
                     {m.text && (
-                      <p className="px-2 py-1.5 text-xs text-purple-100 font-medium">{m.text}</p>
+                      <p className="px-2 py-1.5 text-xs text-gray-800 font-medium">{m.text}</p>
                     )}
                   </div>
                 ) : (
-                  /* Standard Text Message Bubble */
-                  <div
-                    className={`max-w-[85%] sm:max-w-[70%] rounded-2xl px-4 py-2.5 text-xs sm:text-sm leading-relaxed break-words [word-break:break-word] overflow-hidden ${
-                      m.mine
-                        ? "btn-gradient text-white rounded-br-none font-medium shadow-lg shadow-purple-500/20"
-                        : "bg-white/10 text-purple-100 rounded-bl-none border border-white/15 backdrop-blur-md shadow-md"
-                    }`}
-                  >
-                    {m.text}
+                  /* Standard Text Message Bubble (Reference Image Styling) */
+                  <div className="flex flex-col max-w-[85%] sm:max-w-[70%]">
+                    <div
+                      className={`rounded-2xl px-4 py-2.5 text-xs sm:text-sm leading-relaxed break-words [word-break:break-word] overflow-hidden shadow-md font-medium ${
+                        m.mine
+                          ? "bg-gradient-to-r from-[#5a3bfa] to-[#7c3aed] text-white rounded-br-none"
+                          : "bg-white text-gray-800 rounded-bl-none border border-purple-100/90"
+                      }`}
+                    >
+                      {m.text}
+                    </div>
+
+                    {/* Timestamp & WhatsApp Ticks Row */}
+                    <div
+                      className={`flex items-center gap-1 mt-0.5 px-1 text-[10px] ${
+                        m.mine ? "justify-end text-purple-700/80" : "justify-start text-gray-500"
+                      }`}
+                    >
+                      <span>{m.time}</span>
+                      {m.mine && (
+                        <span>
+                          {m.status === "read" ? (
+                            <span title="Read"><CheckCheck size={14} className="text-[#38bdf8] stroke-[2.5]" /></span>
+                          ) : (
+                            <span title="Sent"><Check size={14} className="text-gray-400 stroke-[2]" /></span>
+                          )}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>
@@ -382,20 +439,20 @@ export default function TextChatContainer({
           </div>
         )}
 
-        {/* 3D Animated Sticker Drawer Panel */}
+        {/* 3D Animated Sticker Drawer */}
         <AnimatePresence>
           {stickersOpen && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="border-t border-white/10 bg-[#0a051d]/95 backdrop-blur-3xl p-3 grid grid-cols-6 gap-2 z-20"
+              className="border-t border-purple-200 bg-white/95 p-4 grid grid-cols-6 gap-3 z-20 shadow-xl"
             >
               {BEAUTIFUL_STICKERS.map((s) => (
                 <button
                   key={s.id}
                   onClick={() => handleSendSticker(s.emoji)}
-                  className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 hover:bg-purple-500/30 text-2xl sm:text-3xl transition transform hover:scale-125 active:scale-90 border border-white/10 shadow-md"
+                  className="flex h-12 w-12 items-center justify-center rounded-2xl bg-purple-50 hover:bg-purple-100 text-2xl sm:text-3xl transition transform hover:scale-125 border border-purple-100 shadow-sm mx-auto"
                   title={s.label}
                 >
                   {s.emoji}
@@ -404,110 +461,182 @@ export default function TextChatContainer({
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Centered "Find New Partner" Pill Button Bar (Matching Reference Image) */}
+        <div className="flex items-center justify-center py-2.5 bg-white/60 border-t border-purple-100 z-20">
+          <button
+            onClick={skipToNext}
+            className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#ec4899] to-[#d946ef] hover:from-[#db2777] hover:to-[#c026d3] text-white font-extrabold text-xs sm:text-sm px-6 py-2.5 rounded-full shadow-lg shadow-pink-500/25 transition transform hover:scale-105 active:scale-95 tracking-wide"
+          >
+            <RefreshCw size={15} className="animate-spin-slow" />
+            <span>Find New Partner</span>
+          </button>
+        </div>
       </main>
 
-      {/* Camera Stream Snapshot Modal */}
-      <AnimatePresence>
-        {showCameraModal && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4"
-          >
-            <div className="relative w-full max-w-sm bg-[#120a2e] rounded-3xl overflow-hidden border border-white/20 p-4 flex flex-col items-center gap-4 shadow-2xl">
-              <div className="flex items-center justify-between w-full border-b border-white/10 pb-2">
-                <span className="text-sm font-bold text-white flex items-center gap-2">
-                  <Camera size={16} className="text-cyan-400" /> Camera Snapshot
-                </span>
-                <button
-                  onClick={handleCloseCameraModal}
-                  className="rounded-full p-1 text-purple-300 hover:bg-white/10"
-                >
-                  <X size={18} />
-                </button>
-              </div>
-
-              <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black border border-white/15">
-                <video
-                  ref={localVideoRef}
-                  autoPlay
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover"
-                />
-              </div>
+      {/* Bottom Message Input Bar */}
+      <footer
+        className="relative border-t border-purple-200 bg-white p-2.5 sm:p-4 z-30 shadow-lg"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Attachment Sub-Options Popup Menu */}
+        <AnimatePresence>
+          {attachmentOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.95 }}
+              className="absolute bottom-16 left-12 z-50 flex flex-col gap-1.5 bg-white border border-purple-200 rounded-2xl p-2 shadow-2xl backdrop-blur-xl"
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  setAttachmentOpen(false);
+                  openLiveCamera();
+                }}
+                className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl hover:bg-purple-50 text-gray-800 text-xs font-semibold transition text-left"
+              >
+                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-pink-100 text-pink-600">
+                  <Camera size={15} />
+                </div>
+                <span>Take Camera Photo</span>
+              </button>
 
               <button
-                onClick={handleTakeCameraSnapshot}
-                className="btn-gradient flex items-center justify-center gap-2 w-full py-3 rounded-full text-sm font-bold text-white shadow-xl hover:scale-105 transition"
+                type="button"
+                onClick={() => {
+                  setAttachmentOpen(false);
+                  fileInputRef.current?.click();
+                }}
+                className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl hover:bg-purple-50 text-gray-800 text-xs font-semibold transition text-left"
               >
-                <Camera size={16} /> Take & Send Snap
+                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-purple-100 text-purple-600">
+                  <ImageIcon size={15} />
+                </div>
+                <span>Upload Gallery Image</span>
               </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-      {/* Input Bar */}
-      <footer className="p-3 border-t border-white/10 bg-[#090518]/95 backdrop-blur-2xl z-30">
-        <form onSubmit={handleSendText} className="flex items-center gap-2">
-          {/* Open Camera Button */}
+        <form onSubmit={handleSendText} className="flex items-center gap-2 max-w-4xl mx-auto w-full">
+          {/* Sticker Tray Button */}
           <button
             type="button"
-            onClick={handleOpenCameraModal}
+            onClick={(e) => {
+              e.stopPropagation();
+              setAttachmentOpen(false);
+              setStickersOpen((v) => !v);
+            }}
             disabled={!isConnected}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10 hover:bg-cyan-500/30 text-cyan-300 border border-white/15 transition disabled:opacity-40"
-            title="Camera Photo"
-          >
-            <Camera size={18} />
-          </button>
-
-          {/* Upload Photo Button */}
-          <button
-            type="button"
-            onClick={() => fileInputRef.current?.click()}
-            disabled={!isConnected}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10 hover:bg-pink-500/30 text-pink-300 border border-white/15 transition disabled:opacity-40"
-            title="Upload Image"
-          >
-            <ImageIcon size={18} />
-          </button>
-
-          {/* Stickers Toggle Button */}
-          <button
-            type="button"
-            onClick={() => setStickersOpen((v) => !v)}
-            disabled={!isConnected}
-            className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 transition disabled:opacity-40 ${
-              stickersOpen ? "bg-purple-600 text-white" : "bg-white/10 hover:bg-purple-500/30 text-purple-300"
+            className={`flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border transition shrink-0 disabled:opacity-40 ${
+              stickersOpen ? "bg-pink-500 text-white border-pink-400" : "bg-purple-50 hover:bg-purple-100 text-pink-500 border-purple-200"
             }`}
-            title="3D Stickers"
+            title="Stickers"
           >
             <StickerIcon size={18} />
           </button>
 
-          {/* Text Input */}
+          {/* Combined Attachment Plus Button */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setStickersOpen(false);
+              setAttachmentOpen((v) => !v);
+            }}
+            disabled={!isConnected}
+            className={`flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border transition shrink-0 disabled:opacity-40 ${
+              attachmentOpen ? "bg-purple-600 text-white border-purple-500 rotate-45" : "bg-purple-50 hover:bg-purple-100 text-purple-600 border-purple-200"
+            }`}
+            title="Add Attachment"
+          >
+            <Plus size={18} className="transition-transform duration-200" />
+          </button>
+
+          {/* Type Message Input Field */}
           <input
             type="text"
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
-            placeholder={isConnected ? "Send a message…" : "Waiting to match stranger…"}
+            onFocus={() => {
+              setAttachmentOpen(false);
+              setStickersOpen(false);
+            }}
             disabled={!isConnected}
-            className="flex-1 rounded-full bg-white/10 border border-white/15 px-4 py-2.5 text-xs sm:text-sm text-white placeholder-purple-300/40 focus:outline-none focus:border-cyan-400 disabled:opacity-50"
+            placeholder={isConnected ? "Type a message..." : "Waiting to match partner..."}
+            className="flex-1 min-w-0 rounded-full bg-gray-50 border border-purple-200 px-4 py-2 sm:py-2.5 text-xs sm:text-sm text-gray-800 outline-none focus:border-purple-500 focus:bg-white transition font-medium disabled:opacity-50"
           />
 
-          {/* Send Button */}
+          {/* Send Button (Fully visible on all mobile screens!) */}
           <button
             type="submit"
-            disabled={!draft.trim() || !isConnected}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full btn-gradient text-white shadow-md disabled:opacity-40 hover:scale-105 transition"
-            aria-label="Send"
+            disabled={!isConnected || !draft.trim()}
+            className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-gradient-to-r from-[#5a3bfa] to-[#7c3aed] text-white shadow-md transition transform hover:scale-105 active:scale-95 shrink-0 disabled:opacity-40"
+            title="Send"
           >
             <Send size={16} />
           </button>
         </form>
       </footer>
+
+      {/* Live Camera Modal */}
+      <AnimatePresence>
+        {showCameraModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md p-4">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative w-full max-w-lg rounded-3xl bg-white border border-purple-200 p-5 shadow-2xl flex flex-col items-center gap-4 text-gray-900"
+            >
+              <div className="flex w-full items-center justify-between border-b border-purple-100 pb-3">
+                <span className="text-sm font-bold text-gray-800">Take Photo to Share</span>
+                <button
+                  onClick={closeLiveCamera}
+                  className="rounded-full p-1 text-gray-400 hover:bg-gray-100"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-black border border-purple-100">
+                <video
+                  ref={localVideoRef}
+                  autoPlay
+                  muted
+                  playsInline
+                  className="h-full w-full object-cover"
+                />
+              </div>
+
+              <div className="flex items-center gap-3 w-full pt-2">
+                <button
+                  onClick={closeLiveCamera}
+                  className="flex-1 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-2.5 text-xs transition"
+                >
+                  Cancel
+                </button>
+
+                <button
+                  onClick={captureAndSendPhoto}
+                  className="flex-1 bg-gradient-to-r from-[#5a3bfa] to-[#7c3aed] text-white font-extrabold py-2.5 text-xs rounded-full shadow-lg transition hover:scale-105"
+                >
+                  Snap & Send 📸
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      <ReportModal
+        isOpen={reportOpen}
+        onClose={() => setReportOpen(false)}
+        onReportSubmitted={() => {
+          skipToNext();
+        }}
+      />
     </div>
   );
 }

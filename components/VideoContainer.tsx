@@ -18,8 +18,12 @@ import {
   SwitchCamera,
   Send,
   ShieldAlert,
+  Check,
+  CheckCheck,
+  Flag,
 } from "lucide-react";
 import LogoMark from "@/components/LogoMark";
+import ReportModal from "@/components/ReportModal";
 import type { MessageType, ChatPayload } from "@/lib/protocol";
 
 const EMOJI_REACTIONS = [
@@ -51,6 +55,7 @@ type ChatMessage = {
   text: string;
   mine: boolean;
   time: string;
+  status?: "sent" | "read";
 };
 
 type ReactionPayload = {
@@ -95,6 +100,7 @@ export default function VideoContainer({
   const [speakerEnabled, setSpeakerEnabled] = useState(true);
   const [chatOpen, setChatOpen] = useState(false);
   const [reactionsOpen, setReactionsOpen] = useState(false);
+  const [reportOpen, setReportOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [chatDraft, setChatDraft] = useState("");
   const [unreadCount, setUnreadCount] = useState(0);
@@ -236,19 +242,32 @@ export default function VideoContainer({
   useEffect(() => {
     const unsub = subscribe("chat", (msg) => {
       const payload = msg.payload as ChatPayload;
+
+      // Handle WhatsApp Read Receipt Acknowledgment
+      if (payload.ackId) {
+        setMessages((prev) =>
+          prev.map((m) => (m.id === payload.ackId ? { ...m, status: "read" } : m))
+        );
+        return;
+      }
+
       const textStr = payload.text || "";
       if (!textStr) return;
       const now = new Date();
       const timeStr = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
+      if (payload.msgId) {
+        sendMessage<ChatPayload>("chat", { ackId: payload.msgId });
+      }
+
       setMessages((prev) => [
         ...prev,
-        { id: `${Date.now()}-${Math.random()}`, text: textStr, mine: false, time: timeStr },
+        { id: payload.msgId || `${Date.now()}-${Math.random()}`, text: textStr, mine: false, time: timeStr, status: "read" },
       ]);
       if (!chatOpen) setUnreadCount((count) => count + 1);
     });
     return unsub;
-  }, [subscribe, chatOpen]);
+  }, [subscribe, sendMessage, chatOpen]);
 
   // Listen for incoming emoji reactions over WebRTC data channel
   useEffect(() => {
@@ -282,6 +301,14 @@ export default function VideoContainer({
     });
     return unsub;
   }, [subscribe]);
+
+  // Auto-close chat and emoji reaction tray when no stranger is connected
+  useEffect(() => {
+    if (!isConnected || !remoteStream) {
+      setChatOpen(false);
+      setReactionsOpen(false);
+    }
+  }, [isConnected, remoteStream]);
 
   // Auto-scroll chat message feed
   useEffect(() => {
@@ -369,11 +396,12 @@ export default function VideoContainer({
 
     const now = new Date();
     const timeStr = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    const msgId = `${Date.now()}-${Math.random()}`;
 
-    sendMessage<ChatPayload>("chat", { text });
+    sendMessage<ChatPayload>("chat", { msgId, text });
     setMessages((prev) => [
       ...prev,
-      { id: `${Date.now()}-${Math.random()}`, text, mine: true, time: timeStr },
+      { id: msgId, text, mine: true, time: timeStr, status: "sent" },
     ]);
     setChatDraft("");
   }
@@ -615,6 +643,31 @@ export default function VideoContainer({
               </div>
             )}
 
+            {/* On-Screen Floating 2-Message Overlay (Chatspin / Omegle Style Video Screen Overlay) */}
+            {!chatOpen && messages.length > 0 && (
+              <div className="absolute bottom-20 left-4 max-w-[80%] sm:max-w-[60%] z-30 flex flex-col gap-1.5 pointer-events-none">
+                {messages.slice(-2).map((msg) => (
+                  <motion.div
+                    key={msg.id}
+                    initial={{ opacity: 0, y: 15, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 15, scale: 0.95 }}
+                    transition={{ duration: 0.2 }}
+                    className={`rounded-2xl px-3.5 py-2 text-xs sm:text-sm font-medium shadow-2xl leading-relaxed break-words [word-break:break-word] border ${
+                      msg.mine
+                        ? "bg-gradient-to-r from-purple-600/90 to-pink-600/90 text-white rounded-br-none border-purple-400/30 self-end"
+                        : "bg-black/75 backdrop-blur-md text-white rounded-bl-none border-white/20 self-start"
+                    }`}
+                  >
+                    <span className="text-[9px] block opacity-70 mb-0.5 font-bold">
+                      {msg.mine ? "You" : "Stranger"}
+                    </span>
+                    <span>{msg.text}</span>
+                  </motion.div>
+                ))}
+              </div>
+            )}
+
             {/* DRAGGABLE "YOU" PIP CARD (MOBILE) */}
             <motion.div
               drag
@@ -717,31 +770,43 @@ export default function VideoContainer({
                   <SkipForward size={14} /> NEXT
                 </button>
 
-                {/* 4. Emoji Reaction Picker Toggle */}
+                {/* 4. Emoji Reaction Picker Toggle (Disabled until connected) */}
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
+                    if (!isConnected || !remoteStream) return;
                     setReactionsOpen((v) => !v);
                   }}
+                  disabled={!isConnected || !remoteStream}
                   className={`flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full transition ${
-                    reactionsOpen ? "bg-pink-500 text-white" : "bg-white/15 hover:bg-white/25 text-pink-300"
+                    !isConnected || !remoteStream
+                      ? "opacity-40 cursor-not-allowed bg-white/5 text-gray-500"
+                      : reactionsOpen
+                      ? "bg-pink-500 text-white"
+                      : "bg-white/15 hover:bg-white/25 text-pink-300"
                   }`}
-                  title="Send Emoji Reaction"
+                  title={!isConnected || !remoteStream ? "Chat & Emojis available once connected" : "Send Emoji Reaction"}
                 >
                   <Smile size={18} />
                 </button>
 
-                {/* 5. In-Call Chat Drawer Toggle */}
+                {/* 5. In-Call Chat Drawer Toggle (Disabled until connected) */}
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
+                    if (!isConnected || !remoteStream) return;
                     setChatOpen((v) => !v);
                     setUnreadCount(0);
                   }}
+                  disabled={!isConnected || !remoteStream}
                   className={`relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full transition ${
-                    chatOpen ? "bg-purple-600 text-white" : "bg-white/15 hover:bg-white/25 text-cyan-300"
+                    !isConnected || !remoteStream
+                      ? "opacity-40 cursor-not-allowed bg-white/5 text-gray-500"
+                      : chatOpen
+                      ? "bg-purple-600 text-white"
+                      : "bg-white/15 hover:bg-white/25 text-cyan-300"
                   }`}
-                  title="In-call Chat"
+                  title={!isConnected || !remoteStream ? "Chat & Emojis available once connected" : "In-call Chat"}
                 >
                   <MessageSquare size={18} />
                   {unreadCount > 0 && !chatOpen && (
@@ -751,7 +816,19 @@ export default function VideoContainer({
                   )}
                 </button>
 
-                {/* 6. End Call Button */}
+                {/* 6. Report User Button */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setReportOpen(true);
+                  }}
+                  className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-red-500/25 hover:bg-red-600/50 text-white transition border-2 border-red-500 shadow-lg shadow-red-500/30 transform hover:scale-105 active:scale-95"
+                  title="Report Stranger"
+                >
+                  <Flag size={18} className="text-white fill-red-500/30" />
+                </button>
+
+                {/* 7. End Call Button */}
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
@@ -797,15 +874,15 @@ export default function VideoContainer({
         <AnimatePresence>
           {chatOpen && (
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, y: 50, x: 0 }}
+              animate={{ opacity: 1, y: 0, x: 0 }}
+              exit={{ opacity: 0, y: 50, x: 0 }}
               transition={{ duration: 0.25, ease: "easeInOut" }}
               onClick={(e) => e.stopPropagation()}
-              className="absolute bottom-0 left-0 right-0 md:relative md:bottom-auto md:left-auto md:right-auto md:w-80 lg:w-96 h-[60%] md:h-full z-40 flex flex-col bg-[#090518]/95 backdrop-blur-3xl border-t md:border-t-0 md:border-l border-white/15 shadow-2xl flex-shrink-0"
+              className="absolute bottom-0 left-0 right-0 md:relative md:bottom-auto md:left-auto md:right-auto md:w-80 lg:w-96 h-[60%] md:h-full z-40 flex flex-col bg-black/60 md:bg-[#090518]/95 backdrop-blur-md md:backdrop-blur-3xl border-t md:border-t-0 md:border-l border-white/20 shadow-2xl flex-shrink-0"
             >
-              {/* Chat Header (Issue 6 Fix: Removed NEXT Button) */}
-              <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+              {/* Chat Header */}
+              <div className="flex items-center justify-between border-b border-white/15 px-4 py-3 bg-black/40 backdrop-blur-md">
                 <div className="flex items-center gap-2">
                   <MessageSquare size={16} className="text-cyan-400" />
                   <span className="text-sm font-bold text-white">In-call messages</span>
@@ -819,15 +896,15 @@ export default function VideoContainer({
               </div>
 
               {/* Notice Banner */}
-              <div className="mx-3 mt-3 flex items-center gap-2.5 rounded-2xl bg-white/5 border border-white/10 p-3 text-xs text-purple-200/90">
+              <div className="mx-3 mt-3 flex items-center gap-2.5 rounded-2xl bg-black/40 border border-white/15 p-2.5 text-xs text-purple-200/90 backdrop-blur-sm">
                 <ShieldAlert size={16} className="text-cyan-400 shrink-0" />
-                <span>Messages won&apos;t be saved when the call ends</span>
+                <span>Messages won&apos;t be saved when call ends</span>
               </div>
 
-              {/* Scrollable Messages Feed (Issue 8 Fix: break-words [word-break:break-word] overflow-hidden) */}
+              {/* Scrollable Messages Feed */}
               <div ref={chatListRef} className="flex-1 overflow-y-auto p-3 space-y-2.5 min-h-[140px]">
                 {messages.length === 0 && (
-                  <p className="pt-8 text-center text-xs text-purple-300/60">
+                  <p className="pt-8 text-center text-xs text-purple-200/80 font-medium">
                     {isConnected ? "Everyone will see your message" : "Waiting to match with a stranger…"}
                   </p>
                 )}
@@ -837,18 +914,27 @@ export default function VideoContainer({
                     key={m.id}
                     className={`flex flex-col ${m.mine ? "items-end" : "items-start"}`}
                   >
-                    <div className="flex items-center gap-1.5 text-[10px] text-purple-300/60 px-1 mb-0.5">
+                    <div className="flex items-center gap-1.5 text-[10px] text-purple-200/70 px-1 mb-0.5 font-medium">
                       <span>{m.mine ? "You" : "Stranger"}</span>
                       <span>• {m.time}</span>
                     </div>
                     <div
                       className={`max-w-[85%] rounded-2xl px-3.5 py-2 text-xs leading-relaxed break-words [word-break:break-word] overflow-hidden ${
                         m.mine
-                          ? "btn-gradient text-white rounded-br-none font-medium shadow-md"
-                          : "bg-white/10 text-purple-100 rounded-bl-none border border-white/10 backdrop-blur-md"
+                          ? "btn-gradient text-white rounded-br-none font-bold shadow-lg"
+                          : "bg-black/65 text-white rounded-bl-none border border-white/20 backdrop-blur-md shadow-lg"
                       }`}
                     >
-                      {m.text}
+                      <span>{m.text}</span>
+                      {m.mine && (
+                        <span className="inline-flex items-center ml-1 text-purple-200">
+                          {m.status === "read" ? (
+                            <span title="Read"><CheckCheck size={13} className="text-[#38bdf8] inline" /></span>
+                          ) : (
+                            <span title="Sent"><Check size={13} className="text-white/70 inline" /></span>
+                          )}
+                        </span>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -877,6 +963,14 @@ export default function VideoContainer({
           )}
         </AnimatePresence>
       </div>
+
+      <ReportModal
+        isOpen={reportOpen}
+        onClose={() => setReportOpen(false)}
+        onReportSubmitted={() => {
+          skipToNext();
+        }}
+      />
     </div>
   );
 }

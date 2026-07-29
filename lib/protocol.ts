@@ -21,6 +21,8 @@ export interface Envelope<T = unknown> {
 }
 
 export interface ChatPayload {
+  msgId?: string;
+  ackId?: string;
   text?: string;
   imageUrl?: string;
   sticker?: string;
