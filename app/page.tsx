@@ -30,6 +30,43 @@ export default function Home() {
 
   return (
     <div className="relative flex min-h-screen flex-1 flex-col font-sans bg-gradient-to-b from-[#0e0526] via-[#140836] via-[#1b0840] to-[#0a041c] text-white overflow-hidden">
+      {/* Thin flowing background lines, purely decorative */}
+      <svg
+        className="absolute inset-x-0 top-0 h-[700px] w-full pointer-events-none opacity-40"
+        viewBox="0 0 1400 700"
+        preserveAspectRatio="none"
+        fill="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id="heroLine1" x1="0" y1="0" x2="1400" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#c084fc" stopOpacity="0" />
+            <stop offset="50%" stopColor="#f472b6" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="#22d3ee" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="heroLine2" x1="0" y1="0" x2="1400" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#22d3ee" stopOpacity="0" />
+            <stop offset="50%" stopColor="#a78bfa" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="#f472b6" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M-100,140 C 250,40 500,220 750,120 S 1250,60 1500,160"
+          stroke="url(#heroLine1)"
+          strokeWidth="1.5"
+        />
+        <path
+          d="M-100,260 C 300,340 600,180 850,260 S 1300,320 1500,240"
+          stroke="url(#heroLine2)"
+          strokeWidth="1.5"
+        />
+        <path
+          d="M-100,40 C 350,120 650,10 950,90 S 1350,140 1500,60"
+          stroke="url(#heroLine1)"
+          strokeWidth="1"
+        />
+      </svg>
+
       {/* Background Ambient Aurora Mesh Light Glows */}
       <div className="absolute top-0 left-1/4 -translate-x-1/2 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-pink-500/25 via-purple-600/20 to-transparent blur-[120px] pointer-events-none animate-pulse" />
       <div className="absolute top-1/3 right-10 h-[450px] w-[450px] rounded-full bg-gradient-to-tr from-cyan-500/20 via-pink-500/20 to-transparent blur-[110px] pointer-events-none" />
