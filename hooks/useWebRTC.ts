@@ -114,6 +114,9 @@ export function useWebRTC() {
   const [dataChannelOpen, setDataChannelOpen] = useState(false);
   const [mode, setMode] = useState<ChatMode>("video");
   const [permissionDenied, setPermissionDenied] = useState(false);
+  // Counts 4 -> 1 before we actually enter the matchmaking queue, so the
+  // switch between strangers has a visible beat instead of snapping.
+  const [matchCountdown, setMatchCountdown] = useState(0);
 
   const socketRef = useRef<Socket | null>(null);
   const pcRef = useRef<RTCPeerConnection | null>(null);
@@ -130,6 +133,7 @@ export function useWebRTC() {
   // Pending "ICE went bad, consider re-queuing" timer, so a recovery can
   // cancel it instead of us tearing down a connection that healed itself.
   const iceRetryTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const countdownTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const emit = useCallback(<T,>(type: MessageType, payload: T) => {
     const dc = dcRef.current;
@@ -331,6 +335,30 @@ export function useWebRTC() {
     }
   }, []);
 
+  /**
+   * Wait out a visible 4..1 countdown, then enter the matchmaking queue.
+   * Applies to the initial start, "Next", and the automatic rejoin after a
+   * partner leaves, so every mode behaves the same way.
+   */
+  const queueAfterCountdown = useCallback((targetMode: ChatMode) => {
+    if (countdownTimerRef.current) clearInterval(countdownTimerRef.current);
+    let remaining = 4;
+    setMatchCountdown(remaining);
+    countdownTimerRef.current = setInterval(() => {
+      remaining -= 1;
+      if (remaining > 0) {
+        setMatchCountdown(remaining);
+        return;
+      }
+      if (countdownTimerRef.current) clearInterval(countdownTimerRef.current);
+      countdownTimerRef.current = null;
+      setMatchCountdown(0);
+      // The user may have left during the countdown.
+      if (!readyToMatchRef.current) return;
+      socketRef.current?.emit("queue:join", { mode: targetMode });
+    }, 1000);
+  }, []);
+
   const joinQueue = useCallback(
     async (newMode: ChatMode = "video") => {
       modeRef.current = newMode;
@@ -343,14 +371,14 @@ export function useWebRTC() {
         await ensureLocalStream(newMode);
         readyToMatchRef.current = true;
         setConnectionState("waiting");
-        socketRef.current?.emit("queue:join", { mode: newMode });
+        queueAfterCountdown(newMode);
       } catch {
         // Stop call process if user denies camera/mic permissions
         readyToMatchRef.current = false;
         setConnectionState("idle");
       }
     },
-    [ensureLocalStream]
+    [ensureLocalStream, queueAfterCountdown]
   );
 
   const leaveMatch = useCallback(() => {
@@ -361,6 +389,11 @@ export function useWebRTC() {
       clearTimeout(iceRetryTimerRef.current);
       iceRetryTimerRef.current = null;
     }
+    if (countdownTimerRef.current) {
+      clearInterval(countdownTimerRef.current);
+      countdownTimerRef.current = null;
+    }
+    setMatchCountdown(0);
     teardownPeerConnection();
     socketRef.current?.emit("queue:leave");
     localStreamRef.current?.getTracks().forEach((t) => t.stop());
@@ -370,10 +403,13 @@ export function useWebRTC() {
   }, [teardownPeerConnection]);
 
   const skipToNext = useCallback(() => {
+    // Tell the server we're leaving this pair right away so the partner is
+    // released immediately, then serve out the countdown before re-queuing.
+    socketRef.current?.emit("queue:leave");
     teardownPeerConnection();
     setConnectionState("waiting");
-    socketRef.current?.emit("queue:join", { mode: modeRef.current });
-  }, [teardownPeerConnection]);
+    queueAfterCountdown(modeRef.current);
+  }, [teardownPeerConnection, queueAfterCountdown]);
 
   useEffect(() => {
     const socket = io(SIGNALING_URL, { transports: ["websocket"] });
@@ -460,11 +496,10 @@ export function useWebRTC() {
       // was sitting out a 1.5s delay — long enough for the other user to be
       // paired with someone else, which is why Next often needed several
       // presses before it caught. Just long enough to show the state change.
-      setTimeout(() => {
-        if (!readyToMatchRef.current) return;
+      if (readyToMatchRef.current) {
         setConnectionState("waiting");
-        socketRef.current?.emit("queue:join", { mode: modeRef.current });
-      }, 400);
+        queueAfterCountdown(modeRef.current);
+      }
     });
 
     return () => {
@@ -472,6 +507,10 @@ export function useWebRTC() {
       if (iceRetryTimerRef.current) {
         clearTimeout(iceRetryTimerRef.current);
         iceRetryTimerRef.current = null;
+      }
+      if (countdownTimerRef.current) {
+        clearInterval(countdownTimerRef.current);
+        countdownTimerRef.current = null;
       }
       teardownPeerConnection();
       localStreamRef.current?.getTracks().forEach((t) => t.stop());
@@ -535,6 +574,7 @@ export function useWebRTC() {
     remoteStream,
     dataChannelOpen,
     permissionDenied,
+    matchCountdown,
     requestPermissions,
     joinQueue,
     leaveMatch,

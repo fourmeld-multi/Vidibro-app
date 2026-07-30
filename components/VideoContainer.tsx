@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import LogoMark from "@/components/LogoMark";
 import ReportModal from "@/components/ReportModal";
+import ConfirmNextModal from "@/components/ConfirmNextModal";
 import type { MessageType, ChatPayload } from "@/lib/protocol";
 
 const EMOJI_REACTIONS = [
@@ -101,6 +102,7 @@ export default function VideoContainer({
   const [chatOpen, setChatOpen] = useState(false);
   const [reactionsOpen, setReactionsOpen] = useState(false);
   const [reportOpen, setReportOpen] = useState(false);
+  const [nextConfirmOpen, setNextConfirmOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [chatDraft, setChatDraft] = useState("");
   const [unreadCount, setUnreadCount] = useState(0);
@@ -466,6 +468,12 @@ export default function VideoContainer({
 
   function handleNextClick(e: React.MouseEvent) {
     e.stopPropagation();
+    // Confirm first — a stray tap here otherwise silently ends the chat.
+    setNextConfirmOpen(true);
+  }
+
+  function confirmNext() {
+    setNextConfirmOpen(false);
     setMessages([]);
     setUnreadCount(0);
     skipToNext();
@@ -1005,6 +1013,12 @@ export default function VideoContainer({
         onReportSubmitted={() => {
           skipToNext();
         }}
+      />
+
+      <ConfirmNextModal
+        isOpen={nextConfirmOpen}
+        onCancel={() => setNextConfirmOpen(false)}
+        onConfirm={confirmNext}
       />
     </div>
   );
