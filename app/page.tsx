@@ -11,6 +11,7 @@ import PrivacyFlowSection from "@/components/PrivacyFlowSection";
 import HowItWorks from "@/components/HowItWorks";
 import WhyVidibro from "@/components/WhyVidibro";
 import FAQAccordion from "@/components/FAQAccordion";
+import FinalCTASection from "@/components/FinalCTASection";
 import { TRANSLATIONS, type LanguageCode } from "@/lib/translations";
 
 export default function Home() {
@@ -190,6 +191,9 @@ export default function Home() {
 
         {/* FAQ accordion */}
         <FAQAccordion />
+
+        {/* Final call-to-action band before the footer */}
+        <FinalCTASection />
       </main>
 
       <Footer
