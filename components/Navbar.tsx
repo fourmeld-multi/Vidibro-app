@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, Menu, X, Globe, Video, Zap, ShieldAlert } from "lucide-react";
 import LogoMark from "@/components/LogoMark";
+import ReportUsModal from "@/components/ReportUsModal";
 import { useRouter } from "next/navigation";
 import { LANGUAGES, type LanguageCode } from "@/lib/translations";
 
@@ -24,6 +25,7 @@ export default function Navbar({
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const [reportOpen, setReportOpen] = useState(false);
   const langRef = useRef<HTMLDivElement | null>(null);
 
   const handleStartVideo = onStartVideoChat || (() => router.push("/video-chat"));
@@ -42,6 +44,7 @@ export default function Navbar({
   }, []);
 
   return (
+    <>
     <header className="relative sticky top-0 z-50 backdrop-blur-2xl bg-[#090518]/90 shadow-md">
       {/* Glowing gradient bottom border to separate the bar from the page,
           instead of a flat 10%-opacity border that barely reads on black. */}
@@ -71,13 +74,13 @@ export default function Navbar({
           <Link href="/faq" className="hover:text-white transition">FAQ</Link>
           <Link href="/terms" className="hover:text-white transition">Terms</Link>
           <Link href="/privacy" className="hover:text-white transition">Privacy</Link>
-          <Link
-            href="/report"
+          <button
+            onClick={() => setReportOpen(true)}
             className="flex items-center gap-1.5 rounded-full bg-red-600 hover:bg-red-500 px-3 py-1.5 text-xs font-bold text-white shadow-md shadow-red-600/30 transition"
           >
             <ShieldAlert size={13} />
             Report Us
-          </Link>
+          </button>
 
           {/* Language Dropdown */}
           <div className="relative" ref={langRef}>
@@ -198,17 +201,25 @@ export default function Navbar({
               Privacy
             </Link>
 
-            <Link
-              href="/report"
-              onClick={() => setMobileMenuOpen(false)}
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                setReportOpen(true);
+              }}
               className="flex items-center gap-2 rounded-full bg-red-600 hover:bg-red-500 px-5 py-2.5 text-sm font-extrabold text-white shadow-lg shadow-red-600/30 transition"
             >
               <ShieldAlert size={16} />
               Report Us
-            </Link>
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
     </header>
+
+    {/* Rendered outside <header> — an ancestor with backdrop-filter (the
+        header's blur) creates a new containing block for position:fixed
+        descendants in Chromium, which broke this modal's centering. */}
+    <ReportUsModal isOpen={reportOpen} onClose={() => setReportOpen(false)} />
+    </>
   );
 }
