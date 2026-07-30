@@ -40,9 +40,15 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: { origin: ALLOWED_ORIGIN, methods: ['GET', 'POST'] },
   transports: ['websocket'],
-  // Tightened WebSocket Heartbeats (3s interval / 3s timeout) to instantly purge ghost sessions
-  pingInterval: 3000,
-  pingTimeout: 3000,
+  // Heartbeat tuning is a trade-off: too slow leaves ghost sockets in the
+  // queue, too fast kills healthy users. 3s/3s was far too aggressive —
+  // mobile networks (5G<->wifi handover, a backgrounded tab, a tunnel, a
+  // lift) routinely stall longer than 3s, so real users were being dropped
+  // mid-call and their partner saw a phantom "stranger left". Intentional
+  // exits still fire queue:leave/disconnect instantly, so the heartbeat only
+  // needs to catch hard crashes — 15s of tolerance costs nothing there.
+  pingInterval: 10000,
+  pingTimeout: 15000,
 });
 
 function removeFromQueues(socketId) {

@@ -127,6 +127,9 @@ export function useWebRTC() {
   // ready. Guards the reconnect handler from shoving us into the matchmaking
   // queue before we can contribute any tracks.
   const readyToMatchRef = useRef(false);
+  // Pending "ICE went bad, consider re-queuing" timer, so a recovery can
+  // cancel it instead of us tearing down a connection that healed itself.
+  const iceRetryTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const emit = useCallback(<T,>(type: MessageType, payload: T) => {
     const dc = dcRef.current;
@@ -219,19 +222,46 @@ export function useWebRTC() {
 
     pc.oniceconnectionstatechange = () => {
       const state = pc.iceConnectionState;
+
       if (state === "connected" || state === "completed") {
+        // Recovered (or connected for the first time) — cancel any pending
+        // "give up and re-queue" timer from an earlier blip.
+        if (iceRetryTimerRef.current) {
+          clearTimeout(iceRetryTimerRef.current);
+          iceRetryTimerRef.current = null;
+        }
         applyBandwidthLimitsAndCodecs(pc);
         setConnectionState("connected");
-      } else if (state === "failed" || state === "disconnected" || state === "closed") {
-        setConnectionState("disconnected");
-        setTimeout(() => {
-          if (modeRef.current && (pcRef.current === null || pcRef.current.iceConnectionState !== "connected")) {
-            teardownPeerConnection();
-            setConnectionState("waiting");
-            socketRef.current?.emit("queue:join", { mode: modeRef.current });
-          }
-        }, 2000);
+        return;
       }
+
+      // "closed" only happens because *we* closed the connection (teardown,
+      // End Call, skip). Re-queuing here caused a phantom rejoin ~2s after
+      // the user deliberately left the call.
+      if (state === "closed") return;
+
+      if (state !== "failed" && state !== "disconnected") return;
+
+      // "disconnected" is usually transient — ICE frequently recovers on its
+      // own after a brief network blip, so give it room rather than tearing
+      // a healthy call down. "failed" is terminal and handled quickly.
+      const graceMs = state === "failed" ? 1500 : 9000;
+
+      setConnectionState("disconnected");
+      if (iceRetryTimerRef.current) clearTimeout(iceRetryTimerRef.current);
+      iceRetryTimerRef.current = setTimeout(() => {
+        iceRetryTimerRef.current = null;
+        // Bail if the user left in the meantime, or if this peer connection
+        // is no longer the current one, or if it quietly recovered.
+        if (!readyToMatchRef.current) return;
+        if (pcRef.current !== pc) return;
+        const live = pc.iceConnectionState;
+        if (live === "connected" || live === "completed") return;
+
+        teardownPeerConnection();
+        setConnectionState("waiting");
+        socketRef.current?.emit("queue:join", { mode: modeRef.current });
+      }, graceMs);
     };
 
     pcRef.current = pc;
@@ -327,6 +357,10 @@ export function useWebRTC() {
     // Genuine exit — stop looking for matches, and this is the one place the
     // camera/mic hardware should actually be released.
     readyToMatchRef.current = false;
+    if (iceRetryTimerRef.current) {
+      clearTimeout(iceRetryTimerRef.current);
+      iceRetryTimerRef.current = null;
+    }
     teardownPeerConnection();
     socketRef.current?.emit("queue:leave");
     localStreamRef.current?.getTracks().forEach((t) => t.stop());
@@ -416,17 +450,29 @@ export function useWebRTC() {
     });
 
     socket.on("peer:left", () => {
+      if (iceRetryTimerRef.current) {
+        clearTimeout(iceRetryTimerRef.current);
+        iceRetryTimerRef.current = null;
+      }
       teardownPeerConnection();
       setConnectionState("disconnected");
+      // The peer who pressed "Next" re-queues immediately, while this side
+      // was sitting out a 1.5s delay — long enough for the other user to be
+      // paired with someone else, which is why Next often needed several
+      // presses before it caught. Just long enough to show the state change.
       setTimeout(() => {
-        if (modeRef.current) {
-          setConnectionState("waiting");
-          socketRef.current?.emit("queue:join", { mode: modeRef.current });
-        }
-      }, 1500);
+        if (!readyToMatchRef.current) return;
+        setConnectionState("waiting");
+        socketRef.current?.emit("queue:join", { mode: modeRef.current });
+      }, 400);
     });
 
     return () => {
+      readyToMatchRef.current = false;
+      if (iceRetryTimerRef.current) {
+        clearTimeout(iceRetryTimerRef.current);
+        iceRetryTimerRef.current = null;
+      }
       teardownPeerConnection();
       localStreamRef.current?.getTracks().forEach((t) => t.stop());
       socket.disconnect();
