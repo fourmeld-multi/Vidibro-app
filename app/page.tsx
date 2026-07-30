@@ -183,28 +183,29 @@ export default function Home() {
         </div>
 
         {/* Auto-advancing carousel: Video Calling / Text Chat / Audio Chat */}
-        <AppShowcaseCarousel />
+        <AppShowcaseCarousel lang={lang} />
 
         {/* Honest, factual privacy-architecture explainer — not social proof */}
-        <PrivacyFlowSection />
+        <PrivacyFlowSection lang={lang} />
 
         {/* Section 2: How Vidibro Works */}
-        <HowItWorks />
+        <HowItWorks lang={lang} />
 
         {/* Section 3: Why Vidibro is the Best Omegle Alternative */}
-        <WhyVidibro />
+        <WhyVidibro lang={lang} />
 
         {/* FAQ accordion */}
-        <FAQAccordion />
+        <FAQAccordion lang={lang} />
 
         {/* Final call-to-action band before the footer */}
-        <FinalCTASection />
+        <FinalCTASection lang={lang} />
       </main>
 
       <Footer
         onStartVideoChat={() => router.push("/video-chat")}
         onStartTextChat={() => router.push("/text-chat")}
         onStartAudioChat={() => router.push("/audio-chat")}
+        lang={lang}
       />
     </div>
   );

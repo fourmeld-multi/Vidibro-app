@@ -2,55 +2,28 @@
 
 import { motion } from "framer-motion";
 import { Zap, Lock, Globe, Smartphone, Mic, ShieldCheck } from "lucide-react";
+import { TRANSLATIONS, type LanguageCode } from "@/lib/translations";
 
-const REASONS = [
-  {
-    icon: Zap,
-    iconColor: "text-amber-400",
-    title: "Sub-Second Matching",
-    desc: "Experience instant peer-to-peer connections powered by high-speed global WebRTC nodes.",
-  },
-  {
-    icon: Lock,
-    iconColor: "text-emerald-400",
-    title: "Complete Anonymity",
-    desc: "Your personal details, IP, and location remain strictly private. No signups or tracking.",
-  },
-  {
-    icon: Globe,
-    iconColor: "text-cyan-400",
-    title: "Worldwide Community",
-    desc: "Discover and chat with real users from 180+ countries across every time zone.",
-  },
-  {
-    icon: Smartphone,
-    iconColor: "text-purple-400",
-    title: "Flawless Mobile Experience",
-    desc: "Fully optimized for smooth 60 FPS performance on iOS, Android, and desktop browsers.",
-  },
-  {
-    icon: Mic,
-    iconColor: "text-pink-400",
-    title: "Studio-Quality Audio",
-    desc: "Advanced P2P noise suppression delivers crystal-clear voice clarity during every call.",
-  },
-  {
-    icon: ShieldCheck,
-    iconColor: "text-indigo-400",
-    title: "24/7 AI Protection",
-    desc: "Automated intelligent safety filters proactively shield the community from harmful behavior.",
-  },
-];
+export default function WhyVidibro({ lang = "EN" }: { lang?: LanguageCode }) {
+  const t = TRANSLATIONS[lang] || TRANSLATIONS.EN;
 
-export default function WhyVidibro() {
+  const REASONS = [
+    { icon: Zap, iconColor: "text-amber-400", title: t.card1Title, desc: t.card1Desc },
+    { icon: Lock, iconColor: "text-emerald-400", title: t.card2Title, desc: t.card2Desc },
+    { icon: Globe, iconColor: "text-cyan-400", title: t.card3Title, desc: t.card3Desc },
+    { icon: Smartphone, iconColor: "text-purple-400", title: t.card4Title, desc: t.card4Desc },
+    { icon: Mic, iconColor: "text-pink-400", title: t.card5Title, desc: t.card5Desc },
+    { icon: ShieldCheck, iconColor: "text-indigo-400", title: t.card6Title, desc: t.card6Desc },
+  ];
+
   return (
     <section className="w-full py-14 sm:py-20 border-t border-white/10">
       <div className="text-center max-w-2xl mx-auto mb-12">
         <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight mb-2">
-          Why Millions Choose Vidibro
+          {t.whyTitle1} {t.whyTitle2}
         </h2>
         <p className="text-sm sm:text-base text-purple-200/70 font-medium">
-          The safest, fastest, and most enjoyable way to meet strangers online.
+          {t.whySubtitle}
         </p>
       </div>
 

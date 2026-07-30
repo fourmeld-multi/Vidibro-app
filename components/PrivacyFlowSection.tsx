@@ -2,37 +2,25 @@
 
 import { motion } from "framer-motion";
 import { Camera, Server, UserCheck, ShieldOff } from "lucide-react";
+import { TRANSLATIONS, type LanguageCode } from "@/lib/translations";
 
-const STEPS = [
-  {
-    icon: Camera,
-    title: "Your Camera & Mic",
-    desc: "Captured locally in your browser. Nothing leaves your device until a stranger is actually matched.",
-    color: "text-pink-400",
-  },
-  {
-    icon: Server,
-    title: "Signaling Server",
-    desc: "Only relays connection details — who to connect to. It never sees, stores, or touches your video, audio, or messages.",
-    color: "text-cyan-400",
-  },
-  {
-    icon: UserCheck,
-    title: "Direct to the Stranger",
-    desc: "Your stream travels peer-to-peer, encrypted, straight to the other person's browser. That's the whole path.",
-    color: "text-amber-400",
-  },
-];
+export default function PrivacyFlowSection({ lang = "EN" }: { lang?: LanguageCode }) {
+  const t = TRANSLATIONS[lang] || TRANSLATIONS.EN;
 
-export default function PrivacyFlowSection() {
+  const STEPS = [
+    { icon: Camera, title: t.privacyStep1Title, desc: t.privacyStep1Desc, color: "text-pink-400" },
+    { icon: Server, title: t.privacyStep2Title, desc: t.privacyStep2Desc, color: "text-cyan-400" },
+    { icon: UserCheck, title: t.privacyStep3Title, desc: t.privacyStep3Desc, color: "text-amber-400" },
+  ];
+
   return (
     <section className="w-full py-16 sm:py-24">
       <div className="text-center max-w-2xl mx-auto mb-14">
         <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-3">
-          How Your Privacy <span className="gradient-text">Actually</span> Works
+          {t.privacyTitle1} <span className="gradient-text">{t.privacyTitle2}</span>
         </h2>
         <p className="text-sm sm:text-base text-purple-200/80 font-normal max-w-xl mx-auto">
-          Not a promise — this is the real path your call takes, peer-to-peer, end to end.
+          {t.privacySubtitle}
         </p>
       </div>
 
@@ -69,7 +57,7 @@ export default function PrivacyFlowSection() {
 
         <div className="flex items-center justify-center gap-2 mt-8 text-xs sm:text-sm text-purple-200/60">
           <ShieldOff size={14} className="text-emerald-400" />
-          <span>No accounts, no chat logs, no recordings — nothing to leak because nothing is stored.</span>
+          <span>{t.privacyFooterNote}</span>
         </div>
       </div>
     </section>

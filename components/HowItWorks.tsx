@@ -1,34 +1,25 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { TRANSLATIONS, type LanguageCode } from "@/lib/translations";
 
-const STEPS = [
-  {
-    number: "1",
-    title: "Pick Your Preferred Mode",
-    desc: "Choose Video, Voice, or Text chat. No registration, email, or personal details required.",
-  },
-  {
-    number: "2",
-    title: "Instant Peer Pairing",
-    desc: "Our lightning-fast matching engine pairs you with an active online stranger in under a second.",
-  },
-  {
-    number: "3",
-    title: "Enjoy & Skip Freely",
-    desc: "Have fun conversations, share reactions, or hit Next whenever you're ready to meet someone new.",
-  },
-];
+export default function HowItWorks({ lang = "EN" }: { lang?: LanguageCode }) {
+  const t = TRANSLATIONS[lang] || TRANSLATIONS.EN;
 
-export default function HowItWorks() {
+  const STEPS = [
+    { number: "1", title: t.step1Title, desc: t.step1Desc },
+    { number: "2", title: t.step2Title, desc: t.step2Desc },
+    { number: "3", title: t.step3Title, desc: t.step3Desc },
+  ];
+
   return (
     <section className="w-full py-14 sm:py-20 border-t border-white/10">
       <div className="text-center max-w-2xl mx-auto mb-12">
         <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight mb-2">
-          How Vidibro Works
+          {t.howTitle}
         </h2>
         <p className="text-sm sm:text-base text-purple-200/70 font-medium">
-          Connect with someone new in three simple steps.
+          {t.howSubtitle}
         </p>
       </div>
 

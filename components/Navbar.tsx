@@ -7,7 +7,7 @@ import { MessageSquare, Menu, X, Globe, Video, Zap, ShieldAlert } from "lucide-r
 import LogoMark from "@/components/LogoMark";
 import ReportUsModal from "@/components/ReportUsModal";
 import { useRouter } from "next/navigation";
-import { LANGUAGES, type LanguageCode } from "@/lib/translations";
+import { LANGUAGES, TRANSLATIONS, type LanguageCode } from "@/lib/translations";
 
 type Props = {
   currentLang?: LanguageCode;
@@ -31,6 +31,7 @@ export default function Navbar({
   const handleStartVideo = onStartVideoChat || (() => router.push("/video-chat"));
 
   const selectedItem = LANGUAGES.find((l) => l.code === currentLang) || LANGUAGES[0];
+  const t = TRANSLATIONS[currentLang] || TRANSLATIONS.EN;
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -66,20 +67,20 @@ export default function Navbar({
         <div className="hidden lg:flex items-center gap-5 text-xs sm:text-sm font-semibold text-purple-200/90">
           <Link href="/text-chat" className="flex items-center gap-1.5 text-white font-bold bg-white/10 hover:bg-white/20 px-3 py-1 rounded-full border border-white/15 transition shadow-sm">
             <MessageSquare size={14} className="text-purple-300" />
-            <span>Talk to Strangers</span>
+            <span>{t.navTalkToStrangers}</span>
           </Link>
-          <Link href="/blog" className="hover:text-white transition">Blog</Link>
-          <Link href="/contact" className="hover:text-white transition">Contact</Link>
-          <Link href="/guidelines" className="hover:text-white transition">Guidelines</Link>
-          <Link href="/faq" className="hover:text-white transition">FAQ</Link>
-          <Link href="/terms" className="hover:text-white transition">Terms</Link>
-          <Link href="/privacy" className="hover:text-white transition">Privacy</Link>
+          <Link href="/blog" className="hover:text-white transition">{t.navBlog}</Link>
+          <Link href="/contact" className="hover:text-white transition">{t.navContact}</Link>
+          <Link href="/guidelines" className="hover:text-white transition">{t.navGuidelines}</Link>
+          <Link href="/faq" className="hover:text-white transition">{t.navFAQ}</Link>
+          <Link href="/terms" className="hover:text-white transition">{t.navTerms}</Link>
+          <Link href="/privacy" className="hover:text-white transition">{t.navPrivacy}</Link>
           <button
             onClick={() => setReportOpen(true)}
             className="flex items-center gap-1.5 rounded-full bg-red-600 hover:bg-red-500 px-3 py-1.5 text-xs font-bold text-white shadow-md shadow-red-600/30 transition"
           >
             <ShieldAlert size={13} />
-            Report Us
+            {t.navReportUs}
           </button>
 
           {/* Language Dropdown */}
@@ -126,7 +127,7 @@ export default function Navbar({
             onClick={handleStartVideo}
             className="btn-gradient flex items-center gap-2 rounded-full px-5 py-2 text-xs font-bold text-white shadow-lg shadow-purple-500/25 hover:scale-105 transition uppercase tracking-wider"
           >
-            <span>Start Video Chat</span>
+            <span>{t.navStartVideoChat}</span>
             <Zap size={14} />
           </button>
         </div>
@@ -158,7 +159,7 @@ export default function Navbar({
               onClick={() => setMobileMenuOpen(false)}
               className="text-base font-extrabold text-white hover:text-purple-300 transition"
             >
-              Blog
+              {t.navBlog}
             </Link>
 
             <Link
@@ -166,7 +167,7 @@ export default function Navbar({
               onClick={() => setMobileMenuOpen(false)}
               className="text-base font-extrabold text-white hover:text-purple-300 transition"
             >
-              Contact
+              {t.navContact}
             </Link>
 
             <Link
@@ -174,7 +175,7 @@ export default function Navbar({
               onClick={() => setMobileMenuOpen(false)}
               className="text-base font-extrabold text-white hover:text-purple-300 transition"
             >
-              Guidelines
+              {t.navGuidelines}
             </Link>
 
             <Link
@@ -182,7 +183,7 @@ export default function Navbar({
               onClick={() => setMobileMenuOpen(false)}
               className="text-base font-extrabold text-white hover:text-purple-300 transition"
             >
-              FAQ
+              {t.navFAQ}
             </Link>
 
             <Link
@@ -190,7 +191,7 @@ export default function Navbar({
               onClick={() => setMobileMenuOpen(false)}
               className="text-base font-extrabold text-white hover:text-purple-300 transition"
             >
-              Terms
+              {t.navTerms}
             </Link>
 
             <Link
@@ -198,7 +199,7 @@ export default function Navbar({
               onClick={() => setMobileMenuOpen(false)}
               className="text-base font-extrabold text-white hover:text-purple-300 transition"
             >
-              Privacy
+              {t.navPrivacy}
             </Link>
 
             <button
@@ -209,7 +210,7 @@ export default function Navbar({
               className="flex items-center gap-2 rounded-full bg-red-600 hover:bg-red-500 px-5 py-2.5 text-sm font-extrabold text-white shadow-lg shadow-red-600/30 transition"
             >
               <ShieldAlert size={16} />
-              Report Us
+              {t.navReportUs}
             </button>
           </motion.div>
         )}

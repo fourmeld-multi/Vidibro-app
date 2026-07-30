@@ -3,46 +3,45 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { TRANSLATIONS, type LanguageCode } from "@/lib/translations";
 
-const SHOWCASE_ITEMS = [
-  {
-    id: "video",
-    emoji: "🎥",
-    title: "Face-to-Face Video Calls",
-    description: "Connect over HD video — no signup, no filters, just genuine conversations.",
-    image:
-      "https://images.unsplash.com/photo-1752650733337-cb0189176fb9?auto=format&fit=crop&w=800&q=80",
-    cta: "Start Video Chat",
-    href: "/video-chat",
-    accent: "from-pink-500/80 to-purple-600/80",
-  },
-  {
-    id: "text",
-    emoji: "💬",
-    title: "Anonymous Text Chat",
-    description: "Prefer typing? Chat by text with strangers instantly — casual and private.",
-    image:
-      "https://images.unsplash.com/photo-1758874383881-cd90c326058e?auto=format&fit=crop&w=800&q=80",
-    cta: "Start Text Chat",
-    href: "/text-chat",
-    accent: "from-cyan-500/80 to-blue-600/80",
-  },
-  {
-    id: "audio",
-    emoji: "🎧",
-    title: "Voice-Only Audio Calls",
-    description: "Skip the camera and just talk — a real voice conversation, anywhere.",
-    image:
-      "https://images.unsplash.com/photo-1555965435-f88618f05915?auto=format&fit=crop&w=800&q=80",
-    cta: "Start Audio Chat",
-    href: "/audio-chat",
-    accent: "from-amber-500/80 to-orange-600/80",
-  },
-];
+const IMAGES = {
+  video: "https://images.unsplash.com/photo-1752650733337-cb0189176fb9?auto=format&fit=crop&w=800&q=80",
+  text: "https://images.unsplash.com/photo-1758874383881-cd90c326058e?auto=format&fit=crop&w=800&q=80",
+  audio: "https://images.unsplash.com/photo-1555965435-f88618f05915?auto=format&fit=crop&w=800&q=80",
+};
 
-const COUNT = SHOWCASE_ITEMS.length;
+const ACCENTS = {
+  video: "from-pink-500/80 to-purple-600/80",
+  text: "from-cyan-500/80 to-blue-600/80",
+  audio: "from-amber-500/80 to-orange-600/80",
+};
 
-export default function AppShowcaseCarousel() {
+const HREFS = {
+  video: "/video-chat",
+  text: "/text-chat",
+  audio: "/audio-chat",
+};
+
+const EMOJIS = { video: "🎥", text: "💬", audio: "🎧" };
+
+const COUNT = 3;
+
+export default function AppShowcaseCarousel({ lang = "EN" }: { lang?: LanguageCode }) {
+  const t = TRANSLATIONS[lang] || TRANSLATIONS.EN;
+
+  const SHOWCASE_ITEMS = [
+    { id: "video" as const, title: t.item1Title, description: t.item1Desc, cta: t.item1Cta },
+    { id: "text" as const, title: t.item2Title, description: t.item2Desc, cta: t.item2Cta },
+    { id: "audio" as const, title: t.item3Title, description: t.item3Desc, cta: t.item3Cta },
+  ].map((item) => ({
+    ...item,
+    emoji: EMOJIS[item.id],
+    image: IMAGES[item.id],
+    accent: ACCENTS[item.id],
+    href: HREFS[item.id],
+  }));
+
   const [index, setIndex] = useState(0);
   const [autoPlaying, setAutoPlaying] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
@@ -104,10 +103,10 @@ export default function AppShowcaseCarousel() {
 
       <div className="relative text-center max-w-2xl mx-auto mb-14">
         <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-3">
-          Three Ways to <span className="gradient-text">Connect</span>
+          {t.showcaseTitle1} <span className="gradient-text">{t.showcaseTitle2}</span>
         </h2>
         <p className="text-sm sm:text-base text-purple-200/80 font-normal">
-          Real people, real conversations, zero cost.
+          {t.showcaseSubtitle}
         </p>
       </div>
 

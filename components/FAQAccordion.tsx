@@ -3,31 +3,19 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
+import { TRANSLATIONS, type LanguageCode } from "@/lib/translations";
 
-const FAQS = [
-  {
-    q: "Is Vidibro completely free to use?",
-    a: "Yes! Vidibro is 100% free with no registration, no hidden fees, and no subscriptions required.",
-  },
-  {
-    q: "Do I need to create an account or sign up?",
-    a: "No signup is required. You can start video, audio, or text chatting with strangers instantly with one tap.",
-  },
-  {
-    q: "Are video and audio chats private and secure?",
-    a: "All video, audio, and text streams use direct Peer-to-Peer (P2P) WebRTC encryption. Your conversations are never saved on servers.",
-  },
-  {
-    q: "How do I skip to the next stranger?",
-    a: "Simply tap the 'Next' button during any active video, voice, or text chat to be matched immediately with another online stranger.",
-  },
-  {
-    q: "What should I do if someone behaves inappropriately?",
-    a: "Tap the red 'Report Issue' button in the menu or footer to report inappropriate behavior. Our moderation team reviews reports 24/7.",
-  },
-];
+export default function FAQAccordion({ lang = "EN" }: { lang?: LanguageCode }) {
+  const t = TRANSLATIONS[lang] || TRANSLATIONS.EN;
 
-export default function FAQAccordion() {
+  const FAQS = [
+    { q: t.faqQ1, a: t.faqA1 },
+    { q: t.faqQ2, a: t.faqA2 },
+    { q: t.faqQ3, a: t.faqA3 },
+    { q: t.faqQ4, a: t.faqA4 },
+    { q: t.faqQ5, a: t.faqA5 },
+  ];
+
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const itemRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
@@ -43,10 +31,10 @@ export default function FAQAccordion() {
     <section className="w-full py-16 sm:py-24">
       <div className="text-center max-w-2xl mx-auto mb-12">
         <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-3">
-          Frequently Asked <span className="gradient-text">Questions</span>
+          {t.faqTitle1} <span className="gradient-text">{t.faqTitle2}</span>
         </h2>
         <p className="text-sm sm:text-base text-purple-200/80 font-normal">
-          Everything you need to know before you hit Start.
+          {t.faqSubtitle}
         </p>
       </div>
 
