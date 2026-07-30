@@ -135,6 +135,21 @@ export default function TextChatContainer({
     }
   }, [messages]);
 
+  // Opening the mobile keyboard shrinks the visual viewport but doesn't add a
+  // message, so the effect above never re-runs and the newest message ends up
+  // hidden above the keyboard — forcing the user to scroll back down by hand.
+  // visualViewport fires on the keyboard show/hide, so re-pin to the bottom.
+  useEffect(() => {
+    const vv = window.visualViewport;
+    if (!vv) return;
+    const pinToBottom = () => {
+      const el = listRef.current;
+      if (el) el.scrollTop = el.scrollHeight;
+    };
+    vv.addEventListener("resize", pinToBottom);
+    return () => vv.removeEventListener("resize", pinToBottom);
+  }, []);
+
   function handleSendText(e?: React.FormEvent) {
     if (e) e.preventDefault();
     const clean = draft.trim();
@@ -562,6 +577,12 @@ export default function TextChatContainer({
             onFocus={() => {
               setAttachmentOpen(false);
               setStickersOpen(false);
+              // Keyboard animation takes a moment; re-pin once it has settled
+              // so the latest message stays visible above it.
+              setTimeout(() => {
+                const el = listRef.current;
+                if (el) el.scrollTop = el.scrollHeight;
+              }, 300);
             }}
             disabled={!isConnected}
             placeholder={isConnected ? "Type a message..." : "Waiting to match partner..."}

@@ -655,7 +655,19 @@ export default function VideoContainer({
               <span className="text-[10px] font-medium text-purple-200">{isConnected ? "Stranger" : "Matching…"}</span>
             </div>
 
-            {/* SPEAKER SOUND TOGGLE */}
+            {/* REPORT + SPEAKER TOGGLE (top-right pair) */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setReportOpen(true);
+              }}
+              className="absolute top-3 right-16 z-50 flex h-10 w-10 items-center justify-center rounded-full transition border border-red-400/40 bg-black/75 hover:bg-red-500/80 text-red-400 hover:text-white shadow-2xl backdrop-blur-xl"
+              title="Report Stranger"
+              aria-label="Report Stranger"
+            >
+              <Flag size={17} />
+            </button>
+
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -679,7 +691,7 @@ export default function VideoContainer({
             {/* On-Screen Floating 2-Message Overlay (Chatspin / Omegle Style Video Screen Overlay) */}
             {!chatOpen && messages.length > 0 && (
               <div className="absolute bottom-20 left-4 max-w-[80%] sm:max-w-[60%] z-30 flex flex-col gap-1.5 pointer-events-none">
-                {messages.slice(-2).map((msg) => (
+                {messages.slice(-4).map((msg) => (
                   <motion.div
                     key={msg.id}
                     initial={{ opacity: 0, y: 15, scale: 0.95 }}
@@ -849,17 +861,7 @@ export default function VideoContainer({
                   )}
                 </button>
 
-                {/* 6. Report User Button */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setReportOpen(true);
-                  }}
-                  className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-red-500/25 hover:bg-red-600/50 text-white transition border-2 border-red-500 shadow-lg shadow-red-500/30 transform hover:scale-105 active:scale-95"
-                  title="Report Stranger"
-                >
-                  <Flag size={18} className="text-white fill-red-500/30" />
-                </button>
+                {/* Report moved to the top bar beside the speaker toggle */}
 
                 {/* 7. End Call Button */}
                 <button
