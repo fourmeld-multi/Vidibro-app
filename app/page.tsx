@@ -12,6 +12,7 @@ import HowItWorks from "@/components/HowItWorks";
 import WhyVidibro from "@/components/WhyVidibro";
 import FAQAccordion from "@/components/FAQAccordion";
 import FinalCTASection from "@/components/FinalCTASection";
+import FloatingParticles from "@/components/FloatingParticles";
 import { TRANSLATIONS, type LanguageCode } from "@/lib/translations";
 
 export default function Home() {
@@ -68,6 +69,11 @@ export default function Home() {
           strokeWidth="1"
         />
       </svg>
+
+      {/* Small floating particle dots, purely decorative */}
+      <div className="absolute inset-x-0 top-0 h-[700px] w-full">
+        <FloatingParticles />
+      </div>
 
       {/* Background Ambient Aurora Mesh Light Glows */}
       <div className="absolute top-0 left-1/4 -translate-x-1/2 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-pink-500/25 via-purple-600/20 to-transparent blur-[120px] pointer-events-none animate-pulse" />
