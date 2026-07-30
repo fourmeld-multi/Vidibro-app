@@ -59,6 +59,7 @@ type Props = {
   subscribe: (type: MessageType, cb: (msg: { payload: unknown }) => void) => () => void;
   skipToNext: () => void;
   leaveMatch: () => void;
+  matchCountdown?: number;
 };
 
 type AudioChatMessage = {
@@ -77,6 +78,7 @@ export default function AudioChatContainer({
   subscribe,
   skipToNext,
   leaveMatch,
+  matchCountdown = 0,
 }: Props) {
   const remoteAudioRef = useRef<HTMLAudioElement | null>(null);
   const chatListRef = useRef<HTMLDivElement | null>(null);
@@ -225,7 +227,7 @@ export default function AudioChatContainer({
               <span className={`h-2 w-2 rounded-full ${isConnected ? "bg-emerald-400 animate-pulse" : "bg-yellow-400"}`} />
             </div>
             <span className="text-[11px] text-purple-300/80 font-medium">
-              {connectionState === "waiting" && "Searching for stranger…"}
+              {connectionState === "waiting" && (matchCountdown > 0 ? `Matching in ${matchCountdown}…` : "Searching for stranger…")}
               {connectionState === "connecting" && "Connecting encrypted audio…"}
               {connectionState === "connected" && "Voice Match Connected"}
               {connectionState === "disconnected" && "Stranger disconnected"}
@@ -296,7 +298,7 @@ export default function AudioChatContainer({
           </div>
 
           <p className="text-base sm:text-xl font-black text-white mt-4 tracking-wide">
-            {connectionState === "waiting" && "Searching for Voice Stranger…"}
+            {connectionState === "waiting" && (matchCountdown > 0 ? `Finding your next partner in ${matchCountdown}…` : "Searching for Voice Stranger…")}
             {connectionState === "connecting" && "Establishing Encrypted Audio…"}
             {connectionState === "connected" && "Voice Call Connected 🎙️"}
             {connectionState === "disconnected" && "Stranger Disconnected"}

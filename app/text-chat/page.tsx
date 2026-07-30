@@ -9,6 +9,7 @@ export default function TextChatPage() {
   const router = useRouter();
   const {
     connectionState,
+    matchCountdown,
     dataChannelOpen,
     joinQueue,
     leaveMatch,
@@ -36,6 +37,7 @@ export default function TextChatPage() {
 
       <div className="relative z-10 w-full h-full max-w-4xl max-h-[920px] flex flex-col rounded-3xl border border-purple-500/35 shadow-2xl shadow-purple-500/25 overflow-hidden bg-[#0d0725]/95 backdrop-blur-2xl">
         <TextChatContainer
+        matchCountdown={matchCountdown}
           connectionState={connectionState}
           dataChannelOpen={dataChannelOpen}
           sendMessage={sendMessage}

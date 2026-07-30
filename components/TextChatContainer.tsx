@@ -45,6 +45,7 @@ type Props = {
   subscribe: (type: MessageType, cb: (msg: { payload: unknown }) => void) => () => void;
   skipToNext: () => void;
   leaveMatch: () => void;
+  matchCountdown?: number;
 };
 
 type ChatMessage = {
@@ -64,6 +65,7 @@ export default function TextChatContainer({
   subscribe,
   skipToNext,
   leaveMatch,
+  matchCountdown = 0,
 }: Props) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [draft, setDraft] = useState("");
@@ -322,7 +324,7 @@ export default function TextChatContainer({
             <span className="text-xs text-white/90 font-medium flex items-center gap-1.5">
               <Lock size={11} />
               <span>
-                {connectionState === "waiting" && "Looking for stranger…"}
+                {connectionState === "waiting" && (matchCountdown > 0 ? `Matching in ${matchCountdown}…` : "Looking for stranger…")}
                 {connectionState === "connecting" && "Connecting encrypted chat…"}
                 {connectionState === "connected" && "Matched with Stranger"}
                 {connectionState === "disconnected" && "Stranger left chat"}
@@ -378,7 +380,7 @@ export default function TextChatContainer({
             </div>
 
             <p className="text-base sm:text-lg font-black text-gray-800 tracking-wide">
-              {connectionState === "waiting" && "Searching for someone to text chat with…"}
+              {connectionState === "waiting" && (matchCountdown > 0 ? `Finding your next partner in ${matchCountdown}…` : "Searching for someone to text chat with…")}
               {connectionState === "connecting" && "Establishing encrypted WebRTC connection…"}
               {connectionState === "disconnected" && "Stranger left the chat."}
             </p>

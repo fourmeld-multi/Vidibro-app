@@ -10,6 +10,7 @@ export default function AudioChatPage() {
   const router = useRouter();
   const {
     connectionState,
+    matchCountdown,
     localStream,
     remoteStream,
     dataChannelOpen,
@@ -35,6 +36,7 @@ export default function AudioChatPage() {
   return (
     <div className="w-full h-dvh flex flex-col overflow-hidden bg-[#070414]">
       <AudioChatContainer
+        matchCountdown={matchCountdown}
         localStream={localStream}
         remoteStream={remoteStream}
         connectionState={connectionState}

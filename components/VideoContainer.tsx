@@ -48,6 +48,7 @@ type Props = {
   skipToNext: () => void;
   leaveMatch: () => void;
   isHost: boolean;
+  matchCountdown?: number;
   replaceOutgoingVideoTrack?: (newTrack: MediaStreamTrack) => Promise<void>;
 };
 
@@ -83,6 +84,7 @@ export default function VideoContainer({
   skipToNext,
   leaveMatch,
   replaceOutgoingVideoTrack,
+  matchCountdown = 0,
 }: Props) {
   // Mobile & Desktop Refs
   const localVideoRef = useRef<HTMLVideoElement | null>(null);
@@ -107,6 +109,8 @@ export default function VideoContainer({
   const [chatDraft, setChatDraft] = useState("");
   const [unreadCount, setUnreadCount] = useState(0);
   const [floatingParticles, setFloatingParticles] = useState<FloatingParticle[]>([]);
+  // Short-lived bubbles shown over the video for *incoming* messages only.
+  const [floatingMsgs, setFloatingMsgs] = useState<ChatMessage[]>([]);
   const [remoteSubtitle, setRemoteSubtitle] = useState<string | null>(null);
 
   // Camera Facing Mode Toggle (User / Front vs Environment / Back)
@@ -122,6 +126,7 @@ export default function VideoContainer({
   useEffect(() => {
     if (connectionState === "waiting" || connectionState === "idle") {
       setMessages([]);
+      setFloatingMsgs([]);
       setUnreadCount(0);
     }
   }, [connectionState]);
@@ -278,10 +283,21 @@ export default function VideoContainer({
         sendMessage<ChatPayload>("chat", { ackId: payload.msgId });
       }
 
+      const incomingId = payload.msgId || `${Date.now()}-${Math.random()}`;
       setMessages((prev) => [
         ...prev,
-        { id: payload.msgId || `${Date.now()}-${Math.random()}`, text: textStr, mine: false, time: timeStr, status: "read" },
+        { id: incomingId, text: textStr, mine: false, time: timeStr, status: "read" },
       ]);
+
+      // Transient on-screen bubble over the video: only ever shows messages
+      // *received* from the stranger (your own are visible in the chat panel)
+      // and clears itself after 3s so it doesn't cover their face.
+      const floating = { id: incomingId, text: textStr, mine: false, time: timeStr, status: "read" as const };
+      setFloatingMsgs((prev) => [...prev.slice(-2), floating]);
+      setTimeout(() => {
+        setFloatingMsgs((prev) => prev.filter((m) => m.id !== incomingId));
+      }, 3000);
+
       if (!chatOpen) setUnreadCount((count) => count + 1);
     });
     return unsub;
@@ -528,6 +544,7 @@ export default function VideoContainer({
                     {connectionState === "connecting" && "Establishing encrypted WebRTC connection…"}
                     {connectionState === "disconnected" && "Stranger left. Finding new match…"}
                     {connectionState === "idle" && "Press Start to match with a stranger."}
+                    {connectionState === "waiting" && matchCountdown > 0 && `Finding your next partner in ${matchCountdown}…`}
                   </p>
                   <p className="text-xs text-purple-200/70 mt-1 max-w-sm">
                     Vidibro matches you instantly with online strangers in HD video & encrypted audio.
@@ -660,7 +677,7 @@ export default function VideoContainer({
               <span className="text-xs font-bold text-white font-mono tracking-tight">Vidibro</span>
               <span className="h-3 w-px bg-white/20 mx-0.5" />
               <span className={`h-2 w-2 rounded-full ${isConnected ? "bg-emerald-400 animate-pulse" : "bg-yellow-400"}`} />
-              <span className="text-[10px] font-medium text-purple-200">{isConnected ? "Stranger" : "Matching…"}</span>
+              <span className="text-[10px] font-medium text-purple-200">{isConnected ? "Stranger" : matchCountdown > 0 ? `Matching in ${matchCountdown}…` : "Matching…"}</span>
             </div>
 
             {/* REPORT + SPEAKER TOGGLE (top-right pair) */}
@@ -698,10 +715,10 @@ export default function VideoContainer({
               </div>
             )}
 
-            {/* On-Screen Floating 2-Message Overlay (Chatspin / Omegle Style Video Screen Overlay) */}
-            {!chatOpen && messages.length > 0 && (
+            {/* Transient incoming-message bubbles (auto-clear after 3s) */}
+            {!chatOpen && floatingMsgs.length > 0 && (
               <div className="absolute bottom-20 left-4 max-w-[80%] sm:max-w-[60%] z-30 flex flex-col gap-1.5 pointer-events-none">
-                {messages.slice(-4).map((msg) => (
+                {floatingMsgs.map((msg) => (
                   <motion.div
                     key={msg.id}
                     initial={{ opacity: 0, y: 15, scale: 0.95 }}

@@ -10,6 +10,7 @@ export default function VideoChatPage() {
   const router = useRouter();
   const {
     connectionState,
+    matchCountdown,
     isHost,
     localStream,
     remoteStream,
@@ -37,6 +38,7 @@ export default function VideoChatPage() {
   return (
     <div className="w-full h-dvh flex flex-col overflow-hidden bg-[#070414]">
       <VideoContainer
+        matchCountdown={matchCountdown}
         localStream={localStream}
         remoteStream={remoteStream}
         connectionState={connectionState}
