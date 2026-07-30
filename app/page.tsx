@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Globe2, Users, Video, PhoneCall, MessageSquare, Check } from "lucide-react";
+import { Globe2, Users, Video, PhoneCall, MessageSquare, Check, Flame } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AppShowcaseCarousel from "@/components/AppShowcaseCarousel";
@@ -98,7 +98,8 @@ export default function Home() {
             transition={{ delay: 0.1, duration: 0.5 }}
             className="glass-pill flex items-center gap-2 rounded-full px-5 py-2 text-xs sm:text-sm font-semibold text-purple-100 shadow-xl border border-purple-500/30 bg-purple-950/40"
           >
-            <span>🔥 The random chat everyone&apos;s talking about</span>
+            <Flame size={14} className="text-pink-400" />
+            <span>The random chat everyone&apos;s talking about</span>
           </motion.div>
 
           {/* Main Headline Title */}
