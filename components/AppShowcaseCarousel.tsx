@@ -73,8 +73,46 @@ export default function AppShowcaseCarousel() {
   }
 
   return (
-    <section className="w-full py-16 sm:py-24">
-      <div className="text-center max-w-2xl mx-auto mb-14">
+    <section className="relative w-full py-16 sm:py-24 overflow-hidden">
+      {/* Thin flowing background lines, purely decorative — same motif as
+          the hero, scoped to this section only. */}
+      <svg
+        className="absolute inset-x-0 top-0 h-full w-full pointer-events-none opacity-30"
+        viewBox="0 0 1400 900"
+        preserveAspectRatio="none"
+        fill="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id="showcaseLine1" x1="0" y1="0" x2="1400" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#22d3ee" stopOpacity="0" />
+            <stop offset="50%" stopColor="#c084fc" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="#f472b6" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="showcaseLine2" x1="0" y1="0" x2="1400" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#f472b6" stopOpacity="0" />
+            <stop offset="50%" stopColor="#22d3ee" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="#a78bfa" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M-100,180 C 300,80 600,260 900,160 S 1300,100 1500,200"
+          stroke="url(#showcaseLine1)"
+          strokeWidth="1.5"
+        />
+        <path
+          d="M-100,650 C 350,730 650,570 950,650 S 1350,710 1500,630"
+          stroke="url(#showcaseLine2)"
+          strokeWidth="1.5"
+        />
+        <path
+          d="M-100,420 C 300,500 700,380 1000,460 S 1350,520 1500,440"
+          stroke="url(#showcaseLine1)"
+          strokeWidth="1"
+        />
+      </svg>
+
+      <div className="relative text-center max-w-2xl mx-auto mb-14">
         <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-3">
           Three Ways to <span className="gradient-text">Connect</span>
         </h2>
