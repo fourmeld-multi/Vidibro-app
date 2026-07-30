@@ -4,72 +4,108 @@ const cors = require('cors');
 const { Server } = require('socket.io');
 
 const PORT = process.env.PORT || 4000;
-const ALLOWED_ORIGIN = process.env.FRONTEND_ORIGIN || 'http://localhost:3000';
+const ALLOWED_ORIGIN = process.env.FRONTEND_ORIGIN || '*';
 
 const app = express();
 app.use(cors({ origin: ALLOWED_ORIGIN }));
 
+/** @type {Record<'video'|'audio'|'text', string[]>} */
+const queues = {
+  video: [],
+  audio: [],
+  text: [],
+};
+
+/** @type {Map<string, { roomId: string, partnerId: string, mode: string }>} */
+const activePairs = new Map();
+
+/** @type {Map<string, 'IDLE' | 'WAITING' | 'MATCHING' | 'CONNECTED'>} */
+const userStates = new Map();
+
 app.get('/health', (req, res) => {
-  res.json({ ok: true, waiting: waitingQueue.length, active: activePairs.size / 2 });
+  res.json({
+    ok: true,
+    waiting: {
+      video: queues.video.length,
+      audio: queues.audio.length,
+      text: queues.text.length,
+    },
+    activePairs: activePairs.size / 2,
+    timestamp: new Date().toISOString(),
+  });
 });
 
 const server = http.createServer(app);
 
-// Signaling-only server: no chat/game/reaction/media data ever reaches this
-// process, and no per-connection state is kept beyond {roomId, partnerId} —
-// see the architecture note in the project plan.
 const io = new Server(server, {
   cors: { origin: ALLOWED_ORIGIN, methods: ['GET', 'POST'] },
-  // Pure WebSocket transport only — no long-polling fallback, which removes
-  // the per-request HTTP header overhead polling would otherwise add.
   transports: ['websocket'],
-  // Defaults (25s interval / 20s timeout) mean an abruptly-closed tab or
-  // dropped connection can take up to ~45s to be detected server-side,
-  // leaving the remaining peer staring at a stale "connected" stranger.
-  // Tightened so the other side finds out within a few seconds instead.
-  pingInterval: 5000,
-  pingTimeout: 4000,
+  // Tightened WebSocket Heartbeats (3s interval / 3s timeout) to instantly purge ghost sessions
+  pingInterval: 3000,
+  pingTimeout: 3000,
 });
 
-/** @type {string[]} FIFO queue of waiting socket ids. */
-const waitingQueue = [];
-/** @type {Map<string, {roomId: string, partnerId: string}>} */
-const activePairs = new Map();
+function removeFromQueues(socketId) {
+  for (const mode of ['video', 'audio', 'text']) {
+    const idx = queues[mode].indexOf(socketId);
+    if (idx !== -1) {
+      queues[mode].splice(idx, 1);
+    }
+  }
+}
 
-function removeFromQueue(socketId) {
-  const idx = waitingQueue.indexOf(socketId);
-  if (idx !== -1) waitingQueue.splice(idx, 1);
+function processQueue(mode) {
+  const queue = queues[mode];
+  if (!queue) return;
+
+  while (queue.length >= 2) {
+    const p1Id = queue.shift();
+    const p2Id = queue.shift();
+
+    const p1Socket = io.sockets.sockets.get(p1Id);
+    const p2Socket = io.sockets.sockets.get(p2Id);
+
+    // Evict stale/disconnected sockets without burning queue turn
+    if (!p1Socket || !p1Socket.connected) {
+      if (p2Socket && p2Socket.connected) queue.unshift(p2Id);
+      continue;
+    }
+    if (!p2Socket || !p2Socket.connected) {
+      if (p1Socket && p1Socket.connected) queue.unshift(p1Id);
+      continue;
+    }
+
+    const roomId = `room-${mode}-${p1Id}-${p2Id}`;
+    p1Socket.join(roomId);
+    p2Socket.join(roomId);
+
+    activePairs.set(p1Id, { roomId, partnerId: p2Id, mode });
+    activePairs.set(p2Id, { roomId, partnerId: p1Id, mode });
+
+    userStates.set(p1Id, 'CONNECTED');
+    userStates.set(p2Id, 'CONNECTED');
+
+    p1Socket.emit('match:found', { roomId, role: 'initiator', mode });
+    p2Socket.emit('match:found', { roomId, role: 'receiver', mode });
+  }
 }
 
 io.on('connection', (socket) => {
-  // Strip the stored request reference once the handshake is done — nothing
-  // downstream needs headers/cookies for a fully anonymous signaling relay,
-  // and holding onto it just wastes memory per open connection.
   if (socket.request) socket.request = null;
+  userStates.set(socket.id, 'IDLE');
 
-  socket.on('queue:join', () => {
-    // Already matched or already waiting — ignore duplicate joins.
-    if (activePairs.has(socket.id) || waitingQueue.includes(socket.id)) return;
+  socket.on('queue:join', (data) => {
+    const mode = (data && data.mode) || 'video';
+    
+    // Cleanup any prior stale state/room
+    cleanup(socket.id);
 
-    while (waitingQueue.length > 0) {
-      const partnerId = waitingQueue.shift();
-      const partnerSocket = io.sockets.sockets.get(partnerId);
-      if (!partnerSocket) continue; // stale entry (disconnected while queued) — try the next one
-
-      const roomId = `room-${socket.id}-${partnerId}`;
-      socket.join(roomId);
-      partnerSocket.join(roomId);
-      activePairs.set(socket.id, { roomId, partnerId });
-      activePairs.set(partnerId, { roomId, partnerId: socket.id });
-
-      // Whoever was already waiting initiates the offer — arbitrary but
-      // deterministic, and also becomes the mini-game "host" authority.
-      partnerSocket.emit('match:found', { roomId, role: 'initiator' });
-      socket.emit('match:found', { roomId, role: 'receiver' });
-      return;
+    userStates.set(socket.id, 'WAITING');
+    if (!queues[mode].includes(socket.id)) {
+      queues[mode].push(socket.id);
     }
 
-    waitingQueue.push(socket.id);
+    processQueue(mode);
   });
 
   socket.on('signal:offer', ({ roomId, sdp }) => {
@@ -84,20 +120,29 @@ io.on('connection', (socket) => {
     socket.to(roomId).emit('signal:ice-candidate', { candidate });
   });
 
-  function cleanup() {
-    removeFromQueue(socket.id);
-    const pair = activePairs.get(socket.id);
+  function cleanup(socketId) {
+    removeFromQueues(socketId);
+    userStates.delete(socketId);
+
+    const pair = activePairs.get(socketId);
     if (pair) {
-      activePairs.delete(socket.id);
+      activePairs.delete(socketId);
       activePairs.delete(pair.partnerId);
+      userStates.set(pair.partnerId, 'IDLE');
       socket.to(pair.roomId).emit('peer:left');
     }
   }
 
-  socket.on('queue:leave', cleanup); // "Next" button
-  socket.on('disconnect', cleanup); // tab close / network drop
+  socket.on('queue:leave', () => {
+    cleanup(socket.id);
+    userStates.set(socket.id, 'IDLE');
+  });
+
+  socket.on('disconnect', () => {
+    cleanup(socket.id);
+  });
 });
 
 server.listen(PORT, () => {
-  console.log(`Vidibro signaling server listening on :${PORT}`);
+  console.log(`Vidibro matchmaking & signaling server running on port :${PORT}`);
 });

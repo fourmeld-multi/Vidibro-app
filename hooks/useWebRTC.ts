@@ -22,13 +22,12 @@ export type ChatMode = "video" | "audio" | "text";
 const SIGNALING_URL =
   process.env.NEXT_PUBLIC_SIGNALING_URL?.replace(/\/$/, "") || "http://localhost:4000";
 
-// Kept strictly at 480p per the app's bandwidth/CPU budget — every peer,
-// regardless of device, sends and receives at the same modest resolution.
+// Adaptive 480p / 24fps Media Constraints
 const VIDEO_CONSTRAINTS: MediaStreamConstraints = {
   video: {
     width: { ideal: 640, max: 640 },
     height: { ideal: 480, max: 480 },
-    frameRate: { ideal: 24, max: 30 },
+    frameRate: { ideal: 24, max: 24 },
   },
   audio: true,
 };
@@ -36,16 +35,73 @@ const VIDEO_CONSTRAINTS: MediaStreamConstraints = {
 const AUDIO_ONLY_CONSTRAINTS: MediaStreamConstraints = { audio: true };
 
 function iceServers(): RTCIceServer[] {
-  return [
-    { urls: process.env.NEXT_PUBLIC_STUN_URL || "stun:stun.l.google.com:19302" },
-    {
-      // Real Coturn provisioning is separate infra work — these are
-      // placeholders until a real TURN server/credentials are wired in.
-      urls: process.env.NEXT_PUBLIC_TURN_URL || "turn:REPLACE_WITH_COTURN_HOST:3478",
-      username: process.env.NEXT_PUBLIC_TURN_USERNAME || "vidibro-placeholder",
-      credential: process.env.NEXT_PUBLIC_TURN_CREDENTIAL || "REPLACE_ME",
-    },
+  const stunUrls = [
+    process.env.NEXT_PUBLIC_STUN_URL || "stun:stun.l.google.com:19302",
+    "stun:stun1.l.google.com:19302",
+    "stun:stun2.l.google.com:19302",
+    "stun:stun3.l.google.com:19302",
+    "stun:global.stun.twilio.com:3478",
   ];
+
+  const servers: RTCIceServer[] = [{ urls: stunUrls }];
+
+  const turnUrl = process.env.NEXT_PUBLIC_TURN_URL;
+  const turnUsername = process.env.NEXT_PUBLIC_TURN_USERNAME;
+  const turnCredential = process.env.NEXT_PUBLIC_TURN_CREDENTIAL;
+
+  if (turnUrl && turnUsername && turnCredential && !turnUrl.includes("REPLACE_WITH_COTURN_HOST")) {
+    servers.push({
+      urls: turnUrl,
+      username: turnUsername,
+      credential: turnCredential,
+    });
+  } else {
+    // Free openrelay fallback endpoints for traversal across strict NATs
+    servers.push({
+      urls: "turn:openrelay.metered.ca:80",
+      username: "openrelay",
+      credential: "openrelay",
+    });
+    servers.push({
+      urls: "turn:openrelay.metered.ca:443",
+      username: "openrelay",
+      credential: "openrelay",
+    });
+  }
+
+  return servers;
+}
+
+function applyBandwidthLimitsAndCodecs(pc: RTCPeerConnection) {
+  // 1. Bitrate capping (600 kbps max bitrate for video stream to prevent network degradation)
+  pc.getSenders().forEach((sender) => {
+    if (sender.track?.kind === "video") {
+      const params = sender.getParameters();
+      if (!params.encodings || params.encodings.length === 0) {
+        params.encodings = [{}];
+      }
+      params.encodings[0].maxBitrate = 600000; // 600 kbps
+      params.encodings[0].maxFramerate = 24;
+      sender.setParameters(params).catch(() => {});
+    }
+  });
+
+  // 2. Codec Preference (VP8 / H.264 for Video, Opus for Audio)
+  if (typeof RTCRtpTransceiver !== "undefined" && "setCodecPreferences" in RTCRtpTransceiver.prototype) {
+    pc.getTransceivers().forEach((transceiver) => {
+      if (transceiver.receiver.track.kind === "video" && typeof RTCRtpReceiver.getCapabilities === "function") {
+        const capabilities = RTCRtpReceiver.getCapabilities("video");
+        if (capabilities && capabilities.codecs) {
+          const preferredCodecs = capabilities.codecs.filter(
+            (c) => c.mimeType.toLowerCase() === "video/vp8" || c.mimeType.toLowerCase() === "video/h264"
+          );
+          if (preferredCodecs.length > 0) {
+            transceiver.setCodecPreferences(preferredCodecs);
+          }
+        }
+      }
+    });
+  }
 }
 
 type Listener = (msg: Envelope) => void;
@@ -153,6 +209,7 @@ export function useWebRTC() {
     pc.oniceconnectionstatechange = () => {
       const state = pc.iceConnectionState;
       if (state === "connected" || state === "completed") {
+        applyBandwidthLimitsAndCodecs(pc);
         setConnectionState("connected");
       } else if (state === "failed" || state === "disconnected" || state === "closed") {
         setConnectionState("disconnected");
@@ -160,7 +217,7 @@ export function useWebRTC() {
           if (modeRef.current && (pcRef.current === null || pcRef.current.iceConnectionState !== "connected")) {
             teardownPeerConnection();
             setConnectionState("waiting");
-            socketRef.current?.emit("queue:join");
+            socketRef.current?.emit("queue:join", { mode: modeRef.current });
           }
         }, 2000);
       }
@@ -168,26 +225,22 @@ export function useWebRTC() {
 
     pcRef.current = pc;
     return pc;
-  }, []);
+  }, [teardownPeerConnection]);
 
   const flushPendingCandidates = useCallback(async (pc: RTCPeerConnection) => {
     for (const c of pendingCandidatesRef.current) {
       try {
         await pc.addIceCandidate(new RTCIceCandidate(c));
       } catch {
-        // benign if it was already applied or stale
+        // benign if candidate was already applied
       }
     }
     pendingCandidatesRef.current = [];
   }, []);
 
-  /** Acquire media for the given mode once, kept alive across matches so the
-   * local preview never flickers between "Next" clicks. Text mode never
-   * touches getUserMedia at all — pure signaling + data channel. */
   const ensureLocalStream = useCallback(async (mode: ChatMode) => {
     if (mode === "text") return null;
     
-    // If local stream exists and is active, reuse it
     if (localStreamRef.current && localStreamRef.current.active) {
       const vTracks = localStreamRef.current.getVideoTracks();
       const aTracks = localStreamRef.current.getAudioTracks();
@@ -206,7 +259,6 @@ export function useWebRTC() {
       setLocalStream(stream);
       return stream;
     } catch {
-      // Mobile fallback if specific width/height constraints failed on mobile browser
       if (mode === "video") {
         try {
           const fallbackStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: true });
@@ -230,7 +282,7 @@ export function useWebRTC() {
       setMode(newMode);
       await ensureLocalStream(newMode);
       setConnectionState("waiting");
-      socketRef.current?.emit("queue:join");
+      socketRef.current?.emit("queue:join", { mode: newMode });
     },
     [ensureLocalStream]
   );
@@ -238,9 +290,6 @@ export function useWebRTC() {
   const leaveMatch = useCallback(() => {
     teardownPeerConnection();
     socketRef.current?.emit("queue:leave");
-    // "End Call" is a full exit, not a rematch — release the camera/mic so
-    // the device's recording indicator actually turns off (unlike
-    // skipToNext, which intentionally keeps the stream alive for reuse).
     localStreamRef.current?.getTracks().forEach((t) => t.stop());
     localStreamRef.current = null;
     setLocalStream(null);
@@ -250,7 +299,7 @@ export function useWebRTC() {
   const skipToNext = useCallback(() => {
     teardownPeerConnection();
     setConnectionState("waiting");
-    socketRef.current?.emit("queue:join");
+    socketRef.current?.emit("queue:join", { mode: modeRef.current });
   }, [teardownPeerConnection]);
 
   useEffect(() => {
@@ -259,7 +308,7 @@ export function useWebRTC() {
 
     socket.on("connect", () => {
       if (modeRef.current) {
-        socket.emit("queue:join");
+        socket.emit("queue:join", { mode: modeRef.current });
       }
     });
 
@@ -306,18 +355,17 @@ export function useWebRTC() {
       try {
         await pc.addIceCandidate(new RTCIceCandidate(candidate));
       } catch {
-        // benign race, ignore
+        // benign race
       }
     });
 
     socket.on("peer:left", () => {
       teardownPeerConnection();
       setConnectionState("disconnected");
-      // Auto-rematch 1.5s after stranger leaves or ends call
       setTimeout(() => {
         if (modeRef.current) {
           setConnectionState("waiting");
-          socketRef.current?.emit("queue:join");
+          socketRef.current?.emit("queue:join", { mode: modeRef.current });
         }
       }, 1500);
     });
@@ -331,22 +379,24 @@ export function useWebRTC() {
   }, []);
 
   const replaceOutgoingVideoTrack = useCallback(async (newTrack: MediaStreamTrack) => {
-    // 1. Update localStreamRef so new matches use the updated track
+    // 1. Explicitly stop old video track hardware & update localStreamRef
     if (localStreamRef.current) {
       localStreamRef.current.getVideoTracks().forEach((t) => {
         if (t !== newTrack) {
+          t.stop();
           localStreamRef.current?.removeTrack(t);
         }
       });
       if (!localStreamRef.current.getVideoTracks().includes(newTrack)) {
         localStreamRef.current.addTrack(newTrack);
       }
+      setLocalStream(new MediaStream(localStreamRef.current.getTracks()));
     }
 
     const pc = pcRef.current;
     if (!pc) return;
 
-    // 2. Find video sender across senders and transceivers
+    // 2. Seamlessly swap active video track without SDP renegotiation
     const senders = pc.getSenders();
     let videoSender = senders.find((s) => s.track && s.track.kind === "video");
     if (!videoSender) {

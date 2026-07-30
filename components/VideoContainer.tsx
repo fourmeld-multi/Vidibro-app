@@ -381,24 +381,41 @@ export default function VideoContainer({
   async function flipCamera() {
     const nextFacingMode = facingMode === "user" ? "environment" : "user";
     setFacingMode(nextFacingMode);
+
+    // 1. Explicitly stop existing video tracks BEFORE acquiring new stream to prevent mobile camera locks
+    localStream?.getVideoTracks().forEach((t) => {
+      t.enabled = false;
+      t.stop();
+      if (localStream) localStream.removeTrack(t);
+    });
+
     try {
-      const constraints = { video: { facingMode: nextFacingMode } };
-      const newStream = await navigator.mediaDevices.getUserMedia(constraints);
+      let newStream: MediaStream;
+      try {
+        newStream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            facingMode: { exact: nextFacingMode },
+            width: { ideal: 640, max: 640 },
+            height: { ideal: 480, max: 480 },
+            frameRate: { ideal: 24, max: 24 },
+          },
+        });
+      } catch {
+        // Fallback for mobile devices without exact constraint support
+        newStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: nextFacingMode } });
+      }
+
       const newTrack = newStream.getVideoTracks()[0];
       if (newTrack) {
-        // Stop old local video tracks
-        localStream?.getVideoTracks().forEach((t) => {
-          t.stop();
-          if (localStream) localStream.removeTrack(t);
-        });
         if (localStream) {
           localStream.addTrack(newTrack);
         }
         if (replaceOutgoingVideoTrack) {
           await replaceOutgoingVideoTrack(newTrack);
         }
-        if (localVideoRef.current) localVideoRef.current.srcObject = newStream;
-        if (desktopLocalVideoRef.current) desktopLocalVideoRef.current.srcObject = newStream;
+        const streamToBind = localStream || newStream;
+        if (localVideoRef.current) localVideoRef.current.srcObject = streamToBind;
+        if (desktopLocalVideoRef.current) desktopLocalVideoRef.current.srcObject = streamToBind;
       }
     } catch {
       // Ignore if single camera device
