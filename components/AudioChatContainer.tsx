@@ -235,13 +235,16 @@ export default function AudioChatContainer({
 
         {/* Right Header Controls */}
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => setReportOpen(true)}
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-red-500/25 hover:bg-red-600/50 text-white transition border-2 border-red-500 shadow-md shadow-red-500/30 hover:scale-105 active:scale-95"
-            title="Report User"
-          >
-            <Flag size={15} className="text-white fill-red-500/30" />
-          </button>
+          {/* Only meaningful once there's an actual stranger to report */}
+          {isConnected && (
+            <button
+              onClick={() => setReportOpen(true)}
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-red-500/25 hover:bg-red-600/50 text-white transition border-2 border-red-500 shadow-md shadow-red-500/30 hover:scale-105 active:scale-95"
+              title="Report User"
+            >
+              <Flag size={15} className="text-white fill-red-500/30" />
+            </button>
+          )}
         </div>
       </header>
 

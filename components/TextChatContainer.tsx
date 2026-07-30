@@ -12,7 +12,6 @@ import {
   Sticker as StickerIcon,
   Sparkles,
   Lock,
-  User,
   Check,
   CheckCheck,
   Settings,
@@ -309,7 +308,7 @@ export default function TextChatContainer({
       <header className="flex items-center justify-between bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#ec4899] px-5 py-3.5 z-30 shadow-md text-white">
         <div className="flex items-center gap-3">
           <div className="relative flex h-11 w-11 items-center justify-center rounded-full bg-white/20 border-2 border-white/40 shadow-inner overflow-hidden">
-            <User size={24} className="text-white" />
+            <span className="text-2xl leading-none select-none" aria-hidden="true">🧑</span>
             <span className={`absolute bottom-0.5 right-0.5 h-3 w-3 rounded-full border-2 border-purple-600 ${isConnected ? "bg-emerald-400" : "bg-amber-400"}`} />
           </div>
 
@@ -335,13 +334,16 @@ export default function TextChatContainer({
 
         {/* Right Header Action Controls */}
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => setReportOpen(true)}
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-red-500/25 hover:bg-red-600/50 text-white transition border-2 border-red-500 shadow-md shadow-red-500/30 hover:scale-105 active:scale-95"
-            title="Report Stranger"
-          >
-            <Flag size={15} className="text-white fill-red-500/30" />
-          </button>
+          {/* Only meaningful once there's an actual stranger to report */}
+          {isConnected && (
+            <button
+              onClick={() => setReportOpen(true)}
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-red-500/25 hover:bg-red-600/50 text-white transition border-2 border-red-500 shadow-md shadow-red-500/30 hover:scale-105 active:scale-95"
+              title="Report Stranger"
+            >
+              <Flag size={15} className="text-white fill-red-500/30" />
+            </button>
+          )}
           <button
             onClick={leaveMatch}
             className="flex h-9 w-9 items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition border border-white/20"

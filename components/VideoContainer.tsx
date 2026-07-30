@@ -664,17 +664,19 @@ export default function VideoContainer({
             </div>
 
             {/* REPORT + SPEAKER TOGGLE (top-right pair) */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setReportOpen(true);
-              }}
-              className="absolute top-3 right-16 z-50 flex h-10 w-10 items-center justify-center rounded-full transition border border-red-400/40 bg-black/75 hover:bg-red-500/80 text-red-400 hover:text-white shadow-2xl backdrop-blur-xl"
-              title="Report Stranger"
-              aria-label="Report Stranger"
-            >
-              <Flag size={17} />
-            </button>
+            {isConnected && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setReportOpen(true);
+                }}
+                className="absolute top-3 right-16 z-50 flex h-10 w-10 items-center justify-center rounded-full transition border border-red-400/40 bg-black/75 hover:bg-red-500/80 text-red-400 hover:text-white shadow-2xl backdrop-blur-xl"
+                title="Report Stranger"
+                aria-label="Report Stranger"
+              >
+                <Flag size={17} />
+              </button>
+            )}
 
             <button
               onClick={(e) => {
