@@ -10,6 +10,7 @@ import AppShowcaseCarousel from "@/components/AppShowcaseCarousel";
 import PrivacyFlowSection from "@/components/PrivacyFlowSection";
 import HowItWorks from "@/components/HowItWorks";
 import WhyVidibro from "@/components/WhyVidibro";
+import FAQAccordion from "@/components/FAQAccordion";
 import { TRANSLATIONS, type LanguageCode } from "@/lib/translations";
 
 export default function Home() {
@@ -186,6 +187,9 @@ export default function Home() {
 
         {/* Section 3: Why Vidibro is the Best Omegle Alternative */}
         <WhyVidibro />
+
+        {/* FAQ accordion */}
+        <FAQAccordion />
       </main>
 
       <Footer
