@@ -100,16 +100,6 @@ export default function AppShowcaseCarousel() {
           stroke="url(#showcaseLine1)"
           strokeWidth="1.5"
         />
-        <path
-          d="M-100,650 C 350,730 650,570 950,650 S 1350,710 1500,630"
-          stroke="url(#showcaseLine2)"
-          strokeWidth="1.5"
-        />
-        <path
-          d="M-100,420 C 300,500 700,380 1000,460 S 1350,520 1500,440"
-          stroke="url(#showcaseLine1)"
-          strokeWidth="1"
-        />
       </svg>
 
       <div className="relative text-center max-w-2xl mx-auto mb-14">
