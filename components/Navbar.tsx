@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageSquare, Menu, X, Globe, Video, Zap } from "lucide-react";
+import { MessageSquare, Menu, X, Globe, Video, Zap, ShieldAlert } from "lucide-react";
 import LogoMark from "@/components/LogoMark";
 import { useRouter } from "next/navigation";
 import { LANGUAGES, type LanguageCode } from "@/lib/translations";
@@ -71,6 +71,13 @@ export default function Navbar({
           <Link href="/faq" className="hover:text-white transition">FAQ</Link>
           <Link href="/terms" className="hover:text-white transition">Terms</Link>
           <Link href="/privacy" className="hover:text-white transition">Privacy</Link>
+          <Link
+            href="/report"
+            className="flex items-center gap-1.5 rounded-full bg-red-600 hover:bg-red-500 px-3 py-1.5 text-xs font-bold text-white shadow-md shadow-red-600/30 transition"
+          >
+            <ShieldAlert size={13} />
+            Report Us
+          </Link>
 
           {/* Language Dropdown */}
           <div className="relative" ref={langRef}>
@@ -194,8 +201,9 @@ export default function Navbar({
             <Link
               href="/report"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-extrabold text-purple-200 hover:text-white transition"
+              className="flex items-center gap-2 rounded-full bg-red-600 hover:bg-red-500 px-5 py-2.5 text-sm font-extrabold text-white shadow-lg shadow-red-600/30 transition"
             >
+              <ShieldAlert size={16} />
               Report Us
             </Link>
           </motion.div>
