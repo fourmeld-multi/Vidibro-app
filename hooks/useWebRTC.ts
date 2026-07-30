@@ -123,6 +123,10 @@ export function useWebRTC() {
   const pendingCandidatesRef = useRef<RTCIceCandidateInit[]>([]);
   const listenersRef = useRef<Map<MessageType, Set<Listener>>>(new Map());
   const localStreamRef = useRef<MediaStream | null>(null);
+  // Only true once the user has actually started a chat AND their media is
+  // ready. Guards the reconnect handler from shoving us into the matchmaking
+  // queue before we can contribute any tracks.
+  const readyToMatchRef = useRef(false);
 
   const emit = useCallback(<T,>(type: MessageType, payload: T) => {
     const dc = dcRef.current;
@@ -143,7 +147,13 @@ export function useWebRTC() {
   const teardownPeerConnection = useCallback(() => {
     dcRef.current?.close();
     dcRef.current = null;
-    pcRef.current?.getSenders().forEach((s) => s.track?.stop());
+    // NOTE: deliberately does NOT stop the senders' tracks. Those tracks are
+    // the *local* camera/mic tracks (they were handed to pc.addTrack from
+    // localStreamRef), so stopping them here permanently ends the hardware
+    // capture — readyState goes to "ended" and cannot be revived. That made
+    // the camera go dark on every "Next" and never come back. Closing the
+    // peer connection alone detaches them; the local stream stays live and
+    // is reused for the next match. Only leaveMatch() truly stops capture.
     pcRef.current?.close();
     pcRef.current = null;
     pendingCandidatesRef.current = [];
@@ -296,11 +306,17 @@ export function useWebRTC() {
       modeRef.current = newMode;
       setMode(newMode);
       try {
+        // Media must be live *before* we enter the queue. Joining first and
+        // acquiring the camera afterwards means the server can pair us while
+        // localStreamRef is still null, and createPeerConnection() then adds
+        // zero tracks — the call "connects" with no video and no audio.
         await ensureLocalStream(newMode);
+        readyToMatchRef.current = true;
         setConnectionState("waiting");
         socketRef.current?.emit("queue:join", { mode: newMode });
       } catch {
         // Stop call process if user denies camera/mic permissions
+        readyToMatchRef.current = false;
         setConnectionState("idle");
       }
     },
@@ -308,6 +324,9 @@ export function useWebRTC() {
   );
 
   const leaveMatch = useCallback(() => {
+    // Genuine exit — stop looking for matches, and this is the one place the
+    // camera/mic hardware should actually be released.
+    readyToMatchRef.current = false;
     teardownPeerConnection();
     socketRef.current?.emit("queue:leave");
     localStreamRef.current?.getTracks().forEach((t) => t.stop());
@@ -327,7 +346,11 @@ export function useWebRTC() {
     socketRef.current = socket;
 
     socket.on("connect", () => {
-      if (modeRef.current) {
+      // Only re-enter the queue on an actual reconnect of an in-progress
+      // session. modeRef defaults to "video", so the old truthiness check
+      // fired on every first connect and queued the user before their camera
+      // had even been requested.
+      if (readyToMatchRef.current) {
         socket.emit("queue:join", { mode: modeRef.current });
       }
     });
@@ -336,6 +359,19 @@ export function useWebRTC() {
       roomIdRef.current = roomId;
       setRole(myRole);
       setConnectionState("connecting");
+
+      // Safety net: never build a peer connection without media. If anything
+      // matched us early, acquire the stream now so addTrack has something to
+      // send — otherwise both sides connect to silence and a black frame.
+      if (modeRef.current !== "text" && !localStreamRef.current?.active) {
+        try {
+          await ensureLocalStream(modeRef.current);
+        } catch {
+          setConnectionState("idle");
+          return;
+        }
+      }
+
       const pc = createPeerConnection();
 
       if (myRole === "initiator") {

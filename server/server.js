@@ -130,6 +130,14 @@ io.on('connection', (socket) => {
       activePairs.delete(pair.partnerId);
       userStates.set(pair.partnerId, 'IDLE');
       socket.to(pair.roomId).emit('peer:left');
+
+      // Both peers must actually leave the socket.io room. Without this the
+      // socket stays subscribed to every room it has ever been matched into,
+      // so after a few "Next" presses signalling gets fanned out to stale
+      // rooms and offers/answers cross-talk between unrelated calls.
+      socket.leave(pair.roomId);
+      const partnerSocket = io.sockets.sockets.get(pair.partnerId);
+      if (partnerSocket) partnerSocket.leave(pair.roomId);
     }
   }
 
