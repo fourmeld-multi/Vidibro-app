@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import AudioChatContainer from "@/components/AudioChatContainer";
+import PermissionDeniedModal from "@/components/PermissionDeniedModal";
 import { useWebRTC } from "@/hooks/useWebRTC";
 
 export default function AudioChatPage() {
@@ -12,6 +13,8 @@ export default function AudioChatPage() {
     localStream,
     remoteStream,
     dataChannelOpen,
+    permissionDenied,
+    requestPermissions,
     joinQueue,
     leaveMatch,
     skipToNext,
@@ -20,9 +23,7 @@ export default function AudioChatPage() {
   } = useWebRTC();
 
   useEffect(() => {
-    joinQueue("audio").catch(() => {
-      // Mic permission denied or unavailable — connectionState stays "idle".
-    });
+    joinQueue("audio").catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -42,6 +43,12 @@ export default function AudioChatPage() {
         subscribe={subscribe}
         skipToNext={skipToNext}
         leaveMatch={handleLeave}
+      />
+
+      <PermissionDeniedModal
+        isOpen={permissionDenied}
+        mode="audio"
+        onRetry={() => requestPermissions("audio")}
       />
     </div>
   );

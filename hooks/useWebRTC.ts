@@ -113,6 +113,7 @@ export function useWebRTC() {
   const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
   const [dataChannelOpen, setDataChannelOpen] = useState(false);
   const [mode, setMode] = useState<ChatMode>("video");
+  const [permissionDenied, setPermissionDenied] = useState(false);
 
   const socketRef = useRef<Socket | null>(null);
   const pcRef = useRef<RTCPeerConnection | null>(null);
@@ -239,15 +240,20 @@ export function useWebRTC() {
   }, []);
 
   const ensureLocalStream = useCallback(async (mode: ChatMode) => {
-    if (mode === "text") return null;
+    if (mode === "text") {
+      setPermissionDenied(false);
+      return null;
+    }
     
     if (localStreamRef.current && localStreamRef.current.active) {
       const vTracks = localStreamRef.current.getVideoTracks();
       const aTracks = localStreamRef.current.getAudioTracks();
       if (mode === "video" && vTracks.length > 0 && vTracks[0].readyState === "live") {
+        setPermissionDenied(false);
         return localStreamRef.current;
       }
       if (mode === "audio" && aTracks.length > 0 && aTracks[0].readyState === "live") {
+        setPermissionDenied(false);
         return localStreamRef.current;
       }
     }
@@ -257,6 +263,7 @@ export function useWebRTC() {
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
       localStreamRef.current = stream;
       setLocalStream(stream);
+      setPermissionDenied(false);
       return stream;
     } catch {
       if (mode === "video") {
@@ -264,15 +271,23 @@ export function useWebRTC() {
           const fallbackStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: true });
           localStreamRef.current = fallbackStream;
           setLocalStream(fallbackStream);
+          setPermissionDenied(false);
           return fallbackStream;
         } catch {
-          const basicStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-          localStreamRef.current = basicStream;
-          setLocalStream(basicStream);
-          return basicStream;
+          try {
+            const basicStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+            localStreamRef.current = basicStream;
+            setLocalStream(basicStream);
+            setPermissionDenied(false);
+            return basicStream;
+          } catch {
+            setPermissionDenied(true);
+            throw new Error("Camera & Microphone permission denied");
+          }
         }
       }
-      throw new Error("Unable to acquire media stream");
+      setPermissionDenied(true);
+      throw new Error("Microphone permission denied");
     }
   }, []);
 
@@ -280,9 +295,14 @@ export function useWebRTC() {
     async (newMode: ChatMode = "video") => {
       modeRef.current = newMode;
       setMode(newMode);
-      await ensureLocalStream(newMode);
-      setConnectionState("waiting");
-      socketRef.current?.emit("queue:join", { mode: newMode });
+      try {
+        await ensureLocalStream(newMode);
+        setConnectionState("waiting");
+        socketRef.current?.emit("queue:join", { mode: newMode });
+      } catch {
+        // Stop call process if user denies camera/mic permissions
+        setConnectionState("idle");
+      }
     },
     [ensureLocalStream]
   );
@@ -410,6 +430,20 @@ export function useWebRTC() {
     }
   }, []);
 
+  const requestPermissions = useCallback(
+    async (targetMode?: ChatMode) => {
+      const modeToRequest = targetMode || modeRef.current || "video";
+      try {
+        await ensureLocalStream(modeToRequest);
+        setPermissionDenied(false);
+        joinQueue(modeToRequest);
+      } catch {
+        setPermissionDenied(true);
+      }
+    },
+    [ensureLocalStream, joinQueue]
+  );
+
   return {
     connectionState,
     role,
@@ -418,6 +452,8 @@ export function useWebRTC() {
     localStream,
     remoteStream,
     dataChannelOpen,
+    permissionDenied,
+    requestPermissions,
     joinQueue,
     leaveMatch,
     skipToNext,

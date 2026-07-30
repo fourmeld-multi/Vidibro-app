@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import VideoContainer from "@/components/VideoContainer";
+import PermissionDeniedModal from "@/components/PermissionDeniedModal";
 import { useWebRTC } from "@/hooks/useWebRTC";
 
 export default function VideoChatPage() {
@@ -13,6 +14,8 @@ export default function VideoChatPage() {
     localStream,
     remoteStream,
     dataChannelOpen,
+    permissionDenied,
+    requestPermissions,
     joinQueue,
     leaveMatch,
     skipToNext,
@@ -22,10 +25,7 @@ export default function VideoChatPage() {
   } = useWebRTC();
 
   useEffect(() => {
-    joinQueue("video").catch(() => {
-      // Camera/mic permission denied or unavailable — connectionState stays
-      // "idle" and VideoContainer's own empty state remains visible.
-    });
+    joinQueue("video").catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -47,6 +47,12 @@ export default function VideoChatPage() {
         leaveMatch={handleLeave}
         isHost={isHost}
         replaceOutgoingVideoTrack={replaceOutgoingVideoTrack}
+      />
+
+      <PermissionDeniedModal
+        isOpen={permissionDenied}
+        mode="video"
+        onRetry={() => requestPermissions("video")}
       />
     </div>
   );
