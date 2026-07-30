@@ -113,7 +113,7 @@ export default function Navbar({
                           : "text-purple-200/80 hover:bg-white/10 hover:text-white"
                       }`}
                     >
-                      <span>{lang.flag} {lang.label}</span>
+                      <span>{lang.label}</span>
                       <span className="text-[10px] text-purple-300">{lang.code}</span>
                     </button>
                   ))}

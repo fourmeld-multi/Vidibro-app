@@ -99,7 +99,7 @@ export default function Home() {
             className="glass-pill flex items-center gap-2 rounded-full px-5 py-2 text-xs sm:text-sm font-semibold text-purple-100 shadow-xl border border-purple-500/30 bg-purple-950/40"
           >
             <Flame size={14} className="text-pink-400" />
-            <span>The random chat everyone&apos;s talking about</span>
+            <span>{t.heroTag}</span>
           </motion.div>
 
           {/* Main Headline Title */}
@@ -109,8 +109,7 @@ export default function Home() {
 
           {/* Subtitle */}
           <div className="flex flex-col gap-2.5 sm:gap-1.5 text-base sm:text-xl text-purple-200/80 font-normal leading-relaxed max-w-2xl px-3">
-            <p className="block">Meet amazing people around the globe in real-time.</p>
-            <p className="block text-purple-300/90 font-medium">Free, anonymous, and protected by smart AI moderation.</p>
+            <p className="block">{t.heroSubtitle}</p>
           </div>
 
           {/* Dual Pill Badges Row */}
@@ -136,7 +135,7 @@ export default function Home() {
               className="btn-gradient glow-pulse flex w-full sm:w-auto items-center justify-center gap-3 rounded-full px-9 py-4 text-base sm:text-lg font-extrabold text-white shadow-2xl shadow-purple-500/30 transition uppercase tracking-wider"
             >
               <Video size={22} />
-              START VIDEO MATCH
+              {t.startVideo}
             </motion.button>
 
             {/* Side-by-Side Cards Grid for Mobile (Voice Chat & Text Chat) */}
@@ -150,7 +149,7 @@ export default function Home() {
               >
                 <div className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl sm:rounded-full bg-[#130835] hover:bg-[#1a0b47] px-3 sm:px-7 py-3.5 text-xs sm:text-base font-bold text-white backdrop-blur-xl transition">
                   <PhoneCall size={16} className="text-cyan-300 animate-pulse shrink-0" />
-                  <span>Voice Chat</span>
+                  <span>{t.startAudio}</span>
                 </div>
               </motion.button>
 
@@ -163,7 +162,7 @@ export default function Home() {
               >
                 <div className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl sm:rounded-full bg-[#130835] hover:bg-[#1a0b47] px-3 sm:px-7 py-3.5 text-xs sm:text-base font-bold text-white backdrop-blur-xl transition">
                   <MessageSquare size={16} className="text-pink-300 shrink-0" />
-                  <span>Text Chat</span>
+                  <span>{t.startText}</span>
                 </div>
               </motion.button>
             </div>
@@ -172,13 +171,13 @@ export default function Home() {
           {/* Bottom Assurance Badges */}
           <div className="flex flex-wrap items-center justify-center gap-5 text-xs sm:text-sm text-purple-200/90 font-medium pt-3">
             <span className="flex items-center gap-1.5">
-              <Check size={16} className="text-emerald-400" /> Zero Signup Required
+              <Check size={16} className="text-emerald-400" /> {t.noSignup}
             </span>
             <span className="flex items-center gap-1.5">
-              <Check size={16} className="text-emerald-400" /> P2P Encrypted Streams
+              <Check size={16} className="text-emerald-400" /> {t.freePrivate}
             </span>
             <span className="flex items-center gap-1.5">
-              <Check size={16} className="text-emerald-400" /> Instant Matching
+              <Check size={16} className="text-emerald-400" /> {t.instantMatch}
             </span>
           </div>
         </div>
