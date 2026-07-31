@@ -144,16 +144,14 @@ export default function Navbar({
         </div>
       </div>
 
-      {/* Mobile Drawer Overlay */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.15, ease: "easeOut" }}
-            className="lg:hidden absolute top-full left-0 right-0 z-50 bg-[#0e0828] border-b border-purple-500/20 px-6 py-8 flex flex-col items-center text-center space-y-4 shadow-2xl rounded-b-3xl"
-          >
+      {/* Mobile Drawer Overlay.
+          No animation on purpose. Fading it in meant that for the length of the
+          transition the panel was partly transparent, so the hero text behind it
+          showed straight through the menu links — two layers visible at once,
+          which read as a blink every time it opened or closed. A nav menu isn't
+          communicating anything with that motion anyway, so it just appears. */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden absolute top-full left-0 right-0 z-50 bg-[#0e0828] border-b border-purple-500/20 px-6 py-8 flex flex-col items-center text-center space-y-4 shadow-2xl rounded-b-3xl">
             <Link
               href="/blog"
               onClick={() => setMobileMenuOpen(false)}
@@ -212,9 +210,8 @@ export default function Navbar({
               <ShieldAlert size={16} />
               {t.navReportUs}
             </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        </div>
+      )}
     </header>
 
     {/* Rendered outside <header> — an ancestor with backdrop-filter (the
