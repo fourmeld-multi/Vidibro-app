@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import LogoMark from "@/components/LogoMark";
 import ReportModal from "@/components/ReportModal";
+import ConfirmNextModal from "@/components/ConfirmNextModal";
 import type { MessageType, ChatPayload } from "@/lib/protocol";
 
 const ICEBREAKER_QUESTIONS = [
@@ -85,6 +86,7 @@ export default function AudioChatContainer({
   const [micEnabled, setMicEnabled] = useState(true);
   const [speakerEnabled, setSpeakerEnabled] = useState(true);
   const [reportOpen, setReportOpen] = useState(false);
+  const [nextConfirmOpen, setNextConfirmOpen] = useState(false);
   const [icebreakerIndex, setIcebreakerIndex] = useState(0);
   const [activeSoundFX, setActiveSoundFX] = useState<string | null>(null);
   const [soundboardOpen, setSoundboardOpen] = useState(false);
@@ -446,7 +448,7 @@ export default function AudioChatContainer({
 
           {/* 3. Centered NEXT Button */}
           <button
-            onClick={skipToNext}
+            onClick={() => setNextConfirmOpen(true)}
             className="btn-gradient flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-extrabold text-white shadow-xl hover:scale-105 transition tracking-wider uppercase"
           >
             NEXT
@@ -487,6 +489,15 @@ export default function AudioChatContainer({
         isOpen={reportOpen}
         onClose={() => setReportOpen(false)}
         onReportSubmitted={() => {
+          skipToNext();
+        }}
+      />
+
+      <ConfirmNextModal
+        isOpen={nextConfirmOpen}
+        onCancel={() => setNextConfirmOpen(false)}
+        onConfirm={() => {
+          setNextConfirmOpen(false);
           skipToNext();
         }}
       />

@@ -20,6 +20,7 @@ import {
   Plus,
 } from "lucide-react";
 import ReportModal from "@/components/ReportModal";
+import ConfirmNextModal from "@/components/ConfirmNextModal";
 import type { ChatPayload, MessageType, SystemPayload } from "@/lib/protocol";
 
 const BEAUTIFUL_STICKERS = [
@@ -72,6 +73,7 @@ export default function TextChatContainer({
   const [attachmentOpen, setAttachmentOpen] = useState(false);
   const [showCameraModal, setShowCameraModal] = useState(false);
   const [reportOpen, setReportOpen] = useState(false);
+  const [nextConfirmOpen, setNextConfirmOpen] = useState(false);
   const [partnerTyping, setPartnerTyping] = useState(false);
 
   const listRef = useRef<HTMLDivElement | null>(null);
@@ -544,7 +546,7 @@ export default function TextChatContainer({
         {/* Centered "Find New Partner" Pill Button Bar (Matching Reference Image) */}
         <div className="flex items-center justify-center py-2.5 bg-white/60 border-t border-purple-100 z-20">
           <button
-            onClick={skipToNext}
+            onClick={() => setNextConfirmOpen(true)}
             className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#ec4899] to-[#d946ef] hover:from-[#db2777] hover:to-[#c026d3] text-white font-extrabold text-xs sm:text-sm px-6 py-2.5 rounded-full shadow-lg shadow-pink-500/25 transition transform hover:scale-105 active:scale-95 tracking-wide"
           >
             <RefreshCw size={15} className="animate-spin-slow" />
@@ -722,6 +724,15 @@ export default function TextChatContainer({
         isOpen={reportOpen}
         onClose={() => setReportOpen(false)}
         onReportSubmitted={() => {
+          skipToNext();
+        }}
+      />
+
+      <ConfirmNextModal
+        isOpen={nextConfirmOpen}
+        onCancel={() => setNextConfirmOpen(false)}
+        onConfirm={() => {
+          setNextConfirmOpen(false);
           skipToNext();
         }}
       />
