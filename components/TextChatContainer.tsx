@@ -311,7 +311,6 @@ export default function TextChatContainer({
         <div className="flex items-center gap-3">
           <div className="relative flex h-11 w-11 items-center justify-center rounded-full bg-white/20 border-2 border-white/40 shadow-inner overflow-hidden">
             <span className="text-2xl leading-none select-none" aria-hidden="true">🧑</span>
-            <span className={`absolute bottom-0.5 right-0.5 h-3 w-3 rounded-full border-2 border-purple-600 ${isConnected ? "bg-emerald-400" : "bg-amber-400"}`} />
           </div>
 
           <div className="flex flex-col text-left">
