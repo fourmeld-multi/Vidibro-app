@@ -48,9 +48,18 @@ export default function Navbar({
     <>
     <header className="relative sticky top-0 z-50 bg-[#090518]/95 shadow-md">
       {/* Glowing gradient bottom border to separate the bar from the page,
-          instead of a flat 10%-opacity border that barely reads on black. */}
-      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-purple-400/70 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-purple-400/70 to-transparent blur-[3px]" />
+          instead of a flat 10%-opacity border that barely reads on black.
+          Hidden while the mobile drawer is open: the line then falls between
+          the bar and the drawer, cutting a stray glowing streak across a panel
+          that is already visually attached to the header. The second copy is a
+          real blur filter, so dropping both also spares a full-width filter
+          pass for as long as the menu is up. */}
+      {!mobileMenuOpen && (
+        <>
+          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-purple-400/70 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-purple-400/70 to-transparent blur-[3px]" />
+        </>
+      )}
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-3.5">
         
         {/* Brand Logo */}
