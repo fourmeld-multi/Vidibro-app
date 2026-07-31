@@ -118,6 +118,10 @@ export function useWebRTC() {
   // phone call. There is no browser API that reports "user is on a cellular
   // call", so losing the microphone is the signal we actually get.
   const [deviceBusy, setDeviceBusy] = useState(false);
+  // Distinct from permissionDenied: the user chose "Never allow", so the
+  // browser will not show a prompt again no matter how many times they click.
+  // Only a change in site settings can undo it.
+  const [permissionBlocked, setPermissionBlocked] = useState(false);
   // Counts 4 -> 1 before we actually enter the matchmaking queue, so the
   // switch between strangers has a visible beat instead of snapping.
   const [matchCountdown, setMatchCountdown] = useState(0);
@@ -364,15 +368,42 @@ export function useWebRTC() {
     const isDenied = (e: unknown) => errName(e) === "NotAllowedError" || errName(e) === "SecurityError";
     const isBusy = (e: unknown) => errName(e) === "NotReadableError" || errName(e) === "AbortError";
 
+    /**
+     * Tell a one-off decline apart from a standing "Never allow".
+     *
+     * It matters because they need opposite handling: a one-off decline just
+     * means try again, and clicking Start will re-prompt normally. A standing
+     * block means the browser will never prompt again, so re-asking is futile
+     * and the only way forward is site settings.
+     *
+     * The Permissions API answers this directly where it exists. Safari does
+     * not support querying camera/microphone, so we fall back to timing: a
+     * prompt the user actually saw takes at least a moment to dismiss, while a
+     * standing block rejects more or less instantly.
+     */
+    const isPermanentBlock = async (elapsedMs: number) => {
+      try {
+        const name = (mode === "audio" ? "microphone" : "camera") as PermissionName;
+        const status = await navigator.permissions.query({ name });
+        if (status.state === "denied") return true;
+        if (status.state === "prompt") return false;
+      } catch {
+        // Permissions API unavailable or doesn't know this name — use timing.
+      }
+      return elapsedMs < 300;
+    };
+
     const accept = (stream: MediaStream) => {
       localStreamRef.current = stream;
       setLocalStream(stream);
       setPermissionDenied(false);
+      setPermissionBlocked(false);
       setDeviceBusy(false);
       watchAudioInterruption(stream);
       return stream;
     };
 
+    const startedAt = Date.now();
     try {
       return accept(await navigator.mediaDevices.getUserMedia(constraints));
     } catch (err) {
@@ -381,6 +412,7 @@ export function useWebRTC() {
         throw new Error("Microphone is in use by another app or call");
       }
       if (isDenied(err)) {
+        if (await isPermanentBlock(Date.now() - startedAt)) setPermissionBlocked(true);
         setPermissionDenied(true);
         throw new Error("Camera & Microphone permission denied");
       }
@@ -639,6 +671,7 @@ export function useWebRTC() {
     remoteStream,
     dataChannelOpen,
     permissionDenied,
+    permissionBlocked,
     deviceBusy,
     matchCountdown,
     joinQueue,

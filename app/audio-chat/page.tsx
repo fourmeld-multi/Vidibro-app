@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import AudioChatContainer from "@/components/AudioChatContainer";
 import CallInterruptedScreen from "@/components/CallInterruptedScreen";
+import PermissionBlockedScreen from "@/components/PermissionBlockedScreen";
 import { useWebRTC } from "@/hooks/useWebRTC";
 
 export default function AudioChatPage() {
@@ -15,6 +16,7 @@ export default function AudioChatPage() {
     remoteStream,
     dataChannelOpen,
     permissionDenied,
+    permissionBlocked,
     deviceBusy,
     joinQueue,
     leaveMatch,
@@ -33,11 +35,18 @@ export default function AudioChatPage() {
   // straight back to the landing page. Tapping Start again re-asks; declining
   // again sends them back again.
   useEffect(() => {
-    if (permissionDenied) {
+    if (permissionDenied && !permissionBlocked) {
       leaveMatch();
       router.replace("/");
     }
-  }, [permissionDenied, leaveMatch, router]);
+  }, [permissionDenied, permissionBlocked, leaveMatch, router]);
+
+  // A standing "Never allow" is the one case we don't bounce home for. The
+  // browser won't re-prompt, so sending them back would put them in a loop of
+  // clicking Start and landing straight back on the home page with no clue why.
+  useEffect(() => {
+    if (permissionBlocked) leaveMatch();
+  }, [permissionBlocked, leaveMatch]);
 
   // A phone call owns the mic: stop matchmaking immediately rather than pairing
   // this user with a stranger who won't be able to hear them.
@@ -65,6 +74,7 @@ export default function AudioChatPage() {
       />
 
       {deviceBusy && <CallInterruptedScreen mode="audio" onHome={handleLeave} />}
+      {permissionBlocked && <PermissionBlockedScreen mode="audio" onHome={handleLeave} />}
     </div>
   );
 }
