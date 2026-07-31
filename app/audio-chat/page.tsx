@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import AudioChatContainer from "@/components/AudioChatContainer";
-import PermissionDeniedModal from "@/components/PermissionDeniedModal";
+import CallInterruptedScreen from "@/components/CallInterruptedScreen";
 import { useWebRTC } from "@/hooks/useWebRTC";
 
 export default function AudioChatPage() {
@@ -15,7 +15,7 @@ export default function AudioChatPage() {
     remoteStream,
     dataChannelOpen,
     permissionDenied,
-    requestPermissions,
+    deviceBusy,
     joinQueue,
     leaveMatch,
     skipToNext,
@@ -27,6 +27,23 @@ export default function AudioChatPage() {
     joinQueue("audio").catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // No "allow camera" retry prompt. If they decline the browser permission
+  // there is nothing useful for us to show — the page cannot work — so they go
+  // straight back to the landing page. Tapping Start again re-asks; declining
+  // again sends them back again.
+  useEffect(() => {
+    if (permissionDenied) {
+      leaveMatch();
+      router.replace("/");
+    }
+  }, [permissionDenied, leaveMatch, router]);
+
+  // A phone call owns the mic: stop matchmaking immediately rather than pairing
+  // this user with a stranger who won't be able to hear them.
+  useEffect(() => {
+    if (deviceBusy) leaveMatch();
+  }, [deviceBusy, leaveMatch]);
 
   function handleLeave() {
     leaveMatch();
@@ -47,11 +64,7 @@ export default function AudioChatPage() {
         leaveMatch={handleLeave}
       />
 
-      <PermissionDeniedModal
-        isOpen={permissionDenied}
-        mode="audio"
-        onRetry={() => requestPermissions("audio")}
-      />
+      {deviceBusy && <CallInterruptedScreen mode="audio" onHome={handleLeave} />}
     </div>
   );
 }

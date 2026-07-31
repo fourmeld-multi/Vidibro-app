@@ -114,6 +114,10 @@ export function useWebRTC() {
   const [dataChannelOpen, setDataChannelOpen] = useState(false);
   const [mode, setMode] = useState<ChatMode>("video");
   const [permissionDenied, setPermissionDenied] = useState(false);
+  // The mic was taken away by something else on the device — in practice a
+  // phone call. There is no browser API that reports "user is on a cellular
+  // call", so losing the microphone is the signal we actually get.
+  const [deviceBusy, setDeviceBusy] = useState(false);
   // Counts 4 -> 1 before we actually enter the matchmaking queue, so the
   // switch between strangers has a visible beat instead of snapping.
   const [matchCountdown, setMatchCountdown] = useState(0);
@@ -123,6 +127,7 @@ export function useWebRTC() {
   const dcRef = useRef<RTCDataChannel | null>(null);
   const roomIdRef = useRef<string | null>(null);
   const modeRef = useRef<ChatMode>("video");
+  const muteGraceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pendingCandidatesRef = useRef<RTCIceCandidateInit[]>([]);
   const listenersRef = useRef<Map<MessageType, Set<Listener>>>(new Map());
   const localStreamRef = useRef<MediaStream | null>(null);
@@ -283,6 +288,52 @@ export function useWebRTC() {
     pendingCandidatesRef.current = [];
   }, []);
 
+  /**
+   * Watch the microphone for being seized by another app.
+   *
+   * A cellular call is not observable from the browser — there is no API for
+   * it. What IS observable is the consequence: iOS and Android hand the mic to
+   * the phone call, which mutes (or ends) our audio track. That covers both
+   * "already on a call when they open the page" and "a call arrives mid-chat"
+   * with one mechanism.
+   *
+   * The 1.5s grace matters. A track can mute for a beat during a route change
+   * (headphones connecting, speaker toggle) and recover on its own; acting on
+   * the first mute event would throw people out of working calls. We only
+   * treat it as a real interruption if the mic is still gone after the grace.
+   */
+  const watchAudioInterruption = useCallback((stream: MediaStream) => {
+    const track = stream.getAudioTracks()[0];
+    if (!track) return;
+
+    const clearGrace = () => {
+      if (muteGraceRef.current) {
+        clearTimeout(muteGraceRef.current);
+        muteGraceRef.current = null;
+      }
+    };
+
+    const flagBusy = () => {
+      clearGrace();
+      muteGraceRef.current = setTimeout(() => {
+        // readyToMatchRef guards against firing during our own teardown, where
+        // we stop these tracks deliberately.
+        if (readyToMatchRef.current && (track.muted || track.readyState === "ended")) {
+          setDeviceBusy(true);
+        }
+      }, 1500);
+    };
+
+    track.onmute = flagBusy;
+    track.onunmute = clearGrace;
+    track.onended = () => {
+      if (readyToMatchRef.current) setDeviceBusy(true);
+    };
+
+    // Already muted at acquisition == the call started before they got here.
+    if (track.muted) flagBusy();
+  }, []);
+
   const ensureLocalStream = useCallback(async (mode: ChatMode) => {
     if (mode === "text") {
       setPermissionDenied(false);
@@ -303,28 +354,52 @@ export function useWebRTC() {
     }
 
     const constraints = mode === "audio" ? AUDIO_ONLY_CONSTRAINTS : VIDEO_CONSTRAINTS;
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+
+    // These three outcomes need to be told apart, because they mean different
+    // things to the user. "Denied" is a choice they made. "Busy" is the device
+    // refusing because a phone call already owns the mic. Anything else is
+    // usually the constraints being too specific for this hardware, which is
+    // the only case worth retrying with looser ones.
+    const errName = (e: unknown) => (e as DOMException | undefined)?.name ?? "";
+    const isDenied = (e: unknown) => errName(e) === "NotAllowedError" || errName(e) === "SecurityError";
+    const isBusy = (e: unknown) => errName(e) === "NotReadableError" || errName(e) === "AbortError";
+
+    const accept = (stream: MediaStream) => {
       localStreamRef.current = stream;
       setLocalStream(stream);
       setPermissionDenied(false);
+      setDeviceBusy(false);
+      watchAudioInterruption(stream);
       return stream;
-    } catch {
+    };
+
+    try {
+      return accept(await navigator.mediaDevices.getUserMedia(constraints));
+    } catch (err) {
+      if (isBusy(err)) {
+        setDeviceBusy(true);
+        throw new Error("Microphone is in use by another app or call");
+      }
+      if (isDenied(err)) {
+        setPermissionDenied(true);
+        throw new Error("Camera & Microphone permission denied");
+      }
+
       if (mode === "video") {
         try {
-          const fallbackStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: true });
-          localStreamRef.current = fallbackStream;
-          setLocalStream(fallbackStream);
-          setPermissionDenied(false);
-          return fallbackStream;
-        } catch {
+          return accept(await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: true }));
+        } catch (err2) {
+          if (isBusy(err2)) {
+            setDeviceBusy(true);
+            throw new Error("Microphone is in use by another app or call");
+          }
           try {
-            const basicStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-            localStreamRef.current = basicStream;
-            setLocalStream(basicStream);
-            setPermissionDenied(false);
-            return basicStream;
-          } catch {
+            return accept(await navigator.mediaDevices.getUserMedia({ video: true, audio: true }));
+          } catch (err3) {
+            if (isBusy(err3)) {
+              setDeviceBusy(true);
+              throw new Error("Microphone is in use by another app or call");
+            }
             setPermissionDenied(true);
             throw new Error("Camera & Microphone permission denied");
           }
@@ -333,7 +408,7 @@ export function useWebRTC() {
       setPermissionDenied(true);
       throw new Error("Microphone permission denied");
     }
-  }, []);
+  }, [watchAudioInterruption]);
 
   /**
    * Wait out a visible 4..1 countdown, then enter the matchmaking queue.
@@ -394,6 +469,10 @@ export function useWebRTC() {
       countdownTimerRef.current = null;
     }
     setMatchCountdown(0);
+    if (muteGraceRef.current) {
+      clearTimeout(muteGraceRef.current);
+      muteGraceRef.current = null;
+    }
     teardownPeerConnection();
     socketRef.current?.emit("queue:leave");
     localStreamRef.current?.getTracks().forEach((t) => t.stop());
@@ -551,20 +630,6 @@ export function useWebRTC() {
     }
   }, []);
 
-  const requestPermissions = useCallback(
-    async (targetMode?: ChatMode) => {
-      const modeToRequest = targetMode || modeRef.current || "video";
-      try {
-        await ensureLocalStream(modeToRequest);
-        setPermissionDenied(false);
-        joinQueue(modeToRequest);
-      } catch {
-        setPermissionDenied(true);
-      }
-    },
-    [ensureLocalStream, joinQueue]
-  );
-
   return {
     connectionState,
     role,
@@ -574,8 +639,8 @@ export function useWebRTC() {
     remoteStream,
     dataChannelOpen,
     permissionDenied,
+    deviceBusy,
     matchCountdown,
-    requestPermissions,
     joinQueue,
     leaveMatch,
     skipToNext,
