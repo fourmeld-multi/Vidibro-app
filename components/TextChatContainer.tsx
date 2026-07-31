@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import ReportModal from "@/components/ReportModal";
 import ConfirmNextModal from "@/components/ConfirmNextModal";
-import type { ChatPayload, MessageType } from "@/lib/protocol";
+import type { ChatPayload, MessageType, SystemPayload } from "@/lib/protocol";
 
 const BEAUTIFUL_STICKERS = [
   { id: "unicorn", emoji: "🦄", label: "Magic Unicorn" },
@@ -74,9 +74,14 @@ export default function TextChatContainer({
   const [showCameraModal, setShowCameraModal] = useState(false);
   const [reportOpen, setReportOpen] = useState(false);
   const [nextConfirmOpen, setNextConfirmOpen] = useState(false);
+  const [partnerTyping, setPartnerTyping] = useState(false);
 
   const listRef = useRef<HTMLDivElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  // Hides the partner's "typing…" bubble once they've paused.
+  const typingHideRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Throttles how often we announce our own typing over the data channel.
+  const lastTypingSentRef = useRef(0);
   const localVideoRef = useRef<HTMLVideoElement | null>(null);
   const cameraStreamRef = useRef<MediaStream | null>(null);
 
@@ -86,6 +91,7 @@ export default function TextChatContainer({
   useEffect(() => {
     if (connectionState === "waiting" || connectionState === "idle") {
       setMessages([]);
+      setPartnerTyping(false);
     }
   }, [connectionState]);
 
@@ -104,6 +110,10 @@ export default function TextChatContainer({
 
       // Handle Regular Message
       if (payload.text || payload.imageUrl || payload.sticker) {
+        // Their message landed, so they've stopped typing that thought.
+        setPartnerTyping(false);
+        if (typingHideRef.current) clearTimeout(typingHideRef.current);
+
         const now = new Date();
         const timeStr = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
@@ -127,6 +137,34 @@ export default function TextChatContainer({
       }
     });
   }, [subscribe, sendMessage]);
+
+  // Partner's typing signal. The peer sends a lightweight "system" envelope
+  // over the same data channel as chat, so this costs no extra plumbing.
+  useEffect(() => {
+    return subscribe("system", (msg) => {
+      const payload = msg.payload as SystemPayload;
+      if (payload.event !== "typing") return;
+      setPartnerTyping(true);
+      if (typingHideRef.current) clearTimeout(typingHideRef.current);
+      // They stop sending pings once they stop typing, so time the bubble out.
+      typingHideRef.current = setTimeout(() => setPartnerTyping(false), 2500);
+    });
+  }, [subscribe]);
+
+  useEffect(() => {
+    return () => {
+      if (typingHideRef.current) clearTimeout(typingHideRef.current);
+    };
+  }, []);
+
+  function notifyTyping() {
+    if (!isConnected) return;
+    const now = Date.now();
+    // One ping per second is plenty to keep their bubble alive.
+    if (now - lastTypingSentRef.current < 1000) return;
+    lastTypingSentRef.current = now;
+    sendMessage<SystemPayload>("system", { event: "typing" });
+  }
 
   // Auto scroll message feed
   useEffect(() => {
@@ -456,6 +494,29 @@ export default function TextChatContainer({
                 )}
               </div>
             ))}
+
+            {/* Partner typing indicator */}
+            {partnerTyping && (
+              <motion.div
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="flex justify-start"
+              >
+                <div className="flex items-center gap-1.5 rounded-2xl rounded-bl-none bg-white border border-purple-100 px-4 py-3 shadow-sm">
+                  {[0, 1, 2].map((i) => (
+                    <span
+                      key={i}
+                      className="h-2 w-2 rounded-full bg-purple-400"
+                      style={{
+                        animation: "vidibroTypingBounce 1.2s infinite ease-in-out",
+                        animationDelay: `${i * 0.18}s`,
+                      }}
+                    />
+                  ))}
+                </div>
+              </motion.div>
+            )}
           </div>
         )}
 
@@ -578,7 +639,10 @@ export default function TextChatContainer({
           <input
             type="text"
             value={draft}
-            onChange={(e) => setDraft(e.target.value)}
+            onChange={(e) => {
+              setDraft(e.target.value);
+              notifyTyping();
+            }}
             onFocus={() => {
               setAttachmentOpen(false);
               setStickersOpen(false);

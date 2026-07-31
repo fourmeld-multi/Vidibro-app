@@ -193,3 +193,15 @@ body {
   border-radius: 999px;
 }
 
+
+/* Typing indicator dots (text chat) */
+@keyframes vidibroTypingBounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  30% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
