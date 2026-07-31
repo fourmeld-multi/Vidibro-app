@@ -22,7 +22,7 @@ export default function FinalCTASection({ lang = "EN" }: { lang?: LanguageCode }
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.96 }}
           onClick={() => router.push("/video-chat")}
-          className="btn-gradient glow-pulse mt-2 flex items-center justify-center gap-2.5 rounded-full px-8 py-4 text-base sm:text-lg font-extrabold text-white shadow-2xl shadow-purple-500/30 transition"
+          className="btn-gradient mt-2 flex items-center justify-center gap-2.5 rounded-full px-8 py-4 text-base sm:text-lg font-extrabold text-white shadow-2xl shadow-purple-500/30 transition"
         >
           <Video size={20} />
           {t.ctaButton}

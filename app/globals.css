@@ -172,14 +172,11 @@ body {
   animation: blob-float-reverse 18s ease-in-out infinite;
 }
 
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 25px 5px rgba(139, 92, 246, 0.4); }
-  50% { box-shadow: 0 0 45px 12px rgba(236, 72, 153, 0.6); }
-}
-
-.glow-pulse {
-  animation: pulse-glow 2.8s ease-in-out infinite;
-}
+/* The pulsing CTA glow used to live here. It animated box-shadow, which is one
+   of the properties the compositor cannot take, so every frame repainted the
+   button and the whole area its glow reached — forever, on the busiest button
+   on the landing page. The buttons keep their static shadow-purple-500/30
+   instead, which costs nothing. */
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {

@@ -132,7 +132,7 @@ export default function Home() {
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
               onClick={() => router.push("/video-chat")}
-              className="btn-gradient glow-pulse flex w-full sm:w-auto items-center justify-center gap-3 rounded-full px-9 py-4 text-base sm:text-lg font-extrabold text-white shadow-2xl shadow-purple-500/30 transition uppercase tracking-wider"
+              className="btn-gradient flex w-full sm:w-auto items-center justify-center gap-3 rounded-full px-9 py-4 text-base sm:text-lg font-extrabold text-white shadow-2xl shadow-purple-500/30 transition uppercase tracking-wider"
             >
               <Video size={22} />
               {t.startVideo}
