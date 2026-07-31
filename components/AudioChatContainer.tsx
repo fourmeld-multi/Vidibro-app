@@ -274,15 +274,13 @@ export default function AudioChatContainer({
           <div className="relative flex h-32 w-32 sm:h-44 sm:w-44 items-center justify-center">
             {isConnected && (
               <>
-                <motion.span
-                  animate={{ scale: [1, 2.2, 1], opacity: [0.6, 0.1, 0.6] }}
-                  transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-                  className="absolute inset-0 rounded-full bg-purple-500/30 border border-purple-400/40"
+                <span
+                  className="vidibro-pulse-ring absolute inset-0 rounded-full bg-purple-500/30 border border-purple-400/40"
+                  style={{ "--ring-scale": 2.2, "--ring-max": 0.6, "--ring-min": 0.1, "--ring-duration": "2.5s" } as React.CSSProperties}
                 />
-                <motion.span
-                  animate={{ scale: [1, 1.7, 1], opacity: [0.8, 0.2, 0.8] }}
-                  transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-                  className="absolute inset-0 rounded-full bg-pink-500/30 border border-pink-400/40"
+                <span
+                  className="vidibro-pulse-ring absolute inset-0 rounded-full bg-pink-500/30 border border-pink-400/40"
+                  style={{ "--ring-scale": 1.7, "--ring-max": 0.8, "--ring-min": 0.2, "--ring-duration": "1.8s" } as React.CSSProperties}
                 />
               </>
             )}

@@ -225,6 +225,24 @@ body {
   }
 }
 
+/* Pulsing rings on the audio-call screen. These run for the entire duration of
+   a call, so they are CSS rather than framer-motion: an infinite JS animation
+   writes inline styles from requestAnimationFrame on the main thread the whole
+   time, which is the thread the call itself needs. */
+@keyframes vidibroPulseRing {
+  0%, 100% { transform: scale(1); opacity: var(--ring-max, 0.6); }
+  50% { transform: scale(var(--ring-scale, 2.2)); opacity: var(--ring-min, 0.1); }
+}
+
+.vidibro-pulse-ring {
+  animation: vidibroPulseRing var(--ring-duration, 2.5s) ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vidibro-pulse-ring { animation: none; }
+}
+
 /* FAQ answer reveal — opacity/transform only, so it stays off the main thread. */
 .vidibro-faq-reveal {
   animation: vidibroFaqReveal 0.18s ease-out;

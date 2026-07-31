@@ -139,7 +139,7 @@ export default function VideoContainer({
     if (!audioTrack || !audioTrack.enabled) return;
 
     let audioContext: AudioContext | null = null;
-    let animationId: number | null = null;
+    let intervalId: ReturnType<typeof setInterval> | null = null;
 
     try {
       const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
@@ -151,6 +151,12 @@ export default function VideoContainer({
 
       const dataArray = new Uint8Array(analyser.frequencyBinCount);
 
+      // Sampled on a timer rather than requestAnimationFrame. A "is someone
+      // talking" ring does not need 60 updates a second, and rAF meant we woke
+      // up on every single frame of a live video call to run an FFT read and a
+      // 256-iteration loop on the main thread — competing with the encoder and
+      // decoder for exactly the frames that matter. 10Hz is still visually
+      // instant and costs ~6x less.
       const checkVolume = () => {
         analyser.getByteFrequencyData(dataArray);
         let sum = 0;
@@ -159,16 +165,16 @@ export default function VideoContainer({
         }
         const average = sum / dataArray.length;
         setIsSpeaking(average > 10);
-        animationId = requestAnimationFrame(checkVolume);
       };
 
       checkVolume();
+      intervalId = setInterval(checkVolume, 100);
     } catch {
       // Ignore if Web Audio API unavailable
     }
 
     return () => {
-      if (animationId) cancelAnimationFrame(animationId);
+      if (intervalId) clearInterval(intervalId);
       if (audioContext && audioContext.state !== "closed") {
         audioContext.close();
       }
@@ -553,7 +559,7 @@ export default function VideoContainer({
               )}
 
               {/* Top-Left Stranger Name Badge */}
-              <div className="absolute top-4 left-4 z-30 flex items-center gap-2 bg-black/65 backdrop-blur-xl px-3 py-1.5 rounded-full border border-white/15 shadow-xl">
+              <div className="absolute top-4 left-4 z-30 flex items-center gap-2 bg-black/65 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/15 shadow-xl">
                 <span className={`h-2.5 w-2.5 rounded-full ${isConnected ? "bg-emerald-400 animate-pulse" : "bg-yellow-400"}`} />
                 <span className="text-xs font-bold text-white">Stranger</span>
               </div>
@@ -564,7 +570,7 @@ export default function VideoContainer({
                   e.stopPropagation();
                   toggleSpeaker();
                 }}
-                className={`absolute top-4 right-4 z-30 flex h-10 w-10 items-center justify-center rounded-full transition border border-white/20 shadow-2xl backdrop-blur-xl ${
+                className={`absolute top-4 right-4 z-30 flex h-10 w-10 items-center justify-center rounded-full transition border border-white/20 shadow-2xl backdrop-blur-sm ${
                   speakerEnabled ? "bg-black/75 hover:bg-black/90 text-purple-300" : "bg-red-500 text-white"
                 }`}
                 title={speakerEnabled ? "Mute Speaker" : "Unmute Speaker"}
@@ -590,7 +596,7 @@ export default function VideoContainer({
               )}
 
               {/* Top-Left You Badge on Your Video Screen */}
-              <div className="absolute top-4 left-4 z-30 flex items-center gap-2 bg-black/65 backdrop-blur-xl px-3 py-1.5 rounded-full border border-white/15 shadow-xl">
+              <div className="absolute top-4 left-4 z-30 flex items-center gap-2 bg-black/65 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/15 shadow-xl">
                 {micEnabled ? (
                   <Mic size={14} className="text-emerald-400" />
                 ) : (
@@ -614,7 +620,7 @@ export default function VideoContainer({
                   e.stopPropagation();
                   flipCamera();
                 }}
-                className="absolute top-4 right-4 z-30 flex h-10 w-10 items-center justify-center rounded-full bg-black/75 hover:bg-black/95 text-cyan-300 backdrop-blur-xl border border-white/20 shadow-2xl transition transform hover:scale-110"
+                className="absolute top-4 right-4 z-30 flex h-10 w-10 items-center justify-center rounded-full bg-black/75 hover:bg-black/95 text-cyan-300 backdrop-blur-sm border border-white/20 shadow-2xl transition transform hover:scale-110"
                 title="Flip Camera"
               >
                 <SwitchCamera size={18} />
@@ -670,7 +676,7 @@ export default function VideoContainer({
             />
 
             {/* Static Top-Left Vidibro Logo Badge */}
-            <div className="absolute top-3 left-3 z-30 flex items-center gap-2 bg-black/65 backdrop-blur-xl px-3 py-1.5 rounded-full border border-white/15 shadow-xl pointer-events-none">
+            <div className="absolute top-3 left-3 z-30 flex items-center gap-2 bg-black/65 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/15 shadow-xl pointer-events-none">
               <div className="btn-gradient flex h-7 w-7 items-center justify-center rounded-xl shadow-md">
                 <LogoMark size={14} className="text-white" />
               </div>
@@ -687,7 +693,7 @@ export default function VideoContainer({
                   e.stopPropagation();
                   setReportOpen(true);
                 }}
-                className="absolute top-3 right-16 z-50 flex h-10 w-10 items-center justify-center rounded-full transition border border-red-400/40 bg-black/75 hover:bg-red-500/80 text-red-400 hover:text-white shadow-2xl backdrop-blur-xl"
+                className="absolute top-3 right-16 z-50 flex h-10 w-10 items-center justify-center rounded-full transition border border-red-400/40 bg-black/75 hover:bg-red-500/80 text-red-400 hover:text-white shadow-2xl backdrop-blur-sm"
                 title="Report Stranger"
                 aria-label="Report Stranger"
               >
@@ -700,7 +706,7 @@ export default function VideoContainer({
                 e.stopPropagation();
                 toggleSpeaker();
               }}
-              className={`absolute top-3 right-3 z-50 flex h-10 w-10 items-center justify-center rounded-full transition border border-white/20 shadow-2xl backdrop-blur-xl ${
+              className={`absolute top-3 right-3 z-50 flex h-10 w-10 items-center justify-center rounded-full transition border border-white/20 shadow-2xl backdrop-blur-sm ${
                 speakerEnabled ? "bg-black/75 hover:bg-black/90 text-purple-300" : "bg-red-500 text-white"
               }`}
               title={speakerEnabled ? "Mute Speaker" : "Unmute Speaker"}
@@ -710,7 +716,7 @@ export default function VideoContainer({
 
             {/* Floating Speech Subtitles */}
             {remoteSubtitle && (
-              <div className="absolute bottom-24 left-1/2 -translate-x-1/2 max-w-[85%] z-20 rounded-2xl bg-black/80 backdrop-blur-md px-4 py-2 text-center text-xs font-medium text-white border border-white/15 pointer-events-none">
+              <div className="absolute bottom-24 left-1/2 -translate-x-1/2 max-w-[85%] z-20 rounded-2xl bg-black/80 backdrop-blur-sm px-4 py-2 text-center text-xs font-medium text-white border border-white/15 pointer-events-none">
                 {remoteSubtitle}
               </div>
             )}
@@ -728,7 +734,7 @@ export default function VideoContainer({
                     className={`rounded-2xl px-3.5 py-2 text-xs sm:text-sm font-medium shadow-2xl leading-relaxed break-words [word-break:break-word] border ${
                       msg.mine
                         ? "bg-gradient-to-r from-purple-600/90 to-pink-600/90 text-white rounded-br-none border-purple-400/30 self-end"
-                        : "bg-black/75 backdrop-blur-md text-white rounded-bl-none border-white/20 self-start"
+                        : "bg-black/75 backdrop-blur-sm text-white rounded-bl-none border-white/20 self-start"
                     }`}
                   >
                     <span className="text-[9px] block opacity-70 mb-0.5 font-bold">
@@ -767,14 +773,14 @@ export default function VideoContainer({
                   e.stopPropagation();
                   flipCamera();
                 }}
-                className="absolute top-1 right-1 flex h-5 w-5 items-center justify-center rounded-full bg-black/75 text-cyan-300 backdrop-blur-md border border-white/20 z-40 shadow-md"
+                className="absolute top-1 right-1 flex h-5 w-5 items-center justify-center rounded-full bg-black/75 text-cyan-300 backdrop-blur-sm border border-white/20 z-40 shadow-md"
                 title="Flip Camera"
               >
                 <SwitchCamera size={11} />
               </button>
 
               {/* Mic Indicator on Mobile PIP Screen */}
-              <div className="absolute bottom-1 left-1 flex items-center gap-1 bg-black/70 backdrop-blur-md px-1.5 py-0.5 rounded-md text-[8px] font-bold text-white border border-white/10 pointer-events-none">
+              <div className="absolute bottom-1 left-1 flex items-center gap-1 bg-black/70 backdrop-blur-sm px-1.5 py-0.5 rounded-md text-[8px] font-bold text-white border border-white/10 pointer-events-none">
                 {micEnabled ? <Mic size={9} className="text-emerald-400" /> : <MicOff size={9} className="text-red-400" />}
                 <span>You</span>
                 {isSpeaking && micEnabled && <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-bounce ml-0.5" />}
@@ -804,7 +810,7 @@ export default function VideoContainer({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 25 }}
                 transition={{ duration: 0.25 }}
-                className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 sm:gap-3 bg-black/80 backdrop-blur-2xl px-4 py-2.5 rounded-full border border-white/15 shadow-2xl max-w-[95vw]"
+                className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 sm:gap-3 bg-black/80 backdrop-blur-sm px-4 py-2.5 rounded-full border border-white/15 shadow-2xl max-w-[95vw]"
               >
                 {/* 1. Mic Mute / Unmute */}
                 <button
@@ -912,7 +918,7 @@ export default function VideoContainer({
                 initial={{ opacity: 0, y: 15, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 15, scale: 0.9 }}
-                className="absolute bottom-20 sm:bottom-24 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 bg-black/85 backdrop-blur-2xl px-4 py-2.5 rounded-full border border-white/20 shadow-2xl"
+                className="absolute bottom-20 sm:bottom-24 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 bg-black/85 backdrop-blur-sm px-4 py-2.5 rounded-full border border-white/20 shadow-2xl"
               >
                 {EMOJI_REACTIONS.map((r) => (
                   <button
@@ -941,10 +947,10 @@ export default function VideoContainer({
               exit={{ opacity: 0, y: 50, x: 0 }}
               transition={{ duration: 0.25, ease: "easeInOut" }}
               onClick={(e) => e.stopPropagation()}
-              className="absolute bottom-0 left-0 right-0 md:relative md:bottom-auto md:left-auto md:right-auto md:w-80 lg:w-96 h-[60%] md:h-full z-40 flex flex-col bg-black/60 md:bg-[#090518]/95 backdrop-blur-md md:backdrop-blur-3xl border-t md:border-t-0 md:border-l border-white/20 shadow-2xl flex-shrink-0"
+              className="absolute bottom-0 left-0 right-0 md:relative md:bottom-auto md:left-auto md:right-auto md:w-80 lg:w-96 h-[60%] md:h-full z-40 flex flex-col bg-black/60 md:bg-[#090518]/95 backdrop-blur-sm md:backdrop-blur-sm border-t md:border-t-0 md:border-l border-white/20 shadow-2xl flex-shrink-0"
             >
               {/* Chat Header */}
-              <div className="flex items-center justify-between border-b border-white/15 px-4 py-3 bg-black/40 backdrop-blur-md">
+              <div className="flex items-center justify-between border-b border-white/15 px-4 py-3 bg-black/40 backdrop-blur-sm">
                 <div className="flex items-center gap-2">
                   <MessageSquare size={16} className="text-cyan-400" />
                   <span className="text-sm font-bold text-white">In-call messages</span>
@@ -984,7 +990,7 @@ export default function VideoContainer({
                       className={`max-w-[85%] rounded-2xl px-3.5 py-2 text-xs leading-relaxed break-words [word-break:break-word] overflow-hidden ${
                         m.mine
                           ? "btn-gradient text-white rounded-br-none font-bold shadow-lg"
-                          : "bg-black/65 text-white rounded-bl-none border border-white/20 backdrop-blur-md shadow-lg"
+                          : "bg-black/65 text-white rounded-bl-none border border-white/20 backdrop-blur-sm shadow-lg"
                       }`}
                     >
                       <span>{m.text}</span>
