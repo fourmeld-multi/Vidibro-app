@@ -46,7 +46,7 @@ export default function Navbar({
 
   return (
     <>
-    <header className="relative sticky top-0 z-50 backdrop-blur-sm bg-[#090518]/95 shadow-md">
+    <header className="relative sticky top-0 z-50 bg-[#090518]/95 shadow-md">
       {/* Glowing gradient bottom border to separate the bar from the page,
           instead of a flat 10%-opacity border that barely reads on black. */}
       <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-purple-400/70 to-transparent" />
@@ -87,7 +87,7 @@ export default function Navbar({
           <div className="relative" ref={langRef}>
             <button
               onClick={() => setLangOpen((v) => !v)}
-              className="flex items-center gap-1.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 px-3 py-1 text-xs font-semibold text-purple-100 backdrop-blur-md transition"
+              className="flex items-center gap-1.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 px-3 py-1 text-xs font-semibold text-purple-100 transition"
             >
               <span>{selectedItem.code}</span>
               <span className="text-[9px] text-purple-300">▼</span>
@@ -136,7 +136,7 @@ export default function Navbar({
         <div className="flex lg:hidden items-center gap-2">
           <button
             onClick={() => setMobileMenuOpen((v) => !v)}
-            className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 border border-white/15 text-white backdrop-blur-md transition hover:bg-white/20"
+            className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 border border-white/15 text-white transition hover:bg-white/20"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -148,10 +148,10 @@ export default function Navbar({
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -15 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.2 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
             className="lg:hidden absolute top-full left-0 right-0 z-50 bg-[#0e0828] border-b border-purple-500/20 px-6 py-8 flex flex-col items-center text-center space-y-4 shadow-2xl rounded-b-3xl"
           >
             <Link
