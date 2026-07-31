@@ -18,10 +18,16 @@ export default function ConfirmNextModal({ isOpen, onCancel, onConfirm }: Props)
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/85 p-4">
+          {/* No backdrop-filter here on purpose — a full-viewport blur is the
+              single most expensive thing this overlay could do on a phone,
+              and over an 85% scrim it isn't even visible. Only opacity and
+              transform are animated (both compositor-only) and kept short,
+              so opening feels immediate rather than "loading". */}
           <motion.div
-            initial={{ scale: 0.92, opacity: 0 }}
+            initial={{ scale: 0.96, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.92, opacity: 0 }}
+            exit={{ scale: 0.96, opacity: 0 }}
+            transition={{ duration: 0.12, ease: "easeOut" }}
             className="relative w-full max-w-xs rounded-3xl bg-[#120836] border border-purple-500/30 p-6 shadow-2xl text-white flex flex-col gap-4 text-center"
           >
             <button
