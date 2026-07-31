@@ -17,7 +17,7 @@ export default function ConfirmNextModal({ isOpen, onCancel, onConfirm }: Props)
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/80 backdrop-blur-xl p-4">
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/85 p-4">
           <motion.div
             initial={{ scale: 0.92, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}

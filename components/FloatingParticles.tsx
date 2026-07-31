@@ -1,7 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 // Fixed (not random-at-runtime) positions so server and client render
 // identically — Math.random() here would cause a hydration mismatch.
 const PARTICLES = [
@@ -15,13 +11,23 @@ const PARTICLES = [
   { top: "40%", left: "22%", size: 2, color: "#f472b6", duration: 9.5, delay: 1 },
 ];
 
+/**
+ * Purely decorative drifting dots.
+ *
+ * Deliberately CSS keyframes rather than framer-motion: eight infinite
+ * JS-driven animations meant requestAnimationFrame was writing inline styles
+ * on the main thread for the entire life of the page, which made every other
+ * interaction on the landing page (menu, accordion, buttons) feel a beat
+ * behind on mobile. Animating only transform+opacity in CSS hands these to
+ * the compositor, so they cost effectively nothing on the main thread.
+ */
 export default function FloatingParticles() {
   return (
     <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
       {PARTICLES.map((p, i) => (
-        <motion.span
+        <span
           key={i}
-          className="absolute rounded-full"
+          className="absolute rounded-full motion-reduce:animate-none"
           style={{
             top: p.top,
             left: p.left,
@@ -29,13 +35,9 @@ export default function FloatingParticles() {
             height: p.size,
             backgroundColor: p.color,
             boxShadow: `0 0 6px ${p.color}`,
-          }}
-          animate={{ y: [0, -18, 0], opacity: [0.15, 0.7, 0.15] }}
-          transition={{
-            duration: p.duration,
-            delay: p.delay,
-            repeat: Infinity,
-            ease: "easeInOut",
+            opacity: 0.15,
+            animation: `vidibroParticleFloat ${p.duration}s ease-in-out ${p.delay}s infinite`,
+            willChange: "transform, opacity",
           }}
         />
       ))}

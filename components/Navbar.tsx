@@ -46,7 +46,7 @@ export default function Navbar({
 
   return (
     <>
-    <header className="relative sticky top-0 z-50 backdrop-blur-2xl bg-[#090518]/90 shadow-md">
+    <header className="relative sticky top-0 z-50 backdrop-blur-sm bg-[#090518]/95 shadow-md">
       {/* Glowing gradient bottom border to separate the bar from the page,
           instead of a flat 10%-opacity border that barely reads on black. */}
       <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-purple-400/70 to-transparent" />
@@ -152,7 +152,7 @@ export default function Navbar({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.2 }}
-            className="lg:hidden absolute top-full left-0 right-0 z-50 bg-[#0e0828] border-b border-purple-500/20 px-6 py-8 flex flex-col items-center text-center space-y-4 shadow-2xl rounded-b-3xl backdrop-blur-3xl"
+            className="lg:hidden absolute top-full left-0 right-0 z-50 bg-[#0e0828] border-b border-purple-500/20 px-6 py-8 flex flex-col items-center text-center space-y-4 shadow-2xl rounded-b-3xl"
           >
             <Link
               href="/blog"

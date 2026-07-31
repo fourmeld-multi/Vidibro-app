@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { TRANSLATIONS, type LanguageCode } from "@/lib/translations";
 
@@ -61,21 +60,18 @@ export default function FAQAccordion({ lang = "EN" }: { lang?: LanguageCode }) {
                 </span>
               </button>
 
-              <AnimatePresence initial={false}>
-                {isOpen && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.25, ease: "easeInOut" }}
-                    className="overflow-hidden"
-                  >
-                    <p className="px-5 sm:px-6 pb-4 sm:pb-5 text-xs sm:text-sm text-purple-200/75 leading-relaxed">
-                      {item.a}
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {/* Previously animated height:0 -> auto via framer-motion, which
+                  makes JS measure the element and write an inline style every
+                  frame, forcing a layout pass each time — the usual cause of
+                  sluggish accordions on mobile. The expand itself is now a
+                  single instant layout change, with only opacity/transform
+                  animated in CSS (both compositor-only), so no JS runs during
+                  the animation at all. */}
+              {isOpen && (
+                <p className="vidibro-faq-reveal px-5 sm:px-6 pb-4 sm:pb-5 text-xs sm:text-sm text-purple-200/75 leading-relaxed">
+                  {item.a}
+                </p>
+              )}
             </div>
           );
         })}
