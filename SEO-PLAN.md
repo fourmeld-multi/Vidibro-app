@@ -58,15 +58,21 @@ make it a safe long-term model (see §6).
 
 | Signal | Value |
 |---|---|
-| Posts | **135** |
-| Article word count | **3,832** |
+| Posts | **35** (Guides 18, Community 8, Comparisons 6, Safety 3) |
+| Typical post | **1,901 words** |
+| Longest flagship guide | 3,832 words |
 | JSON-LD | Article, Organization |
-| Categories | Guides, Comparisons, Safety, Community |
-| Internal links per post | 22 |
-| Images per post | 6 |
+| Internal links per post | 13–22 |
+| Images per post | 4–6, descriptive filenames + alt |
+| Outbound citations | yes — real authorities (e.g. adaa.org) |
 | Related Articles block | yes |
-| Trailing-slash URLs | consistent |
-| Author | "👤 Admin" |
+| Tag sidebar | 15+ tags |
+| Author | "Harris Mesia" — one named human across all posts |
+
+**They have 35 posts, not hundreds.** This is the most important correction in
+this document. A competitor ranking in this niche is doing it with 35 well-made
+articles. Depth is beating volume, which means our blog target should be far
+smaller and far better than originally planned.
 
 Their H2 structure on the flagship guide:
 ```
@@ -203,15 +209,22 @@ and `talk to strangers bengali` are three separate entries in their directory.
 ### Tier 7 — Blog (150)
 Four categories, matching AirTalk's proven split:
 
-**Guides (50)** — how-to and definitional; targets featured snippets
-**Comparisons (30)** — `X vs Y`, `best N alternatives`; highest commercial intent
-**Safety (30)** — trust and E-E-A-T; also the content Google most wants to see
-from a stranger-chat site
-**Community (40)** — emotional long-tail: loneliness, social anxiety, making
-friends, first-conversation nerves. **This is the fastest-ranking category for a
-new domain** and AirTalk's strongest work.
+**Guides (25)** — how-to and definitional; targets featured snippets
+**Comparisons (15)** — `X vs Y`, `best N alternatives`; highest commercial intent
+**Safety (10)** — trust and E-E-A-T; the content Google most wants to see from a
+stranger-chat site
+**Community (20)** — emotional long-tail: loneliness, social anxiety, making
+friends, first-conversation nerves. **The fastest-ranking category for a new
+domain**, and AirTalk's strongest work.
 
-**Total: 8 + 25 + 60 + 80 + 35 + 40 + 150 = 398 → round to 400.**
+**Blog total: 70** — double what the ranking competitor has, not four times.
+Writing 150 mediocre posts to beat a site that ranks on 35 good ones would be
+solving the wrong problem.
+
+**Total: 8 + 25 + 60 + 80 + 35 + 40 + 70 = 318.**
+
+Round the remainder up with city and language pages, which are the cheapest to
+differentiate legitimately — not with more blog posts.
 
 ---
 
@@ -503,3 +516,135 @@ Per-page unique data is what makes 400 pages legitimate rather than doorways.
 For a city page that means: real neighbourhoods, real peak hours in local time,
 locally true conversation topics, the actual languages spoken there, and mobile
 data realities in that market.
+
+
+---
+
+## 10. The writing spec, measured from a ranking competitor
+
+Taken from `airtalk.live/blog/how-anonymous-chat-helps-social-anxiety/`, a
+typical (not flagship) post. These are measurements, not preferences.
+
+| Metric | Measured | What it means for us |
+|---|---|---|
+| Words | 1,901 | 1,500–2,000 is the working target, not 3,000+ |
+| H2 | 11 | Most phrased as **questions** |
+| H3 | 17 | Sub-answers under each question |
+| Paragraphs | 40 | Short — averaging **42 words** |
+| Sentences | 140, avg **14 words** | Range **2 to 64** words |
+| Bulleted lists | **0** | Entirely prose |
+| Images | 4 | Descriptive filenames, real alt text |
+| Internal links | 13 | Contextual, mid-sentence |
+| Outbound links | 1 | To **adaa.org** — a real authority |
+
+### The four things that make it not read as machine-written
+
+**1. It opens with a hard number and names its source.**
+> "Social anxiety disorder affects an estimated 15 million adults in the United
+> States … according to the Anxiety and Depression Association of America."
+
+No "In today's digital world." A checkable fact in the first sentence, credited
+to a named organisation, with an outbound link to it. That single outbound
+citation does more for E-E-A-T than any amount of self-description.
+
+**2. Sentence rhythm varies enormously.** Average 14 words, but the range is 2
+to 64. Uniform sentence length is the clearest tell of generated text. The
+second sentence of that post is five words: *"Most people who have it never get
+treatment."*
+
+**3. Zero bullet lists.** Continuous prose throughout. Bullets are the reflex
+format for generated content, and their absence is conspicuous in a good way.
+
+**4. H2s are written as the questions people actually search.** "Is Talking to
+Strangers Good for Social Anxiety?", "Does Anonymous Chat Help With Social
+Anxiety?" — each answered immediately in the paragraph below. That is what wins
+featured snippets.
+
+### Blog index structure (also measured)
+
+Sidebar with **category counts** (`Guides (18)`), a **tag cloud** of 15+ tags
+with a "See More", pagination, and cards showing image + title + date + author +
+category + a real excerpt (not a truncated first line).
+
+The card excerpts are written, not auto-truncated — the social-anxiety card
+opens on the statistic, the conversation-starter card opens with *"Most people
+delete the first thing they type."* Worth copying: it is a small amount of extra
+work per post that makes an index page genuinely readable.
+
+### Decided: the byline is "Vidibro Team"
+
+AirTalk uses one named human ("Harris Mesia") across all 35 posts. A real name
+is the stronger signal, and this can be upgraded later without changing a single
+URL — the `Article` schema's `author` field is the only thing that changes.
+
+---
+
+## 11. The country/city page, measured
+
+From `silly.chat/video-chat-india` — the page type that maps directly onto our
+Tiers 3 and 4.
+
+| Signal | Measured |
+|---|---|
+| Words | **569** |
+| H1 | 1 — "Best Free Video Chat in India" |
+| H2 | 8 |
+| H3 | **27** |
+| Lists | 4 |
+| Images | 3 |
+| Internal links | **57 total, 38 unique** |
+| JSON-LD | Organization, WebPage, BreadcrumbList, FAQPage |
+| hreflang | en, hi, bn, ta, te |
+
+### The finding that matters most: they redirect, they don't duplicate
+
+`/random-video-chat-india` **301s to** `/video-chat-india`. One canonical page
+per market, with the alternate keyword slug redirecting into it. Their directory
+still links the old slug, which simply redirects on click.
+
+This is the mechanism that keeps a programmatic site out of duplicate-content
+trouble, and we should adopt it as a rule:
+
+> **One page per market. Every alternate slug 301s to it. Never two URLs
+> competing for the same intent.**
+
+For us that means picking one pattern — `/video-chat-{place}` — and redirecting
+`/random-video-chat-{place}` into it rather than building both, which §3
+originally implied.
+
+### The real engine is internal linking, not word count
+
+569 words is thin. What the page is dense in is **links** — 38 unique internal
+destinations from a single country page, and they are not a generic footer dump.
+From India specifically:
+
+```
+→ /kolkata-video-chat              city within the country
+→ /bangla-chat-online              language spoken there
+→ /bengali-dating-chat             intent variant of that language
+→ /talk-to-strangers-bengali       another intent variant
+→ /audio-chat-india                same market, different mode
+→ /omegle-alternative-india        competitor term for that market
+→ /video-chat-australia            sibling country
+```
+
+Every market becomes a **hub with spokes**: country → its cities → its languages
+→ its modes → its competitor terms. That is how 240 programmatic pages get
+crawled and indexed without external links, and it is the single most
+transferable thing on their site.
+
+**Design rule for our template:** each country page must link to at least
+3 cities, 2 languages, 2 modes, 1 competitor term, and 2 sibling countries — all
+contextual and in-content, not a footer block.
+
+### Where we should deliberately not copy them
+
+- **569 words is thin.** Their Malaysia page is 884, this one is 569, and both
+  are heavily templated. It ranks today; it is not a durable position. Our
+  1,200–1,500 target with genuine local data stands.
+- **Their hreflang is inconsistent** — the Malaysia page carries `x-default`,
+  this one does not, and the localised versions sit on a *different* slug
+  (`/hi/random-video-chat-india`) from the English canonical
+  (`/video-chat-india`). Keep ours consistent: same slug across all languages,
+  `x-default` on every cluster, fully reciprocal.
+- **Unsourced stat counters** (`1M+`, `500k+`, `99.9%`) appear here too.
