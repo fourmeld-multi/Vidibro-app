@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Globe, Sparkles, Scale, Languages as LangIcon } from "lucide-react";
+import { Globe, Sparkles, Scale, Building2, Languages as LangIcon } from "lucide-react";
 import { ENTRIES, hrefFor } from "@/lib/directory/entries";
 import { generatePageSEO, BASE_URL } from "@/lib/seo";
-import { formatPeakHours } from "@/lib/liveCount";
 import JsonLd from "@/components/JsonLd";
+import LinkAccordion, { PillLink } from "@/components/directory/LinkAccordion";
 
 export const metadata: Metadata = generatePageSEO({
   title: "Chat Directory — Every Country, City and Language",
@@ -15,19 +15,14 @@ export const metadata: Metadata = generatePageSEO({
 });
 
 /**
- * Countries are the organising unit — their cities appear *on the country card*
- * rather than in a separate wall of links.
+ * Countries and Popular Features sit open as two columns; cities and languages
+ * are +/- accordions.
  *
- * Two reasons that matters. A flat list of eighty cities is a link dump that
- * tells Google nothing about how Kolkata relates to India, and it dilutes the
- * page's authority evenly across every link. Grouping under the country builds a
- * topical cluster and concentrates signal on the country page, which is the
- * higher-volume term.
- *
- * Languages deliberately do NOT nest. Bengali belongs to India *and* Bangladesh;
- * Tamil to India, Sri Lanka, Singapore and Malaysia. Filing them under one
- * country would be factually wrong and would leave the other country unable to
- * link to them, so they get their own compact strip.
+ * The reason for the split is length. Sixty countries is a page; three hundred
+ * cities is a wall, and a wall of links is both unreadable and a weak signal —
+ * it spreads the page's authority evenly across every link and says nothing
+ * about how they relate. Collapsing them keeps the page scannable while leaving
+ * every link in the HTML for a crawler to follow.
  */
 const REGIONS: Record<string, string> = {
   "video-chat-india": "Asia",
@@ -37,19 +32,21 @@ const REGIONS: Record<string, string> = {
 };
 const REGION_ORDER = ["Asia", "Middle East & Africa", "Europe", "Americas", "Oceania"];
 
-/** Routes that exist outside the directory. */
 const FEATURES = [
-  { href: "/video-chat", label: "Random video chat" },
-  { href: "/audio-chat", label: "Voice chat, camera off" },
-  { href: "/text-chat", label: "Text chat with strangers" },
+  { href: "/video-chat", label: "random video chat" },
+  { href: "/audio-chat", label: "random voice chat" },
+  { href: "/text-chat", label: "text chat with strangers" },
+  { href: "/video-chat", label: "video chat no login" },
+  { href: "/audio-chat", label: "chat without showing face" },
+  { href: "/text-chat", label: "anonymous text chat" },
 ];
 
 const COMPARE = [
-  { href: "/omegle-alternative", label: "Omegle alternative" },
-  { href: "/chatroulette-alternative", label: "Chatroulette alternative" },
-  { href: "/ometv-alternative", label: "OmeTV alternative" },
-  { href: "/emerald-chat-alternative", label: "Emerald Chat alternative" },
-  { href: "/airtalk-alternative", label: "AirTalk alternative" },
+  { href: "/omegle-alternative", label: "omegle alternative" },
+  { href: "/chatroulette-alternative", label: "chatroulette alternative" },
+  { href: "/ometv-alternative", label: "ometv alternative" },
+  { href: "/emerald-chat-alternative", label: "emerald chat alternative" },
+  { href: "/airtalk-alternative", label: "airtalk alternative" },
 ];
 
 export default function DirectoryPage() {
@@ -62,8 +59,21 @@ export default function DirectoryPage() {
     items: countries.filter((c) => (REGIONS[c.slug] ?? "Asia") === region),
   })).filter((g) => g.items.length > 0);
 
-  const citiesOf = (countryName: string) => cities.filter((c) => c.parent === countryName);
-  const citiesAZ = [...cities].sort((a, b) => a.name.localeCompare(b.name));
+  // Cities are grouped under their country so the list reads as structure
+  // rather than as three hundred unrelated links.
+  const cityItems = countries.flatMap((c) =>
+    cities
+      .filter((city) => city.parent === c.name)
+      .map((city) => ({ href: hrefFor(city.slug), label: `${city.name.toLowerCase()} video chat` }))
+  );
+  const orphanCities = cities
+    .filter((city) => !countries.some((c) => c.name === city.parent))
+    .map((city) => ({ href: hrefFor(city.slug), label: `${city.name.toLowerCase()} video chat` }));
+
+  const languageItems = languages.map((l) => ({
+    href: hrefFor(l.slug),
+    label: `${l.name.toLowerCase()} video chat`,
+  }));
 
   return (
     <main className="w-full">
@@ -78,162 +88,100 @@ export default function DirectoryPage() {
         }}
       />
 
-      <div className="mx-auto max-w-4xl px-5 sm:px-6 py-10 sm:py-16">
+      <div className="mx-auto max-w-5xl px-5 sm:px-6 py-10 sm:py-16">
         <nav aria-label="Breadcrumb" className="mb-6 text-sm text-purple-300/70">
           <Link href="/" className="hover:text-purple-200">Home</Link>
           <span className="mx-1.5">/</span>
           <span className="text-purple-200">Directory</span>
         </nav>
 
-        <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+        <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
           Chat <span className="gradient-text">Directory</span>
         </h1>
+        <p className="mt-5 max-w-2xl text-base sm:text-lg leading-relaxed text-purple-100/80">
+          Vidibro does not let you filter who you match with — the queue is one shared pool, and
+          that is deliberate. These pages tell you what to expect instead: which languages you are
+          likely to hear in a market, the hours its queue is actually full, and what people there
+          tend to talk about.
+        </p>
 
-        <div className="mt-5 max-w-2xl space-y-3.5 text-sm sm:text-base leading-relaxed text-purple-100/85">
-          <p>
-            Vidibro does not let you filter who you match with — the queue is one shared pool, and
-            that is deliberate. What these pages do instead is tell you what to expect: which
-            languages you are likely to hear in a given market, the hours when its queue is actually
-            full, and what people there tend to talk about.
-          </p>
-          <p>
-            Useful if you are wondering why matching feels slow at three in the afternoon, or what
-            to open with when you land on someone from a place you have never been.
-          </p>
+        {/* Two columns: countries and features, both open by default. */}
+        <div className="mt-12 grid gap-10 lg:grid-cols-2">
+          <section>
+            <h2 className="flex items-center gap-3 border-b border-white/[0.08] pb-4 text-2xl font-black tracking-tight text-white">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-500/15 text-purple-300">
+                <Globe size={18} />
+              </span>
+              By Country
+            </h2>
+            {byRegion.map((group) => (
+              <div key={group.region} className="mt-6">
+                {byRegion.length > 1 && (
+                  <div className="mb-3 text-[12px] font-bold uppercase tracking-[0.15em] text-purple-300/45">
+                    {group.region}
+                  </div>
+                )}
+                <div className="grid gap-2.5 sm:grid-cols-2">
+                  {group.items.map((c) => (
+                    <PillLink
+                      key={c.slug}
+                      href={hrefFor(c.slug)}
+                      label={`random video chat ${c.name.replace(/^the /, "").toLowerCase()}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </section>
+
+          <section>
+            <h2 className="flex items-center gap-3 border-b border-white/[0.08] pb-4 text-2xl font-black tracking-tight text-white">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-pink-500/15 text-pink-300">
+                <Sparkles size={18} />
+              </span>
+              Popular Features
+            </h2>
+            <div className="mt-6 grid gap-2.5 sm:grid-cols-2">
+              {FEATURES.map((f, i) => (
+                <PillLink key={`${f.href}-${i}`} {...f} />
+              ))}
+            </div>
+
+            <h2 className="mt-10 flex items-center gap-3 border-b border-white/[0.08] pb-4 text-2xl font-black tracking-tight text-white">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/15 text-amber-300">
+                <Scale size={18} />
+              </span>
+              Compare
+            </h2>
+            <div className="mt-6 grid gap-2.5 sm:grid-cols-2">
+              {COMPARE.map((c) => (
+                <PillLink key={c.href} {...c} />
+              ))}
+            </div>
+          </section>
         </div>
 
-        {/* 1 · BY COUNTRY — the organising unit, cities inline */}
-        <section className="mt-14">
-          <h2 className="flex items-center gap-2 text-xl sm:text-2xl font-black text-white tracking-tight">
-            <Globe size={18} className="text-purple-300" />
-            By country
-            <span className="text-sm font-bold text-purple-300/60">({countries.length})</span>
-          </h2>
-          <p className="mt-2 mb-6 text-sm sm:text-base text-purple-200/65">
-            Who is online, when they are online, and what they speak.
-          </p>
+        {/* Cities and languages collapse, because they are the long lists. */}
+        <div className="mt-12 space-y-3">
+          <LinkAccordion
+            title="By City"
+            subtitle="Local hours, local conversation — narrower than a country."
+            items={[...cityItems, ...orphanCities]}
+            previewCount={8}
+          />
+          <LinkAccordion
+            title="By Language"
+            subtitle="Languages that cross borders and so get their own page — Bengali spans India and Bangladesh, Tamil spans four countries."
+            items={languageItems}
+            previewCount={8}
+          />
+        </div>
 
-          {byRegion.map((group) => (
-            <div key={group.region} className="mb-8">
-              <h3 className="mb-3 text-[13px] font-bold uppercase tracking-[0.15em] text-purple-300/50">
-                {group.region}
-              </h3>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {group.items.map((c) => {
-                  const kids = citiesOf(c.name);
-                  return (
-                    <div
-                      key={c.slug}
-                      className="rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 transition hover:border-purple-400/25"
-                    >
-                      <Link href={hrefFor(c.slug)} className="text-lg font-bold text-white hover:text-purple-200 transition">
-                        {c.name}
-                      </Link>
-                      <div className="mt-2 text-sm leading-relaxed text-purple-200/65">
-                        {c.languages.slice(0, 3).join(" · ")}
-                      </div>
-                      <div className="mt-1.5 text-sm text-purple-300/55">Busiest {formatPeakHours(c.peakHours)}</div>
-
-                      {/* Cities live here, on their country — not in a separate
-                          80-link wall with no relationship to anything. */}
-                      {kids.length > 0 && (
-                        <div className="mt-3 flex flex-wrap gap-x-2 gap-y-1 border-t border-white/[0.07] pt-3 text-sm">
-                          {kids.map((k) => (
-                            <Link
-                              key={k.slug}
-                              href={hrefFor(k.slug)}
-                              className="text-purple-300/85 hover:text-purple-200 hover:underline underline-offset-2"
-                            >
-                              {k.name}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
-        </section>
-
-        {/* 2 · POPULAR FEATURES */}
-        <section className="mt-12">
-          <h2 className="flex items-center gap-2 text-xl sm:text-2xl font-black text-white tracking-tight">
-            <Sparkles size={18} className="text-purple-300" />
-            Popular features
-          </h2>
-          <p className="mt-2 mb-4 text-sm sm:text-base text-purple-200/65">
-            Ways of using Vidibro, rather than places.
-          </p>
-          <div className="flex flex-wrap gap-2.5">
-            {FEATURES.map((f) => (
-              <Chip key={f.href} {...f} />
-            ))}
-          </div>
-        </section>
-
-        {/* 3 · COMPARE — commercial intent, kept apart from browsing */}
-        <section className="mt-12">
-          <h2 className="flex items-center gap-2 text-xl sm:text-2xl font-black text-white tracking-tight">
-            <Scale size={18} className="text-purple-300" />
-            Compare
-          </h2>
-          <p className="mt-2 mb-4 text-sm sm:text-base text-purple-200/65">
-            How Vidibro differs from the platforms people usually arrive from.
-          </p>
-          <div className="flex flex-wrap gap-2.5">
-            {COMPARE.map((c) => (
-              <Chip key={c.href} {...c} />
-            ))}
-          </div>
-        </section>
-
-        {/* Language strip — separate because these cross borders */}
-        {languages.length > 0 && (
-          <section className="mt-12 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-5 sm:px-6">
-            <h2 className="flex items-center gap-2 text-sm font-black uppercase tracking-wider text-purple-200">
-              <LangIcon size={15} className="text-purple-300" />
-              By language
-            </h2>
-            <p className="mt-2 mb-4 text-sm text-purple-200/65">
-              These get their own pages because they cross borders — Bengali spans India and
-              Bangladesh, Tamil spans four countries. A language spoken in only one country lives on
-              that country&apos;s page instead.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {languages.map((l) => (
-                <Chip key={l.slug} href={hrefFor(l.slug)} label={l.name} />
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* All cities A–Z — direct access without an 80-link wall up top */}
-        {citiesAZ.length > 0 && (
-          <section className="mt-10 border-t border-white/[0.07] pt-8">
-            <h2 className="mb-3 text-[13px] font-bold uppercase tracking-[0.15em] text-purple-300/50">
-              All cities A–Z
-            </h2>
-            <div className="flex flex-wrap gap-x-3 gap-y-2 text-sm">
-              {citiesAZ.map((c) => (
-                <Link
-                  key={c.slug}
-                  href={hrefFor(c.slug)}
-                  className="text-purple-300/75 hover:text-purple-200 hover:underline underline-offset-2"
-                >
-                  {c.name}
-                </Link>
-              ))}
-            </div>
-          </section>
-        )}
-
-        <section className="mt-12 rounded-3xl border border-purple-500/20 bg-purple-500/5 p-6 sm:p-8">
-          <h2 className="text-lg sm:text-xl font-black text-white mb-2">
+        <section className="mt-12 rounded-3xl border border-purple-500/20 bg-purple-500/[0.06] p-6 sm:p-8">
+          <h2 className="mb-2 text-lg sm:text-xl font-black text-white">
             Do not see the place you are looking for?
           </h2>
-          <p className="text-sm text-purple-200/75 leading-relaxed">
+          <p className="text-base leading-relaxed text-purple-200/75">
             This directory is written one market at a time, and a page only goes up when there is
             something genuinely true to say about that market. Matching itself is global regardless —
             you can{" "}
@@ -245,16 +193,5 @@ export default function DirectoryPage() {
         </section>
       </div>
     </main>
-  );
-}
-
-function Chip({ href, label }: { href: string; label: string }) {
-  return (
-    <Link
-      href={href}
-      className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm sm:text-base font-medium text-purple-100/85 transition hover:border-purple-400/30 hover:bg-white/[0.08] hover:text-white"
-    >
-      {label}
-    </Link>
   );
 }
