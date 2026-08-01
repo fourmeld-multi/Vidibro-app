@@ -86,7 +86,7 @@ export default function DirectoryPage() {
         }}
       />
 
-      <div className="mx-auto max-w-5xl px-5 sm:px-6 py-10 sm:py-16">
+      <div className="mx-auto max-w-6xl px-5 sm:px-6 py-10 sm:py-16">
         <nav aria-label="Breadcrumb" className="mb-6 text-sm text-purple-300/70">
           <Link href="/" className="hover:text-purple-200">Home</Link>
           <span className="mx-1.5">/</span>
@@ -104,7 +104,7 @@ export default function DirectoryPage() {
         </p>
 
         {/* Two columns: countries and features, both open by default. */}
-        <div className="mt-12 grid gap-10 lg:grid-cols-2">
+        <div className="mt-12 space-y-12">
           <section>
             <h2 className="flex items-center gap-3 border-b border-white/[0.08] pb-4 text-2xl font-black tracking-tight text-white">
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-500/15 text-purple-300">
@@ -119,7 +119,7 @@ export default function DirectoryPage() {
                     {group.region}
                   </div>
                 )}
-                <div className="grid gap-2.5 sm:grid-cols-2">
+                <div className="grid gap-2.5 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                   {group.items.map((c) => (
                     <PillLink
                       key={c.slug}
@@ -139,19 +139,19 @@ export default function DirectoryPage() {
               </span>
               Popular Features
             </h2>
-            <div className="mt-6 grid gap-2.5 sm:grid-cols-2">
+            <div className="mt-6 grid gap-2.5 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {FEATURES.map((f, i) => (
                 <PillLink key={`${f.href}-${i}`} {...f} />
               ))}
             </div>
 
-            <h2 className="mt-10 flex items-center gap-3 border-b border-white/[0.08] pb-4 text-2xl font-black tracking-tight text-white">
+            <h2 className="mt-12 flex items-center gap-3 border-b border-white/[0.08] pb-4 text-2xl font-black tracking-tight text-white">
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/15 text-amber-300">
                 <Scale size={18} />
               </span>
               Compare
             </h2>
-            <div className="mt-6 grid gap-2.5 sm:grid-cols-2">
+            <div className="mt-6 grid gap-2.5 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {COMPARE.map((c) => (
                 <PillLink key={c.href} {...c} />
               ))}

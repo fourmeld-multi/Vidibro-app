@@ -65,7 +65,7 @@ export default function LinkAccordion({
 
       {/* hidden, not unmounted — see the note above */}
       <div className={open ? "px-5 pb-5 sm:px-6 sm:pb-6" : "hidden"}>
-        <div className="grid gap-2.5 sm:grid-cols-2">
+        <div className="grid gap-2.5 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {items.map((item, i) => (
             <PillLink key={item.href} {...item} hidden={!showAll && i >= previewCount} />
           ))}
@@ -97,11 +97,11 @@ export function PillLink({
   return (
     <Link
       href={href}
-      className={`group flex items-center justify-between gap-3 rounded-xl border border-white/[0.08] bg-white/[0.035] px-4 py-3.5 transition hover:border-purple-400/30 hover:bg-white/[0.07] ${
+      className={`group flex items-center justify-between gap-3 rounded-xl border border-white/[0.08] bg-white/[0.035] px-3.5 py-3 transition hover:border-purple-400/30 hover:bg-white/[0.07] ${
         hidden ? "hidden" : ""
       }`}
     >
-      <span className="text-sm sm:text-base text-purple-100/85 transition group-hover:text-white">
+      <span className="text-[13px] sm:text-sm leading-snug text-purple-100/85 transition group-hover:text-white">
         {label}
       </span>
       <ArrowRight
