@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { BASE_URL } from "@/lib/seo";
+import { ENTRIES } from "@/lib/directory/entries";
 
 /**
  * Every indexable URL on the site.
@@ -20,6 +21,7 @@ const STATIC_ROUTES = [
   "/chatroulette-alternative",
   "/ometv-alternative",
   "/emerald-chat-alternative",
+  "/directory",
   "/faq",
   "/guidelines",
   "/privacy",
@@ -32,6 +34,7 @@ function priorityFor(route: string): number {
   if (route === "") return 1.0;
   if (route.endsWith("-chat")) return 0.9;
   if (route.includes("alternative")) return 0.9;
+  if (route === "/directory") return 0.8;
   return 0.7;
 }
 
@@ -47,5 +50,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: priorityFor(route),
   }));
 
-  return staticEntries;
+  // Generated from the same data the pages render from — never hardcoded, which
+  // is how the old directory ended up missing from the sitemap entirely.
+  const directoryEntries: MetadataRoute.Sitemap = ENTRIES.map((e) => ({
+    url: `${BASE_URL}/directory/${e.slug}`,
+    lastModified: buildTime,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  return [...staticEntries, ...directoryEntries];
 }

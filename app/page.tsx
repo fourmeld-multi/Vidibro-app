@@ -11,6 +11,7 @@ import PrivacyFlowSection from "@/components/PrivacyFlowSection";
 import HowItWorks from "@/components/HowItWorks";
 import WhyVidibro from "@/components/WhyVidibro";
 import FAQAccordion from "@/components/FAQAccordion";
+import PopularDestinations from "@/components/PopularDestinations";
 import FinalCTASection from "@/components/FinalCTASection";
 import FloatingParticles from "@/components/FloatingParticles";
 import { TRANSLATIONS, type LanguageCode } from "@/lib/translations";
@@ -195,6 +196,8 @@ export default function Home() {
         <WhyVidibro lang={lang} />
 
         {/* FAQ accordion */}
+        <PopularDestinations />
+
         <FAQAccordion lang={lang} />
 
         {/* Full Global Directory Section at Bottom of Homepage */}

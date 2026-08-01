@@ -268,6 +268,12 @@ export function resolvableRelated(entry: DirectoryEntry) {
   );
 }
 
+/**
+ * Directory entries live under /directory/{slug}; the standalone routes
+ * (/audio-chat, /omegle-alternative, …) sit at the top level. Getting this
+ * wrong silently produces 404s on every cross-link, so it lives in one place.
+ */
 export function hrefFor(slug: string) {
-  return REAL_ROUTES.has(slug) && !ENTRY_BY_SLUG[slug] ? `/${slug}` : `/${slug}`;
+  if (ENTRY_BY_SLUG[slug]) return `/directory/${slug}`;
+  return `/${slug}`;
 }
