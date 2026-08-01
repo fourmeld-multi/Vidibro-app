@@ -12,7 +12,6 @@ import HowItWorks from "@/components/HowItWorks";
 import WhyVidibro from "@/components/WhyVidibro";
 import FAQAccordion from "@/components/FAQAccordion";
 import FinalCTASection from "@/components/FinalCTASection";
-import LandingDirectorySection from "@/components/LandingDirectorySection";
 import FloatingParticles from "@/components/FloatingParticles";
 import { TRANSLATIONS, type LanguageCode } from "@/lib/translations";
 
@@ -199,7 +198,6 @@ export default function Home() {
         <FAQAccordion lang={lang} />
 
         {/* Full Global Directory Section at Bottom of Homepage */}
-        <LandingDirectorySection />
 
         {/* Final call-to-action band before the footer */}
         <FinalCTASection lang={lang} />

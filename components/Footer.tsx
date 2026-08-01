@@ -92,7 +92,6 @@ export default function Footer({ onStartVideoChat, onStartTextChat, onStartAudio
             <Link href="/guidelines" className="hover:text-white transition">{t.footerGuidelines}</Link>
             <Link href="/report" className="hover:text-white transition">{t.footerReportAbuse}</Link>
             <Link href="/faq" className="hover:text-white transition">{t.footerSafetyFaq}</Link>
-            <Link href="/blog" className="hover:text-white transition">{t.footerBlogSafety}</Link>
           </div>
 
           {/* Column 5: Legal & About */}

@@ -78,7 +78,6 @@ export default function Navbar({
             <MessageSquare size={14} className="text-purple-300" />
             <span>{t.navTalkToStrangers}</span>
           </Link>
-          <Link href="/blog" className="hover:text-white transition">{t.navBlog}</Link>
           <Link href="/contact" className="hover:text-white transition">{t.navContact}</Link>
           <Link href="/guidelines" className="hover:text-white transition">{t.navGuidelines}</Link>
           <Link href="/faq" className="hover:text-white transition">{t.navFAQ}</Link>
@@ -161,13 +160,6 @@ export default function Navbar({
           communicating anything with that motion anyway, so it just appears. */}
       {mobileMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 right-0 z-50 bg-[#0e0828] border-b border-purple-500/20 px-6 py-8 flex flex-col items-center text-center space-y-4 shadow-2xl rounded-b-3xl">
-            <Link
-              href="/blog"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-extrabold text-white hover:text-purple-300 transition"
-            >
-              {t.navBlog}
-            </Link>
 
             <Link
               href="/contact"
