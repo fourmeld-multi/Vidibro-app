@@ -14,22 +14,22 @@ import FAQAccordion from "@/components/FAQAccordion";
 import PopularDestinations from "@/components/PopularDestinations";
 import FinalCTASection from "@/components/FinalCTASection";
 import FloatingParticles from "@/components/FloatingParticles";
+import { totalUsersCount } from "@/lib/liveCount";
 import { TRANSLATIONS, type LanguageCode } from "@/lib/translations";
 
 export default function Home() {
   const router = useRouter();
   const [lang, setLang] = useState<LanguageCode>("EN");
-  const [onlineCount, setOnlineCount] = useState(24910);
+  const [onlineCount, setOnlineCount] = useState(() => totalUsersCount());
 
   const t = TRANSLATIONS[lang] || TRANSLATIONS.EN;
 
-  // Realistic subtle fluctuating live online user counter
+  // Derived from the clock rather than random-walked. The previous version
+  // moved by Math.random() * 11 - 5, so it decremented about half the time —
+  // a cumulative total that goes down between two refreshes reads as broken.
   useEffect(() => {
-    const interval = setInterval(() => {
-      const delta = Math.floor(Math.random() * 11) - 5;
-      setOnlineCount((prev) => Math.max(18000, prev + delta));
-    }, 3500);
-    return () => clearInterval(interval);
+    const id = setInterval(() => setOnlineCount(totalUsersCount()), 30_000);
+    return () => clearInterval(id);
   }, []);
 
   return (

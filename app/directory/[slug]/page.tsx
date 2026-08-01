@@ -7,6 +7,8 @@ import { assertEntryIsPublishable } from "@/lib/directory/types";
 import { generatePageSEO, BASE_URL } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 import PeakHoursBar from "@/components/PeakHoursBar";
+import LiveMarketStatus from "@/components/LiveMarketStatus";
+import MatchingDiagram from "@/components/MatchingDiagram";
 
 export function generateStaticParams() {
   return ENTRIES.map((e) => ({ slug: e.slug }));
@@ -126,6 +128,17 @@ export default async function DirectoryEntryPage({
           </Link>
         </div>
 
+        {/* Reads the entry's timezone to show what is actually happening in this
+            market right now. Changes through the day, and differs per page
+            because the underlying data does. */}
+        <LiveMarketStatus
+          slug={entry.slug}
+          name={entry.name}
+          timezone={entry.timezone}
+          peakHours={entry.peakHours}
+          weight={entry.weight}
+        />
+
         {/* The locally-true data, surfaced as its own block. This is what makes
             the page different from every other page in the directory. */}
         <div className="mt-10 grid gap-3 sm:grid-cols-2">
@@ -146,6 +159,7 @@ export default async function DirectoryEntryPage({
             two devices rather than through a server we control. Nothing is recorded, and there is
             no profile for a conversation to be attached to afterwards.
           </p>
+          <MatchingDiagram />
         </Section>
 
         <Section title="How do you start?">

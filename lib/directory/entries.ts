@@ -30,6 +30,7 @@ export const ENTRIES: DirectoryEntry[] = [
     ],
     peakHours: "21:00 – 01:00 IST",
     timezone: "Asia/Kolkata",
+    weight: 4.2,
     places: ["Mumbai", "Delhi", "Bangalore", "Kolkata", "Chennai", "Hyderabad", "Pune"],
     talkingPoints: [
       "Cricket, and the IPL in particular — during the season it is the default opener with almost anyone",
@@ -105,6 +106,7 @@ export const ENTRIES: DirectoryEntry[] = [
     languages: ["বাংলা (Bengali)", "हिन्दी (Hindi)", "English"],
     peakHours: "22:00 – 01:30 IST",
     timezone: "Asia/Kolkata",
+    weight: 0.8,
     places: ["Park Street", "Salt Lake", "College Street", "Howrah", "Ballygunge", "New Town"],
     talkingPoints: [
       "Durga Puja — the city effectively stops for it, and pandal-hopping routes are argued over months in advance",
@@ -179,6 +181,7 @@ export const ENTRIES: DirectoryEntry[] = [
     languages: ["বাংলা (Bengali)", "English", "हिन्दी (Hindi)"],
     peakHours: "22:00 – 01:00 IST / 22:30 – 01:30 BST",
     timezone: "Asia/Dhaka",
+    weight: 1.7,
     places: ["Kolkata", "Dhaka", "Chittagong", "Sylhet", "Howrah", "Siliguri"],
     talkingPoints: [
       "Rabindranath Tagore, whose songs are still sung on both sides of the border and are common ground almost immediately",
@@ -252,6 +255,7 @@ export const ENTRIES: DirectoryEntry[] = [
     languages: ["বাংলা (Bengali)", "English", "সিলেটি (Sylheti)"],
     peakHours: "22:30 – 01:30 BST",
     timezone: "Asia/Dhaka",
+    weight: 1.6,
     places: ["Dhaka", "Chittagong", "Sylhet", "Khulna", "Rajshahi", "Cox's Bazar"],
     talkingPoints: [
       "Cricket, which occupies a place here closer to religion than sport — a Bangladesh–India match stops the country",
@@ -303,6 +307,7 @@ export const ENTRIES: DirectoryEntry[] = [
     languages: ["اردو (Urdu)", "English", "پنجابی (Punjabi)", "پشتو (Pashto)"],
     peakHours: "21:00 – 01:00 PKT",
     timezone: "Asia/Karachi",
+    weight: 1.9,
     places: ["Karachi", "Lahore", "Islamabad", "Faisalabad", "Rawalpindi", "Peshawar"],
     talkingPoints: [
       "Cricket, and specifically the long argument about whether the current side is better than the 1992 one",
@@ -354,6 +359,7 @@ export const ENTRIES: DirectoryEntry[] = [
     languages: ["Filipino / Tagalog", "English", "Cebuano / Bisaya", "Ilocano"],
     peakHours: "20:00 – 00:30 PHT",
     timezone: "Asia/Manila",
+    weight: 1.5,
     places: ["Manila", "Quezon City", "Cebu", "Davao", "Makati", "Baguio"],
     talkingPoints: [
       "Basketball, which is closer to a national obsession than a pastime — the NBA is followed as closely as the PBA",
@@ -406,6 +412,7 @@ export const ENTRIES: DirectoryEntry[] = [
     languages: ["हिन्दी (Hindi)", "मराठी (Marathi)", "English", "ગુજરાતી (Gujarati)"],
     peakHours: "22:00 – 01:30 IST",
     timezone: "Asia/Kolkata",
+    weight: 1.0,
     places: ["Bandra", "Andheri", "Colaba", "Dadar", "Juhu", "Powai"],
     talkingPoints: [
       "The local trains, which are less transport than a shared ordeal everyone has an opinion about",
@@ -458,6 +465,7 @@ export const ENTRIES: DirectoryEntry[] = [
     languages: ["हिन्दी (Hindi)", "English", "ਪੰਜਾਬੀ (Punjabi)", "اردو (Urdu)"],
     peakHours: "21:30 – 01:00 IST",
     timezone: "Asia/Kolkata",
+    weight: 1.0,
     places: ["Connaught Place", "Hauz Khas", "Saket", "Chandni Chowk", "Dwarka", "Noida"],
     talkingPoints: [
       "Winter smog, which dominates conversation for two months a year and which everyone has a coping strategy for",
@@ -509,6 +517,7 @@ export const ENTRIES: DirectoryEntry[] = [
     languages: ["हिन्दी (Hindi)", "English", "اردو (Urdu)"],
     peakHours: "21:00 – 01:00 IST",
     timezone: "Asia/Kolkata",
+    weight: 2.6,
     places: ["Delhi", "Lucknow", "Jaipur", "Bhopal", "Patna", "Indore"],
     talkingPoints: [
       "Hindi cinema, which reaches far past India and is common ground with people who have never been there",

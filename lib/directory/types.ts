@@ -45,8 +45,14 @@ export type DirectoryEntry = {
   languages: string[];
   /** Real local-time window, e.g. "21:00 – 01:00 IST". */
   peakHours: string;
-  /** IANA zone, so the template can show "busy right now" honestly. */
+  /** IANA zone. Drives the live local-time and peak/quiet state on the page. */
   timezone: string;
+  /**
+   * Relative market size, used only to scale the presentation "online now"
+   * figure so India does not show the same number as a small market. 1 is a
+   * mid-sized country. Not a measurement of anything.
+   */
+  weight?: number;
   /** Named places within this market — cities for a country, areas for a city. */
   places: string[];
   /**
