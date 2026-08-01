@@ -202,7 +202,7 @@ export default async function DirectoryEntryPage({
           <p>
             A report button sits in the top bar throughout every call. Pressing it ends the
             conversation immediately and moves you on. Use it early rather than sitting through
-            something uncomfortable — that is what it is for, and reports are reviewed.
+            something uncomfortable — ending a bad conversation fast is the point of it.
           </p>
           <p className="text-purple-200/70">
             Read the <Link href="/guidelines" className="text-purple-300 underline underline-offset-2 hover:text-purple-200">community guidelines</Link>{" "}
