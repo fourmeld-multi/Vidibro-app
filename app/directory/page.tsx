@@ -1,47 +1,69 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Globe, Building2, Languages, Sparkles } from "lucide-react";
+import { Globe, Sparkles, Scale, Languages as LangIcon } from "lucide-react";
 import { ENTRIES, hrefFor } from "@/lib/directory/entries";
-import type { DirectoryKind } from "@/lib/directory/types";
 import { generatePageSEO, BASE_URL } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = generatePageSEO({
   title: "Chat Directory — Every Country, City and Language",
   description:
-    "Browse Vidibro by country, city, language or chat type. Find where people are online right now and what they speak, then start a free video, voice or text chat.",
+    "Browse Vidibro by country, city or language. See who is online where, what they speak and when each market is busiest, then start a free video, voice or text chat.",
   slug: "/directory",
   keywords: ["chat directory", "random video chat by country", "video chat by city", "video chat by language"],
 });
 
-const GROUPS: Array<{ kind: DirectoryKind; heading: string; blurb: string; icon: React.ReactNode }> = [
-  {
-    kind: "country",
-    heading: "By country",
-    blurb: "Who is online, when they are online, and what they speak.",
-    icon: <Globe size={16} />,
-  },
-  {
-    kind: "city",
-    heading: "By city",
-    blurb: "Narrower than a country — local hours, local conversation.",
-    icon: <Building2 size={16} />,
-  },
-  {
-    kind: "language",
-    heading: "By language",
-    blurb: "What to expect if you want to talk in a particular language.",
-    icon: <Languages size={16} />,
-  },
-  {
-    kind: "topic",
-    heading: "By chat type",
-    blurb: "Ways of using Vidibro, rather than places.",
-    icon: <Sparkles size={16} />,
-  },
+/**
+ * Countries are the organising unit — their cities appear *on the country card*
+ * rather than in a separate wall of links.
+ *
+ * Two reasons that matters. A flat list of eighty cities is a link dump that
+ * tells Google nothing about how Kolkata relates to India, and it dilutes the
+ * page's authority evenly across every link. Grouping under the country builds a
+ * topical cluster and concentrates signal on the country page, which is the
+ * higher-volume term.
+ *
+ * Languages deliberately do NOT nest. Bengali belongs to India *and* Bangladesh;
+ * Tamil to India, Sri Lanka, Singapore and Malaysia. Filing them under one
+ * country would be factually wrong and would leave the other country unable to
+ * link to them, so they get their own compact strip.
+ */
+const REGIONS: Record<string, string> = {
+  "video-chat-india": "Asia",
+  "video-chat-bangladesh": "Asia",
+  "video-chat-pakistan": "Asia",
+  "video-chat-philippines": "Asia",
+};
+const REGION_ORDER = ["Asia", "Middle East & Africa", "Europe", "Americas", "Oceania"];
+
+/** Routes that exist outside the directory. */
+const FEATURES = [
+  { href: "/video-chat", label: "Random video chat" },
+  { href: "/audio-chat", label: "Voice chat, camera off" },
+  { href: "/text-chat", label: "Text chat with strangers" },
+];
+
+const COMPARE = [
+  { href: "/omegle-alternative", label: "Omegle alternative" },
+  { href: "/chatroulette-alternative", label: "Chatroulette alternative" },
+  { href: "/ometv-alternative", label: "OmeTV alternative" },
+  { href: "/emerald-chat-alternative", label: "Emerald Chat alternative" },
+  { href: "/airtalk-alternative", label: "AirTalk alternative" },
 ];
 
 export default function DirectoryPage() {
+  const countries = ENTRIES.filter((e) => e.kind === "country");
+  const cities = ENTRIES.filter((e) => e.kind === "city");
+  const languages = ENTRIES.filter((e) => e.kind === "language");
+
+  const byRegion = REGION_ORDER.map((region) => ({
+    region,
+    items: countries.filter((c) => (REGIONS[c.slug] ?? "Asia") === region),
+  })).filter((g) => g.items.length > 0);
+
+  const citiesOf = (countryName: string) => cities.filter((c) => c.parent === countryName);
+  const citiesAZ = [...cities].sort((a, b) => a.name.localeCompare(b.name));
+
   return (
     <main className="w-full">
       <JsonLd
@@ -79,51 +101,141 @@ export default function DirectoryPage() {
           </p>
         </div>
 
-        {GROUPS.map((group) => {
-          const items = ENTRIES.filter((e) => e.kind === group.kind);
-          if (items.length === 0) return null;
-          return (
-            <section key={group.kind} className="mt-12">
-              <h2 className="flex items-center gap-2 text-xl sm:text-2xl font-black text-white tracking-tight">
-                <span className="text-purple-300">{group.icon}</span>
-                {group.heading}
-                <span className="text-sm font-bold text-purple-300/60">({items.length})</span>
-              </h2>
-              <p className="mt-1.5 mb-5 text-xs sm:text-sm text-purple-200/65">{group.blurb}</p>
+        {/* 1 · BY COUNTRY — the organising unit, cities inline */}
+        <section className="mt-14">
+          <h2 className="flex items-center gap-2 text-xl sm:text-2xl font-black text-white tracking-tight">
+            <Globe size={18} className="text-purple-300" />
+            By country
+            <span className="text-sm font-bold text-purple-300/60">({countries.length})</span>
+          </h2>
+          <p className="mt-1.5 mb-6 text-xs sm:text-sm text-purple-200/65">
+            Who is online, when they are online, and what they speak.
+          </p>
 
+          {byRegion.map((group) => (
+            <div key={group.region} className="mb-8">
+              <h3 className="mb-3 text-[11px] font-bold uppercase tracking-[0.15em] text-purple-300/50">
+                {group.region}
+              </h3>
               <div className="grid gap-3 sm:grid-cols-2">
-                {items.map((e) => (
-                  <Link
-                    key={e.slug}
-                    href={hrefFor(e.slug)}
-                    className="group rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 transition hover:border-purple-400/30 hover:bg-white/[0.06]"
-                  >
-                    <div className="font-bold text-white group-hover:text-purple-200 transition">
-                      {e.name}
-                    </div>
-                    {/* Each row carries its own data rather than being a bare link,
-                        so the hub is a page worth reading, not a sitemap in disguise. */}
-                    <div className="mt-1.5 text-xs text-purple-200/65 leading-relaxed">
-                      {e.languages.slice(0, 3).join(" · ")}
-                    </div>
-                    <div className="mt-1 text-xs text-purple-300/55">
-                      Busiest {e.peakHours}
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </section>
-          );
-        })}
+                {group.items.map((c) => {
+                  const kids = citiesOf(c.name);
+                  return (
+                    <div
+                      key={c.slug}
+                      className="rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 transition hover:border-purple-400/25"
+                    >
+                      <Link href={hrefFor(c.slug)} className="font-bold text-white hover:text-purple-200 transition">
+                        {c.name}
+                      </Link>
+                      <div className="mt-1.5 text-xs leading-relaxed text-purple-200/65">
+                        {c.languages.slice(0, 3).join(" · ")}
+                      </div>
+                      <div className="mt-1 text-xs text-purple-300/55">Busiest {c.peakHours}</div>
 
-        <section className="mt-14 rounded-3xl border border-purple-500/20 bg-purple-500/5 p-6 sm:p-8">
+                      {/* Cities live here, on their country — not in a separate
+                          80-link wall with no relationship to anything. */}
+                      {kids.length > 0 && (
+                        <div className="mt-3 flex flex-wrap gap-x-2 gap-y-1 border-t border-white/[0.07] pt-2.5 text-xs">
+                          {kids.map((k) => (
+                            <Link
+                              key={k.slug}
+                              href={hrefFor(k.slug)}
+                              className="text-purple-300/85 hover:text-purple-200 hover:underline underline-offset-2"
+                            >
+                              {k.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </section>
+
+        {/* 2 · POPULAR FEATURES */}
+        <section className="mt-12">
+          <h2 className="flex items-center gap-2 text-xl sm:text-2xl font-black text-white tracking-tight">
+            <Sparkles size={18} className="text-purple-300" />
+            Popular features
+          </h2>
+          <p className="mt-1.5 mb-4 text-xs sm:text-sm text-purple-200/65">
+            Ways of using Vidibro, rather than places.
+          </p>
+          <div className="flex flex-wrap gap-2.5">
+            {FEATURES.map((f) => (
+              <Chip key={f.href} {...f} />
+            ))}
+          </div>
+        </section>
+
+        {/* 3 · COMPARE — commercial intent, kept apart from browsing */}
+        <section className="mt-12">
+          <h2 className="flex items-center gap-2 text-xl sm:text-2xl font-black text-white tracking-tight">
+            <Scale size={18} className="text-purple-300" />
+            Compare
+          </h2>
+          <p className="mt-1.5 mb-4 text-xs sm:text-sm text-purple-200/65">
+            How Vidibro differs from the platforms people usually arrive from.
+          </p>
+          <div className="flex flex-wrap gap-2.5">
+            {COMPARE.map((c) => (
+              <Chip key={c.href} {...c} />
+            ))}
+          </div>
+        </section>
+
+        {/* Language strip — separate because these cross borders */}
+        {languages.length > 0 && (
+          <section className="mt-12 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-5 sm:px-6">
+            <h2 className="flex items-center gap-2 text-sm font-black uppercase tracking-wider text-purple-200">
+              <LangIcon size={15} className="text-purple-300" />
+              By language
+            </h2>
+            <p className="mt-1.5 mb-3.5 text-xs text-purple-200/60">
+              These get their own pages because they cross borders — Bengali spans India and
+              Bangladesh, Tamil spans four countries. A language spoken in only one country lives on
+              that country&apos;s page instead.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {languages.map((l) => (
+                <Chip key={l.slug} href={hrefFor(l.slug)} label={l.name} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* All cities A–Z — direct access without an 80-link wall up top */}
+        {citiesAZ.length > 0 && (
+          <section className="mt-10 border-t border-white/[0.07] pt-8">
+            <h2 className="mb-3 text-[11px] font-bold uppercase tracking-[0.15em] text-purple-300/50">
+              All cities A–Z
+            </h2>
+            <div className="flex flex-wrap gap-x-3 gap-y-2 text-xs">
+              {citiesAZ.map((c) => (
+                <Link
+                  key={c.slug}
+                  href={hrefFor(c.slug)}
+                  className="text-purple-300/75 hover:text-purple-200 hover:underline underline-offset-2"
+                >
+                  {c.name}
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section className="mt-12 rounded-3xl border border-purple-500/20 bg-purple-500/5 p-6 sm:p-8">
           <h2 className="text-lg sm:text-xl font-black text-white mb-2">
             Do not see the place you are looking for?
           </h2>
           <p className="text-sm text-purple-200/75 leading-relaxed">
-            This directory is being written one market at a time, and a page only goes up when
-            there is something genuinely true to say about that market. Matching itself is global
-            regardless — you can{" "}
+            This directory is written one market at a time, and a page only goes up when there is
+            something genuinely true to say about that market. Matching itself is global regardless —
+            you can{" "}
             <Link href="/video-chat" className="text-purple-300 underline underline-offset-2 hover:text-purple-200">
               start a video chat
             </Link>{" "}
@@ -132,5 +244,16 @@ export default function DirectoryPage() {
         </section>
       </div>
     </main>
+  );
+}
+
+function Chip({ href, label }: { href: string; label: string }) {
+  return (
+    <Link
+      href={href}
+      className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs sm:text-sm font-medium text-purple-100/85 transition hover:border-purple-400/30 hover:bg-white/[0.08] hover:text-white"
+    >
+      {label}
+    </Link>
   );
 }
