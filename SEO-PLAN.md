@@ -648,3 +648,129 @@ contextual and in-content, not a footer block.
   (`/video-chat-india`). Keep ours consistent: same slug across all languages,
   `x-default` on every cluster, fully reciprocal.
 - **Unsourced stat counters** (`1M+`, `500k+`, `99.9%`) appear here too.
+
+---
+
+# 12. FINAL MODEL — supersedes §3 and §4
+
+Everything above was working-out. This section is the decision. Where it
+conflicts with §3 or §4, this wins.
+
+## 12.1 One rule above all others
+
+> **One page per intent. Every wording variant 301s into it.**
+
+Not one page per keyword. "bangla chat online", "bengali chat" and "talk to
+strangers bengali" are one intent worded three ways — one page, two redirects.
+This is where the competitor is weakest: they built those as separate pages, so
+their directory looks larger than it is.
+
+## 12.2 Country is the container
+
+A country page holds its market. Children hang off it and link back up.
+
+```
+/directory/video-chat-india          the container
+   ├── cities      kolkata, mumbai, delhi …
+   ├── languages   bengali, hindi, tamil …   (also linked from Bangladesh etc.)
+   └── links up, down and sideways
+```
+
+**When a country has no children** — one dominant language, no city with its own
+identity (Japan, Poland, Nepal, Qatar, Vietnam) — it does not get thin child
+pages invented to fill slots. Instead:
+
+- Cities appear as **text** on the country page, not as links
+- `/japanese-video-chat` and `/video-chat-tokyo` **301 into** the country page
+- The page satisfies its linking quota **sideways**: more siblings, more modes,
+  more feature pages
+
+> **A country either has children, or it has more siblings.**
+
+## 12.3 When does a child page exist?
+
+**City** — only if its country is large and multi-city *and* five genuinely
+local facts can be written. Kolkata passes (adda, Durga Puja, East Bengal vs
+Mohun Bagan, College Street, later peak than the rest of India). A city where
+the honest text would be "a vibrant city with friendly people" does not.
+
+**Language** — only if it breaks out of a single country:
+
+| Own page | Folds into the country |
+|---|---|
+| Bengali (India + Bangladesh) | Japanese → Japan |
+| Hindi (India is multilingual) | Korean → Korea |
+| Tamil (IN, LK, SG, MY) | Thai → Thailand |
+| Spanish, Arabic, Portuguese, Urdu | Polish → Poland |
+
+Roughly 16 language pages, not 100. The other ~84 are redirects.
+
+## 12.4 Language of the page ≠ language of the country
+
+The competitor's Japan page puts a Japanese H1 on an English body with
+`lang="en"` and no `ja` hreflang. It serves neither visitor and bounces both.
+
+Two independent axes:
+
+```
+WHAT it is about  →  the URL     /directory/video-chat-russia
+WHAT LANGUAGE     →  the prefix  /hi/directory/video-chat-russia
+```
+
+**All directory pages are written in English.** Translation is a separate,
+later axis, and it goes into **our audience's languages** (Hindi, Bengali,
+Tamil, Telugu) across the top pages — not into each country's own language.
+The competitor does exactly this: every country page English, hreflang only to
+hi/bn/ta/te.
+
+## 12.5 The hub
+
+```
+1 · BY COUNTRY        grouped by region. Each card carries its languages,
+                      local peak hours, and its cities inline.
+2 · POPULAR FEATURES  cam to cam, no login, talk to strangers, no face…
+3 · COMPARE           Omegle / OmeTV / Chatroulette alternatives
+  + language strip    Bengali · Hindi · Tamil · Spanish · Arabic  (~16)
+  + all cities A–Z    compact, for direct access
+```
+
+Compare is separate because it is commercial intent, not browsing. The language
+strip is separate because Bengali belongs to two countries, not one.
+
+## 12.6 Realistic page count
+
+| | Pages |
+|---|---|
+| Countries | ~60 |
+| Cities (only where earned) | ~50 |
+| Languages (cross-border only) | ~16 |
+| Features | ~15 |
+| Compare | ~25 |
+| Blog | ~70 |
+| Money pages | 8 |
+| **Total** | **~244** |
+
+Plus several hundred redirects, which cost nothing and cannibalise nothing.
+
+Not 400. The earlier 400 only worked by counting pages that would have been
+near-duplicates of each other. **The real ceiling is how many markets we can say
+something true and specific about** — likely 150–200. That number gets found by
+writing until the content stops being honest, not by picking it in advance.
+
+## 12.7 Images
+
+No stock photography and no AI-generated faces — on a site whose product is
+talking to real strangers, a fake face is the worst possible asset.
+
+Instead, visuals generated in code from each page's own data, which makes them
+unique per page for free:
+
+1. **Peak-hours bar** — rendered from the entry's real `peakHours` and timezone.
+   Genuinely different on every page because the underlying data is.
+2. **Per-page OG share card** — generated at build time from the entry (name,
+   languages, peak hours), so every directory page shares with its own image
+   rather than one generic card.
+3. **A "how matching works" diagram** — one SVG, shared, explains the product.
+
+All three are SVG or generated PNG: no downloads, no licensing, no layout shift,
+and nothing that can be mistaken for a real photograph of a real person.
