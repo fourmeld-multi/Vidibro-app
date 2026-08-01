@@ -86,7 +86,7 @@ export default function DirectoryPage() {
         }}
       />
 
-      <div className="mx-auto max-w-7xl px-5 sm:px-6 py-10 sm:py-16">
+      <div className="mx-auto max-w-6xl px-5 sm:px-6 py-10 sm:py-16">
         <nav aria-label="Breadcrumb" className="mb-6 text-sm text-purple-300/70">
           <Link href="/" className="hover:text-purple-200">Home</Link>
           <span className="mx-1.5">/</span>

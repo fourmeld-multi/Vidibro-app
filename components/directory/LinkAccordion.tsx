@@ -65,9 +65,9 @@ export default function LinkAccordion({
 
       {/* hidden, not unmounted — see the note above */}
       <div className={open ? "px-5 pb-5 sm:px-6 sm:pb-6" : "hidden"}>
-        <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
           {items.map((item, i) => (
-            <PillLink key={item.href} {...item} hidden={!showAll && i >= previewCount} />
+            <PillLink key={item.href} {...item} compact hidden={!showAll && i >= previewCount} />
           ))}
         </div>
 
@@ -89,23 +89,26 @@ export function PillLink({
   href,
   label,
   hidden = false,
+  compact = false,
 }: {
   href: string;
   label: string;
   hidden?: boolean;
+  /** Tighter padding for the six-across city and language grids. */
+  compact?: boolean;
 }) {
   return (
     <Link
       href={href}
-      className={`group flex items-center justify-between gap-3 rounded-xl border border-white/[0.08] bg-white/[0.035] px-3.5 py-3 transition hover:border-purple-400/30 hover:bg-white/[0.07] ${
+      className={`group flex items-center justify-between gap-1.5 rounded-xl border border-white/[0.08] bg-white/[0.035] px-2.5 py-2.5 transition hover:border-purple-400/30 hover:bg-white/[0.07] ${
         hidden ? "hidden" : ""
-      }`}
+      } ${compact ? "" : "sm:px-3.5 sm:py-3"}`}
     >
-      <span className="text-[13px] sm:text-sm leading-snug text-purple-100/85 transition group-hover:text-white">
+      <span className={`${compact ? "text-[12px]" : "text-[13px] sm:text-sm"} leading-snug text-purple-100/85 transition group-hover:text-white`}>
         {label}
       </span>
       <ArrowRight
-        size={15}
+        size={compact ? 12 : 15}
         className="shrink-0 text-purple-300/40 transition group-hover:translate-x-0.5 group-hover:text-purple-200"
       />
     </Link>
