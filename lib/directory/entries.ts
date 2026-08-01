@@ -1383,6 +1383,114 @@ export const ENTRIES: DirectoryEntry[] = [
     ],
   },
 
+  {
+    slug: "random-video-chat",
+    kind: "topic",
+    name: "random video chat",
+    primaryKeyword: "random video chat",
+    title: "Random Video Chat — Talk to Strangers on Camera, Free",
+    description:
+      "Free random video chat with strangers worldwide. One tap to match, no account, no download — works in any browser on phone or laptop.",
+    tagline:
+      "Press one button and you are on camera with someone you have never met. No account, no download, no waiting room.",
+    languages: ["Any — there is no language filter"],
+    talkingPoints: [],
+    safetyNote:
+      "The single most common mistake is treating a video call as more private than it is. The person you are talking to can screen-record without any indication on your side, on any platform. Assume anything on camera could be kept.",
+    intro: [
+      "Random video chat is the simplest form of online social discovery: you are paired with one stranger, on camera, and either the conversation works or you press Next. There is no profile to build, no matching algorithm learning your preferences, and no feed. It is closer to walking into a room than to using an app.",
+      "Vidibro pairs you over a direct browser-to-browser connection, which means the video and audio travel between the two devices rather than through a server we control. There is no account, so there is nothing to attach a conversation to afterwards, and nothing for us to store.",
+      "What surprises most people is how quickly it stops feeling strange. The first three matches are awkward, and then it is simply talking to someone. The people who get the most out of it are the ones who ask a real question in the first ten seconds instead of typing hi.",
+    ],
+    faqs: [
+      { question: "Is random video chat free?", answer: "On Vidibro, entirely. No account, no subscription, no credits, no premium tier that unlocks matching. The only cost is your data — roughly 250 to 300 MB an hour for video." },
+      { question: "Do I need to sign up or download anything?", answer: "Neither. It runs in your browser on a phone or laptop. You open the page, allow the camera, and you are in the queue. There is no app to install and no account to create." },
+      { question: "Is random video chat safe?", answer: "The connection itself is peer-to-peer and never recorded by us, but that is a privacy property rather than a guarantee about who you meet. Share no full name, address, workplace or financial details, and use the report button early rather than sitting through something uncomfortable." },
+      { question: "Can I use random video chat without showing my face?", answer: "Yes. Voice chat pairs you from the same queue with the camera off entirely, and text chat needs neither camera nor microphone. Many people prefer voice for exactly this reason." },
+      { question: "How is this different from Omegle?", answer: "Omegle shut down in late 2023. Vidibro covers the same idea with three modes rather than one, a direct peer-to-peer connection rather than a relayed one, and no account at any point. See the Omegle alternative page for a fuller comparison." },
+      { question: "Why is nobody matching with me?", answer: "Almost always the hour. Random chat traffic is heavily concentrated in the evening for whichever region is currently awake — if you are trying at three in the afternoon, the queue is genuinely thin rather than broken. The country pages list real peak windows." },
+    ],
+    related: [
+      { slug: "audio-chat", label: "voice chat with the camera off", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-india", label: "video chat in India", relation: "sibling" },
+      { slug: "video-chat-philippines", label: "video chat in the Philippines", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "random-voice-chat",
+    kind: "topic",
+    name: "random voice chat",
+    primaryKeyword: "random voice chat",
+    title: "Random Voice Chat — Talk to Strangers Without Camera, Free",
+    description:
+      "Free random voice chat with strangers. Camera off, no account, no download — the whole experience of random chat without being on video.",
+    tagline:
+      "All of random chat, none of the camera. Voice-only matching for people who want the conversation without the performance.",
+    languages: ["Any — there is no language filter"],
+    talkingPoints: [],
+    safetyNote:
+      "Voice feels more private than video and is not. Recording audio is trivial, and a voice carries accent, age and background noise that together say more about where you are than people expect. The same rules apply.",
+    intro: [
+      "Voice-only random chat removes the single biggest barrier to talking to strangers online, which is being looked at. No camera, no lighting, no deciding what to do with your face — just two people talking.",
+      "This turns out to matter enormously. People who never use video chat use voice chat happily, and conversations tend to run longer, because neither person is managing how they appear. It is also the mode that works while you are doing something else: walking, cooking, or lying in the dark at 2am.",
+      "It pairs from the same queue as video, so you are not matched into a smaller pool. Data use is far lower too — roughly 15 MB an hour against 250 for video, which matters if you are on a limited plan.",
+    ],
+    faqs: [
+      { question: "Can I really use it with the camera off?", answer: "Yes — voice chat never requests camera access at all. It asks for your microphone and nothing else, so there is no risk of the camera coming on by accident." },
+      { question: "How much data does voice chat use?", answer: "Around 15 MB an hour, against roughly 250 to 300 MB for video. If you are watching a mobile data limit, voice is the mode that costs you almost nothing." },
+      { question: "Is voice chat busier or quieter than video?", answer: "Quieter, but not dramatically. Everyone matches from one shared queue, so you are not being pushed into a smaller pool by choosing voice." },
+      { question: "Why would I use voice instead of video?", answer: "Most people say the same thing: it is easier to talk when you are not being watched. It also works while you are doing something else, which video does not, and it removes the appearance-based snap judgements that make video chat exhausting." },
+      { question: "Is it anonymous?", answer: "There is no account, no phone number and no profile, and audio runs directly between the two browsers. Your voice does carry information about you, though — accent, age, background — so treat it as identifying even though your face is not visible." },
+      { question: "Can I switch to video mid-conversation?", answer: "Not within a single call. Switching modes means starting a new match, which is deliberate: nobody should be able to talk you onto camera partway through a conversation you agreed to have with the camera off." },
+    ],
+    related: [
+      { slug: "video-chat", label: "video chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "airtalk-alternative", label: "AirTalk alternatives", relation: "competitor" },
+      { slug: "video-chat-india", label: "chatting in India", relation: "sibling" },
+      { slug: "bengali-video-chat", label: "Bengali chat", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "anonymous-text-chat",
+    kind: "topic",
+    name: "anonymous text chat",
+    primaryKeyword: "anonymous text chat",
+    title: "Anonymous Text Chat — Message Strangers Free, No Registration",
+    description:
+      "Free anonymous text chat with strangers. No camera, no microphone, no account — just typing to someone new, with nothing kept afterwards.",
+    tagline:
+      "No camera, no microphone, no account. Just typing to someone you have never met, with nothing kept when you close the tab.",
+    languages: ["Any — there is no language filter"],
+    talkingPoints: [],
+    safetyNote:
+      "Text is the easiest mode to screenshot and the easiest to be talked into oversharing on, because it feels low-stakes and there is no face to read. Never move a conversation onto another app at a stranger's request — that is how nearly every scam on a platform like this begins.",
+    intro: [
+      "Text chat is the lowest-commitment way to meet someone online. Nothing is switched on: no camera, no microphone, no permission prompt at all. You open the page, you are matched, and you type.",
+      "It suits three groups particularly well. People who want to talk without being heard, because they share a room or it is the middle of the night. People practising a language, who need time to compose a sentence. And people who simply find video exhausting and would rather read than perform.",
+      "Messages show a double tick when the other person has actually read them, so you are never guessing. Nothing is stored on our side — close the tab and the conversation is gone, with no account it could have been attached to.",
+    ],
+    faqs: [
+      { question: "Do I need a camera or microphone for text chat?", answer: "Neither. Text chat never requests either permission, so there is no prompt to accept and no possibility of something switching on by accident. It works on any device that has a browser." },
+      { question: "Is text chat with strangers anonymous?", answer: "Yes. No account, no email, no phone number, and no profile that persists between conversations. Nothing identifies you to the next person you match with." },
+      { question: "Are my messages saved anywhere?", answer: "No. Messages travel directly between the two browsers over a data channel and are held only in the page while it is open. Closing the tab ends it — there is no history to retrieve, by you or by us." },
+      { question: "What is the double tick?", answer: "The same idea as in messaging apps: one tick means sent, two means the other person's browser has actually displayed it. It exists so you are not left wondering whether a message landed." },
+      { question: "Can I send emoji or stickers?", answer: "Yes — there is a set of emoji stickers, plus full-screen reactions. They are more useful than they sound when you and the other person do not share a language well." },
+      { question: "Is text chat busier than video?", answer: "It matches from the same shared queue, so it is not a smaller pool. It tends to appeal to people at times and in places where video is awkward, which means the mix of people can feel different." },
+    ],
+    related: [
+      { slug: "video-chat", label: "video chat", relation: "mode" },
+      { slug: "audio-chat", label: "voice chat", relation: "mode" },
+      { slug: "emerald-chat-alternative", label: "Emerald Chat alternatives", relation: "competitor" },
+      { slug: "hindi-video-chat", label: "chatting in Hindi", relation: "sibling" },
+      { slug: "video-chat-bangladesh", label: "chatting in Bangladesh", relation: "sibling" },
+    ],
+  },
+
 ];
 
 export const ENTRY_BY_SLUG: Record<string, DirectoryEntry> = Object.fromEntries(
@@ -1402,7 +1510,16 @@ export function getAllSlugs() {
  * is a placeholder for a page not yet written — rendering it would put a 404 on
  * a live page, which is worse than a shorter link list.
  */
-const REAL_ROUTES = new Set(["audio-chat", "text-chat", "video-chat", "omegle-alternative"]);
+const REAL_ROUTES = new Set([
+  "audio-chat",
+  "text-chat",
+  "video-chat",
+  "omegle-alternative",
+  "chatroulette-alternative",
+  "ometv-alternative",
+  "emerald-chat-alternative",
+  "airtalk-alternative",
+]);
 
 export function resolvableRelated(entry: DirectoryEntry) {
   return entry.related.filter(

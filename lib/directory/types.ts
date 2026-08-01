@@ -46,10 +46,10 @@ export type DirectoryEntry = {
   // --- Locally true data — the anti-duplicate payload ----------------------
   /** Languages genuinely spoken, native script first: ["বাংলা (Bengali)", …] */
   languages: string[];
-  /** Real local-time window, e.g. "21:00 – 01:00 IST". */
-  peakHours: string;
-  /** IANA zone. Drives the live local-time and peak/quiet state on the page. */
-  timezone: string;
+  /** Real local-time window, e.g. "21:00 – 01:00 IST". Places only. */
+  peakHours?: string;
+  /** IANA zone. Drives the live local-time and peak/quiet state. Places only. */
+  timezone?: string;
   /**
    * Relative market size, used only to scale the presentation "online now"
    * figure so India does not show the same number as a small market. 1 is a
@@ -57,16 +57,16 @@ export type DirectoryEntry = {
    */
   weight?: number;
   /** Named places within this market — cities for a country, areas for a city. */
-  places: string[];
+  places?: string[];
   /**
    * Conversation material that is actually true here. This is the field that
    * most stops a page reading as generated, so it is required, not optional.
    */
   talkingPoints: string[];
   /** Network reality — shapes genuinely useful video-quality advice. */
-  connectivityNote: string;
+  connectivityNote?: string;
   /** Anything about safety or etiquette that genuinely differs in this market. */
-  localNote: string;
+  localNote?: string;
   /**
    * A safety or etiquette point true of this market specifically.
    *
@@ -119,17 +119,36 @@ export const LINKING_RULES: Record<RelatedLink["relation"], number> = {
   topic: 0,
 };
 
-/** Throws at build time rather than shipping a page that breaks the rules. */
+/**
+ * Throws at build time rather than shipping a page that breaks the rules.
+ *
+ * Place pages and topic pages are held to different standards because they are
+ * different things. A country page without local peak hours or named cities is
+ * a thin page pretending to be about a market. A topic page has neither by
+ * definition, so requiring them would only produce invented values — which is
+ * worse than not having the field.
+ */
 export function assertEntryIsPublishable(e: DirectoryEntry): void {
   const problems: string[] = [];
+  const isPlace = e.kind !== "topic";
 
   if (e.languages.length === 0) problems.push("no languages");
-  if (e.places.length < 3) problems.push("fewer than 3 named places");
-  if (e.talkingPoints.length < 3) problems.push("fewer than 3 talking points");
   if (e.faqs.length < 5) problems.push("fewer than 5 FAQs");
   if (e.intro.join(" ").split(/\s+/).length < 120) problems.push("intro under 120 words");
 
-  for (const [relation, min] of Object.entries(LINKING_RULES)) {
+  if (isPlace) {
+    if (!e.peakHours) problems.push("no peak hours");
+    if (!e.timezone) problems.push("no timezone");
+    if (!e.places || e.places.length < 3) problems.push("fewer than 3 named places");
+    if (!e.connectivityNote) problems.push("no connectivity note");
+    if (!e.localNote) problems.push("no local note");
+    if (e.talkingPoints.length < 3) problems.push("fewer than 3 talking points");
+  }
+
+  // Topic pages have no cities or siblings of their own, so they are held to
+  // the link rules that actually apply to them.
+  const rules = isPlace ? LINKING_RULES : { city: 0, language: 0, mode: 2, competitor: 1, sibling: 0, topic: 0 };
+  for (const [relation, min] of Object.entries(rules)) {
     if (min === 0) continue;
     const count = e.related.filter((r) => r.relation === relation).length;
     if (count < min) problems.push(`${count}/${min} ${relation} links`);

@@ -32,13 +32,11 @@ const REGIONS: Record<string, string> = {
 };
 const REGION_ORDER = ["Asia", "Middle East & Africa", "Europe", "Americas", "Oceania"];
 
+/** Content pages, not the app screens — the app routes are noindex. */
 const FEATURES = [
-  { href: "/video-chat", label: "random video chat" },
-  { href: "/audio-chat", label: "random voice chat" },
-  { href: "/text-chat", label: "text chat with strangers" },
-  { href: "/video-chat", label: "video chat no login" },
-  { href: "/audio-chat", label: "chat without showing face" },
-  { href: "/text-chat", label: "anonymous text chat" },
+  { href: "/directory/random-video-chat", label: "random video chat" },
+  { href: "/directory/random-voice-chat", label: "random voice chat" },
+  { href: "/directory/anonymous-text-chat", label: "anonymous text chat" },
 ];
 
 const COMPARE = [

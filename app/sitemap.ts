@@ -13,9 +13,9 @@ import { ENTRIES } from "@/lib/directory/entries";
 
 const STATIC_ROUTES = [
   "",
-  "/video-chat",
-  "/audio-chat",
-  "/text-chat",
+  // /video-chat, /audio-chat and /text-chat are deliberately absent: they are
+  // noindex application screens. The content pages that target those terms live
+  // in the directory and are included below.
   "/omegle-alternative",
   "/airtalk-alternative",
   "/chatroulette-alternative",

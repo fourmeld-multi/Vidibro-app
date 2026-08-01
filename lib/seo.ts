@@ -10,6 +10,8 @@ type SEOProps = {
   type?: "website" | "article";
   publishedTime?: string;
   keywords?: string[];
+  /** For application screens that should not compete with a content page. */
+  noindex?: boolean;
 };
 
 export function generatePageSEO({
@@ -23,6 +25,7 @@ export function generatePageSEO({
   image = `${BASE_URL}/opengraph-image`,
   type = "website",
   publishedTime,
+  noindex = false,
   keywords = [
     "free random video chat",
     "talk to strangers online",
@@ -46,10 +49,10 @@ export function generatePageSEO({
       canonical: canonicalUrl,
     },
     robots: {
-      index: true,
+      index: !noindex,
       follow: true,
       googleBot: {
-        index: true,
+        index: !noindex,
         follow: true,
         "max-video-preview": -1,
         "max-image-preview": "large",

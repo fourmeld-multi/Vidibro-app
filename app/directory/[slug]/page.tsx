@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   Video, Mic, MessageSquare, Clock, Languages, Signal, ShieldCheck, Zap,
-  Lock, Smartphone, MousePointerClick, Camera, Users, Compass, Scale, HelpCircle, Sunrise, Handshake,
+  Lock, Smartphone, MousePointerClick, Camera, Users, Compass, Scale, HelpCircle, Sunrise, Handshake, ArrowLeft,
   Sticker, CheckCheck, Globe2, Activity,
 } from "lucide-react";
 import { ENTRIES, getEntry, resolvableRelated, hrefFor } from "@/lib/directory/entries";
@@ -80,12 +80,21 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
       />
 
       <div className="mx-auto max-w-4xl px-5 sm:px-6 py-10 sm:py-14">
-        <nav aria-label="Breadcrumb" className="mb-6 text-sm text-purple-300/70">
-          <Link href="/" className="hover:text-purple-200">Home</Link>
-          <span className="mx-1.5">/</span>
-          <Link href="/directory" className="hover:text-purple-200">Directory</Link>
-          <span className="mx-1.5">/</span>
-          <span className="text-purple-200">{entry.name}</span>
+        {/* Up-navigation rather than "back". Most readers arrive here from
+            search, where there is no history to go back to, but the parent is
+            still the right place to send them. Both links stay so the
+            BreadcrumbList schema above matches something visible. */}
+        <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-4 text-sm">
+          <Link
+            href="/directory"
+            className="inline-flex items-center gap-1.5 font-semibold text-purple-300 transition hover:text-purple-200"
+          >
+            <ArrowLeft size={15} /> Directory
+          </Link>
+          <span className="text-purple-300/25">|</span>
+          <Link href="/" className="text-purple-300/70 transition hover:text-purple-200">
+            Home
+          </Link>
         </nav>
 
         {/* ---------- HERO ---------- */}
@@ -125,10 +134,12 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
           </Link>
         </div>
 
-        <LiveMarketStatus
-          slug={entry.slug} name={entry.name} timezone={entry.timezone}
-          peakHours={entry.peakHours} weight={entry.weight}
-        />
+        {entry.timezone && entry.peakHours && (
+          <LiveMarketStatus
+            slug={entry.slug} name={entry.name} timezone={entry.timezone}
+            peakHours={entry.peakHours} weight={entry.weight}
+          />
+        )}
 
         {/* Checkable facts only. Nothing here should be unverifiable. */}
         {/* Below the buttons on purpose. This paragraph is ~250px on a phone,
@@ -146,7 +157,11 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
             left with a gap. */}
         <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
           <StatTile tone="emerald" value="None" label="Signup required" />
-          <StatTile tone="cyan" value={formatPeakHours(entry.peakHours.split("/")[0].trim())} label="Busiest window" />
+          <StatTile
+            tone="cyan"
+            value={entry.peakHours ? formatPeakHours(entry.peakHours.split("/")[0].trim()) : "Any hour"}
+            label={entry.peakHours ? "Busiest window" : "When it works"}
+          />
           <StatTile tone="purple" value={`${entry.languages.length}`} label="Languages you'll hear" />
           <StatTile tone="amber" value="180+" label="Countries" />
           <StatTile tone="pink" value="300k+" label="Daily matches" />
@@ -161,7 +176,9 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
               conversation to attach to and nothing for us to keep.
             </IconCard>
             <IconCard icon={<Smartphone size={16} />} title="Built for mobile data" tone="cyan">
-              {entry.connectivityNote.split(".").slice(0, 2).join(".") + "."}
+              {entry.connectivityNote
+                ? entry.connectivityNote.split(".").slice(0, 2).join(".") + "."
+                : "Video is capped near 600 kbps and adapts downward, so a call softens on a weak signal instead of freezing or dropping."}
             </IconCard>
             <IconCard icon={<Sticker size={16} />} title="Stickers and reactions" tone="pink">
               Send emoji stickers and full-screen reactions mid-call — the fastest way to say
@@ -182,7 +199,10 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
           </div>
         </section>
 
-        {/* The per-market payload — the part that is only true here. */}
+        {/* The per-market payload — the part that is only true here. Topic
+            pages have no market, so the whole section is skipped rather than
+            filled with invented values. */}
+        {entry.kind !== "topic" && (
         <section className="mt-14">
           <SectionHead
             tone="pink"
@@ -199,9 +219,9 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
                 </span>
                 <h3 className="text-base font-black text-white">Peak match hours</h3>
               </div>
-              <div className="mt-3 text-2xl sm:text-3xl font-black text-emerald-300">{formatPeakHours(entry.peakHours)}</div>
+              <div className="mt-3 text-2xl sm:text-3xl font-black text-emerald-300">{formatPeakHours(entry.peakHours!)}</div>
               <p className="mt-2 text-sm leading-relaxed text-purple-100/80">{entry.localNote}</p>
-              <PeakHoursBar peakHours={entry.peakHours} />
+              <PeakHoursBar peakHours={entry.peakHours!} />
             </div>
 
             {entry.localPhrases?.length ? (
@@ -218,12 +238,15 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
               <IconCard icon={<Signal size={15} />} title="Connection and data" tone="cyan">
                 {entry.connectivityNote}
               </IconCard>
-              <IconCard icon={<Users size={15} />} title="Where people are" tone="purple">
-                {entry.places.join(" · ")}
-              </IconCard>
+              {entry.places && (
+                <IconCard icon={<Users size={15} />} title="Where people are" tone="purple">
+                  {entry.places.join(" · ")}
+                </IconCard>
+              )}
             </div>
           </div>
         </section>
+        )}
 
         <section className="mt-14">
           <SectionHead tone="cyan" icon={<Zap size={18} />} title="How it works" />
@@ -321,9 +344,11 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
           <Link href="/video-chat" className="btn-gradient mt-6 inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-extrabold text-white shadow-lg">
             <Video size={16} /> Start video chat
           </Link>
-          <p className="mt-4 flex items-center justify-center gap-1.5 text-xs text-purple-300/55">
-            <Sunrise size={12} /> Busiest {formatPeakHours(entry.peakHours)}
-          </p>
+          {entry.peakHours && (
+            <p className="mt-4 flex items-center justify-center gap-1.5 text-sm text-purple-300/55">
+              <Sunrise size={13} /> Busiest {formatPeakHours(entry.peakHours)}
+            </p>
+          )}
         </section>
       </div>
     </main>
