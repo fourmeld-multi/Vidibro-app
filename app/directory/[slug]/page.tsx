@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { generatePageSEO, generateJsonLdSchema } from "@/lib/seo";
 import { DIRECTORY_ITEMS, getAllDirectorySlugs, getDirectoryItem } from "@/lib/directoryData";
-import { Video, PhoneCall, MessageSquare, Clock, Globe, ShieldCheck, ArrowRight } from "lucide-react";
+import { Video, PhoneCall, MessageSquare, Clock, Globe, ShieldCheck, CheckCircle2, Lock, Smartphone } from "lucide-react";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -60,7 +60,7 @@ export default async function DynamicDirectoryPage({ params }: Props) {
           <div className="inline-flex items-center gap-2 rounded-full bg-purple-500/10 border border-purple-500/30 px-4 py-1.5 text-xs font-extrabold text-purple-300 uppercase tracking-wider">
             <span>{item.flag || "🌐"} {item.name} Hub</span>
             <span>•</span>
-            <span className="text-emerald-400">🟢 {item.onlineCount} Online</span>
+            <span className="text-emerald-400 font-bold">{item.trustBadge}</span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
@@ -68,7 +68,7 @@ export default async function DynamicDirectoryPage({ params }: Props) {
           </h1>
         </div>
 
-        {/* Live Matching CTA Card */}
+        {/* Live Matching CTA Card with Native Buttons */}
         <div className="rounded-3xl bg-gradient-to-r from-purple-900/60 via-indigo-900/60 to-pink-900/60 border border-purple-500/30 p-6 sm:p-8 backdrop-blur-xl shadow-2xl flex flex-col items-center gap-6 text-center">
           <div className="flex flex-wrap items-center justify-center gap-4 text-xs sm:text-sm font-semibold text-purple-200">
             <span className="flex items-center gap-1.5">
@@ -78,17 +78,18 @@ export default async function DynamicDirectoryPage({ params }: Props) {
             <span>•</span>
             <span className="flex items-center gap-1.5">
               <Clock size={15} className="text-amber-300" />
-              <span>Peak Times: {item.peakTimes}</span>
+              <span>Peak Activity: {item.peakTimes}</span>
             </span>
           </div>
 
+          {/* Native Language Action Buttons */}
           <div className="flex flex-col sm:flex-row items-center gap-3 w-full justify-center">
             <Link
               href="/video-chat"
               className="btn-gradient glow-pulse flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-full px-8 py-3.5 text-sm font-extrabold text-white uppercase shadow-xl transition"
             >
               <Video size={18} />
-              Start Video Match
+              {item.actionButtons.video}
             </Link>
 
             <Link
@@ -96,7 +97,7 @@ export default async function DynamicDirectoryPage({ params }: Props) {
               className="flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 px-6 py-3.5 text-xs sm:text-sm font-bold text-white transition"
             >
               <PhoneCall size={16} className="text-cyan-300" />
-              Voice Chat
+              {item.actionButtons.audio}
             </Link>
 
             <Link
@@ -104,14 +105,41 @@ export default async function DynamicDirectoryPage({ params }: Props) {
               className="flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 px-6 py-3.5 text-xs sm:text-sm font-bold text-white transition"
             >
               <MessageSquare size={16} className="text-pink-300" />
-              Text Chat
+              {item.actionButtons.text}
             </Link>
+          </div>
+        </div>
+
+        {/* Key Platform Highlights Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="rounded-2xl bg-white/5 border border-white/10 p-4 flex items-center gap-3">
+            <Lock size={20} className="text-purple-400 shrink-0" />
+            <div className="flex flex-col">
+              <span className="text-xs font-bold text-white">WebRTC P2P Cifrado</span>
+              <span className="text-[11px] text-purple-200/70">Sin almacenamiento</span>
+            </div>
+          </div>
+
+          <div className="rounded-2xl bg-white/5 border border-white/10 p-4 flex items-center gap-3">
+            <ShieldCheck size={20} className="text-emerald-400 shrink-0" />
+            <div className="flex flex-col">
+              <span className="text-xs font-bold text-white">Bandera Roja 24/7</span>
+              <span className="text-[11px] text-purple-200/70">Bloqueo en 1 toque</span>
+            </div>
+          </div>
+
+          <div className="rounded-2xl bg-white/5 border border-white/10 p-4 flex items-center gap-3">
+            <Smartphone size={20} className="text-cyan-400 shrink-0" />
+            <div className="flex flex-col">
+              <span className="text-xs font-bold text-white">4G/5G Optimizado</span>
+              <span className="text-[11px] text-purple-200/70">Tasa máx 600 kbps</span>
+            </div>
           </div>
         </div>
 
         {/* Human-Style Description */}
         <div className="rounded-3xl bg-white/5 border border-white/10 p-6 sm:p-8 flex flex-col gap-4">
-          <h2 className="text-xl font-bold text-white">About Stranger Chatting in {item.name}</h2>
+          <h2 className="text-xl font-bold text-white">Platform Information & Overview</h2>
           <p className="text-purple-200/80 leading-relaxed whitespace-pre-line text-sm sm:text-base">
             {item.description}
           </p>

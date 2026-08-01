@@ -59,8 +59,8 @@ export default function DirectoryIndexPage() {
                     </span>
                   </div>
                 </div>
-                <span className="text-xs font-extrabold text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-full border border-emerald-400/20">
-                  {item.onlineCount}
+                <span className="text-[11px] font-bold text-emerald-400 bg-emerald-400/10 px-2.5 py-1 rounded-full border border-emerald-400/20">
+                  {item.trustBadge}
                 </span>
               </Link>
             ))}
@@ -91,8 +91,8 @@ export default function DirectoryIndexPage() {
                       </span>
                     </div>
                   </div>
-                  <span className="text-xs font-extrabold text-cyan-400 bg-cyan-400/10 px-2.5 py-1 rounded-full border border-cyan-400/20">
-                    {item.onlineCount}
+                  <span className="text-[11px] font-bold text-cyan-400 bg-cyan-400/10 px-2.5 py-1 rounded-full border border-cyan-400/20">
+                    {item.trustBadge}
                   </span>
                 </Link>
               ))}
@@ -118,8 +118,8 @@ export default function DirectoryIndexPage() {
                     {item.name}
                   </span>
                 </div>
-                <span className="text-xs font-extrabold text-purple-300 bg-purple-500/10 px-2.5 py-1 rounded-full border border-purple-500/20">
-                  {item.onlineCount}
+                <span className="text-[11px] font-bold text-purple-300 bg-purple-500/10 px-2.5 py-1 rounded-full border border-purple-500/20">
+                  {item.trustBadge}
                 </span>
               </Link>
             ))}
@@ -144,8 +144,8 @@ export default function DirectoryIndexPage() {
                     {item.name}
                   </span>
                 </div>
-                <span className="text-xs font-extrabold text-pink-300 bg-pink-500/10 px-2.5 py-1 rounded-full border border-pink-500/20">
-                  {item.onlineCount}
+                <span className="text-[11px] font-bold text-pink-300 bg-pink-500/10 px-2.5 py-1 rounded-full border border-pink-500/20">
+                  {item.trustBadge}
                 </span>
               </Link>
             ))}

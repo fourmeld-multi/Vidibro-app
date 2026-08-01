@@ -78,10 +78,11 @@ export default async function DynamicBlogPostPage({ params }: Props) {
           </h1>
 
           {/* Author Badge */}
-          <div className="flex items-center gap-4 pt-2 border-b border-white/10 pb-6 text-xs sm:text-sm text-purple-200/80">
+          <div className="flex flex-wrap items-center gap-4 pt-2 border-b border-white/10 pb-6 text-xs sm:text-sm text-purple-200/80">
             <div className="flex items-center gap-2">
               <User size={16} className="text-purple-400" />
               <span className="font-bold text-white">{post.author}</span>
+              <span className="text-xs text-purple-300/60 font-medium">({post.authorRole})</span>
             </div>
             <span>•</span>
             <div className="flex items-center gap-1.5">

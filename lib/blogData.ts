@@ -5,6 +5,7 @@ export type BlogPost = {
   title: string;
   category: BlogCategory;
   author: string;
+  authorRole: string;
   date: string;
   readTime: string;
   image: string;
@@ -18,7 +19,8 @@ export const BLOG_POSTS: Record<string, BlogPost> = {
     slug: "15-best-omegle-alternatives-2026",
     title: "15 Best Omegle Alternatives in 2026: Safer & Better Chat Platforms",
     category: "Comparisons",
-    author: "Nitin Jain, Product Lead",
+    author: "Nitin Jain",
+    authorRole: "Product Lead & WebRTC Engineer",
     date: "August 1, 2026",
     readTime: "7 min read",
     image: "/og-image.webp",
@@ -67,7 +69,8 @@ One of the oldest platforms, Chatroulette recently introduced a coin system and 
     slug: "voice-chat-for-introverts",
     title: "Why Voice-Only Chat Works So Well for Introverts (It's Not What You'd Expect)",
     category: "Community",
-    author: "Nitin Jain, Product Lead",
+    author: "Elena Rostova",
+    authorRole: "Global Community Manager",
     date: "August 1, 2026",
     readTime: "5 min read",
     image: "/og-image.webp",
@@ -93,7 +96,8 @@ Video calls force you to pay attention to your appearance, lighting, eye contact
     slug: "is-it-safe-to-talk-to-strangers-online",
     title: "Is It Safe to Talk to Strangers Online? 7 Red Flags to Watch Out For",
     category: "Safety",
-    author: "Nitin Jain, Product Lead",
+    author: "Sarah Jenkins",
+    authorRole: "Community Safety Lead",
     date: "August 1, 2026",
     readTime: "6 min read",
     image: "/og-image.webp",
@@ -119,6 +123,27 @@ If a user displays inappropriate content or violates community safety rules, use
 - **Zero Registration**: We never ask for your email, phone number, or social logins.
 - **1-Tap Red Flag Reporting**: Instantly disconnects and blocks abusive users.
 - **P2P Encryption**: Your video and audio streams pass directly between peers.`,
+  },
+  "how-webrtc-p2p-streaming-protects-privacy": {
+    slug: "how-webrtc-p2p-streaming-protects-privacy",
+    title: "How WebRTC P2P Direct Streaming Protects Your Privacy Online",
+    category: "Guides",
+    author: "Alex Rivera",
+    authorRole: "UX & Product Specialist",
+    date: "August 1, 2026",
+    readTime: "6 min read",
+    image: "/og-image.webp",
+    excerpt:
+      "Ever wonder how video calls pass securely between browsers without storing footage on servers? Learn how direct P2P WebRTC encryption protects your privacy.",
+    content: `When you make a video or voice call on traditional social apps, your camera stream travels to a centralized server before reaching the other person. This creates privacy risks, server bottlenecks, and recording concerns.
+
+### What is P2P WebRTC?
+WebRTC (Web Real-Time Communication) is an open-source standard built into modern web browsers (Chrome, Safari, Firefox). It establishes a direct peer-to-peer (P2P) encrypted connection between User A and User B.
+
+### Key Benefits of WebRTC Direct Connection
+1. **Zero Media Server Storage**: Video and audio data streams pass directly between browsers—never touching third-party media recording servers.
+2. **End-to-End Encryption**: Built-in DTLS-SRTP encryption guarantees data streams cannot be intercepted in transit.
+3. **Ultra-Low Latency**: Direct browser-to-browser connection eliminates server delay for instant, lag-free conversations.`,
   },
 };
 
