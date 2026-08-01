@@ -14,6 +14,7 @@ export type DirectoryItem = {
 };
 
 export const DIRECTORY_ITEMS: Record<string, DirectoryItem> = {
+  // --- COUNTRIES ---
   russia: {
     slug: "russia",
     title: "Talk to Strangers in Russia (Free 1-on-1 Video & Voice Chat)",
@@ -40,32 +41,6 @@ export const DIRECTORY_ITEMS: Record<string, DirectoryItem> = {
       },
     ],
   },
-  "russian-chat": {
-    slug: "russian-chat",
-    title: "Russian Voice & Video Chat with Strangers (Русский Чат)",
-    category: "language",
-    name: "Russian Language Chat",
-    flag: "🇷🇺",
-    languages: ["Russian (Русский)"],
-    peakTimes: "7 PM – 3 AM MSK",
-    onlineCount: "12,150+",
-    description:
-      "Meet Russian speakers around the globe for real-time 1-on-1 voice calls, video matches, and anonymous text chat. Vidibro's Russian Language Hub lets you practice native conversation, make new friends, and enjoy spontaneous talks without registration.\n\nOur platform operates with WebRTC P2P direct streaming, WhatsApp-style text read receipts, and 24/7 Red Flag user reporting for a safe, high-quality experience.",
-    faqs: [
-      {
-        question: "Do I need to download an app for Russian Chat?",
-        answer: "No, Vidibro runs 100% directly inside your mobile or desktop browser without requiring any app download.",
-      },
-      {
-        question: "Can I talk without showing my face?",
-        answer: "Yes! You can use Voice Chat mode for faceless audio calls or Text Chat mode for anonymous instant messaging.",
-      },
-      {
-        question: "How fast is matching in Russian Chat?",
-        answer: "Matching is practically instant, typically pairing you with a Russian speaker in less than a second.",
-      },
-    ],
-  },
   "united-states": {
     slug: "united-states",
     title: "Talk to Strangers in USA (Free 1-on-1 Video & Voice Match)",
@@ -86,10 +61,6 @@ export const DIRECTORY_ITEMS: Record<string, DirectoryItem> = {
         question: "Do I need to enter a credit card or phone number?",
         answer: "Never. Vidibro requires zero personal data, zero credit cards, and zero registration.",
       },
-      {
-        question: "How does user moderation work?",
-        answer: "Vidibro features a 1-tap Red Flag report button. Reporting an inappropriate user immediately blocks them and finds you a new match.",
-      },
     ],
   },
   india: {
@@ -102,19 +73,11 @@ export const DIRECTORY_ITEMS: Record<string, DirectoryItem> = {
     peakTimes: "9 PM – 2 AM IST",
     onlineCount: "18,450+",
     description:
-      "Connect with friendly people across Mumbai, Delhi, Bengaluru, Kolkata, and all over India. Vidibro offers fast 1-on-1 video calls, faceless voice chat, and text messaging in Hindi, English, and regional languages.\n\nNo app store downloads, zero registration, and lightweight WebRTC streaming optimized for Indian mobile networks.",
+      "Connect with friendly people across Mumbai, Delhi, Bengaluru, Kolkata, and all over India. Vidibro offers fast 1-on-1 video calls, faceless voice chat, and text messaging in Hindi, English, and regional languages.",
     faqs: [
       {
         question: "Can I chat in Hindi on Vidibro?",
         answer: "Yes! Hindi and English are widely spoken by users matching from India on Vidibro.",
-      },
-      {
-        question: "Does Vidibro work on Jio/Airtel 4G mobile networks?",
-        answer: "Yes, Vidibro features adaptive bitrate capping (600 kbps) designed specifically to run smoothly on mobile networks.",
-      },
-      {
-        question: "Can I use text chat instead of video?",
-        answer: "Yes, you can select Text Chat for anonymous messaging with WhatsApp-style read receipts and photo sharing.",
       },
     ],
   },
@@ -129,12 +92,7 @@ export const DIRECTORY_ITEMS: Record<string, DirectoryItem> = {
     onlineCount: "7,900+",
     description:
       "Meet people across London, Manchester, Edinburgh, and the UK. Vidibro pairs you instantly for 1-on-1 video chat, voice calls, and text with zero account creation.",
-    faqs: [
-      {
-        question: "Is Vidibro free in the UK?",
-        answer: "Yes, Vidibro is completely free for all users in the UK with zero hidden fees.",
-      },
-    ],
+    faqs: [{ question: "Is Vidibro free in the UK?", answer: "Yes, Vidibro is completely free for all users in the UK with zero hidden fees." }],
   },
   canada: {
     slug: "canada",
@@ -145,14 +103,8 @@ export const DIRECTORY_ITEMS: Record<string, DirectoryItem> = {
     languages: ["English", "French"],
     peakTimes: "8 PM – 1 AM EST / PST",
     onlineCount: "6,300+",
-    description:
-      "Connect with strangers in Toronto, Vancouver, Montreal, and across Canada for 1-on-1 video, audio, and text chat.",
-    faqs: [
-      {
-        question: "Is signup required in Canada?",
-        answer: "No, you can launch video or voice chat instantly without signing up.",
-      },
-    ],
+    description: "Connect with strangers in Toronto, Vancouver, Montreal, and across Canada for 1-on-1 video, audio, and text chat.",
+    faqs: [{ question: "Is signup required in Canada?", answer: "No, you can launch video or voice chat instantly without signing up." }],
   },
   philippines: {
     slug: "philippines",
@@ -163,14 +115,8 @@ export const DIRECTORY_ITEMS: Record<string, DirectoryItem> = {
     languages: ["Tagalog / Filipino", "English"],
     peakTimes: "8 PM – 1 AM PHT",
     onlineCount: "11,200+",
-    description:
-      "Meet Pinoy strangers online for free 1-on-1 video calls, voice chat, and messaging across Manila, Cebu, and Davao.",
-    faqs: [
-      {
-        question: "Is Vidibro free in the Philippines?",
-        answer: "Yes, Vidibro is 100% free with no registration or phone number required.",
-      },
-    ],
+    description: "Meet Pinoy strangers online for free 1-on-1 video calls, voice chat, and messaging across Manila, Cebu, and Davao.",
+    faqs: [{ question: "Is Vidibro free in the Philippines?", answer: "Yes, Vidibro is 100% free with no registration or phone number required." }],
   },
   germany: {
     slug: "germany",
@@ -181,14 +127,8 @@ export const DIRECTORY_ITEMS: Record<string, DirectoryItem> = {
     languages: ["German (Deutsch)", "English"],
     peakTimes: "8 PM – 1 AM CET",
     onlineCount: "8,150+",
-    description:
-      "Meet German speakers across Berlin, Munich, and Frankfurt for 1-on-1 video, voice, and text chat.",
-    faqs: [
-      {
-        question: "Is WebRTC encrypted in Germany?",
-        answer: "Yes, all audio and video streams use direct WebRTC P2P encryption.",
-      },
-    ],
+    description: "Meet German speakers across Berlin, Munich, and Frankfurt for 1-on-1 video, voice, and text chat.",
+    faqs: [{ question: "Is WebRTC encrypted in Germany?", answer: "Yes, all audio and video streams use direct WebRTC P2P encryption." }],
   },
   japan: {
     slug: "japan",
@@ -199,12 +139,184 @@ export const DIRECTORY_ITEMS: Record<string, DirectoryItem> = {
     languages: ["Japanese (日本語)", "English"],
     peakTimes: "9 PM – 2 AM JST",
     onlineCount: "9,100+",
+    description: "Connect with strangers in Tokyo, Osaka, and Kyoto for anonymous 1-on-1 video and voice chat.",
+    faqs: [{ question: "Can I practice Japanese on Vidibro?", answer: "Yes, Japan is a highly active region on Vidibro for language practice and casual talks." }],
+  },
+  brazil: {
+    slug: "brazil",
+    title: "Talk to Strangers in Brazil (Chat de Vídeo Aleatório Brasil)",
+    category: "country",
+    name: "Brazil",
+    flag: "🇧🇷",
+    languages: ["Portuguese (Português)", "English"],
+    peakTimes: "8 PM – 2 AM BRT",
+    onlineCount: "13,400+",
+    description: "Meet people across São Paulo, Rio de Janeiro, and Salvador for free 1-on-1 video and voice chat in Portuguese.",
+    faqs: [{ question: "É gratuito no Brasil?", answer: "Sim! Vidibro é 100% gratuito e sem necessidade de cadastro." }],
+  },
+  france: {
+    slug: "france",
+    title: "Talk to Strangers in France (Chat Vidéo Aléatoire France)",
+    category: "country",
+    name: "France",
+    flag: "🇫🇷",
+    languages: ["French (Français)", "English"],
+    peakTimes: "8 PM – 1 AM CET",
+    onlineCount: "7,450+",
+    description: "Connect with French speakers across Paris, Lyon, and Marseille for 1-on-1 video and voice chat.",
+    faqs: [{ question: "Est-ce gratuit en France?", answer: "Oui, Vidibro est 100% gratuit et sans inscription." }],
+  },
+  spain: {
+    slug: "spain",
+    title: "Talk to Strangers in Spain (Chat de Video Aleatorio España)",
+    category: "country",
+    name: "Spain",
+    flag: "🇪🇸",
+    languages: ["Spanish (Español)"],
+    peakTimes: "9 PM – 2 AM CET",
+    onlineCount: "8,900+",
+    description: "Meet strangers across Madrid, Barcelona, and Valencia for 1-on-1 video and voice chat in Spanish.",
+    faqs: [{ question: "¿Es gratis en España?", answer: "Sí, Vidibro es 100% gratis y no requiere registro." }],
+  },
+  indonesia: {
+    slug: "indonesia",
+    title: "Talk to Strangers in Indonesia (Video Chat Random Indonesia)",
+    category: "country",
+    name: "Indonesia",
+    flag: "🇮🇩",
+    languages: ["Indonesian (Bahasa)", "English"],
+    peakTimes: "8 PM – 1 AM WIB",
+    onlineCount: "12,800+",
+    description: "Meet Indonesian strangers in Jakarta, Surabaya, and Bali for free 1-on-1 video call and voice chat.",
+    faqs: [{ question: "Apakah Vidibro gratis di Indonesia?", answer: "Ya, Vidibro 100% gratis tanpa pendaftaran." }],
+  },
+  mexico: {
+    slug: "mexico",
+    title: "Talk to Strangers in Mexico (Chat de Video México)",
+    category: "country",
+    name: "Mexico",
+    flag: "🇲🇽",
+    languages: ["Spanish (Español)", "English"],
+    peakTimes: "8 PM – 1 AM CST",
+    onlineCount: "10,150+",
+    description: "Connect with people across Mexico City, Guadalajara, and Monterrey for 1-on-1 video and voice chat.",
+    faqs: [{ question: "¿Es gratis en México?", answer: "Sí, Vidibro es 100% gratis sin necesidad de cuenta." }],
+  },
+  south_korea: {
+    slug: "south-korea",
+    title: "Talk to Strangers in South Korea (랜덤 화상채팅)",
+    category: "country",
+    name: "South Korea",
+    flag: "🇰🇷",
+    languages: ["Korean (한국어)", "English"],
+    peakTimes: "9 PM – 2 AM KST",
+    onlineCount: "9,600+",
+    description: "Meet Korean speakers in Seoul, Busan, and Incheon for anonymous 1-on-1 video and voice calls.",
+    faqs: [{ question: "Is Korean chat free?", answer: "Yes, Vidibro is completely free with no registration." }],
+  },
+  turkey: {
+    slug: "turkey",
+    title: "Talk to Strangers in Turkey (Rastgele Görüntülü Sohbet)",
+    category: "country",
+    name: "Turkey",
+    flag: "🇹🇷",
+    languages: ["Turkish (Türkçe)", "English"],
+    peakTimes: "8 PM – 2 AM TRT",
+    onlineCount: "11,800+",
+    description: "Connect with strangers in Istanbul, Ankara, and Izmir for free 1-on-1 video, audio, and text chat.",
+    faqs: [{ question: "Türkiye'de ücretsiz mi?", answer: "Evet, Vidibro 100% ücretsizdir ve kayıt gerektirmez." }],
+  },
+  italy: {
+    slug: "italy",
+    title: "Talk to Strangers in Italy (Chat Video Casuale Italia)",
+    category: "country",
+    name: "Italy",
+    flag: "🇮🇹",
+    languages: ["Italian (Italiano)", "English"],
+    peakTimes: "8 PM – 1 AM CET",
+    onlineCount: "6,900+",
+    description: "Meet Italian speakers across Rome, Milan, and Naples for 1-on-1 video and voice chat.",
+    faqs: [{ question: "È gratuito in Italia?", answer: "Sì, Vidibro è gratuito al 100% senza registrazione." }],
+  },
+  australia: {
+    slug: "australia",
+    title: "Talk to Strangers in Australia (Free Video Chat Aussie)",
+    category: "country",
+    name: "Australia",
+    flag: "🇦🇺",
+    languages: ["English"],
+    peakTimes: "7 PM – 12 AM AEST",
+    onlineCount: "5,800+",
+    description: "Connect with Aussie strangers in Sydney, Melbourne, and Brisbane for instant 1-on-1 video and voice match.",
+    faqs: [{ question: "Is Vidibro free in Australia?", answer: "Yes, Vidibro is 100% free for all Australian users." }],
+  },
+
+  // --- CITIES ---
+  moscow: {
+    slug: "moscow",
+    title: "Talk to Strangers in Moscow (Москва Чат)",
+    category: "city",
+    name: "Moscow",
+    flag: "🇷🇺",
+    languages: ["Russian (Русский)", "English"],
+    peakTimes: "8 PM – 2 AM MSK",
+    onlineCount: "5,400+",
+    description: "Connect with people in Moscow for 1-on-1 WebRTC video, voice calls, and instant text messaging.",
+    faqs: [{ question: "Can I chat in Moscow for free?", answer: "Yes, Vidibro is 100% free with zero signup." }],
+  },
+  new_york: {
+    slug: "new-york",
+    title: "Talk to Strangers in New York City (NYC Video Chat)",
+    category: "city",
+    name: "New York City",
+    flag: "🇺🇸",
+    languages: ["English", "Spanish"],
+    peakTimes: "8 PM – 2 AM EST",
+    onlineCount: "6,800+",
+    description: "Meet New Yorkers for instant 1-on-1 video calls, voice chat, and messaging with no account required.",
+    faqs: [{ question: "Is NYC video chat free?", answer: "Yes, Vidibro is 100% free." }],
+  },
+  london: {
+    slug: "london",
+    title: "Talk to Strangers in London (London Voice & Video Chat)",
+    category: "city",
+    name: "London",
+    flag: "🇬🇧",
+    languages: ["English"],
+    peakTimes: "7 PM – 1 AM GMT",
+    onlineCount: "4,200+",
+    description: "Connect with Londoners for anonymous 1-on-1 video calls and faceless voice chat.",
+    faqs: [{ question: "Is London chat active?", answer: "Yes, London is a highly active city hub on Vidibro." }],
+  },
+  tokyo: {
+    slug: "tokyo",
+    title: "Talk to Strangers in Tokyo (東京 チャット)",
+    category: "city",
+    name: "Tokyo",
+    flag: "🇯🇵",
+    languages: ["Japanese (日本語)", "English"],
+    peakTimes: "9 PM – 2 AM JST",
+    onlineCount: "4,900+",
+    description: "Meet people in Tokyo for instant 1-on-1 video calls and voice chat.",
+    faqs: [{ question: "Is signup required in Tokyo?", answer: "No, instant matching with zero signup." }],
+  },
+
+  // --- LANGUAGES ---
+  "russian-chat": {
+    slug: "russian-chat",
+    title: "Russian Voice & Video Chat with Strangers (Русский Чат)",
+    category: "language",
+    name: "Russian Language Chat",
+    flag: "🇷🇺",
+    languages: ["Russian (Русский)"],
+    peakTimes: "7 PM – 3 AM MSK",
+    onlineCount: "12,150+",
     description:
-      "Connect with strangers in Tokyo, Osaka, and Kyoto for anonymous 1-on-1 video and voice chat.",
+      "Meet Russian speakers around the globe for real-time 1-on-1 voice calls, video matches, and anonymous text chat. Vidibro's Russian Language Hub lets you practice native conversation, make new friends, and enjoy spontaneous talks without registration.",
     faqs: [
       {
-        question: "Can I practice Japanese on Vidibro?",
-        answer: "Yes, Japan is a highly active region on Vidibro for language practice and casual talks.",
+        question: "Do I need an app for Russian Chat?",
+        answer: "No, Vidibro runs 100% directly inside your browser without requiring any app download.",
       },
     ],
   },
@@ -217,14 +329,8 @@ export const DIRECTORY_ITEMS: Record<string, DirectoryItem> = {
     languages: ["English"],
     peakTimes: "24/7 Global Activity",
     onlineCount: "24,800+",
-    description:
-      "Connect with native and fluent English speakers worldwide for instant 1-on-1 video, audio, and text chat.",
-    faqs: [
-      {
-        question: "Is English chat available 24/7?",
-        answer: "Yes, English is the most active language hub on Vidibro around the clock.",
-      },
-    ],
+    description: "Connect with native and fluent English speakers worldwide for instant 1-on-1 video, audio, and text chat.",
+    faqs: [{ question: "Is English chat active 24/7?", answer: "Yes, English is active around the clock." }],
   },
   "hindi-chat": {
     slug: "hindi-chat",
@@ -235,14 +341,8 @@ export const DIRECTORY_ITEMS: Record<string, DirectoryItem> = {
     languages: ["Hindi (हिंदी)"],
     peakTimes: "8 PM – 2 AM IST",
     onlineCount: "15,600+",
-    description:
-      "Meet Hindi speakers for free 1-on-1 video calls, voice chat, and messaging with zero signup.",
-    faqs: [
-      {
-        question: "Is Hindi chat free?",
-        answer: "Yes, Vidibro is 100% free with no coins or account registration.",
-      },
-    ],
+    description: "Meet Hindi speakers for free 1-on-1 video calls, voice chat, and messaging with zero signup.",
+    faqs: [{ question: "Is Hindi chat free?", answer: "Yes, Vidibro is 100% free." }],
   },
   "spanish-chat": {
     slug: "spanish-chat",
@@ -253,15 +353,35 @@ export const DIRECTORY_ITEMS: Record<string, DirectoryItem> = {
     languages: ["Spanish (Español)"],
     peakTimes: "8 PM – 2 AM CET / EST",
     onlineCount: "12,400+",
-    description:
-      "Connect with Spanish speakers across Spain, Mexico, Argentina, and Colombia for 1-on-1 video and voice calls.",
-    faqs: [
-      {
-        question: "Is Spanish chat active in Latin America?",
-        answer: "Yes, Vidibro has high active user numbers across Spain and Latin America.",
-      },
-    ],
+    description: "Connect with Spanish speakers across Spain, Mexico, Argentina, and Colombia for 1-on-1 video and voice calls.",
+    faqs: [{ question: "Is Spanish chat active?", answer: "Yes, Spanish is one of Vidibro's largest hubs." }],
   },
+  "german-chat": {
+    slug: "german-chat",
+    title: "German Random Video Chat (Deutscher Chat)",
+    category: "language",
+    name: "German Chat",
+    flag: "🇩🇪",
+    languages: ["German (Deutsch)"],
+    peakTimes: "8 PM – 1 AM CET",
+    onlineCount: "6,700+",
+    description: "Meet native German speakers for 1-on-1 video calls, faceless voice chat, and language practice.",
+    faqs: [{ question: "Is German chat free?", answer: "Yes, 100% free with zero registration." }],
+  },
+  "french-chat": {
+    slug: "french-chat",
+    title: "French Random Chat with Strangers (Chat en Français)",
+    category: "language",
+    name: "French Chat",
+    flag: "🇫🇷",
+    languages: ["French (Français)"],
+    peakTimes: "8 PM – 1 AM CET",
+    onlineCount: "5,900+",
+    description: "Connect with French speakers across France, Canada, and Belgium for instant 1-on-1 video and voice match.",
+    faqs: [{ question: "Est-ce gratuit?", answer: "Oui, Vidibro est gratuit." }],
+  },
+
+  // --- TOPICS & INTERESTS ---
   "night-talks": {
     slug: "night-talks",
     title: "2 AM Late Night Stranger Chat & Voice Call Hub",
@@ -269,16 +389,10 @@ export const DIRECTORY_ITEMS: Record<string, DirectoryItem> = {
     name: "Late Night Talks",
     flag: "🌙",
     languages: ["English", "Global"],
-    peakTimes: " Midnight – 4 AM Local Time",
+    peakTimes: "Midnight – 4 AM Local Time",
     onlineCount: "16,800+",
-    description:
-      "Can't sleep at night? Connect with other night owls around the globe for relaxed, comforting 1-on-1 voice calls, text chats, and video matches when the world is quiet.",
-    faqs: [
-      {
-        question: "Are night chats safe?",
-        answer: "Yes, Vidibro features 24/7 Red Flag reporting and P2P encryption to ensure safe late-night conversations.",
-      },
-    ],
+    description: "Can't sleep at night? Connect with other night owls around the globe for relaxed, comforting 1-on-1 voice calls, text chats, and video matches when the world is quiet.",
+    faqs: [{ question: "Are night chats safe?", answer: "Yes, Vidibro features 24/7 Red Flag reporting and P2P encryption." }],
   },
   "gaming-chat": {
     slug: "gaming-chat",
@@ -289,14 +403,32 @@ export const DIRECTORY_ITEMS: Record<string, DirectoryItem> = {
     languages: ["English", "Global"],
     peakTimes: "6 PM – 3 AM",
     onlineCount: "11,500+",
-    description:
-      "Talk with fellow gamers about your favorite games, find gaming squad partners, or hang out over anonymous voice and video calls.",
-    faqs: [
-      {
-        question: "Can I talk about gaming on Vidibro?",
-        answer: "Yes! Vidibro's Gaming Hub is popular for casual voice chats while playing games.",
-      },
-    ],
+    description: "Talk with fellow gamers about your favorite games, find gaming squad partners, or hang out over anonymous voice and video calls.",
+    faqs: [{ question: "Can I talk about gaming on Vidibro?", answer: "Yes! Vidibro's Gaming Hub is popular for casual voice chats." }],
+  },
+  "language-exchange": {
+    slug: "language-exchange",
+    title: "Language Exchange Random Voice & Video Chat",
+    category: "topic",
+    name: "Language Exchange",
+    flag: "🗣️",
+    languages: ["Global Languages"],
+    peakTimes: "24/7 Global",
+    onlineCount: "14,300+",
+    description: "Practice foreign languages naturally with native speakers around the world via 1-on-1 voice calls and video chat.",
+    faqs: [{ question: "Can I practice languages for free?", answer: "Yes, Vidibro is 100% free with no limits." }],
+  },
+  "faceless-talks": {
+    slug: "faceless-talks",
+    title: "Faceless Anonymous Voice Call Hub for Introverts",
+    category: "topic",
+    name: "Faceless Voice Talks",
+    flag: "🎙️",
+    languages: ["Global Languages"],
+    peakTimes: "24/7 Global",
+    onlineCount: "19,200+",
+    description: "Enjoy zero-camera-pressure 1-on-1 voice calls with real strangers worldwide. Perfect for introverts and late night talks.",
+    faqs: [{ question: "Is camera required?", answer: "No! Voice Chat mode requires no camera." }],
   },
 };
 

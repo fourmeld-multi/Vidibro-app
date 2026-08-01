@@ -15,6 +15,7 @@ export const metadata: Metadata = generatePageSEO({
 export default function DirectoryIndexPage() {
   const items = Object.values(DIRECTORY_ITEMS);
   const countries = items.filter((i) => i.category === "country");
+  const cities = items.filter((i) => i.category === "city");
   const languages = items.filter((i) => i.category === "language");
   const topics = items.filter((i) => i.category === "topic");
 
@@ -65,6 +66,39 @@ export default function DirectoryIndexPage() {
             ))}
           </div>
         </div>
+
+        {/* Cities Hub */}
+        {cities.length > 0 && (
+          <div className="flex flex-col gap-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
+              <span>🏙️ Major City Hubs</span>
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {cities.map((item) => (
+                <Link
+                  key={item.slug}
+                  href={`/directory/${item.slug}`}
+                  className="flex items-center justify-between rounded-2xl bg-white/5 hover:bg-white/10 border border-purple-500/20 p-4 transition group"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">{item.flag}</span>
+                    <div className="flex flex-col">
+                      <span className="text-sm font-bold text-white group-hover:text-purple-300 transition">
+                        {item.name}
+                      </span>
+                      <span className="text-[11px] text-purple-200/60 font-medium">
+                        {item.languages.slice(0, 2).join(", ")}
+                      </span>
+                    </div>
+                  </div>
+                  <span className="text-xs font-extrabold text-cyan-400 bg-cyan-400/10 px-2.5 py-1 rounded-full border border-cyan-400/20">
+                    {item.onlineCount}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Languages Hub */}
         <div className="flex flex-col gap-6">
