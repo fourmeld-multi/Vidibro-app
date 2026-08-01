@@ -137,6 +137,36 @@ export const ENTRIES: DirectoryEntry[] = [
     peakHours: "22:00 – 01:30 IST",
     timezone: "Asia/Kolkata",
     weight: 0.8,
+    tagline:
+      "Random video chat with Kolkata. Talk in Bangla or English, meet people who genuinely want a long conversation, and start without an account.",
+    localPhrases: [
+      { phrase: "কেমন আছো?", meaning: "How are you?", say: "kemon achho" },
+      { phrase: "কী খবর?", meaning: "What's the news? — a normal opener here", say: "ki khobor" },
+      { phrase: "দারুণ!", meaning: "Brilliant / excellent", say: "darun" },
+      { phrase: "আড্ডা দিই", meaning: "Let's have an adda", say: "adda di" },
+    ],
+    starters: [
+      {
+        topic: "Durga Puja",
+        ask: "Which pandals are you doing this year, and in what order?",
+        why: "Routes are planned weeks ahead and people are competitive about them.",
+      },
+      {
+        topic: "Football",
+        ask: "East Bengal or Mohun Bagan — and did your family choose for you?",
+        why: "One of the oldest club rivalries anywhere, and usually inherited.",
+      },
+      {
+        topic: "Books",
+        ask: "Have you ever actually found something good on College Street?",
+        why: "Everyone has a story about the second-hand stalls.",
+      },
+      {
+        topic: "Street food",
+        ask: "Where is the best kathi roll, and do not say Park Street?",
+        why: "Naming Park Street is the boring answer and people will tell you so.",
+      },
+    ],
     places: ["Park Street", "Salt Lake", "College Street", "Howrah", "Ballygunge", "New Town"],
     talkingPoints: [
       "Durga Puja — the city effectively stops for it, and pandal-hopping routes are argued over months in advance",
@@ -212,6 +242,36 @@ export const ENTRIES: DirectoryEntry[] = [
     peakHours: "22:00 – 01:00 IST / 22:30 – 01:30 BST",
     timezone: "Asia/Dhaka",
     weight: 1.7,
+    tagline:
+      "Free Bengali video chat. Over 200 million speakers across India and Bangladesh — talk in Bangla with no account, no app and no language filter.",
+    localPhrases: [
+      { phrase: "ভালো আছি", meaning: "I'm well", say: "bhalo achhi" },
+      { phrase: "তুমি কোথায় থাকো?", meaning: "Where do you live?", say: "tumi kothay thako" },
+      { phrase: "ঠিক আছে", meaning: "Okay / that's fine", say: "thik achhe" },
+      { phrase: "আবার দেখা হবে", meaning: "We'll meet again", say: "abar dekha hobe" },
+    ],
+    starters: [
+      {
+        topic: "Two Bengals",
+        ask: "Do you say it the Dhaka way or the Kolkata way?",
+        why: "The vocabulary differs enough that this becomes the conversation.",
+      },
+      {
+        topic: "Tagore",
+        ask: "Which Rabindrasangeet did you grow up hearing at home?",
+        why: "Common ground on both sides of the border within seconds.",
+      },
+      {
+        topic: "Ilish",
+        ask: "Shorshe ilish or bhapa — and whose recipe?",
+        why: "A genuinely contested subject that crosses the border.",
+      },
+      {
+        topic: "Pohela Boishakh",
+        ask: "How does your family actually spend Pohela Boishakh?",
+        why: "April new year, celebrated differently in each region.",
+      },
+    ],
     places: ["Kolkata", "Dhaka", "Chittagong", "Sylhet", "Howrah", "Siliguri"],
     talkingPoints: [
       "Rabindranath Tagore, whose songs are still sung on both sides of the border and are common ground almost immediately",
@@ -286,6 +346,36 @@ export const ENTRIES: DirectoryEntry[] = [
     peakHours: "22:30 – 01:30 BST",
     timezone: "Asia/Dhaka",
     weight: 1.6,
+    tagline:
+      "Best free video chat in Bangladesh. Connect with people in Dhaka, Chittagong and Sylhet, talk in your own language, and start in one tap.",
+    localPhrases: [
+      { phrase: "কী অবস্থা?", meaning: "What's up? — casual, very Dhaka", say: "ki obostha" },
+      { phrase: "আপনি কেমন আছেন?", meaning: "How are you? — polite form", say: "apni kemon achhen" },
+      { phrase: "ভালো লাগলো", meaning: "That was nice", say: "bhalo laglo" },
+      { phrase: "দোয়া করবেন", meaning: "Keep me in your prayers — a common sign-off", say: "doa korben" },
+    ],
+    starters: [
+      {
+        topic: "Cricket",
+        ask: "Where were you when Bangladesh last beat India?",
+        why: "Close to a national memory exercise.",
+      },
+      {
+        topic: "Rickshaw art",
+        ask: "Do you actually notice the rickshaw paintings any more?",
+        why: "A real folk-art tradition most locals stopped seeing.",
+      },
+      {
+        topic: "Sylhet and Britain",
+        ask: "Do you have family in the UK, or is that just a Sylhet thing?",
+        why: "A large share of Britain's Bangladeshi community traces to one region.",
+      },
+      {
+        topic: "Ramadan",
+        ask: "Does your routine completely flip during Ramadan?",
+        why: "Activity here moves hours later for a month.",
+      },
+    ],
     places: ["Dhaka", "Chittagong", "Sylhet", "Khulna", "Rajshahi", "Cox's Bazar"],
     talkingPoints: [
       "Cricket, which occupies a place here closer to religion than sport — a Bangladesh–India match stops the country",
@@ -338,6 +428,36 @@ export const ENTRIES: DirectoryEntry[] = [
     peakHours: "21:00 – 01:00 PKT",
     timezone: "Asia/Karachi",
     weight: 1.9,
+    tagline:
+      "Best free video chat in Pakistan. Meet people in Karachi, Lahore and Islamabad, talk in Urdu or English, and start without an account.",
+    localPhrases: [
+      { phrase: "کیا حال ہے؟", meaning: "How are you?", say: "kya haal hai" },
+      { phrase: "زبردست", meaning: "Brilliant / superb", say: "zabardast" },
+      { phrase: "کہاں سے ہو؟", meaning: "Where are you from?", say: "kahan se ho" },
+      { phrase: "پھر ملیں گے", meaning: "We'll meet again", say: "phir milenge" },
+    ],
+    starters: [
+      {
+        topic: "Cricket",
+        ask: "Is this side better than the 1992 team, honestly?",
+        why: "An argument with no ending and everyone has a position.",
+      },
+      {
+        topic: "Biryani",
+        ask: "Karachi or Lahore biryani — defend your answer.",
+        why: "A serious dispute, and a fast way past small talk.",
+      },
+      {
+        topic: "Coke Studio",
+        ask: "Which Coke Studio season was actually the best one?",
+        why: "Turned classical and folk forms into something global.",
+      },
+      {
+        topic: "The north",
+        ask: "Have you been to Hunza or Skardu, or is it still on the list?",
+        why: "Almost everyone will talk about the Karakoram at length.",
+      },
+    ],
     places: ["Karachi", "Lahore", "Islamabad", "Faisalabad", "Rawalpindi", "Peshawar"],
     talkingPoints: [
       "Cricket, and specifically the long argument about whether the current side is better than the 1992 one",
@@ -390,6 +510,36 @@ export const ENTRIES: DirectoryEntry[] = [
     peakHours: "20:00 – 00:30 PHT",
     timezone: "Asia/Manila",
     weight: 1.5,
+    tagline:
+      "Best free video chat in the Philippines. Meet Filipinos in Manila, Cebu and Davao — English widely spoken, no signup, no download.",
+    localPhrases: [
+      { phrase: "Kumusta?", meaning: "How are you?", say: "koo-moos-TAH" },
+      { phrase: "Salamat", meaning: "Thank you", say: "sa-LA-mat" },
+      { phrase: "Ingat", meaning: "Take care — a warm sign-off", say: "EE-ngat" },
+      { phrase: "Sana all", meaning: "'Lucky you' — very current slang", say: "SA-na all" },
+    ],
+    starters: [
+      {
+        topic: "Basketball",
+        ask: "PBA or NBA, and who do you actually follow?",
+        why: "Closer to a national obsession than a pastime.",
+      },
+      {
+        topic: "Karaoke",
+        ask: "What is your guaranteed karaoke song?",
+        why: "Genuinely inescapable, and everyone has one.",
+      },
+      {
+        topic: "Working abroad",
+        ask: "Is anyone in your family working overseas?",
+        why: "Common enough that video calling is emotionally familiar here.",
+      },
+      {
+        topic: "Regions",
+        ask: "Manila, Cebu or Davao — and which do you defend?",
+        why: "The three think of themselves as quite different places.",
+      },
+    ],
     places: ["Manila", "Quezon City", "Cebu", "Davao", "Makati", "Baguio"],
     talkingPoints: [
       "Basketball, which is closer to a national obsession than a pastime — the NBA is followed as closely as the PBA",
@@ -443,6 +593,36 @@ export const ENTRIES: DirectoryEntry[] = [
     peakHours: "22:00 – 01:30 IST",
     timezone: "Asia/Kolkata",
     weight: 1.0,
+    tagline:
+      "Random video chat with Mumbai. Hindi, Marathi or English, no account needed, and a queue that runs later than anywhere else in India.",
+    localPhrases: [
+      { phrase: "काय म्हणतोस?", meaning: "What do you say? — Marathi, very Mumbai", say: "kaay mhantos" },
+      { phrase: "टाइमपास", meaning: "Killing time — used constantly", say: "timepass" },
+      { phrase: "भाऊ", meaning: "Brother — Marathi, friendly", say: "bhau" },
+      { phrase: "चल ना", meaning: "Come on then", say: "chal na" },
+    ],
+    starters: [
+      {
+        topic: "Local trains",
+        ask: "Which line do you take, and how bad is it really?",
+        why: "A shared ordeal that opens people up immediately.",
+      },
+      {
+        topic: "Vada pav",
+        ask: "Your one vada pav place — and it cannot be a chain?",
+        why: "Loyalties here are street-by-street.",
+      },
+      {
+        topic: "Ganesh Chaturthi",
+        ask: "Does your building do its own Ganpati?",
+        why: "Ten days when the city reorganises around it.",
+      },
+      {
+        topic: "Monsoon",
+        ask: "Have you ever had to walk home through a flooded road?",
+        why: "Nearly everyone has, and the stories are good.",
+      },
+    ],
     places: ["Bandra", "Andheri", "Colaba", "Dadar", "Juhu", "Powai"],
     talkingPoints: [
       "The local trains, which are less transport than a shared ordeal everyone has an opinion about",
@@ -496,6 +676,36 @@ export const ENTRIES: DirectoryEntry[] = [
     peakHours: "21:30 – 01:00 IST",
     timezone: "Asia/Kolkata",
     weight: 1.0,
+    tagline:
+      "Video chat with Delhi and NCR. Hindi, Punjabi or English, no signup — meet students, workers and people who moved here from everywhere.",
+    localPhrases: [
+      { phrase: "और भाई?", meaning: "So, brother? — the standard Delhi opener", say: "aur bhai" },
+      { phrase: "बढ़िया", meaning: "Great / excellent", say: "badhiya" },
+      { phrase: "सही है", meaning: "Fair enough / that works", say: "sahi hai" },
+      { phrase: "चलो फिर", meaning: "Alright then", say: "chalo phir" },
+    ],
+    starters: [
+      {
+        topic: "Winter smog",
+        ask: "What is your November air-purifier situation?",
+        why: "Two months a year it dominates every conversation.",
+      },
+      {
+        topic: "Paranthe",
+        ask: "Chole bhature or paranthe — and which specific place?",
+        why: "Old Delhi loyalties are precise and non-negotiable.",
+      },
+      {
+        topic: "Campus",
+        ask: "DU, JNU or Jamia — or did you escape all of it?",
+        why: "The student population shapes the city's whole rhythm.",
+      },
+      {
+        topic: "Origins",
+        ask: "Are you actually from Delhi, or did you come for something?",
+        why: "Most people came for work or study, and that story goes somewhere.",
+      },
+    ],
     places: ["Connaught Place", "Hauz Khas", "Saket", "Chandni Chowk", "Dwarka", "Noida"],
     talkingPoints: [
       "Winter smog, which dominates conversation for two months a year and which everyone has a coping strategy for",
@@ -548,6 +758,36 @@ export const ENTRIES: DirectoryEntry[] = [
     peakHours: "21:00 – 01:00 IST",
     timezone: "Asia/Kolkata",
     weight: 2.6,
+    tagline:
+      "Free Hindi video chat. Over 600 million speakers across India and beyond — talk in Hindi with no account, no app and no filter.",
+    localPhrases: [
+      { phrase: "नमस्ते", meaning: "Hello — works everywhere, always safe", say: "namaste" },
+      { phrase: "क्या चल रहा है?", meaning: "What's going on?", say: "kya chal raha hai" },
+      { phrase: "बिल्कुल सही", meaning: "Exactly right", say: "bilkul sahi" },
+      { phrase: "अच्छा लगा बात करके", meaning: "Good to have talked", say: "achha laga baat karke" },
+    ],
+    starters: [
+      {
+        topic: "Urdu overlap",
+        ask: "Can you tell if someone is speaking Hindi or Urdu?",
+        why: "In speech the line is much blurrier than people expect.",
+      },
+      {
+        topic: "Cinema",
+        ask: "What was the last film you saw that was not in Hindi?",
+        why: "Sidesteps the assumption that Bollywood is the whole industry.",
+      },
+      {
+        topic: "Regional Hindi",
+        ask: "Can you place someone's town from how they speak?",
+        why: "Lucknow, Bhopal and Patna Hindi differ audibly.",
+      },
+      {
+        topic: "Exams",
+        ask: "Did you do the UPSC or JEE years, or dodge them?",
+        why: "Shapes a great many lives across the Hindi belt.",
+      },
+    ],
     places: ["Delhi", "Lucknow", "Jaipur", "Bhopal", "Patna", "Indore"],
     talkingPoints: [
       "Hindi cinema, which reaches far past India and is common ground with people who have never been there",
@@ -600,6 +840,36 @@ export const ENTRIES: DirectoryEntry[] = [
     peakHours: "23:00 – 02:00 BST",
     timezone: "Asia/Dhaka",
     weight: 1.1,
+    tagline:
+      "Video chat with people in Dhaka. Free, anonymous and instant — one of the latest-running chat queues anywhere in South Asia.",
+    localPhrases: [
+      { phrase: "জ্যামে আটকে আছি", meaning: "Stuck in traffic — universally understood here", say: "jam-e atke achhi" },
+      { phrase: "চলেন", meaning: "Let's go", say: "cholen" },
+      { phrase: "মামা", meaning: "Informal 'mate', used with vendors and drivers", say: "mama" },
+      { phrase: "ভাই", meaning: "Brother — the default way to address a man", say: "bhai" },
+    ],
+    starters: [
+      {
+        topic: "Traffic",
+        ask: "What is your actual strategy for getting across the city at 6pm?",
+        why: "Everyone has one and everyone thinks theirs is best.",
+      },
+      {
+        topic: "Old Dhaka",
+        ask: "Is Old Dhaka food genuinely better, or is that nostalgia?",
+        why: "Reliably divides people from different parts of the city.",
+      },
+      {
+        topic: "Two cities",
+        ask: "Gulshan and Old Dhaka — do they feel like the same city to you?",
+        why: "Residents will say no, at length.",
+      },
+      {
+        topic: "Chawkbazar",
+        ask: "Have you done the Chawkbazar iftar market, or is it too much?",
+        why: "Famous, crowded, and argued about every Ramadan.",
+      },
+    ],
     places: ["Gulshan", "Dhanmondi", "Old Dhaka", "Uttara", "Mirpur", "Banani"],
     talkingPoints: [
       "The traffic, which is genuinely world-famous and which every resident has a personal strategy for surviving",
@@ -653,6 +923,36 @@ export const ENTRIES: DirectoryEntry[] = [
     peakHours: "20:00 – 00:30 PHT",
     timezone: "Asia/Manila",
     weight: 1.0,
+    tagline:
+      "Random video chat with Manila. Free and anonymous, English widely spoken, and a queue that fills early in the evening.",
+    localPhrases: [
+      { phrase: "Anong balita?", meaning: "What's the news?", say: "a-NONG ba-LEE-ta" },
+      { phrase: "Grabe", meaning: "Wow / that's intense", say: "GRA-beh" },
+      { phrase: "Tara", meaning: "Let's go", say: "ta-RA" },
+      { phrase: "Bahala na", meaning: "Come what may — a whole philosophy", say: "ba-HA-la na" },
+    ],
+    starters: [
+      {
+        topic: "EDSA",
+        ask: "How long is your commute on a genuinely bad day?",
+        why: "A shared trauma that opens people up instantly.",
+      },
+      {
+        topic: "Jeepneys",
+        ask: "Do you actually want the old jeepneys modernised?",
+        why: "A live argument with real feeling on both sides.",
+      },
+      {
+        topic: "Food",
+        ask: "Sisig, adobo or halo-halo — one only.",
+        why: "Forcing a choice gets a much better answer than 'what food do you like'.",
+      },
+      {
+        topic: "Typhoons",
+        ask: "What is your typhoon-season routine?",
+        why: "Genuinely part of life here a few times a year.",
+      },
+    ],
     places: ["Makati", "BGC", "Quezon City", "Intramuros", "Ermita", "Pasig"],
     talkingPoints: [
       "Traffic, which residents discuss the way other cities discuss weather — EDSA at rush hour is a shared trauma",
@@ -706,6 +1006,36 @@ export const ENTRIES: DirectoryEntry[] = [
     peakHours: "21:30 – 01:30 PKT",
     timezone: "Asia/Karachi",
     weight: 1.2,
+    tagline:
+      "Video chat with Karachi. Urdu, Sindhi or English, no signup — Pakistan's largest and most mixed city, online late into the night.",
+    localPhrases: [
+      { phrase: "کیا سین ہے؟", meaning: "What's the scene? — very Karachi", say: "kya scene hai" },
+      { phrase: "یار", meaning: "Mate / dude", say: "yaar" },
+      { phrase: "بالکل", meaning: "Absolutely", say: "bilkul" },
+      { phrase: "خیال رکھنا", meaning: "Take care", say: "khayaal rakhna" },
+    ],
+    starters: [
+      {
+        topic: "The sea",
+        ask: "Do you actually go to the beach, or only when relatives visit?",
+        why: "The only major coastal city in Pakistan, and residents are attached to it.",
+      },
+      {
+        topic: "Origins",
+        ask: "Where did your family come to Karachi from?",
+        why: "Urdu, Sindhi, Pashto, Punjabi and Balochi communities all live here.",
+      },
+      {
+        topic: "Heat",
+        ask: "How do you survive May and June here?",
+        why: "Everyone has an elaborate strategy.",
+      },
+      {
+        topic: "Cricket returning",
+        ask: "Did you go to a match when international teams came back?",
+        why: "Still an emotional subject in the city.",
+      },
+    ],
     places: ["Clifton", "Saddar", "DHA", "Gulshan-e-Iqbal", "Korangi", "North Nazimabad"],
     talkingPoints: [
       "Biryani, and the specific claim that Karachi's is better than Lahore's, which will start a conversation instantly",
@@ -759,6 +1089,36 @@ export const ENTRIES: DirectoryEntry[] = [
     peakHours: "21:00 – 00:30 IST",
     timezone: "Asia/Kolkata",
     weight: 1.0,
+    tagline:
+      "Video chat with Bangalore. Mostly English, better connections than anywhere else in India, and no account required.",
+    localPhrases: [
+      { phrase: "ಹೇಗಿದ್ದೀರಾ?", meaning: "How are you? — Kannada", say: "hegiddeera" },
+      { phrase: "ಚೆನ್ನಾಗಿದೆ", meaning: "It's good", say: "chennagide" },
+      { phrase: "ಸ್ವಲ್ಪ", meaning: "A little / a bit — used constantly", say: "swalpa" },
+      { phrase: "ಧನ್ಯವಾದ", meaning: "Thank you", say: "dhanyavaada" },
+    ],
+    starters: [
+      {
+        topic: "Silk Board",
+        ask: "How long have you been stuck at Silk Board, cumulatively?",
+        why: "A citywide joke that everyone can contribute to.",
+      },
+      {
+        topic: "Weather",
+        ask: "Is the weather still the best thing about this city?",
+        why: "Bangaloreans bring it up unprompted; the answer is changing.",
+      },
+      {
+        topic: "Origins",
+        ask: "Which state did you move here from, and when?",
+        why: "Almost nobody you meet is originally from here.",
+      },
+      {
+        topic: "Filter coffee",
+        ask: "Which darshini does it properly?",
+        why: "Strong opinions, low stakes, always works.",
+      },
+    ],
     places: ["Koramangala", "Indiranagar", "Whitefield", "HSR Layout", "MG Road", "Jayanagar"],
     talkingPoints: [
       "The weather, which Bangaloreans consider the best in India and will bring up unprompted",
@@ -811,6 +1171,36 @@ export const ENTRIES: DirectoryEntry[] = [
     peakHours: "21:00 – 00:30 IST",
     timezone: "Asia/Kolkata",
     weight: 1.4,
+    tagline:
+      "Free Tamil video chat. Around 80 million speakers across India, Sri Lanka, Singapore and Malaysia — no account, no app, no filter.",
+    localPhrases: [
+      { phrase: "எப்படி இருக்கீங்க?", meaning: "How are you?", say: "eppadi irukeenga" },
+      { phrase: "நன்றி", meaning: "Thank you", say: "nandri" },
+      { phrase: "சூப்பர்", meaning: "Great — borrowed and everywhere", say: "super" },
+      { phrase: "பிறகு பார்க்கலாம்", meaning: "See you later", say: "piragu paarkalaam" },
+    ],
+    starters: [
+      {
+        topic: "Kollywood",
+        ask: "Which Kollywood era do you actually rate?",
+        why: "A star system and set of rivalries entirely separate from Bollywood.",
+      },
+      {
+        topic: "Where they are",
+        ask: "Chennai, Jaffna, Singapore or somewhere else?",
+        why: "Tamil is official in three countries, so this genuinely varies.",
+      },
+      {
+        topic: "Pongal",
+        ask: "How does your family keep Pongal?",
+        why: "Matters more here than most north Indian festivals do.",
+      },
+      {
+        topic: "Filter coffee",
+        ask: "Degree coffee — do you take it the traditional way?",
+        why: "Preparation and pouring are not treated as negotiable.",
+      },
+    ],
     places: ["Chennai", "Coimbatore", "Madurai", "Jaffna", "Singapore", "Kuala Lumpur"],
     talkingPoints: [
       "Kollywood, which has its own star system and rivalries entirely separate from Bollywood",
@@ -863,6 +1253,36 @@ export const ENTRIES: DirectoryEntry[] = [
     peakHours: "21:00 – 01:00 PKT",
     timezone: "Asia/Karachi",
     weight: 1.5,
+    tagline:
+      "Free Urdu video chat. Talk in Urdu with people across Pakistan, India and the Gulf — no account, no app, video, voice or text.",
+    localPhrases: [
+      { phrase: "آداب", meaning: "A respectful hello, works anywhere", say: "aadab" },
+      { phrase: "سنائیں", meaning: "So, tell me — a standard opener", say: "sunayen" },
+      { phrase: "کمال ہے", meaning: "That's wonderful", say: "kamaal hai" },
+      { phrase: "اللہ حافظ", meaning: "Goodbye", say: "Allah hafiz" },
+    ],
+    starters: [
+      {
+        topic: "Poetry",
+        ask: "Do you have a Ghalib or Faiz couplet you actually use?",
+        why: "Quoting poetry mid-conversation is normal here, not affected.",
+      },
+      {
+        topic: "The Hindi line",
+        ask: "Have you ever realised halfway through that they were speaking Hindi?",
+        why: "In speech the two are close enough that it happens constantly.",
+      },
+      {
+        topic: "Script",
+        ask: "Can you still read Nastaliq comfortably?",
+        why: "The scripts diverge completely even where the speech does not.",
+      },
+      {
+        topic: "Food triangle",
+        ask: "Karachi, Lahore or Delhi — who does the same dish best?",
+        why: "Three cities claim the same food and disagree about all of it.",
+      },
+    ],
     places: ["Karachi", "Lahore", "Islamabad", "Hyderabad", "Delhi", "Dubai"],
     talkingPoints: [
       "Poetry, which occupies a place in Urdu culture that has no real equivalent in English — Ghalib and Faiz get quoted in ordinary conversation",
