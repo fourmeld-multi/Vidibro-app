@@ -6,6 +6,7 @@ import { ENTRIES, getEntry, resolvableRelated, hrefFor } from "@/lib/directory/e
 import { assertEntryIsPublishable } from "@/lib/directory/types";
 import { generatePageSEO, BASE_URL } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
+import PeakHoursBar from "@/components/PeakHoursBar";
 
 export function generateStaticParams() {
   return ENTRIES.map((e) => ({ slug: e.slug }));
@@ -24,6 +25,9 @@ export async function generateMetadata({
     description: entry.description,
     slug: `/directory/${entry.slug}`,
     keywords: [entry.primaryKeyword, `${entry.name} video chat`, `talk to strangers ${entry.name}`],
+    // Each directory page has its own generated card (opengraph-image.tsx in
+    // this segment) rather than the generic site one.
+    image: `${BASE_URL}/directory/${entry.slug}/opengraph-image`,
   });
 }
 
@@ -166,6 +170,7 @@ export default async function DirectoryEntryPage({
         </Section>
 
         <Section title="When is it busiest, and what will the call be like?">
+          <PeakHoursBar peakHours={entry.peakHours} />
           <p>
             The queue is fullest between <strong className="text-white">{entry.peakHours}</strong>.{" "}
             {entry.localNote}

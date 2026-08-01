@@ -115,11 +115,15 @@ export default function RootLayout({
             },
           ]}
         />
-        {/* Runs before hydration so there's no flash of the wrong theme —
-            reads the stored preference (or system setting) and applies it
-            immediately, before React ever mounts. */}
+        {/* The design is dark-only: the landing page alone carries 144 hardcoded
+            dark colour classes and zero theme-variable usages, and ThemeToggle
+            was never mounted anywhere. This script used to honour
+            prefers-color-scheme, which meant every visitor whose OS is set to
+            light got a light page background behind text styled for a dark one
+            — white-on-white in places. Until the palette is genuinely
+            themeable, dark is the only honest answer. */}
         <Script id="theme-init" strategy="beforeInteractive">
-          {`try{var t=localStorage.getItem('vidibro-theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t);}catch(e){}`}
+          {`document.documentElement.setAttribute('data-theme','dark');`}
         </Script>
         <Background />
         {children}
