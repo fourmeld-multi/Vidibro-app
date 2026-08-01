@@ -20,6 +20,8 @@ export const ENTRIES: DirectoryEntry[] = [
     title: "Video Chat India — Talk to Indian Strangers Free, No Signup",
     description:
       "Free random video chat with people across India. Match instantly with strangers in Mumbai, Delhi, Kolkata and beyond — no account, no phone number, works on Jio and Airtel.",
+    tagline:
+      "The best free video chat in India. Connect with people across the country, make new friends, talk in your own language — no signup, no download, no waiting.",
     languages: [
       "हिन्दी (Hindi)",
       "বাংলা (Bengali)",
@@ -42,7 +44,35 @@ export const ENTRIES: DirectoryEntry[] = [
     connectivityNote:
       "Most people in India will reach you on 4G or 5G rather than fixed broadband, usually on Jio or Airtel. Vidibro caps video at roughly 600 kbps and adapts downward when the connection tightens, so a call holds together on a moving train or in a patchy area — it will look softer rather than freezing.",
     localNote:
-      "India spans one time zone but a very wide range of daily rhythms. Metro users tend to come online late, after 21:00 IST, while smaller-city users are often around earlier in the evening. If matching feels slow at 15:00, it is not the queue being broken — it is genuinely quiet.",
+      "India spans one time zone but a very wide range of daily rhythms. Metro users tend to come online late, after 9 PM IST, while smaller-city users are often around earlier in the evening. If matching feels slow at 3 in the afternoon, it is not the queue being broken — it is genuinely quiet.",
+    localPhrases: [
+      { phrase: "क्या हाल है?", meaning: "How's it going?", say: "kya haal hai" },
+      { phrase: "आप कहाँ से हो?", meaning: "Where are you from?", say: "aap kahaan se ho" },
+      { phrase: "मज़ा आया", meaning: "That was fun / I enjoyed it", say: "mazaa aaya" },
+      { phrase: "फिर मिलते हैं", meaning: "See you again", say: "phir milte hain" },
+    ],
+    starters: [
+      {
+        topic: "Cricket",
+        ask: "Which IPL team do you actually support, and how badly are they doing?",
+        why: "Almost nobody in India is neutral about this, and the complaint is usually funnier than the praise.",
+      },
+      {
+        topic: "Food",
+        ask: "Settle it for me — Hyderabadi or Lucknowi biryani?",
+        why: "A genuinely contested question that people will argue with strangers about.",
+      },
+      {
+        topic: "Where they're from",
+        ask: "Are you from the city you're living in, or did you move for work?",
+        why: "A very large share of urban India moved for work or study, so this usually opens up a real story.",
+      },
+      {
+        topic: "Films",
+        ask: "What's the last film you watched that wasn't in Hindi?",
+        why: "Sidesteps the assumption that Bollywood is the only industry, which people appreciate.",
+      },
+    ],
     intro: [
       "India is the single largest source of random-chat traffic in the world, and it is not close. That has an obvious practical consequence: at almost any hour there is someone online, and during the late-evening peak the wait between matches is usually a few seconds rather than a few minutes.",
       "What it does not mean is that every conversation will be in the same language. India has twenty-two official languages and Vidibro does not filter by any of them, so a match from Chennai and a match from Chandigarh are genuinely different conversations. Most people default to English or Hindi with a stranger and switch if they find common ground, which happens more often than you would expect.",
@@ -72,7 +102,7 @@ export const ENTRIES: DirectoryEntry[] = [
       {
         question: "What time of day is busiest in India?",
         answer:
-          "Between 21:00 and 01:00 IST, after dinner. Weekday afternoons are noticeably quieter, so if you are waiting a long time at 15:00 the queue is genuinely thin rather than broken.",
+          "Between 9 PM and 1 AM IST, after dinner. Weekday afternoons are noticeably quieter, so if you are waiting a long time at 3 PM the queue is genuinely thin rather than broken.",
       },
       {
         question: "Is my video recorded or stored?",

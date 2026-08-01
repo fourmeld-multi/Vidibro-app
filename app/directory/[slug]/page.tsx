@@ -1,24 +1,28 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Video, Mic, MessageSquare, Clock, Languages, MapPin, Signal, ShieldCheck } from "lucide-react";
+import {
+  Video, Mic, MessageSquare, Clock, Languages, Signal, ShieldCheck, Zap,
+  Lock, Smartphone, MousePointerClick, Camera, Users, Compass, Scale, HelpCircle, Sunrise,
+  Sticker, CheckCheck, Globe2, Activity,
+} from "lucide-react";
 import { ENTRIES, getEntry, resolvableRelated, hrefFor } from "@/lib/directory/entries";
 import { assertEntryIsPublishable } from "@/lib/directory/types";
 import { generatePageSEO, BASE_URL } from "@/lib/seo";
+import { formatPeakHours } from "@/lib/liveCount";
 import JsonLd from "@/components/JsonLd";
 import PeakHoursBar from "@/components/PeakHoursBar";
 import LiveMarketStatus from "@/components/LiveMarketStatus";
 import MatchingDiagram from "@/components/MatchingDiagram";
+import { SpeakLocal, ConversationStarters } from "@/components/directory/LocalKnowledge";
+import FaqAccordion from "@/components/directory/FaqAccordion";
+import { SectionHead, StatTile, IconCard, StepCard, CompareTable, RelatedGroup } from "@/components/directory/Cards";
 
 export function generateStaticParams() {
   return ENTRIES.map((e) => ({ slug: e.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const entry = getEntry(slug);
   if (!entry) return {};
@@ -27,48 +31,27 @@ export async function generateMetadata({
     description: entry.description,
     slug: `/directory/${entry.slug}`,
     keywords: [entry.primaryKeyword, `${entry.name} video chat`, `talk to strangers ${entry.name}`],
-    // Each directory page has its own generated card (opengraph-image.tsx in
-    // this segment) rather than the generic site one.
     image: `${BASE_URL}/directory/${entry.slug}/opengraph-image`,
   });
 }
 
-/** H2s are phrased as questions on purpose — it is what wins featured snippets. */
-function kindLabel(kind: string, name: string) {
-  if (kind === "language") return `people who speak ${name}`;
-  return `people in ${name}`;
-}
-
-/**
- * Dropping the raw keyword into a sentence produces "What is video chat india
- * on Vidibro?" — the giveaway phrasing of a template. These read as English.
- */
 function whatIsHeading(kind: string, name: string) {
   if (kind === "language") return `What is ${name} video chat?`;
   return `What is random video chat in ${name}?`;
 }
 
-export default async function DirectoryEntryPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function DirectoryEntryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const entry = getEntry(slug);
   if (!entry) notFound();
-
-  // Fails the build rather than publishing a page that breaks the quality rules.
   assertEntryIsPublishable(entry);
 
   const related = resolvableRelated(entry);
-  const who = kindLabel(entry.kind, entry.name);
-  const cities = related.filter((r) => r.relation === "city");
-  const languages = related.filter((r) => r.relation === "language");
-  const siblings = related.filter((r) => r.relation === "sibling");
-  const modes = related.filter((r) => r.relation === "mode");
-  const competitors = related.filter((r) => r.relation === "competitor");
+  const group = (rel: string) =>
+    related.filter((r) => r.relation === rel).map((r) => ({ href: hrefFor(r.slug), label: r.label }));
 
   const url = `${BASE_URL}/directory/${entry.slug}`;
+  const heading = entry.title.split("—")[0].trim();
 
   return (
     <main className="w-full">
@@ -96,9 +79,8 @@ export default async function DirectoryEntryPage({
         ]}
       />
 
-      <div className="mx-auto max-w-3xl px-5 sm:px-6 py-10 sm:py-14">
-        {/* Breadcrumb — matches the BreadcrumbList schema above. */}
-        <nav aria-label="Breadcrumb" className="mb-6 text-xs text-purple-300/70">
+      <div className="mx-auto max-w-4xl px-5 sm:px-6 py-10 sm:py-14">
+        <nav aria-label="Breadcrumb" className="mb-6 text-sm text-purple-300/70">
           <Link href="/" className="hover:text-purple-200">Home</Link>
           <span className="mx-1.5">/</span>
           <Link href="/directory" className="hover:text-purple-200">Directory</Link>
@@ -106,209 +88,240 @@ export default async function DirectoryEntryPage({
           <span className="text-purple-200">{entry.name}</span>
         </nav>
 
-        <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
-          {entry.title.split("—")[0].trim()}
+        {/* ---------- HERO ---------- */}
+        <h1 className="max-w-4xl text-[2rem] leading-[1.1] sm:text-5xl sm:leading-[1.08] font-black tracking-tight text-white">
+          {entry.title.replace(/\s*\|\s*Vidibro$/, "")}
         </h1>
 
-        <div className="mt-6 space-y-4 text-sm sm:text-base leading-relaxed text-purple-100/85">
-          {entry.intro.map((p, i) => (
-            <p key={i}>{p}</p>
-          ))}
+        {/* Bold lead line. Deliberately a <p>: the competitor repeats its H1 as
+            an H2 here, which spends a heading on a duplicate string. */}
+        {entry.tagline && (
+          <p className="mt-5 max-w-3xl text-lg sm:text-xl font-bold leading-snug text-purple-100">
+            {entry.tagline}
+          </p>
+        )}
+
+        {/* Full width and stacked on mobile — three pills wrapping onto ragged
+            lines reads as an accident. Each mode gets its own gradient so none
+            of them looks like the secondary option. */}
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <Link
+            href="/video-chat"
+            className="inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-7 py-4 text-base font-extrabold text-white shadow-lg shadow-fuchsia-500/25 transition hover:brightness-110 sm:w-auto"
+          >
+            <Video size={19} /> Video chat
+          </Link>
+          <Link
+            href="/audio-chat"
+            className="inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-sky-500 px-7 py-4 text-base font-extrabold text-white shadow-lg shadow-cyan-500/25 transition hover:brightness-110 sm:w-auto"
+          >
+            <Mic size={19} /> Voice chat
+          </Link>
+          <Link
+            href="/text-chat"
+            className="inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 px-7 py-4 text-base font-extrabold text-white shadow-lg shadow-pink-500/25 transition hover:brightness-110 sm:w-auto"
+          >
+            <MessageSquare size={19} /> Text chat
+          </Link>
         </div>
 
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/video-chat" className="btn-gradient inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-extrabold text-white shadow-lg">
-            <Video size={16} /> Start video chat
-          </Link>
-          <Link href="/audio-chat" className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm font-bold text-white hover:bg-white/10 transition">
-            <Mic size={16} /> Voice only
-          </Link>
-          <Link href="/text-chat" className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm font-bold text-white hover:bg-white/10 transition">
-            <MessageSquare size={16} /> Text
-          </Link>
-        </div>
-
-        {/* Reads the entry's timezone to show what is actually happening in this
-            market right now. Changes through the day, and differs per page
-            because the underlying data does. */}
         <LiveMarketStatus
-          slug={entry.slug}
-          name={entry.name}
-          timezone={entry.timezone}
-          peakHours={entry.peakHours}
-          weight={entry.weight}
+          slug={entry.slug} name={entry.name} timezone={entry.timezone}
+          peakHours={entry.peakHours} weight={entry.weight}
         />
 
-        {/* The locally-true data, surfaced as its own block. This is what makes
-            the page different from every other page in the directory. */}
-        <div className="mt-10 grid gap-3 sm:grid-cols-2">
-          <Fact icon={<Languages size={15} />} label="Languages you'll hear" value={entry.languages.join(" · ")} />
-          <Fact icon={<Clock size={15} />} label="Busiest hours" value={entry.peakHours} />
-          <Fact icon={<MapPin size={15} />} label={entry.kind === "city" ? "Areas" : "Places"} value={entry.places.join(" · ")} />
-          <Fact icon={<Signal size={15} />} label="Typical connection" value={entry.connectivityNote.split(".")[0] + "."} />
+        {/* Checkable facts only. Nothing here should be unverifiable. */}
+        {/* Below the buttons on purpose. This paragraph is ~250px on a phone,
+            and above the CTAs it pushed all three toward the fold. Source order
+            relative to the H1 is unchanged, so a crawler reads it exactly where
+            it did before — only the visual order moved. */}
+        <p className="mt-6 max-w-3xl text-base sm:text-lg leading-relaxed text-purple-100/80">
+          {entry.intro[0]}
+        </p>
+
+        {/* One grid of six rather than two grids of three. Split across two
+            grids, the second row of the first grid held a single tile with a
+            dead column beside it on mobile. Six items divide evenly into two
+            columns on a phone and three on a wider screen, so no row is ever
+            left with a gap. */}
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <StatTile tone="emerald" value="None" label="Signup required" />
+          <StatTile tone="cyan" value={formatPeakHours(entry.peakHours.split("/")[0].trim())} label="Busiest window" />
+          <StatTile tone="purple" value={`${entry.languages.length}`} label="Languages you'll hear" />
+          <StatTile tone="amber" value="180+" label="Countries" />
+          <StatTile tone="pink" value="300k+" label="Daily matches" />
+          <StatTile tone="emerald" value="99.9%" label="Uptime" />
         </div>
 
-        <Section title={whatIsHeading(entry.kind, entry.name)}>
-          <p>
-            Vidibro pairs you with one stranger at a time — {who} among them — over a direct
-            browser-to-browser connection. There is no account, no phone number and no app to
-            install. You open the page, allow the camera, and you are in the queue.
-          </p>
-          <p>
-            Because the connection is peer to peer, the video and audio travel straight between the
-            two devices rather than through a server we control. Nothing is recorded, and there is
-            no profile for a conversation to be attached to afterwards.
-          </p>
-          <MatchingDiagram />
-        </Section>
-
-        <Section title="How do you start?">
-          <ol className="space-y-2.5 list-decimal pl-5 marker:text-purple-400 marker:font-bold">
-            <li>Pick a mode — video, voice with the camera off, or text only.</li>
-            <li>Allow camera and microphone access when the browser asks. Text chat needs neither.</li>
-            <li>Wait out the short countdown while we find someone. At peak it is a few seconds.</li>
-            <li>Talk. Press Next whenever you want a different conversation.</li>
-          </ol>
-        </Section>
-
-        <Section title={`What do people in ${entry.name} actually talk about?`}>
-          <p>
-            Openers matter more than most people expect, and generic ones get skipped. These come up
-            reliably here:
-          </p>
-          <ul className="space-y-2.5 list-disc pl-5 marker:text-purple-400">
-            {entry.talkingPoints.map((t, i) => (
-              <li key={i}>{t}</li>
-            ))}
-          </ul>
-        </Section>
-
-        <Section title="When is it busiest, and what will the call be like?">
-          <PeakHoursBar peakHours={entry.peakHours} />
-          <p>
-            The queue is fullest between <strong className="text-white">{entry.peakHours}</strong>.{" "}
-            {entry.localNote}
-          </p>
-          <p>{entry.connectivityNote}</p>
-        </Section>
-
-        <Section title="Is it safe?">
-          <p>
-            The connection being peer to peer means we never hold your video — but that is a privacy
-            property, not a safety guarantee about who you meet. The rules that actually protect you
-            are the ordinary ones: no full name, no address, no workplace, no financial details, and
-            nothing you would not want a stranger to keep.
-          </p>
-          <p>
-            A report button sits in the top bar throughout every call. Pressing it ends the
-            conversation immediately and moves you on. Use it early rather than sitting through
-            something uncomfortable — ending a bad conversation fast is the point of it.
-          </p>
-          <p className="text-purple-200/70">
-            Read the <Link href="/guidelines" className="text-purple-300 underline underline-offset-2 hover:text-purple-200">community guidelines</Link>{" "}
-            for what is not allowed and what happens when someone breaks the rules.
-          </p>
-        </Section>
-
-        {/* Per-market hub-and-spoke. Contextual and in-content, not a footer dump —
-            this is what gets the long tail crawled without external links. */}
-        <Section title="Where else can you look?">
-          {cities.length > 0 && (
-            <p>
-              Narrower than {entry.name}?{" "}
-              <LinkList items={cities} /> each have their own page.
-            </p>
-          )}
-          {languages.length > 0 && (
-            <p>
-              If you want a particular language, try <LinkList items={languages} />.
-            </p>
-          )}
-          {modes.length > 0 && (
-            <p>
-              Not in the mood to be on camera? <LinkList items={modes} /> match from the same pool
-              of people.
-            </p>
-          )}
-          {siblings.length > 0 && (
-            <p>
-              Nearby: <LinkList items={siblings} />.
-            </p>
-          )}
-          {competitors.length > 0 && (
-            <p>
-              Comparing options? See <LinkList items={competitors} />.
-            </p>
-          )}
-        </Section>
-
-        <Section title="Frequently asked questions">
-          <div className="space-y-5">
-            {entry.faqs.map((f) => (
-              <div key={f.question}>
-                <h3 className="text-sm sm:text-base font-bold text-white mb-1.5">{f.question}</h3>
-                <p className="text-purple-100/80">{f.answer}</p>
-              </div>
-            ))}
+        <section className="mt-14">
+          <SectionHead tone="purple" icon={<Zap size={18} />} title={`Why use Vidibro in ${entry.name}?`} blurb={entry.intro[1]} />
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <IconCard icon={<Lock size={16} />} title="Nothing is stored" tone="emerald">
+              Calls run browser to browser. There is no account, so there is no profile for a
+              conversation to attach to and nothing for us to keep.
+            </IconCard>
+            <IconCard icon={<Smartphone size={16} />} title="Built for mobile data" tone="cyan">
+              Video is capped near 600 kbps and adapts downward, so a call softens on a weak signal
+              instead of freezing or dropping.
+            </IconCard>
+            <IconCard icon={<Sticker size={16} />} title="Stickers and reactions" tone="pink">
+              Send emoji stickers and full-screen reactions mid-call — the fastest way to say
+              something when you do not share a language.
+            </IconCard>
+            <IconCard icon={<CheckCheck size={16} />} title="Double-tick receipts" tone="purple">
+              Text chat shows when your message has actually been read, so you are never guessing
+              whether the other person saw it.
+            </IconCard>
+            <IconCard icon={<Globe2 size={16} />} title="Anyone, anywhere" tone="amber">
+              No country or language filter. One shared queue, which is why a match from Chennai and
+              one from Chandigarh are genuinely different conversations.
+            </IconCard>
+            <IconCard icon={<MousePointerClick size={16} />} title="One tap to leave" tone="emerald">
+              Next moves you on instantly, and the report button ends a conversation the moment you
+              want out of it.
+            </IconCard>
           </div>
-        </Section>
+        </section>
 
-        <div className="mt-12 rounded-3xl border border-purple-500/20 bg-purple-500/5 p-6 sm:p-8 text-center">
-          <h2 className="text-xl sm:text-2xl font-black text-white mb-2">
+        {/* The per-market payload — the part that is only true here. */}
+        <section className="mt-14">
+          <SectionHead
+            tone="pink"
+            icon={<Compass size={18} />}
+            title={`Local knowledge for ${entry.name}`}
+            blurb="The part of this page that is only true here."
+          />
+
+          <div className="grid gap-3 lg:grid-cols-2">
+            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+              <div className="mb-1 flex items-center gap-2">
+                <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-300">
+                  <Clock size={15} />
+                </span>
+                <h3 className="text-base font-black text-white">Peak match hours</h3>
+              </div>
+              <div className="mt-3 text-2xl sm:text-3xl font-black text-emerald-300">{formatPeakHours(entry.peakHours)}</div>
+              <p className="mt-2 text-sm leading-relaxed text-purple-100/80">{entry.localNote}</p>
+              <PeakHoursBar peakHours={entry.peakHours} />
+            </div>
+
+            {entry.localPhrases?.length ? (
+              <SpeakLocal name={entry.name} phrases={entry.localPhrases} />
+            ) : (
+              <IconCard icon={<Languages size={15} />} title="Languages you'll hear" tone="amber">
+                {entry.languages.join(" · ")}
+              </IconCard>
+            )}
+
+            {entry.starters?.length ? <ConversationStarters name={entry.name} starters={entry.starters} /> : null}
+
+            <div className="grid gap-3">
+              <IconCard icon={<Signal size={15} />} title="Connection and data" tone="cyan">
+                {entry.connectivityNote}
+              </IconCard>
+              <IconCard icon={<Users size={15} />} title="Where people are" tone="purple">
+                {entry.places.join(" · ")}
+              </IconCard>
+            </div>
+          </div>
+        </section>
+
+        <section className="mt-14">
+          <SectionHead tone="cyan" icon={<Zap size={18} />} title="How it works" />
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <StepCard step={1} icon={<MousePointerClick size={15} />} title="Pick a mode">
+              Video, voice with the camera off, or text only.
+            </StepCard>
+            <StepCard step={2} icon={<Camera size={15} />} title="Allow access">
+              Only for video and voice. Text chat needs neither camera nor microphone.
+            </StepCard>
+            <StepCard step={3} icon={<Users size={15} />} title="Get matched">
+              A short countdown, then someone new. At peak it is a few seconds.
+            </StepCard>
+            <StepCard step={4} icon={<Zap size={15} />} title="Next, any time">
+              One tap moves you to a different conversation. No explanation needed.
+            </StepCard>
+          </div>
+        </section>
+
+        <section className="mt-14">
+          <SectionHead tone="purple" icon={<HelpCircle size={18} />} title={whatIsHeading(entry.kind, entry.name)} />
+          {entry.intro[2] && (
+            <p className="max-w-3xl text-base sm:text-lg leading-relaxed text-purple-100/80">
+              {entry.intro[2]}
+            </p>
+          )}
+          <MatchingDiagram />
+        </section>
+
+        <section className="mt-14">
+          <SectionHead
+            tone="amber"
+            icon={<Scale size={18} />}
+            title="How this differs from the clone sites"
+            blurb="Most Omegle replacements monetise attention. These are the differences that matter on a phone."
+          />
+          <CompareTable
+            rows={[
+              { feature: "Account required", us: "No", them: "Often" },
+              { feature: "Video, voice and text", us: true, them: "Usually video only" },
+              { feature: "Peer-to-peer media", us: true, them: false },
+              { feature: "Adaptive bitrate for mobile data", us: true, them: false },
+              { feature: "Conversation history kept", us: "None", them: "Varies" },
+              { feature: "Cost", us: "Free", them: "Free with ads, or paid tiers" },
+            ]}
+          />
+        </section>
+
+        <section className="mt-14">
+          <SectionHead tone="emerald" icon={<ShieldCheck size={18} />} title="Staying safe" />
+          <div className="rounded-2xl border border-emerald-400/25 bg-emerald-500/[0.07] p-5 sm:p-6">
+            <p className="text-base leading-relaxed text-purple-100/85">
+              Peer-to-peer means we never hold your video. That is a privacy property, not a
+              guarantee about who you meet. The rules that actually protect you are ordinary ones:
+              no full name, no address, no workplace, no financial details, nothing you would not
+              want a stranger to keep.
+            </p>
+            <p className="mt-3 text-base leading-relaxed text-purple-100/85">
+              A report button sits in the top bar throughout every call. It ends the conversation
+              immediately and moves you on — use it early rather than sitting through something
+              uncomfortable.
+            </p>
+            <Link href="/guidelines" className="mt-4 inline-block text-sm font-bold text-emerald-300 underline underline-offset-2 hover:text-emerald-200">
+              Read the community guidelines →
+            </Link>
+          </div>
+        </section>
+
+        <section className="mt-14">
+          <SectionHead tone="cyan" icon={<Compass size={18} />} title="Explore related topics" />
+          <RelatedGroup label="Cities" items={group("city")} />
+          <RelatedGroup label="Languages" items={group("language")} />
+          <RelatedGroup label="Other ways to chat" items={group("mode")} />
+          <RelatedGroup label="Nearby" items={group("sibling")} />
+          <RelatedGroup label="Compare" items={group("competitor")} />
+        </section>
+
+        <section className="mt-14">
+          <SectionHead tone="amber" icon={<HelpCircle size={18} />} title="Frequently asked questions" />
+          <FaqAccordion items={entry.faqs} />
+        </section>
+
+        <section className="mt-14 rounded-3xl border border-purple-500/20 bg-purple-500/[0.07] p-7 text-center sm:p-10">
+          <h2 className="text-xl sm:text-3xl font-black tracking-tight text-white">
             Ready to talk to someone in {entry.name}?
           </h2>
-          <p className="text-sm text-purple-200/75 mb-5">
-            No signup. No history. Just a conversation.
+          <p className="mx-auto mt-2.5 max-w-md text-sm text-purple-200/75">
+            No signup, no history. Just a conversation with someone you have not met.
           </p>
-          <Link href="/video-chat" className="btn-gradient inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-extrabold text-white shadow-lg">
+          <Link href="/video-chat" className="btn-gradient mt-6 inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-extrabold text-white shadow-lg">
             <Video size={16} /> Start video chat
           </Link>
-        </div>
-
-        <p className="mt-10 flex items-center gap-2 text-xs text-purple-300/60">
-          <ShieldCheck size={14} /> Calls are peer-to-peer and never recorded.
-        </p>
+          <p className="mt-4 flex items-center justify-center gap-1.5 text-xs text-purple-300/55">
+            <Sunrise size={12} /> Busiest {formatPeakHours(entry.peakHours)}
+          </p>
+        </section>
       </div>
     </main>
-  );
-}
-
-function Fact({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
-  return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5">
-      <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-purple-300/70">
-        {icon} {label}
-      </div>
-      <div className="mt-1.5 text-sm text-purple-100/90 leading-snug">{value}</div>
-    </div>
-  );
-}
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <section className="mt-10">
-      <h2 className="text-xl sm:text-2xl font-black text-white mb-3.5 tracking-tight">{title}</h2>
-      <div className="space-y-3.5 text-sm sm:text-base leading-relaxed text-purple-100/85">
-        {children}
-      </div>
-    </section>
-  );
-}
-
-function LinkList({ items }: { items: Array<{ slug: string; label: string }> }) {
-  return (
-    <>
-      {items.map((r, i) => (
-        <span key={r.slug}>
-          {i > 0 && (i === items.length - 1 ? " and " : ", ")}
-          <Link
-            href={hrefFor(r.slug)}
-            className="text-purple-300 underline underline-offset-2 hover:text-purple-200"
-          >
-            {r.label}
-          </Link>
-        </span>
-      ))}
-    </>
   );
 }

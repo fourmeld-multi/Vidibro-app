@@ -74,7 +74,7 @@ export default function MatchingDiagram({ className = "" }: { className?: string
         </text>
       </svg>
 
-      <figcaption className="mt-4 text-xs leading-relaxed text-purple-200/70">
+      <figcaption className="mt-5 text-base leading-relaxed text-purple-100/80">
         The server only introduces the two of you. Once connected, video and audio travel straight
         between the two browsers — which is why there is nothing for us to record, and no account
         for a conversation to be attached to.

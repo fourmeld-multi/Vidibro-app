@@ -1,3 +1,4 @@
+import { formatPeakHours } from "@/lib/liveCount";
 /**
  * A 24-hour strip showing when this market's queue is actually busy.
  *
@@ -34,7 +35,7 @@ export default function PeakHoursBar({ peakHours }: { peakHours: string }) {
 
   return (
     <figure className="mt-10 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-5 sm:px-6">
-      <figcaption className="mb-4 text-[11px] font-bold uppercase tracking-wider text-purple-300/70">
+      <figcaption className="mb-4 text-[13px] font-bold uppercase tracking-wider text-purple-300/70">
         When the queue is busy · {win.label}
       </figcaption>
 
@@ -61,17 +62,17 @@ export default function PeakHoursBar({ peakHours }: { peakHours: string }) {
         })}
       </div>
 
-      <div className="mt-2 flex justify-between text-[10px] text-purple-300/45">
-        <span>00:00</span>
-        <span>06:00</span>
-        <span>12:00</span>
-        <span>18:00</span>
-        <span>24:00</span>
+      <div className="mt-2 flex justify-between text-[12px] text-purple-300/45">
+        <span>12 AM</span>
+        <span>6 AM</span>
+        <span>12 PM</span>
+        <span>6 PM</span>
+        <span>12 AM</span>
       </div>
 
       {/* The text carries the same information for anyone who cannot see the bar. */}
-      <p className="mt-3 text-xs text-purple-200/70">
-        Busiest between <strong className="text-purple-100">{peakHours}</strong>. Outside that
+      <p className="mt-3 text-sm text-purple-200/75">
+        Busiest between <strong className="text-purple-100">{formatPeakHours(peakHours)}</strong>. Outside that
         window the queue is genuinely thinner — matching will take longer, and that is the queue,
         not a fault.
       </p>

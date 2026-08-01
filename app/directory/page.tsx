@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Globe, Sparkles, Scale, Languages as LangIcon } from "lucide-react";
 import { ENTRIES, hrefFor } from "@/lib/directory/entries";
 import { generatePageSEO, BASE_URL } from "@/lib/seo";
+import { formatPeakHours } from "@/lib/liveCount";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = generatePageSEO({
@@ -78,7 +79,7 @@ export default function DirectoryPage() {
       />
 
       <div className="mx-auto max-w-4xl px-5 sm:px-6 py-10 sm:py-16">
-        <nav aria-label="Breadcrumb" className="mb-6 text-xs text-purple-300/70">
+        <nav aria-label="Breadcrumb" className="mb-6 text-sm text-purple-300/70">
           <Link href="/" className="hover:text-purple-200">Home</Link>
           <span className="mx-1.5">/</span>
           <span className="text-purple-200">Directory</span>
@@ -108,13 +109,13 @@ export default function DirectoryPage() {
             By country
             <span className="text-sm font-bold text-purple-300/60">({countries.length})</span>
           </h2>
-          <p className="mt-1.5 mb-6 text-xs sm:text-sm text-purple-200/65">
+          <p className="mt-2 mb-6 text-sm sm:text-base text-purple-200/65">
             Who is online, when they are online, and what they speak.
           </p>
 
           {byRegion.map((group) => (
             <div key={group.region} className="mb-8">
-              <h3 className="mb-3 text-[11px] font-bold uppercase tracking-[0.15em] text-purple-300/50">
+              <h3 className="mb-3 text-[13px] font-bold uppercase tracking-[0.15em] text-purple-300/50">
                 {group.region}
               </h3>
               <div className="grid gap-3 sm:grid-cols-2">
@@ -125,18 +126,18 @@ export default function DirectoryPage() {
                       key={c.slug}
                       className="rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 transition hover:border-purple-400/25"
                     >
-                      <Link href={hrefFor(c.slug)} className="font-bold text-white hover:text-purple-200 transition">
+                      <Link href={hrefFor(c.slug)} className="text-lg font-bold text-white hover:text-purple-200 transition">
                         {c.name}
                       </Link>
-                      <div className="mt-1.5 text-xs leading-relaxed text-purple-200/65">
+                      <div className="mt-2 text-sm leading-relaxed text-purple-200/65">
                         {c.languages.slice(0, 3).join(" · ")}
                       </div>
-                      <div className="mt-1 text-xs text-purple-300/55">Busiest {c.peakHours}</div>
+                      <div className="mt-1.5 text-sm text-purple-300/55">Busiest {formatPeakHours(c.peakHours)}</div>
 
                       {/* Cities live here, on their country — not in a separate
                           80-link wall with no relationship to anything. */}
                       {kids.length > 0 && (
-                        <div className="mt-3 flex flex-wrap gap-x-2 gap-y-1 border-t border-white/[0.07] pt-2.5 text-xs">
+                        <div className="mt-3 flex flex-wrap gap-x-2 gap-y-1 border-t border-white/[0.07] pt-3 text-sm">
                           {kids.map((k) => (
                             <Link
                               key={k.slug}
@@ -162,7 +163,7 @@ export default function DirectoryPage() {
             <Sparkles size={18} className="text-purple-300" />
             Popular features
           </h2>
-          <p className="mt-1.5 mb-4 text-xs sm:text-sm text-purple-200/65">
+          <p className="mt-2 mb-4 text-sm sm:text-base text-purple-200/65">
             Ways of using Vidibro, rather than places.
           </p>
           <div className="flex flex-wrap gap-2.5">
@@ -178,7 +179,7 @@ export default function DirectoryPage() {
             <Scale size={18} className="text-purple-300" />
             Compare
           </h2>
-          <p className="mt-1.5 mb-4 text-xs sm:text-sm text-purple-200/65">
+          <p className="mt-2 mb-4 text-sm sm:text-base text-purple-200/65">
             How Vidibro differs from the platforms people usually arrive from.
           </p>
           <div className="flex flex-wrap gap-2.5">
@@ -195,7 +196,7 @@ export default function DirectoryPage() {
               <LangIcon size={15} className="text-purple-300" />
               By language
             </h2>
-            <p className="mt-1.5 mb-3.5 text-xs text-purple-200/60">
+            <p className="mt-2 mb-4 text-sm text-purple-200/65">
               These get their own pages because they cross borders — Bengali spans India and
               Bangladesh, Tamil spans four countries. A language spoken in only one country lives on
               that country&apos;s page instead.
@@ -211,10 +212,10 @@ export default function DirectoryPage() {
         {/* All cities A–Z — direct access without an 80-link wall up top */}
         {citiesAZ.length > 0 && (
           <section className="mt-10 border-t border-white/[0.07] pt-8">
-            <h2 className="mb-3 text-[11px] font-bold uppercase tracking-[0.15em] text-purple-300/50">
+            <h2 className="mb-3 text-[13px] font-bold uppercase tracking-[0.15em] text-purple-300/50">
               All cities A–Z
             </h2>
-            <div className="flex flex-wrap gap-x-3 gap-y-2 text-xs">
+            <div className="flex flex-wrap gap-x-3 gap-y-2 text-sm">
               {citiesAZ.map((c) => (
                 <Link
                   key={c.slug}
@@ -251,7 +252,7 @@ function Chip({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs sm:text-sm font-medium text-purple-100/85 transition hover:border-purple-400/30 hover:bg-white/[0.08] hover:text-white"
+      className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm sm:text-base font-medium text-purple-100/85 transition hover:border-purple-400/30 hover:bg-white/[0.08] hover:text-white"
     >
       {label}
     </Link>

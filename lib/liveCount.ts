@@ -65,18 +65,35 @@ export function hourIn(timezone: string, now: Date = new Date()): number {
   }
 }
 
-/** Local clock time in a market, e.g. "22:15". */
+/**
+ * Local clock time in a market, as "8:24 PM".
+ *
+ * 12-hour on purpose. The data below stores windows in 24-hour form because it
+ * is unambiguous to write and to parse, but "20:24" is not how most readers in
+ * these markets say the time — it gets read as a typo for 8pm or simply
+ * misread. Storage stays 24-hour; display is 12-hour.
+ */
 export function localTimeIn(timezone: string, now: Date = new Date()): string {
   try {
-    return new Intl.DateTimeFormat("en-GB", {
+    return new Intl.DateTimeFormat("en-US", {
       timeZone: timezone,
-      hour: "2-digit",
+      hour: "numeric",
       minute: "2-digit",
-      hour12: false,
+      hour12: true,
     }).format(now);
   } catch {
     return "";
   }
+}
+
+/** "21:00 – 01:00 IST" -> "9:00 PM – 1:00 AM IST". Leaves anything it cannot parse alone. */
+export function formatPeakHours(peakHours: string): string {
+  return peakHours.replace(/(\d{1,2}):(\d{2})/g, (_m, h: string, min: string) => {
+    const hour = parseInt(h, 10);
+    const suffix = hour >= 12 ? "PM" : "AM";
+    const display = hour % 12 === 0 ? 12 : hour % 12;
+    return `${display}:${min} ${suffix}`;
+  });
 }
 
 /**

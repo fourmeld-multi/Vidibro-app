@@ -39,6 +39,9 @@ export type DirectoryEntry = {
   primaryKeyword: string;
   title: string;
   description: string;
+  /** Bold lead line under the H1. Rendered as a <p>, not a second heading —
+   *  repeating the H1 as an H2 (as the competitor does) wastes a heading. */
+  tagline?: string;
 
   // --- Locally true data — the anti-duplicate payload ----------------------
   /** Languages genuinely spoken, native script first: ["বাংলা (Bengali)", …] */
@@ -64,6 +67,20 @@ export type DirectoryEntry = {
   connectivityNote: string;
   /** Anything about safety or etiquette that genuinely differs in this market. */
   localNote: string;
+
+  /**
+   * Phrases a visitor can actually use, with meaning and rough pronunciation.
+   * The single most useful thing a page like this can carry — it turns the page
+   * from something you read into something you use during a call.
+   */
+  localPhrases?: Array<{ phrase: string; meaning: string; say: string }>;
+
+  /**
+   * Openers, as something copyable rather than a bullet. A specific question
+   * beats a topic: "which pandal are you doing this year?" gets a reply,
+   * "festivals" does not.
+   */
+  starters?: Array<{ topic: string; ask: string; why: string }>;
 
   // --- Body ----------------------------------------------------------------
   /** Opening paragraphs. Lead with substance; no "In today's digital world". */

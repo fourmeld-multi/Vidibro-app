@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Clock, Users, Sunrise } from "lucide-react";
-import { localTimeIn, isPeakNow, marketOnlineCount, formatCount } from "@/lib/liveCount";
+import { localTimeIn, isPeakNow, marketOnlineCount, formatCount, formatPeakHours } from "@/lib/liveCount";
 
 /**
  * "What is happening in this market right now."
@@ -35,6 +35,7 @@ export default function LiveMarketStatus({
     peak: boolean | null;
     count: string;
     offsetLabel: string;
+    sameZone: boolean;
   } | null>(null);
 
   useEffect(() => {
@@ -61,6 +62,7 @@ export default function LiveMarketStatus({
         peak: isPeakNow(peakHours, timezone, now),
         count: formatCount(marketOnlineCount(slug, timezone, weight, now)),
         offsetLabel,
+        sameZone: diffMin === 0,
       });
     };
 
@@ -73,7 +75,7 @@ export default function LiveMarketStatus({
     return <div className="mt-8 h-[86px] rounded-2xl border border-white/10 bg-white/[0.03]" />;
   }
 
-  const { time, peak, count, offsetLabel } = state;
+  const { time, peak, count, offsetLabel, sameZone } = state;
 
   return (
     <div
@@ -84,12 +86,14 @@ export default function LiveMarketStatus({
       }`}
     >
       <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-        <div className="flex items-center gap-2">
-          <Clock size={15} className={peak ? "text-emerald-300" : "text-purple-300/70"} />
-          <span className="text-sm text-purple-100">
-            <strong className="font-bold text-white">{time}</strong> in {name}
-          </span>
-        </div>
+        {!sameZone && (
+          <div className="flex items-center gap-2">
+            <Clock size={15} className={peak ? "text-emerald-300" : "text-purple-300/70"} />
+            <span className="text-base text-purple-100">
+              <strong className="font-bold text-white">{time}</strong> in {name}
+            </span>
+          </div>
+        )}
 
         <div className="flex items-center gap-2">
           <span
@@ -97,7 +101,7 @@ export default function LiveMarketStatus({
               peak ? "bg-emerald-400 animate-pulse motion-reduce:animate-none" : "bg-purple-400/50"
             }`}
           />
-          <span className="text-sm text-purple-100">
+          <span className="text-base text-purple-100">
             {peak ? (
               <>
                 <strong className="font-bold text-emerald-300">Peak hours</strong> — best time to
@@ -111,16 +115,22 @@ export default function LiveMarketStatus({
 
         <div className="flex items-center gap-2">
           <Users size={15} className="text-purple-300/70" />
-          <span className="text-sm text-purple-100">
+          <span className="text-base text-purple-100">
             <strong className="font-bold text-white">{count}</strong> online
           </span>
         </div>
       </div>
 
-      <p className="mt-2.5 flex items-center gap-1.5 text-xs text-purple-300/60">
-        <Sunrise size={12} />
-        {name} is {offsetLabel}
-        {!peak && <> · busiest {peakHours}</>}
+      <p className="mt-2.5 flex items-center gap-1.5 text-sm text-purple-300/60">
+        <Sunrise size={13} />
+        {sameZone ? (
+          <>It is {time} where you are · busiest {formatPeakHours(peakHours)}</>
+        ) : (
+          <>
+            {name} is {offsetLabel}
+            {!peak && <> · busiest {formatPeakHours(peakHours)}</>}
+          </>
+        )}
       </p>
     </div>
   );
