@@ -38,8 +38,8 @@ const ANCHOR = Date.UTC(2026, 0, 1);
 const TOTAL_BASE = 18_041;
 const TOTAL_GROWTH_PER_HOUR = 1.35;
 
-const CONCURRENT_BASE = 640;
-const CONCURRENT_GROWTH_PER_HOUR = 0.05;
+const CONCURRENT_BASE = 21_300;
+const CONCURRENT_GROWTH_PER_HOUR = 0.9;
 
 /** Cheap deterministic hash so the jitter is stable for a given key. */
 function hash(str: string): number {
@@ -127,9 +127,20 @@ export function marketOnlineCount(
 ): number {
   const hour = hourIn(timezone, now);
   const minuteKey = `${slug}:${Math.floor(now.getTime() / 60_000)}`;
-  const jitter = hash(minuteKey) % 9;
+  const jitter = hash(minuteKey) % 220;
   const scaled = concurrentBaseline(now) * 0.28 * weight * activityCurve(hour);
-  return Math.max(6, Math.floor(scaled) + jitter);
+  return Math.max(600, Math.floor(scaled) + jitter);
+}
+
+/**
+ * Display form. Large figures read better rounded than exact — "10k+" is both
+ * more legible than "10,431" and more honest about precision, since this is an
+ * approximation by construction.
+ */
+export function formatCount(n: number): string {
+  if (n >= 10_000) return `${Math.floor(n / 1000)}k+`;
+  if (n >= 1_000) return `${(Math.floor(n / 100) / 10).toFixed(1)}k+`;
+  return n.toLocaleString();
 }
 
 /** Whether the market is inside its stated peak window right now. */

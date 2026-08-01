@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Clock, Users, Sunrise } from "lucide-react";
-import { localTimeIn, isPeakNow, marketOnlineCount } from "@/lib/liveCount";
+import { localTimeIn, isPeakNow, marketOnlineCount, formatCount } from "@/lib/liveCount";
 
 /**
  * "What is happening in this market right now."
@@ -33,7 +33,7 @@ export default function LiveMarketStatus({
   const [state, setState] = useState<{
     time: string;
     peak: boolean | null;
-    count: number;
+    count: string;
     offsetLabel: string;
   } | null>(null);
 
@@ -59,7 +59,7 @@ export default function LiveMarketStatus({
       setState({
         time: localTimeIn(timezone, now),
         peak: isPeakNow(peakHours, timezone, now),
-        count: marketOnlineCount(slug, timezone, weight, now),
+        count: formatCount(marketOnlineCount(slug, timezone, weight, now)),
         offsetLabel,
       });
     };
@@ -112,7 +112,7 @@ export default function LiveMarketStatus({
         <div className="flex items-center gap-2">
           <Users size={15} className="text-purple-300/70" />
           <span className="text-sm text-purple-100">
-            <strong className="font-bold text-white">{count.toLocaleString()}</strong> online
+            <strong className="font-bold text-white">{count}</strong> online
           </span>
         </div>
       </div>
