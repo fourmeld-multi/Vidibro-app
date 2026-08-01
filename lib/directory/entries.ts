@@ -73,6 +73,10 @@ export const ENTRIES: DirectoryEntry[] = [
         why: "Sidesteps the assumption that Bollywood is the only industry, which people appreciate.",
       },
     ],
+    safetyNote:
+      "Payment-app scams are the thing to watch for here. Nobody you meet at random has a legitimate reason to send you a UPI request, a QR code, or a link to 'verify' anything. Screenshotting is also easier than people assume, so treat anything on camera as potentially permanent.",
+    etiquette:
+      "Indians tend to open with where you are from rather than what you do, and the answer is expected to include a state, not just a country. Asking someone's salary is far less taboo than in the West; asking about caste is.",
     intro: [
       "India is the single largest source of random-chat traffic in the world, and it is not close. That has an obvious practical consequence: at almost any hour there is someone online, and during the late-evening peak the wait between matches is usually a few seconds rather than a few minutes.",
       "What it does not mean is that every conversation will be in the same language. India has twenty-two official languages and Vidibro does not filter by any of them, so a match from Chennai and a match from Chandigarh are genuinely different conversations. Most people default to English or Hindi with a stranger and switch if they find common ground, which happens more often than you would expect.",
@@ -179,6 +183,10 @@ export const ENTRIES: DirectoryEntry[] = [
       "Kolkata has solid 4G and expanding 5G coverage, though older parts of the city — around College Street and the Howrah side — can be patchy indoors. Vidibro drops video quality rather than the call when signal dips, so a conversation survives a walk between rooms.",
     localNote:
       "Kolkata runs late even by Indian standards. The busiest window is after 22:00 IST and holds past 01:00, later than the national average. During Durga Puja in autumn, expect activity to shift dramatically — much of the city is out at night rather than online.",
+    safetyNote:
+      "Conversations here run long, which is pleasant but means you may share more than you meant to over an hour. The usual rule applies more, not less: no workplace, no neighbourhood, no college name plus year, which together identify someone easily.",
+    etiquette:
+      "Rushing is the rudeness here. An abrupt Next after thirty seconds reads worse in Kolkata than most places, where adda is expected to meander. If you are going, say so.",
     intro: [
       "Kolkata is a city where talking at length to someone you have just met is close to a civic habit. Adda — the unhurried conversation that goes nowhere in particular and lasts hours — is a genuine local institution, and it makes the city unusually well suited to random chat. People here tend not to end a call after ninety seconds.",
       "Most matches from Kolkata will speak Bengali, and many will switch to English or Hindi without being asked once they realise you do not. There is no language filter on Vidibro, so what you get is whoever is online — which in practice means a mix of students, night-shift workers, and people who simply keep late hours.",
@@ -284,6 +292,10 @@ export const ENTRIES: DirectoryEntry[] = [
       "Bengali speakers split across two countries with different network conditions. Indian users are typically on Jio or Airtel 4G/5G; Bangladeshi users on Grameenphone or Robi, where speeds vary more outside Dhaka and Chittagong. Vidibro adapts to whichever end is weaker, so a cross-border call settles at a quality both sides can hold.",
     localNote:
       "Bengali is spoken by well over 200 million people across two countries, which makes it one of the most widely spoken languages in the world and an unusually large pool for a language-specific match. West Bengal and Bangladesh are thirty minutes apart, so the evening peaks overlap almost exactly.",
+    safetyNote:
+      "Because Bengali conversations frequently cross the India-Bangladesh border, be aware you may be talking to someone under a very different legal and political system. Avoid pressing anyone for opinions on either government — it can carry real consequences for them, not you.",
+    etiquette:
+      "Formality matters more in Bangla than in English. Tumi and apni are not interchangeable: apni with someone older or newly met, tumi once it is clearly friendly. Getting it wrong is noticed.",
     intro: [
       "Bengali is spoken by more than 200 million people, which makes it roughly the sixth most spoken language on earth and a far larger pool than most language-specific chat pages can offer. It also spans a border: West Bengal in India and Bangladesh, with sizeable communities in the UK, the Gulf and North America.",
       "That split is the interesting part. A Bangla conversation on Vidibro is as likely to reach Dhaka or Sylhet as Kolkata, and the two varieties differ enough in vocabulary and rhythm that people frequently end up discussing the language itself. It is a reliable opener when nothing else presents itself.",
@@ -388,6 +400,10 @@ export const ENTRIES: DirectoryEntry[] = [
       "Most people connect on mobile through Grameenphone, Robi or Banglalink. 4G is solid across Dhaka and Chittagong but thins out in rural districts, and evening congestion is real. Vidibro drops video quality rather than the call, so a conversation survives a weak signal by getting softer.",
     localNote:
       "Bangladesh runs thirty minutes ahead of India, so its evening peak overlaps almost exactly with West Bengal's — which is why Bangla conversations connect so readily across the border. Ramadan shifts the pattern significantly: activity moves much later, well past midnight.",
+    safetyNote:
+      "Mobile financial services like bKash are near-universal here, and so are scams built on them. No stranger has a reason to ask for a bKash number, a PIN, or a 'refund' transfer. Report and move on.",
+    etiquette:
+      "Salaam is a normal opening even between strangers, and returning it is basic courtesy. Age shapes address here — bhai, apu, mama all signal relative age, and using them well makes a conversation warmer very quickly.",
     intro: [
       "Bangladesh has one of the youngest populations in the world — the median age is under thirty — and near-universal mobile internet. That combination produces an unusually active late-night queue for a country of its size.",
       "Nearly everyone here speaks Bengali, which makes it one of the few countries where a language-specific conversation is close to guaranteed rather than a matter of luck. English is common among students and city professionals, and many people switch without being asked once they realise you do not speak Bangla.",
@@ -470,6 +486,10 @@ export const ENTRIES: DirectoryEntry[] = [
       "Jazz, Zong and Telenor carry most traffic, with 4G widespread in the major cities and patchier elsewhere. Fixed broadband is less common than in neighbouring markets, so expect mobile connections. Video adapts downward on a weak signal instead of dropping the call.",
     localNote:
       "Urdu and Hindi are close enough in conversation that Pakistani and north Indian users often understand each other without either switching to English — one of the more interesting things that happens on a service with no country filter. Ramadan moves activity much later into the night.",
+    safetyNote:
+      "Discussing religion or the military with strangers can create genuine risk for the person you are talking to, not for you. If a conversation moves that way, it is kinder to change the subject than to press it.",
+    etiquette:
+      "Assalamu alaikum is a standard opener and returning it properly matters. Yaar signals friendliness quickly. Asking directly which city someone is from is normal and usually welcome.",
     intro: [
       "Pakistan is a large, young, heavily mobile-first market, and its late-evening queue reflects that. Most people you meet will be on a phone rather than a laptop, usually after nine at night.",
       "Urdu is the shared language across the country, though Punjabi, Pashto and Sindhi are first languages for millions. English is widely spoken in cities and in education, so conversations tend to move between languages easily.",
@@ -552,6 +572,10 @@ export const ENTRIES: DirectoryEntry[] = [
       "Globe and Smart carry most traffic, and mobile data is the norm rather than fixed broadband. Speeds have improved sharply but remain uneven between metro Manila and the provinces, and typhoon season causes genuine outages. Video quality adapts downward rather than the call dropping.",
     localNote:
       "English proficiency here is among the highest in Asia, which makes the Philippines one of the easiest markets to hold a conversation in regardless of where you are from. The queue fills earlier than in South Asia — from about 20:00 PHT — and thins after midnight.",
+    safetyNote:
+      "Romance and investment scams targeting Filipinos abroad are common enough to be worth naming. Any conversation that moves quickly toward money, crypto, or a request to move to another app is worth ending immediately.",
+    etiquette:
+      "Warmth is the default and bluntness reads as coldness. Po and opo signal respect to someone older and are noticed when used by a foreigner. Ending with ingat rather than just leaving is appreciated.",
     intro: [
       "The Philippines is consistently among the heaviest social-media-using countries in the world, and it shows in how readily people here take to random chat. Conversations tend to start warmly and go on longer than the global average.",
       "English is not a second language here so much as a parallel one — it is used in schooling, business and media, and most people switch into it without being asked. That makes this one of the least frustrating markets to match into if you speak no local language.",
@@ -635,6 +659,10 @@ export const ENTRIES: DirectoryEntry[] = [
       "Mumbai has among the best mobile coverage in India, with widespread 5G. The exception is the trains — coverage is genuinely unreliable along stretches of the local lines, which is where an adaptive video call earns its keep by softening rather than ending.",
     localNote:
       "Mumbai keeps later hours than most of India, partly because commutes are long and evenings start late. The queue is at its fullest after 22:00 IST and holds well past one in the morning.",
+    safetyNote:
+      "Mumbai has the highest concentration of aspiring actors and models in India, and correspondingly the most casting-related scams. Nobody legitimate scouts talent through random video chat, and no real audition requires money.",
+    etiquette:
+      "Mumbai is direct and fast by Indian standards — people get to the point and do not take brevity personally. Timepass is a genuine, respectable reason to be here and saying so is completely normal.",
     intro: [
       "Mumbai is India's most linguistically mixed city, and matching here reflects that. Hindi and Marathi are both common, Gujarati is widespread in parts of the city, and English is the default for a lot of younger professionals — often several of them inside one conversation.",
       "It is also a city of long days. Commutes eat hours, evenings start late, and the result is that Mumbai's chat queue peaks later than most of the country and stays busy well past midnight.",
@@ -718,6 +746,10 @@ export const ENTRIES: DirectoryEntry[] = [
       "Delhi and the wider NCR have strong 4G and broad 5G coverage, and fixed broadband is more common here than in most Indian cities. Calls are generally stable. The metro's underground stretches are the main place you will notice quality dropping.",
     localNote:
       "Delhi's student population gives it a distinctive rhythm — the queue picks up earlier than Mumbai's, from around 21:30 IST, and stays busy until about one. Winter evenings are noticeably more active than summer ones, when much of the city avoids being outdoors anyway.",
+    safetyNote:
+      "Delhi's student population makes it a target for education and visa scams — fake counsellors, fake test-prep offers, fake study-abroad help. All of these are real, and none of them start on a random chat.",
+    etiquette:
+      "Delhi conversation is more argumentative than most, and disagreement is a form of engagement rather than hostility. Aur bhai is the standard opener; too much formality reads as distance.",
     intro: [
       "Delhi is a city of arrivals. A large proportion of the people you meet here moved for university or work, from Bihar, UP, Punjab, the north-east and everywhere else, which makes 'where are you from' an unusually productive opening question.",
       "Hindi is the common language and English is close behind, particularly among students. Punjabi is widely spoken, and Urdu remains present in the older parts of the city.",
@@ -800,6 +832,10 @@ export const ENTRIES: DirectoryEntry[] = [
       "Hindi speakers span the whole north Indian belt, from metros with 5G to smaller towns on variable 4G. Expect a wide range of connection quality within a single evening. Video adapts to whichever end is weaker rather than dropping.",
     localNote:
       "Hindi is not the same thing as India. India has twenty-two official languages, and a Tamil or Bengali speaker may not use Hindi at all — which is exactly why this page exists separately from the India page. Hindi is also spoken in Nepal, Fiji, Mauritius, and across large diaspora communities.",
+    safetyNote:
+      "Hindi is spoken across a huge range of regions and contexts, so assumptions travel badly. Do not assume someone's religion, politics or region from their accent — being wrong about it is the fastest way to end an otherwise good conversation.",
+    etiquette:
+      "Aap and tum matter. Aap with anyone older or newly met; tum only once it is clearly friendly. Ji added to a name is a small courtesy that consistently improves how a conversation goes.",
     intro: [
       "Hindi has somewhere over 600 million speakers counting second-language users, which puts it among the three most spoken languages on earth. On a service with no language filter, that scale matters: Hindi comes up more often than almost anything else.",
       "It is worth separating from India itself. India is multilingual to a degree people outside it often underestimate, and a match from Chennai or Kochi may not speak Hindi at all. Meanwhile Hindi is spoken well beyond India's borders — in Nepal, Fiji, Mauritius, and among very large diaspora communities.",
@@ -882,6 +918,10 @@ export const ENTRIES: DirectoryEntry[] = [
       "Dhaka has the best coverage in Bangladesh, with reliable 4G on Grameenphone, Robi and Banglalink and 5G expanding. Evening congestion is real in dense areas like Mirpur and Old Dhaka, where video quality softens rather than the call dropping.",
     localNote:
       "Dhaka runs late. The queue here is busiest from 23:00 BST and holds past two in the morning — later than almost anywhere else in South Asia. During Ramadan the pattern shifts further still, with activity peaking after taraweeh.",
+    safetyNote:
+      "Dhaka's queue runs past 2am, and late-night conversations with tired people go further than intended more often. If you are chatting at 1am, be deliberate about what you say rather than relying on judgement.",
+    etiquette:
+      "Directness about money and marriage is normal here and is not usually intrusive — 'are you married' is small talk, not a proposition. Reacting as though it were offensive lands badly.",
     intro: [
       "Dhaka is one of the most densely populated cities on earth, and the queue reflects it: at peak, Bangladesh's activity is heavily concentrated here. If you are matching into Bangladesh late at night, statistically you are talking to Dhaka.",
       "Almost everyone speaks Bangla. English is common among students and anyone working in Gulshan or Banani, and people switch readily once they realise you do not follow. There is no language filter, so what you get is whoever is online.",
@@ -965,6 +1005,10 @@ export const ENTRIES: DirectoryEntry[] = [
       "Metro Manila has the strongest connections in the Philippines, on Globe or Smart, though mobile data is far more common than fixed broadband. Typhoon season causes genuine outages a few times a year. Video adapts downward rather than dropping.",
     localNote:
       "Manila's queue fills earlier than South Asian cities — from about 20:00 PHT — and thins after midnight. English is used so widely that a conversation rarely stalls on language, which makes it one of the easiest markets to match into.",
+    safetyNote:
+      "Metro Manila conversations often turn to work abroad, which attracts recruitment scams. No genuine employer recruits through random video chat, and no legitimate agency asks for a placement fee over a call.",
+    etiquette:
+      "Filipinos will often agree rather than contradict you outright, so an enthusiastic yes does not always mean agreement. Asking an open question twice, differently, gets you closer to what someone actually thinks.",
     intro: [
       "Metro Manila is where most Philippine activity concentrates, and it is one of the easiest places in the world to hold a conversation with a stranger. English is used in schooling, work and media, so most people switch into it without being asked.",
       "It is also a city where talking to people you do not know is unremarkable. Filipinos consistently rank among the heaviest social media users globally, and conversations here tend to open warmly and run longer than average.",
@@ -1048,6 +1092,10 @@ export const ENTRIES: DirectoryEntry[] = [
       "Karachi has Pakistan's densest mobile coverage on Jazz, Zong and Telenor, with 4G throughout and 5G in parts. Load-shedding still affects home broadband in some areas, which is one reason most people connect on mobile. Video quality adapts rather than the call dropping.",
     localNote:
       "Karachi is the most linguistically mixed city in Pakistan, so a conversation here is less predictable than one in Lahore. It also keeps late hours — the queue peaks around 21:30 PKT and stays busy past one, and shifts considerably later during Ramadan.",
+    safetyNote:
+      "Karachi is the country's commercial centre, and business-shaped scams follow — job offers, investment 'opportunities', requests to receive a payment on someone's behalf. None of these come from a legitimate stranger on a random chat.",
+    etiquette:
+      "Where your family came to Karachi from is an ordinary question here rather than a probing one, because almost everyone's family came from somewhere. It is a better opener than asking what someone does.",
     intro: [
       "Karachi is Pakistan's largest city and its most mixed. Urdu is the common language, but Sindhi, Pashto, Punjabi and Balochi are all first languages for large communities here, and where someone's family came from is a normal thing to end up discussing.",
       "It is also the country's commercial centre and its only major port, which gives it a different character from Lahore or Islamabad — busier, more transient, more used to strangers. That tends to show in how readily people here talk to one.",
@@ -1131,6 +1179,10 @@ export const ENTRIES: DirectoryEntry[] = [
       "Bangalore has the best fixed broadband penetration of any Indian city alongside strong 4G and 5G, so connections here are more stable than the national average. You are more likely to meet someone on wifi at home than on mobile data.",
     localNote:
       "Bangalore's peak starts around 21:00 IST but ends earlier than Mumbai or Kolkata — closer to half past midnight. The tech workforce keeps earlier mornings than most Indian cities, and it shows in the queue.",
+    safetyNote:
+      "Bangalore's tech workforce attracts job and recruitment scams, including fake offers and 'interview fees'. No real employer recruits through random video chat, and none asks for payment at any stage.",
+    etiquette:
+      "Kannada speakers notice when someone makes any attempt at the language, and appreciate it out of proportion to the effort. Assuming everyone here is a software engineer, however, gets old fast.",
     intro: [
       "Bangalore is India's most transplanted city. A very large share of the people you meet moved here for work, mostly in tech, from Tamil Nadu, Kerala, Andhra, the north and everywhere else — which makes it one of the few Indian cities where the local language is not the default conversation language.",
       "English dominates as a result, with Kannada, Hindi and Tamil all common. If you speak only English, Bangalore is one of the easier Indian cities to match into.",
@@ -1213,6 +1265,10 @@ export const ENTRIES: DirectoryEntry[] = [
       "Tamil speakers span four countries with very different networks — Indian users on Jio or Airtel 4G/5G, Sri Lankan users on Dialog or Mobitel, and Singapore and Malaysia on some of the fastest mobile networks anywhere. Vidibro adapts to whichever end is weaker.",
     localNote:
       "Tamil is one of the few languages with official status in multiple countries: India, Sri Lanka and Singapore. That means a Tamil conversation genuinely may not be an Indian one — and speakers from Jaffna, Chennai and Singapore sound noticeably different from each other.",
+    safetyNote:
+      "Tamil conversations reach Sri Lanka, Singapore and Malaysia as well as India, so legal contexts vary widely. Be careful with questions about the war and its aftermath — for Sri Lankan Tamil speakers this is living memory, not history.",
+    etiquette:
+      "Tamil speakers are notably proud of the language's age and literature, and an interest in it is genuinely welcome. Assuming a Tamil speaker also speaks Hindi is a reliable way to annoy someone.",
     intro: [
       "Tamil has around 80 million speakers and an unusual distribution: it is an official language in India, Sri Lanka and Singapore, with large established communities in Malaysia, the Gulf and the UK. A Tamil conversation on a service with no country filter is genuinely as likely to reach Jaffna or Singapore as Chennai.",
       "It is also among the oldest continuously spoken languages in the world, with a literary tradition going back two thousand years — something speakers tend to mention, and reasonably so.",
@@ -1295,6 +1351,10 @@ export const ENTRIES: DirectoryEntry[] = [
       "Most Urdu speakers connect on mobile — Jazz, Zong or Telenor in Pakistan, Jio or Airtel in India, and strong networks across the Gulf where large communities live and work. Fixed broadband is less common in Pakistan than in neighbouring markets.",
     localNote:
       "The important thing about Urdu is what it shares. Spoken Urdu and Hindi are close enough to be mutually intelligible in ordinary conversation, so this page and the Hindi one describe overlapping — not separate — pools of people. The writing systems differ completely; the speech largely does not.",
+    safetyNote:
+      "Urdu conversations often cross the Pakistan-India border. That is one of the more rewarding things about this page, but it means politics carries weight it would not in a domestic conversation. Let the other person set that pace.",
+    etiquette:
+      "Aap is the default with a stranger; tum is familiar and can read as dismissive if used too early. Poetry quoted mid-conversation is normal rather than showing off, and matching it is a compliment.",
     intro: [
       "Urdu is the national language of Pakistan and one of India's twenty-two official languages, with large communities across the Gulf, the UK and North America. Counting second-language speakers it reaches well over 200 million people.",
       "The single most interesting thing about it on a service with no country filter is its relationship with Hindi. In everyday speech the two are mutually intelligible — different scripts, largely shared vocabulary and grammar — which means a Pakistani and a north Indian user regularly discover they can talk without either switching to English, and without having planned to.",

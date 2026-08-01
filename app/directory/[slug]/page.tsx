@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   Video, Mic, MessageSquare, Clock, Languages, Signal, ShieldCheck, Zap,
-  Lock, Smartphone, MousePointerClick, Camera, Users, Compass, Scale, HelpCircle, Sunrise,
+  Lock, Smartphone, MousePointerClick, Camera, Users, Compass, Scale, HelpCircle, Sunrise, Handshake,
   Sticker, CheckCheck, Globe2, Activity,
 } from "lucide-react";
 import { ENTRIES, getEntry, resolvableRelated, hrefFor } from "@/lib/directory/entries";
@@ -161,8 +161,7 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
               conversation to attach to and nothing for us to keep.
             </IconCard>
             <IconCard icon={<Smartphone size={16} />} title="Built for mobile data" tone="cyan">
-              Video is capped near 600 kbps and adapts downward, so a call softens on a weak signal
-              instead of freezing or dropping.
+              {entry.connectivityNote.split(".").slice(0, 2).join(".") + "."}
             </IconCard>
             <IconCard icon={<Sticker size={16} />} title="Stickers and reactions" tone="pink">
               Send emoji stickers and full-screen reactions mid-call — the fastest way to say
@@ -172,9 +171,9 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
               Text chat shows when your message has actually been read, so you are never guessing
               whether the other person saw it.
             </IconCard>
-            <IconCard icon={<Globe2 size={16} />} title="Anyone, anywhere" tone="amber">
-              No country or language filter. One shared queue, which is why a match from Chennai and
-              one from Chandigarh are genuinely different conversations.
+            <IconCard icon={<Globe2 size={16} />} title={`Languages in ${entry.name}`} tone="amber">
+              {entry.languages.join(" · ")} — and no language filter, so which one you get is
+              genuinely down to who is online.
             </IconCard>
             <IconCard icon={<MousePointerClick size={16} />} title="One tap to leave" tone="emerald">
               Next moves you on instantly, and the report button ends a conversation the moment you
@@ -276,6 +275,11 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
         <section className="mt-14">
           <SectionHead tone="emerald" icon={<ShieldCheck size={18} />} title="Staying safe" />
           <div className="rounded-2xl border border-emerald-400/25 bg-emerald-500/[0.07] p-5 sm:p-6">
+            {entry.safetyNote && (
+              <p className="mb-3 text-base font-semibold leading-relaxed text-emerald-100">
+                {entry.safetyNote}
+              </p>
+            )}
             <p className="text-base leading-relaxed text-purple-100/85">
               Peer-to-peer means we never hold your video. That is a privacy property, not a
               guarantee about who you meet. The rules that actually protect you are ordinary ones:

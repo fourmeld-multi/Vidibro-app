@@ -67,6 +67,18 @@ export type DirectoryEntry = {
   connectivityNote: string;
   /** Anything about safety or etiquette that genuinely differs in this market. */
   localNote: string;
+  /**
+   * A safety or etiquette point true of this market specifically.
+   *
+   * Exists to break up boilerplate as much as to inform. Measured across the
+   * first 15 pages, ~48% of each page's text was identical to every other
+   * page — the shared safety section being one of the largest blocks. Every
+   * field like this one moves that ratio in the right direction, and a shared
+   * block that never varies is what makes a programmatic page look generated.
+   */
+  safetyNote?: string;
+  /** How people here open and close conversations, and what lands badly. */
+  etiquette?: string;
 
   /**
    * Phrases a visitor can actually use, with meaning and rough pronunciation.
