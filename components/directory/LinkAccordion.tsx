@@ -65,7 +65,7 @@ export default function LinkAccordion({
 
       {/* hidden, not unmounted — see the note above */}
       <div className={open ? "px-5 pb-5 sm:px-6 sm:pb-6" : "hidden"}>
-        <div className="grid gap-2.5 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((item, i) => (
             <PillLink key={item.href} {...item} hidden={!showAll && i >= previewCount} />
           ))}
