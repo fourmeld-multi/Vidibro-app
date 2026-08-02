@@ -125,6 +125,22 @@ export default function RootLayout({
         <Script id="theme-init" strategy="beforeInteractive">
           {`document.documentElement.setAttribute('data-theme','dark');`}
         </Script>
+        {/* Google Analytics. Root layout wraps every route — chat pages,
+            directory, everything — so this one placement covers the whole
+            site rather than needing to be added page by page.
+            afterInteractive: loads once the page is interactive rather than
+            blocking the initial render, which is what the page currently
+            needs to hit its Core Web Vitals numbers. */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-BSGKV3MTVF"
+          strategy="afterInteractive"
+        />
+        <Script id="ga-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-BSGKV3MTVF');`}
+        </Script>
         <Background />
         {children}
       </body>
