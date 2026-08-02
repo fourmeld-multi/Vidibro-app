@@ -29,6 +29,8 @@ const REGIONS: Record<string, string> = {
   "video-chat-bangladesh": "Asia",
   "video-chat-pakistan": "Asia",
   "video-chat-philippines": "Asia",
+  "video-chat-indonesia": "Asia",
+  "video-chat-vietnam": "Asia",
 };
 const REGION_ORDER = ["Asia", "Middle East & Africa", "Europe", "Americas", "Oceania"];
 

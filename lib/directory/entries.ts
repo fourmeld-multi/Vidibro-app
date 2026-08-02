@@ -1491,6 +1491,288 @@ export const ENTRIES: DirectoryEntry[] = [
     ],
   },
 
+  {
+    slug: "video-chat-indonesia",
+    kind: "country",
+    name: "Indonesia",
+    primaryKeyword: "video chat indonesia",
+    title: "Video Chat Indonesia — Talk to Indonesian Strangers Free",
+    description:
+      "Free random video chat with people across Indonesia. Meet strangers in Jakarta, Surabaya and Bandung — no signup, works on Telkomsel and XL.",
+    tagline:
+      "Best free video chat in Indonesia. Connect with people across the world's largest archipelago, talk in Bahasa or English, and start without an account.",
+    languages: ["Bahasa Indonesia", "Basa Jawa (Javanese)", "Basa Sunda (Sundanese)", "English"],
+    peakHours: "20:00 – 00:00 WIB",
+    timezone: "Asia/Jakarta",
+    weight: 2.1,
+    places: ["Jakarta", "Surabaya", "Bandung", "Medan", "Semarang", "Denpasar"],
+    talkingPoints: [
+      "Badminton, which Indonesia takes more seriously than almost any other country on earth",
+      "Food that changes completely between islands — rendang from Padang, gudeg from Yogya, coto from Makassar",
+      "Mudik, the mass migration home before Idul Fitri, which practically empties Jakarta for a week",
+      "Jakarta traffic, and the fact that most people navigate it on a motorbike rather than in a car",
+      "How different the islands are from each other, which Indonesians will correct you about quickly",
+    ],
+    connectivityNote:
+      "Telkomsel, XL and Indosat carry nearly all traffic, and mobile data is far more common than fixed broadband. Coverage is strong across Java and thins toward the eastern islands. Video quality adapts downward rather than the call dropping.",
+    localNote:
+      "Indonesia spans three time zones, so its evening peak moves across the country — Jakarta at 20:00 WIB, Bali an hour later, Papua two. The queue reflects Java, where most of the population lives. Ramadan shifts activity later by several hours.",
+    safetyNote:
+      "Investment and crypto scams are common here and often open as ordinary friendly conversation before turning to money. Nobody legitimate raises trading, gold or a 'business opportunity' with a stranger on a video call.",
+    etiquette:
+      "Indonesians tend to avoid direct disagreement, so a polite yes does not always mean agreement — asking the same question a second way gets you closer to the truth. Kak or mas as a form of address reads as warm rather than formal.",
+    localPhrases: [
+      { phrase: "Apa kabar?", meaning: "How are you?", say: "AH-pa KA-bar" },
+      { phrase: "Terima kasih", meaning: "Thank you", say: "te-REE-ma KA-see" },
+      { phrase: "Santai aja", meaning: "Take it easy / no worries", say: "SAN-tie AH-ja" },
+      { phrase: "Sampai jumpa", meaning: "See you later", say: "SAM-pie JOOM-pa" },
+    ],
+    starters: [
+      { topic: "Badminton", ask: "Are you actually following the badminton, or is that a stereotype?", why: "It is not a stereotype, and people enjoy being asked about it." },
+      { topic: "Islands", ask: "Which island are you on, and what do people get wrong about it?", why: "Indonesians are quick to correct the assumption that the country is Java." },
+      { topic: "Food", ask: "Rendang, gudeg or coto — and where is your family from?", why: "Food maps directly onto region here, so this answers two questions at once." },
+      { topic: "Mudik", ask: "Do you do mudik every year, and how long does the journey take?", why: "One of the largest annual human migrations anywhere, and everyone has a story." },
+    ],
+    intro: [
+      "Indonesia is the fourth most populous country in the world and one of the most heavily mobile-first, which makes its evening queue genuinely busy. It is also spread across more than seventeen thousand islands and three time zones, so who you reach depends a great deal on when you are online.",
+      "Bahasa Indonesia is the shared language and is used with strangers by default, but it is a second language for a great many people — Javanese alone has more first-language speakers than Bahasa does. English is common in Jakarta and among younger users.",
+      "The practical thing to know is that the queue follows Java, where over half the population lives. If you are matching at 20:00 WIB you are mostly reaching Jakarta, Bandung and Surabaya rather than the eastern islands.",
+      "No account, no phone number, nothing installed. The call runs browser to browser and nothing is recorded.",
+    ],
+    faqs: [
+      { question: "Will people in Indonesia speak English?", answer: "In Jakarta and among younger users, often. Bahasa Indonesia is the default with strangers though, and for many people it is already their second language after Javanese or Sundanese." },
+      { question: "What time is Indonesia busiest?", answer: "Between 20:00 and 00:00 WIB. The country spans three time zones, so the peak moves eastward across the evening, but the queue mostly reflects Java where most people live." },
+      { question: "Does it work on Telkomsel and XL?", answer: "Yes, and on Indosat. Mobile data is far more common here than fixed broadband. Coverage is strong across Java and thins toward the eastern islands, where video softens rather than dropping." },
+      { question: "Is random video chat legal in Indonesia?", answer: "Using the service is legal and requires no registration. Indonesia does enforce content laws more actively than many countries, so sexual content in particular carries real legal risk for the person sending it." },
+      { question: "How much data does it use?", answer: "Roughly 250 to 300 MB an hour for video, or about 15 MB for voice only — worth knowing if you are on a prepaid package." },
+      { question: "Can I chat during Ramadan?", answer: "Yes, and the pattern shifts noticeably — activity moves several hours later, with the busiest window after taraweeh rather than at the usual evening peak." },
+    ],
+    related: [
+      { slug: "video-chat-jakarta", label: "Jakarta", relation: "city" },
+      { slug: "video-chat-surabaya", label: "Surabaya", relation: "city" },
+      { slug: "video-chat-bandung", label: "Bandung", relation: "city" },
+      { slug: "indonesian-video-chat", label: "Bahasa Indonesia chat", relation: "language" },
+      { slug: "javanese-video-chat", label: "Javanese chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-philippines", label: "the Philippines", relation: "sibling" },
+      { slug: "video-chat-india", label: "India", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-vietnam",
+    kind: "country",
+    name: "Vietnam",
+    primaryKeyword: "video chat vietnam",
+    title: "Video Chat Vietnam — Talk to Vietnamese Strangers Free",
+    description:
+      "Free random video chat with people across Vietnam. Meet strangers in Hanoi, Ho Chi Minh City and Da Nang — no signup, no download.",
+    tagline:
+      "Free video chat with Vietnam. Meet people from Hanoi to the Mekong, talk in Vietnamese or English, and start in one tap with no account.",
+    languages: ["Tiếng Việt (Vietnamese)", "English"],
+    peakHours: "20:00 – 23:30 ICT",
+    timezone: "Asia/Ho_Chi_Minh",
+    weight: 1.3,
+    places: ["Hanoi", "Ho Chi Minh City", "Da Nang", "Hai Phong", "Can Tho", "Hue"],
+    talkingPoints: [
+      "Coffee, which Vietnam takes extremely seriously — cà phê sữa đá, and egg coffee if you are in Hanoi",
+      "The north-south difference, which shows up in accent, food and how directly people speak",
+      "Football, which became a national obsession after the 2018 U23 run and has not cooled since",
+      "Motorbikes, and the genuine skill involved in crossing a Hanoi street on foot",
+      "Tết, the lunar new year, which reorganises the whole country for a fortnight",
+    ],
+    connectivityNote:
+      "Viettel, Vinaphone and Mobifone carry most traffic, and Vietnam has unusually good and cheap mobile data by regional standards. Fixed broadband is also widespread in the cities, so connections here are more stable than in much of Southeast Asia.",
+    localNote:
+      "Vietnam's queue peaks earlier and ends earlier than South or Southeast Asian neighbours — busy from 20:00 ICT and thinning by half past eleven. Mornings start early here and it shows in the evening pattern.",
+    safetyNote:
+      "Vietnam enforces laws about online political content actively, and that risk falls on the person in Vietnam rather than on you. If a conversation drifts toward the government or the party, let them decide whether to continue it.",
+    etiquette:
+      "How you address someone in Vietnamese depends on relative age — anh, chị, em — so people will often ask your age early. It is not rude, it is grammar. Answering it directly makes the rest of the conversation easier.",
+    localPhrases: [
+      { phrase: "Xin chào", meaning: "Hello", say: "sin CHOW" },
+      { phrase: "Cảm ơn", meaning: "Thank you", say: "GAHM uhn" },
+      { phrase: "Không sao", meaning: "It's fine / no problem", say: "khong SAO" },
+      { phrase: "Hẹn gặp lại", meaning: "See you again", say: "hen gap LAI" },
+    ],
+    starters: [
+      { topic: "Coffee", ask: "Egg coffee or cà phê sữa đá — and does that give away where you're from?", why: "It does. Egg coffee is Hanoi; the answer opens the north-south conversation." },
+      { topic: "North and south", ask: "Hanoi or Saigon — and what do people from the other one get wrong?", why: "A real and good-natured rivalry that people enjoy explaining." },
+      { topic: "Football", ask: "Do you still watch the national team, or was 2018 the peak?", why: "That run changed how the country follows football, and people remember exactly where they were." },
+      { topic: "Tết", ask: "Do you travel home for Tết, and how far is it?", why: "Almost everyone does, and the journey stories are the interesting part." },
+    ],
+    intro: [
+      "Vietnam has a young population, cheap and genuinely fast mobile data, and one of the highest rates of internet use in Southeast Asia. The result is an evening queue that fills quickly and reliably, even though the country is smaller than several of its neighbours.",
+      "Vietnamese is spoken by essentially everyone, and unlike much of the region there is no second national language competing with it. English is common among younger people in Hanoi, Da Nang and Ho Chi Minh City, and less so elsewhere.",
+      "The north-south divide is the thing most people discover in their first few conversations. Accent, vocabulary, food and even how directly someone speaks all shift between Hanoi and Saigon, and Vietnamese users will happily explain the differences at length.",
+      "Nothing to install and no account to create. The call connects directly between browsers and is never recorded.",
+    ],
+    faqs: [
+      { question: "Do people in Vietnam speak English on video chat?", answer: "Younger users in Hanoi, Da Nang and Ho Chi Minh City often do. Outside the cities it is less common, and Vietnamese is the default with a stranger." },
+      { question: "What time is Vietnam busiest?", answer: "From about 20:00 to 23:30 ICT. It peaks and ends earlier than most of the region, which reflects genuinely early mornings here." },
+      { question: "How good are connections in Vietnam?", answer: "Better than most of Southeast Asia. Mobile data on Viettel, Vinaphone and Mobifone is fast and cheap, and fixed broadband is widespread in cities, so calls tend to be stable." },
+      { question: "Why do people ask my age straight away?", answer: "Vietnamese pronouns depend on relative age — anh, chị and em all encode it — so someone needs a rough idea before they can address you properly. It is grammar rather than nosiness." },
+      { question: "Is it free?", answer: "Entirely. No account, no subscription, no credits. Only your data costs anything." },
+      { question: "Can I use voice or text instead?", answer: "Yes. Voice runs with the camera off and text needs neither camera nor microphone. All three match from the same pool." },
+    ],
+    related: [
+      { slug: "video-chat-hanoi", label: "Hanoi", relation: "city" },
+      { slug: "video-chat-ho-chi-minh-city", label: "Ho Chi Minh City", relation: "city" },
+      { slug: "video-chat-da-nang", label: "Da Nang", relation: "city" },
+      { slug: "vietnamese-video-chat", label: "Vietnamese chat", relation: "language" },
+      { slug: "indonesian-video-chat", label: "Bahasa Indonesia chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-philippines", label: "the Philippines", relation: "sibling" },
+      { slug: "video-chat-indonesia", label: "Indonesia", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-chittagong",
+    kind: "city",
+    name: "Chittagong",
+    parent: "Bangladesh",
+    primaryKeyword: "chittagong video chat",
+    title: "Chittagong Video Chat — Talk to Strangers in Chattogram Free",
+    description:
+      "Random video chat with people in Chittagong. Free, anonymous, no signup — talk in Chittagonian, Bangla or English.",
+    tagline:
+      "Video chat with Chittagong. Bangladesh's port city, its own dialect, and a queue that runs late — free, anonymous, no account.",
+    languages: ["চাটগাঁইয়া (Chittagonian)", "বাংলা (Bengali)", "English"],
+    peakHours: "22:30 – 01:30 BST",
+    timezone: "Asia/Dhaka",
+    weight: 0.5,
+    places: ["Agrabad", "Khulshi", "Patenga", "GEC Circle", "Halishahar", "Chawkbazar"],
+    talkingPoints: [
+      "Mezban, the communal beef feast that is specifically Chittagonian and which locals are proud of",
+      "The dialect itself — Chittagonian is different enough from standard Bangla that Dhaka speakers often struggle",
+      "Patenga beach and the port, which shape the city's whole economy and character",
+      "The Chittagong Hill Tracts, culturally distinct from the rest of Bangladesh and a subject people handle carefully",
+      "Shipbreaking at Sitakunda, which is either a source of jobs or an environmental disaster depending who you ask",
+    ],
+    connectivityNote:
+      "Chittagong has solid 4G on Grameenphone, Robi and Banglalink, though it lags Dhaka for 5G rollout. The port and hill areas have weaker indoor coverage. Video softens on a poor signal instead of the call ending.",
+    localNote:
+      "Chittagong's queue peaks at much the same time as Dhaka's, from 22:30 BST, but it is a far smaller pool — this is Bangladesh's second city, not its first. Matching specifically into Chittagong takes patience.",
+    safetyNote:
+      "As a port and industrial city, Chittagong sees more job-offer scams than most of Bangladesh — shipping work, overseas placements, agency fees. No legitimate employer recruits through random video chat, and none asks for money upfront.",
+    etiquette:
+      "Chittagonians will often switch to standard Bangla for outsiders, and appreciate it if you notice the dialect is different rather than assuming they are speaking Bangla badly. It is a distinct variety, not an accent.",
+    localPhrases: [
+      { phrase: "খাইছেন?", meaning: "Have you eaten? — used as a greeting", say: "khai-chen" },
+      { phrase: "কেমন চলছে?", meaning: "How's it going?", say: "kemon cholchhe" },
+      { phrase: "ঠিক আছে ভাই", meaning: "It's fine, brother", say: "thik achhe bhai" },
+      { phrase: "আসি তাহলে", meaning: "I'll be off then", say: "ashi tahole" },
+    ],
+    starters: [
+      { topic: "Mezban", ask: "Have you been to a proper mezban, and how much beef is too much?", why: "Specifically Chittagonian, and locals enjoy that an outsider knows it." },
+      { topic: "The dialect", ask: "How much Chittagonian can someone from Dhaka actually follow?", why: "The honest answer is 'not much', which people find funny." },
+      { topic: "The port", ask: "Does everyone here end up connected to the port somehow?", why: "Largely yes, and it opens up what the city actually runs on." },
+      { topic: "Patenga", ask: "Is Patenga still worth going to, or has it got too crowded?", why: "A real local debate rather than a tourist question." },
+    ],
+    intro: [
+      "Chittagong is Bangladesh's second city and its only major port, which gives it a different character from Dhaka — more industrial, more outward-facing, and noticeably prouder of being distinct.",
+      "The clearest marker of that is the language. Chittagonian is different enough from standard Bangla that speakers from Dhaka often cannot follow it, and linguists argue about whether it counts as a separate language. Locals will usually switch to standard Bangla for outsiders, but noticing the difference goes a long way.",
+      "It is a smaller pool than Dhaka, so matching specifically into Chittagong takes patience. The peak arrives at much the same time — after 22:30 — because Bangladesh as a whole keeps late hours.",
+      "No account, no phone number, nothing to install. The call connects browser to browser and is never recorded.",
+    ],
+    faqs: [
+      { question: "Is Chittagonian the same as Bengali?", answer: "Not quite. It is different enough that Dhaka speakers often cannot follow it, and linguists disagree about whether it is a dialect or a separate language. Most people switch to standard Bangla with an outsider." },
+      { question: "When is Chittagong busiest?", answer: "From about 22:30 to 01:30 BST, much the same as Dhaka — Bangladesh runs late generally. The pool is smaller though, so matching specifically here takes longer." },
+      { question: "Does it work on Grameenphone in Chittagong?", answer: "Yes, and on Robi and Banglalink. 4G is solid, though 5G lags Dhaka. Coverage indoors near the port and hill areas is weaker." },
+      { question: "Will people speak English?", answer: "Some will, particularly students and anyone working in shipping or business. Bangla is the practical common language, and Chittagonian is what many people speak at home." },
+      { question: "Is it free?", answer: "Yes, completely. No account, no subscription, no payment. Only your mobile data costs anything." },
+      { question: "How do I report someone?", answer: "A report button sits in the top bar during every call. It ends the conversation immediately and moves you on to someone new." },
+    ],
+    related: [
+      { slug: "video-chat-dhaka", label: "Dhaka", relation: "city" },
+      { slug: "video-chat-sylhet", label: "Sylhet", relation: "city" },
+      { slug: "video-chat-kolkata", label: "Kolkata", relation: "city" },
+      { slug: "bengali-video-chat", label: "Bengali video chat", relation: "language" },
+      { slug: "hindi-video-chat", label: "Hindi video chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-bangladesh", label: "Bangladesh", relation: "sibling" },
+      { slug: "video-chat-india", label: "India", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-cebu",
+    kind: "city",
+    name: "Cebu",
+    parent: "the Philippines",
+    primaryKeyword: "cebu video chat",
+    title: "Cebu Video Chat — Talk to Cebuano Strangers Free",
+    description:
+      "Random video chat with people in Cebu. Free, anonymous, no signup — Cebuano and English widely spoken, no app needed.",
+    tagline:
+      "Video chat with Cebu. The Queen City of the South, where the language is Cebuano rather than Tagalog — free, anonymous, no account.",
+    languages: ["Cebuano / Bisaya", "English", "Filipino / Tagalog"],
+    peakHours: "20:00 – 00:00 PHT",
+    timezone: "Asia/Manila",
+    weight: 0.6,
+    places: ["Lahug", "IT Park", "Mactan", "Colon Street", "Talisay", "Mandaue"],
+    talkingPoints: [
+      "Lechon, which Cebu genuinely claims to do better than anywhere else in the Philippines and will defend",
+      "Sinulog in January, one of the largest festivals in the country and the city's whole year in one week",
+      "That the language here is Cebuano, not Tagalog — a point people care about more than outsiders expect",
+      "Diving and island hopping from Mactan, which is what most of the world knows Cebu for",
+      "The rivalry with Manila, which runs deeper than friendly and shapes how people here talk about the capital",
+    ],
+    connectivityNote:
+      "Globe and Smart cover Cebu City and Mactan well, and IT Park has some of the best connectivity in the country because of the outsourcing industry. Coverage thins quickly outside the metro and on the smaller islands.",
+    localNote:
+      "Cebu keeps similar hours to Manila, filling from 20:00 PHT, but it is a distinctly separate pool with its own character. A large night-shift outsourcing workforce also means there are genuinely people awake here at 3am.",
+    safetyNote:
+      "The outsourcing industry makes Cebu a target for fake recruitment — offers of BPO work, training fees, agency deposits. Real employers do not recruit over random video chat, and no legitimate job asks you to pay to start it.",
+    etiquette:
+      "Calling Cebuano 'a dialect of Tagalog' is the fastest way to annoy someone here — they are separate languages. Using Bisaya rather than Cebuano is common locally and lands well. Warmth is the default, and bluntness reads as coldness.",
+    localPhrases: [
+      { phrase: "Kumusta ka?", meaning: "How are you? — Cebuano", say: "koo-MOOS-ta ka" },
+      { phrase: "Salamat kaayo", meaning: "Thank you very much", say: "sa-LA-mat ka-AH-yo" },
+      { phrase: "Lami", meaning: "Delicious — you will use this", say: "LA-mi" },
+      { phrase: "Amping", meaning: "Take care", say: "AM-ping" },
+    ],
+    starters: [
+      { topic: "Lechon", ask: "Is Cebu lechon actually better, or is that just civic pride?", why: "They will say yes, and then explain exactly why, which is the fun part." },
+      { topic: "Language", ask: "How different is Cebuano from Tagalog, really?", why: "Different languages, not dialects — and people appreciate being asked rather than assumed at." },
+      { topic: "Sinulog", ask: "Do you stay in the city for Sinulog or escape it?", why: "Genuinely divides residents, and both answers come with stories." },
+      { topic: "Manila", ask: "What does Manila get wrong about Cebu?", why: "A real rivalry, and this is the question people here actually want to answer." },
+    ],
+    intro: [
+      "Cebu is the Philippines' second metropolitan area and thinks of itself as a counterweight to Manila rather than a smaller version of it. That shows up quickly in conversation, usually within the first minute.",
+      "The most important practical difference is language. People here speak Cebuano, also called Bisaya, which is a separate language from Tagalog rather than a dialect of it — a distinction that matters to Cebuanos considerably more than most outsiders realise. English is used as widely as anywhere in the country.",
+      "The city also has a large outsourcing workforce on night shifts, which means the queue here does not empty at the same time as the rest of the region. There are genuinely people awake and online at three in the morning.",
+      "Nothing to install, no account, no phone number. The call runs directly between browsers and is never recorded.",
+    ],
+    faqs: [
+      { question: "Do people in Cebu speak Tagalog?", answer: "Most understand it, but the language here is Cebuano, also called Bisaya — a separate language rather than a dialect of Tagalog. English is widely spoken and is often the easiest common ground." },
+      { question: "When is Cebu busiest?", answer: "From about 20:00 to midnight PHT, similar to Manila. Cebu also has a large night-shift outsourcing workforce, so there are more people online in the small hours here than you would expect." },
+      { question: "Is Cebu a different pool from Manila?", answer: "There is no location filter at all, so everyone matches from one shared queue. What differs is the character of the conversations — Cebu is culturally distinct and people here will tell you so." },
+      { question: "How is the connection in Cebu?", answer: "Good in the city and around Mactan, and particularly strong in IT Park because of the outsourcing industry. It thins quickly on the smaller islands." },
+      { question: "Is it free?", answer: "Completely. No account, no subscription, no credits. Only your data costs anything." },
+      { question: "Can I chat without the camera?", answer: "Yes. Voice chat matches from the same queue with the camera off, and text chat needs neither camera nor microphone." },
+    ],
+    related: [
+      { slug: "video-chat-manila", label: "Manila", relation: "city" },
+      { slug: "video-chat-davao", label: "Davao", relation: "city" },
+      { slug: "video-chat-quezon-city", label: "Quezon City", relation: "city" },
+      { slug: "cebuano-video-chat", label: "Cebuano video chat", relation: "language" },
+      { slug: "tagalog-video-chat", label: "Tagalog video chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-philippines", label: "the Philippines", relation: "sibling" },
+      { slug: "video-chat-indonesia", label: "Indonesia", relation: "sibling" },
+    ],
+  },
+
 ];
 
 export const ENTRY_BY_SLUG: Record<string, DirectoryEntry> = Object.fromEntries(
