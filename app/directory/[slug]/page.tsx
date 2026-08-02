@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import {
   Video, Mic, MessageSquare, Clock, Languages, Signal, ShieldCheck, Zap,
   Lock, Smartphone, MousePointerClick, Camera, Users, Compass, Scale, HelpCircle, Sunrise, Handshake, ArrowLeft,
+  Plane, Snowflake, Gavel, Wallet, Sparkles, Wifi, Clock3,
   Sticker, CheckCheck, Globe2, Activity,
 } from "lucide-react";
 import { ENTRIES, getEntry, resolvableRelated, hrefFor } from "@/lib/directory/entries";
@@ -34,6 +35,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     image: `${BASE_URL}/directory/${entry.slug}/opengraph-image`,
   });
 }
+
+/** Icon and colour per spotlight kind, so the cards read as one family. */
+const SPOTLIGHT_STYLE = {
+  diaspora: { icon: <Plane size={16} />, tone: "cyan" as const },
+  seasonal: { icon: <Snowflake size={16} />, tone: "cyan" as const },
+  legal: { icon: <Gavel size={16} />, tone: "amber" as const },
+  cost: { icon: <Wallet size={16} />, tone: "emerald" as const },
+  culture: { icon: <Sparkles size={16} />, tone: "pink" as const },
+  infra: { icon: <Wifi size={16} />, tone: "purple" as const },
+  time: { icon: <Clock3 size={16} />, tone: "amber" as const },
+};
 
 function whatIsHeading(kind: string, name: string) {
   if (kind === "language") return `What is ${name} video chat?`;
@@ -246,6 +258,27 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
             </div>
           </div>
         </section>
+        )}
+
+        {entry.spotlights && entry.spotlights.length > 0 && (
+          <section className="mt-14">
+            <SectionHead
+              tone="amber"
+              icon={<Sparkles size={18} />}
+              title={`What is different about ${entry.name}`}
+              blurb="Things that are true here and not in most other markets."
+            />
+            <div className="grid gap-3 sm:grid-cols-2">
+              {entry.spotlights.map((sp) => {
+                const style = SPOTLIGHT_STYLE[sp.kind];
+                return (
+                  <IconCard key={sp.title} icon={style.icon} title={sp.title} tone={style.tone}>
+                    {sp.body}
+                  </IconCard>
+                );
+              })}
+            </div>
+          </section>
         )}
 
         <section className="mt-14">

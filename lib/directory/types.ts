@@ -81,6 +81,25 @@ export type DirectoryEntry = {
   etiquette?: string;
 
   /**
+   * Market-specific cards that only appear where they are true.
+   *
+   * The strongest defence against boilerplate is not varying the words inside a
+   * fixed set of sections — it is having different sections. A page about Russia
+   * carrying a card on winter and one on what not to discuss, where the Brazil
+   * page instead carries Carnival and "Portuguese, not Spanish", produces pages
+   * with genuinely different shapes rather than the same shape refilled.
+   *
+   * Only add one where there is something real to say. An empty spotlight is
+   * worse than none.
+   */
+  spotlights?: Array<{
+    title: string;
+    body: string;
+    /** Drives the icon and colour, so the cards read as a consistent family. */
+    kind: "diaspora" | "seasonal" | "legal" | "cost" | "culture" | "infra" | "time";
+  }>;
+
+  /**
    * Phrases a visitor can actually use, with meaning and rough pronunciation.
    * The single most useful thing a page like this can carry — it turns the page
    * from something you read into something you use during a call.

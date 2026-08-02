@@ -45,6 +45,18 @@ export const ENTRIES: DirectoryEntry[] = [
       "Most people in India will reach you on 4G or 5G rather than fixed broadband, usually on Jio or Airtel. Vidibro caps video at roughly 600 kbps and adapts downward when the connection tightens, so a call holds together on a moving train or in a patchy area — it will look softer rather than freezing.",
     localNote:
       "India spans one time zone but a very wide range of daily rhythms. Metro users tend to come online late, after 9 PM IST, while smaller-city users are often around earlier in the evening. If matching feels slow at 3 in the afternoon, it is not the queue being broken — it is genuinely quiet.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Jugaad is a real word and a real skill",
+        body: "Roughly: solving something properly with the wrong materials. It describes a bike engine driving a water pump, or an app built for a phone three generations old. Asking someone for their best jugaad story is one of the fastest routes into a genuine conversation here.",
+      },
+      {
+        kind: "culture",
+        title: "One exam can decide a decade",
+        body: "UPSC, JEE and NEET shape an enormous share of young lives here — years of preparation, often away from home, for a single result. Nearly everyone under thirty either sat one or watched a sibling do it, and it comes up more than outsiders expect.",
+      },
+    ],
     localPhrases: [
       { phrase: "क्या हाल है?", meaning: "How's it going?", say: "kya haal hai" },
       { phrase: "आप कहाँ से हो?", meaning: "Where are you from?", say: "aap kahaan se ho" },
@@ -143,6 +155,18 @@ export const ENTRIES: DirectoryEntry[] = [
     weight: 0.8,
     tagline:
       "Random video chat with Kolkata. Talk in Bangla or English, meet people who genuinely want a long conversation, and start without an account.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "The largest book fair in the world",
+        body: "The Kolkata Book Fair draws over two million visitors a year and is the biggest non-trade book fair anywhere. Reading is a mainstream social activity here, not a niche one, and asking what someone is reading is a normal question rather than a probing one.",
+      },
+      {
+        kind: "infra",
+        title: "India's last trams",
+        body: "Kolkata ran the only surviving tram network in India, over a century old and steadily shrinking. Residents are divided between nostalgia and impatience about it, which makes it a small, specific question that gets a real opinion.",
+      },
+    ],
     localPhrases: [
       { phrase: "কেমন আছো?", meaning: "How are you?", say: "kemon achho" },
       { phrase: "কী খবর?", meaning: "What's the news? — a normal opener here", say: "ki khobor" },
@@ -252,6 +276,18 @@ export const ENTRIES: DirectoryEntry[] = [
     weight: 1.7,
     tagline:
       "Free Bengali video chat. Over 200 million speakers across India and Bangladesh — talk in Bangla with no account, no app and no language filter.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "A language with a martyrs' day",
+        body: "In 1952 students were killed in Dhaka protesting for Bengali to be recognised as an official language. That day, 21 February, is now UNESCO's International Mother Language Day. Few languages have a death toll attached to their status, and Bengali speakers know this history well.",
+      },
+      {
+        kind: "culture",
+        title: "Two vocabularies, one language",
+        body: "Dhaka and Kolkata Bengali differ enough in everyday words that speakers place each other within a sentence — jol against pani for water is the classic tell. It is the most reliable conversation on any Bengali call and neither side tires of it.",
+      },
+    ],
     localPhrases: [
       { phrase: "ভালো আছি", meaning: "I'm well", say: "bhalo achhi" },
       { phrase: "তুমি কোথায় থাকো?", meaning: "Where do you live?", say: "tumi kothay thako" },
@@ -360,6 +396,18 @@ export const ENTRIES: DirectoryEntry[] = [
     weight: 1.6,
     tagline:
       "Best free video chat in Bangladesh. Connect with people in Dhaka, Chittagong and Sylhet, talk in your own language, and start in one tap.",
+    spotlights: [
+      {
+        kind: "time",
+        title: "The latest queue in South Asia",
+        body: "Bangladesh runs later than India or Pakistan, with the peak arriving after 22:30 and holding past one. It is thirty minutes ahead of India on the clock and roughly an hour behind it in habits, which is a strange and useful combination for cross-border conversation.",
+      },
+      {
+        kind: "culture",
+        title: "A country younger than most of its buildings",
+        body: "Bangladesh became independent in 1971, and its median age is under twenty-eight. Most people you meet are younger than the country's football stadium — which makes the national story feel personal here in a way older nations do not.",
+      },
+    ],
     localPhrases: [
       { phrase: "কী অবস্থা?", meaning: "What's up? — casual, very Dhaka", say: "ki obostha" },
       { phrase: "আপনি কেমন আছেন?", meaning: "How are you? — polite form", say: "apni kemon achhen" },
@@ -446,6 +494,18 @@ export const ENTRIES: DirectoryEntry[] = [
     weight: 1.9,
     tagline:
       "Best free video chat in Pakistan. Meet people in Karachi, Lahore and Islamabad, talk in Urdu or English, and start without an account.",
+    spotlights: [
+      {
+        kind: "seasonal",
+        title: "Ramadan turns the day upside down",
+        body: "For a month, the whole rhythm inverts. Sehri at 4am, iftar at sunset, and a social peak that runs from taraweeh until two or three in the morning. The queue does not shrink during Ramadan; it moves, and if you match at the usual hour you will wonder where everyone went.",
+      },
+      {
+        kind: "culture",
+        title: "Truck art is a genuine craft tradition",
+        body: "The decorated trucks are not folk kitsch — they are a recognised art form with regional styles, named workshops and painters who are known by name. Ask what the poetry written on the back usually says; the answers are better than you would guess.",
+      },
+    ],
     localPhrases: [
       { phrase: "کیا حال ہے؟", meaning: "How are you?", say: "kya haal hai" },
       { phrase: "زبردست", meaning: "Brilliant / superb", say: "zabardast" },
@@ -532,6 +592,18 @@ export const ENTRIES: DirectoryEntry[] = [
     weight: 1.5,
     tagline:
       "Best free video chat in the Philippines. Meet Filipinos in Manila, Cebu and Davao — English widely spoken, no signup, no download.",
+    spotlights: [
+      {
+        kind: "diaspora",
+        title: "Ten million people working abroad",
+        body: "Roughly one in ten Filipinos works overseas, and almost every family has someone away. Video calling is not a novelty here, it is how families exist — which is why conversations on a service like this start warmer and run longer than almost anywhere else.",
+      },
+      {
+        kind: "culture",
+        title: "The world's heaviest social media users",
+        body: "The Philippines has topped global rankings for time spent on social platforms for most of the last decade. Talking to strangers online is unremarkable here rather than unusual, and it shows immediately in how readily a conversation gets going.",
+      },
+    ],
     localPhrases: [
       { phrase: "Kumusta?", meaning: "How are you?", say: "koo-moos-TAH" },
       { phrase: "Salamat", meaning: "Thank you", say: "sa-LA-mat" },
@@ -619,6 +691,18 @@ export const ENTRIES: DirectoryEntry[] = [
     weight: 1.0,
     tagline:
       "Random video chat with Mumbai. Hindi, Marathi or English, no account needed, and a queue that runs later than anywhere else in India.",
+    spotlights: [
+      {
+        kind: "infra",
+        title: "The suburban railway is the city",
+        body: "Around seven million people ride the Mumbai locals every day, packed to a degree that has its own vocabulary. It sets the shape of the working day, and everyone has a story that would sound alarming anywhere else and routine here.",
+      },
+      {
+        kind: "culture",
+        title: "The dabbawalas still run on paper",
+        body: "Around 200,000 home-cooked lunches are delivered across Mumbai daily by a system with no app, no tracking and famously few errors. It is studied by business schools and shrugged at by locals, which is a good conversation in itself.",
+      },
+    ],
     localPhrases: [
       { phrase: "काय म्हणतोस?", meaning: "What do you say? — Marathi, very Mumbai", say: "kaay mhantos" },
       { phrase: "टाइमपास", meaning: "Killing time — used constantly", say: "timepass" },
@@ -706,6 +790,18 @@ export const ENTRIES: DirectoryEntry[] = [
     weight: 1.0,
     tagline:
       "Video chat with Delhi and NCR. Hindi, Punjabi or English, no signup — meet students, workers and people who moved here from everywhere.",
+    spotlights: [
+      {
+        kind: "seasonal",
+        title: "Two months when the air decides everything",
+        body: "From late October, smog dominates conversation, plans and health. Air quality apps are checked the way weather is elsewhere. It is a genuine grievance rather than small talk, and people are frank about it.",
+      },
+      {
+        kind: "culture",
+        title: "A capital of people from everywhere else",
+        body: "Delhi's population has been shaped by successive migrations — Partition, then decades of work and study arrivals. 'Where are you originally from' is not a rude question here; it is the normal one, and the answer is usually a story.",
+      },
+    ],
     localPhrases: [
       { phrase: "और भाई?", meaning: "So, brother? — the standard Delhi opener", say: "aur bhai" },
       { phrase: "बढ़िया", meaning: "Great / excellent", say: "badhiya" },
@@ -792,6 +888,18 @@ export const ENTRIES: DirectoryEntry[] = [
     weight: 2.6,
     tagline:
       "Free Hindi video chat. Over 600 million speakers across India and beyond — talk in Hindi with no account, no app and no filter.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Hindi is not the same thing as India",
+        body: "Around forty percent of India speaks it natively. A match from Chennai, Kochi or Kolkata may not use it at all, and assuming otherwise is a common and irritating mistake. This is exactly why this page exists separately from the India one.",
+      },
+      {
+        kind: "culture",
+        title: "The script is the real difference from Urdu",
+        body: "Spoken Hindi and Urdu are largely mutually intelligible; written, they share almost nothing, since one uses Devanagari and the other a Perso-Arabic script. Two people can talk fluently for an hour and be unable to read each other's messages.",
+      },
+    ],
     localPhrases: [
       { phrase: "नमस्ते", meaning: "Hello — works everywhere, always safe", say: "namaste" },
       { phrase: "क्या चल रहा है?", meaning: "What's going on?", say: "kya chal raha hai" },
@@ -878,6 +986,18 @@ export const ENTRIES: DirectoryEntry[] = [
     weight: 1.1,
     tagline:
       "Video chat with people in Dhaka. Free, anonymous and instant — one of the latest-running chat queues anywhere in South Asia.",
+    spotlights: [
+      {
+        kind: "infra",
+        title: "One of the densest cities on earth",
+        body: "Dhaka packs over 20 million people into a small area, with a population density that ranks among the highest anywhere. That density explains the traffic, the noise and, indirectly, why so much social life happens online and late.",
+      },
+      {
+        kind: "culture",
+        title: "Rickshaw art is a named craft",
+        body: "Dhaka has tens of thousands of hand-painted cycle rickshaws, with recognised painters and regional styles. UNESCO listed it as intangible cultural heritage. Most locals stopped seeing it years ago, which makes noticing it a genuinely nice thing to ask about.",
+      },
+    ],
     localPhrases: [
       { phrase: "জ্যামে আটকে আছি", meaning: "Stuck in traffic — universally understood here", say: "jam-e atke achhi" },
       { phrase: "চলেন", meaning: "Let's go", say: "cholen" },
@@ -965,6 +1085,18 @@ export const ENTRIES: DirectoryEntry[] = [
     weight: 1.0,
     tagline:
       "Random video chat with Manila. Free and anonymous, English widely spoken, and a queue that fills early in the evening.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Karaoke is not a joke here",
+        body: "The Philippines takes karaoke more seriously than any country on earth, and Manila is its centre. Everyone has a signature song, refusing to sing reads as odd, and asking someone what theirs is gets you an answer within seconds.",
+      },
+      {
+        kind: "time",
+        title: "The night shift keeps it awake",
+        body: "Metro Manila's outsourcing industry runs on American hours, which means a substantial workforce is up and online while the rest of Asia sleeps. If you are matching at 4am regional time, this is where a lot of the queue comes from.",
+      },
+    ],
     localPhrases: [
       { phrase: "Anong balita?", meaning: "What's the news?", say: "a-NONG ba-LEE-ta" },
       { phrase: "Grabe", meaning: "Wow / that's intense", say: "GRA-beh" },
@@ -1052,6 +1184,18 @@ export const ENTRIES: DirectoryEntry[] = [
     weight: 1.2,
     tagline:
       "Video chat with Karachi. Urdu, Sindhi or English, no signup — Pakistan's largest and most mixed city, online late into the night.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "The most mixed city in Pakistan",
+        body: "Karachi grew through waves of migration — Partition, internal movement, and decades of people arriving for work. Urdu, Sindhi, Pashto, Punjabi and Balochi communities all live here, which makes 'where is your family from' the normal opener rather than a probing one.",
+      },
+      {
+        kind: "infra",
+        title: "Pakistan's only major coast",
+        body: "Karachi is the country's sole large port city, and the sea shapes its economy, its food and its self-image. For a nation of 240 million, almost everyone's imported anything came through here — which locals are quietly proud of.",
+      },
+    ],
     localPhrases: [
       { phrase: "کیا سین ہے؟", meaning: "What's the scene? — very Karachi", say: "kya scene hai" },
       { phrase: "یار", meaning: "Mate / dude", say: "yaar" },
@@ -1139,6 +1283,18 @@ export const ENTRIES: DirectoryEntry[] = [
     weight: 1.0,
     tagline:
       "Video chat with Bangalore. Mostly English, better connections than anywhere else in India, and no account required.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Almost nobody you meet is from here",
+        body: "Bangalore's population roughly tripled in three decades, driven by people arriving for work from every other state. It is the one Indian city where the local language is not the default conversation language, and where 'where are you from' has an interesting answer nearly every time.",
+      },
+      {
+        kind: "infra",
+        title: "The best home internet in India",
+        body: "Bangalore has fixed broadband penetration well above the national average, so you are more likely to reach someone on wifi here than on a phone in a moving vehicle. Calls are noticeably more stable than the Indian norm.",
+      },
+    ],
     localPhrases: [
       { phrase: "ಹೇಗಿದ್ದೀರಾ?", meaning: "How are you? — Kannada", say: "hegiddeera" },
       { phrase: "ಚೆನ್ನಾಗಿದೆ", meaning: "It's good", say: "chennagide" },
@@ -1225,6 +1381,18 @@ export const ENTRIES: DirectoryEntry[] = [
     weight: 1.4,
     tagline:
       "Free Tamil video chat. Around 80 million speakers across India, Sri Lanka, Singapore and Malaysia — no account, no app, no filter.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "One of the oldest languages still spoken",
+        body: "Tamil has a continuous literary tradition going back over two thousand years, and is classified as a classical language in its own right. Speakers are genuinely proud of this and an interest in it is received far better than polite small talk.",
+      },
+      {
+        kind: "diaspora",
+        title: "Official in three countries",
+        body: "Tamil holds official status in India, Sri Lanka and Singapore, with large communities in Malaysia and the Gulf. A Tamil conversation is as likely to reach Jaffna or Singapore as Chennai, and the varieties differ audibly enough for people to place each other.",
+      },
+    ],
     localPhrases: [
       { phrase: "எப்படி இருக்கீங்க?", meaning: "How are you?", say: "eppadi irukeenga" },
       { phrase: "நன்றி", meaning: "Thank you", say: "nandri" },
@@ -1311,6 +1479,18 @@ export const ENTRIES: DirectoryEntry[] = [
     weight: 1.5,
     tagline:
       "Free Urdu video chat. Talk in Urdu with people across Pakistan, India and the Gulf — no account, no app, video, voice or text.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Poetry turns up in ordinary conversation",
+        body: "Quoting a Ghalib or Faiz couplet mid-sentence is normal here rather than showy, and mushairas — poetry gatherings — still draw crowds. Having one line ready changes how a conversation goes more than any amount of fluency would.",
+      },
+      {
+        kind: "culture",
+        title: "Two countries that understand each other perfectly",
+        body: "Spoken Urdu and Hindi are close enough that a Pakistani and a north Indian can talk for an hour without either switching to English. On a service with no country filter this happens constantly, and it tends to be the conversation people remember.",
+      },
+    ],
     localPhrases: [
       { phrase: "آداب", meaning: "A respectful hello, works anywhere", say: "aadab" },
       { phrase: "سنائیں", meaning: "So, tell me — a standard opener", say: "sunayen" },
@@ -1521,6 +1701,18 @@ export const ENTRIES: DirectoryEntry[] = [
       "Investment and crypto scams are common here and often open as ordinary friendly conversation before turning to money. Nobody legitimate raises trading, gold or a 'business opportunity' with a stranger on a video call.",
     etiquette:
       "Indonesians tend to avoid direct disagreement, so a polite yes does not always mean agreement — asking the same question a second way gets you closer to the truth. Kak or mas as a form of address reads as warm rather than formal.",
+    spotlights: [
+      {
+        kind: "time",
+        title: "Seventeen thousand islands, three time zones",
+        body: "Indonesia stretches further west to east than the continental United States. Its evening rolls across three time zones, so the queue at any moment is mostly Java — and matching at 22:00 WIB means Papua is already asleep.",
+      },
+      {
+        kind: "culture",
+        title: "Badminton is the national sport, genuinely",
+        body: "Not football. Indonesia has won Olympic badminton gold more often than any other sport, finals are watched the way cup finals are elsewhere, and asking about it is treated as a sign you know something real about the country.",
+      },
+    ],
     localPhrases: [
       { phrase: "Apa kabar?", meaning: "How are you?", say: "AH-pa KA-bar" },
       { phrase: "Terima kasih", meaning: "Thank you", say: "te-REE-ma KA-see" },
@@ -1591,6 +1783,18 @@ export const ENTRIES: DirectoryEntry[] = [
       "Vietnam enforces laws about online political content actively, and that risk falls on the person in Vietnam rather than on you. If a conversation drifts toward the government or the party, let them decide whether to continue it.",
     etiquette:
       "How you address someone in Vietnamese depends on relative age — anh, chị, em — so people will often ask your age early. It is not rude, it is grammar. Answering it directly makes the rest of the conversation easier.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Coffee here is a separate civilisation",
+        body: "Vietnam is the world's second largest coffee producer and drinks it in ways that exist nowhere else — condensed milk over ice, egg coffee in Hanoi, coconut coffee, salt coffee. Ordering it is a whole vocabulary, and people enjoy teaching it.",
+      },
+      {
+        kind: "culture",
+        title: "How you say 'you' depends on your age",
+        body: "Vietnamese has no neutral 'you'. Anh, chị, em and several more all encode relative age, so someone genuinely cannot address you until they can place you. That is why the age question arrives in the first thirty seconds — it is grammar, not curiosity.",
+      },
+    ],
     localPhrases: [
       { phrase: "Xin chào", meaning: "Hello", say: "sin CHOW" },
       { phrase: "Cảm ơn", meaning: "Thank you", say: "GAHM uhn" },
@@ -1662,6 +1866,18 @@ export const ENTRIES: DirectoryEntry[] = [
       "As a port and industrial city, Chittagong sees more job-offer scams than most of Bangladesh — shipping work, overseas placements, agency fees. No legitimate employer recruits through random video chat, and none asks for money upfront.",
     etiquette:
       "Chittagonians will often switch to standard Bangla for outsiders, and appreciate it if you notice the dialect is different rather than assuming they are speaking Bangla badly. It is a distinct variety, not an accent.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "A dialect Dhaka cannot follow",
+        body: "Chittagonian diverges from standard Bangla enough that speakers from Dhaka often genuinely cannot understand it, and linguists disagree about whether it is a dialect at all. Noticing the difference rather than assuming bad Bangla is appreciated more than you would expect.",
+      },
+      {
+        kind: "infra",
+        title: "Where almost everything enters the country",
+        body: "Chittagong port handles the overwhelming majority of Bangladesh's trade. The city's economy, its politics and a great many family livelihoods run through it, which is why it comes up in conversation faster than the sea or the hills do.",
+      },
+    ],
     localPhrases: [
       { phrase: "খাইছেন?", meaning: "Have you eaten? — used as a greeting", say: "khai-chen" },
       { phrase: "কেমন চলছে?", meaning: "How's it going?", say: "kemon cholchhe" },
@@ -1733,6 +1949,18 @@ export const ENTRIES: DirectoryEntry[] = [
       "The outsourcing industry makes Cebu a target for fake recruitment — offers of BPO work, training fees, agency deposits. Real employers do not recruit over random video chat, and no legitimate job asks you to pay to start it.",
     etiquette:
       "Calling Cebuano 'a dialect of Tagalog' is the fastest way to annoy someone here — they are separate languages. Using Bisaya rather than Cebuano is common locally and lands well. Warmth is the default, and bluntness reads as coldness.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Cebuano is a language, not a dialect",
+        body: "This is the thing to get right. Cebuano and Tagalog are separate languages, not variants, and calling it a dialect is the fastest way to sour a conversation here. Bisaya is what locals usually call it, and using that lands well.",
+      },
+      {
+        kind: "culture",
+        title: "The lechon claim is not modest",
+        body: "Cebu asserts it makes the best roast pork in the Philippines and will not entertain alternatives. Anthony Bourdain agreed publicly, which locals have not stopped mentioning. Raising it gets you a passionate and very specific set of recommendations.",
+      },
+    ],
     localPhrases: [
       { phrase: "Kumusta ka?", meaning: "How are you? — Cebuano", say: "koo-MOOS-ta ka" },
       { phrase: "Salamat kaayo", meaning: "Thank you very much", say: "sa-LA-mat ka-AH-yo" },
@@ -1770,6 +1998,854 @@ export const ENTRIES: DirectoryEntry[] = [
       { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
       { slug: "video-chat-philippines", label: "the Philippines", relation: "sibling" },
       { slug: "video-chat-indonesia", label: "Indonesia", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-jakarta",
+    kind: "city",
+    name: "Jakarta",
+    parent: "Indonesia",
+    primaryKeyword: "jakarta video chat",
+    title: "Jakarta Video Chat — Talk to Strangers in Jakarta Free",
+    description:
+      "Random video chat with people in Jakarta. Free, anonymous, no signup — talk in Bahasa or English with strangers across the capital.",
+    tagline:
+      "Video chat with Jakarta. Indonesia's capital, its slang, and its famously terrible traffic — free, anonymous, no account.",
+    languages: ["Bahasa Indonesia", "Betawi", "English"],
+    peakHours: "20:30 – 00:30 WIB",
+    timezone: "Asia/Jakarta",
+    weight: 1.1,
+    places: ["Menteng", "Kemang", "SCBD", "Kota Tua", "PIK", "Kelapa Gading"],
+    talkingPoints: [
+      "The traffic, which is routinely ranked among the worst on earth and which everyone has surrendered to differently",
+      "Jakarta slang — gue and lo instead of saya and kamu, which instantly marks someone as from here",
+      "Warung food versus mall food, a class and taste divide people are surprisingly open about",
+      "Banjir, the seasonal flooding, and which neighbourhoods always go under",
+      "The MRT, which is new enough that people still talk about it as an achievement",
+    ],
+    connectivityNote:
+      "Jakarta has the best coverage in Indonesia on Telkomsel, XL and Indosat, with widespread 5G in the central districts. Fixed broadband is common in apartments. The main issue is congestion in dense areas at peak hours rather than absence of signal.",
+    localNote:
+      "Jakarta's queue fills slightly later than the national average, from about 20:30 WIB, and holds past midnight — long commutes push the whole evening back. During mudik week before Idul Fitri the city genuinely empties and the queue thins noticeably.",
+    safetyNote:
+      "Jakarta is where most Indonesian investment and crypto scams originate, and they usually open as friendly small talk before turning to money over several conversations. Any stranger who mentions trading, gold or a business opportunity is running one.",
+    etiquette:
+      "Jakarta slang uses gue and lo where the rest of the country uses saya and kamu — using it marks you as familiar, which is fine with peers and rude with anyone older. Kak works safely either way.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "The city has its own pronouns",
+        body: "Jakartans say gue and lo where standard Bahasa uses saya and kamu. It is the single clearest marker of a native Jakartan, and the slang moves fast enough that it also dates roughly how old someone is.",
+      },
+      {
+        kind: "infra",
+        title: "The world's worst traffic, measured",
+        body: "Jakarta has ranked at or near the top of global congestion indexes for years, which is why the city built an MRT that people still discuss as an achievement. Commute stories here escalate quickly and are all true.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Gimana?", meaning: "How's it going? — casual", say: "gi-MA-na" },
+      { phrase: "Mager", meaning: "Too lazy to move — extremely common slang", say: "MA-ger" },
+      { phrase: "Cabut", meaning: "I'm off / let's leave", say: "CHA-boot" },
+      { phrase: "Santuy", meaning: "Chill — playful spelling of santai", say: "SAN-tooy" },
+    ],
+    starters: [
+      { topic: "Traffic", ask: "What's the worst commute you've had this month?", why: "Jakarta traffic is a shared grievance and the stories escalate quickly." },
+      { topic: "Slang", ask: "Do you say gue and lo, or did you grow up somewhere else?", why: "It identifies a real Jakartan versus someone who moved for work." },
+      { topic: "Food", ask: "Best warung near you — and does it have a name?", why: "The best ones usually do not, which is the point." },
+      { topic: "Flooding", ask: "Does your area flood, and have you got used to it?", why: "A yearly reality that shapes where people choose to live." },
+    ],
+    intro: [
+      "Jakarta is one of the largest metropolitan areas in the world and the centre of Indonesia's online life. If you match into Indonesia during the evening peak, you are most likely reaching Jakarta or the sprawl around it.",
+      "The city has its own way of speaking. Jakartans use gue and lo where standard Bahasa uses saya and kamu, and the slang moves fast enough that it marks not just where someone is from but roughly how old they are. It is the single quickest way to tell a native Jakartan from someone who arrived for work.",
+      "Long commutes shape everything here, including when people come online. The queue fills later than the national average and stays busy past midnight, because evenings genuinely start late when getting home takes two hours.",
+      "No account, no phone number, nothing installed. The call runs directly between browsers and is never recorded.",
+    ],
+    faqs: [
+      { question: "Will people in Jakarta speak English?", answer: "Many will, particularly in the business districts and among younger users. Bahasa Indonesia is the default with a stranger, and you will hear plenty of Jakarta slang mixed into it." },
+      { question: "When is Jakarta busiest?", answer: "From about 20:30 to 00:30 WIB, later than the Indonesian average. Long commutes push the whole evening back. The week of mudik before Idul Fitri is a genuine exception — the city empties." },
+      { question: "How is the connection in Jakarta?", answer: "The best in Indonesia. Telkomsel, XL and Indosat all have strong coverage with 5G in central districts, and apartment broadband is common. Congestion at peak hours is more of an issue than lack of signal." },
+      { question: "What is gue and lo?", answer: "Jakarta slang for I and you, replacing the standard saya and kamu. Using it signals familiarity, which works with peers and reads as rude with someone older." },
+      { question: "Is it free?", answer: "Completely. No account, no subscription, no credits. Only your data costs anything." },
+      { question: "Can I use voice or text instead?", answer: "Yes. Voice runs with the camera off, text needs neither camera nor microphone, and all three match from the same pool." },
+    ],
+    related: [
+      { slug: "video-chat-surabaya", label: "Surabaya", relation: "city" },
+      { slug: "video-chat-bandung", label: "Bandung", relation: "city" },
+      { slug: "video-chat-manila", label: "Manila", relation: "city" },
+      { slug: "indonesian-video-chat", label: "Bahasa Indonesia chat", relation: "language" },
+      { slug: "javanese-video-chat", label: "Javanese chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-indonesia", label: "Indonesia", relation: "sibling" },
+      { slug: "video-chat-philippines", label: "the Philippines", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-hanoi",
+    kind: "city",
+    name: "Hanoi",
+    parent: "Vietnam",
+    primaryKeyword: "hanoi video chat",
+    title: "Hanoi Video Chat — Talk to Strangers in Hanoi Free",
+    description:
+      "Random video chat with people in Hanoi. Free, anonymous, no signup — talk in Vietnamese or English with strangers across the capital.",
+    tagline:
+      "Video chat with Hanoi. Vietnam's capital, four real seasons, and egg coffee — free, anonymous, and no account needed.",
+    languages: ["Tiếng Việt (Vietnamese)", "English"],
+    peakHours: "20:00 – 23:00 ICT",
+    timezone: "Asia/Ho_Chi_Minh",
+    weight: 0.7,
+    places: ["Hoan Kiem", "Old Quarter", "Tay Ho", "Ba Dinh", "Cau Giay", "Long Bien"],
+    talkingPoints: [
+      "Egg coffee, which is Hanoi's invention and which people here will insist Saigon cannot do properly",
+      "Bun cha, and the specific places that locals rate versus the ones tourists queue for",
+      "That Hanoi has four actual seasons, including a genuinely cold winter, unlike the south",
+      "Walking around Hoan Kiem lake, which is a real daily ritual rather than a tourist activity",
+      "The north-south difference in how people speak — Hanoians consider their accent the standard one",
+    ],
+    connectivityNote:
+      "Hanoi has strong, cheap mobile data on Viettel, Vinaphone and Mobifone, plus widespread fibre broadband. Connections here are among the more stable in Southeast Asia, so video quality holds up better than the regional norm.",
+    localNote:
+      "Hanoi's queue peaks earlier and finishes earlier than most of Asia — busy from 20:00 ICT and thinning by eleven. Mornings genuinely start early here, and the evening reflects that. Tet in late January or February empties the city entirely.",
+    safetyNote:
+      "Northern Vietnam sees a lot of fake overseas job and study placements, particularly aimed at younger people. Any stranger offering work abroad, a visa route, or an agency contact is running something, and the money involved is never recoverable.",
+    etiquette:
+      "Hanoians are more formal than southerners and read bluntness as rudeness more readily. Expect to be asked your age early so someone knows which pronoun to use — anh, chị or em — and answer it plainly rather than deflecting.",
+    spotlights: [
+      {
+        kind: "seasonal",
+        title: "The only Vietnamese city with a real winter",
+        body: "Hanoi gets four distinct seasons including a genuinely cold, damp January — which surprises anyone expecting uniform tropics. It shapes the food, the clothing and how much of social life happens indoors at that time of year.",
+      },
+      {
+        kind: "culture",
+        title: "Egg coffee was invented here",
+        body: "Cà phê trứng came out of a Hanoi shortage of milk in the 1940s and never left. Hanoians consider Saigon incapable of making it properly, and asking where to get the real thing produces immediate and specific directions.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Đi đâu đấy?", meaning: "Where are you off to? — used as a greeting", say: "dee dow DAY" },
+      { phrase: "Ngon quá", meaning: "So tasty", say: "ngon QWA" },
+      { phrase: "Trời ơi", meaning: "Oh my god — all-purpose exclamation", say: "chuh-ee UH-ee" },
+      { phrase: "Bạn ơi", meaning: "Hey, friend — polite way to get attention", say: "ban UH-ee" },
+    ],
+    starters: [
+      { topic: "Egg coffee", ask: "Where do you actually go for egg coffee — not the tourist place?", why: "Hanoi's own invention, and locals have strong views about who does it properly." },
+      { topic: "Seasons", ask: "How cold does it really get here in January?", why: "Surprises people who assume all of Vietnam is tropical, and Hanoians enjoy that." },
+      { topic: "Bun cha", ask: "Which bun cha place, and is it the one with the queue?", why: "Usually not, and the answer is genuinely useful." },
+      { topic: "North and south", ask: "What do people in Saigon get wrong about Hanoi?", why: "A real rivalry that people here are happy to explain at length." },
+    ],
+    intro: [
+      "Hanoi is Vietnam's capital and its older, more formal city, and residents are conscious of both facts. It is also the one Vietnamese city with four genuine seasons, including a winter cold enough to surprise anyone expecting uniform tropics.",
+      "The accent here is treated as standard Vietnamese, which is a live subject if you also talk to people from Ho Chi Minh City. Vocabulary, tone and even how directly someone will disagree with you all shift between the two, and Hanoians will explain the differences with some pride.",
+      "Practically, the queue peaks earlier than almost anywhere else in Asia — busy from eight and thinning by eleven. Mornings start early in Hanoi and the evening pattern follows.",
+      "Nothing to install, no account, no phone number. The call connects browser to browser and is never recorded.",
+    ],
+    faqs: [
+      { question: "Do people in Hanoi speak English?", answer: "Younger people and anyone working in tourism or tech often do. Vietnamese is the default with a stranger, and Hanoi's accent is the one treated as standard." },
+      { question: "When is Hanoi busiest?", answer: "From about 20:00 to 23:00 ICT — earlier than most of Asia, because mornings genuinely start early here. Tet in late January or February empties the city." },
+      { question: "How is the internet in Hanoi?", answer: "Good. Viettel, Vinaphone and Mobifone all offer fast, cheap mobile data, and fibre broadband is widespread. Calls are more stable here than in much of Southeast Asia." },
+      { question: "Why do people ask my age immediately?", answer: "Vietnamese pronouns depend on relative age, so someone needs a rough idea before addressing you. In Hanoi, where formality matters more than in the south, it comes up quickly." },
+      { question: "Is Hanoi different from Ho Chi Minh City?", answer: "Noticeably — in accent, food, weather and directness. There is no location filter here, so you will meet both, and the differences are a reliable conversation." },
+      { question: "Is it free?", answer: "Entirely. No account, no subscription, no payment of any kind." },
+    ],
+    related: [
+      { slug: "video-chat-ho-chi-minh-city", label: "Ho Chi Minh City", relation: "city" },
+      { slug: "video-chat-da-nang", label: "Da Nang", relation: "city" },
+      { slug: "video-chat-jakarta", label: "Jakarta", relation: "city" },
+      { slug: "vietnamese-video-chat", label: "Vietnamese chat", relation: "language" },
+      { slug: "indonesian-video-chat", label: "Bahasa Indonesia chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-vietnam", label: "Vietnam", relation: "sibling" },
+      { slug: "video-chat-indonesia", label: "Indonesia", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-lahore",
+    kind: "city",
+    name: "Lahore",
+    parent: "Pakistan",
+    primaryKeyword: "lahore video chat",
+    title: "Lahore Video Chat — Talk to Strangers in Lahore Free",
+    description:
+      "Random video chat with people in Lahore. Free, anonymous, no signup — talk in Punjabi, Urdu or English.",
+    tagline:
+      "Video chat with Lahore. Pakistan's cultural capital, its food, and its unmatched confidence about both — free and anonymous.",
+    languages: ["پنجابی (Punjabi)", "اردو (Urdu)", "English"],
+    peakHours: "21:30 – 01:30 PKT",
+    timezone: "Asia/Karachi",
+    weight: 0.9,
+    places: ["Gulberg", "Model Town", "Anarkali", "Walled City", "DHA", "Johar Town"],
+    talkingPoints: [
+      "Food, which Lahore considers itself unmatched at, and specifically the Walled City at night",
+      "Basant, the spring kite festival, banned for years and still argued about with real feeling",
+      "The saying Lahore Lahore Aye — roughly 'Lahore is Lahore' — which locals deploy as a complete argument",
+      "Punjabi, which is spoken far more freely here than in Karachi and carries a lot of the humour",
+      "Winter smog, which has become as bad as Delhi's and which nobody has a solution for",
+    ],
+    connectivityNote:
+      "Lahore has strong 4G on Jazz, Zong and Telenor with 5G appearing in newer areas, and fibre broadband is more common here than in most of Pakistan. Connections are generally more stable than Karachi's.",
+    localNote:
+      "Lahore comes online later than Karachi, from about 21:30 PKT, and stays busy past one in the morning — the city genuinely eats late and sleeps later. During Ramadan the pattern shifts hours further back.",
+    safetyNote:
+      "Lahore has a large student population and correspondingly sees a lot of education and visa scams — fake consultants, fake scholarship routes, fake test-prep. None of these begin legitimately on a random video call.",
+    etiquette:
+      "Punjabi is used far more openly here than in Karachi, and switching into it even badly is received warmly. Lahoris are less formal than Islamabad and will get personal faster; that is friendliness rather than intrusion.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Lahore Lahore Aye",
+        body: "Roughly 'Lahore is Lahore' — deployed as a complete argument that requires no supporting evidence, usually about food. It captures the city's self-regard perfectly, and repeating it back to a Lahori is a reliable way to make them laugh.",
+      },
+      {
+        kind: "seasonal",
+        title: "Basant was banned and is still argued about",
+        body: "The spring kite festival was outlawed after deaths from glass-coated string. Older Lahoris describe it as the best thing the city ever had; younger ones mostly know it as a story. The generational split makes it an unusually good question.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "کی حال اے؟", meaning: "How are you? — Punjabi", say: "ki haal ae" },
+      { phrase: "چنگا", meaning: "Good / alright", say: "changa" },
+      { phrase: "سوہنا", meaning: "Lovely, beautiful — used constantly", say: "sohna" },
+      { phrase: "رب راکھا", meaning: "God keep you — a warm goodbye", say: "rab raakha" },
+    ],
+    starters: [
+      { topic: "Food", ask: "Walled City at midnight — where exactly, and what do I order?", why: "Lahoris consider this their home ground and will give you a real answer." },
+      { topic: "Basant", ask: "Do you remember Basant before the ban, or only hear about it?", why: "Splits generations, and both answers are worth hearing." },
+      { topic: "Punjabi", ask: "Do you speak Punjabi at home or only with friends?", why: "The honest answer says a lot about class and family in Lahore." },
+      { topic: "Karachi", ask: "Settle it — Lahore or Karachi biryani?", why: "You already know what a Lahori will say, and how much detail they will give." },
+    ],
+    intro: [
+      "Lahore thinks of itself as Pakistan's cultural capital and does not present this as a matter of opinion. It is the country's second largest city, the centre of Punjabi culture, and — by its own account and quite a lot of external agreement — where the food is.",
+      "Punjabi is spoken here far more openly than in Karachi, where Urdu dominates. Most people move between Punjabi, Urdu and English within a single conversation, and an outsider attempting even a little Punjabi is received warmly rather than corrected.",
+      "The city keeps late hours even by Pakistani standards. The queue fills around half past nine and stays busy past one, which fits a place where dinner regularly starts at eleven.",
+      "No signup, no phone number, nothing installed. The call runs directly between browsers and nothing is recorded.",
+    ],
+    faqs: [
+      { question: "What language do people in Lahore speak?", answer: "Punjabi far more openly than in Karachi, alongside Urdu, with English common in education and business. Most conversations move between all three without anyone deciding to switch." },
+      { question: "When is Lahore busiest?", answer: "From about 21:30 to 01:30 PKT — later than Karachi. The city eats late and sleeps later. Ramadan pushes the pattern hours further back." },
+      { question: "Does it work on Jazz and Zong in Lahore?", answer: "Yes, and on Telenor. 4G is strong with 5G in newer areas, and fibre broadband is more common here than in most of Pakistan, so calls tend to be stable." },
+      { question: "Can I talk to people in Indian Punjab from Lahore?", answer: "Yes — there is no country filter, and Punjabi is spoken on both sides of the border. These conversations tend to be memorable for exactly that reason." },
+      { question: "Is registration required?", answer: "No. No account, no phone number, no email. You open the page and you are in the queue." },
+      { question: "Can I chat without the camera?", answer: "Yes. Voice chat pairs you the same way with the camera off, and text chat needs neither camera nor microphone." },
+    ],
+    related: [
+      { slug: "video-chat-karachi", label: "Karachi", relation: "city" },
+      { slug: "video-chat-islamabad", label: "Islamabad", relation: "city" },
+      { slug: "video-chat-delhi", label: "Delhi", relation: "city" },
+      { slug: "urdu-video-chat", label: "Urdu video chat", relation: "language" },
+      { slug: "punjabi-video-chat", label: "Punjabi video chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-pakistan", label: "Pakistan", relation: "sibling" },
+      { slug: "video-chat-india", label: "India", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-turkey",
+    kind: "country",
+    name: "Turkey",
+    primaryKeyword: "video chat turkey",
+    title: "Video Chat Turkey — Talk to Turkish Strangers Free",
+    description:
+      "Free random video chat with people across Turkey. Meet strangers in Istanbul, Ankara and Izmir — no signup, no download.",
+    tagline:
+      "Free video chat with Turkey. Meet people from Istanbul to Izmir, talk in Turkish or English, and start in one tap with no account.",
+    languages: ["Türkçe (Turkish)", "English", "Kurmancî (Kurdish)"],
+    peakHours: "21:00 – 01:00 TRT",
+    timezone: "Europe/Istanbul",
+    weight: 1.7,
+    places: ["Istanbul", "Ankara", "Izmir", "Antalya", "Bursa", "Adana"],
+    talkingPoints: [
+      "Çay, which is drunk constantly and in enormous quantity, and which starts more conversations here than coffee",
+      "Football, and specifically the Galatasaray, Fenerbahçe and Beşiktaş loyalties that divide families",
+      "Turkish television drama, which is watched across the Middle East, the Balkans and Latin America",
+      "Whether Turkey is European or Asian, which people answer very differently depending on where they live",
+      "Food regionality — Gaziantep for baklava, Adana for kebab, and everyone convinced their region wins",
+    ],
+    connectivityNote:
+      "Turkcell, Vodafone and Türk Telekom provide strong 4G and expanding 5G nationally, and fibre broadband is common in the cities. Connection quality here is well above the regional average, so video generally holds full quality.",
+    localNote:
+      "Turkey keeps late hours, and the queue reflects that — busy from 21:00 TRT and holding past one. Ramadan and the weeks around it shift the whole pattern later. Istanbul dominates the pool the way Java dominates Indonesia's.",
+    safetyNote:
+      "Turkey enforces laws about insulting the state and the president actively, and prosecutions are real. That risk falls on the person in Turkey, not on you — if a conversation turns political, let them set the limits rather than pushing.",
+    etiquette:
+      "Hospitality is close to an obligation here, and abruptness reads badly — a conversation that ends without a proper goodbye is felt as rude. Abi and abla, older brother and sister, are warm ways to address someone slightly older.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Çay is the social unit of currency",
+        body: "Turkey drinks more tea per person than any other country on earth — served in tulip glasses, offered constantly, and refusing is mildly awkward. A conversation here is measured in glasses, and asking how many someone has had today is a reliable opener.",
+      },
+      {
+        kind: "diaspora",
+        title: "Millions of Turks grew up in Germany",
+        body: "Around three million people of Turkish descent live in Germany, and many move between both countries and both languages. You will meet people whose Turkish is native and whose everyday life is German, and who find the question 'where are you from' genuinely complicated.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Nasılsın?", meaning: "How are you?", say: "NA-suhl-suhn" },
+      { phrase: "Teşekkürler", meaning: "Thank you", say: "te-shek-KUR-ler" },
+      { phrase: "Çok güzel", meaning: "Very nice / beautiful", say: "chok gu-ZEL" },
+      { phrase: "Görüşürüz", meaning: "See you around", say: "gu-ru-SHU-ruz" },
+    ],
+    starters: [
+      { topic: "Çay", ask: "How many glasses of çay is a normal day for you?", why: "The number is always higher than an outsider expects, and people enjoy saying it." },
+      { topic: "Football", ask: "Galatasaray, Fenerbahçe or Beşiktaş — and did you get a choice?", why: "Usually inherited, and the answer comes with family history." },
+      { topic: "East or west", ask: "Do you think of Turkey as European or Asian?", why: "Answered very differently depending on the region, and always thoughtfully." },
+      { topic: "Food regions", ask: "Which city does your family say has the best food?", why: "Never Istanbul, and the real answer opens up where they are actually from." },
+    ],
+    intro: [
+      "Turkey sits at the crossing point of Europe and the Middle East, and that is not just geography — it shapes how people here talk about themselves, and the answer changes depending on whether you are speaking to someone in Izmir or in Diyarbakır.",
+      "It is a large, young, heavily online market with genuinely good infrastructure. Connection quality is well above the regional average, so video calls here tend to hold full quality rather than degrading, which is not true of much of Asia.",
+      "Turkish is spoken by essentially everyone, and English is common among younger urban users. Kurdish is a first language for millions in the southeast, which people are variously open or careful about depending on who is asking.",
+      "No account, no phone number, nothing to install. The call runs directly between the two browsers and is never recorded.",
+    ],
+    faqs: [
+      { question: "Do people in Turkey speak English?", answer: "Younger urban users often do, particularly in Istanbul, Izmir and Antalya. Turkish is the default with a stranger, and English proficiency drops sharply outside the cities." },
+      { question: "What time is Turkey busiest?", answer: "From about 21:00 to 01:00 TRT. Turkey keeps late hours generally, and Ramadan shifts the whole pattern later still." },
+      { question: "How good are connections in Turkey?", answer: "Well above the regional average. Turkcell, Vodafone and Türk Telekom all offer strong 4G with expanding 5G, and city fibre is widespread, so video usually holds full quality." },
+      { question: "Is random video chat legal in Turkey?", answer: "Using the service is legal and needs no registration. Turkey does block sites periodically and enforces content laws actively, so be aware that legal risk from a conversation falls on the person inside the country." },
+      { question: "Will I be matched with people outside Istanbul?", answer: "Yes, though Istanbul dominates the pool simply by population. Ankara, Izmir, Bursa and Antalya all appear regularly." },
+      { question: "Can I use voice or text instead?", answer: "Yes. Voice runs with the camera off and text needs neither camera nor microphone. All three match from the same queue." },
+    ],
+    related: [
+      { slug: "video-chat-istanbul", label: "Istanbul", relation: "city" },
+      { slug: "video-chat-ankara", label: "Ankara", relation: "city" },
+      { slug: "video-chat-izmir", label: "Izmir", relation: "city" },
+      { slug: "turkish-video-chat", label: "Turkish chat", relation: "language" },
+      { slug: "arabic-video-chat", label: "Arabic chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-pakistan", label: "Pakistan", relation: "sibling" },
+      { slug: "video-chat-nigeria", label: "Nigeria", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-nigeria",
+    kind: "country",
+    name: "Nigeria",
+    primaryKeyword: "video chat nigeria",
+    title: "Video Chat Nigeria — Talk to Nigerian Strangers Free",
+    description:
+      "Free random video chat with people across Nigeria. Meet strangers in Lagos, Abuja and Port Harcourt — no signup, English widely spoken.",
+    tagline:
+      "Free video chat with Nigeria. Meet people from Lagos to Kano, in English or Pidgin, with no account and nothing to download.",
+    languages: ["English", "Nigerian Pidgin", "Yorùbá", "Igbo", "Hausa"],
+    peakHours: "20:00 – 00:00 WAT",
+    timezone: "Africa/Lagos",
+    weight: 1.8,
+    places: ["Lagos", "Abuja", "Port Harcourt", "Kano", "Ibadan", "Benin City"],
+    talkingPoints: [
+      "Afrobeats, which went global in a decade and which Nigerians are entirely unsurprised about",
+      "Jollof rice, and the long-running argument with Ghana that nobody intends to settle",
+      "English Premier League football, followed here with more intensity than in most English cities",
+      "Nollywood, the second largest film industry in the world by output",
+      "Lagos hustle — the specific pride and exhaustion of working in that city",
+    ],
+    connectivityNote:
+      "MTN, Airtel and Glo carry nearly all traffic and mobile data is the norm; fixed broadband is rare outside business use. Data is relatively expensive here, which makes voice chat at roughly 15 MB an hour genuinely useful rather than a fallback.",
+    localNote:
+      "Nigeria's queue fills from about 20:00 WAT and holds to midnight. Power supply affects it more than in most markets — a stretch without electricity thins the queue for hours, which is why people often prefer voice or text late at night.",
+    safetyNote:
+      "Nigerians are far more often the target of scams than the source, despite the stereotype, and romance and investment approaches are common in both directions here. Any conversation that moves toward money, crypto, or another app is worth ending immediately.",
+    etiquette:
+      "Age is respected explicitly — sir, ma, and 'aunty' or 'uncle' for anyone older are normal rather than formal. Pidgin signals warmth and is not broken English; treating it as such is noticed and lands badly.",
+    spotlights: [
+      {
+        kind: "infra",
+        title: "Power supply shapes the queue",
+        body: "Grid electricity is unreliable enough that a bad stretch visibly thins the pool for hours. It is also why voice and text are proportionally more popular here than video — they survive a weak connection and a phone that has to last until the power returns.",
+      },
+      {
+        kind: "culture",
+        title: "Nollywood is the second biggest film industry on earth",
+        body: "By number of films produced, Nigeria sits behind only India. Most of it never reaches Western cinemas, which means asking someone what they are watching gets you an entire industry you have never heard of.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "How far?", meaning: "What's up? — Pidgin, the standard greeting", say: "how FAR" },
+      { phrase: "No wahala", meaning: "No problem", say: "no wa-HA-la" },
+      { phrase: "Abeg", meaning: "Please / come on", say: "a-BEG" },
+      { phrase: "Wetin dey happen?", meaning: "What's going on?", say: "WE-tin day HAP-pen" },
+    ],
+    starters: [
+      { topic: "Afrobeats", ask: "Who are you listening to that hasn't gone international yet?", why: "Gets you past the three artists everyone outside Nigeria names." },
+      { topic: "Jollof", ask: "Nigeria or Ghana — and how confident are you?", why: "Extremely confident, always, and the delivery is the fun part." },
+      { topic: "Football", ask: "Which Premier League club, and how did you end up with them?", why: "Usually a childhood story about a specific match." },
+      { topic: "City", ask: "Lagos or Abuja — and would you move?", why: "A real trade-off between opportunity and sanity that people discuss frankly." },
+    ],
+    intro: [
+      "Nigeria is Africa's largest country by population and one of the most online, with a young median age and near-universal mobile internet in the cities. English is an official language, which makes it one of the easiest markets in the world to hold a conversation in without any shared second language.",
+      "Nigerian Pidgin sits alongside it and does a lot of the social work — it signals warmth and informality in a way standard English does not. It is a language in its own right rather than broken English, and treating it as the latter is noticed immediately.",
+      "One practical thing shapes the queue here more than anywhere else: power. Electricity supply is unreliable enough that a bad stretch visibly thins the pool for hours, and it is part of why voice and text chat are proportionally more popular here than video.",
+      "No account, no phone number, nothing installed. The call connects browser to browser and is never recorded.",
+    ],
+    faqs: [
+      { question: "Do Nigerians on video chat speak English?", answer: "Yes — English is an official language and the medium of education, so conversations can happen entirely in English. You will also hear Pidgin, which is a distinct language rather than broken English." },
+      { question: "What time is Nigeria busiest?", answer: "From about 20:00 to midnight WAT. Power supply affects this more than in most markets — an outage thins the queue for hours at a time." },
+      { question: "Does it work on MTN and Airtel?", answer: "Yes, and on Glo. Mobile data is how nearly everyone connects. Data is relatively expensive here, so voice chat at around 15 MB an hour is a genuinely practical alternative to video's 250." },
+      { question: "What is Nigerian Pidgin?", answer: "An English-based creole spoken widely across the country as a language of its own, not a broken form of English. It signals warmth and informality, and using a little of it is received well." },
+      { question: "Is it free?", answer: "Yes. No account, no subscription, no payment. Your data is the only cost, which is worth knowing given Nigerian data prices." },
+      { question: "Can I chat without using much data?", answer: "Yes — voice chat uses roughly 15 MB an hour against 250 for video, and text chat uses almost nothing. Both match from the same pool of people." },
+    ],
+    related: [
+      { slug: "video-chat-lagos", label: "Lagos", relation: "city" },
+      { slug: "video-chat-abuja", label: "Abuja", relation: "city" },
+      { slug: "video-chat-port-harcourt", label: "Port Harcourt", relation: "city" },
+      { slug: "yoruba-video-chat", label: "Yorùbá chat", relation: "language" },
+      { slug: "hausa-video-chat", label: "Hausa chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-turkey", label: "Turkey", relation: "sibling" },
+      { slug: "video-chat-india", label: "India", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-russia",
+    kind: "country",
+    name: "Russia",
+    primaryKeyword: "video chat russia",
+    title: "Video Chat Russia — Talk to Russian Strangers Free",
+    description:
+      "Free random video chat with people across Russia. Meet strangers in Moscow, St Petersburg and beyond — no signup, no download.",
+    tagline:
+      "Free video chat with Russia. Meet people across eleven time zones, talk in Russian or English, and start with no account.",
+    languages: ["Русский (Russian)", "English", "Татарча (Tatar)"],
+    peakHours: "21:00 – 01:00 MSK",
+    timezone: "Europe/Moscow",
+    weight: 1.9,
+    places: ["Moscow", "St Petersburg", "Novosibirsk", "Yekaterinburg", "Kazan", "Nizhny Novgorod"],
+    talkingPoints: [
+      "Books, seriously — reading is a mainstream social habit here in a way it is not in most countries",
+      "Dacha season, and the fact that a large share of city people disappear to one every summer weekend",
+      "Winter as a shared subject: not complaining about it, but the specific logistics of living in it",
+      "Food that is genuinely regional — Georgian, Uzbek and Tatar cooking are everyday, not exotic",
+      "Chess, hockey and figure skating, followed closely enough that casual knowledge is assumed",
+    ],
+    connectivityNote:
+      "Russia has unusually cheap and fast mobile data on MTS, Beeline and Megafon, and fibre broadband is common in cities. Connection quality in the west is comparable to Western Europe; the far east and rural north are weaker.",
+    localNote:
+      "Russia spans eleven time zones, but the queue overwhelmingly reflects Moscow and St Petersburg where most of the population lives. Matching at 21:00 MSK reaches the west; the Siberian and far-eastern evening happens while Moscow sleeps.",
+    safetyNote:
+      "Russian law restricts a wide range of online speech, and enforcement is real. The risk falls entirely on the person inside the country, not on you — if a conversation moves toward politics or the war, let them decide whether to continue, and do not press.",
+    etiquette:
+      "Russians smile less at strangers than Western Europeans do, and it is not coldness — an unearned smile reads as insincere here. Warmth comes a few minutes in rather than immediately, and directness is normal rather than rude.",
+    spotlights: [
+      {
+        kind: "seasonal",
+        title: "Winter genuinely changes the queue",
+        body: "Moscow gets about seven hours of daylight in December against seventeen in June, and the queue reflects it — winter evenings are noticeably busier and start earlier. Summer is the opposite: weekends empty out to dachas from Friday afternoon.",
+      },
+      {
+        kind: "legal",
+        title: "What not to push on",
+        body: "A range of online speech carries legal risk here, and it lands on the person in Russia rather than on you. If politics comes up, follow their lead and drop it when they change the subject. Treating someone's caution as evasiveness is both unfair and unsafe for them.",
+      },
+      {
+        kind: "time",
+        title: "Eleven time zones, one peak",
+        body: "Russia stretches from Kaliningrad to Kamchatka, but the queue follows Moscow because that is where the population is. Vladivostok's evening happens at 11:00 MSK — if you want the far east, that is when to look.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Как дела?", meaning: "How are things?", say: "kak dee-LA" },
+      { phrase: "Понятно", meaning: "I see / got it", say: "pan-YAT-na" },
+      { phrase: "Класс!", meaning: "Great / cool", say: "klass" },
+      { phrase: "Давай", meaning: "Alright then — also used as goodbye", say: "da-VIE" },
+    ],
+    starters: [
+      { topic: "Books", ask: "What are you reading at the moment?", why: "A normal question here rather than a pretentious one, and you will get a real answer." },
+      { topic: "Dacha", ask: "Does your family have a dacha, and do you actually like going?", why: "Nearly universal, and the honest answer is often 'not really', which is funnier." },
+      { topic: "Winter", ask: "What's the coldest you've actually been outside in?", why: "Numbers get competitive quickly and nobody minds." },
+      { topic: "Food", ask: "Georgian, Uzbek or Russian — what does your family cook most?", why: "Reveals region and background without asking about either directly." },
+    ],
+    intro: [
+      "Russia is one of the largest random-chat markets outside Asia, with cheap fast internet, a highly online population, and long winters that keep people indoors for months at a time. The queue here is reliably busy in a way that smaller European markets are not.",
+      "Russian is spoken by essentially everyone, and English proficiency is lower than in Northern or Western Europe — younger users in Moscow and St Petersburg often speak it well, but outside the two capitals you should not assume it.",
+      "The thing most first-time visitors misread is the lack of smiling. A Russian stranger not smiling at you is not being cold; a smile given without reason reads as insincere here. Warmth arrives a few minutes into a conversation rather than at the start of it, and when it does it tends to be genuine.",
+      "No account, no phone number, nothing to install. The call connects directly between browsers and is never recorded.",
+    ],
+    faqs: [
+      { question: "Do people in Russia speak English on video chat?", answer: "Younger users in Moscow and St Petersburg often do. Outside the two capitals it is much less common, and Russian is the default with a stranger." },
+      { question: "What time is Russia busiest?", answer: "From about 21:00 to 01:00 MSK. The country spans eleven time zones, but the queue follows Moscow and St Petersburg because that is where most people are." },
+      { question: "How good is the internet in Russia?", answer: "Better than most people expect. Mobile data on MTS, Beeline and Megafon is cheap and fast, and city fibre is widespread. The far east and rural north are weaker." },
+      { question: "Why does nobody smile?", answer: "Smiling at a stranger without a reason is read as insincere in Russia rather than friendly. It is a cultural difference, not hostility, and warmth usually shows up a few minutes into a conversation." },
+      { question: "Is random video chat legal in Russia?", answer: "Using the service is legal. Russian law does restrict a wide range of online speech, though, and that risk falls on the person inside the country — worth remembering if a conversation turns political." },
+      { question: "Can I use voice or text instead?", answer: "Yes. Voice runs with the camera off and text needs neither camera nor microphone. All three match from the same pool." },
+    ],
+    related: [
+      { slug: "video-chat-moscow", label: "Moscow", relation: "city" },
+      { slug: "video-chat-saint-petersburg", label: "St Petersburg", relation: "city" },
+      { slug: "video-chat-novosibirsk", label: "Novosibirsk", relation: "city" },
+      { slug: "russian-video-chat", label: "Russian chat", relation: "language" },
+      { slug: "turkish-video-chat", label: "Turkish chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-turkey", label: "Turkey", relation: "sibling" },
+      { slug: "video-chat-germany", label: "Germany", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-germany",
+    kind: "country",
+    name: "Germany",
+    primaryKeyword: "video chat germany",
+    title: "Video Chat Germany — Talk to German Strangers Free",
+    description:
+      "Free random video chat with people across Germany. Meet strangers in Berlin, Munich and Hamburg — no signup, English widely spoken.",
+    tagline:
+      "Free video chat with Germany. Meet people from Berlin to Munich, in German or English, with no account and nothing to install.",
+    languages: ["Deutsch (German)", "English", "Türkçe (Turkish)", "Русский (Russian)"],
+    peakHours: "20:00 – 23:30 CET",
+    timezone: "Europe/Berlin",
+    weight: 1.2,
+    places: ["Berlin", "Munich", "Hamburg", "Cologne", "Frankfurt", "Stuttgart"],
+    talkingPoints: [
+      "Football, and the fact that club loyalty here is regional in a way that surprises outsiders",
+      "Bread, genuinely — Germans abroad complain about it more than about anything else",
+      "The regional divide, which is not only east and west but Bavaria versus everyone else",
+      "Bureaucracy, which Germans complain about with a specificity that is its own art form",
+      "Sunday closing, which shapes the whole week and which nobody wants changed as much as visitors assume",
+    ],
+    connectivityNote:
+      "Germany has good fixed broadband but famously patchy mobile coverage for a wealthy country, particularly on trains and outside cities. Deutsche Telekom, Vodafone and O2 all have dead zones. Adaptive bitrate matters more here than the country's wealth would suggest.",
+    localNote:
+      "Germany's queue peaks early and ends early — busy from 20:00 CET and thinning by half eleven. Feierabend, the hard line between work and evening, is real, and so is the general expectation of an early start.",
+    safetyNote:
+      "Germany enforces strict privacy law, and people here are noticeably more careful about being recorded than in most markets. Asking to screenshot or record, even as a joke, will end a conversation quickly — and rightly.",
+    etiquette:
+      "Directness is not rudeness here; a flat disagreement is normal and does not mean the conversation is going badly. The formal Sie against informal du matters less with strangers online, where du is generally fine among peers.",
+    spotlights: [
+      {
+        kind: "diaspora",
+        title: "You will meet German-Turks, and it matters",
+        body: "Germany has the largest Turkish community outside Turkey — around three million people. Many are second or third generation, speak both languages natively, and have a genuinely different relationship to both countries than either passport suggests. Assuming someone is 'from' one or the other is the fastest way to get it wrong.",
+      },
+      {
+        kind: "infra",
+        title: "Rich country, patchy mobile signal",
+        body: "German mobile coverage is poor for a country of its wealth, and it is a standing national joke. Dead zones on trains and outside cities are normal. If a German user's video degrades, the network is the likely cause rather than their device.",
+      },
+      {
+        kind: "culture",
+        title: "Feierabend is a real boundary",
+        body: "The line between work and evening is treated seriously here, and it shapes when people are online. The queue fills sharply after six and empties earlier than almost anywhere else in Europe — Germans are genuinely asleep by midnight on a weeknight.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Wie geht's?", meaning: "How's it going?", say: "vee GAYTS" },
+      { phrase: "Alles klar", meaning: "All good / understood", say: "AH-les klar" },
+      { phrase: "Doch!", meaning: "Yes it is! — contradicting a negative, no English equivalent", say: "dokh" },
+      { phrase: "Tschüss", meaning: "Bye", say: "chuss" },
+    ],
+    starters: [
+      { topic: "Regions", ask: "Where in Germany, and what do the other regions get wrong about it?", why: "Regional identity runs deeper here than the national one, and people enjoy the question." },
+      { topic: "Bureaucracy", ask: "What's the most absurd piece of paperwork you've had to do?", why: "A reliable national sport, and the stories are genuinely good." },
+      { topic: "Doch", ask: "Explain 'doch' to me — English doesn't have it.", why: "Germans love being asked this and the explanation always turns into a conversation." },
+      { topic: "Sunday", ask: "Would you actually want shops open on Sunday?", why: "Most say no, which surprises people who assume it is an inconvenience." },
+    ],
+    intro: [
+      "Germany is Europe's largest market for this kind of thing, and one of the easiest to talk in — English proficiency is high, particularly among anyone under forty, and most people will switch without being asked.",
+      "It is also less culturally uniform than outsiders expect. Regional identity often runs deeper than national identity, the east and west still differ in ways people will discuss frankly, and Bavaria considers itself a separate proposition from the rest of the country.",
+      "The other thing worth knowing is timing. Germany comes online early and goes offline early — the queue fills after six and thins by half eleven, which is unusually early for Europe and reflects both a real work-life boundary and genuinely early mornings.",
+      "No account, no phone number, nothing installed. The call runs directly between browsers and is never recorded.",
+    ],
+    faqs: [
+      { question: "Do Germans speak English on video chat?", answer: "Very widely, particularly under forty, and most people switch without being asked. German is the default opener but the language barrier here is lower than almost anywhere in Europe." },
+      { question: "What time is Germany busiest?", answer: "From about 20:00 to 23:30 CET — early by European standards. The work-evening boundary is taken seriously and mornings start early." },
+      { question: "Why is the connection sometimes bad?", answer: "German mobile coverage is genuinely poor for a country of its wealth, and dead zones on trains and outside cities are normal. Fixed broadband is good; mobile is the weak point." },
+      { question: "Will I be matched with Turkish speakers in Germany?", answer: "Often. Germany has the largest Turkish community outside Turkey, around three million people, many second or third generation and natively bilingual." },
+      { question: "Is directness rude?", answer: "No. A flat disagreement is normal here and does not mean the conversation is going badly. Reading it as hostility is the most common misunderstanding." },
+      { question: "Is it free?", answer: "Entirely. No account, no subscription, no payment of any kind." },
+    ],
+    related: [
+      { slug: "video-chat-berlin", label: "Berlin", relation: "city" },
+      { slug: "video-chat-munich", label: "Munich", relation: "city" },
+      { slug: "video-chat-hamburg", label: "Hamburg", relation: "city" },
+      { slug: "german-video-chat", label: "German chat", relation: "language" },
+      { slug: "turkish-video-chat", label: "Turkish chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-russia", label: "Russia", relation: "sibling" },
+      { slug: "video-chat-turkey", label: "Turkey", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-brazil",
+    kind: "country",
+    name: "Brazil",
+    primaryKeyword: "video chat brazil",
+    title: "Video Chat Brazil — Talk to Brazilian Strangers Free",
+    description:
+      "Free random video chat with people across Brazil. Meet strangers in São Paulo, Rio and Salvador — no signup, no download.",
+    tagline:
+      "Free video chat with Brazil. Meet people from São Paulo to Salvador, in Portuguese or English, with no account and nothing to install.",
+    languages: ["Português (Portuguese)", "English", "Español"],
+    peakHours: "21:00 – 01:00 BRT",
+    timezone: "America/Sao_Paulo",
+    weight: 2.0,
+    places: ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Salvador", "Brasília", "Recife"],
+    talkingPoints: [
+      "Football, which needs no introduction, though the club rivalries are more interesting than the national team",
+      "Regional identity — the northeast, the south and São Paulo consider themselves genuinely different countries",
+      "Music that changes completely by region: samba in Rio, forró in the northeast, funk in the favelas of both",
+      "Churrasco, and the fact that Brazilians will be politely appalled by how other countries do barbecue",
+      "How much of the country is nothing like the postcard, which Brazilians are quick and generous about explaining",
+    ],
+    connectivityNote:
+      "Vivo, Claro and TIM cover the cities well with 4G and expanding 5G, and fibre is common in São Paulo and Rio. Coverage thins substantially in the north and in the interior, where mobile data is both slower and more expensive.",
+    localNote:
+      "Brazil runs late. The queue fills around 21:00 BRT and holds past one in the morning, later than most of the Americas. It also spans four time zones, though the population and the queue both concentrate in the southeast.",
+    safetyNote:
+      "Brazil sees a high rate of romance-based fraud in both directions, and the approaches are patient — several friendly conversations before anything is asked for. Any move toward money, crypto, or continuing on another app is the tell.",
+    etiquette:
+      "Physical warmth translates online as conversational warmth: brevity reads as coldness here. Expect to be asked personal questions early, which is friendliness rather than intrusion, and expect the conversation to run long if it goes well.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Portuguese, not Spanish",
+        body: "This is the single most common thing outsiders get wrong, and it lands somewhere between tiring and insulting. Brazilians largely understand Spanish and will not usually be rude about it, but opening in Spanish marks you immediately. Even a badly pronounced 'oi, tudo bem?' goes much further.",
+      },
+      {
+        kind: "seasonal",
+        title: "Carnival reorganises the country",
+        body: "For about a week in February or March, normal patterns stop applying. The queue thins during the day and swells late at night, and conversations are shorter and louder. It is a genuinely different experience of the same service, and worth knowing before you assume something is broken.",
+      },
+      {
+        kind: "time",
+        title: "The Southern Hemisphere flips the seasons",
+        body: "Brazilian summer is December to March, so the quiet-outdoors months are the reverse of Europe and North America. If matching feels thin in January, that is beach season rather than a problem with the queue.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Tudo bem?", meaning: "All good? — the standard greeting", say: "TOO-doo beng" },
+      { phrase: "Valeu", meaning: "Thanks / cheers — casual", say: "va-LEH-oo" },
+      { phrase: "Legal", meaning: "Cool / nice", say: "lay-GOW" },
+      { phrase: "Falou", meaning: "Alright then — used as goodbye", say: "fa-LOH" },
+    ],
+    starters: [
+      { topic: "Region", ask: "Which state, and what do people from São Paulo get wrong about it?", why: "Regional pride is strong and the answer is never dull." },
+      { topic: "Music", ask: "What are you listening to that isn't sertanejo or funk?", why: "Gets past the two genres outsiders name and into something real." },
+      { topic: "Football", ask: "Which club, and did you inherit it or choose it?", why: "Club loyalty is more revealing than the national team here." },
+      { topic: "Churrasco", ask: "What would you say if I told you we barbecue with sauce?", why: "The reaction is the point, and it is always worth it." },
+    ],
+    intro: [
+      "Brazil is the largest market in South America and one of the most socially online countries anywhere — Brazilians consistently rank among the heaviest users of messaging and social platforms in the world, and it shows in how readily people here start conversations with strangers.",
+      "Portuguese is the language, and this matters more than it sounds: opening in Spanish is the most common mistake outsiders make, and while Brazilians are usually gracious about it, it marks you instantly. A few words of Portuguese changes the temperature of a conversation immediately.",
+      "The country is also far less uniform than it appears from outside. The northeast, the south and the southeast differ in accent, music, food and self-image strongly enough that Brazilians describe them as separate countries, and they will explain the differences enthusiastically.",
+      "No account, no phone number, nothing installed. The call runs directly between browsers and is never recorded.",
+    ],
+    faqs: [
+      { question: "Do Brazilians speak Spanish?", answer: "Many understand it, but Portuguese is the language and opening in Spanish is the most common mistake outsiders make. Even a little Portuguese is received warmly." },
+      { question: "What time is Brazil busiest?", answer: "From about 21:00 to 01:00 BRT — late by the standards of the Americas. The country spans four time zones but the queue concentrates in the southeast." },
+      { question: "Do Brazilians on video chat speak English?", answer: "Some, particularly younger users in São Paulo and Rio, but proficiency is lower than in Europe. Portuguese is the practical default." },
+      { question: "How is the internet in Brazil?", answer: "Good in the cities on Vivo, Claro and TIM, with fibre common in São Paulo and Rio. Coverage thins substantially in the north and the interior, where data is slower and pricier." },
+      { question: "Why does it feel quiet in January?", answer: "Southern Hemisphere summer. December to March is beach season, so the pattern is the reverse of Europe and North America — quieter days, later nights." },
+      { question: "Is it free?", answer: "Completely. No account, no subscription, no credits. Only your data costs anything." },
+    ],
+    related: [
+      { slug: "video-chat-sao-paulo", label: "São Paulo", relation: "city" },
+      { slug: "video-chat-rio-de-janeiro", label: "Rio de Janeiro", relation: "city" },
+      { slug: "video-chat-salvador", label: "Salvador", relation: "city" },
+      { slug: "portuguese-video-chat", label: "Portuguese chat", relation: "language" },
+      { slug: "spanish-video-chat", label: "Spanish chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-mexico", label: "Mexico", relation: "sibling" },
+      { slug: "video-chat-united-states", label: "the United States", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-mexico",
+    kind: "country",
+    name: "Mexico",
+    primaryKeyword: "video chat mexico",
+    title: "Video Chat Mexico — Talk to Mexican Strangers Free",
+    description:
+      "Free random video chat with people across Mexico. Meet strangers in Mexico City, Guadalajara and Monterrey — no signup, no app.",
+    tagline:
+      "Free video chat with Mexico. Meet people from CDMX to Monterrey, in Spanish or English, with no account and nothing to download.",
+    languages: ["Español (Spanish)", "English", "Náhuatl", "Maya"],
+    peakHours: "21:00 – 00:30 CST",
+    timezone: "America/Mexico_City",
+    weight: 1.6,
+    places: ["Mexico City", "Guadalajara", "Monterrey", "Puebla", "Tijuana", "Mérida"],
+    talkingPoints: [
+      "Food, and specifically that what the rest of the world calls Mexican food is mostly not",
+      "Regional rivalry — chilangos, tapatíos and regiomontanos all have firm views about each other",
+      "Lucha libre, which is genuinely followed rather than a novelty",
+      "Día de Muertos, and how differently it is understood inside Mexico versus outside it",
+      "Music that spans mariachi, banda, corridos tumbados and a huge indie scene",
+    ],
+    connectivityNote:
+      "Telcel dominates, with AT&T and Movistar behind it. Coverage is strong across the centre and north and thinner in the south and rural areas. Mobile data is the norm, and it is not especially cheap, so voice chat is a practical alternative.",
+    localNote:
+      "Mexico's queue fills around 21:00 CST and thins by half past midnight. The country spans several time zones, and the northern border states run on US schedules more than on Mexico City's, which shifts when they appear.",
+    safetyNote:
+      "Extortion scams built on personal details are a real pattern here, and they work by assembling small facts across a friendly conversation — your city, your school, a relative's name. Withholding those is more important in this market than in most.",
+    etiquette:
+      "Formality is warmer here than in Spain: usted with anyone older is normal and appreciated. Diminutives — ahorita, poquito — soften almost everything, and their vagueness about time is genuine rather than evasive.",
+    spotlights: [
+      {
+        kind: "diaspora",
+        title: "The other side of the border is family",
+        body: "Around 37 million people in the United States are of Mexican origin, and a very large share of Mexicans have close family there. Matching into Mexico often means talking to someone whose brother or mother is in Chicago or Los Angeles, and video calling is already how they stay in touch — which makes this a market unusually comfortable with the format.",
+      },
+      {
+        kind: "time",
+        title: "The north runs on US time",
+        body: "Tijuana, Monterrey and the border states work to schedules set by trade with the United States rather than by Mexico City. They come online earlier and are more likely to be around at hours when the centre of the country is asleep.",
+      },
+      {
+        kind: "culture",
+        title: "Ahorita does not mean now",
+        body: "It is the diminutive of ahora, 'now', and it can mean anything from five minutes to never. It is not evasiveness — it is a genuine feature of how time is discussed, and taking it literally is the classic outsider mistake.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "¿Qué onda?", meaning: "What's up? — casual and very Mexican", say: "keh ON-da" },
+      { phrase: "Órale", meaning: "Wow / alright / let's go — depends entirely on tone", say: "OH-ra-leh" },
+      { phrase: "Ahorita", meaning: "In a bit — famously elastic", say: "ah-oh-REE-ta" },
+      { phrase: "Nos vemos", meaning: "See you", say: "nos VEH-mos" },
+    ],
+    starters: [
+      { topic: "Food", ask: "What's a dish from your state that nobody outside Mexico knows?", why: "Opens up real regional cooking rather than the tacos-and-burritos assumption." },
+      { topic: "Cities", ask: "CDMX, Guadalajara or Monterrey — and be honest about why?", why: "The rivalry is real and the reasoning is usually funny." },
+      { topic: "Family abroad", ask: "Do you have family on the other side?", why: "Very often yes, and it is a subject people talk about openly." },
+      { topic: "Ahorita", ask: "How long is ahorita, actually?", why: "Nobody can answer this and everybody enjoys trying." },
+    ],
+    intro: [
+      "Mexico is the largest Spanish-speaking country in the world by population and one of the most active online markets in the Americas. The queue here is reliably busy through the evening and the conversations tend to be warm and unhurried.",
+      "Spanish is the language, though Mexican Spanish differs enough from Spain's that people notice immediately which one you learned. English is common in the north, in tourist areas and among younger urban users, and less so elsewhere.",
+      "One thing shapes this market more than any other: the closeness of the United States. Around 37 million people there are of Mexican origin, most Mexicans have family across the border, and video calling is already a normal part of family life as a result. It makes this an unusually comfortable market for the format.",
+      "No account, no phone number, nothing to install. The call runs browser to browser and is never recorded.",
+    ],
+    faqs: [
+      { question: "Do people in Mexico speak English?", answer: "Commonly in the north, in tourist areas and among younger urban users. Spanish is the practical default, and Mexican Spanish differs enough from Spain's that people will notice which you learned." },
+      { question: "What time is Mexico busiest?", answer: "From about 21:00 to 00:30 CST. The northern border states run closer to US schedules, so they appear earlier and stay later than the centre." },
+      { question: "How is the connection in Mexico?", answer: "Telcel dominates with good coverage across the centre and north; the south and rural areas are thinner. Data is not especially cheap, so voice chat at roughly 15 MB an hour is a genuine alternative." },
+      { question: "What does ahorita mean?", answer: "Literally the diminutive of 'now', but in practice anything from five minutes to never. It is a real feature of how time is discussed here rather than evasiveness." },
+      { question: "Will I meet Mexican-Americans too?", answer: "Frequently — there is no country filter, and the connection between the two countries is close enough that families are split across it. Many conversations end up being about exactly that." },
+      { question: "Is it free?", answer: "Yes. No account, no subscription, no payment. Only your data costs anything." },
+    ],
+    related: [
+      { slug: "video-chat-mexico-city", label: "Mexico City", relation: "city" },
+      { slug: "video-chat-guadalajara", label: "Guadalajara", relation: "city" },
+      { slug: "video-chat-monterrey", label: "Monterrey", relation: "city" },
+      { slug: "spanish-video-chat", label: "Spanish chat", relation: "language" },
+      { slug: "portuguese-video-chat", label: "Portuguese chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-united-states", label: "the United States", relation: "sibling" },
+      { slug: "video-chat-brazil", label: "Brazil", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-united-states",
+    kind: "country",
+    name: "the United States",
+    primaryKeyword: "video chat usa",
+    title: "Video Chat USA — Talk to American Strangers Free",
+    description:
+      "Free random video chat with people across the United States. Meet strangers in New York, LA and Chicago — no signup, no download.",
+    tagline:
+      "Free video chat with the United States. Four time zones, one queue, and no account — start talking to someone new in a tap.",
+    languages: ["English", "Español (Spanish)", "中文 (Chinese)"],
+    peakHours: "21:00 – 02:00 ET",
+    timezone: "America/New_York",
+    weight: 2.4,
+    places: ["New York", "Los Angeles", "Chicago", "Houston", "Atlanta", "Seattle"],
+    talkingPoints: [
+      "Where someone is from, which in the US means a state and usually a specific relationship to it",
+      "Regional food that outsiders never hear about — barbecue styles, green chile, Midwestern hotdish",
+      "College sport, which is followed with an intensity that baffles most of the world",
+      "How far apart everything is, and the road trips that result",
+      "Local news and weather, which Americans discuss with strangers more readily than most nationalities",
+    ],
+    connectivityNote:
+      "Coverage is generally strong on Verizon, AT&T and T-Mobile, with widespread 5G and home broadband. Rural coverage is patchier than the country's wealth suggests. Data caps are common enough that voice chat is a real consideration for some users.",
+    localNote:
+      "The US spans four mainland time zones, so its peak is a rolling three-hour band rather than a single window. The queue is busiest from 21:00 ET, when the east coast evening overlaps with the west coast's late afternoon, and it does not fully empty until around 02:00 ET.",
+    safetyNote:
+      "Sextortion targeting young men is a well-documented and growing pattern on platforms like this one in the US. It works by moving to another app, getting explicit material, then threatening to send it to contacts. Never move a conversation off the platform at a stranger's suggestion, and never send anything you would not want forwarded.",
+    etiquette:
+      "Small talk with strangers is normal and expected here rather than intrusive, and silence reads as awkwardness. Americans tend to be enthusiastic early — that is politeness, not necessarily a signal that the conversation is going unusually well.",
+    spotlights: [
+      {
+        kind: "time",
+        title: "Four time zones, a rolling peak",
+        body: "There is no single American evening. The queue starts filling with the east coast at 21:00 ET, and by the time New York goes quiet at midnight, California is only reaching its own peak. That three-hour band is why the US pool stays busy longer than any other single country.",
+      },
+      {
+        kind: "culture",
+        title: "Late night is the real market",
+        body: "The busiest hours here are later than most countries and skew heavily toward people who are up alone. That shapes the conversations: they tend to be longer, more candid, and more likely to be about something real than the small talk of an early evening.",
+      },
+      {
+        kind: "legal",
+        title: "State laws differ on recording",
+        body: "Some US states require both parties to consent to a recording, others only one. Vidibro never records anything, but this is worth knowing if the other person mentions recording — the legal position genuinely varies by where they are sitting.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "What's up?", meaning: "A greeting, not usually a real question", say: "wuts up" },
+      { phrase: "For sure", meaning: "Agreement, or polite non-committal — tone decides", say: "fer SHUR" },
+      { phrase: "No worries", meaning: "It's fine / don't apologise", say: "no WUR-eez" },
+      { phrase: "Take care", meaning: "Warm sign-off", say: "tayk KAIR" },
+    ],
+    starters: [
+      { topic: "Where from", ask: "Which state, and do you still like it there?", why: "The second half is what makes this interesting rather than a formality." },
+      { topic: "Food", ask: "What's a food from your state that nobody else has heard of?", why: "Regional American food is far stranger and better than the exports suggest." },
+      { topic: "Distance", ask: "What's the longest drive you've done in one go?", why: "The numbers astonish people from smaller countries, and Americans enjoy that." },
+      { topic: "Late night", ask: "Why are you up right now?", why: "At 2am this is a real question and often gets a real answer." },
+    ],
+    intro: [
+      "The United States is the single largest English-speaking market for random chat, and its queue behaves differently from anywhere else because the country covers four mainland time zones. There is no single American evening — the peak rolls westward across three hours.",
+      "That has a practical consequence: the US pool stays busy for longer than any other individual country. It starts filling on the east coast around nine and does not fully empty until two in the morning eastern time, by which point California is only just winding down.",
+      "The late-night hours are the interesting ones. The people online at 2am are disproportionately alone and awake by choice, and the conversations reflect that — longer, more candid, and less like small talk than the early evening.",
+      "No account, no phone number, nothing to install. The call runs directly between browsers and is never recorded.",
+    ],
+    faqs: [
+      { question: "When is the US busiest for random video chat?", answer: "From about 21:00 to 02:00 ET. Because the country spans four time zones the peak rolls westward, which keeps the pool busier for longer than any other single country." },
+      { question: "Is random video chat legal in the US?", answer: "Yes, and no registration is required. Recording law varies by state — some require both parties to consent, others only one — which is worth knowing if the other person raises it." },
+      { question: "Will people speak Spanish too?", answer: "Frequently. Spanish is the second language of the US by a wide margin, with over 40 million speakers, and you will encounter it regularly." },
+      { question: "How is the connection?", answer: "Generally strong on Verizon, AT&T and T-Mobile with widespread 5G and home broadband. Rural coverage is patchier than the country's wealth suggests, and data caps still exist on some plans." },
+      { question: "Why does it feel different at 2am?", answer: "Because the people online then are mostly awake alone by choice rather than filling a gap in an evening. Conversations at that hour tend to be longer and more candid." },
+      { question: "Is it free?", answer: "Entirely. No account, no subscription, no credits, no premium tier." },
+    ],
+    related: [
+      { slug: "video-chat-new-york", label: "New York", relation: "city" },
+      { slug: "video-chat-los-angeles", label: "Los Angeles", relation: "city" },
+      { slug: "video-chat-chicago", label: "Chicago", relation: "city" },
+      { slug: "spanish-video-chat", label: "Spanish chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-mexico", label: "Mexico", relation: "sibling" },
+      { slug: "video-chat-brazil", label: "Brazil", relation: "sibling" },
     ],
   },
 
