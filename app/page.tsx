@@ -20,14 +20,12 @@ import { TRANSLATIONS, type LanguageCode } from "@/lib/translations";
 export default function Home() {
   const router = useRouter();
   const [lang, setLang] = useState<LanguageCode>("EN");
-  const [onlineCount, setOnlineCount] = useState(() => totalUsersCount());
+  const [onlineCount, setOnlineCount] = useState(24910);
 
   const t = TRANSLATIONS[lang] || TRANSLATIONS.EN;
 
-  // Derived from the clock rather than random-walked. The previous version
-  // moved by Math.random() * 11 - 5, so it decremented about half the time —
-  // a cumulative total that goes down between two refreshes reads as broken.
   useEffect(() => {
+    setOnlineCount(totalUsersCount());
     const id = setInterval(() => setOnlineCount(totalUsersCount()), 30_000);
     return () => clearInterval(id);
   }, []);
