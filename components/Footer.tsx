@@ -22,8 +22,8 @@ export default function Footer({ onStartVideoChat, onStartTextChat, onStartAudio
         {/* Brand Banner */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-10 border-b border-white/10">
           <div className="flex items-center gap-3">
-            <div className="btn-gradient flex h-10 w-10 items-center justify-center rounded-2xl shadow-lg">
-              <LogoMark size={20} className="text-white" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl overflow-hidden shadow-lg shadow-purple-500/25">
+              <LogoMark size={40} className="h-full w-full object-cover" />
             </div>
             <div className="flex flex-col text-left">
               <span className="text-2xl font-extrabold text-white font-mono tracking-tight">Vidibro</span>

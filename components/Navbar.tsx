@@ -64,8 +64,8 @@ export default function Navbar({
         
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="btn-gradient flex h-9 w-9 items-center justify-center rounded-xl shadow-lg shadow-purple-500/25 group-hover:scale-105 transition">
-            <LogoMark size={18} className="text-white" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl overflow-hidden shadow-lg shadow-purple-500/25 group-hover:scale-105 transition">
+            <LogoMark size={36} className="h-full w-full object-cover" />
           </div>
           <span className="text-lg sm:text-xl font-black tracking-tight text-white font-mono">
             Vidibro
