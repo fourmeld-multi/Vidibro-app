@@ -677,8 +677,8 @@ export default function VideoContainer({
 
             {/* Static Top-Left Vidibro Logo Badge */}
             <div className="absolute top-3 left-3 z-30 flex items-center gap-2 bg-black/65 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/15 shadow-xl pointer-events-none">
-              <div className="btn-gradient flex h-7 w-7 items-center justify-center rounded-xl shadow-md">
-                <LogoMark size={14} className="text-white" />
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg overflow-hidden shadow-md">
+                <LogoMark size={28} className="h-full w-full object-cover" />
               </div>
               <span className="text-xs font-bold text-white font-mono tracking-tight">Vidibro</span>
               <span className="h-3 w-px bg-white/20 mx-0.5" />

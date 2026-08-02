@@ -129,15 +129,15 @@ export type TranslationKeys = {
 
 export const TRANSLATIONS: Record<LanguageCode, TranslationKeys> = {
   EN: {
-    heroTag: "1,000s of active strangers online now",
+    heroTag: "Meet Real Strangers in 1 Click",
     heroTitle1: "Talk to Strangers by",
     heroTitleVideo: "Video",
     heroTitleVoice: "Voice",
     heroTitleText: "Text",
     heroSubtitle: "Start a free random chat by video, voice or text. Meet new people, make friends, and talk to online strangers instantly without video pressure.",
     startVideo: "Start a Video Chat",
-    startAudio: "Start an Audio Chat",
-    startText: "Talk to Stranger (Text)",
+    startAudio: "Start Voice Chat",
+    startText: "Start Text Chat",
     noSignup: "No signup, ever",
     instantMatch: "Instant match",
     freePrivate: "100% Free & Private",

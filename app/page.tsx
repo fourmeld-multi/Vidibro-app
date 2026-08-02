@@ -140,17 +140,17 @@ export default function Home() {
             </motion.button>
 
             {/* Side-by-Side Cards Grid for Mobile (Voice Chat & Text Chat) */}
-            <div className="grid grid-cols-2 gap-3 w-full sm:flex sm:w-auto">
+            <div className="grid grid-cols-2 gap-3 w-full sm:flex sm:w-auto items-stretch">
               {/* Voice Chat Button with Cyan/Blue Gradient Border */}
               <motion.button
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}
                 onClick={() => router.push("/audio-chat")}
-                className="relative p-[2px] rounded-2xl sm:rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/50 transition w-full sm:w-auto"
+                className="relative p-[1.5px] rounded-2xl sm:rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/50 transition w-full sm:w-auto flex flex-col justify-center"
               >
-                <div className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl sm:rounded-full bg-[#130835] hover:bg-[#1a0b47] px-3 sm:px-7 py-3.5 text-xs sm:text-base font-bold text-white backdrop-blur-xl transition">
-                  <PhoneCall size={16} className="text-cyan-300 animate-pulse shrink-0" />
-                  <span>{t.startAudio}</span>
+                <div className="flex h-full w-full sm:w-auto items-center justify-center gap-1.5 sm:gap-2 rounded-[14px] sm:rounded-full bg-[#130835] hover:bg-[#1a0b47] px-2 sm:px-7 py-3.5 text-[11px] sm:text-base font-bold text-white backdrop-blur-xl transition">
+                  <PhoneCall size={15} className="text-cyan-300 animate-pulse shrink-0" />
+                  <span className="whitespace-nowrap">{t.startAudio}</span>
                 </div>
               </motion.button>
 
@@ -159,11 +159,11 @@ export default function Home() {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}
                 onClick={() => router.push("/text-chat")}
-                className="relative p-[2px] rounded-2xl sm:rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-400 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/50 transition w-full sm:w-auto"
+                className="relative p-[1.5px] rounded-2xl sm:rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-400 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/50 transition w-full sm:w-auto flex flex-col justify-center"
               >
-                <div className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl sm:rounded-full bg-[#130835] hover:bg-[#1a0b47] px-3 sm:px-7 py-3.5 text-xs sm:text-base font-bold text-white backdrop-blur-xl transition">
-                  <MessageSquare size={16} className="text-pink-300 shrink-0" />
-                  <span>{t.startText}</span>
+                <div className="flex h-full w-full sm:w-auto items-center justify-center gap-1.5 sm:gap-2 rounded-[14px] sm:rounded-full bg-[#130835] hover:bg-[#1a0b47] px-2 sm:px-7 py-3.5 text-[11px] sm:text-base font-bold text-white backdrop-blur-xl transition">
+                  <MessageSquare size={15} className="text-pink-300 shrink-0" />
+                  <span className="whitespace-nowrap">{t.startText}</span>
                 </div>
               </motion.button>
             </div>

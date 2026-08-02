@@ -218,8 +218,8 @@ export default function AudioChatContainer({
       {/* Top Header Bar */}
       <header className="flex items-center justify-between border-b border-white/10 bg-[#0c0622]/90 backdrop-blur-2xl px-4 py-3 z-30">
         <div className="flex items-center gap-3">
-          <div className="btn-gradient flex h-9 w-9 items-center justify-center rounded-xl shadow-md">
-            <LogoMark size={16} className="text-white" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl overflow-hidden shadow-md">
+            <LogoMark size={36} className="h-full w-full object-cover" />
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5">
