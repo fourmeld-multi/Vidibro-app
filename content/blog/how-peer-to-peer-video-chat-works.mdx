@@ -1,0 +1,39 @@
+---
+title: "How Peer-to-Peer Video Chat Actually Works"
+slug: "how-peer-to-peer-video-chat-works"
+date: "2026-07-24"
+author: "Vidibro Team"
+category: "safety"
+tags: ["Privacy", "Anonymous Voice Chat", "Digital Safety Systems"]
+excerpt: "Peer-to-peer gets used a lot in privacy claims without explanation. What it actually means for where your video and audio go."
+---
+
+"Peer-to-peer" is one of those terms that shows up in privacy claims constantly and gets explained rarely. Here's what it actually means, in plain terms, and why it matters for a platform where you're on camera with a stranger.
+
+## The two ways a video call can work
+
+There are two fundamentally different ways to build a video call product.
+
+**Server-relayed:** your video and audio travel to the company's server first, then get forwarded to the other person. The server sits in the middle of every call, which means it's technically capable of accessing, recording, or storing that stream, whether or not it actually does.
+
+**Peer-to-peer (P2P):** your browser and the other person's browser connect directly to each other, and the video/audio stream travels straight between the two of you. No server sits in the middle of the actual call content — it's only involved in the initial handshake that helps your browsers find each other, not in anything said or shown after that connection is made.
+
+Vidibro uses the second model, built on WebRTC — the same open browser standard behind most modern video calling.
+
+## What the signaling server actually does (and doesn't do)
+
+Two browsers can't just find each other on the internet with no help — something has to introduce them first. That's what Vidibro's signaling server does: it matches you with another waiting user and helps both browsers exchange the technical details needed to open a direct connection. Once that connection is open, the signaling server's job is done. It doesn't see, store, or relay your video, audio, or messages — those travel directly between your browser and the other person's from that point on.
+
+## Why this is a genuinely different privacy model
+
+With nothing routing through a central server during the call itself, there's no video or audio "at rest" somewhere that could later be accessed, leaked, or subpoenaed after the fact — because it never existed anywhere except live, in transit, between two browsers. That's a structural property of how the connection works, not a policy promise about what a company chooses not to do with data it could technically access.
+
+## The one honest asterisk: restrictive networks
+
+Direct peer-to-peer connections aren't always possible from every network — some firewalls and NAT configurations, common on certain corporate or mobile networks, block the kind of direct connection WebRTC normally makes. In that specific case, a relay server may be used to forward the encrypted stream between the two browsers instead of a truly direct path. WebRTC encrypts media in transit by default (via SRTP), so a relay in this role forwards ciphertext it can't meaningfully inspect — but it's worth being precise: "peer-to-peer" describes the normal, common path, not an absolute guarantee for every possible network configuration.
+
+## What it doesn't protect against
+
+P2P architecture protects the *transport* of your call — where the data travels and who could intercept it in transit. It doesn't protect against the other person in the call recording their own screen, which no chat platform, P2P or otherwise, can prevent. That's a real limit worth knowing, not something P2P claims to solve.
+
+Every call on Vidibro — [video, voice, or text](/) — runs on this same model: no account needed to start, and nothing about the call routed anywhere except directly between the two people talking.

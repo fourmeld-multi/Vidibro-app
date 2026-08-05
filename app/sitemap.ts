@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { BASE_URL } from "@/lib/seo";
 import { ENTRIES } from "@/lib/directory/entries";
+import { getAllPosts, getAllCategories, getAllTags, tagToSlug } from "@/lib/blog/posts";
 
 /**
  * Every indexable URL on the site.
@@ -26,6 +27,7 @@ const STATIC_ROUTES = [
   "/camsurf-alternative",
   "/shagle-alternative",
   "/directory",
+  "/blog",
   "/faq",
   "/guidelines",
   "/privacy",
@@ -63,5 +65,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticEntries, ...directoryEntries];
+  // Same principle for the blog — generated from content/blog/*.mdx, not a
+  // hand-maintained list, so a new post can never silently miss the sitemap.
+  const blogPostEntries: MetadataRoute.Sitemap = getAllPosts().map((p) => ({
+    url: `${BASE_URL}/blog/${p.slug}`,
+    lastModified: new Date(p.date),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+  const blogCategoryEntries: MetadataRoute.Sitemap = getAllCategories().map((c) => ({
+    url: `${BASE_URL}/blog/category/${c.category}`,
+    lastModified: buildTime,
+    changeFrequency: "weekly",
+    priority: 0.5,
+  }));
+  const blogTagEntries: MetadataRoute.Sitemap = getAllTags().map((t) => ({
+    url: `${BASE_URL}/blog/tag/${tagToSlug(t.tag)}`,
+    lastModified: buildTime,
+    changeFrequency: "weekly",
+    priority: 0.4,
+  }));
+
+  return [...staticEntries, ...directoryEntries, ...blogPostEntries, ...blogCategoryEntries, ...blogTagEntries];
 }

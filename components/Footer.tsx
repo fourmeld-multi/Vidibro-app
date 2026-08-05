@@ -92,6 +92,12 @@ export default function Footer({ onStartVideoChat, onStartTextChat, onStartAudio
             <Link href="/guidelines" className="hover:text-white transition">{t.footerGuidelines}</Link>
             <Link href="/report" className="hover:text-white transition">{t.footerReportAbuse}</Link>
             <Link href="/faq" className="hover:text-white transition">{t.footerSafetyFaq}</Link>
+            {/* Not run through the translation system like its neighbors —
+                same gap /directory already has in this footer. Adding a plain
+                English link now beats shipping the blog with zero site-wide
+                nav entry point at all. */}
+            <Link href="/blog" className="hover:text-white transition">Blog</Link>
+            <Link href="/directory" className="hover:text-white transition">Directory</Link>
           </div>
 
           {/* Column 5: Legal & About */}
