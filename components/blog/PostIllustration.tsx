@@ -113,12 +113,25 @@ export default function PostIllustration({
 
       <rect width="400" height="225" fill={`url(#scrim-${id})`} />
 
-      {/* Brand mark, top-left — same chevron pair as the site logo */}
-      <g transform="translate(22 22)" opacity="0.9">
-        <path d="M0 4l5 5-5 5" fill="none" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" />
-        <path d="M20 4l-5 5 5 5" fill="none" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" />
-        <circle cx="10" cy="9" r="1.8" fill="#ffffff" />
-        <text x="30" y="13.5" fill="#ffffff" fontSize="12.5" fontWeight="800" letterSpacing="0.3">
+      {/* Brand mark, top-left. Uses the real logo rather than the hand-drawn
+          chevron glyph that used to be here (that came from an early design
+          doc and is not what the site ships).
+
+          Points at /logo-mark.png, not /logo.png: the original is an opaque
+          tile whose four rounded corners are filled white rather than
+          transparent, so on a coloured background it renders as a white box
+          around the logo. logo-mark.png is the same artwork with a proper
+          alpha channel on those corners. */}
+      <g transform="translate(20 16)">
+        <image
+          href="/logo-mark.png"
+          x="0"
+          y="0"
+          width="22"
+          height="22"
+          preserveAspectRatio="xMidYMid meet"
+        />
+        <text x="29" y="16" fill="#ffffff" fontSize="12.5" fontWeight="800" letterSpacing="0.3">
           Vidibro
         </text>
       </g>
