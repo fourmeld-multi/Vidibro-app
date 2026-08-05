@@ -2763,6 +2763,817 @@ export const ENTRIES: DirectoryEntry[] = [
   },
 
   {
+    slug: "video-chat-china",
+    kind: "country",
+    name: "China",
+    primaryKeyword: "video chat china",
+    title: "Video Chat China — Talk to Strangers Free",
+    description:
+      "Free random video chat with people from China. Talk in Mandarin or English — no signup, no download, works in any browser with a VPN.",
+    tagline:
+      "Free video chat with China. One time zone, over a billion people, and a conversation that starts with no account and no download.",
+    languages: ["中文 (Mandarin)", "粵語 (Cantonese)", "English"],
+    peakHours: "21:00 – 01:00 CST",
+    timezone: "Asia/Shanghai",
+    weight: 2.2,
+    places: ["Shanghai", "Beijing", "Guangzhou", "Shenzhen", "Chengdu", "Hangzhou"],
+    talkingPoints: [
+      "Regional food, which varies far more than the export version suggests — Sichuan heat, Cantonese dim sum, Beijing roast duck are barely the same cuisine",
+      "Mobile payment culture: cash is nearly obsolete in most cities, everything runs through WeChat Pay or Alipay",
+      "The gaokao, the national college entrance exam, which shapes a huge share of teenage years the way exams do in India and Korea",
+      "High-speed rail — China's network is the largest in the world and most people have a strong opinion on their local line",
+      "Chunyun, the Lunar New Year migration, the largest annual human movement on Earth and something almost everyone has a story about",
+    ],
+    connectivityNote:
+      "Domestic mobile networks (China Mobile, China Unicom, China Telecom) are fast and dense — 4G and 5G cover cities thoroughly. The genuine obstacle is not bandwidth: mainland China's firewall blocks most foreign platforms outright, Vidibro included, so reaching this page from within China normally requires a VPN. Traffic here skews toward diaspora communities and VPN users rather than unrestricted domestic access.",
+    localNote:
+      "Worth saying plainly: the Great Firewall blocks the great majority of non-Chinese apps and websites, and video chat platforms without a Chinese ICP license are routinely among them. If you are matched with someone in China, they are very likely using a VPN or are part of the diaspora abroad — not a sign anything is wrong on your end.",
+    safetyNote:
+      "Political topics — Taiwan, Hong Kong, Xinjiang, Tibet — are genuinely sensitive and can put the other person at real legal risk to discuss on a recorded or reported platform, not just an awkward one. Steer around them rather than testing the water.",
+    etiquette:
+      "Directness about age, job and hometown early in a conversation is normal and not considered intrusive the way it might read elsewhere. Modesty about compliments is expected — a compliment is often deflected rather than accepted, which is politeness, not disagreement.",
+    spotlights: [
+      {
+        kind: "legal",
+        title: "This page is reachable mostly through a VPN",
+        body: "China's firewall blocks the large majority of foreign social and video platforms, and unlicensed video chat is routinely on that list. Most people you match with here are either using a VPN from within China or are part of the global Chinese diaspora — both are completely normal, not a sign anything has gone wrong.",
+      },
+      {
+        kind: "culture",
+        title: "One country, one time zone",
+        body: "China spans a geographic width that would normally cover five time zones, but the entire country runs on Beijing time by law. In practice this means the far west sees the sun rise and set hours later in the clock than official time suggests — worth knowing if a match mentions the sky looking wrong for the hour.",
+      },
+      {
+        kind: "cost",
+        title: "Cash barely exists in daily life",
+        body: "WeChat Pay and Alipay handle the overwhelming majority of everyday transactions in Chinese cities, to the point that some smaller vendors no longer reliably accept cash at all. It is a genuinely different daily experience from most of the world and a real point of comparison to raise.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "你好", meaning: "Hello", say: "nǐ hǎo" },
+      { phrase: "你在哪儿?", meaning: "Where are you?", say: "nǐ zài nǎr" },
+      { phrase: "太棒了", meaning: "That's great / awesome", say: "tài bàng le" },
+      { phrase: "很高兴认识你", meaning: "Nice to meet you", say: "hěn gāoxìng rènshi nǐ" },
+    ],
+    starters: [
+      { topic: "Regional food", ask: "What does food from your hometown actually taste like?", why: "Sichuan, Cantonese and northern cooking are wildly different — a good way past the export-menu version." },
+      { topic: "Gaokao", ask: "How many years out from the gaokao are you, and was it as brutal as people say?", why: "A genuinely shared rite of passage for a huge share of the population." },
+      { topic: "Cashless life", ask: "When did you last actually use cash?", why: "For many people in Chinese cities the honest answer is 'I can't remember'." },
+      { topic: "Distance", ask: "How far is your hometown from where you live now, by train?", why: "China's rail distances are enormous and most people have made the trip." },
+    ],
+    intro: [
+      "China is the world's most populous country and, despite its size, runs on a single official time zone — Beijing time — which gives the evening chat peak a single, sharp window rather than the rolling band a country like the US has.",
+      "The honest thing to say upfront: mainland China's firewall blocks most foreign apps and unlicensed video platforms, Vidibro included, so most people reaching this page from inside China are doing so through a VPN. Traffic here also comes heavily from the global Chinese diaspora — students, workers and families abroad who want to talk in Mandarin or Cantonese.",
+      "Regional variety inside China is much wider than it looks from outside — food, dialect and daily life differ enormously between Shanghai, Guangzhou and Beijing, and most people are happy to talk about exactly how their hometown differs from the stereotype.",
+      "No account, no download, nothing installed — the call runs directly between browsers.",
+    ],
+    faqs: [
+      { question: "Do I need a VPN to use this from China?", answer: "In practice, usually yes. Mainland China's firewall blocks most foreign social and video platforms, and unlicensed video chat is routinely among them." },
+      { question: "Will people speak English?", answer: "It varies a lot by city and generation — better in Shanghai, Beijing and among younger, urban users than the national average. Mandarin is the safer default to expect." },
+      { question: "Is Cantonese different from Mandarin?", answer: "Very — they are not mutually intelligible in speech, though they share the same written characters for the most part. A Cantonese speaker from Guangzhou may not follow spoken Mandarin well." },
+      { question: "When is China's chat traffic busiest?", answer: "Roughly 21:00 to 01:00 China Standard Time, the single evening window that applies country-wide since the whole country uses one official time zone." },
+      { question: "Is it safe to talk about politics?", answer: "Best avoided. Topics like Taiwan, Hong Kong or Xinjiang carry real risk for the other person depending on where and how the conversation is seen, not just an awkward turn." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-shanghai", label: "Shanghai", relation: "city" },
+      { slug: "video-chat-beijing", label: "Beijing", relation: "city" },
+      { slug: "video-chat-guangzhou", label: "Guangzhou", relation: "city" },
+      { slug: "chinese-video-chat", label: "Mandarin chat", relation: "language" },
+      { slug: "cantonese-video-chat", label: "Cantonese chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-japan", label: "Japan", relation: "sibling" },
+      { slug: "video-chat-south-korea", label: "South Korea", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-shanghai",
+    kind: "city",
+    name: "Shanghai",
+    parent: "China",
+    primaryKeyword: "shanghai video chat",
+    title: "Shanghai Video Chat — Talk to Strangers Free",
+    description:
+      "Random video chat with people in Shanghai. Free, anonymous, no signup — talk in Mandarin, Shanghainese or English, day or night.",
+    languages: ["中文 (Mandarin)", "上海话 (Shanghainese)", "English"],
+    peakHours: "21:30 – 01:00 CST",
+    timezone: "Asia/Shanghai",
+    weight: 1.1,
+    tagline:
+      "Random video chat with Shanghai. China's financial capital, its most international city, and a conversation that starts with no account at all.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Shanghainese is its own language, not an accent",
+        body: "Shanghainese (Wu Chinese) is mutually unintelligible with Mandarin, not just a regional pronunciation of it. Younger residents mostly speak Mandarin fluently too, but hearing Shanghainese spoken between locals is common, and it is a genuine point of local pride.",
+      },
+      {
+        kind: "infra",
+        title: "The world's busiest metro system by rides",
+        body: "Shanghai's subway carries more daily passengers than any other metro system on Earth, and it is still expanding. For most residents it is simply how the city moves, rather than something remarkable — a useful thing to ask about rather than assume.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "侬好", meaning: "Hello (Shanghainese)", say: "nong hao" },
+      { phrase: "你好", meaning: "Hello (Mandarin)", say: "nǐ hǎo" },
+      { phrase: "老好额", meaning: "Very good (Shanghainese)", say: "lao hao eh" },
+      { phrase: "再会", meaning: "Goodbye", say: "zài huì" },
+    ],
+    starters: [
+      { topic: "The Bund", ask: "Do you ever actually go to the Bund, or is that just for tourists now?", why: "A genuinely local question that separates residents from visitors' assumptions." },
+      { topic: "Language", ask: "Do you speak Shanghainese, and do people your age still use it much?", why: "A real generational shift worth asking about directly." },
+      { topic: "Pace", ask: "Does Shanghai feel fast even to people who live here?", why: "Most residents have a strong, specific opinion on this." },
+    ],
+    places: ["The Bund", "Pudong", "Xintiandi", "Jing'an", "French Concession", "Hongqiao"],
+    talkingPoints: [
+      "The contrast between the Bund's colonial-era waterfront and Pudong's futuristic skyline directly across the river",
+      "Shanghainese versus Mandarin, and how much of the local language survives among younger residents",
+      "The metro system, the busiest in the world by daily rides, and simply how most people get anywhere",
+      "Shanghai's reputation within China as the most cosmopolitan, business-driven city, and how residents feel about that label",
+    ],
+    connectivityNote:
+      "Shanghai has some of the densest, fastest mobile coverage in the world — 4G and 5G are near-universal across the city. As with the rest of mainland China, reaching this page at all typically requires a VPN due to the national firewall.",
+    localNote:
+      "Shanghai runs later than much of China — dinner and socialising commonly start after 8pm, and the queue here stays livelier past midnight than in most other Chinese cities.",
+    intro: [
+      "Shanghai is China's largest city and its financial centre, and the most internationally-minded major city in the country — a large expat and returnee population alongside locals who have grown up around foreign business.",
+      "Shanghainese, the local Wu-Chinese language, is a genuinely separate language from Mandarin rather than an accent of it, and hearing it spoken between locals — even as fewer young people use it daily — is one of the city's real distinguishing features.",
+      "As with the rest of mainland China, reaching this page typically means using a VPN, so most matches here are either doing exactly that or are part of the Chinese diaspora abroad.",
+      "No account, no download — the call runs directly between browsers and nothing is recorded.",
+    ],
+    faqs: [
+      { question: "Is Shanghainese the same as Mandarin?", answer: "No — Shanghainese (Wu Chinese) is a separate language, not mutually intelligible with Mandarin in speech, though nearly everyone in the city also speaks fluent Mandarin." },
+      { question: "Do I need a VPN to reach this from Shanghai?", answer: "Yes, in almost all cases — mainland China's firewall blocks unlicensed video chat platforms nationwide, Shanghai included." },
+      { question: "When is Shanghai's chat traffic busiest?", answer: "Around 21:30 to 01:00 China Standard Time — the city runs a bit later than the national average." },
+      { question: "Will people speak English in Shanghai?", answer: "More often than the Chinese national average, given the city's international business presence, but Mandarin is still the safer default expectation." },
+      { question: "Is it free?", answer: "Completely — no signup, no subscription, no app to install." },
+    ],
+    related: [
+      { slug: "video-chat-china", label: "video chat across China", relation: "sibling" },
+      { slug: "video-chat-japan", label: "Japan", relation: "sibling" },
+      { slug: "video-chat-beijing", label: "Beijing", relation: "city" },
+      { slug: "video-chat-guangzhou", label: "Guangzhou", relation: "city" },
+      { slug: "video-chat-hangzhou", label: "Hangzhou", relation: "city" },
+      { slug: "chinese-video-chat", label: "Mandarin chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+    ],
+  },
+
+  {
+    slug: "video-chat-japan",
+    kind: "country",
+    name: "Japan",
+    primaryKeyword: "video chat japan",
+    title: "Video Chat Japan — Talk to Strangers Free",
+    description:
+      "Free random video chat with people from Japan. Talk in Japanese or English — no signup, no download, instant matching any time.",
+    tagline:
+      "Free video chat with Japan. One time zone, some of the fastest networks anywhere, and a conversation with no account needed.",
+    languages: ["日本語 (Japanese)", "English"],
+    peakHours: "22:00 – 02:00 JST",
+    timezone: "Asia/Tokyo",
+    weight: 1.7,
+    places: ["Tokyo", "Osaka", "Yokohama", "Nagoya", "Fukuoka", "Sapporo"],
+    talkingPoints: [
+      "Anime and manga, which reach far beyond Japan and are common ground even with people who have never been there",
+      "Konbini (convenience store) culture — 7-Eleven, Lawson and FamilyMart function as a genuine part of daily life, not just a shop",
+      "Regional dialects, especially Kansai-ben around Osaka, which sounds distinctly different from standard Tokyo Japanese",
+      "The last-train culture: Tokyo's trains largely stop around midnight, which quietly shapes how the whole evening is planned",
+      "Onsen (hot spring) culture, a genuinely widespread weekend and holiday habit rather than a tourist novelty",
+    ],
+    connectivityNote:
+      "Japan has some of the most reliable mobile networks anywhere — NTT Docomo, SoftBank and au all run dense, fast 4G and 5G with very little dead coverage even outside major cities. Connection quality is rarely the limiting factor here.",
+    localNote:
+      "English proficiency is genuinely lower on average here than in many other Asian markets, despite years of compulsory school English — text chat can be a gentler starting point than voice or video if there is a language gap. Patience is well rewarded; many people are more comfortable than they expect once the conversation gets going.",
+    safetyNote:
+      "Directness that reads as normal elsewhere — strong opinions, blunt compliments, fast personal questions — can land as unusually forward here. Slower pacing tends to go better than it would in a more direct market.",
+    etiquette:
+      "A slight bow or nod at the start of a video call is a small, appreciated gesture. Long pauses in conversation are more comfortable and less awkward here than in many other cultures — resist the urge to fill every silence.",
+    spotlights: [
+      {
+        kind: "infra",
+        title: "Among the most reliable networks anywhere",
+        body: "Japan's mobile infrastructure is consistently ranked among the world's best for reliability and speed. Dropped calls and buffering are rare enough here that when they happen, it is genuinely more likely to be the other side of the connection than Japan's.",
+      },
+      {
+        kind: "culture",
+        title: "The last train shapes the evening",
+        body: "Tokyo's train network largely stops running around midnight, and a missed last train means an expensive taxi or an all-night manga café. It is a real, practical constraint that quietly organises how people plan their nights out — worth asking about directly.",
+      },
+      {
+        kind: "seasonal",
+        title: "Cherry blossom season is a genuine cultural event",
+        body: "Hanami — cherry blossom viewing, usually late March to early April — is a real, widely observed seasonal ritual involving parks, picnics and time off, not a tourist photo opportunity. Asking whether someone has done hanami this year is a natural seasonal opener.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "こんにちは", meaning: "Hello (daytime)", say: "kon-nichi-wa" },
+      { phrase: "はじめまして", meaning: "Nice to meet you", say: "ha-ji-me-mashi-te" },
+      { phrase: "すごい", meaning: "Amazing / wow", say: "su-go-i" },
+      { phrase: "また今度", meaning: "See you again sometime", say: "ma-ta kon-do" },
+    ],
+    starters: [
+      { topic: "Last train", ask: "Have you ever missed the last train home?", why: "A near-universal experience in Japan's big cities and a good story starter." },
+      { topic: "Konbini", ask: "What's your usual convenience store order?", why: "A small, specific question that gets a real, detailed answer here." },
+      { topic: "Dialect", ask: "Can you tell someone's from Osaka just from how they talk?", why: "Kansai-ben is distinct enough that most people have an opinion on it." },
+      { topic: "Anime", ask: "What's something you're watching that isn't well known outside Japan?", why: "Moves past the handful of titles everyone already knows." },
+    ],
+    intro: [
+      "Japan runs on a single time zone and has one of the most reliable network infrastructures anywhere, which makes it a genuinely smooth market for video chat — dropped calls here are rare.",
+      "English proficiency is lower on average than many people expect, despite years of compulsory school English, so text chat can be an easier opening than voice or video if there's a language gap. Patience tends to be rewarded.",
+      "Culturally, this is a market where pacing matters — comfortable silence, a slower build to personal topics, and a small nod or bow at the start of a call go further here than the fast, direct approach that works elsewhere.",
+      "No account, no download — the call runs directly between browsers and nothing is recorded.",
+    ],
+    faqs: [
+      { question: "Will people in Japan speak English?", answer: "Sometimes, but proficiency is genuinely lower on average here than in many other Asian markets. Text chat can be a gentler starting point if there's a language gap." },
+      { question: "When is Japan's chat traffic busiest?", answer: "Roughly 22:00 to 02:00 Japan Standard Time — later in the evening than many countries, partly shaped by Japan's own late-night culture." },
+      { question: "How reliable is the connection?", answer: "Very. Japan's mobile networks are consistently ranked among the most reliable in the world, so dropped or laggy calls are uncommon." },
+      { question: "Is directness rude in Japanese conversation?", answer: "Not rude exactly, but faster and blunter than the local norm — pacing gently and giving silence room tends to land better here." },
+      { question: "Is it free?", answer: "Entirely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-tokyo", label: "Tokyo", relation: "city" },
+      { slug: "video-chat-osaka", label: "Osaka", relation: "city" },
+      { slug: "video-chat-yokohama", label: "Yokohama", relation: "city" },
+      { slug: "japanese-video-chat", label: "Japanese chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-south-korea", label: "South Korea", relation: "sibling" },
+      { slug: "video-chat-china", label: "China", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-tokyo",
+    kind: "city",
+    name: "Tokyo",
+    parent: "Japan",
+    primaryKeyword: "tokyo video chat",
+    title: "Tokyo Video Chat — Talk to Strangers Free",
+    description:
+      "Random video chat with people in Tokyo. Free, anonymous, no signup — talk in Japanese or English any time, day or night.",
+    languages: ["日本語 (Japanese)", "English"],
+    peakHours: "22:30 – 02:30 JST",
+    timezone: "Asia/Tokyo",
+    weight: 1.0,
+    tagline:
+      "Random video chat with Tokyo. The world's largest metro area, some of its fastest networks, and a conversation with no account needed.",
+    spotlights: [
+      {
+        kind: "infra",
+        title: "The busiest railway network on Earth",
+        body: "Tokyo's combined train and subway system moves more daily passengers than any other city's, and Shinjuku Station alone handles over three million a day. Trains largely stop by midnight, which is a real, practical constraint most residents plan their evenings around.",
+      },
+      {
+        kind: "culture",
+        title: "23 wards, 23 different personalities",
+        body: "Shibuya, Shinjuku, Akihabara and Asakusa are all technically Tokyo but feel like genuinely different cities — youth fashion, business, otaku culture and old Tokyo respectively. Asking which ward someone lives in tells you a lot about them.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "こんばんは", meaning: "Good evening", say: "kon-ban-wa" },
+      { phrase: "本当に?", meaning: "Really?", say: "hon-tou ni" },
+      { phrase: "頑張って", meaning: "Good luck / do your best", say: "gan-bat-te" },
+      { phrase: "おつかれさま", meaning: "Thanks for your effort (very common sign-off)", say: "o-tsu-ka-re-sa-ma" },
+    ],
+    starters: [
+      { topic: "Wards", ask: "Which ward do you live in, and what's it actually like?", why: "Tokyo's 23 wards genuinely differ enough that this gets a specific, real answer." },
+      { topic: "Last train", ask: "What happens when you miss the last train?", why: "A shared, slightly dreaded experience for most Tokyo residents." },
+      { topic: "Density", ask: "Does the crowding at Shibuya crossing ever stop feeling normal?", why: "A concrete, specific detail rather than a generic question about city life." },
+    ],
+    places: ["Shibuya", "Shinjuku", "Akihabara", "Asakusa", "Ginza", "Ikebukuro"],
+    talkingPoints: [
+      "How different Tokyo's wards feel from each other — Shibuya, Shinjuku, Akihabara and Asakusa each have a distinct character",
+      "The last-train cutoff and how it shapes plans for the whole evening",
+      "Tokyo's reputation abroad as futuristic versus the genuinely old neighbourhoods like Asakusa that most tourists skip",
+      "Shibuya Crossing, one of the busiest pedestrian crossings on Earth and something most residents have stopped noticing entirely",
+    ],
+    connectivityNote:
+      "Tokyo has extremely dense, fast mobile and fibre coverage — among the best in the world. Connection issues here are rarely about Tokyo's own network.",
+    localNote:
+      "Tokyo genuinely runs late — the chat queue here stays active well past midnight, later than most other major Asian cities, partly because trains stopping around midnight means many people are already out and awake.",
+    intro: [
+      "Tokyo is the world's largest metropolitan area by population and one of the most densely connected — mobile and fibre networks here are consistently among the fastest and most reliable anywhere.",
+      "The city's 23 wards feel like genuinely different places rather than administrative divisions — Shibuya's youth culture, Akihabara's otaku scene and Asakusa's old-Tokyo streets could each be a different city.",
+      "Tokyo's trains largely stop running around midnight, which quietly shapes how the whole evening unfolds, and the chat queue here stays busy well past that hour as a result — later than in most other cities this size.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever saved or recorded.",
+    ],
+    faqs: [
+      { question: "When is Tokyo's chat traffic busiest?", answer: "Around 22:30 to 02:30 Japan Standard Time — later than most cities, partly shaped by the city's last-train culture." },
+      { question: "Will people in Tokyo speak English?", answer: "More commonly than the Japanese national average given the international population, but Japanese is still the safer default to expect." },
+      { question: "How reliable is Tokyo's connection?", answer: "Extremely — Tokyo has some of the densest, fastest mobile and fibre coverage in the world." },
+      { question: "Why do Tokyo residents talk about trains so much?", answer: "Because the network largely stops around midnight, which genuinely shapes how people plan their evenings — it comes up often and naturally in conversation." },
+      { question: "Is it free?", answer: "Completely — no signup, no app, no subscription." },
+    ],
+    related: [
+      { slug: "video-chat-japan", label: "video chat across Japan", relation: "sibling" },
+      { slug: "video-chat-south-korea", label: "South Korea", relation: "sibling" },
+      { slug: "video-chat-osaka", label: "Osaka", relation: "city" },
+      { slug: "video-chat-yokohama", label: "Yokohama", relation: "city" },
+      { slug: "video-chat-nagoya", label: "Nagoya", relation: "city" },
+      { slug: "japanese-video-chat", label: "Japanese chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+    ],
+  },
+
+  {
+    slug: "video-chat-south-korea",
+    kind: "country",
+    name: "South Korea",
+    primaryKeyword: "video chat south korea",
+    title: "Video Chat South Korea — Talk to Strangers Free",
+    description:
+      "Free random video chat with people from South Korea. Talk in Korean or English — no signup, no download, some of the fastest internet anywhere.",
+    tagline:
+      "Free video chat with South Korea. Some of the fastest internet on Earth, one time zone, and a conversation with no account needed.",
+    languages: ["한국어 (Korean)", "English"],
+    peakHours: "22:00 – 02:00 KST",
+    timezone: "Asia/Seoul",
+    weight: 1.5,
+    places: ["Seoul", "Busan", "Incheon", "Daegu", "Daejeon"],
+    talkingPoints: [
+      "K-pop and K-drama's genuine global reach — common ground even with people who have never visited",
+      "PC bang culture: internet cafés built specifically for gaming remain a real, everyday social space here, not a relic",
+      "Mandatory military service for men, roughly 18–21 months, which shapes a huge share of conversations about someone's twenties",
+      "Korean age counting, where everyone turns a year older on New Year's Day rather than their birthday — a genuinely confusing, fun thing to ask about",
+      "Skincare and beauty routines, which are a mainstream, detailed daily habit here rather than a niche interest",
+    ],
+    connectivityNote:
+      "South Korea consistently ranks among the fastest average internet speeds in the world, both fixed and mobile. Buffering or lag on a call here is rarely the local connection's fault.",
+    localNote:
+      "The chat queue runs notably late — Korea has a strong late-night culture (built partly around PC bangs and 24-hour cafés), and traffic here stays lively well past midnight, later than the regional average.",
+    safetyNote:
+      "Age matters more directly here than in many cultures because it sets the tone of how people address each other — asking age early is normal and not considered rude, unlike in markets where it can read as intrusive.",
+    etiquette:
+      "A slight bow works well as an opening gesture. Because of the Korean age system, someone may state their age with real precision — treat it as useful social information, not oversharing.",
+    spotlights: [
+      {
+        kind: "infra",
+        title: "Some of the fastest internet on Earth",
+        body: "South Korea has topped global average-internet-speed rankings for years, on both fixed broadband and mobile. It is one of the few markets where a genuinely slow connection is more likely to be the other end of the call than Korea's own network.",
+      },
+      {
+        kind: "culture",
+        title: "Everyone gets a year older on the same day",
+        body: "Under the traditional Korean age system, a baby is considered one year old at birth and everyone turns a year older on New Year's Day, not their birthday — meaning a person's 'Korean age' can be one or two years ahead of their international age. It is a genuinely fun, low-stakes thing to ask about.",
+      },
+      {
+        kind: "culture",
+        title: "Military service shapes a shared timeline",
+        body: "Almost all Korean men serve roughly 18 to 21 months in the military, typically in their early twenties. It is a widely discussed rite of passage — men openly compare experiences, and it is a completely normal, non-sensitive conversation topic here.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "안녕하세요", meaning: "Hello (polite)", say: "an-nyeong-ha-se-yo" },
+      { phrase: "반가워요", meaning: "Nice to meet you", say: "ban-ga-wo-yo" },
+      { phrase: "대박", meaning: "Wow / no way (very common slang)", say: "dae-bak" },
+      { phrase: "잘 가요", meaning: "Goodbye (to someone leaving)", say: "jal ga-yo" },
+    ],
+    starters: [
+      { topic: "Korean age", ask: "How old are you in Korean age versus international age?", why: "A fun, specific cultural quirk that almost always gets an enthusiastic explanation." },
+      { topic: "PC bang", ask: "Do you still go to PC bangs, or was that more of a school thing?", why: "A concrete, generational question about a genuinely local institution." },
+      { topic: "Military service", ask: "Where did you serve, and what was the hardest part?", why: "A widely shared, openly discussed rite of passage for Korean men." },
+      { topic: "Late nights", ask: "What's still open near you at 2am?", why: "Korea's 24-hour culture means this usually gets a specific, interesting answer." },
+    ],
+    intro: [
+      "South Korea has some of the fastest internet in the world, on both fixed and mobile networks, which makes it a genuinely smooth market for video calls — connection issues here are rarely Korea's fault.",
+      "The country runs on a single time zone with a distinctly late-night culture, built partly around 24-hour PC bangs and cafés, and the chat queue here stays busy well past midnight.",
+      "Two specifics are worth knowing before a conversation: the traditional Korean age system, where everyone turns a year older together on New Year's Day rather than their birthday, and mandatory military service for men, an openly discussed shared experience for a huge share of the population in their twenties.",
+      "No account, no download — the call runs directly between browsers.",
+    ],
+    faqs: [
+      { question: "Is South Korean internet really that fast?", answer: "Yes — the country has consistently ranked among the fastest average internet speeds globally, on both mobile and fixed broadband." },
+      { question: "What is Korean age?", answer: "Under the traditional system, a person is considered one year old at birth and everyone gains a year together on New Year's Day, rather than on individual birthdays — so someone's Korean age can run one or two years ahead of their international age." },
+      { question: "Is it normal to ask about military service?", answer: "Yes, it's a widely and openly discussed rite of passage for Korean men, who typically serve 18 to 21 months in their early twenties." },
+      { question: "When is South Korea's chat traffic busiest?", answer: "Roughly 22:00 to 02:00 Korea Standard Time, staying lively later than the regional average thanks to the country's late-night culture." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-seoul", label: "Seoul", relation: "city" },
+      { slug: "video-chat-busan", label: "Busan", relation: "city" },
+      { slug: "video-chat-incheon", label: "Incheon", relation: "city" },
+      { slug: "korean-video-chat", label: "Korean chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-japan", label: "Japan", relation: "sibling" },
+      { slug: "video-chat-china", label: "China", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-seoul",
+    kind: "city",
+    name: "Seoul",
+    parent: "South Korea",
+    primaryKeyword: "seoul video chat",
+    title: "Seoul Video Chat — Talk to Strangers Free",
+    description:
+      "Random video chat with people in Seoul. Free, anonymous, no signup — talk in Korean or English any time, day or night.",
+    languages: ["한국어 (Korean)", "English"],
+    peakHours: "22:30 – 03:00 KST",
+    timezone: "Asia/Seoul",
+    weight: 0.9,
+    tagline:
+      "Random video chat with Seoul. One of the most connected cities on Earth, a genuine 24-hour culture, and a conversation with no account at all.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "A genuinely 24-hour city",
+        body: "Between PC bangs, jjimjilbang (bathhouses), convenience stores and cafés, large parts of Seoul function around the clock. It is not an exaggeration to say the city has a real second daytime that starts around midnight — one reason the chat queue here stays busy so late.",
+      },
+      {
+        kind: "infra",
+        title: "The Han River splits the city's personality",
+        body: "Gangnam, south of the Han River, is associated with wealth and plastic surgery clinics; the older northern side carries most of Seoul's historic palaces and traditional neighbourhoods like Bukchon. Asking which side someone lives on is a natural, revealing question.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "여보세요", meaning: "Hello (used on calls specifically)", say: "yeo-bo-se-yo" },
+      { phrase: "진짜?", meaning: "Really? / seriously?", say: "jin-jja" },
+      { phrase: "화이팅", meaning: "Fighting! — an all-purpose cheer of encouragement", say: "hwa-i-ting" },
+      { phrase: "수고하셨어요", meaning: "You worked hard — a common, warm sign-off", say: "su-go-ha-syeo-sseo-yo" },
+    ],
+    starters: [
+      { topic: "Han River", ask: "North or south of the Han River, and does it really change how you see the city?", why: "A real, locally understood divide most residents have an opinion on." },
+      { topic: "24-hour life", ask: "What's your go-to spot for 3am?", why: "Seoul's round-the-clock culture makes this a genuine, specific question." },
+      { topic: "Neighbourhoods", ask: "Gangnam or Hongdae — which actually fits your personality?", why: "Seoul's districts have distinct enough reputations that this gets a real answer." },
+    ],
+    places: ["Gangnam", "Hongdae", "Myeongdong", "Itaewon", "Bukchon", "Yeouido"],
+    talkingPoints: [
+      "The Han River divide between Gangnam's modern wealth and the older, historic northern neighbourhoods",
+      "Seoul's genuine round-the-clock culture — PC bangs, bathhouses and cafés that never really close",
+      "Hongdae's youth and indie music scene versus Myeongdong's shopping-district energy",
+      "How fast the city has transformed in a single generation, something older residents discuss readily",
+    ],
+    connectivityNote:
+      "Seoul has extremely dense, extremely fast mobile and fibre coverage even by South Korea's already high national standard. Connection quality here is rarely a concern.",
+    localNote:
+      "Seoul's chat traffic stays busy later than almost anywhere else covered here, commonly well past 2am, driven by the city's genuine 24-hour culture.",
+    intro: [
+      "Seoul is South Korea's capital and by far its largest city, and one of the most densely networked cities in the world — video calls here are rarely limited by the local connection.",
+      "The city runs on a real 24-hour rhythm: PC bangs, bathhouses and cafés operate around the clock, and the chat queue here reflects that, staying lively well past 2am.",
+      "The Han River genuinely divides the city's character — Gangnam's modern wealth to the south, older palaces and neighbourhoods like Bukchon to the north — and it's a natural, specific thing to ask a Seoul resident about.",
+      "No account, no download — the call runs directly between browsers, and the traditional Korean age system means it's worth asking early whether an age someone gives is Korean or international.",
+    ],
+    faqs: [
+      { question: "When is Seoul's chat traffic busiest?", answer: "Around 22:30 to 03:00 Korea Standard Time — later than most cities anywhere, driven by Seoul's genuine round-the-clock culture." },
+      { question: "How fast is Seoul's internet?", answer: "Extremely — Seoul has some of the densest, fastest mobile and fibre coverage in the world, even relative to South Korea's already high national average." },
+      { question: "What's the divide between north and south Seoul?", answer: "The Han River splits the city — Gangnam to the south is associated with modern wealth, while the older side to the north holds most of Seoul's historic palaces and traditional neighbourhoods." },
+      { question: "Will people in Seoul speak English?", answer: "More commonly among younger, urban residents than the Korean national average, but Korean is still the safer default to expect." },
+      { question: "Is it free?", answer: "Completely — no signup, no app, no subscription." },
+    ],
+    related: [
+      { slug: "video-chat-south-korea", label: "video chat across South Korea", relation: "sibling" },
+      { slug: "video-chat-japan", label: "Japan", relation: "sibling" },
+      { slug: "video-chat-busan", label: "Busan", relation: "city" },
+      { slug: "video-chat-incheon", label: "Incheon", relation: "city" },
+      { slug: "video-chat-daegu", label: "Daegu", relation: "city" },
+      { slug: "korean-video-chat", label: "Korean chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+    ],
+  },
+
+  {
+    slug: "video-chat-thailand",
+    kind: "country",
+    name: "Thailand",
+    primaryKeyword: "video chat thailand",
+    title: "Video Chat Thailand — Talk to Strangers Free",
+    description:
+      "Free random video chat with people from Thailand. Talk in Thai or English — no signup, no download, instant matching any time.",
+    tagline:
+      "Free video chat with Thailand. Street food, warm evenings, and a conversation that starts with no account needed.",
+    languages: ["ไทย (Thai)", "English"],
+    peakHours: "20:00 – 00:00 ICT",
+    timezone: "Asia/Bangkok",
+    weight: 1.1,
+    places: ["Bangkok", "Chiang Mai", "Phuket", "Pattaya", "Khon Kaen"],
+    talkingPoints: [
+      "Street food, which is central to daily eating here rather than a special occasion — most people have strong opinions on their favourite stall",
+      "Songkran, the Thai New Year water festival in April, one of the most widely loved and anticipated events of the year",
+      "Muay Thai, practised and watched far beyond the tourist gyms, with real regional loyalties",
+      "Buddhist temple life, which is a normal, everyday part of the calendar for most Thai people, not just a tourist backdrop",
+      "Motorbikes as the default way to get around most Thai cities, and the specific chaos of Bangkok traffic",
+    ],
+    connectivityNote:
+      "Urban Thailand, especially Bangkok, has solid 4G and increasingly widespread 5G on AIS, TrueMove and dtac. Rural areas in the north and northeast (Isan) run patchier, mostly 4G-only coverage — video may soften there while voice and text stay solid.",
+    localNote:
+      "Thailand has an unusually large, tourism-fluent population used to talking with foreigners, which makes cross-language conversation smoother here than in many countries of similar size. English confidence is genuinely uneven though — patience helps.",
+    safetyNote:
+      "The monarchy is protected by strict lèse-majesté laws, and even casual foreign commentary on it can cause real problems for a Thai match, not just discomfort. It's a topic worth avoiding entirely rather than testing.",
+    etiquette:
+      "The wai — a slight bow with palms together — is a warm, appreciated gesture to offer even on a video call. Losing your temper or raising your voice is taken far more seriously here than in many cultures; calm, even under frustration, matters.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Songkran is genuinely nationwide",
+        body: "Thai New Year in mid-April, known internationally for its water fights, is a real family and religious holiday, not just a tourist spectacle — temple visits and respect to elders happen alongside the water throwing. Asking about someone's Songkran plans is a natural, warm seasonal opener.",
+      },
+      {
+        kind: "legal",
+        title: "The monarchy is not a casual topic",
+        body: "Thailand's lèse-majesté laws make criticism of the monarchy a serious legal matter, and this is genuinely enforced. It is worth avoiding the subject entirely with a Thai match rather than assuming it is safe because the conversation is anonymous.",
+      },
+      {
+        kind: "infra",
+        title: "Bangkok traffic is a real daily constraint",
+        body: "Bangkok is consistently ranked among the world's most congested cities, and many residents plan their entire day around avoiding it — the BTS Skytrain and MRT exist specifically because road traffic is that unreliable. It's a genuine, relatable daily frustration to ask about.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "สวัสดีครับ/ค่ะ", meaning: "Hello (male/female speaker)", say: "sa-wat-dee krap/kah" },
+      { phrase: "สบายดีไหม", meaning: "How are you?", say: "sa-bai-dee-mai" },
+      { phrase: "อร่อยมาก", meaning: "Very delicious", say: "a-roi mak" },
+      { phrase: "แล้วเจอกัน", meaning: "See you later", say: "laew jer gan" },
+    ],
+    starters: [
+      { topic: "Street food", ask: "What's your go-to street food stall, and what do you always order?", why: "Gets a specific, personal answer rather than a generic 'I like pad thai'." },
+      { topic: "Songkran", ask: "How do you actually spend Songkran — family, temple, water fights, or all three?", why: "A genuinely widely celebrated holiday most people are happy to talk about." },
+      { topic: "Traffic", ask: "How long is your commute in Bangkok traffic, honestly?", why: "A shared daily frustration that usually gets a detailed, sympathetic answer." },
+      { topic: "Muay Thai", ask: "Did you grow up training Muay Thai, or is that more of a gym thing now?", why: "Distinguishes the sport's real cultural roots from its tourist-gym image." },
+    ],
+    intro: [
+      "Thailand has a large, tourism-fluent population that is genuinely comfortable talking with people from outside the country, which makes it one of the smoother markets here for cross-language conversation — though English confidence still varies a lot by person.",
+      "Street food is central to daily life rather than a special occasion, and most people have strong, specific opinions about their favourite stall — a reliable, easy way into a real conversation.",
+      "Two things are worth knowing before a call: Songkran, the April water festival, is a genuinely beloved nationwide holiday worth asking about, while the monarchy is protected by strict lèse-majesté laws and is a topic to avoid entirely rather than test.",
+      "No account, no download — the call runs directly between browsers.",
+    ],
+    faqs: [
+      { question: "Will people in Thailand speak English?", answer: "Often, especially in Bangkok and tourist-facing areas, thanks to a large tourism industry — but confidence varies a lot by person and region. Patience helps." },
+      { question: "How is the connection in Thailand?", answer: "Solid 4G and growing 5G in Bangkok and other cities on AIS, TrueMove and dtac. Rural areas in the north and northeast run patchier, mostly 4G coverage." },
+      { question: "Is it OK to discuss Thai politics or the monarchy?", answer: "Best avoided entirely. Thailand's lèse-majesté laws take criticism of the monarchy seriously, and this is a real legal risk, not just an awkward topic." },
+      { question: "When is Thailand's chat traffic busiest?", answer: "Roughly 20:00 to midnight Indochina Time (ICT), the country's standard evening window." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-bangkok", label: "Bangkok", relation: "city" },
+      { slug: "video-chat-chiang-mai", label: "Chiang Mai", relation: "city" },
+      { slug: "video-chat-phuket", label: "Phuket", relation: "city" },
+      { slug: "thai-video-chat", label: "Thai chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-sri-lanka", label: "Sri Lanka", relation: "sibling" },
+      { slug: "video-chat-vietnam", label: "Vietnam", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-bangkok",
+    kind: "city",
+    name: "Bangkok",
+    parent: "Thailand",
+    primaryKeyword: "bangkok video chat",
+    title: "Bangkok Video Chat — Talk to Strangers Free",
+    description:
+      "Random video chat with people in Bangkok. Free, anonymous, no signup — talk in Thai or English, any time of day or night.",
+    languages: ["ไทย (Thai)", "English"],
+    peakHours: "20:30 – 00:30 ICT",
+    timezone: "Asia/Bangkok",
+    weight: 0.8,
+    tagline:
+      "Random video chat with Bangkok. Street food on every corner, notorious traffic, and a conversation that starts with no account at all.",
+    spotlights: [
+      {
+        kind: "infra",
+        title: "Built to route around its own traffic",
+        body: "Bangkok's BTS Skytrain and MRT subway exist largely because road traffic here is too unpredictable to plan around. Many residents choose where to live and work based on rail access alone — a genuinely practical, daily consideration, not a lifestyle preference.",
+      },
+      {
+        kind: "culture",
+        title: "A digital nomad hub as much as a Thai capital",
+        body: "Bangkok has one of the world's largest concentrations of remote workers and digital nomads, drawn by low costs and reliable internet, alongside its 10-million-plus Thai population. Conversations here can range from lifelong locals to someone who arrived from abroad three weeks ago.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "กินข้าวหรือยัง", meaning: "Have you eaten yet? — a genuine, common greeting", say: "gin khao rue yang" },
+      { phrase: "เดี๋ยวก่อน", meaning: "Wait a moment", say: "diao gorn" },
+      { phrase: "สนุกมาก", meaning: "So much fun", say: "sa-nook mak" },
+      { phrase: "ขอบคุณค่ะ/ครับ", meaning: "Thank you (female/male speaker)", say: "khop-khun kah/krap" },
+    ],
+    starters: [
+      { topic: "Traffic", ask: "What's the worst traffic jam story you've got?", why: "Bangkok traffic is universally shared and reliably produces a good story." },
+      { topic: "Street food", ask: "Where's your neighbourhood's best street food, and is it a secret or does everyone know?", why: "Gets past the tourist-guide answer into something genuinely local." },
+      { topic: "City life", ask: "Skytrain, motorbike taxi or boat — what's your actual daily commute?", why: "Bangkok has several genuinely different ways to get around, and people have strong preferences." },
+    ],
+    places: ["Sukhumvit", "Silom", "Chatuchak", "Khao San Road", "Chinatown", "Thonburi"],
+    talkingPoints: [
+      "The city's notorious traffic and how the BTS Skytrain and MRT exist specifically to route around it",
+      "Chatuchak Weekend Market, one of the largest markets in the world, and whether locals still actually go",
+      "The Chao Phraya River and its boat routes, a genuinely practical alternative to road traffic",
+      "Bangkok's mix of lifelong residents and a large international remote-worker population living side by side",
+    ],
+    connectivityNote:
+      "Bangkok has strong, widely available 4G and growing 5G coverage across the metro area on AIS, TrueMove and dtac — one of the more reliable urban networks in Southeast Asia.",
+    localNote:
+      "Evenings in Bangkok often run later than the Thai national average — the queue here stays active past midnight more often than in smaller Thai cities.",
+    intro: [
+      "Bangkok is Thailand's capital and by far its largest city — over ten million people in the metro area, alongside one of the world's largest populations of remote workers and digital nomads drawn by the cost of living and reliable internet.",
+      "Traffic here is genuinely notorious, and the BTS Skytrain and MRT subway exist specifically to give residents a way around it — asking about someone's commute reliably gets a real, detailed answer.",
+      "The mix of lifelong Bangkok residents and a large international population means conversations here range widely — from someone who has never left the city to someone who arrived weeks ago.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever saved or recorded.",
+    ],
+    faqs: [
+      { question: "When is Bangkok's chat traffic busiest?", answer: "Roughly 20:30 to 00:30 Indochina Time — evenings here tend to run a little later than the Thai national average." },
+      { question: "How's the internet connection in Bangkok?", answer: "Strong — widely available 4G and growing 5G across the metro area, among the more reliable urban networks in Southeast Asia." },
+      { question: "Will I match with tourists or locals in Bangkok?", answer: "Both, genuinely. Bangkok has a huge local population alongside one of the world's largest digital-nomad communities." },
+      { question: "Why do Bangkok residents talk about traffic so much?", answer: "Because it's a real, daily constraint — Bangkok is consistently ranked among the world's most congested cities, and it shapes how people plan their whole day." },
+      { question: "Is it free?", answer: "Completely — no signup, no subscription, no app." },
+    ],
+    related: [
+      { slug: "video-chat-thailand", label: "video chat across Thailand", relation: "sibling" },
+      { slug: "video-chat-sri-lanka", label: "Sri Lanka", relation: "sibling" },
+      { slug: "video-chat-chiang-mai", label: "Chiang Mai", relation: "city" },
+      { slug: "video-chat-phuket", label: "Phuket", relation: "city" },
+      { slug: "video-chat-pattaya", label: "Pattaya", relation: "city" },
+      { slug: "thai-video-chat", label: "Thai chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+    ],
+  },
+
+  {
+    slug: "video-chat-sri-lanka",
+    kind: "country",
+    name: "Sri Lanka",
+    primaryKeyword: "video chat sri lanka",
+    title: "Video Chat Sri Lanka — Talk to Strangers Free",
+    description:
+      "Free random video chat with people from Sri Lanka. Talk in Sinhala, Tamil or English — no signup, no download, instant matching.",
+    tagline:
+      "Free video chat with Sri Lanka. Same time offset as India, three languages in daily use, and a conversation with no account needed.",
+    languages: ["සිංහල (Sinhala)", "தமிழ் (Tamil)", "English"],
+    peakHours: "20:30 – 00:30 IST",
+    timezone: "Asia/Colombo",
+    weight: 0.7,
+    places: ["Colombo", "Kandy", "Galle", "Jaffna", "Negombo"],
+    talkingPoints: [
+      "Ceylon tea, genuinely central to both the economy and daily life, and a real point of national pride",
+      "Cricket, followed with the same intensity as in India and Pakistan and a reliable shared talking point across all three",
+      "The Kandy–Ella hill country train route, considered one of the most scenic rail journeys anywhere and a source of real local pride",
+      "The Sinhala–Tamil–Muslim cultural mix, which shapes food, festivals and daily life differently across the island",
+      "The 2022 economic crisis and its lasting effects, which most Sri Lankans have lived through directly and are often willing to discuss candidly",
+    ],
+    connectivityNote:
+      "Mobile coverage is solid in Colombo and other coastal cities on Dialog, Mobitel and Airtel, with reasonable 4G reach. Coverage thins out in the central hill country and more remote areas, where voice and text chat hold up better than video.",
+    localNote:
+      "Sri Lanka shares India's exact time offset (IST, UTC+5:30) despite being a separate country, so the two markets' evening peaks line up almost precisely — a genuine, useful coincidence for cross-market matching.",
+    safetyNote:
+      "The Sinhala–Tamil relationship carries real historical weight from the civil war period that ended in 2009. It is a genuinely sensitive subject for many Sri Lankans and worth approaching carefully rather than raising casually.",
+    etiquette:
+      "A slight head wobble similar to India's is common here too and means agreement or acknowledgment, not confusion. Asking someone's hometown is a normal, welcome opener — regional identity (Kandyan, Jaffna, coastal) matters and people are generally glad to talk about it.",
+    spotlights: [
+      {
+        kind: "time",
+        title: "The same clock as India, a different country",
+        body: "Sri Lanka uses the identical UTC+5:30 offset as India, a rare and specific coincidence for two separate nations. It means the two countries' evening chat peaks land at almost exactly the same local hour, which is worth knowing if a match mentions India in passing.",
+      },
+      {
+        kind: "culture",
+        title: "Three languages, genuinely all in daily use",
+        body: "Sinhala, Tamil and English are all functioning daily languages here, not a single official language with token others — road signs, news broadcasts and casual conversation all reflect this. Asking which languages someone actually uses day to day gets a real, considered answer.",
+      },
+      {
+        kind: "cost",
+        title: "The 2022 crisis is recent, lived history",
+        body: "Sri Lanka's 2022 economic collapse — fuel queues, power cuts, a change of government — is within very recent memory for everyone here, not a distant news story. Many people are willing to discuss it candidly if it comes up naturally, though it's worth letting them raise the specifics rather than pressing.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "ආයුබෝවන්", meaning: "Hello / greetings (Sinhala)", say: "aa-yu-bo-wan" },
+      { phrase: "වාඩිද?", meaning: "How are you? (Sinhala, casual)", say: "kohomada" },
+      { phrase: "வணக்கம்", meaning: "Hello (Tamil)", say: "vanakkam" },
+      { phrase: "மிக்க நன்றி", meaning: "Thank you very much (Tamil)", say: "mikka nandri" },
+    ],
+    starters: [
+      { topic: "Tea country", ask: "Have you ever been up to the hill country tea estates?", why: "Ceylon tea is a genuine point of pride and most people have a family or travel connection to it." },
+      { topic: "Cricket", ask: "Where were you for the last big Sri Lanka match?", why: "Cricket is followed intensely enough that this reliably gets a detailed, animated answer." },
+      { topic: "Languages", ask: "Which languages do you actually use day to day?", why: "With Sinhala, Tamil and English all in genuine daily use, this is a real, specific question here." },
+      { topic: "Hill trains", ask: "Have you done the Kandy to Ella train ride?", why: "A widely loved, genuinely scenic journey most Sri Lankans have opinions about." },
+    ],
+    intro: [
+      "Sri Lanka shares India's exact UTC+5:30 time offset despite being an entirely separate country, which means the two markets' evening chat peaks line up almost precisely — a small but genuinely useful fact if a match mentions India.",
+      "Three languages are in real daily use here — Sinhala, Tamil and English — rather than one official language with the others as formality, and asking what someone actually speaks day to day gets a considered, real answer.",
+      "The island's Sinhala, Tamil and Muslim communities each carry distinct food, festivals and daily rhythms, and the 2022 economic crisis — fuel queues, power cuts, a change of government — is recent, lived history for everyone here rather than a distant headline.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Do Sri Lanka and India really share the same time zone?", answer: "Yes — both use UTC+5:30, an unusual coincidence for two separate countries, and it means their evening chat peaks land at almost the same local hour." },
+      { question: "What languages will people speak?", answer: "Sinhala and Tamil are both genuinely in daily use, alongside English, which is common as a link language especially in Colombo and among younger, urban users." },
+      { question: "Is it OK to ask about the civil war or Sinhala-Tamil relations?", answer: "Approach carefully — it's recent, real history for many families here. Better to let it come up naturally than raise it directly." },
+      { question: "How's the internet connection?", answer: "Solid in Colombo and coastal cities on Dialog, Mobitel and Airtel. Coverage thins in the hill country and more remote areas." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-colombo", label: "Colombo", relation: "city" },
+      { slug: "video-chat-kandy", label: "Kandy", relation: "city" },
+      { slug: "video-chat-galle", label: "Galle", relation: "city" },
+      { slug: "tamil-video-chat", label: "Tamil chat", relation: "language" },
+      { slug: "sinhala-video-chat", label: "Sinhala chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-india", label: "India", relation: "sibling" },
+      { slug: "video-chat-thailand", label: "Thailand", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-colombo",
+    kind: "city",
+    name: "Colombo",
+    parent: "Sri Lanka",
+    primaryKeyword: "colombo video chat",
+    title: "Colombo Video Chat — Talk to Strangers Free",
+    description:
+      "Random video chat with people in Colombo. Free, anonymous, no signup — talk in Sinhala, Tamil or English, day or night.",
+    languages: ["සිංහල (Sinhala)", "தமிழ் (Tamil)", "English"],
+    peakHours: "20:30 – 00:30 IST",
+    timezone: "Asia/Colombo",
+    weight: 0.5,
+    tagline:
+      "Random video chat with Colombo. Sri Lanka's commercial capital, a genuine colonial-layered port history, and a conversation with no account at all.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Three colonial layers in one city",
+        body: "Colombo carries visible Portuguese, Dutch and British colonial history in its architecture and street names, stacked across roughly 450 years of foreign rule before independence in 1948. It's a genuinely layered history most residents can point to physically around them.",
+      },
+      {
+        kind: "infra",
+        title: "A growing tech and startup scene",
+        body: "Colombo has a real, expanding software and startup community, drawing on Sri Lanka's strong English-medium education system. It's a useful thing to know before assuming every conversation here will be about tourism or tea.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "සුභ උදෑසනක්", meaning: "Good morning (Sinhala)", say: "suba udhasanak" },
+      { phrase: "හොඳයි", meaning: "Good / fine (Sinhala)", say: "hondai" },
+      { phrase: "நல்லா இருக்கீங்களா?", meaning: "Are you doing well? (Tamil)", say: "nalla irukkeengalaa" },
+      { phrase: "பிறகு பார்க்கலாம்", meaning: "See you later (Tamil)", say: "piragu paarkalaam" },
+    ],
+    starters: [
+      { topic: "Galle Face Green", ask: "Do you still go down to Galle Face in the evenings?", why: "A genuinely popular local ritual, not just a tourist stop, that most Colombo residents have an opinion on." },
+      { topic: "City history", ask: "Which part of the city has the oldest buildings near you?", why: "Colombo's colonial-layered history means this usually gets a specific, interesting answer." },
+      { topic: "Work", ask: "Is Colombo's tech scene actually growing the way people say?", why: "A genuine, current topic beyond the tourism image most outsiders have of Sri Lanka." },
+    ],
+    places: ["Galle Face Green", "Fort", "Pettah", "Cinnamon Gardens", "Mount Lavinia", "Bambalapitiya"],
+    talkingPoints: [
+      "Galle Face Green, the seaside promenade that functions as the city's real evening social space",
+      "The visible Portuguese, Dutch and British layers of Colombo's colonial architecture and history",
+      "The city's growing tech and startup scene, a genuine and current counterpoint to Sri Lanka's tourism-heavy international image",
+      "Colombo's role as commercial capital versus Kandy's role as the island's cultural and religious centre",
+    ],
+    connectivityNote:
+      "Colombo has the strongest, most consistent mobile coverage in Sri Lanka — solid 4G across the city on Dialog, Mobitel and Airtel, with 5G expanding in central areas.",
+    localNote:
+      "Colombo runs on the same evening rhythm as the rest of Sri Lanka, but as the commercial capital it tends to have a later, more active queue than smaller towns on the island.",
+    intro: [
+      "Colombo is Sri Lanka's commercial capital and largest city, carrying visible layers of Portuguese, Dutch and British colonial history across roughly 450 years of foreign presence before 1948 independence.",
+      "It has the country's strongest mobile network coverage and a genuinely growing tech and startup community, built on Sri Lanka's strong English-medium education — a real counterpoint to the tourism-only image many outsiders have.",
+      "Galle Face Green, the seafront promenade, functions as the city's actual evening social space for residents, not just a tourist photo stop, and is a natural, specific thing to ask a Colombo resident about.",
+      "No account, no download — the call runs directly between browsers, and shares Sri Lanka's exact time offset with India, so evenings here fall at the same clock hour as across the water.",
+    ],
+    faqs: [
+      { question: "When is Colombo's chat traffic busiest?", answer: "Roughly 20:30 to 00:30 Sri Lanka time (IST, UTC+5:30) — the same window as the rest of the country, with a slightly later, busier queue than smaller towns." },
+      { question: "Will people in Colombo speak English?", answer: "Often, and fluently — Colombo has a strong English-medium education tradition, so English is more common here than the Sri Lankan national average." },
+      { question: "How's the internet connection?", answer: "Colombo has the strongest, most consistent mobile coverage in Sri Lanka — solid 4G with 5G expanding in central areas." },
+      { question: "Is Colombo just about tourism?", answer: "No — it's Sri Lanka's commercial capital with a genuine, growing tech and startup scene, alongside its colonial-era architecture and port history." },
+      { question: "Is it free?", answer: "Completely — no signup, no app, no subscription." },
+    ],
+    related: [
+      { slug: "video-chat-sri-lanka", label: "video chat across Sri Lanka", relation: "sibling" },
+      { slug: "video-chat-india", label: "India", relation: "sibling" },
+      { slug: "video-chat-kandy", label: "Kandy", relation: "city" },
+      { slug: "video-chat-galle", label: "Galle", relation: "city" },
+      { slug: "video-chat-jaffna", label: "Jaffna", relation: "city" },
+      { slug: "tamil-video-chat", label: "Tamil chat", relation: "language" },
+      { slug: "sinhala-video-chat", label: "Sinhala chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+    ],
+  },
+
+  {
     slug: "video-chat-united-states",
     kind: "country",
     name: "the United States",
