@@ -7,7 +7,7 @@ import JsonLd from "@/components/JsonLd";
 import LinkAccordion, { PillLink } from "@/components/directory/LinkAccordion";
 
 export const metadata: Metadata = generatePageSEO({
-  title: "Chat Directory — Every Country, City and Language",
+  title: "Chat Directory — Country, City and Language",
   description:
     "Browse Vidibro by country, city or language — who is online, what they speak, and when each market is busiest. Free video, voice or text chat.",
   slug: "/directory",

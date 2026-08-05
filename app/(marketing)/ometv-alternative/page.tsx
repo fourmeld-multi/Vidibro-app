@@ -3,7 +3,7 @@ import AlternativePageTemplate from "@/components/AlternativePageTemplate";
 import { generatePageSEO } from "@/lib/seo";
 
 export const metadata: Metadata = generatePageSEO({
-  title: "Best Free OmeTV Alternative 2026 (No App Download Required)",
+  title: "Best Free OmeTV Alternative 2026 (No App)",
   description:
     "Searching for an OmeTV alternative? Vidibro lets you video, voice or text chat with strangers in your browser — no app download, no signup.",
   slug: "/ometv-alternative",

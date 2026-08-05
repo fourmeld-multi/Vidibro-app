@@ -3,7 +3,7 @@ import AlternativePageTemplate from "@/components/AlternativePageTemplate";
 import { generatePageSEO } from "@/lib/seo";
 
 export const metadata: Metadata = generatePageSEO({
-  title: "Best Free AirTALK Alternative 2026 (Anonymous Voice & Video Chat)",
+  title: "Best Free AirTALK Alternative 2026 (No Signup)",
   description:
     "Looking for a free AirTALK alternative? Vidibro offers instant anonymous voice calls, HD video match and text chat with zero signup, on any browser.",
   slug: "/airtalk-alternative",

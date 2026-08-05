@@ -3,7 +3,7 @@ import AlternativePageTemplate from "@/components/AlternativePageTemplate";
 import { generatePageSEO } from "@/lib/seo";
 
 export const metadata: Metadata = generatePageSEO({
-  title: "Best Chatroulette Alternative 2026 (Instant 1-on-1 Video Match)",
+  title: "Best Chatroulette Alternative 2026 (Free)",
   description:
     "Looking for a modern Chatroulette alternative? Vidibro pairs you instantly with strangers for 1-on-1 video, voice and text. No coins, no signup.",
   slug: "/chatroulette-alternative",

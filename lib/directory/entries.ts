@@ -17,7 +17,7 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "country",
     name: "India",
     primaryKeyword: "video chat india",
-    title: "Video Chat India — Talk to Indian Strangers Free, No Signup",
+    title: "Video Chat India — Talk to Strangers Free",
     description:
       "Free random video chat across India. Match instantly with strangers in Mumbai, Delhi and Kolkata — no account, no phone number, works on Jio.",
     tagline:
@@ -146,7 +146,7 @@ export const ENTRIES: DirectoryEntry[] = [
     name: "Kolkata",
     parent: "India",
     primaryKeyword: "kolkata video chat",
-    title: "Kolkata Video Chat — Talk to Strangers in Kolkata Free",
+    title: "Kolkata Video Chat — Talk to Strangers Free",
     description:
       "Random video chat with people in Kolkata and across West Bengal. Free, anonymous, no signup — talk in Bengali or English, day or night.",
     languages: ["বাংলা (Bengali)", "हिन्दी (Hindi)", "English"],
@@ -267,7 +267,7 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "language",
     name: "Bengali",
     primaryKeyword: "bengali video chat",
-    title: "Bengali Video Chat — Talk to Strangers in Bangla, Free",
+    title: "Bengali Video Chat — Talk to Strangers Free",
     description:
       "Free video chat in Bengali. Meet Bangla-speaking strangers from West Bengal, Bangladesh and beyond — no signup, no app, video, voice or text.",
     languages: ["বাংলা (Bengali)", "English", "हिन्दी (Hindi)"],
@@ -387,7 +387,7 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "country",
     name: "Bangladesh",
     primaryKeyword: "video chat bangladesh",
-    title: "Video Chat Bangladesh — Talk to Bangladeshi Strangers Free",
+    title: "Video Chat Bangladesh — Talk to Strangers Free",
     description:
       "Free random video chat with people across Bangladesh. Match with strangers in Dhaka, Chittagong and Sylhet — no signup, works on Grameenphone and Robi.",
     languages: ["বাংলা (Bengali)", "English", "সিলেটি (Sylheti)"],
@@ -485,7 +485,7 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "country",
     name: "Pakistan",
     primaryKeyword: "video chat pakistan",
-    title: "Video Chat Pakistan — Talk to Pakistani Strangers Free",
+    title: "Video Chat Pakistan — Talk to Strangers Free",
     description:
       "Free random video chat with people across Pakistan. Meet strangers in Karachi, Lahore and Islamabad — no signup, no app, works on Jazz and Zong.",
     languages: ["اردو (Urdu)", "English", "پنجابی (Punjabi)", "پشتو (Pashto)"],
@@ -583,7 +583,7 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "country",
     name: "the Philippines",
     primaryKeyword: "video chat philippines",
-    title: "Video Chat Philippines — Talk to Filipino Strangers Free",
+    title: "Video Chat Philippines — Talk to Strangers Free",
     description:
       "Free random video chat with Filipinos. Meet people in Manila, Cebu and Davao instantly — no signup, no download, English widely spoken.",
     languages: ["Filipino / Tagalog", "English", "Cebuano / Bisaya", "Ilocano"],
@@ -682,7 +682,7 @@ export const ENTRIES: DirectoryEntry[] = [
     name: "Mumbai",
     parent: "India",
     primaryKeyword: "mumbai video chat",
-    title: "Mumbai Video Chat — Talk to Strangers in Mumbai Free",
+    title: "Mumbai Video Chat — Talk to Strangers Free",
     description:
       "Random video chat with people in Mumbai. Free, anonymous, no signup — meet strangers from Bandra to Andheri in Hindi, Marathi or English.",
     languages: ["हिन्दी (Hindi)", "मराठी (Marathi)", "English", "ગુજરાતી (Gujarati)"],
@@ -879,7 +879,7 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "language",
     name: "Hindi",
     primaryKeyword: "hindi video chat",
-    title: "Hindi Video Chat — Talk to Strangers in Hindi, Free",
+    title: "Hindi Video Chat — Talk to Strangers Free",
     description:
       "Free video chat in Hindi. Meet Hindi-speaking strangers across India and beyond — no signup, no app, video, voice or text.",
     languages: ["हिन्दी (Hindi)", "English", "اردو (Urdu)"],
@@ -1076,7 +1076,7 @@ export const ENTRIES: DirectoryEntry[] = [
     name: "Manila",
     parent: "the Philippines",
     primaryKeyword: "manila video chat",
-    title: "Manila Video Chat — Talk to Filipino Strangers Free",
+    title: "Manila Video Chat — Talk to Strangers Free",
     description:
       "Random video chat with people in Manila and Metro Manila. Free, anonymous, no signup — English widely spoken, no app needed.",
     languages: ["Filipino / Tagalog", "English"],
@@ -1175,7 +1175,7 @@ export const ENTRIES: DirectoryEntry[] = [
     name: "Karachi",
     parent: "Pakistan",
     primaryKeyword: "karachi video chat",
-    title: "Karachi Video Chat — Talk to Strangers in Karachi Free",
+    title: "Karachi Video Chat — Talk to Strangers Free",
     description:
       "Random video chat with people in Karachi. Free, anonymous, no signup — talk in Urdu, Sindhi or English with strangers across the city.",
     languages: ["اردو (Urdu)", "English", "سنڌي (Sindhi)", "پشتو (Pashto)"],
@@ -1274,7 +1274,7 @@ export const ENTRIES: DirectoryEntry[] = [
     name: "Bangalore",
     parent: "India",
     primaryKeyword: "bangalore video chat",
-    title: "Bangalore Video Chat — Talk to Strangers in Bangalore Free",
+    title: "Bangalore Video Chat — Talk to Strangers Free",
     description:
       "Random video chat with people in Bangalore. Free, anonymous, no signup — talk in English, Kannada or Hindi with strangers across the city.",
     languages: ["ಕನ್ನಡ (Kannada)", "English", "हिन्दी (Hindi)", "தமிழ் (Tamil)"],
@@ -1372,7 +1372,7 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "language",
     name: "Tamil",
     primaryKeyword: "tamil video chat",
-    title: "Tamil Video Chat — Talk to Strangers in Tamil, Free",
+    title: "Tamil Video Chat — Talk to Strangers Free",
     description:
       "Free video chat in Tamil. Meet Tamil-speaking strangers from Tamil Nadu, Sri Lanka, Singapore and Malaysia — no signup, no app.",
     languages: ["தமிழ் (Tamil)", "English"],
@@ -1568,7 +1568,7 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "topic",
     name: "random video chat",
     primaryKeyword: "random video chat",
-    title: "Random Video Chat — Talk to Strangers on Camera, Free",
+    title: "Random Video Chat — Talk to Strangers Free",
     description:
       "Free random video chat with strangers worldwide. One tap to match, no account, no download — works in any browser on phone or laptop.",
     tagline:
@@ -1604,7 +1604,7 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "topic",
     name: "random voice chat",
     primaryKeyword: "random voice chat",
-    title: "Random Voice Chat — Talk to Strangers Without Camera, Free",
+    title: "Random Voice Chat — Talk to Strangers Free",
     description:
       "Free random voice chat with strangers. Camera off, no account, no download — the whole experience of random chat without being on video.",
     tagline:
@@ -1640,7 +1640,7 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "topic",
     name: "anonymous text chat",
     primaryKeyword: "anonymous text chat",
-    title: "Anonymous Text Chat — Message Strangers Free, No Registration",
+    title: "Anonymous Text Chat — Message Strangers Free",
     description:
       "Free anonymous text chat with strangers. No camera, no microphone, no account — just typing to someone new, with nothing kept afterwards.",
     tagline:
@@ -1676,7 +1676,7 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "country",
     name: "Indonesia",
     primaryKeyword: "video chat indonesia",
-    title: "Video Chat Indonesia — Talk to Indonesian Strangers Free",
+    title: "Video Chat Indonesia — Talk to Strangers Free",
     description:
       "Free random video chat with people across Indonesia. Meet strangers in Jakarta, Surabaya and Bandung — no signup, works on Telkomsel and XL.",
     tagline:
@@ -1758,7 +1758,7 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "country",
     name: "Vietnam",
     primaryKeyword: "video chat vietnam",
-    title: "Video Chat Vietnam — Talk to Vietnamese Strangers Free",
+    title: "Video Chat Vietnam — Talk to Strangers Free",
     description:
       "Free random video chat with people across Vietnam. Meet strangers in Hanoi, Ho Chi Minh City and Da Nang — no signup, no download.",
     tagline:
@@ -1841,7 +1841,7 @@ export const ENTRIES: DirectoryEntry[] = [
     name: "Chittagong",
     parent: "Bangladesh",
     primaryKeyword: "chittagong video chat",
-    title: "Chittagong Video Chat — Talk to Strangers in Chattogram Free",
+    title: "Chittagong Video Chat — Talk to Strangers Free",
     description:
       "Random video chat with people in Chittagong. Free, anonymous, no signup — talk in Chittagonian, Bangla or English.",
     tagline:
@@ -2007,7 +2007,7 @@ export const ENTRIES: DirectoryEntry[] = [
     name: "Jakarta",
     parent: "Indonesia",
     primaryKeyword: "jakarta video chat",
-    title: "Jakarta Video Chat — Talk to Strangers in Jakarta Free",
+    title: "Jakarta Video Chat — Talk to Strangers Free",
     description:
       "Random video chat with people in Jakarta. Free, anonymous, no signup — talk in Bahasa or English with strangers across the capital.",
     tagline:
@@ -2173,7 +2173,7 @@ export const ENTRIES: DirectoryEntry[] = [
     name: "Lahore",
     parent: "Pakistan",
     primaryKeyword: "lahore video chat",
-    title: "Lahore Video Chat — Talk to Strangers in Lahore Free",
+    title: "Lahore Video Chat — Talk to Strangers Free",
     description:
       "Random video chat with people in Lahore. Free, anonymous, no signup required — talk in Punjabi, Urdu or English with strangers today.",
     tagline:
@@ -2337,7 +2337,7 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "country",
     name: "Nigeria",
     primaryKeyword: "video chat nigeria",
-    title: "Video Chat Nigeria — Talk to Nigerian Strangers Free",
+    title: "Video Chat Nigeria — Talk to Strangers Free",
     description:
       "Free random video chat with people across Nigeria. Meet strangers in Lagos, Abuja and Port Harcourt — no signup, English widely spoken.",
     tagline:
@@ -2593,7 +2593,7 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "country",
     name: "Brazil",
     primaryKeyword: "video chat brazil",
-    title: "Video Chat Brazil — Talk to Brazilian Strangers Free",
+    title: "Video Chat Brazil — Talk to Strangers Free",
     description:
       "Free random video chat with people across Brazil. Meet strangers in São Paulo, Rio and Salvador — no signup, no download.",
     tagline:

@@ -3,7 +3,7 @@ import AlternativePageTemplate from "@/components/AlternativePageTemplate";
 import { generatePageSEO } from "@/lib/seo";
 
 export const metadata: Metadata = generatePageSEO({
-  title: "Best Free Omegle Alternative 2026 (No Sign Up Required)",
+  title: "Best Free Omegle Alternative 2026 (No Signup)",
   description:
     "Looking for a safe Omegle alternative? Vidibro offers instant 1-on-1 video, voice and text chat with strangers worldwide — zero registration.",
   slug: "/omegle-alternative",

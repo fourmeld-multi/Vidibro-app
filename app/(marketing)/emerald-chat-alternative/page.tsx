@@ -3,7 +3,7 @@ import AlternativePageTemplate from "@/components/AlternativePageTemplate";
 import { generatePageSEO } from "@/lib/seo";
 
 export const metadata: Metadata = generatePageSEO({
-  title: "Best Free Emerald Chat Alternative 2026",
+  title: "Best Emerald Chat Alternative 2026 (Free)",
   description:
     "Looking for a clean Emerald Chat alternative? Vidibro offers instant 1-on-1 video, audio and text matching with zero ads and zero registration.",
   slug: "/emerald-chat-alternative",
