@@ -24,23 +24,6 @@ export const metadata: Metadata = generatePageSEO({
  * about how they relate. Collapsing them keeps the page scannable while leaving
  * every link in the HTML for a crawler to follow.
  */
-const REGIONS: Record<string, string> = {
-  "video-chat-india": "Asia",
-  "video-chat-bangladesh": "Asia",
-  "video-chat-pakistan": "Asia",
-  "video-chat-philippines": "Asia",
-  "video-chat-indonesia": "Asia",
-  "video-chat-vietnam": "Asia",
-  "video-chat-turkey": "Middle East & Africa",
-  "video-chat-nigeria": "Middle East & Africa",
-  "video-chat-russia": "Europe",
-  "video-chat-germany": "Europe",
-  "video-chat-brazil": "Americas",
-  "video-chat-mexico": "Americas",
-  "video-chat-united-states": "Americas",
-};
-const REGION_ORDER = ["Asia", "Middle East & Africa", "Europe", "Americas", "Oceania"];
-
 /** Content pages, not the app screens — the app routes are noindex. */
 const FEATURES = [
   { href: "/directory/random-video-chat", label: "random video chat" },
@@ -60,11 +43,6 @@ export default function DirectoryPage() {
   const countries = ENTRIES.filter((e) => e.kind === "country");
   const cities = ENTRIES.filter((e) => e.kind === "city");
   const languages = ENTRIES.filter((e) => e.kind === "language");
-
-  const byRegion = REGION_ORDER.map((region) => ({
-    region,
-    items: countries.filter((c) => (REGIONS[c.slug] ?? "Asia") === region),
-  })).filter((g) => g.items.length > 0);
 
   // Cities are grouped under their country so the list reads as structure
   // rather than as three hundred unrelated links.
@@ -121,24 +99,15 @@ export default function DirectoryPage() {
               </span>
               By Country
             </h2>
-            {byRegion.map((group) => (
-              <div key={group.region} className="mt-6">
-                {byRegion.length > 1 && (
-                  <div className="mb-3 text-[12px] font-bold uppercase tracking-[0.15em] text-purple-300/45">
-                    {group.region}
-                  </div>
-                )}
-                <div className="grid gap-2.5 sm:grid-cols-2">
-                  {group.items.map((c) => (
-                    <PillLink
-                      key={c.slug}
-                      href={hrefFor(c.slug)}
-                      label={`random video chat ${c.name.replace(/^the /, "").toLowerCase()}`}
-                    />
-                  ))}
-                </div>
-              </div>
-            ))}
+            <div className="mt-6 grid gap-2.5 sm:grid-cols-2">
+              {countries.map((c) => (
+                <PillLink
+                  key={c.slug}
+                  href={hrefFor(c.slug)}
+                  label={`random video chat ${c.name.replace(/^the /, "").toLowerCase()}`}
+                />
+              ))}
+            </div>
           </section>
 
           <section>
