@@ -46,20 +46,13 @@ export default function Navbar({
 
   return (
     <>
-    <header className="relative sticky top-0 z-50 bg-[#090518]/95 shadow-md">
-      {/* Glowing gradient bottom border to separate the bar from the page,
-          instead of a flat 10%-opacity border that barely reads on black.
-          Hidden while the mobile drawer is open: the line then falls between
-          the bar and the drawer, cutting a stray glowing streak across a panel
-          that is already visually attached to the header. Single copy, no
-          blur filter — a `filter` on a child of a `position: sticky` element
-          is a known Android Chrome compositing bug (the sticky layer can
-          drop a paint frame during fast scroll, i.e. the whole bar
-          vanishing), so the softer blurred duplicate was removed rather
-          than risk it. */}
-      {!mobileMenuOpen && (
-        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-purple-400/70 to-transparent" />
-      )}
+    <header className="sticky top-0 z-50 bg-[#090518]/95 shadow-md border-b border-purple-400/20">
+      {/* Was a glowing gradient line via an absolutely-positioned child div.
+          Removed entirely (not just de-blurred) after that still didn't fix
+          reports of the whole bar vanishing during fast scroll on Android —
+          any extra child inside a position:sticky element is one less thing
+          for the browser's compositor to get wrong mid-scroll. A plain
+          border-bottom on the header itself needs no extra layer at all. */}
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-3.5">
         
         {/* Brand Logo */}
