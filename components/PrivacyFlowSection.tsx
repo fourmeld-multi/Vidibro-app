@@ -30,8 +30,7 @@ export default function PrivacyFlowSection({ lang = "EN" }: { lang?: LanguageCod
             <motion.div
               key={step.title}
               initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: i * 0.12 }}
               className="relative flex flex-col gap-2.5 rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6"
             >
@@ -45,8 +44,7 @@ export default function PrivacyFlowSection({ lang = "EN" }: { lang?: LanguageCod
                 <motion.div
                   className="hidden sm:block absolute top-1/2 -right-3 w-6 h-px bg-gradient-to-r from-purple-400/60 to-transparent"
                   initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true }}
+                  animate={{ scaleX: 1 }}
                   transition={{ duration: 0.5, delay: i * 0.12 + 0.3 }}
                   style={{ transformOrigin: "left" }}
                 />

@@ -29,8 +29,7 @@ export default function HowItWorks({ lang = "EN" }: { lang?: LanguageCode }) {
           <motion.div
             key={step.number}
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1, duration: 0.5 }}
             className="relative overflow-hidden rounded-3xl bg-white/[0.04] border border-white/10 p-6 sm:p-7 backdrop-blur-xl hover:border-purple-500/40 transition shadow-xl group"
           >

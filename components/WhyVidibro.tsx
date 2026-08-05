@@ -35,8 +35,7 @@ export default function WhyVidibro({ lang = "EN" }: { lang?: LanguageCode }) {
             <motion.div
               key={item.title}
               initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.08, duration: 0.45 }}
               className="rounded-3xl bg-white/[0.04] border border-white/10 p-6 backdrop-blur-xl hover:border-purple-500/40 transition shadow-xl flex flex-col gap-3 group"
             >

@@ -33,8 +33,7 @@ export default function ZigZagFeatures() {
           <div className="lg:col-span-6 w-full">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               className="relative overflow-hidden rounded-3xl border border-purple-500/30 bg-[#0d0724]/90 p-6 sm:p-7 shadow-2xl backdrop-blur-2xl"
             >
@@ -70,8 +69,7 @@ export default function ZigZagFeatures() {
           <div className="lg:col-span-6 w-full order-2 lg:order-1">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               className="relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-[#09061a]/90 p-6 sm:p-7 shadow-2xl backdrop-blur-2xl"
             >
@@ -133,8 +131,7 @@ export default function ZigZagFeatures() {
           <div className="lg:col-span-6 w-full">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               className="relative overflow-hidden rounded-3xl border border-purple-500/30 bg-[#0d0724]/90 p-6 sm:p-7 shadow-2xl backdrop-blur-2xl"
             >
@@ -166,8 +163,7 @@ export default function ZigZagFeatures() {
           <div className="lg:col-span-6 w-full order-2 lg:order-1">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               className="relative overflow-hidden rounded-3xl border border-pink-500/30 bg-[#0c0620]/90 p-6 sm:p-7 shadow-2xl backdrop-blur-2xl"
             >
