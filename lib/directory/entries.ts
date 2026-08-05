@@ -3574,6 +3574,1216 @@ export const ENTRIES: DirectoryEntry[] = [
   },
 
   {
+    slug: "video-chat-uk",
+    kind: "country",
+    name: "the UK",
+    primaryKeyword: "video chat uk",
+    title: "Video Chat UK — Talk to British Strangers Free",
+    description:
+      "Free random video chat with people across the UK. Meet strangers in London, Manchester and Glasgow — no signup, no download.",
+    tagline:
+      "Free video chat with the UK. One evening peak, four nations, and a conversation that starts with no account at all.",
+    languages: ["English", "Polski (Polish)", "پنجابی (Punjabi)"],
+    peakHours: "21:00 – 01:00 GMT",
+    timezone: "Europe/London",
+    weight: 1.6,
+    places: ["London", "Manchester", "Birmingham", "Glasgow", "Leeds", "Liverpool"],
+    talkingPoints: [
+      "Football, specifically which club and how badly they're doing this season — genuinely the fastest way into a real conversation",
+      "The weather, complained about with real affection and detail rather than as small talk filler",
+      "Regional accents — Scouse, Geordie, Glaswegian and Cockney are different enough that people often can't place each other on first listen",
+      "Tea, made a specific way and defended with real seriousness — milk-first-or-last is a genuine, ongoing argument",
+      "The North-South divide, a real economic and cultural fault line that most people have a strong opinion on",
+    ],
+    connectivityNote:
+      "EE, O2, Vodafone and Three all run solid 4G with growing 5G in cities. Rural coverage across Scotland, Wales and parts of Northern England is genuinely patchier, so video may soften outside urban areas while voice and text hold up fine.",
+    localNote:
+      "The UK is four nations, not one — Scotland, Wales and Northern Ireland each have distinct identities, and assuming everyone is 'English' is a common and mildly irritating mistake. The single time zone keeps the evening peak sharp and predictable, from about nine at night to one in the morning.",
+    safetyNote:
+      "British self-deprecating humour can read as genuine self-criticism to people unfamiliar with it — it usually isn't. Taking early jokes at face value is a common cross-cultural mix-up here.",
+    etiquette:
+      "Queue-jumping, even accidentally, is taken seriously. Self-deprecating humour is the default register for a first conversation, not literal pessimism — matching it tends to land better than earnest compliments early on.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Four nations under one time zone",
+        body: "Scotland, Wales, Northern Ireland and England each have distinct accents, some devolved politics and, in Wales' case, a living second language. It's worth asking which nation someone is from rather than assuming England by default.",
+      },
+      {
+        kind: "culture",
+        title: "The weather is a genuine daily topic, not filler",
+        body: "Discussing the weather in the UK isn't a substitute for real conversation the way it can be elsewhere — it's a real, detailed, ongoing topic people have opinions about. Leaning into it rather than past it tends to work well.",
+      },
+      {
+        kind: "infra",
+        title: "Polish is the UK's second most spoken language",
+        body: "Following large-scale migration since the mid-2000s, Polish is now the most common non-English first language across the UK, ahead of Punjabi and Urdu. It's a genuinely useful thing to know rather than assume everyone here speaks only English at home.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Alright?", meaning: "A greeting, not usually a real question about wellbeing", say: "ol-RYTE" },
+      { phrase: "Cheers", meaning: "Thanks, or goodbye — does double duty", say: "CHEERZ" },
+      { phrase: "Not bad", meaning: "Often means genuinely good — British understatement", say: "not BAD" },
+      { phrase: "Fancy a cuppa?", meaning: "Would you like a tea?", say: "FAN-see a CUP-uh" },
+    ],
+    starters: [
+      { topic: "Football", ask: "Who do you support, and how's the season going for them?", why: "Reliably opens a longer, more animated conversation than almost anything else here." },
+      { topic: "Regions", ask: "Can people tell where you're from just by your accent?", why: "UK accents vary enough over short distances that this usually gets a real, specific answer." },
+      { topic: "Tea", ask: "Milk first or milk last?", why: "A genuinely contested, low-stakes debate that almost everyone has a firm opinion on." },
+      { topic: "Weather", ask: "Has the weather actually been as bad as everyone's saying?", why: "Takes the national pastime seriously instead of dismissing it as small talk." },
+    ],
+    intro: [
+      "The UK runs on a single time zone, which keeps its evening chat peak sharp and predictable — from around nine at night to one in the morning, without the rolling bands a larger country like the US has.",
+      "It's genuinely four nations rather than one: England, Scotland, Wales and Northern Ireland each carry distinct accents, some devolved politics, and in Wales a living second language, and assuming everyone is simply 'English' is a common, mildly irritating mistake worth avoiding.",
+      "Football is the fastest route into a real conversation here — which club someone supports, and how the season is going, reliably opens up more than a generic opener would. Regional accents are also a genuine talking point: Scouse, Geordie and Glaswegian differ enough that people often can't place each other.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "When is the UK's chat traffic busiest?", answer: "Roughly 21:00 to 01:00 GMT — a single, sharp evening window since the whole UK runs on one time zone." },
+      { question: "Is everyone in the UK English?", answer: "No — the UK is four nations: England, Scotland, Wales and Northern Ireland, each with distinct identity and, in Wales' case, a living second language." },
+      { question: "What language besides English will I hear?", answer: "Polish is the most common non-English first language in the UK following large-scale migration since the mid-2000s, ahead of Punjabi and Urdu." },
+      { question: "How's the connection across the UK?", answer: "Solid 4G and growing 5G in cities on EE, O2, Vodafone and Three. Rural Scotland, Wales and parts of Northern England run patchier — video may soften there while voice and text stay solid." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-london", label: "London", relation: "city" },
+      { slug: "video-chat-manchester", label: "Manchester", relation: "city" },
+      { slug: "video-chat-glasgow", label: "Glasgow", relation: "city" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "polish-video-chat", label: "Polish chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-france", label: "France", relation: "sibling" },
+      { slug: "video-chat-poland", label: "Poland", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-london",
+    kind: "city",
+    name: "London",
+    parent: "the UK",
+    primaryKeyword: "london video chat",
+    title: "London Video Chat — Talk to Strangers Free",
+    description:
+      "Random video chat with people in London. Free, anonymous, no signup — talk in English or one of 300+ other languages, any time.",
+    languages: ["English", "Polski (Polish)", "اردو (Urdu)"],
+    peakHours: "21:30 – 01:30 GMT",
+    timezone: "Europe/London",
+    weight: 0.9,
+    tagline:
+      "Random video chat with London. One of the most linguistically diverse cities on Earth, and a conversation that starts with no account at all.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Over 300 languages spoken",
+        body: "London is regularly cited as one of the most linguistically diverse cities on Earth, with over 300 languages spoken across its boroughs. A match here speaking a language other than English at home is closer to the norm than the exception.",
+      },
+      {
+        kind: "infra",
+        title: "The Tube shapes daily geography",
+        body: "The London Underground, opened in 1863, is the oldest metro system in the world and still defines how most residents think about distance — measured in tube stops and line changes rather than miles.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "You alright?", meaning: "Standard greeting, not a real health check", say: "you ol-RYTE" },
+      { phrase: "Mind the gap", meaning: "Famous Tube announcement, said half-jokingly in daily life", say: "mynd thuh gap" },
+      { phrase: "Sound", meaning: "Good / agreed (more common outside London but widely understood)", say: "sownd" },
+      { phrase: "See you later", meaning: "Standard goodbye", say: "see yoo LAY-ter" },
+    ],
+    starters: [
+      { topic: "Boroughs", ask: "Which borough are you in, and does it actually match its reputation?", why: "London's boroughs differ enough in character that this gets a specific, real answer." },
+      { topic: "The Tube", ask: "What's the worst tube line, honestly?", why: "A shared daily frustration that almost every Londoner has a strong opinion on." },
+      { topic: "Diversity", ask: "What language do you actually speak at home?", why: "With over 300 languages spoken across the city, this is a genuine, not rhetorical, question." },
+    ],
+    places: ["Camden", "Shoreditch", "Notting Hill", "Brixton", "Canary Wharf", "Greenwich"],
+    talkingPoints: [
+      "How different London's boroughs feel from each other — Shoreditch, Notting Hill and Canary Wharf could be different cities",
+      "The Underground, the world's oldest metro system, and the specific frustrations of whichever line someone relies on",
+      "London's enormous linguistic diversity — over 300 languages spoken across the city",
+      "The cost of living, a real and constant topic among residents rather than a cliché",
+    ],
+    connectivityNote:
+      "London has dense, fast mobile and fibre coverage across almost the entire city on EE, O2, Vodafone and Three, with 5G widely available in central boroughs.",
+    localNote:
+      "London runs slightly later than the UK national average — the queue here stays busy past half past nine and doesn't fully empty until around 1:30am.",
+    intro: [
+      "London is the UK's capital and by a wide margin its largest city, and one of the most linguistically diverse cities on Earth — over 300 languages are spoken across its boroughs, making a language other than English at home closer to the norm than the exception for many residents.",
+      "The Underground, opened in 1863 and still the oldest metro system in the world, quietly shapes how most Londoners think about their own city — distance measured in tube stops and line changes rather than miles.",
+      "Boroughs here differ enough in character that they can feel like different cities entirely: Shoreditch's creative scene, Notting Hill's residential calm and Canary Wharf's financial towers sit within the same city limits but couldn't feel more distinct.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Will everyone in London speak English natively?", answer: "Most people speak fluent English, but London is one of the most linguistically diverse cities in the world, with over 300 languages spoken — many residents grew up speaking something else at home." },
+      { question: "When is London's chat traffic busiest?", answer: "Roughly 21:30 to 01:30 GMT, a little later than the UK national average." },
+      { question: "How's the connection in London?", answer: "Strong — dense mobile and fibre coverage across nearly the whole city, with 5G widely available in central boroughs." },
+      { question: "Do London boroughs really feel that different?", answer: "Yes, genuinely — Shoreditch, Notting Hill and Canary Wharf have distinct characters despite being minutes apart on the map." },
+      { question: "Is it free?", answer: "Completely — no signup, no app, no subscription." },
+    ],
+    related: [
+      { slug: "video-chat-uk", label: "video chat across the UK", relation: "sibling" },
+      { slug: "video-chat-france", label: "France", relation: "sibling" },
+      { slug: "video-chat-manchester", label: "Manchester", relation: "city" },
+      { slug: "video-chat-glasgow", label: "Glasgow", relation: "city" },
+      { slug: "video-chat-birmingham", label: "Birmingham", relation: "city" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "polish-video-chat", label: "Polish chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+    ],
+  },
+
+  {
+    slug: "video-chat-france",
+    kind: "country",
+    name: "France",
+    primaryKeyword: "video chat france",
+    title: "Video Chat France — Talk to French Strangers Free",
+    description:
+      "Free random video chat with people from France. Talk in French or English — no signup, no download, instant matching any time.",
+    tagline:
+      "Free video chat with France. Café culture, strong opinions and a conversation that starts with no account at all.",
+    languages: ["Français (French)", "English"],
+    peakHours: "20:00 – 00:00 CET",
+    timezone: "Europe/Paris",
+    weight: 1.5,
+    places: ["Paris", "Marseille", "Lyon", "Toulouse", "Nice", "Bordeaux"],
+    talkingPoints: [
+      "Regional food rivalries — Lyon's bouchons, Provençal cooking and Norman butter-and-cream all claim to be the 'real' French cuisine",
+      "Café terrace culture, a genuine daily ritual for lingering over one coffee rather than a quick stop",
+      "Cinema, which France treats as a serious cultural institution — French cinema has its own strong identity distinct from Hollywood",
+      "Strikes and protests, a normal, expected part of French civic life rather than a rare event",
+      "The strict separation of work and personal time, including a genuine cultural resistance to checking email after hours",
+    ],
+    connectivityNote:
+      "Orange, SFR, Bouygues and Free all run solid 4G with expanding 5G in cities. Rural coverage in central and southern France is patchier, though still generally usable for voice and text.",
+    localNote:
+      "French daily rhythm skews later than much of northern Europe — dinner commonly starts around 8pm, and the evening chat peak here reflects that later start.",
+    safetyNote:
+      "Directness in French conversation, including disagreement, is not considered rude the way it might read in a more indirect culture — it's a normal register, not hostility.",
+    etiquette:
+      "A simple 'bonjour' before getting into a conversation is genuinely expected and its absence is noticed — skipping straight to a question can land as abrupt.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Strikes are a normal part of civic life",
+        body: "Grèves (strikes) are a routine, expected feature of French public life, not a rare crisis — transport, education and public services all see them regularly. It's a genuinely mainstream topic of daily conversation rather than a sensitive one.",
+      },
+      {
+        kind: "culture",
+        title: "One coffee, an hour at the table",
+        body: "Sitting at a café terrace for an hour over a single coffee is completely normal here, and waiters won't rush you the way they might elsewhere. It reflects a broader French resistance to rushing daily life.",
+      },
+      {
+        kind: "legal",
+        title: "The right to disconnect is written into law",
+        body: "France has a genuine legal 'right to disconnect' for many employees, protecting them from being expected to answer work messages outside hours. It's a real reflection of how seriously personal time is protected here.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Salut", meaning: "Hi (casual)", say: "sah-LU" },
+      { phrase: "Ça va?", meaning: "How's it going?", say: "sah VAH" },
+      { phrase: "C'est top", meaning: "That's great", say: "say TOP" },
+      { phrase: "À plus", meaning: "See you later (casual)", say: "ah PLU" },
+    ],
+    starters: [
+      { topic: "Food regions", ask: "What's the food from your region that outsiders always get wrong?", why: "French regional cuisine is a genuine source of pride and a good, specific opener." },
+      { topic: "Strikes", ask: "Is there a strike happening near you right now?", why: "A regular, normal feature of French life that usually gets a real, current answer." },
+      { topic: "Café culture", ask: "How long do you usually sit at a café before anyone rushes you?", why: "Highlights a genuinely different relationship with time than many other cultures." },
+      { topic: "Cinema", ask: "What's a French film everyone here has seen that never made it abroad?", why: "Moves past the handful of exported French films most outsiders already know." },
+    ],
+    intro: [
+      "France runs a later daily rhythm than much of northern Europe — dinner commonly starts around 8pm — and the evening chat peak here reflects that, starting later and running past midnight.",
+      "Café culture is a genuine, unhurried daily ritual: sitting at a terrace for an hour over a single coffee is completely normal, and it reflects a broader French resistance to rushing through daily life that shows up in conversation too.",
+      "Two things are worth knowing before a call: strikes and protests are a routine, expected part of French civic life rather than a rare crisis, and French directness — including open disagreement — is a normal conversational register here, not rudeness.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Will people in France speak English?", answer: "Often in cities and among younger people, but French is still the safer default expectation, and a simple 'bonjour' before diving in is genuinely appreciated." },
+      { question: "Why do the French talk about strikes so much?", answer: "Because they're a routine, normal part of civic life here, not a rare event — transport and public services see them regularly, and it's a completely mainstream topic." },
+      { question: "When is France's chat traffic busiest?", answer: "Roughly 20:00 to midnight Central European Time, reflecting France's later daily rhythm." },
+      { question: "Is directness considered rude in French conversation?", answer: "Not really — open disagreement is a normal conversational register here rather than a sign of hostility." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-paris", label: "Paris", relation: "city" },
+      { slug: "video-chat-marseille", label: "Marseille", relation: "city" },
+      { slug: "video-chat-lyon", label: "Lyon", relation: "city" },
+      { slug: "french-video-chat", label: "French chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-uk", label: "the UK", relation: "sibling" },
+      { slug: "video-chat-spain", label: "Spain", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-paris",
+    kind: "city",
+    name: "Paris",
+    parent: "France",
+    primaryKeyword: "paris video chat",
+    title: "Paris Video Chat — Talk to Strangers Free",
+    description:
+      "Random video chat with people in Paris. Free, anonymous, no signup — talk in French or English, day or night, no download needed.",
+    languages: ["Français (French)", "English"],
+    peakHours: "20:30 – 00:30 CET",
+    timezone: "Europe/Paris",
+    weight: 0.9,
+    tagline:
+      "Random video chat with Paris. Twenty arrondissements, café terraces on every corner, and a conversation with no account needed.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Twenty spirals, not a grid",
+        body: "Paris is divided into 20 arrondissements arranged in a clockwise spiral from the centre, and locals identify strongly with their number — asking which arrondissement someone lives in is a completely normal, specific opener.",
+      },
+      {
+        kind: "infra",
+        title: "The Métro reaches almost everywhere",
+        body: "Paris has one of the densest metro networks in the world relative to its size — most points in the city are within a short walk of a station, which shapes how compactly Parisians think about distance.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Coucou", meaning: "Hi (very casual, friendly)", say: "koo-KOO" },
+      { phrase: "C'est chaud", meaning: "That's tough / intense (slang)", say: "say SHOH" },
+      { phrase: "Grave", meaning: "Totally / for real (common slang agreement)", say: "grahv" },
+      { phrase: "Bonne soirée", meaning: "Have a good evening", say: "bun swa-RAY" },
+    ],
+    starters: [
+      { topic: "Arrondissement", ask: "Which arrondissement, and would you actually recommend living there?", why: "A specific, genuinely revealing question locals enjoy answering." },
+      { topic: "Tourist spots", ask: "Do you ever actually go to the Eiffel Tower, or is that purely a tourist thing now?", why: "Separates lived experience from the postcard image of the city." },
+      { topic: "Café life", ask: "What's your regular café, and what do you always order?", why: "Gets a specific, personal answer rather than a generic one about Parisian cafés." },
+    ],
+    places: ["Le Marais", "Montmartre", "Latin Quarter", "Champs-Élysées", "Belleville", "Bastille"],
+    talkingPoints: [
+      "How different each arrondissement feels — Montmartre's hilltop village feel versus the Champs-Élysées' polish",
+      "The Métro's density, and how compactly it makes most Parisians think about getting anywhere",
+      "The gap between the postcard image of Paris and the real, everyday city residents actually live in",
+      "Café terrace culture as a genuine daily ritual rather than a tourist photo opportunity",
+    ],
+    connectivityNote:
+      "Paris has dense, fast mobile and fibre coverage across the entire city on Orange, SFR, Bouygues and Free, with strong 5G availability in central arrondissements.",
+    localNote:
+      "Paris runs a touch later than the French national average — dinner and socialising commonly stretch past 9pm, and the chat queue here stays active correspondingly late.",
+    intro: [
+      "Paris is France's capital and its largest city, laid out in 20 arrondissements arranged in a clockwise spiral from the centre — a structure locals identify with strongly and are happy to talk about.",
+      "The Métro is one of the densest metro networks in the world relative to city size, putting most points in Paris within a short walk of a station, and it shapes how compactly residents think about distance.",
+      "There's a real gap between the postcard image most visitors carry and the everyday city residents actually live in — café terrace culture is genuine daily ritual here, not a tourist backdrop, and asking about someone's actual routine tends to get a much more interesting answer than asking about landmarks.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "When is Paris's chat traffic busiest?", answer: "Roughly 20:30 to 00:30 Central European Time, slightly later than the French national average." },
+      { question: "Will people in Paris speak English?", answer: "Often, especially younger residents, but French remains the safer default — a simple 'bonjour' first is genuinely appreciated." },
+      { question: "What are arrondissements?", answer: "Paris's 20 administrative districts, arranged in a clockwise spiral from the centre. Locals identify strongly with their number and it's a natural thing to ask about." },
+      { question: "How's the connection in Paris?", answer: "Strong — dense mobile and fibre coverage citywide, with solid 5G in central arrondissements." },
+      { question: "Is it free?", answer: "Completely — no signup, no app, no subscription." },
+    ],
+    related: [
+      { slug: "video-chat-france", label: "video chat across France", relation: "sibling" },
+      { slug: "video-chat-uk", label: "the UK", relation: "sibling" },
+      { slug: "video-chat-marseille", label: "Marseille", relation: "city" },
+      { slug: "video-chat-lyon", label: "Lyon", relation: "city" },
+      { slug: "video-chat-toulouse", label: "Toulouse", relation: "city" },
+      { slug: "french-video-chat", label: "French chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+    ],
+  },
+
+  {
+    slug: "video-chat-spain",
+    kind: "country",
+    name: "Spain",
+    primaryKeyword: "video chat spain",
+    title: "Video Chat Spain — Talk to Spanish Strangers Free",
+    description:
+      "Free random video chat with people from Spain. Talk in Spanish, Catalan or English — no signup, no download, instant matching.",
+    tagline:
+      "Free video chat with Spain. Late dinners, strong regional identity, and a conversation that starts with no account needed.",
+    languages: ["Español (Spanish)", "Català (Catalan)", "English"],
+    peakHours: "22:00 – 02:00 CET",
+    timezone: "Europe/Madrid",
+    weight: 1.4,
+    places: ["Madrid", "Barcelona", "Valencia", "Seville", "Bilbao"],
+    talkingPoints: [
+      "Football, and specifically the Real Madrid–Barcelona rivalry (El Clásico), one of the most intense in world sport",
+      "Dinner timing — 9 or 10pm is completely normal here, genuinely later than almost anywhere else in Europe",
+      "Regional identity, especially Catalonia's — Catalan is a living, distinct language and a real point of pride and, at times, political tension",
+      "Tapas culture, which is about sharing and grazing over hours rather than a single sit-down meal",
+      "Flamenco, rooted specifically in Andalusia in the south rather than being a generic 'Spanish' export",
+    ],
+    connectivityNote:
+      "Movistar, Vodafone and Orange run strong 4G and growing 5G across Spanish cities. Coverage is reliable in most tourist and urban areas, with some thinning in rural interior regions.",
+    localNote:
+      "Spain's daily clock runs notably later than its geography would suggest — the country sits on Central European Time despite being roughly aligned with the UK, which pushes dinner, socialising and this chat queue's peak later than almost anywhere else in Europe.",
+    safetyNote:
+      "Catalan independence is a genuinely live, sometimes contentious political topic — worth treading carefully rather than assuming a casual, settled view either way.",
+    etiquette:
+      "Physical warmth in conversation — enthusiasm, interruption as engagement rather than rudeness — is normal here and shouldn't be read as pushiness.",
+    spotlights: [
+      {
+        kind: "time",
+        title: "The wrong time zone for its geography",
+        body: "Spain runs on Central European Time despite sitting roughly in line with the UK and Portugal geographically — a legacy of a mid-20th-century political decision. The practical effect is a daily rhythm that runs later than the sun really suggests it should.",
+      },
+      {
+        kind: "culture",
+        title: "Catalan is a living language, not a dialect",
+        body: "Catalan is a distinct Romance language, not a regional variant of Spanish, spoken natively across Catalonia and used in schools, media and government there. Assuming everyone in Barcelona speaks Spanish first can be a genuine, noticed mistake.",
+      },
+      {
+        kind: "culture",
+        title: "El Clásico is more than a football match",
+        body: "Real Madrid versus Barcelona carries real political and regional weight beyond the sport itself, tied to Madrid-Catalonia tension. It's a genuinely charged fixture, not just a big game — worth knowing before assuming it's a neutral topic.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "¿Qué tal?", meaning: "How's it going?", say: "keh tahl" },
+      { phrase: "Qué guay", meaning: "How cool", say: "keh gwhy" },
+      { phrase: "Vale", meaning: "Okay / got it", say: "BAH-leh" },
+      { phrase: "Hasta luego", meaning: "See you later", say: "AHS-tah loo-EH-go" },
+    ],
+    starters: [
+      { topic: "Dinner time", ask: "What time do you actually eat dinner?", why: "Spain's genuinely late dinner hour reliably surprises outsiders and gets a real, specific answer." },
+      { topic: "Regional identity", ask: "Do you feel more Spanish or more [region]?", why: "Regional identity is a real, felt thing here, especially in Catalonia and the Basque Country." },
+      { topic: "Football", ask: "Real Madrid or Barcelona, and how strongly do you feel about it?", why: "Gets past a generic football question into the rivalry's real regional weight." },
+      { topic: "Tapas", ask: "What's your go-to tapas order?", why: "A specific, personal question that gets past the tourist-menu version of tapas culture." },
+    ],
+    intro: [
+      "Spain runs on Central European Time despite sitting roughly in line with the UK geographically, a legacy of a mid-20th-century political decision — the practical result is a daily rhythm that runs later than the sun suggests, with dinner commonly at 9 or 10pm and the chat queue here peaking well after most of Europe has gone quiet.",
+      "Regional identity runs deep and genuinely varies — Catalan is a distinct, living language spoken across Catalonia rather than a dialect of Spanish, and Basque identity carries its own real weight too. Assuming a single 'Spanish' culture applies everywhere is a common outsider mistake.",
+      "Football carries real regional and political charge here, especially the Real Madrid-Barcelona rivalry, which reflects genuine Madrid-Catalonia tension rather than being just a big match — worth knowing before treating it as a neutral topic.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Why does Spain's chat traffic peak so late?", answer: "Spain runs on Central European Time despite its geography, pushing daily life — dinner, socialising, and this queue's peak — later than almost anywhere else in Europe, commonly past 10pm." },
+      { question: "Is Catalan just a Spanish dialect?", answer: "No — Catalan is a distinct Romance language, spoken natively across Catalonia and used in schools, media and government there, not a variant of Spanish." },
+      { question: "Is it safe to discuss Catalan independence?", answer: "It's a genuinely live, sometimes contentious political topic. Worth approaching carefully rather than assuming a casual, settled view either way." },
+      { question: "When is Spain's chat traffic busiest?", answer: "Roughly 22:00 to 02:00 Central European Time — genuinely later than most other European countries." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-madrid", label: "Madrid", relation: "city" },
+      { slug: "video-chat-barcelona", label: "Barcelona", relation: "city" },
+      { slug: "video-chat-valencia", label: "Valencia", relation: "city" },
+      { slug: "spanish-video-chat", label: "Spanish chat", relation: "language" },
+      { slug: "catalan-video-chat", label: "Catalan chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-france", label: "France", relation: "sibling" },
+      { slug: "video-chat-italy", label: "Italy", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-madrid",
+    kind: "city",
+    name: "Madrid",
+    parent: "Spain",
+    primaryKeyword: "madrid video chat",
+    title: "Madrid Video Chat — Talk to Strangers Free",
+    description:
+      "Random video chat with people in Madrid. Free, anonymous, no signup — talk in Spanish or English, any time, day or very late night.",
+    languages: ["Español (Spanish)", "English"],
+    peakHours: "22:30 – 02:30 CET",
+    timezone: "Europe/Madrid",
+    weight: 0.8,
+    tagline:
+      "Random video chat with Madrid. Spain's capital, its latest nightlife, and a conversation with no account needed.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "A nightlife that starts after most cities sleep",
+        body: "Madrid's bars and clubs routinely don't fill up until after midnight, with some venues staying busy until sunrise. It's a genuine, citywide rhythm rather than a niche scene — one reason this chat queue stays lively so late.",
+      },
+      {
+        kind: "infra",
+        title: "El Retiro is the city's real living room",
+        body: "Retiro Park functions as Madrid's genuine shared outdoor space — packed on weekends with locals rather than tourists. Asking whether someone was in Retiro recently is a natural, specific local question.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Madrileño/a", meaning: "A person from Madrid — a genuine point of local pride", say: "mah-dree-LEN-yo" },
+      { phrase: "Mola mucho", meaning: "Really cool (Madrid slang)", say: "MOH-lah MOO-cho" },
+      { phrase: "¿Nos vemos?", meaning: "Shall we meet up?", say: "nos VEH-mos" },
+      { phrase: "Un beso", meaning: "A kiss — common warm sign-off, platonic here", say: "oon BEH-so" },
+    ],
+    starters: [
+      { topic: "Nightlife", ask: "What time do you actually head out on a night out?", why: "Madrid's genuinely late nightlife rhythm reliably surprises outsiders." },
+      { topic: "Retiro", ask: "Were you in Retiro this weekend?", why: "A specific, real local ritual most Madrileños actually take part in." },
+      { topic: "Football", ask: "Real Madrid or Atlético?", why: "Madrid has two major clubs with genuinely different fanbases and identities — a good, local-specific question." },
+    ],
+    places: ["Retiro Park", "Gran Vía", "Malasaña", "Chueca", "La Latina", "Salamanca"],
+    talkingPoints: [
+      "Madrid's genuinely late nightlife rhythm, where places don't fill until after midnight",
+      "Retiro Park as the city's real shared outdoor space, especially on weekends",
+      "The Real Madrid–Atlético Madrid city rivalry, distinct from the Real Madrid–Barcelona national one",
+      "Gran Vía's constant energy versus the quieter, older streets of La Latina",
+    ],
+    connectivityNote:
+      "Madrid has strong, consistent 4G and growing 5G coverage across the city on Movistar, Vodafone and Orange — among the most reliable networks in Spain.",
+    localNote:
+      "Madrid runs even later than the Spanish national average — this queue often stays genuinely busy past 2am, in step with the city's real nightlife rhythm.",
+    intro: [
+      "Madrid is Spain's capital and its largest city, known for a nightlife rhythm that starts after many other cities have gone quiet — bars and clubs routinely don't fill until after midnight, and this chat queue reflects that same late energy.",
+      "Retiro Park functions as the city's genuine shared outdoor space, especially on weekends, when it fills with locals rather than tourists — a natural, specific thing to ask a Madrileño about.",
+      "Madrid has two major football clubs, Real Madrid and Atlético, whose local rivalry is genuinely distinct from Real Madrid's national one with Barcelona — a useful distinction before assuming every football conversation here is about El Clásico.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "When is Madrid's chat traffic busiest?", answer: "Roughly 22:30 to 02:30 Central European Time — even later than the Spanish national average, matching the city's genuine nightlife rhythm." },
+      { question: "Why does Madrid stay up so late?", answer: "It's a real, citywide rhythm — bars and clubs routinely don't fill until after midnight, and it shapes when people are actually online and chatting too." },
+      { question: "Is Real Madrid vs Atlético the same as El Clásico?", answer: "No — that's Madrid's own local rivalry, distinct from the Real Madrid-Barcelona national rivalry known as El Clásico." },
+      { question: "How's the connection in Madrid?", answer: "Strong — consistent 4G and growing 5G across the city, among the most reliable networks in Spain." },
+      { question: "Is it free?", answer: "Completely — no signup, no app, no subscription." },
+    ],
+    related: [
+      { slug: "video-chat-spain", label: "video chat across Spain", relation: "sibling" },
+      { slug: "video-chat-italy", label: "Italy", relation: "sibling" },
+      { slug: "video-chat-barcelona", label: "Barcelona", relation: "city" },
+      { slug: "video-chat-valencia", label: "Valencia", relation: "city" },
+      { slug: "video-chat-seville", label: "Seville", relation: "city" },
+      { slug: "spanish-video-chat", label: "Spanish chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+    ],
+  },
+
+  {
+    slug: "video-chat-italy",
+    kind: "country",
+    name: "Italy",
+    primaryKeyword: "video chat italy",
+    title: "Video Chat Italy — Talk to Italian Strangers Free",
+    description:
+      "Free random video chat with people from Italy. Talk in Italian or English — no signup, no download, instant matching any time.",
+    tagline:
+      "Free video chat with Italy. Regional food rivalries, strong opinions on coffee, and a conversation that starts with no account.",
+    languages: ["Italiano (Italian)", "English"],
+    peakHours: "21:00 – 01:00 CET",
+    timezone: "Europe/Rome",
+    weight: 1.4,
+    places: ["Rome", "Milan", "Naples", "Turin", "Florence", "Bologna"],
+    talkingPoints: [
+      "Regional food rivalries — pizza rules, pasta-to-sauce pairings and whose region invented what are all genuinely contested",
+      "Calcio (football), followed with real regional loyalty — Serie A rivalries run deep and specific",
+      "Coffee etiquette, including the real, widely observed rule against cappuccino after 11am",
+      "The North-South economic and cultural divide, a real and often-discussed fault line",
+      "Multi-generational family closeness — many young Italians live near or with family well into adulthood, and it's not stigmatised the way it can be elsewhere",
+    ],
+    connectivityNote:
+      "TIM, Vodafone and WindTre run solid 4G with expanding 5G in northern cities especially. Southern and rural areas run somewhat patchier, though generally usable coverage.",
+    localNote:
+      "Italy's north and south genuinely differ in pace, wealth and daily rhythm — treating the country as one uniform culture misses a real and often-discussed internal divide.",
+    safetyNote:
+      "Comparing regions unfavourably — implying the south is 'behind' the north, for instance — touches a real, sensitive nerve. Best left for the other person to raise, if at all.",
+    etiquette:
+      "Getting food specifics wrong — the wrong sauce with the wrong pasta shape, cappuccino ordered after lunch — is taken more seriously than it might sound, and correcting it is a normal, friendly part of conversation here, not rudeness.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Coffee has real rules",
+        body: "Ordering a cappuccino after 11am is a widely (though not universally) held faux pas — espresso is the standard order for the rest of the day. It's a small thing that genuinely matters to many Italians and a fun, safe topic to raise.",
+      },
+      {
+        kind: "culture",
+        title: "Pasta shape is not arbitrary",
+        body: "Which sauce goes with which pasta shape is treated as a real rule rather than a preference — thick ragù with tagliatelle, not spaghetti, for instance. Getting this wrong in conversation is a genuinely reliable way to spark a passionate, friendly correction.",
+      },
+      {
+        kind: "culture",
+        title: "The North-South divide is real and openly discussed",
+        body: "Economic and cultural differences between northern and southern Italy are significant and openly talked about, not a taboo subject. It's worth knowing rather than assuming Italy is culturally uniform top to bottom.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Ciao", meaning: "Hi / bye — works both ways", say: "chow" },
+      { phrase: "Come va?", meaning: "How's it going?", say: "KOH-meh vah" },
+      { phrase: "Che bello", meaning: "How lovely / how great", say: "keh BEL-lo" },
+      { phrase: "A dopo", meaning: "See you later", say: "ah DOH-po" },
+    ],
+    starters: [
+      { topic: "Food rules", ask: "What's a food combination from your region that you'd genuinely never do?", why: "Reliably gets a passionate, specific answer given how seriously Italian food regionalism is taken." },
+      { topic: "Coffee", ask: "Do you actually follow the no-cappuccino-after-11am rule?", why: "A small, fun, genuinely real cultural detail that most people have a take on." },
+      { topic: "Region", ask: "North or south — does the divide feel real where you're from?", why: "Opens up a genuine, openly discussed part of Italian identity." },
+      { topic: "Calcio", ask: "Which club, and is your city divided over it?", why: "Italian football rivalries are often hyper-local and specific, unlike a single national obsession." },
+    ],
+    intro: [
+      "Italy's evening chat peak runs from around nine at night to one in the morning, on a single time zone, and the country's food culture — genuinely contested pasta-and-sauce pairings, regional rivalries over who invented what — shows up constantly and reliably in conversation here.",
+      "Coffee etiquette is a small but real thing: cappuccino after 11am is widely seen as a faux pas, with espresso the standard order for the rest of the day, and it's a safe, fun detail to bring up early.",
+      "The North-South divide is genuine and openly discussed rather than a sensitive taboo — economic and cultural differences between the two halves of the country are significant, and treating Italy as culturally uniform misses something most Italians would immediately point out.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Is the cappuccino-after-11am rule real?", answer: "Widely observed, though not universal — espresso is the standard order later in the day, and it's a genuinely real, if small, point of etiquette many Italians care about." },
+      { question: "Is the North-South divide a sensitive topic?", answer: "It's real and openly discussed, not taboo — but comparing regions unfavourably (implying one is 'behind' the other) touches a real nerve, so it's best left for the other person to raise." },
+      { question: "When is Italy's chat traffic busiest?", answer: "Roughly 21:00 to 01:00 Central European Time, the country's standard evening window." },
+      { question: "Will people in Italy speak English?", answer: "Variably — better among younger, urban and northern Italians than the national average. Italian is the safer default to expect." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-rome", label: "Rome", relation: "city" },
+      { slug: "video-chat-milan", label: "Milan", relation: "city" },
+      { slug: "video-chat-naples", label: "Naples", relation: "city" },
+      { slug: "italian-video-chat", label: "Italian chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-spain", label: "Spain", relation: "sibling" },
+      { slug: "video-chat-netherlands", label: "Netherlands", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-rome",
+    kind: "city",
+    name: "Rome",
+    parent: "Italy",
+    primaryKeyword: "rome video chat",
+    title: "Rome Video Chat — Talk to Strangers Free",
+    description:
+      "Random video chat with people in Rome. Free, anonymous, no signup — talk in Italian or English, any time of day or night.",
+    languages: ["Italiano (Italian)", "English"],
+    peakHours: "21:30 – 01:30 CET",
+    timezone: "Europe/Rome",
+    weight: 0.8,
+    tagline:
+      "Random video chat with Rome. Ancient ruins built into daily life, aperitivo culture, and a conversation with no account needed.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Ancient history isn't a backdrop, it's the commute",
+        body: "Romans genuinely walk past 2,000-year-old ruins on the way to work — ancient sites are woven into ordinary daily geography here rather than roped off in a separate 'historic district'. It's easy to forget how unusual that actually is.",
+      },
+      {
+        kind: "culture",
+        title: "Aperitivo is a real pre-dinner ritual",
+        body: "The early-evening aperitivo — a drink with light snacks before dinner — is a genuine, near-universal Roman habit, not a tourist invention. Asking about someone's regular aperitivo spot is a natural, specific local question.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Daje", meaning: "Come on! / let's go — very Roman slang", say: "DYE-eh" },
+      { phrase: "Aò", meaning: "Hey! (Roman attention-getter)", say: "ah-OH" },
+      { phrase: "Che bello!", meaning: "How great!", say: "keh BEL-lo" },
+      { phrase: "Ci vediamo", meaning: "See you (standard)", say: "chee veh-dee-AH-mo" },
+    ],
+    starters: [
+      { topic: "Living with history", ask: "Do you actually walk past ancient ruins on your normal commute?", why: "A genuinely striking, real fact of daily life in Rome that most residents enjoy discussing." },
+      { topic: "Aperitivo", ask: "What's your regular aperitivo spot?", why: "A real, specific daily ritual rather than a tourist question about landmarks." },
+      { topic: "Traffic", ask: "Is Rome's traffic really as chaotic as its reputation?", why: "Gets a genuine, often colourful answer from residents who deal with it daily." },
+    ],
+    places: ["Trastevere", "Testaccio", "Monti", "Vatican City", "Trevi", "EUR"],
+    talkingPoints: [
+      "How ordinary it is here to pass genuinely ancient ruins on a normal daily commute",
+      "Rione (neighbourhood) identity — Trastevere, Testaccio and Monti each have a distinct character and loyal locals",
+      "Aperitivo as a real daily pre-dinner ritual, not a tourist invention",
+      "The particular chaos of Roman traffic, a shared and reliably animated topic among residents",
+    ],
+    connectivityNote:
+      "TIM, Vodafone and WindTre provide solid 4G across Rome with 5G expanding in central areas — generally reliable, though dense historic centre streets can occasionally soften signal.",
+    localNote:
+      "Rome's evenings run a little later than the Italian national average, with the chat queue staying active past 1:30am on busier nights.",
+    intro: [
+      "Rome is Italy's capital and one of the few cities on Earth where genuinely ancient history is woven into ordinary daily life rather than roped off in a museum district — residents routinely walk past 2,000-year-old ruins on their way to work.",
+      "Aperitivo, a pre-dinner drink with light snacks, is a real, near-daily ritual here rather than a tourist invention, and asking about someone's regular spot is a natural, specific way into conversation.",
+      "The city's rioni, or historic neighbourhoods, each carry a distinct identity — Trastevere's bohemian charm, Testaccio's food-market roots, Monti's boutique streets — and Romans identify with theirs strongly.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Do Romans really live around ancient ruins?", answer: "Yes, genuinely — it's ordinary daily geography here, not a separate historic district, and many residents pass 2,000-year-old sites on a normal commute." },
+      { question: "When is Rome's chat traffic busiest?", answer: "Roughly 21:30 to 01:30 Central European Time, slightly later than the Italian national average." },
+      { question: "What is aperitivo?", answer: "A real, near-daily Roman ritual — a pre-dinner drink with light snacks, typically in the early evening. Not a tourist invention." },
+      { question: "How's the connection in Rome?", answer: "Solid 4G with expanding 5G in central areas, though dense historic-centre streets can occasionally soften signal." },
+      { question: "Is it free?", answer: "Completely — no signup, no app, no subscription." },
+    ],
+    related: [
+      { slug: "video-chat-italy", label: "video chat across Italy", relation: "sibling" },
+      { slug: "video-chat-spain", label: "Spain", relation: "sibling" },
+      { slug: "video-chat-milan", label: "Milan", relation: "city" },
+      { slug: "video-chat-naples", label: "Naples", relation: "city" },
+      { slug: "video-chat-florence", label: "Florence", relation: "city" },
+      { slug: "italian-video-chat", label: "Italian chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+    ],
+  },
+
+  {
+    slug: "video-chat-netherlands",
+    kind: "country",
+    name: "the Netherlands",
+    primaryKeyword: "video chat netherlands",
+    title: "Video Chat Netherlands — Talk to Strangers Free",
+    description:
+      "Free random video chat with people from the Netherlands. Talk in Dutch or English — no signup, no download, instant matching.",
+    tagline:
+      "Free video chat with the Netherlands. Some of the best English in Europe, real directness, and a conversation with no account.",
+    languages: ["Nederlands (Dutch)", "English"],
+    peakHours: "20:30 – 00:30 CET",
+    timezone: "Europe/Amsterdam",
+    weight: 1.1,
+    places: ["Amsterdam", "Rotterdam", "The Hague", "Utrecht", "Eindhoven"],
+    talkingPoints: [
+      "Cycling, which is genuine daily infrastructure here rather than a hobby — more bikes than people nationally",
+      "Dutch directness, a real and often-discussed communication style that can read as blunt to outsiders but isn't meant that way",
+      "The country's relationship with water and land reclamation, a genuinely central part of national identity given a quarter of the country sits below sea level",
+      "Football, followed with real intensity, and the historic Ajax-Feyenoord rivalry specifically",
+      "Extremely high English proficiency, consistently ranked among the best in the world for a non-native-English country",
+    ],
+    connectivityNote:
+      "KPN, VodafoneZiggo and T-Mobile run some of the most reliable 4G and 5G networks in Europe, with dense coverage even in smaller towns. Connection issues here are rarely the local network's fault.",
+    localNote:
+      "Dutch directness is genuine and normal here, not rudeness — disagreement, blunt feedback and skipping small talk are all standard registers that read very differently than they would in a more indirect culture.",
+    safetyNote:
+      "What can feel like bluntness to first-time conversation partners is a normal communication style here, not hostility — worth not taking personally.",
+    etiquette:
+      "Getting straight to the point is appreciated more than extended small talk. A direct compliment or direct disagreement are both completely normal and not softened the way they might be elsewhere.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "More bikes than people",
+        body: "The Netherlands has more bicycles than residents, and cycling infrastructure — dedicated lanes, priority signals, bike parking garages — is treated as seriously as road infrastructure elsewhere. It's genuine daily transport, not a lifestyle choice.",
+      },
+      {
+        kind: "infra",
+        title: "A quarter of the country is below sea level",
+        body: "Roughly 26% of the Netherlands sits below sea level, managed through an extensive system of dikes, pumps and water boards that predate the modern state itself. Water management is a genuinely central, still-active part of national identity, not history.",
+      },
+      {
+        kind: "culture",
+        title: "Directness is the default, not an exception",
+        body: "Dutch communication style tends toward blunt, direct feedback and skipping small talk in favour of getting to the point — completely normal here, though it can read as unusually forward to people from more indirect cultures.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Hoi", meaning: "Hi (casual)", say: "hoy" },
+      { phrase: "Hoe gaat het?", meaning: "How's it going?", say: "hoo gaht het" },
+      { phrase: "Gezellig", meaning: "Cosy / convivial — a uniquely Dutch concept with no direct translation", say: "geh-ZEL-ikh" },
+      { phrase: "Doei", meaning: "Bye (casual)", say: "doo-ee" },
+    ],
+    starters: [
+      { topic: "Cycling", ask: "How far do you bike on a normal day?", why: "Cycling is genuine daily infrastructure here, and this gets a real, specific answer rather than a hobby anecdote." },
+      { topic: "Gezellig", ask: "Can you actually explain gezellig to someone who's never heard it?", why: "A uniquely Dutch concept people are usually happy to try to translate, and it never quite works — good conversation fuel." },
+      { topic: "Directness", ask: "Do you think Dutch directness gets misread by other cultures?", why: "A self-aware, often entertaining topic for Dutch speakers used to explaining themselves to outsiders." },
+      { topic: "Water", ask: "Do you live below sea level?", why: "A genuinely striking fact many Dutch people live with and rarely get asked about directly." },
+    ],
+    intro: [
+      "The Netherlands has some of the highest English proficiency of any non-native-English country in the world, which makes it one of the easier European markets here for cross-language conversation — though Dutch remains a genuine point of pride to use if you can.",
+      "Cycling is real daily infrastructure rather than a hobby — the country has more bicycles than residents, and dedicated lanes and bike-priority signals are treated as seriously as road infrastructure elsewhere.",
+      "Dutch directness is a real, normal communication style here — blunt feedback and skipping small talk in favour of getting straight to the point — and it's worth not reading it as rudeness when it shows up in conversation.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Will people in the Netherlands speak English?", answer: "Very likely, and fluently — the country consistently ranks among the best English proficiency of any non-native-English nation in the world." },
+      { question: "Is Dutch directness rude?", answer: "Not by local standards — blunt feedback and skipping small talk are completely normal registers here, even if they can feel unusually forward to people from more indirect cultures." },
+      { question: "When is Dutch chat traffic busiest?", answer: "Roughly 20:30 to 00:30 Central European Time, a standard evening window." },
+      { question: "How reliable is the internet?", answer: "Very — KPN, VodafoneZiggo and T-Mobile run some of the most reliable 4G and 5G networks in Europe, with dense coverage even outside major cities." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-amsterdam", label: "Amsterdam", relation: "city" },
+      { slug: "video-chat-rotterdam", label: "Rotterdam", relation: "city" },
+      { slug: "video-chat-the-hague", label: "The Hague", relation: "city" },
+      { slug: "dutch-video-chat", label: "Dutch chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-germany", label: "Germany", relation: "sibling" },
+      { slug: "video-chat-italy", label: "Italy", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-amsterdam",
+    kind: "city",
+    name: "Amsterdam",
+    parent: "the Netherlands",
+    primaryKeyword: "amsterdam video chat",
+    title: "Amsterdam Video Chat — Talk to Strangers Free",
+    description:
+      "Random video chat with people in Amsterdam. Free, anonymous, no signup — talk in Dutch or English, any time, day or night.",
+    languages: ["Nederlands (Dutch)", "English"],
+    peakHours: "21:00 – 01:00 CET",
+    timezone: "Europe/Amsterdam",
+    weight: 0.8,
+    tagline:
+      "Random video chat with Amsterdam. Canals older than most countries, one of Europe's most international cities, and no account needed.",
+    spotlights: [
+      {
+        kind: "diaspora",
+        title: "Genuinely more internationals than locals in places",
+        body: "Amsterdam has one of the highest shares of foreign-born residents of any European capital, and in parts of the city centre, English is heard as often as Dutch. A match here may well not be Dutch at all.",
+      },
+      {
+        kind: "infra",
+        title: "The canal ring is a UNESCO site people actually live in",
+        body: "Amsterdam's 17th-century canal ring is a UNESCO World Heritage Site, and unlike many such sites, people genuinely live and work inside it day to day rather than it being a preserved museum district.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Alsjeblieft", meaning: "Please / here you go", say: "AHLS-yuh-bleeft" },
+      { phrase: "Lekker", meaning: "Nice / tasty — used very broadly for anything good", say: "LEK-ker" },
+      { phrase: "Gezellig", meaning: "Cosy / convivial atmosphere", say: "geh-ZEL-ikh" },
+      { phrase: "Tot ziens", meaning: "See you later (more formal)", say: "tot zeens" },
+    ],
+    starters: [
+      { topic: "International city", ask: "Are you actually Dutch, or did you move here?", why: "With such a large international population, this is a genuine question rather than an assumption." },
+      { topic: "Cycling", ask: "Has a bike ever nearly hit you, or have you nearly hit someone?", why: "Amsterdam's cycling density makes this a near-universal, funny shared experience." },
+      { topic: "Canals", ask: "Do you actually live near a canal, or is that more of a postcard thing?", why: "Separates the tourist image from the real, everyday city." },
+    ],
+    places: ["Jordaan", "De Pijp", "Canal Ring", "Vondelpark", "Oud-West", "Noord"],
+    talkingPoints: [
+      "How international the city genuinely is, with English commonly heard alongside Dutch in the centre",
+      "Cycling density even by Dutch standards, and the near-universal experience of a bike near-miss",
+      "The gap between Amsterdam's tourist image and the quieter, more residential neighbourhoods like Oud-West and Noord",
+      "The 17th-century canal ring as a living, lived-in UNESCO site rather than a museum district",
+    ],
+    connectivityNote:
+      "Amsterdam has extremely dense, reliable 4G and 5G coverage across the entire city on KPN, VodafoneZiggo and T-Mobile — among the strongest urban networks in Europe.",
+    localNote:
+      "Amsterdam's evening rhythm is fairly standard for the Netherlands, though its large international population means the chat queue here can feel busy at hours that wouldn't suit an all-Dutch crowd.",
+    intro: [
+      "Amsterdam is the Netherlands' capital and by far its most internationally populated city — one of the highest shares of foreign-born residents of any European capital, and English is heard about as often as Dutch in parts of the centre.",
+      "Cycling density here is intense even by Dutch national standards, and a near-miss with a bike is close to a universal shared experience among residents, visitors and everyone in between.",
+      "The 17th-century canal ring is a UNESCO World Heritage Site that people genuinely live and work inside, not a preserved museum district — a real, lived-in piece of history rather than a backdrop.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Will I match with actual Dutch people in Amsterdam?", answer: "Often, but not always — Amsterdam has one of the highest shares of foreign-born residents of any European capital, so a match here may well not be Dutch." },
+      { question: "When is Amsterdam's chat traffic busiest?", answer: "Roughly 21:00 to 01:00 Central European Time, a fairly standard evening window for the Netherlands." },
+      { question: "Is the canal ring just for tourists?", answer: "No — it's a UNESCO World Heritage Site that people genuinely live and work inside day to day, not a preserved district set apart from real life." },
+      { question: "How reliable is Amsterdam's connection?", answer: "Extremely — dense 4G and 5G coverage across the whole city, among the strongest urban networks in Europe." },
+      { question: "Is it free?", answer: "Completely — no signup, no app, no subscription." },
+    ],
+    related: [
+      { slug: "video-chat-netherlands", label: "video chat across the Netherlands", relation: "sibling" },
+      { slug: "video-chat-germany", label: "Germany", relation: "sibling" },
+      { slug: "video-chat-rotterdam", label: "Rotterdam", relation: "city" },
+      { slug: "video-chat-the-hague", label: "The Hague", relation: "city" },
+      { slug: "video-chat-utrecht", label: "Utrecht", relation: "city" },
+      { slug: "dutch-video-chat", label: "Dutch chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+    ],
+  },
+
+  {
+    slug: "video-chat-poland",
+    kind: "country",
+    name: "Poland",
+    primaryKeyword: "video chat poland",
+    title: "Video Chat Poland — Talk to Polish Strangers Free",
+    description:
+      "Free random video chat with people from Poland. Talk in Polish or English — no signup, no download, instant matching any time.",
+    tagline:
+      "Free video chat with Poland. A country rebuilt twice over, a huge UK diaspora, and a conversation with no account needed.",
+    languages: ["Polski (Polish)", "English"],
+    peakHours: "20:00 – 00:00 CET",
+    timezone: "Europe/Warsaw",
+    weight: 1.2,
+    places: ["Warsaw", "Krakow", "Wroclaw", "Gdansk", "Poznan"],
+    talkingPoints: [
+      "WWII history, which is still genuinely present in national memory and family stories rather than a distant textbook subject",
+      "The huge Polish diaspora in the UK and Ireland, meaning many people here have close family living abroad",
+      "Post-1989 transformation — the shift from communism to a modern EU economy within a single lifetime for older generations",
+      "Vodka culture, including real etiquette around how and when it's shared, distinct from casual outsider assumptions",
+      "Catholic identity, which remains a genuinely significant part of national and family life for many Poles",
+    ],
+    connectivityNote:
+      "Orange, Play, Plus and T-Mobile run solid 4G with expanding 5G in major cities. Coverage is generally reliable even outside urban centres, one of the stronger networks in Central Europe.",
+    localNote:
+      "Poland's relationship with the UK is a genuine, common conversation thread — a huge Polish diaspora has lived and worked there since the mid-2000s, and family connections across the two countries are common.",
+    safetyNote:
+      "WWII and the communist era are recent enough in family memory to be genuinely sensitive for some people — worth letting the other person set the tone rather than probing directly.",
+    etiquette:
+      "A toast before drinking, even informally mentioned, is a small but genuine social nicety. Direct eye contact during a toast specifically is considered meaningful here, more than in many other cultures.",
+    spotlights: [
+      {
+        kind: "diaspora",
+        title: "A huge, recent diaspora in the UK",
+        body: "Since Poland joined the EU in 2004, over a million Poles have lived and worked in the UK at various points, making Polish the UK's most common non-English first language. It's a genuine, live connection between the two countries that comes up often.",
+      },
+      {
+        kind: "culture",
+        title: "Warsaw was rebuilt from near-total ruin",
+        body: "Around 85% of Warsaw was destroyed in WWII, and its Old Town was painstakingly rebuilt from historical paintings and photographs afterward — now a UNESCO site precisely because of that reconstruction, not despite it.",
+      },
+      {
+        kind: "culture",
+        title: "A single generation, two different countries",
+        body: "Many older Poles have lived under communism and in the current EU-integrated Poland within one lifetime — a genuinely dramatic transformation that shapes how different generations see the country very differently.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Cześć", meaning: "Hi (casual)", say: "cheshch" },
+      { phrase: "Jak się masz?", meaning: "How are you?", say: "yak shyeh mash" },
+      { phrase: "Super", meaning: "Great / awesome", say: "SOO-per" },
+      { phrase: "Na razie", meaning: "See you later (casual)", say: "nah RAH-zyeh" },
+    ],
+    starters: [
+      { topic: "UK connection", ask: "Do you have family in the UK or Ireland?", why: "With such a large diaspora, this is a genuine, common question rather than an assumption." },
+      { topic: "History", ask: "What's a family story from the war or communist era that stuck with you?", why: "Handled gently, this often gets a genuinely moving, specific answer many people are willing to share." },
+      { topic: "Warsaw's rebuild", ask: "Did you know Warsaw's Old Town was rebuilt from paintings after the war?", why: "A striking, real fact that usually leads into a deeper conversation about the city." },
+      { topic: "Change", ask: "How different is Poland now from how your parents grew up?", why: "Gets at the genuinely dramatic post-1989 transformation in a personal, specific way." },
+    ],
+    intro: [
+      "Poland runs a single evening peak from around eight at night to midnight Central European Time, and its recent history — WWII, the communist era, and rapid transformation since 1989 — is genuinely present in daily conversation rather than confined to textbooks.",
+      "A huge Polish diaspora has lived and worked in the UK since Poland joined the EU in 2004, making Polish the UK's most common non-English first language — a real, live connection that comes up often between the two markets.",
+      "Warsaw's Old Town, painstakingly rebuilt from historical paintings after roughly 85% of the city was destroyed in WWII, is a genuine point of national pride and a striking fact most visitors don't know going in.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Why do so many Poles have UK connections?", answer: "Since Poland joined the EU in 2004, over a million Poles have lived and worked in the UK at various points, making Polish the UK's most common non-English first language." },
+      { question: "Is it OK to ask about WWII or communism?", answer: "Approach gently — these periods are recent enough in family memory to be genuinely sensitive for some people. Best to let the other person set the tone." },
+      { question: "When is Poland's chat traffic busiest?", answer: "Roughly 20:00 to midnight Central European Time, a standard evening window." },
+      { question: "Will people in Poland speak English?", answer: "Often among younger, urban Poles, though Polish is still the safer default expectation with older generations." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-warsaw", label: "Warsaw", relation: "city" },
+      { slug: "video-chat-krakow", label: "Krakow", relation: "city" },
+      { slug: "video-chat-wroclaw", label: "Wroclaw", relation: "city" },
+      { slug: "polish-video-chat", label: "Polish chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-uk", label: "the UK", relation: "sibling" },
+      { slug: "video-chat-germany", label: "Germany", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-warsaw",
+    kind: "city",
+    name: "Warsaw",
+    parent: "Poland",
+    primaryKeyword: "warsaw video chat",
+    title: "Warsaw Video Chat — Talk to Strangers Free",
+    description:
+      "Random video chat with people in Warsaw. Free, anonymous, no signup — talk in Polish or English, any time of day or night.",
+    languages: ["Polski (Polish)", "English"],
+    peakHours: "20:30 – 00:30 CET",
+    timezone: "Europe/Warsaw",
+    weight: 0.7,
+    tagline:
+      "Random video chat with Warsaw. A city rebuilt almost from nothing, now one of Central Europe's fastest-growing capitals, and no account needed.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "A capital rebuilt almost from scratch",
+        body: "Roughly 85% of Warsaw was destroyed during WWII, and its historic Old Town was reconstructed afterward using paintings, photographs and architectural records — now a UNESCO World Heritage Site specifically because of that reconstruction effort.",
+      },
+      {
+        kind: "infra",
+        title: "One of Europe's fastest-changing skylines",
+        body: "Warsaw's business district has grown rapidly since 1989, adding modern skyscrapers alongside its rebuilt historic core — a genuinely visible contrast that most residents have watched happen within their own lifetime or their parents'.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Siema", meaning: "Hey (very casual)", say: "SHE-eh-mah" },
+      { phrase: "Spoko", meaning: "Cool / fine / no worries", say: "SPOH-koh" },
+      { phrase: "Dzięki", meaning: "Thanks (casual)", say: "JEN-kee" },
+      { phrase: "Do zobaczenia", meaning: "See you (standard)", say: "do zo-bah-CHEN-ya" },
+    ],
+    starters: [
+      { topic: "Rebuilt city", ask: "Does it feel strange knowing most of the Old Town is a reconstruction?", why: "A genuinely thought-provoking, real fact most Varsovians have a considered view on." },
+      { topic: "Skyline", ask: "Has the city changed a lot just in your lifetime?", why: "Warsaw's rapid post-1989 growth means this usually gets a specific, real answer." },
+      { topic: "Krakow rivalry", ask: "Warsaw or Krakow — where would you actually rather live?", why: "A genuine, friendly rivalry between Poland's two best-known cities." },
+    ],
+    places: ["Old Town", "Praga", "Mokotów", "Wilanów", "Powiśle", "Śródmieście"],
+    talkingPoints: [
+      "The Old Town's reconstruction from near-total ruin, using paintings and photographs as the blueprint",
+      "How fast the skyline has changed since 1989, visible within a single generation",
+      "The friendly Warsaw-Krakow rivalry over which city better represents modern Poland",
+      "Praga, the historic district on the river's east bank, which largely survived the war and feels genuinely different from the rebuilt centre",
+    ],
+    connectivityNote:
+      "Warsaw has strong 4G and growing 5G coverage across the city on Orange, Play, Plus and T-Mobile — reliable even in outer districts.",
+    localNote:
+      "Warsaw's evening chat traffic runs slightly later than the Polish national average, staying active past midnight on busier nights.",
+    intro: [
+      "Warsaw is Poland's capital, and one of the more striking rebuilt cities in Europe — roughly 85% of it was destroyed in WWII, and its historic Old Town was reconstructed afterward from paintings, photographs and architectural records, now a UNESCO site because of that reconstruction rather than despite it.",
+      "The skyline has changed dramatically since 1989, with a modern business district growing rapidly alongside the rebuilt historic core — a visible transformation many residents or their parents have watched happen firsthand.",
+      "Praga, the district on the river's eastern bank, largely survived the war intact and feels genuinely different from the reconstructed centre — a real, less-visited side of the city worth asking a local about.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Is Warsaw's Old Town really a reconstruction?", answer: "Yes — around 85% of the city was destroyed in WWII, and the Old Town was rebuilt afterward from paintings and photographs. It's a UNESCO site specifically because of that reconstruction." },
+      { question: "When is Warsaw's chat traffic busiest?", answer: "Roughly 20:30 to 00:30 Central European Time, slightly later than the Polish national average." },
+      { question: "Is Warsaw or Krakow more popular for tourists?", answer: "Krakow is generally more visited for its preserved old architecture, while Warsaw is the modern capital and largest city — a genuine, friendly rivalry exists between the two." },
+      { question: "How's the connection in Warsaw?", answer: "Strong — solid 4G and growing 5G across the city, reliable even in outer districts." },
+      { question: "Is it free?", answer: "Completely — no signup, no app, no subscription." },
+    ],
+    related: [
+      { slug: "video-chat-poland", label: "video chat across Poland", relation: "sibling" },
+      { slug: "video-chat-uk", label: "the UK", relation: "sibling" },
+      { slug: "video-chat-krakow", label: "Krakow", relation: "city" },
+      { slug: "video-chat-wroclaw", label: "Wroclaw", relation: "city" },
+      { slug: "video-chat-gdansk", label: "Gdansk", relation: "city" },
+      { slug: "polish-video-chat", label: "Polish chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+    ],
+  },
+
+  {
+    slug: "video-chat-canada",
+    kind: "country",
+    name: "Canada",
+    primaryKeyword: "video chat canada",
+    title: "Video Chat Canada — Talk to Strangers Free",
+    description:
+      "Free random video chat with people from Canada. Talk in English or French — no signup, no download, instant matching any time.",
+    tagline:
+      "Free video chat with Canada. A genuinely bilingual country, six time zones, and a conversation that starts with no account.",
+    languages: ["English", "Français (French)"],
+    peakHours: "20:00 – 00:00 ET",
+    timezone: "America/Toronto",
+    weight: 1.3,
+    places: ["Toronto", "Vancouver", "Montreal", "Calgary", "Ottawa"],
+    talkingPoints: [
+      "Hockey, followed with genuine national intensity — a losing streak by the local team is real, shared grief",
+      "The English-French divide, especially Quebec's distinct culture and language, which most Canadians take seriously rather than as a formality",
+      "Winter, discussed with real specificity — the difference between a mild coastal Vancouver winter and a brutal Prairie one is significant",
+      "Being mistaken for American, which many Canadians find genuinely, mildly irritating and are happy to explain the difference",
+      "Universal healthcare, a real point of national identity and pride, distinct from the US system just across the border",
+    ],
+    connectivityNote:
+      "Rogers, Bell and Telus run strong 4G and growing 5G in major cities. Canada's geography means huge stretches of the country have minimal coverage — rural and northern connectivity can be genuinely limited outside population centres.",
+    localNote:
+      "Canada spans six time zones, an even wider spread than the US, though the large majority of the population and chat traffic sits in the Eastern and Pacific zones, keeping the practical peak window manageable.",
+    safetyNote:
+      "Conflating Canada with the US, or assuming Canadian politics mirror American ones, is a common and genuinely tiresome mistake for many Canadians — worth avoiding.",
+    etiquette:
+      "Politeness is a genuine cultural norm here, not a stereotype — apologising even when not at fault is common, and matching that register tends to go over well.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "A genuinely bilingual country, not just officially",
+        body: "French is the primary daily language for millions of Canadians, especially in Quebec, and it's a lived reality rather than a symbolic second official language. Assuming everyone in Canada speaks English at home is a real, noticeable mistake.",
+      },
+      {
+        kind: "infra",
+        title: "Six time zones, but not evenly populated",
+        body: "Canada spans a wider time-zone range than the US, but the large majority of the population sits in the Eastern and Pacific zones around Toronto and Vancouver, which keeps the country's practical evening peak more contained than its geography would suggest.",
+      },
+      {
+        kind: "culture",
+        title: "Not American, and genuinely tired of the mix-up",
+        body: "Being assumed American — in accent, culture or politics — is a common and mildly irritating experience for many Canadians, who see real, meaningful differences in healthcare, politics and daily life despite the shared border and language.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Eh?", meaning: "A genuine, common verbal tic — not always a stereotype", say: "ay" },
+      { phrase: "Sorry", meaning: "Said reflexively, often not a real apology", say: "SOR-ee" },
+      { phrase: "Double-double", meaning: "Coffee with two creams, two sugars — a Tim Hortons staple order", say: "DUB-uhl DUB-uhl" },
+      { phrase: "Take care", meaning: "Warm, common sign-off", say: "tayk KAIR" },
+    ],
+    starters: [
+      { topic: "Winter", ask: "How bad does winter actually get where you are?", why: "Canada's winter varies hugely by region and reliably gets a specific, animated answer." },
+      { topic: "French-English divide", ask: "Do you speak French, or is that more of a Quebec thing where you are?", why: "A genuine, real question about a divide that actually shapes daily life for many Canadians." },
+      { topic: "American mix-up", ask: "What's the most annoying thing people assume about Canada?", why: "Most Canadians have a ready, often funny answer to this." },
+      { topic: "Hockey", ask: "How's your team doing this season?", why: "Hockey is followed with genuine national intensity and reliably opens a longer conversation." },
+    ],
+    intro: [
+      "Canada spans six time zones — an even wider range than the US — though the large majority of the population sits in the Eastern and Pacific zones around Toronto and Vancouver, which keeps the country's practical evening chat peak more contained than its geography would suggest.",
+      "It's a genuinely bilingual country, not just officially: French is the primary daily language for millions of Canadians, especially in Quebec, and assuming everyone speaks English at home is a real, noticeable mistake.",
+      "Being mistaken for American is a common and mildly irritating experience for many Canadians, who see meaningful, real differences in healthcare, politics and daily life despite the shared border and language — a topic most are happy to clarify, often with some humour.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Is Canada really bilingual?", answer: "Yes, genuinely — French is the primary daily language for millions of Canadians, especially in Quebec, not just a symbolic second official language." },
+      { question: "When is Canada's chat traffic busiest?", answer: "Roughly 20:00 to midnight Eastern Time — the largest single population and traffic concentration, even though the country spans six time zones total." },
+      { question: "Is it OK to say 'eh'?", answer: "It's a genuine, common verbal tic for many Canadians, not just a stereotype — using it naturally usually lands fine." },
+      { question: "How's the internet across Canada?", answer: "Strong in cities on Rogers, Bell and Telus, but Canada's vast geography means large rural and northern areas have minimal coverage." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-toronto", label: "Toronto", relation: "city" },
+      { slug: "video-chat-vancouver", label: "Vancouver", relation: "city" },
+      { slug: "video-chat-montreal", label: "Montreal", relation: "city" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "french-video-chat", label: "French chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-united-states", label: "the United States", relation: "sibling" },
+      { slug: "video-chat-france", label: "France", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-new-york",
+    kind: "city",
+    name: "New York",
+    parent: "the United States",
+    primaryKeyword: "new york video chat",
+    title: "New York Video Chat — Talk to Strangers Free",
+    description:
+      "Random video chat with people in New York. Free, anonymous, no signup — talk any time of day or night, the city that never sleeps.",
+    languages: ["English", "Español (Spanish)", "中文 (Chinese)"],
+    peakHours: "22:00 – 02:30 ET",
+    timezone: "America/New_York",
+    weight: 1.2,
+    tagline:
+      "Random video chat with New York. Five boroughs, a subway that never fully stops, and a conversation with no account needed.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Five boroughs, five different cities",
+        body: "Manhattan, Brooklyn, Queens, the Bronx and Staten Island are all technically New York City but have genuinely distinct identities and rivalries — a Brooklyn resident and a Manhattan resident will often describe the city quite differently.",
+      },
+      {
+        kind: "infra",
+        title: "The only major US subway that runs all night",
+        body: "New York's subway is one of the few major metro systems in the world that runs 24 hours a day, every day. It shapes the city's genuine round-the-clock culture in a way most other American cities simply can't match.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "What's good?", meaning: "Casual greeting", say: "wuts GOOD" },
+      { phrase: "On line", meaning: "New York-specific for 'in line' (queuing)", say: "on LYNE" },
+      { phrase: "Fuhgeddaboudit", meaning: "Forget about it — classic, still genuinely used", say: "fuh-GED-uh-bow-dit" },
+      { phrase: "Take it easy", meaning: "Casual goodbye", say: "tayk it EE-zee" },
+    ],
+    starters: [
+      { topic: "Boroughs", ask: "Which borough, and do you defend it against the others?", why: "Borough loyalty is real and usually gets an animated, specific answer." },
+      { topic: "Subway", ask: "What's your most reliable subway line, and your least?", why: "A shared daily experience nearly every New Yorker has strong opinions on." },
+      { topic: "Pace", ask: "Does the city ever actually feel like it slows down?", why: "New York's round-the-clock reputation is genuinely lived, not just a slogan, for many residents." },
+    ],
+    places: ["Manhattan", "Brooklyn", "Queens", "the Bronx", "Staten Island", "Harlem"],
+    talkingPoints: [
+      "Borough identity and the real, friendly rivalries between Manhattan, Brooklyn and Queens especially",
+      "The subway running 24 hours a day, one of very few major systems in the world that does",
+      "The genuine density and pace of the city, and how residents adjust to or push back against it",
+      "New York's huge immigrant population and the languages and food that come with it, block by block",
+    ],
+    connectivityNote:
+      "Verizon, AT&T and T-Mobile all run dense 4G and 5G coverage across New York City, among the strongest urban networks in the US, though signal can dip underground and between tall buildings.",
+    localNote:
+      "New York's chat traffic runs later than the US national average — the city's genuine round-the-clock culture keeps the queue busy well past 2am on many nights.",
+    intro: [
+      "New York City is made up of five boroughs — Manhattan, Brooklyn, Queens, the Bronx and Staten Island — that are technically one city but carry genuinely distinct identities, and borough loyalty is a real, common thread in conversation here.",
+      "The subway is one of very few major metro systems in the world that runs 24 hours a day, every day, and it shapes a genuine round-the-clock culture that few other American cities can match.",
+      "The city's density and pace are real, not exaggerated for effect, and residents have real, considered relationships with it — some love the constant motion, others actively push back against it, and both make for a good, specific conversation.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "When is New York's chat traffic busiest?", answer: "Roughly 22:00 to 02:30 Eastern Time — later than the US national average, driven by the city's genuine round-the-clock culture." },
+      { question: "Do boroughs really feel that different?", answer: "Yes, genuinely — Manhattan, Brooklyn, Queens, the Bronx and Staten Island each carry distinct identities and real, friendly rivalries." },
+      { question: "Is the subway really 24 hours?", answer: "Yes — it's one of very few major metro systems in the world that runs all day, every day, which shapes how the city actually lives at night." },
+      { question: "How's the connection in New York?", answer: "Strong — dense 4G and 5G coverage citywide, among the best urban networks in the US, though it can dip underground or between tall buildings." },
+      { question: "Is it free?", answer: "Completely — no signup, no app, no subscription." },
+    ],
+    related: [
+      { slug: "video-chat-united-states", label: "video chat across the United States", relation: "sibling" },
+      { slug: "video-chat-canada", label: "Canada", relation: "sibling" },
+      { slug: "video-chat-los-angeles", label: "Los Angeles", relation: "city" },
+      { slug: "video-chat-chicago", label: "Chicago", relation: "city" },
+      { slug: "video-chat-boston", label: "Boston", relation: "city" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "spanish-video-chat", label: "Spanish chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+    ],
+  },
+
+  {
+    slug: "video-chat-los-angeles",
+    kind: "city",
+    name: "Los Angeles",
+    parent: "the United States",
+    primaryKeyword: "los angeles video chat",
+    title: "LA Video Chat — Talk to Strangers Free, No Signup",
+    description:
+      "Random video chat with people in Los Angeles. Free, anonymous, no signup — talk any time of day or night, no download needed.",
+    languages: ["English", "Español (Spanish)"],
+    peakHours: "21:30 – 01:30 PT",
+    timezone: "America/Los_Angeles",
+    weight: 1.1,
+    tagline:
+      "Random video chat with LA. A city built around the car, no real single centre, and a conversation with no account needed.",
+    spotlights: [
+      {
+        kind: "infra",
+        title: "A city with no real centre",
+        body: "Unlike most major cities, LA doesn't have a single dominant downtown that everyone orbits — Hollywood, Santa Monica, Downtown and Pasadena all function as genuine hubs in their own right. Asking 'which part of LA' someone means gets a real, specific answer.",
+      },
+      {
+        kind: "culture",
+        title: "Built around the car, not the train",
+        body: "LA's sprawl and car-dependent layout are genuine, defining features of daily life here, unlike the dense, transit-first cities on the East Coast — commute times and distances are a real, common topic of complaint and comparison.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Hella", meaning: "Very / a lot (California slang)", say: "HEL-uh" },
+      { phrase: "The 405", meaning: "One of LA's most notoriously congested freeways", say: "the four-oh-five" },
+      { phrase: "For sure", meaning: "Agreement", say: "fer SHUR" },
+      { phrase: "Take it easy", meaning: "Casual goodbye", say: "tayk it EE-zee" },
+    ],
+    starters: [
+      { topic: "Which LA", ask: "Which part of LA do you actually mean when you say you live here?", why: "LA has no single centre, so this reliably gets a specific, real answer rather than a generic one." },
+      { topic: "Traffic", ask: "What's your worst freeway story?", why: "LA traffic is a shared, near-universal frustration that gets a detailed, often funny answer." },
+      { topic: "Industry", ask: "Are you actually in entertainment, or is that just the LA stereotype?", why: "Distinguishes the industry image from the much larger, more ordinary reality of the city." },
+    ],
+    places: ["Hollywood", "Santa Monica", "Downtown LA", "Silver Lake", "Pasadena", "Venice"],
+    talkingPoints: [
+      "The lack of a single city centre, and how differently Hollywood, Santa Monica and Downtown each feel",
+      "Genuinely car-dependent daily life, and the notorious traffic on freeways like the 405",
+      "The gap between the entertainment-industry image of LA and the much larger, more ordinary reality most residents live",
+      "Neighbourhood identity — Silver Lake's creative scene versus Pasadena's quieter, more residential feel",
+    ],
+    connectivityNote:
+      "Verizon, AT&T and T-Mobile provide strong 4G and growing 5G across Los Angeles, though the city's sprawl means quality can vary more block to block than in denser cities.",
+    localNote:
+      "LA's chat traffic runs later in local time than much of the country, reflecting the West Coast's later relative position in the US evening — the queue here often stays lively past 1am Pacific.",
+    intro: [
+      "Los Angeles doesn't have a single dominant centre the way most major cities do — Hollywood, Santa Monica, Downtown and Pasadena all function as genuine hubs in their own right, and asking which part of LA someone actually means gets a real, specific answer.",
+      "The city is genuinely built around the car rather than transit, unlike the denser East Coast cities, and traffic on freeways like the 405 is a real, shared daily frustration rather than a stereotype.",
+      "There's a real gap between the entertainment-industry image most outsiders have of LA and the much larger, more ordinary reality most residents actually live — most people here are not in the industry at all.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Does LA really not have a city centre?", answer: "Not a single dominant one, no — Hollywood, Santa Monica, Downtown and Pasadena all function as genuine hubs in their own right, which is unusual for a city this size." },
+      { question: "When is LA's chat traffic busiest?", answer: "Roughly 21:30 to 01:30 Pacific Time, reflecting the West Coast's later position in the US evening." },
+      { question: "Is everyone in LA in entertainment?", answer: "No — that's a real stereotype, but the large majority of residents work in completely ordinary jobs unrelated to the industry." },
+      { question: "How bad is LA traffic really?", answer: "Genuinely notorious — freeways like the 405 are a real, common source of daily frustration and a reliable conversation topic." },
+      { question: "Is it free?", answer: "Completely — no signup, no app, no subscription." },
+    ],
+    related: [
+      { slug: "video-chat-united-states", label: "video chat across the United States", relation: "sibling" },
+      { slug: "video-chat-canada", label: "Canada", relation: "sibling" },
+      { slug: "video-chat-new-york", label: "New York", relation: "city" },
+      { slug: "video-chat-chicago", label: "Chicago", relation: "city" },
+      { slug: "video-chat-san-francisco", label: "San Francisco", relation: "city" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "spanish-video-chat", label: "Spanish chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+    ],
+  },
+
+  {
     slug: "video-chat-united-states",
     kind: "country",
     name: "the United States",
