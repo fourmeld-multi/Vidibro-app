@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import TextChatContainer from "@/components/TextChatContainer";
 import { useWebRTC } from "@/hooks/useWebRTC";
+import { getReturnPath } from "@/lib/returnTo";
 
 export default function TextChatPage() {
   const router = useRouter();
@@ -23,9 +24,19 @@ export default function TextChatPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Fires on the in-app leave button AND on any other way this page goes
+  // away — browser/gesture back, closing the tab, navigating elsewhere —
+  // so matchmaking/signaling state never stays open after the chat ends.
+  useEffect(() => {
+    return () => {
+      leaveMatch();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   function handleLeave() {
     leaveMatch();
-    router.push("/");
+    router.push(getReturnPath("/text-chat"));
   }
 
   return (

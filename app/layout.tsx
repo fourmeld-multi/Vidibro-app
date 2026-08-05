@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import Background from "@/components/Background";
+import PathTracker from "@/components/PathTracker";
 import { BASE_URL } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 import "./globals.css";
@@ -142,6 +143,7 @@ export default function RootLayout({
             gtag('js', new Date());
             gtag('config', 'G-BSGKV3MTVF');`}
         </Script>
+        <PathTracker />
         <Background />
         {children}
       </body>

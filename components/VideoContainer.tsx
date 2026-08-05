@@ -752,7 +752,7 @@ export default function VideoContainer({
               dragConstraints={videoScreenRef}
               dragElastic={0.05}
               dragMomentum={false}
-              className="absolute top-16 right-3 z-30 w-36 aspect-video rounded-xl overflow-hidden border-2 border-white/20 bg-black shadow-2xl group cursor-grab active:cursor-grabbing"
+              className="absolute top-16 right-3 z-30 w-28 aspect-[3/4] rounded-xl overflow-hidden border-2 border-white/20 bg-black shadow-2xl group cursor-grab active:cursor-grabbing"
             >
               <video
                 ref={localVideoRef}

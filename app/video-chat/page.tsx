@@ -6,6 +6,7 @@ import VideoContainer from "@/components/VideoContainer";
 import CallInterruptedScreen from "@/components/CallInterruptedScreen";
 import PermissionBlockedScreen from "@/components/PermissionBlockedScreen";
 import { useWebRTC } from "@/hooks/useWebRTC";
+import { getReturnPath } from "@/lib/returnTo";
 
 export default function VideoChatPage() {
   const router = useRouter();
@@ -39,7 +40,7 @@ export default function VideoChatPage() {
   useEffect(() => {
     if (permissionDenied && !permissionBlocked) {
       leaveMatch();
-      router.replace("/");
+      router.replace(getReturnPath("/video-chat"));
     }
   }, [permissionDenied, permissionBlocked, leaveMatch, router]);
 
@@ -56,9 +57,19 @@ export default function VideoChatPage() {
     if (deviceBusy) leaveMatch();
   }, [deviceBusy, leaveMatch]);
 
+  // Fires on the in-app leave button AND on any other way this page goes
+  // away — browser/gesture back, closing the tab, navigating elsewhere —
+  // so the camera/mic hardware never stays on after the call ends.
+  useEffect(() => {
+    return () => {
+      leaveMatch();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   function handleLeave() {
     leaveMatch();
-    router.push("/");
+    router.push(getReturnPath("/video-chat"));
   }
 
   return (

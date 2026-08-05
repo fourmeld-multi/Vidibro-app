@@ -22,15 +22,29 @@ export type ChatMode = "video" | "audio" | "text";
 const SIGNALING_URL =
   process.env.NEXT_PUBLIC_SIGNALING_URL?.replace(/\/$/, "") || "http://localhost:4000";
 
-// Adaptive 480p / 24fps Media Constraints
-const VIDEO_CONSTRAINTS: MediaStreamConstraints = {
-  video: {
-    width: { ideal: 640, max: 640 },
-    height: { ideal: 480, max: 480 },
-    frameRate: { ideal: 24, max: 24 },
-  },
-  audio: true,
-};
+// Adaptive 480p / 24fps Media Constraints. Portrait on mobile (matches the
+// `md` breakpoint the mobile video layout itself switches on) so the
+// captured frame matches how a phone is actually held, instead of a fixed
+// 4:3-landscape capture getting cropped into a portrait-shaped box by
+// object-cover. Desktop keeps the original landscape capture — webcams are
+// physically landscape sensors, so there's nothing to orient there.
+function videoConstraints(): MediaStreamConstraints {
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+  return {
+    video: isMobile
+      ? {
+          width: { ideal: 480, max: 480 },
+          height: { ideal: 640, max: 640 },
+          frameRate: { ideal: 24, max: 24 },
+        }
+      : {
+          width: { ideal: 640, max: 640 },
+          height: { ideal: 480, max: 480 },
+          frameRate: { ideal: 24, max: 24 },
+        },
+    audio: true,
+  };
+}
 
 const AUDIO_ONLY_CONSTRAINTS: MediaStreamConstraints = { audio: true };
 
@@ -357,7 +371,7 @@ export function useWebRTC() {
       }
     }
 
-    const constraints = mode === "audio" ? AUDIO_ONLY_CONSTRAINTS : VIDEO_CONSTRAINTS;
+    const constraints = mode === "audio" ? AUDIO_ONLY_CONSTRAINTS : videoConstraints();
 
     // These three outcomes need to be told apart, because they mean different
     // things to the user. "Denied" is a choice they made. "Busy" is the device
