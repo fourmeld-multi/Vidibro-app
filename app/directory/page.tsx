@@ -37,6 +37,10 @@ const COMPARE = [
   { href: "/ometv-alternative", label: "ometv alternative" },
   { href: "/emerald-chat-alternative", label: "emerald chat alternative" },
   { href: "/airtalk-alternative", label: "airtalk alternative" },
+  { href: "/monkey-alternative", label: "monkey app alternative" },
+  { href: "/coomeet-alternative", label: "coomeet alternative" },
+  { href: "/camsurf-alternative", label: "camsurf alternative" },
+  { href: "/shagle-alternative", label: "shagle alternative" },
 ];
 
 export default function DirectoryPage() {

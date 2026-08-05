@@ -5566,6 +5566,10 @@ const REAL_ROUTES = new Set([
   "ometv-alternative",
   "emerald-chat-alternative",
   "airtalk-alternative",
+  "monkey-alternative",
+  "coomeet-alternative",
+  "camsurf-alternative",
+  "shagle-alternative",
 ]);
 
 export function resolvableRelated(entry: DirectoryEntry) {
