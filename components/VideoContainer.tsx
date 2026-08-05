@@ -949,12 +949,8 @@ export default function VideoContainer({
               onClick={(e) => e.stopPropagation()}
               className="absolute bottom-0 left-0 right-0 md:relative md:bottom-auto md:left-auto md:right-auto md:w-80 lg:w-96 h-[60%] md:h-full z-40 flex flex-col bg-black/60 md:bg-[#090518]/95 backdrop-blur-sm md:backdrop-blur-sm border-t md:border-t-0 md:border-l border-white/20 shadow-2xl flex-shrink-0"
             >
-              {/* Chat Header */}
-              <div className="flex items-center justify-between border-b border-white/15 px-4 py-3 bg-black/40 backdrop-blur-sm">
-                <div className="flex items-center gap-2">
-                  <MessageSquare size={16} className="text-cyan-400" />
-                  <span className="text-sm font-bold text-white">In-call messages</span>
-                </div>
+              {/* Chat Header — just a close control, nothing else to mis-tap */}
+              <div className="flex items-center justify-end border-b border-white/15 px-4 py-3 bg-black/40 backdrop-blur-sm">
                 <button
                   onClick={() => setChatOpen(false)}
                   className="rounded-full p-1 text-purple-300 hover:bg-white/10 hover:text-white"
@@ -1016,12 +1012,12 @@ export default function VideoContainer({
                   onChange={(e) => setChatDraft(e.target.value)}
                   placeholder={isConnected ? "Send message…" : "Waiting to connect…"}
                   disabled={!isConnected}
-                  className="flex-1 rounded-full bg-white/5 border border-white/15 px-4 py-2 text-xs text-white placeholder-purple-300/40 focus:outline-none focus:border-cyan-400 disabled:opacity-50"
+                  className="flex-1 rounded-full bg-gradient-to-r from-purple-600/20 via-pink-600/15 to-cyan-600/15 border border-purple-400/40 px-4 py-2 text-xs text-white placeholder-purple-300/50 focus:outline-none focus:border-pink-400/70 disabled:opacity-50"
                 />
                 <button
                   type="submit"
                   disabled={!chatDraft.trim() || !isConnected}
-                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full btn-gradient text-white shadow-md disabled:opacity-40 hover:scale-105 transition"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full btn-gradient text-white shadow-lg shadow-pink-500/30 disabled:opacity-40 hover:scale-105 transition"
                   aria-label="Send"
                 >
                   <Send size={14} />
