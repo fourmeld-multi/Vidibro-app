@@ -12,6 +12,13 @@ const nextConfig: NextConfig = {
   async redirects() {
     return directoryRedirects();
   },
+
+  // AppShowcaseCarousel pulls its 3 photos straight from Unsplash. Routing
+  // them through next/image gets automatic AVIF/WebP + correctly-sized
+  // requests instead of always shipping the raw 800px source.
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],
+  },
 };
 
 export default nextConfig;

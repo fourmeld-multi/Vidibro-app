@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { TRANSLATIONS, type LanguageCode } from "@/lib/translations";
@@ -145,8 +146,15 @@ export default function AppShowcaseCarousel({ lang = "EN" }: { lang?: LanguageCo
               aria-label={item.title}
               tabIndex={isFront ? 0 : -1}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={item.image} alt={item.title} className="absolute inset-0 h-full w-full object-cover" />
+              <Image
+                src={item.image}
+                alt={item.title}
+                fill
+                sizes="(max-width: 639px) 280px, 448px"
+                priority={idx === 0}
+                loading={idx === 0 ? undefined : "lazy"}
+                className="object-cover"
+              />
               <div className={`absolute inset-0 bg-gradient-to-t ${item.accent} mix-blend-multiply opacity-40`} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
