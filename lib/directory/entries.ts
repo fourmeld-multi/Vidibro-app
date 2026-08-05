@@ -4784,6 +4784,674 @@ export const ENTRIES: DirectoryEntry[] = [
   },
 
   {
+    slug: "video-chat-portugal",
+    kind: "country",
+    name: "Portugal",
+    primaryKeyword: "video chat portugal",
+    title: "Video Chat Portugal — Talk to Strangers Free",
+    description:
+      "Free random video chat with people from Portugal. Talk in Portuguese or English — no signup, no download, instant matching.",
+    tagline:
+      "Free video chat with Portugal. On the UK's clock, not Spain's, and a conversation that starts with no account needed.",
+    languages: ["Português (Portuguese)", "English"],
+    peakHours: "21:00 – 01:00 WET",
+    timezone: "Europe/Lisbon",
+    weight: 0.9,
+    places: ["Lisbon", "Porto", "Braga", "Coimbra", "Faro"],
+    talkingPoints: [
+      "Football — Benfica, Porto and Sporting rivalries run deep, alongside real national pride in Cristiano Ronaldo's career",
+      "Fado, the melancholic folk music genre native to Lisbon, genuinely still performed and listened to rather than a museum piece",
+      "Being distinct from Spain — Portuguese people take real, sometimes mildly irritated care to separate the two countries and languages",
+      "The Age of Discovery, a genuine source of national pride around 15th-century Portuguese explorers and navigation",
+      "Emigration — a huge historical and ongoing Portuguese diaspora across Brazil, France and the US means many people here have close family abroad",
+    ],
+    connectivityNote:
+      "MEO, Vodafone and NOS run solid 4G with growing 5G in Lisbon and Porto. Coverage is more variable in the rural interior and Algarve's smaller towns.",
+    localNote:
+      "Portugal sits on Western European Time (the same clock as the UK), not Central European Time like neighbouring Spain — a genuinely unusual geographic quirk for a country sharing a peninsula, and it means this queue's peak lands an hour earlier than Spain's.",
+    safetyNote:
+      "Conflating Portugal with Spain, or assuming Portuguese and Spanish are mutually intelligible in the same way Hindi and Urdu are, is a common and mildly grating mistake here — the languages differ more than outsiders expect.",
+    etiquette:
+      "A warm, unhurried greeting is appreciated before diving into a conversation. Directness about family and hometown is normal and welcomed early on.",
+    spotlights: [
+      {
+        kind: "time",
+        title: "On the UK's clock, not Spain's",
+        body: "Portugal runs on Western European Time, the same zone as the UK and Ireland, despite sharing a land border and peninsula with Spain, which sits an hour ahead on Central European Time. It's a genuine geographic oddity — and the reverse of Spain's own 'wrong time zone' situation.",
+      },
+      {
+        kind: "diaspora",
+        title: "A country shaped by leaving it",
+        body: "Portuguese emigration to Brazil, France, Luxembourg and the US has been substantial for generations, and it's genuinely common to meet someone here with immediate family living abroad. It shapes a real, ongoing sense of connection to a wider Portuguese-speaking world.",
+      },
+      {
+        kind: "culture",
+        title: "Not Spain, and it matters",
+        body: "Portuguese and Spanish are related but not mutually intelligible the way people sometimes assume, and conflating Portugal with Spain — culturally or linguistically — is a common outsider mistake that genuinely lands as mildly grating here.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Olá", meaning: "Hello", say: "oh-LAH" },
+      { phrase: "Tudo bem?", meaning: "How's it going?", say: "TOO-doo beng" },
+      { phrase: "Que fixe!", meaning: "How cool!", say: "keh FEE-sheh" },
+      { phrase: "Até logo", meaning: "See you later", say: "ah-TEH LOH-goo" },
+    ],
+    starters: [
+      { topic: "Spain vs Portugal", ask: "What's the most annoying thing people get wrong about Portugal versus Spain?", why: "A genuine, common frustration most Portuguese people are happy to set straight." },
+      { topic: "Fado", ask: "Do you actually listen to fado, or is that more for tourists now?", why: "Separates the tourist image from a music genre that's genuinely still alive here." },
+      { topic: "Diaspora", ask: "Do you have family living abroad?", why: "Portugal's large diaspora means this is a real, common question rather than an assumption." },
+      { topic: "Football", ask: "Benfica, Porto or Sporting?", why: "A genuine, deep club rivalry independent of the national team." },
+    ],
+    intro: [
+      "Portugal runs on Western European Time, the same clock as the UK and Ireland, despite sharing a peninsula and land border with Spain, which sits an hour ahead — a genuine geographic oddity that shifts this queue's evening peak earlier than Spain's.",
+      "Being mistaken for Spain, culturally or linguistically, is a common and mildly grating experience here — Portuguese and Spanish are related but not mutually intelligible the way outsiders sometimes assume, and most people are glad to set the record straight.",
+      "A substantial, ongoing Portuguese diaspora across Brazil, France, Luxembourg and the US means it's genuinely common to talk to someone with close family living abroad, and fado — Lisbon's native melancholic folk music — is still a real, living tradition rather than a museum piece.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Is Portugal on the same time zone as Spain?", answer: "No — Portugal uses Western European Time, the same as the UK, while Spain runs an hour ahead on Central European Time, despite sharing a peninsula." },
+      { question: "Are Portuguese and Spanish mutually intelligible?", answer: "Related, but not to the degree outsiders sometimes assume — conflating the two languages or cultures is a common mistake that genuinely lands as irritating here." },
+      { question: "When is Portugal's chat traffic busiest?", answer: "Roughly 21:00 to 01:00 Western European Time, the country's standard evening window." },
+      { question: "Will people in Portugal speak English?", answer: "Often, especially younger and urban residents, but Portuguese remains the safer default expectation." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-lisbon", label: "Lisbon", relation: "city" },
+      { slug: "video-chat-porto", label: "Porto", relation: "city" },
+      { slug: "video-chat-braga", label: "Braga", relation: "city" },
+      { slug: "portuguese-video-chat", label: "Portuguese chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-spain", label: "Spain", relation: "sibling" },
+      { slug: "video-chat-uk", label: "the UK", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-argentina",
+    kind: "country",
+    name: "Argentina",
+    primaryKeyword: "video chat argentina",
+    title: "Video Chat Argentina — Talk to Strangers Free",
+    description:
+      "Free random video chat with people from Argentina. Talk in Spanish — no signup, no download, instant matching any time of night.",
+    tagline:
+      "Free video chat with Argentina. Late dinners, mate shared in a circle, and a conversation that starts with no account.",
+    languages: ["Español (Spanish)", "English"],
+    peakHours: "22:30 – 02:30 ART",
+    timezone: "America/Argentina/Buenos_Aires",
+    weight: 1.1,
+    places: ["Buenos Aires", "Córdoba", "Rosario", "Mendoza", "La Plata"],
+    talkingPoints: [
+      "Football, followed with something close to religious intensity — Messi, Maradona and the Boca-River rivalry specifically",
+      "Mate, the shared herbal tea ritual — genuinely communal, passed around a circle rather than drunk individually",
+      "Asado, the Argentine barbecue tradition, a real weekend social institution rather than just a meal",
+      "Argentina's distinct Spanish accent and vocabulary, including 'vos' instead of 'tú', which sounds noticeably different from other Spanish-speaking countries",
+      "Inflation and economic instability, a genuine, ongoing lived reality most Argentines can speak to candidly and specifically",
+    ],
+    connectivityNote:
+      "Personal, Movistar and Claro run reasonable 4G in Buenos Aires and other major cities, with more variable coverage in Patagonia and rural interior provinces.",
+    localNote:
+      "Argentine dinner runs even later than Spain's — commonly after 9 or 10pm — and this queue's peak reflects that, staying quiet until well into the evening by most other countries' standards.",
+    safetyNote:
+      "Economic hardship is a genuine, widely shared experience here, and most people are candid about it if it comes up — but it's better to let them raise the specifics than to press for details.",
+    etiquette:
+      "If offered mate in a video call context (people do show it off), understand it's normally a shared, communal drink — describing it that way rather than assuming it's a personal beverage shows real familiarity.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Mate is communal, not individual",
+        body: "Yerba mate is traditionally prepared in one gourd and passed around a circle of friends, each person drinking through the same metal straw before passing it on. It's a genuinely social ritual, not just a caffeinated drink, and asking about someone's mate routine is a warm, specific opener.",
+      },
+      {
+        kind: "culture",
+        title: "Vos, not tú",
+        body: "Argentine Spanish uses 'vos' instead of the 'tú' most Spanish learners are taught, with its own distinct verb conjugations — a real, audible difference from Spain or Mexico's Spanish that surprises people expecting one uniform 'Spanish'.",
+      },
+      {
+        kind: "cost",
+        title: "Inflation is a real, daily topic",
+        body: "Argentina has experienced persistently high inflation for years, and it's a genuine, openly discussed part of daily life here — prices changing noticeably within weeks is a lived reality many Argentines can describe in specific, current detail.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "¿Qué onda?", meaning: "What's up? (very Argentine)", say: "keh OHN-dah" },
+      { phrase: "Che", meaning: "Hey / attention-getter, deeply Argentine", say: "cheh" },
+      { phrase: "Buenísimo", meaning: "Really great", say: "bweh-NEE-see-mo" },
+      { phrase: "Nos vemos", meaning: "See you", say: "nos VEH-mos" },
+    ],
+    starters: [
+      { topic: "Mate", ask: "Do you have your mate gear next to you right now?", why: "A genuinely common, warm daily ritual most Argentines are happy to show or describe." },
+      { topic: "Football", ask: "Boca or River?", why: "One of the most intense football rivalries in the world and a reliable route into an animated conversation." },
+      { topic: "Dinner time", ask: "What time do you actually eat dinner?", why: "Argentina's genuinely late dinner hour reliably surprises people and gets a specific answer." },
+      { topic: "Economy", ask: "How much have prices changed just this year?", why: "A real, current topic most Argentines can speak to candidly and specifically." },
+    ],
+    intro: [
+      "Argentina's evening chat peak starts notably late by most countries' standards — commonly after 10:30pm — reflecting a national dinner and social rhythm that runs even later than Spain's.",
+      "Football here is followed with something close to religious intensity, and the Boca-River rivalry specifically is one of the most intense derbies in world sport — a reliable route into a long, animated conversation.",
+      "Mate, the shared herbal tea ritual passed around a circle through one metal straw, is genuinely communal rather than an individual drink, and Argentine Spanish itself sounds distinct — 'vos' instead of 'tú', with its own conjugations — from the Spanish taught in most classrooms.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Why does Argentina's chat traffic peak so late?", answer: "Argentine daily life runs notably late, with dinner commonly after 9 or 10pm — later even than Spain — and the chat queue's peak reflects that same rhythm." },
+      { question: "Is Argentine Spanish different from other Spanish?", answer: "Yes, audibly — Argentina uses 'vos' instead of 'tú' with distinct verb conjugations, giving it a noticeably different sound and vocabulary from Spain or Mexico's Spanish." },
+      { question: "What is mate?", answer: "A shared herbal tea, traditionally prepared in one gourd and passed around a circle of people through the same metal straw — a genuinely communal ritual, not an individual drink." },
+      { question: "Is it OK to ask about Argentina's economy?", answer: "Generally yes — inflation and economic instability are openly, candidly discussed here. Better to let the specifics come from them rather than pressing directly, though." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-buenos-aires", label: "Buenos Aires", relation: "city" },
+      { slug: "video-chat-cordoba", label: "Córdoba", relation: "city" },
+      { slug: "video-chat-rosario", label: "Rosario", relation: "city" },
+      { slug: "spanish-video-chat", label: "Spanish chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-brazil", label: "Brazil", relation: "sibling" },
+      { slug: "video-chat-mexico", label: "Mexico", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-uae",
+    kind: "country",
+    name: "the UAE",
+    primaryKeyword: "video chat uae",
+    title: "Video Chat UAE — Free, Talk to Strangers Now",
+    description:
+      "Free random video chat with people in the UAE. Talk in Arabic, English or Hindi — no signup, no download, instant matching.",
+    tagline:
+      "Free video chat with the UAE. A country where expats outnumber citizens by far, and a conversation with no account needed.",
+    languages: ["العربية (Arabic)", "English", "हिन्दी (Hindi)"],
+    peakHours: "21:00 – 01:00 GST",
+    timezone: "Asia/Dubai",
+    weight: 0.9,
+    places: ["Dubai", "Abu Dhabi", "Sharjah", "Al Ain"],
+    talkingPoints: [
+      "The demographic reality: expats make up roughly 80-90% of the UAE's population, so a match here is statistically more likely to be from South Asia, the Philippines or elsewhere than Emirati",
+      "The country's extremely rapid transformation from a modest Gulf trading economy to a global city within a single lifetime for older residents",
+      "Ramadan, which genuinely reshapes daily rhythm nationwide — working hours shift and public eating/drinking during daylight is restricted for everyone",
+      "The desert-to-skyline contrast, and how normalised living alongside record-breaking architecture has become for residents",
+      "Hospitality customs, including the seriousness with which Emirati coffee and dates are offered as a welcoming gesture",
+    ],
+    connectivityNote:
+      "Etisalat and du run extremely fast, dense 5G and fibre coverage — among the best in the world. The genuine catch: historically, UAE telecom regulation has restricted or throttled VoIP and video-calling apps not licensed locally, and while access has loosened in recent years, it can still be inconsistent depending on the app and network.",
+    localNote:
+      "With expats making up the large majority of the population, a match here is more likely to be a long-term South Asian, Filipino or Western resident than an Emirati citizen — worth knowing rather than assuming.",
+    safetyNote:
+      "Public criticism of the government or royal family, and content the UAE considers indecent, carry real legal consequences here, not just social awkwardness. Best avoided entirely rather than tested.",
+    etiquette:
+      "Modesty in dress and language on camera is taken more seriously here than in many Western markets, reflecting genuinely different, actively enforced public norms — worth being mindful of rather than assuming anonymity removes the stakes.",
+    spotlights: [
+      {
+        kind: "diaspora",
+        title: "A country where citizens are the minority",
+        body: "Emirati citizens make up only a small fraction of the UAE's population — most residents are expats from South Asia, the Philippines, and elsewhere, many on long-term work visas. It's one of the most extreme expat-majority demographics anywhere, and shapes who you're actually likely to match with here.",
+      },
+      {
+        kind: "infra",
+        title: "Fast internet, inconsistent VoIP access",
+        body: "The UAE has some of the fastest fixed and mobile internet in the world, but telecom regulation has historically restricted unlicensed VoIP and video-calling services. Access has genuinely improved in recent years but can still vary — worth knowing this isn't a reflection of Vidibro's own reliability.",
+      },
+      {
+        kind: "legal",
+        title: "Real legal limits on speech and content",
+        body: "Criticism of the government, and content the UAE deems indecent, carry genuine legal risk here, not just social disapproval. This is enforced seriously, and it's worth steering around entirely rather than testing where the line is.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "مرحبا", meaning: "Hello", say: "mar-ha-ban" },
+      { phrase: "كيف حالك؟", meaning: "How are you?", say: "kayf ha-lak" },
+      { phrase: "شكراً", meaning: "Thank you", say: "shuk-ran" },
+      { phrase: "مع السلامة", meaning: "Goodbye", say: "ma-'as sa-la-ma" },
+    ],
+    starters: [
+      { topic: "Background", ask: "Are you originally from the UAE, or did you move here for work?", why: "Given the expat-majority population, this is a genuine, common question rather than an assumption." },
+      { topic: "Transformation", ask: "How much has the city you're in changed just in the last decade?", why: "The UAE's development pace is genuinely rapid and most residents have a specific, striking answer." },
+      { topic: "Ramadan", ask: "How does your daily routine change during Ramadan?", why: "A real, nationwide shift in rhythm that most residents, regardless of faith, can speak to." },
+    ],
+    intro: [
+      "The UAE has one of the most extreme expat-majority populations in the world — Emirati citizens are a small minority of residents, with most people here from South Asia, the Philippines and elsewhere on long-term work visas, so a match is statistically more likely to be an expat than an Emirati.",
+      "Internet infrastructure is genuinely excellent, among the fastest anywhere, but telecom regulation has historically restricted unlicensed VoIP and video-calling apps — access has improved in recent years but can still be inconsistent, which is worth knowing before assuming a connection issue is on Vidibro's end.",
+      "It's worth saying plainly: criticism of the government and content considered indecent carry real legal consequences here, not just social disapproval, and this is genuinely enforced — better avoided outright than tested.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Will I match with an actual Emirati in the UAE?", answer: "Possibly, but statistically it's more likely to be an expat — citizens are a small minority of the UAE's population, with most residents from South Asia, the Philippines and elsewhere." },
+      { question: "Does video chat work reliably in the UAE?", answer: "Usually, but not always — UAE telecom regulation has historically restricted unlicensed VoIP and video-calling apps, and access can still vary by app and network despite recent improvements." },
+      { question: "Is it safe to discuss politics or religion?", answer: "Best avoided. Criticism of the government carries genuine legal risk here, not just awkwardness, and it's enforced seriously." },
+      { question: "When is UAE chat traffic busiest?", answer: "Roughly 21:00 to 01:00 Gulf Standard Time, the country's standard evening window." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-dubai", label: "Dubai", relation: "city" },
+      { slug: "video-chat-abu-dhabi", label: "Abu Dhabi", relation: "city" },
+      { slug: "video-chat-sharjah", label: "Sharjah", relation: "city" },
+      { slug: "arabic-video-chat", label: "Arabic chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-saudi-arabia", label: "Saudi Arabia", relation: "sibling" },
+      { slug: "video-chat-qatar", label: "Qatar", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-dubai",
+    kind: "city",
+    name: "Dubai",
+    parent: "the UAE",
+    primaryKeyword: "dubai video chat",
+    title: "Dubai Video Chat — Talk to Strangers Free",
+    description:
+      "Random video chat with people in Dubai. Free, anonymous, no signup — talk in Arabic, English or Hindi, day or night.",
+    languages: ["English", "العربية (Arabic)", "हिन्दी (Hindi)"],
+    peakHours: "21:30 – 01:30 GST",
+    timezone: "Asia/Dubai",
+    weight: 0.7,
+    tagline:
+      "Random video chat with Dubai. Over 200 nationalities in one city, the world's tallest building, and no account needed.",
+    spotlights: [
+      {
+        kind: "diaspora",
+        title: "Over 200 nationalities in one city",
+        body: "Dubai is regularly cited as one of the most internationally diverse cities on Earth by population share, with residents from over 200 nationalities. English functions as the genuine day-to-day lingua franca here more often than Arabic.",
+      },
+      {
+        kind: "infra",
+        title: "Built at a genuinely unusual pace",
+        body: "Much of Dubai's current skyline, including the Burj Khalifa, the world's tallest building, was built within the last 20-25 years — a pace of transformation few cities anywhere have matched, and something most long-term residents have watched happen firsthand.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "أهلاً", meaning: "Hi / welcome", say: "ah-lan" },
+      { phrase: "إن شاء الله", meaning: "God willing — used constantly, including casually", say: "in-shah-al-lah" },
+      { phrase: "يلا", meaning: "Let's go / come on", say: "yal-lah" },
+      { phrase: "مع السلامة", meaning: "Goodbye", say: "ma-'as sa-la-ma" },
+    ],
+    starters: [
+      { topic: "Origins", ask: "How long have you been in Dubai, and where are you originally from?", why: "With over 200 nationalities represented, this is a genuine, common question here." },
+      { topic: "Skyline", ask: "Do you remember when the Burj Khalifa was being built?", why: "Dubai's transformation has happened fast enough that many residents have a real, specific memory of it." },
+      { topic: "Heat", ask: "How do you actually deal with summer here?", why: "Dubai's extreme summer heat genuinely shapes daily routines and gets a real, practical answer." },
+    ],
+    places: ["Downtown Dubai", "Dubai Marina", "Deira", "Jumeirah", "Business Bay", "Al Barsha"],
+    talkingPoints: [
+      "The sheer diversity of the city — over 200 nationalities living and working alongside each other",
+      "How fast the skyline has changed, with much of it built within the last two decades",
+      "The gap between Dubai's luxury tourist image and the much larger, more ordinary working population that actually runs the city",
+      "Extreme summer heat, routinely above 40°C, and how daily life adjusts around it",
+    ],
+    connectivityNote:
+      "Etisalat and du provide extremely fast 5G and fibre across Dubai — among the best urban networks in the world. As across the UAE, VoIP and video-calling app access can still be inconsistent depending on the app and network, improving but not fully resolved in recent years.",
+    localNote:
+      "Dubai runs slightly later than the UAE national average in the evening, with a large international population keeping the queue active later into the night.",
+    intro: [
+      "Dubai is regularly cited as one of the most internationally diverse cities on Earth, with residents from over 200 nationalities — English functions as the genuine daily lingua franca here more often than Arabic.",
+      "The skyline has been built at a genuinely unusual pace: much of what's iconic today, including the Burj Khalifa, the world's tallest building, went up within the last two to two-and-a-half decades, a transformation many current residents watched happen directly.",
+      "There's a real gap between Dubai's luxury, tourist-facing image and the much larger, more ordinary working population — from construction and service workers to office professionals from across South Asia and beyond — that actually keeps the city running day to day.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Will everyone I match with in Dubai be Emirati?", answer: "Unlikely as the default — Dubai is one of the most internationally diverse cities in the world, and English is the more common day-to-day language across its many resident nationalities." },
+      { question: "When is Dubai's chat traffic busiest?", answer: "Roughly 21:30 to 01:30 Gulf Standard Time, slightly later than the UAE national average given the large international population." },
+      { question: "Does video chat work reliably in Dubai?", answer: "Generally, but VoIP and video-calling app access can still be inconsistent under UAE telecom regulation — it's improved in recent years but isn't fully resolved." },
+      { question: "How hot does it actually get?", answer: "Routinely above 40°C in summer, and it genuinely shapes daily life — many residents shift outdoor activity to early morning or late evening." },
+      { question: "Is it free?", answer: "Completely — no signup, no app, no subscription." },
+    ],
+    related: [
+      { slug: "video-chat-uae", label: "video chat across the UAE", relation: "sibling" },
+      { slug: "video-chat-qatar", label: "Qatar", relation: "sibling" },
+      { slug: "video-chat-abu-dhabi", label: "Abu Dhabi", relation: "city" },
+      { slug: "video-chat-sharjah", label: "Sharjah", relation: "city" },
+      { slug: "video-chat-al-ain", label: "Al Ain", relation: "city" },
+      { slug: "arabic-video-chat", label: "Arabic chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+    ],
+  },
+
+  {
+    slug: "video-chat-saudi-arabia",
+    kind: "country",
+    name: "Saudi Arabia",
+    primaryKeyword: "video chat saudi arabia",
+    title: "Video Chat Saudi Arabia — Talk to Strangers Free",
+    description:
+      "Free random video chat with people from Saudi Arabia. Talk in Arabic or English — no signup, no download, instant matching.",
+    tagline:
+      "Free video chat with Saudi Arabia. A country changing fast under Vision 2030, and a conversation with no account needed.",
+    languages: ["العربية (Arabic)", "English"],
+    peakHours: "22:00 – 02:00 AST",
+    timezone: "Asia/Riyadh",
+    weight: 1.0,
+    places: ["Riyadh", "Jeddah", "Mecca", "Medina", "Dammam"],
+    talkingPoints: [
+      "Vision 2030's rapid social changes — cinemas reopened in 2018 after a 35-year ban, women have driven legally since 2018, genuinely recent and significant shifts",
+      "Hospitality as a deeply held cultural value, with real, specific etiquette around offering and accepting Arabic coffee and dates",
+      "Football's growing investment and profile, alongside a long-standing, genuine domestic following",
+      "The daily rhythm shaped by prayer times, which structure much of public and business life nationwide",
+      "Mecca and Medina's status as Islam's two holiest cities, a real point of national significance beyond tourism",
+    ],
+    connectivityNote:
+      "STC, Mobily and Zain run strong 4G and growing 5G in Riyadh, Jeddah and other major cities. As across the Gulf, VoIP and video-calling app access has historically been restricted by telecom regulation — this has loosened significantly since around 2017 but can still vary by app.",
+    localNote:
+      "Saudi Arabia has changed rapidly and recently under Vision 2030 — cinemas, mixed-gender public events and other changes are genuinely new within the last several years, and older and younger residents often have quite different lived experiences of the country as a result.",
+    safetyNote:
+      "Political and religious criticism carry real legal risk here, more so than in most countries this directory covers — this is not a topic to test the limits of, even anonymously.",
+    etiquette:
+      "Prayer times genuinely pause daily activity nationwide, and a match may pause a conversation briefly around one — this is completely normal and not a sign of disinterest.",
+    spotlights: [
+      {
+        kind: "legal",
+        title: "Recent, real change — but real limits remain",
+        body: "Saudi Arabia has changed substantially since 2016's Vision 2030 reforms — cinemas, concerts and women driving are all genuinely new. At the same time, political and religious criticism carry serious legal consequences, and it's worth understanding both realities rather than assuming either the old or new image is the whole picture.",
+      },
+      {
+        kind: "infra",
+        title: "VoIP access has genuinely improved",
+        body: "Saudi Arabia restricted VoIP and video-calling apps for years before loosening these rules substantially around 2017. Access is much better than it used to be, though it's still worth knowing this history if a call has trouble connecting.",
+      },
+      {
+        kind: "culture",
+        title: "Prayer times structure the whole day",
+        body: "Five daily prayer times genuinely pause much of public life nationwide, including shops and business hours. If a conversation partner steps away briefly around one of these times, it's a normal part of daily rhythm, not a loss of interest.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "السلام عليكم", meaning: "Peace be upon you — standard greeting", say: "as-sa-lam-mu ah-lay-kum" },
+      { phrase: "كيف حالك؟", meaning: "How are you?", say: "kayf ha-lak" },
+      { phrase: "إن شاء الله", meaning: "God willing", say: "in-shah-al-lah" },
+      { phrase: "مع السلامة", meaning: "Goodbye", say: "ma-'as sa-la-ma" },
+    ],
+    starters: [
+      { topic: "Recent changes", ask: "What's the biggest change you've seen in daily life over the last few years?", why: "Vision 2030's reforms are recent enough that most residents have a genuine, specific answer." },
+      { topic: "Hospitality", ask: "What's the proper way to offer someone coffee where you're from?", why: "A real, specific cultural detail Saudis take genuine pride in explaining correctly." },
+      { topic: "Cities", ask: "Riyadh, Jeddah or somewhere else — how do they actually differ?", why: "Saudi cities have real, distinct characters that a generic outside view misses." },
+    ],
+    intro: [
+      "Saudi Arabia has changed substantially and recently — cinemas reopened in 2018 after a 35-year ban, and women have driven legally since the same year, genuine shifts under the Vision 2030 reform programme that older and younger residents often experience quite differently.",
+      "VoIP and video-calling access has historically been restricted by telecom regulation here, loosening significantly since around 2017 — worth knowing as context if a call has trouble connecting, rather than assuming it's Vidibro's own fault.",
+      "Daily life is structured around five prayer times nationwide, which genuinely pause much of public and business activity — if a conversation partner steps away briefly around one, it's completely normal rhythm, not disinterest.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Has Saudi Arabia really changed that much recently?", answer: "Yes, genuinely — cinemas, concerts and women driving are all new within the last several years under the Vision 2030 reform programme, a real and significant shift." },
+      { question: "Does video chat work reliably there?", answer: "Much better than it used to — VoIP restrictions loosened substantially around 2017, though access can still vary somewhat by app." },
+      { question: "Is it safe to discuss politics or religion?", answer: "No — this carries genuine legal risk here, more so than in most countries this directory covers, and it's best avoided entirely." },
+      { question: "When is Saudi chat traffic busiest?", answer: "Roughly 22:00 to 02:00 Arabia Standard Time, the country's standard evening window." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-riyadh", label: "Riyadh", relation: "city" },
+      { slug: "video-chat-jeddah", label: "Jeddah", relation: "city" },
+      { slug: "video-chat-dammam", label: "Dammam", relation: "city" },
+      { slug: "arabic-video-chat", label: "Arabic chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-uae", label: "the UAE", relation: "sibling" },
+      { slug: "video-chat-qatar", label: "Qatar", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-switzerland",
+    kind: "country",
+    name: "Switzerland",
+    primaryKeyword: "video chat switzerland",
+    title: "Video Chat Switzerland — Talk to Strangers Free",
+    description:
+      "Free random video chat with people from Switzerland. Talk in German, French or Italian — no signup, no download, instant matching.",
+    tagline:
+      "Free video chat with Switzerland. Four official languages, one small country, and a conversation with no account needed.",
+    languages: ["Deutsch (German)", "Français (French)", "Italiano (Italian)"],
+    peakHours: "20:30 – 00:30 CET",
+    timezone: "Europe/Zurich",
+    weight: 0.8,
+    places: ["Zurich", "Geneva", "Basel", "Bern", "Lausanne"],
+    talkingPoints: [
+      "The four-language divide — German (roughly 62%), French (23%), Italian (8%) and Romansh (under 1%) — and how differently each region feels",
+      "Direct democracy, with frequent nationwide referendums on real policy questions, a genuinely unusual governance feature for outsiders",
+      "Punctuality and precision, a real, widely held national value rather than just a stereotype",
+      "The high cost of living matched by comparably high wages, and how that balance actually plays out day to day",
+      "Mountain and skiing culture, genuinely central to national identity beyond the postcard image",
+    ],
+    connectivityNote:
+      "Swisscom, Sunrise and Salt run some of the most reliable 4G and 5G networks in Europe, with dense coverage even in mountainous regions.",
+    localNote:
+      "Switzerland's language divide is a real, lived geography, not a formality — a German-speaking Zurich resident and a French-speaking Geneva resident may default to different languages entirely, and English often functions as a practical bridge between them.",
+    safetyNote:
+      "Assuming all of Switzerland is German-speaking, or that everyone speaks all four national languages fluently, is a common and slightly grating outsider mistake — most Swiss people are fluent in their own region's language plus some English, not necessarily all four.",
+    etiquette:
+      "Punctuality is taken seriously here as a real sign of respect, more so than in many cultures — showing up to a scheduled call on time (or acknowledging lateness directly) genuinely matters.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Four languages, genuinely different regions",
+        body: "German, French, Italian and Romansh are all official languages, spoken natively in distinct geographic regions rather than evenly across the country. A conversation in Zurich and one in Geneva can feel like different countries linguistically, despite being the same nation.",
+      },
+      {
+        kind: "legal",
+        title: "Direct democracy, several times a year",
+        body: "Switzerland holds nationwide referendums on real policy questions multiple times per year, letting citizens vote directly on issues that would typically only reach parliament elsewhere. It's a genuinely unusual, actively used governance feature most Swiss people have real opinions about.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Grüezi", meaning: "Hello (Swiss German, formal)", say: "GROO-eh-tsee" },
+      { phrase: "Salut", meaning: "Hi (French-speaking regions)", say: "sah-LU" },
+      { phrase: "Merci vilmal", meaning: "Thanks a lot (Swiss German)", say: "mer-SEE FEEL-mahl" },
+      { phrase: "Ciao", meaning: "Bye (widely used across regions)", say: "chow" },
+    ],
+    starters: [
+      { topic: "Language region", ask: "Which language region are you in, and do you speak the others too?", why: "Switzerland's language divide is real and geographic, and this reliably gets a specific, informative answer." },
+      { topic: "Referendums", ask: "What's the last thing you actually voted on in a referendum?", why: "Switzerland's direct democracy means this gets a real, current, specific answer unlike almost anywhere else." },
+      { topic: "Mountains", ask: "Do you ski or hike regularly, or is that more of a tourist image?", why: "Separates the postcard image from the genuine, varied relationship residents have with the mountains." },
+    ],
+    intro: [
+      "Switzerland has four official languages — German, French, Italian and Romansh — spoken natively in distinct geographic regions rather than evenly across the country, so a conversation with someone from Zurich and someone from Geneva can feel linguistically like two different nations.",
+      "Direct democracy is a genuinely active, not symbolic, feature of Swiss life — nationwide referendums on real policy questions happen several times a year, and most residents have specific, considered opinions on recent votes.",
+      "Punctuality and precision are taken seriously here as real cultural values rather than just a stereotype, and showing up to a call on time — or acknowledging lateness directly — genuinely matters more than in many other cultures.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Does everyone in Switzerland speak all four languages?", answer: "No, that's a common misconception — most Swiss people are fluent in their own region's language plus some English, not necessarily all four national languages." },
+      { question: "What is direct democracy in Switzerland?", answer: "Nationwide referendums on real policy questions happen several times a year, letting citizens vote directly on issues that would typically only reach parliament elsewhere — a genuinely active governance feature." },
+      { question: "When is Swiss chat traffic busiest?", answer: "Roughly 20:30 to 00:30 Central European Time, a standard evening window." },
+      { question: "How's the internet connection?", answer: "Extremely reliable — Swisscom, Sunrise and Salt run some of the strongest 4G and 5G coverage in Europe, even in mountainous regions." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-zurich", label: "Zurich", relation: "city" },
+      { slug: "video-chat-geneva", label: "Geneva", relation: "city" },
+      { slug: "video-chat-basel", label: "Basel", relation: "city" },
+      { slug: "german-video-chat", label: "German chat", relation: "language" },
+      { slug: "french-video-chat", label: "French chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-germany", label: "Germany", relation: "sibling" },
+      { slug: "video-chat-france", label: "France", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-greece",
+    kind: "country",
+    name: "Greece",
+    primaryKeyword: "video chat greece",
+    title: "Video Chat Greece — Talk to Strangers Free",
+    description:
+      "Free random video chat with people from Greece. Talk in Greek or English — no signup, no download, instant matching any time.",
+    tagline:
+      "Free video chat with Greece. Ancient history in daily geography, thousands of islands, and a conversation with no account.",
+    languages: ["Ελληνικά (Greek)", "English"],
+    peakHours: "21:00 – 01:00 EET",
+    timezone: "Europe/Athens",
+    weight: 0.9,
+    places: ["Athens", "Thessaloniki", "Patras", "Heraklion", "Larissa"],
+    talkingPoints: [
+      "Ancient history built into ordinary daily geography, much like Rome — ruins genuinely sit alongside modern apartment buildings",
+      "Island life and identity — Greece has thousands of islands, and someone's specific island connection is a real, distinct part of who they are",
+      "The 2010s debt crisis and its lasting economic effects, which most Greeks lived through directly and can discuss candidly",
+      "Coffee culture, including frappé, genuinely invented in Greece and still central to daily social life",
+      "The Orthodox Christian calendar, which shapes holidays and traditions differently from Catholic or Protestant Europe",
+    ],
+    connectivityNote:
+      "Cosmote, Vodafone and Nova run solid 4G with growing 5G in Athens and Thessaloniki. Island coverage varies more — generally good on larger islands, patchier on smaller or more remote ones.",
+    localNote:
+      "Greece sits on Eastern European Time, an hour ahead of most of central Europe, which shifts this queue's evening peak slightly earlier relative to countries like Italy or Germany despite being roughly the same longitude band.",
+    safetyNote:
+      "The 2010s economic crisis is recent, lived history with real hardship for many families — worth letting the topic come from them rather than raising it directly.",
+    etiquette:
+      "Hospitality and generosity in conversation are genuine cultural values here — an enthusiastic, warm tone is the norm and shouldn't be mistaken for exaggeration.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "History is daily geography, not a museum visit",
+        body: "Ancient ruins sit genuinely alongside modern apartment buildings and cafés in Athens, much like Rome — residents walk past millennia-old sites as part of an ordinary commute rather than visiting them as a special occasion.",
+      },
+      {
+        kind: "culture",
+        title: "Thousands of islands, real distinct identities",
+        body: "Greece has well over a thousand islands, and someone's connection to a specific one — family roots, summers spent there — is a real, meaningful part of identity here, not interchangeable with 'Greek islands' as a generic category.",
+      },
+      {
+        kind: "cost",
+        title: "The debt crisis is recent, lived history",
+        body: "Greece's 2010s economic crisis brought real, significant hardship — steep unemployment, wage cuts, capital controls — within living memory for most adults here. It's worth approaching gently and letting the specifics come from them rather than raising it directly.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Γεια σου", meaning: "Hello (informal)", say: "YAH-soo" },
+      { phrase: "Τι κάνεις;", meaning: "How are you?", say: "tee KAH-nees" },
+      { phrase: "Τέλειο", meaning: "Perfect / awesome", say: "TEH-lee-oh" },
+      { phrase: "Τα λέμε", meaning: "See you (casual)", say: "tah LEH-meh" },
+    ],
+    starters: [
+      { topic: "Islands", ask: "Do you have a specific island your family is connected to?", why: "Island identity is real and specific here, not a generic tourist category — gets a genuine, detailed answer." },
+      { topic: "Ancient history", ask: "Do you actually walk past ancient ruins on your normal day?", why: "A genuinely striking fact of daily life in much of Greece, especially Athens." },
+      { topic: "Coffee", ask: "Frappé or Greek coffee — what's your actual daily order?", why: "A specific, personal question that gets past the tourist-menu image of Greek coffee culture." },
+    ],
+    intro: [
+      "Greece sits on Eastern European Time, an hour ahead of much of central Europe, which shifts this queue's evening peak earlier relative to countries at a similar longitude — and ancient history is woven into ordinary daily geography here, much like Rome, with ruins genuinely sitting alongside modern apartment buildings.",
+      "Island identity is real and specific rather than a generic tourist category — Greece has well over a thousand islands, and someone's connection to a particular one, through family or childhood summers, is a genuine, meaningful part of who they are.",
+      "The 2010s debt crisis brought real hardship within living memory for most adults here — steep unemployment, wage cuts, capital controls — and it's a topic worth approaching gently, letting specifics come from the other person rather than raising it directly.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Do Greeks really live around ancient ruins?", answer: "Yes, genuinely, especially in Athens — ancient sites sit alongside modern buildings as ordinary daily geography, not a separate museum district." },
+      { question: "Are all Greek islands the same?", answer: "No — with well over a thousand islands, each carries its own distinct identity, and someone's specific island connection is a real, meaningful part of who they are." },
+      { question: "Is it OK to discuss the Greek debt crisis?", answer: "Approach gently — it caused real, lasting hardship within living memory for most adults. Better to let the specifics come from them than to raise it directly." },
+      { question: "When is Greece's chat traffic busiest?", answer: "Roughly 21:00 to 01:00 Eastern European Time, the country's standard evening window." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-athens", label: "Athens", relation: "city" },
+      { slug: "video-chat-thessaloniki", label: "Thessaloniki", relation: "city" },
+      { slug: "video-chat-heraklion", label: "Heraklion", relation: "city" },
+      { slug: "greek-video-chat", label: "Greek chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-italy", label: "Italy", relation: "sibling" },
+      { slug: "video-chat-turkey", label: "Turkey", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-qatar",
+    kind: "country",
+    name: "Qatar",
+    primaryKeyword: "video chat qatar",
+    title: "Video Chat Qatar — Talk to Strangers Free",
+    description:
+      "Free random video chat with people in Qatar. Talk in Arabic, English or Hindi — no signup, no download, instant matching.",
+    tagline:
+      "Free video chat with Qatar. One of the highest expat ratios anywhere, and a conversation that starts with no account.",
+    languages: ["العربية (Arabic)", "English", "हिन्दी (Hindi)"],
+    peakHours: "21:00 – 01:00 AST",
+    timezone: "Asia/Qatar",
+    weight: 0.7,
+    places: ["Doha", "Al Wakrah", "Al Rayyan", "Al Khor"],
+    talkingPoints: [
+      "The demographic reality: roughly 85-90% of Qatar's population are expats, overwhelmingly from South Asia and the Philippines, so citizens are a genuine minority",
+      "The 2022 FIFA World Cup, a transformative national moment and a huge, genuine point of pride tied to years of infrastructure investment",
+      "LNG wealth driving extremely rapid development, similar in scale and speed to its Gulf neighbours",
+      "Extreme summer heat, routinely above 40°C, which shapes when and how people spend time outdoors",
+      "Hospitality customs, with real, specific etiquette around offering Arabic coffee (gahwa) and dates to guests",
+    ],
+    connectivityNote:
+      "Ooredoo and Vodafone Qatar run extremely fast 5G and fibre — among the best networks anywhere. As across the Gulf, VoIP and video-calling app access has historically been restricted by telecom regulation and can still be inconsistent, improving somewhat around and since the 2022 World Cup.",
+    localNote:
+      "With citizens making up a small minority of the population, a match here is statistically far more likely to be a long-term expat resident, especially from South Asia or the Philippines, than a Qatari national.",
+    safetyNote:
+      "As with its Gulf neighbours, criticism of the government and content considered indecent carry real legal risk here, not just social disapproval — best avoided entirely.",
+    etiquette:
+      "Modesty in dress and language on camera is taken seriously here, reflecting genuinely and actively enforced public norms — worth being mindful of on camera specifically.",
+    spotlights: [
+      {
+        kind: "diaspora",
+        title: "One of the highest expat ratios on Earth",
+        body: "Qatari citizens make up only around 10-15% of the country's population — the overwhelming majority are expats, mostly from South Asia and the Philippines, working on long-term visas. It's an even more extreme ratio than the UAE's, and shapes who you're actually likely to match with here.",
+      },
+      {
+        kind: "seasonal",
+        title: "The 2022 World Cup changed the country's global image",
+        body: "Hosting the 2022 FIFA World Cup was a genuinely transformative national moment, backed by years of stadium, transit and infrastructure investment. It remains a real, current point of national pride and a natural, welcome topic to raise.",
+      },
+      {
+        kind: "infra",
+        title: "Extreme heat shapes the whole day",
+        body: "Qatar's summer temperatures routinely exceed 40°C, and outdoor work is legally restricted during the hottest midday hours in summer months. It's a genuine, practical daily constraint most residents plan around rather than a minor inconvenience.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "مرحبا", meaning: "Hello", say: "mar-ha-ban" },
+      { phrase: "شلونك؟", meaning: "How are you? (Gulf dialect)", say: "shlo-nak" },
+      { phrase: "يعطيك العافية", meaning: "A common thanks/blessing phrase", say: "yah-teek al-ah-fee-yah" },
+      { phrase: "مع السلامة", meaning: "Goodbye", say: "ma-'as sa-la-ma" },
+    ],
+    starters: [
+      { topic: "Background", ask: "Are you Qatari, or did you move here for work?", why: "Given how small the citizen population actually is, this is a genuine, common question." },
+      { topic: "World Cup", ask: "What was it actually like being in Qatar during the World Cup?", why: "A real, recent national moment most residents have a specific, vivid memory of." },
+      { topic: "Heat", ask: "How do you plan your day around the summer heat?", why: "A genuine, practical daily constraint that gets a specific, real answer." },
+    ],
+    intro: [
+      "Qatari citizens make up only around 10-15% of the country's population, an even more extreme ratio than the UAE's — the overwhelming majority of residents are expats, mostly from South Asia and the Philippines, so a match here is statistically far more likely to be an expat than a Qatari national.",
+      "Hosting the 2022 FIFA World Cup was a genuinely transformative national moment, backed by years of infrastructure investment, and it remains a real, current point of pride most residents are glad to talk about.",
+      "Summer heat here routinely exceeds 40°C, restricting outdoor work by law during the hottest midday hours — a genuine, practical daily constraint rather than a minor inconvenience, and it shapes daily rhythm nationwide.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Will I match with an actual Qatari citizen?", answer: "Unlikely as the default — citizens make up only around 10-15% of the population, with the large majority of residents being expats, mostly from South Asia and the Philippines." },
+      { question: "Does video chat work reliably in Qatar?", answer: "Generally, though VoIP and video-calling access has historically been restricted by telecom regulation and can still be somewhat inconsistent, despite improvements around the 2022 World Cup." },
+      { question: "Is it safe to discuss politics?", answer: "No — criticism of the government carries real legal risk here, similar to its Gulf neighbours, and it's best avoided entirely." },
+      { question: "When is Qatar's chat traffic busiest?", answer: "Roughly 21:00 to 01:00 Arabia Standard Time, the country's standard evening window." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-doha", label: "Doha", relation: "city" },
+      { slug: "video-chat-al-wakrah", label: "Al Wakrah", relation: "city" },
+      { slug: "video-chat-al-rayyan", label: "Al Rayyan", relation: "city" },
+      { slug: "arabic-video-chat", label: "Arabic chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-uae", label: "the UAE", relation: "sibling" },
+      { slug: "video-chat-saudi-arabia", label: "Saudi Arabia", relation: "sibling" },
+    ],
+  },
+
+  {
     slug: "video-chat-united-states",
     kind: "country",
     name: "the United States",

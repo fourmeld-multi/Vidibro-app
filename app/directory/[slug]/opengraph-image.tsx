@@ -22,7 +22,17 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   const entry = getEntry(slug);
 
   const heading = entry ? entry.title.split("—")[0].trim() : "Vidibro";
-  const languages = entry ? entry.languages.slice(0, 4).join("  ·  ") : "";
+  // Romanized name only ("العربية (Arabic)" -> "Arabic") — Satori's default
+  // font can't shape Arabic's contextual letterforms and throws a build-time
+  // font-substitution error on the raw native-script text. The page itself
+  // renders native script fine via the site's normal webfonts; this only
+  // trims what gets baked into the static share-card PNG.
+  const languages = entry
+    ? entry.languages
+        .slice(0, 4)
+        .map((l) => l.match(/\(([^)]+)\)/)?.[1] ?? l)
+        .join("  ·  ")
+    : "";
   const peak = entry ? entry.peakHours : "";
 
   return new ImageResponse(
