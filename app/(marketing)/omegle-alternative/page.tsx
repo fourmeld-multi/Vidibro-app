@@ -5,7 +5,7 @@ import { generatePageSEO } from "@/lib/seo";
 export const metadata: Metadata = generatePageSEO({
   title: "Best Free Omegle Alternative 2026 (No Sign Up Required)",
   description:
-    "Looking for a safe, modern alternative to Omegle? Vidibro provides instant 1-on-1 video, voice, and text chat with real strangers worldwide. Zero registration, P2P WebRTC encryption, and 24/7 AI moderation.",
+    "Looking for a safe Omegle alternative? Vidibro offers instant 1-on-1 video, voice and text chat with strangers worldwide — zero registration.",
   slug: "/omegle-alternative",
 });
 

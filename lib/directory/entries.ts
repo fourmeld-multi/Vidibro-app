@@ -19,7 +19,7 @@ export const ENTRIES: DirectoryEntry[] = [
     primaryKeyword: "video chat india",
     title: "Video Chat India — Talk to Indian Strangers Free, No Signup",
     description:
-      "Free random video chat with people across India. Match instantly with strangers in Mumbai, Delhi, Kolkata and beyond — no account, no phone number, works on Jio and Airtel.",
+      "Free random video chat across India. Match instantly with strangers in Mumbai, Delhi and Kolkata — no account, no phone number, works on Jio.",
     tagline:
       "The best free video chat in India. Connect with people across the country, make new friends, talk in your own language — no signup, no download, no waiting.",
     languages: [
@@ -2175,7 +2175,7 @@ export const ENTRIES: DirectoryEntry[] = [
     primaryKeyword: "lahore video chat",
     title: "Lahore Video Chat — Talk to Strangers in Lahore Free",
     description:
-      "Random video chat with people in Lahore. Free, anonymous, no signup — talk in Punjabi, Urdu or English.",
+      "Random video chat with people in Lahore. Free, anonymous, no signup required — talk in Punjabi, Urdu or English with strangers today.",
     tagline:
       "Video chat with Lahore. Pakistan's cultural capital, its food, and its unmatched confidence about both — free and anonymous.",
     languages: ["پنجابی (Punjabi)", "اردو (Urdu)", "English"],

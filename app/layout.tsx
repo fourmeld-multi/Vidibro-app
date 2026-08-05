@@ -98,6 +98,7 @@ export default function RootLayout({
               "@type": "WebSite",
               "@id": `${BASE_URL}/#website`,
               name: "Vidibro",
+              alternateName: ["Vidibro App", "Vidibro Chat", "Vidibro.com"],
               url: BASE_URL,
               publisher: { "@id": `${BASE_URL}/#organization` },
               inLanguage: "en",

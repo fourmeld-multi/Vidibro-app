@@ -9,7 +9,7 @@ import LinkAccordion, { PillLink } from "@/components/directory/LinkAccordion";
 export const metadata: Metadata = generatePageSEO({
   title: "Chat Directory — Every Country, City and Language",
   description:
-    "Browse Vidibro by country, city or language. See who is online where, what they speak and when each market is busiest, then start a free video, voice or text chat.",
+    "Browse Vidibro by country, city or language — who is online, what they speak, and when each market is busiest. Free video, voice or text chat.",
   slug: "/directory",
   keywords: ["chat directory", "random video chat by country", "video chat by city", "video chat by language"],
 });

@@ -5,7 +5,7 @@ import { generatePageSEO } from "@/lib/seo";
 export const metadata: Metadata = generatePageSEO({
   title: "Best Free AirTALK Alternative 2026 (Anonymous Voice & Video Chat)",
   description:
-    "Looking for a free AirTALK alternative? Vidibro offers instant anonymous voice calls, HD 1-on-1 video match, and text chat with zero signup. Experience P2P WebRTC privacy and adaptive mobile streaming.",
+    "Looking for a free AirTALK alternative? Vidibro offers instant anonymous voice calls, HD video match and text chat with zero signup, on any browser.",
   slug: "/airtalk-alternative",
 });
 

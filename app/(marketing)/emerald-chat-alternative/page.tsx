@@ -5,7 +5,7 @@ import { generatePageSEO } from "@/lib/seo";
 export const metadata: Metadata = generatePageSEO({
   title: "Best Free Emerald Chat Alternative 2026",
   description:
-    "Looking for a clean Emerald Chat alternative? Vidibro provides instant 1-on-1 video, audio, and text matching with zero ads, zero registration, and 24/7 moderation.",
+    "Looking for a clean Emerald Chat alternative? Vidibro offers instant 1-on-1 video, audio and text matching with zero ads and zero registration.",
   slug: "/emerald-chat-alternative",
 });
 
