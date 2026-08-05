@@ -49,9 +49,9 @@ export default function Footer({ onStartVideoChat, onStartTextChat, onStartAudio
 
           {/* Column 1: Video Chat */}
           <div className="flex flex-col gap-2.5 text-left">
-            <h4 className="font-extrabold text-white uppercase tracking-wider text-[11px] text-pink-400">
+            <h2 className="font-extrabold text-white uppercase tracking-wider text-[11px] text-pink-400">
               {t.footerVideoHeading}
-            </h4>
+            </h2>
             <button onClick={onStartVideoChat} className="text-left hover:text-white transition">HD Random Video Call</button>
             <button onClick={onStartVideoChat} className="text-left hover:text-white transition">Girls Video Chat</button>
             <button onClick={onStartVideoChat} className="text-left hover:text-white transition">Global Video Match</button>
@@ -62,9 +62,9 @@ export default function Footer({ onStartVideoChat, onStartTextChat, onStartAudio
 
           {/* Column 2: Text Chat */}
           <div className="flex flex-col gap-2.5 text-left">
-            <h4 className="font-extrabold text-white uppercase tracking-wider text-[11px] text-cyan-400">
+            <h2 className="font-extrabold text-white uppercase tracking-wider text-[11px] text-cyan-400">
               {t.footerTextHeading}
-            </h4>
+            </h2>
             <button onClick={onStartTextChat} className="text-left hover:text-white transition">Anonymous Text Chat</button>
             <button onClick={onStartTextChat} className="text-left hover:text-white transition">Random Stranger Text</button>
             <button onClick={onStartTextChat} className="text-left hover:text-white transition">3D Sticker Chat</button>
@@ -74,9 +74,9 @@ export default function Footer({ onStartVideoChat, onStartTextChat, onStartAudio
 
           {/* Column 3: Voice Chat */}
           <div className="flex flex-col gap-2.5 text-left">
-            <h4 className="font-extrabold text-white uppercase tracking-wider text-[11px] text-purple-400">
+            <h2 className="font-extrabold text-white uppercase tracking-wider text-[11px] text-purple-400">
               {t.footerVoiceHeading}
-            </h4>
+            </h2>
             <button onClick={onStartAudioChat} className="text-left hover:text-white transition">Random Audio Call</button>
             <button onClick={onStartAudioChat} className="text-left hover:text-white transition">Voice Match Room</button>
             <button onClick={onStartAudioChat} className="text-left hover:text-white transition">Clear HD P2P Voice</button>
@@ -86,9 +86,9 @@ export default function Footer({ onStartVideoChat, onStartTextChat, onStartAudio
 
           {/* Column 4: Resources & Safety */}
           <div className="flex flex-col gap-2.5 text-left">
-            <h4 className="font-extrabold text-white uppercase tracking-wider text-[11px] text-yellow-400">
+            <h2 className="font-extrabold text-white uppercase tracking-wider text-[11px] text-yellow-400">
               {t.footerResourcesHeading}
-            </h4>
+            </h2>
             <Link href="/guidelines" className="hover:text-white transition">{t.footerGuidelines}</Link>
             <Link href="/report" className="hover:text-white transition">{t.footerReportAbuse}</Link>
             <Link href="/faq" className="hover:text-white transition">{t.footerSafetyFaq}</Link>
@@ -96,9 +96,9 @@ export default function Footer({ onStartVideoChat, onStartTextChat, onStartAudio
 
           {/* Column 5: Legal & About */}
           <div className="flex flex-col gap-2.5 text-left">
-            <h4 className="font-extrabold text-white uppercase tracking-wider text-[11px] text-emerald-400">
+            <h2 className="font-extrabold text-white uppercase tracking-wider text-[11px] text-emerald-400">
               {t.footerLegalHeading}
-            </h4>
+            </h2>
             <Link href="/privacy" className="hover:text-white transition">{t.footerPrivacyPolicy}</Link>
             <Link href="/terms" className="hover:text-white transition">{t.footerTerms}</Link>
             <Link href="/contact" className="hover:text-white transition">{t.footerContact}</Link>
