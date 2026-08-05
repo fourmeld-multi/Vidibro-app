@@ -98,6 +98,7 @@ export default function Footer({ onStartVideoChat, onStartTextChat, onStartAudio
                 nav entry point at all. */}
             <Link href="/blog" className="hover:text-white transition">Blog</Link>
             <Link href="/directory" className="hover:text-white transition">Directory</Link>
+            <Link href="/about" className="hover:text-white transition">About</Link>
           </div>
 
           {/* Column 5: Legal & About */}

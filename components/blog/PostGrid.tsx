@@ -21,6 +21,7 @@ export default function PostGrid({ posts }: { posts: BlogPost[] }) {
             <PostIllustration
               category={post.category}
               seed={post.slug}
+              title={post.title}
               className="h-full w-full transition duration-300 group-hover:scale-105"
             />
           </div>

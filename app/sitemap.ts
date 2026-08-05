@@ -28,6 +28,7 @@ const STATIC_ROUTES = [
   "/shagle-alternative",
   "/directory",
   "/blog",
+  "/about",
   "/faq",
   "/guidelines",
   "/privacy",

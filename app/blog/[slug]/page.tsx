@@ -105,7 +105,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </div>
 
         <div className="mt-8 aspect-[16/9] w-full overflow-hidden rounded-3xl">
-          <PostIllustration category={post.category} seed={post.slug} className="h-full w-full" />
+          <PostIllustration category={post.category} seed={post.slug} title={post.title} className="h-full w-full" />
         </div>
 
         <article className="mt-10 text-base sm:text-lg">
