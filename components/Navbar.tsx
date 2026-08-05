@@ -51,14 +51,14 @@ export default function Navbar({
           instead of a flat 10%-opacity border that barely reads on black.
           Hidden while the mobile drawer is open: the line then falls between
           the bar and the drawer, cutting a stray glowing streak across a panel
-          that is already visually attached to the header. The second copy is a
-          real blur filter, so dropping both also spares a full-width filter
-          pass for as long as the menu is up. */}
+          that is already visually attached to the header. Single copy, no
+          blur filter — a `filter` on a child of a `position: sticky` element
+          is a known Android Chrome compositing bug (the sticky layer can
+          drop a paint frame during fast scroll, i.e. the whole bar
+          vanishing), so the softer blurred duplicate was removed rather
+          than risk it. */}
       {!mobileMenuOpen && (
-        <>
-          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-purple-400/70 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-purple-400/70 to-transparent blur-[3px]" />
-        </>
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-purple-400/70 to-transparent" />
       )}
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-3.5">
         
