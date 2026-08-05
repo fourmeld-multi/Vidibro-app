@@ -155,7 +155,7 @@ export default function AppShowcaseCarousel({ lang = "EN" }: { lang?: LanguageCo
                 loading={idx === 0 ? undefined : "lazy"}
                 className="object-cover"
               />
-              <div className={`absolute inset-0 bg-gradient-to-t ${item.accent} mix-blend-multiply opacity-40`} />
+              <div className={`absolute inset-0 bg-gradient-to-t ${item.accent} opacity-30`} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
               {isFront && (
