@@ -5538,6 +5538,416 @@ export const ENTRIES: DirectoryEntry[] = [
     ],
   },
 
+  {
+    slug: "talk-to-strangers",
+    kind: "topic",
+    name: "talking to strangers",
+    primaryKeyword: "talk to strangers",
+    title: "Talk to Strangers Online — Free, No Signup",
+    description:
+      "Talk to strangers online free — video, voice or text, matched instantly. No account, no app, no login, just a real conversation.",
+    tagline:
+      "One queue, three ways in. Talk to a stranger by video, by voice, or by text — whichever one you'll actually open tonight.",
+    languages: ["Any — there is no language filter"],
+    talkingPoints: [],
+    safetyNote:
+      "The single most useful habit: never move the conversation to another app because a stranger asked you to. Almost every scam that starts here starts with that request, and there is no good reason for it in a genuinely casual chat.",
+    intro: [
+      "\"Talk to strangers\" is a wider thing than any one feature. Sometimes it means a face-to-face video call; sometimes it means voice with the camera off because you are lying in the dark; sometimes it means typing, because you do not want to be heard. This page covers all three, because the mode people want changes with their mood far more than it changes with the person.",
+      "What stays constant is the shape of it: you open the page, you are put in a queue with everyone else who is online, and you are matched with one person. There is no profile to fill in first, no interests to select, no waiting for someone to accept a request. The gap between deciding to talk to someone and actually talking to them is a couple of seconds.",
+      "The part most people underestimate is how much the skip button matters. Most matches will not be the conversation you were hoping for, and that is not a failure of the platform or of you — it is how random matching works. The value is in trying again quickly, not in forcing one match to work.",
+      "No account, no download, nothing kept after you close the tab.",
+    ],
+    faqs: [
+      { question: "Is talking to strangers online free here?", answer: "Entirely. No account, no subscription, no credits, and no premium tier holding features back. Video, voice and text all work the same way for everyone." },
+      { question: "Do I have to use my camera?", answer: "No. Voice-only and text are separate modes, not a video call with things switched off — pick whichever you actually want and the camera is never requested in the other two." },
+      { question: "How long do conversations usually last?", answer: "Enormously variable. Plenty end in seconds because one side skips, and some run for an hour. Both are normal, and treating short ones as rejection is the fastest way to stop enjoying it." },
+      { question: "Can I choose who I talk to?", answer: "No — there are no filters by gender, country or interest. Everyone matches from one shared pool. That is deliberate: filtered matching turns a random conversation into browsing profiles, which is a different thing." },
+      { question: "What if someone behaves badly?", answer: "Skip immediately. It disconnects you and puts you into a new match straight away, and you owe nobody an explanation for leaving a conversation." },
+      { question: "Is it anonymous?", answer: "There is no account, no phone number and no profile. Calls run directly between browsers rather than through a server. What you say and show on camera is still visible to the other person, so anonymity is about identity, not about what happens inside the call." },
+    ],
+    related: [
+      { slug: "video-chat", label: "video chat", relation: "mode" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "random-video-chat", label: "random video chat specifically", relation: "sibling" },
+      { slug: "late-night-chat", label: "chatting late at night", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "chat-without-signup",
+    kind: "topic",
+    name: "chatting without signup",
+    primaryKeyword: "chat with strangers without login",
+    title: "Chat With Strangers — No Signup or Login Needed",
+    description:
+      "Video chat with strangers without login or registration. No account, no app download, no email — open the page and start talking.",
+    tagline:
+      "No email, no password, no app store. The entire sign-up flow is opening the page.",
+    languages: ["Any — there is no language filter"],
+    talkingPoints: [],
+    safetyNote:
+      "No account cuts both ways. Nothing ties a conversation to you, but nothing ties it to the other person either — there is no profile history to check them against, so judge people on how they behave in the call itself.",
+    intro: [
+      "A surprising number of \"free\" chat sites are free only after you hand over an email address, verify a phone number, or install something. That is the friction this page is about removing. There is no account on Vidibro, so there is nothing to create, nothing to confirm, and nothing to delete later if you change your mind.",
+      "This is not just convenience. An account is a record — of when you were online, who you were matched with, and what you did. Not having one means those records do not exist to be leaked, sold, or handed over. The trade-off is that there is nothing to log back into and no history to return to, which for a platform built around one-off conversations is the point rather than a limitation.",
+      "The only permission you are ever asked for is the camera or microphone, and only for the mode you chose. Text chat asks for neither. Nothing is installed at any point — it runs in the browser tab you already have open, on a phone or a laptop.",
+      "Close the tab and you have left no trace to clean up.",
+    ],
+    faqs: [
+      { question: "Do I really not need an account?", answer: "Correct — there is no sign-up form anywhere. No email, no password, no phone number, no social login. The page works the moment it loads." },
+      { question: "Is there an app to download?", answer: "No. It runs in a normal browser on phones and computers, which is also why there is no app-store listing, no install prompt, and no updates to keep on top of." },
+      { question: "Why do some sites require registration then?", answer: "Usually for one of two reasons: an account lets them build a profile they can advertise against, or it is how a paid tier is enforced. Neither applies here, so neither does the sign-up." },
+      { question: "Can I come back to a conversation later?", answer: "No — and this is the real cost of having no account. Nothing is saved, so once a chat ends there is no way back to it. If you want to stay in touch, you have to arrange that during the conversation." },
+      { question: "What permissions will I be asked for?", answer: "Only the camera and microphone, and only for the mode you picked. Voice chat never requests camera access, and text chat requests neither." },
+      { question: "Is no-signup less safe?", answer: "It is a genuine trade-off. You give up nothing about yourself, but you also cannot look up who you are talking to — there are no profiles or histories on either side. Judge the conversation as it happens, and skip without hesitation if something feels off." },
+    ],
+    related: [
+      { slug: "video-chat", label: "video chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "talk-to-strangers", label: "talking to strangers generally", relation: "sibling" },
+      { slug: "safe-chat-with-strangers", label: "staying safe while chatting", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "late-night-chat",
+    kind: "topic",
+    name: "late night chat",
+    primaryKeyword: "late night chat with strangers",
+    title: "Late Night Chat — Talk to Strangers at 3am",
+    description:
+      "Can't sleep? Late night chat with strangers who are also awake. Free, anonymous, no signup — video, voice or text at any hour.",
+    tagline:
+      "It is 3am and the people you know are asleep. Somewhere the queue is still full.",
+    languages: ["Any — there is no language filter"],
+    talkingPoints: [],
+    safetyNote:
+      "Late-night conversations get personal faster than daytime ones, which is most of their appeal and also the thing to watch. Being tired lowers the bar for what you'd normally share — the details worth protecting are the same at 3am as at 3pm.",
+    intro: [
+      "The loneliest hours are the ones where the people you would normally message are asleep. That is a scheduling problem more than an emotional one, and it is the specific problem random chat is unusually good at solving, because the queue does not run on your time zone. When it is 3am where you are, it is the middle of the evening somewhere else and that queue is busy.",
+      "Conversations at this hour are genuinely different. The people online late are disproportionately awake by choice rather than filling a gap between plans, and it shows — they tend to run longer, get past small talk faster, and be more candid than the same conversation would be at noon. Insomnia, shift work and long-haul travel all put people here, and none of those groups are in a rush.",
+      "Voice-only tends to suit the hour better than video. You can talk in the dark without turning a light on or thinking about how you look at 3am, and it works while you are lying down. Text works for the same reason if you are somewhere you cannot be heard.",
+      "No account, nothing saved, and nothing to explain in the morning.",
+    ],
+    faqs: [
+      { question: "Is anyone actually online at 3am?", answer: "Yes, reliably — the queue is global, so your 3am is another country's evening peak. The pool is smaller than at 9pm your time, but it is never empty." },
+      { question: "Which mode works best late at night?", answer: "Voice-only, for most people. You can talk in the dark without lighting or thinking about how you look, and it works lying down. Text works if you cannot be heard." },
+      { question: "Why do late-night conversations feel different?", answer: "The people online then are mostly awake by choice rather than between plans, and nobody is in a hurry. Conversations get past small talk faster and tend to be more candid." },
+      { question: "Is it safe to chat when I'm tired?", answer: "The risks are the same, but tiredness lowers your guard — people share more at 3am than they would at 3pm. The information worth protecting does not change with the hour." },
+      { question: "Will I get matched with people in my own country?", answer: "Sometimes, but late at night you are more likely to be matched across time zones, since that is where the awake people are. It is one of the better hours for talking to someone genuinely far away." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits, at any hour." },
+    ],
+    related: [
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "talk-to-strangers", label: "talking to strangers generally", relation: "sibling" },
+      { slug: "random-voice-chat", label: "random voice chat", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "safe-chat-with-strangers",
+    kind: "topic",
+    name: "chatting safely",
+    primaryKeyword: "safe chat with strangers",
+    title: "Safe Chat With Strangers — What Actually Helps",
+    description:
+      "How to chat with strangers safely: what peer-to-peer actually protects, the red flags worth knowing, and the habits that matter.",
+    tagline:
+      "Not a promise that nothing bad happens. A straight account of what is protected, what is not, and what you control.",
+    languages: ["Any — there is no language filter"],
+    talkingPoints: [],
+    safetyNote:
+      "Skip is the safety feature you will actually use. It disconnects the call and re-matches you in one tap, and it works before you have finished deciding whether something is a problem — which is exactly when you should use it.",
+    intro: [
+      "Most pages about safe chat either promise that everything is monitored and fine, or warn that talking to strangers is reckless. Neither is accurate, and both leave you without anything useful to do. What follows is the actual position.",
+      "What is protected structurally: calls run peer-to-peer over WebRTC, directly between two browsers rather than through a company server, so there is no copy of your video or audio sitting somewhere to be leaked or handed over later. There is no account, so there is no profile tying a conversation to your identity. Those are properties of how the connection is built, not policies that could quietly change.",
+      "What is not protected: nothing scans the call in real time to catch bad behaviour before it reaches you, and nothing can stop the person on the other end from recording their own screen — that is true of every video platform, not this one specifically. Anyone claiming otherwise about their own product is overselling.",
+      "What that leaves you is the part that actually matters day to day: skip early and without guilt, keep identifying details out of first conversations, and treat any request to move to another app as the end of the conversation rather than the start of a better one.",
+    ],
+    faqs: [
+      { question: "Is chatting with strangers safe?", answer: "It carries real risk, like anywhere people meet anonymously. The structural protections here are genuine — peer-to-peer calls, no account — but there is no live moderation, so your own habits do most of the work." },
+      { question: "What is the biggest red flag?", answer: "Being pushed to continue on another app. It is the opening move in most scams that start on platforms like this, because it removes any record and moves you somewhere with fewer protections." },
+      { question: "Does peer-to-peer mean nobody can see my call?", answer: "It means your video and audio are not routed through a server that could store them. It does not stop the other person recording their own screen — no platform can prevent that." },
+      { question: "Should I ever share my social media?", answer: "Not in a first conversation, and not because someone pressed for it. A genuine conversation does not need it, and handing over a profile hands over your name, photos and contacts at once." },
+      { question: "What should I do if a conversation turns bad?", answer: "Skip straight away. Do not explain, negotiate or warn them first — the whole design assumes you will leave conversations that are not working, and there is no cost to doing it early." },
+      { question: "Is text chat safer than video?", answer: "It exposes less about you — no face, no voice, no room in the background. It does not protect against manipulation or scams, which work the same way in text." },
+    ],
+    related: [
+      { slug: "video-chat", label: "video chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "talk-to-strangers", label: "talking to strangers generally", relation: "sibling" },
+      { slug: "chat-without-signup", label: "chatting without an account", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-malaysia",
+    kind: "country",
+    name: "Malaysia",
+    primaryKeyword: "video chat malaysia",
+    title: "Video Chat Malaysia — Talk to Strangers Free",
+    description:
+      "Free random video chat with people from Malaysia. Talk in Malay, English or Chinese — no signup, no download, instant matching.",
+    tagline:
+      "Free video chat with Malaysia. Three languages in one conversation is normal here — and no account to start.",
+    languages: ["Bahasa Melayu (Malay)", "English", "中文 (Chinese)", "தமிழ் (Tamil)"],
+    peakHours: "21:00 – 01:00 MYT",
+    timezone: "Asia/Kuala_Lumpur",
+    weight: 0.9,
+    places: ["Kuala Lumpur", "Penang", "Johor Bahru", "Ipoh", "Kota Kinabalu"],
+    talkingPoints: [
+      "Food, which is the national conversation — nasi lemak, char kway teow and roti canai each have fiercely defended regional versions",
+      "Mamak stalls, open through the night and genuinely where a lot of socialising happens rather than a tourist curiosity",
+      "The Malay–Chinese–Indian mix, which shapes food, festivals and how people actually speak day to day",
+      "Manglish, the local English with Malay and Chinese particles bolted on — 'lah' at the end of a sentence is the famous one",
+      "The Peninsula versus Borneo divide: Sabah and Sarawak feel genuinely different from Kuala Lumpur and residents will say so",
+    ],
+    connectivityNote:
+      "Maxis, Celcom and Digi run solid 4G with 5G across the Klang Valley and other cities. Coverage in the interior of Sabah and Sarawak is genuinely patchier — voice and text hold up there better than video.",
+    localNote:
+      "Code-switching mid-sentence between Malay, English and Chinese is completely normal here rather than a sign someone is struggling. Most urban Malaysians speak at least two languages and will switch to whichever one you are comfortable in.",
+    safetyNote:
+      "Race and religion are constitutionally sensitive topics in Malaysia and are policed more tightly than in most countries this directory covers. Worth letting the other person lead if either comes up at all.",
+    etiquette:
+      "Using the right hand when gesturing about food or handing something over reads as basic manners here. Asking whether someone has eaten yet — 'sudah makan?' — is a genuine, warm greeting rather than an actual question about lunch.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Manglish is its own thing",
+        body: "Malaysian English borrows particles from Malay and Chinese and uses them constantly — 'lah', 'meh', 'can or not'. It is not broken English; it is a stable local variety with its own rules, and getting it slightly wrong is a reliable source of amusement for whoever you are talking to.",
+      },
+      {
+        kind: "culture",
+        title: "Mamak stalls run all night",
+        body: "Indian-Muslim mamak restaurants stay open through the small hours and function as the default late-night social space — football is watched there, arguments are had there, and it is where a lot of the country's socialising actually happens.",
+      },
+      {
+        kind: "infra",
+        title: "Two halves, separated by a sea",
+        body: "Peninsular Malaysia and Malaysian Borneo (Sabah and Sarawak) are separated by roughly 600km of the South China Sea, with different ethnic makeups, different immigration rules and a genuine sense of distinct identity. Asking which side someone is from is a real question, not a formality.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "Apa khabar?", meaning: "How are you?", say: "AH-pa KHA-bar" },
+      { phrase: "Sudah makan?", meaning: "Have you eaten? — a warm, standard greeting", say: "SOO-dah MA-kan" },
+      { phrase: "Boleh lah", meaning: "Sure / that works", say: "BO-leh lah" },
+      { phrase: "Jumpa lagi", meaning: "See you again", say: "JOOM-pa LA-gi" },
+    ],
+    starters: [
+      { topic: "Food", ask: "Whose nasi lemak is the best, and don't say a restaurant?", why: "The real answer is always a specific stall, and it always comes with a story." },
+      { topic: "Mamak", ask: "What time does your usual mamak get busy?", why: "A genuinely local rhythm most Malaysians can describe precisely." },
+      { topic: "Languages", ask: "How many languages do you switch between in a normal day?", why: "The honest answer is often three, and people enjoy explaining when they use which." },
+      { topic: "Borneo", ask: "Peninsula or Borneo — and does the other side feel like a different country?", why: "A real internal divide people have genuine, specific opinions about." },
+    ],
+    intro: [
+      "Malaysia is one of the more genuinely multilingual markets in this directory. Malay is the national language, English is widely used in business and cities, and Chinese and Tamil are first languages for large communities — most urban Malaysians move between at least two of them in an ordinary day, often within a single sentence.",
+      "That shows up immediately in conversation. Code-switching mid-sentence is normal rather than a sign of difficulty, and Manglish — English with Malay and Chinese particles attached — is a stable local variety with its own rules rather than an error.",
+      "Food is the reliable way in. Regional versions of nasi lemak, char kway teow and roti canai are defended with real seriousness, and mamak stalls that stay open through the night are where a lot of the country's actual socialising happens.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "What language should I expect in Malaysia?", answer: "Malay is the national language and English is very widely spoken, especially in cities. Chinese and Tamil are first languages for large communities, and switching between them mid-conversation is completely normal." },
+      { question: "When is Malaysia's chat traffic busiest?", answer: "Roughly 21:00 to 01:00 Malaysia Time — and the late end holds up better than most markets, helped by mamak culture keeping people out and awake." },
+      { question: "What is Manglish?", answer: "Malaysian English, with particles borrowed from Malay and Chinese — 'lah', 'meh', 'can or not'. It is a stable local variety, not broken English." },
+      { question: "How is the internet connection?", answer: "Strong 4G and growing 5G across the Klang Valley and other cities on Maxis, Celcom and Digi. Interior Sabah and Sarawak run patchier." },
+      { question: "Are there topics to avoid?", answer: "Race and religion are constitutionally sensitive here and policed more tightly than in most countries. Best to let the other person lead if either comes up." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-kuala-lumpur", label: "Kuala Lumpur", relation: "city" },
+      { slug: "video-chat-penang", label: "Penang", relation: "city" },
+      { slug: "video-chat-johor-bahru", label: "Johor Bahru", relation: "city" },
+      { slug: "chinese-video-chat", label: "Mandarin chat", relation: "language" },
+      { slug: "tamil-video-chat", label: "Tamil chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-indonesia", label: "Indonesia", relation: "sibling" },
+      { slug: "video-chat-thailand", label: "Thailand", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-israel",
+    kind: "country",
+    name: "Israel",
+    primaryKeyword: "video chat israel",
+    title: "Video Chat Israel — Talk to Strangers Free",
+    description:
+      "Free random video chat with people from Israel. Talk in Hebrew, Arabic or English — no signup, no download, instant matching.",
+    tagline:
+      "Free video chat with Israel. A working week that starts on Sunday, and a conversation that starts with no account.",
+    languages: ["עברית (Hebrew)", "العربية (Arabic)", "English", "Русский (Russian)"],
+    peakHours: "21:00 – 01:00 IST",
+    timezone: "Asia/Jerusalem",
+    weight: 0.8,
+    places: ["Tel Aviv", "Jerusalem", "Haifa", "Beersheba", "Netanya"],
+    talkingPoints: [
+      "The Sunday-to-Thursday working week, which catches almost every foreigner off guard the first time",
+      "Shabbat, which genuinely changes the pace of the country from Friday afternoon to Saturday night",
+      "The tech industry, which is unusually large relative to the country's size and something a lot of people work in or near",
+      "Hummus, and the completely serious question of which specific place does it properly",
+      "Directness as a communication style — being blunt is not considered rude here the way it is in many cultures",
+    ],
+    connectivityNote:
+      "Partner, Cellcom and Pelephone provide strong 4G and widespread 5G, and fixed broadband is fast and reliable. Connection quality is rarely the limiting factor here.",
+    localNote:
+      "The week runs Sunday to Thursday, so Friday and Saturday are the weekend rather than the working days they are elsewhere. Traffic here drops noticeably from Friday afternoon through Saturday evening for Shabbat, then picks up again Saturday night.",
+    safetyNote:
+      "Regional politics are live, personal and unavoidable in the news here, and people you match with may have direct experience of them. It is a subject to let the other person raise, at their pace, rather than opening with.",
+    etiquette:
+      "Directness is normal and not a sign of hostility — disagreement gets stated plainly and is not usually softened first. Matching that register tends to land better than excessive politeness, which can read as evasive.",
+    spotlights: [
+      {
+        kind: "time",
+        title: "The weekend is Friday and Saturday",
+        body: "The Israeli working week runs Sunday to Thursday. It is a small thing that reorganises everything — when the queue is busy, when people are free, and why a Sunday-evening conversation here feels like a Monday-evening one anywhere else.",
+      },
+      {
+        kind: "culture",
+        title: "Shabbat genuinely slows the country down",
+        body: "From Friday afternoon to Saturday nightfall much of the country quietens — public transport reduces, many businesses close, and the pace changes noticeably. It is observed to very different degrees by different people, which is itself a conversation.",
+      },
+      {
+        kind: "culture",
+        title: "Bluntness is not rudeness",
+        body: "Israeli conversational style is famously direct: opinions arrive unsoftened and disagreement is stated outright. Visitors often read this as aggression when it is closer to the opposite — indirectness is what tends to be read as insincere.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "מה נשמע?", meaning: "How's it going?", say: "ma nish-MA" },
+      { phrase: "סבבה", meaning: "Cool / all good", say: "SA-ba-ba" },
+      { phrase: "יאללה", meaning: "Let's go / come on", say: "YA-lla" },
+      { phrase: "להתראות", meaning: "See you", say: "le-hit-ra-OT" },
+    ],
+    starters: [
+      { topic: "The week", ask: "Does a Sunday morning feel like a Monday to you?", why: "The Sunday-to-Thursday week is a genuine daily-life difference most people enjoy explaining." },
+      { topic: "Hummus", ask: "Which place does hummus properly, and why is everywhere else wrong?", why: "A completely serious argument with strong regional loyalties." },
+      { topic: "Shabbat", ask: "How much does your Friday actually change?", why: "Observance varies enormously person to person, so the answer is always specific." },
+      { topic: "Directness", ask: "Do people abroad ever think you're being rude when you're not?", why: "A self-aware, usually funny topic for a culture used to being read wrong." },
+    ],
+    intro: [
+      "Israel runs a Sunday-to-Thursday working week, which is the first thing worth knowing before you try to work out when the queue is busy. Friday and Saturday are the weekend, and the country quietens noticeably from Friday afternoon through Saturday nightfall for Shabbat before picking back up on Saturday night.",
+      "Several languages are genuinely in daily use — Hebrew as the primary one, Arabic as an official language and a first language for a large minority, plus widespread English and a substantial Russian-speaking population from post-Soviet immigration.",
+      "Conversationally, the thing that surprises people most is the directness. Opinions arrive unsoftened and disagreement is stated plainly, and none of it is meant as hostility. Indirectness is more likely to be read as insincere than as polite.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "When is Israel's chat traffic busiest?", answer: "Roughly 21:00 to 01:00 local time, but the weekly pattern matters more: the working week is Sunday to Thursday, and traffic drops from Friday afternoon through Saturday evening for Shabbat." },
+      { question: "What languages will people speak?", answer: "Hebrew primarily, with Arabic as an official language and a first language for a large minority. English is widely spoken, and Russian is common thanks to substantial post-Soviet immigration." },
+      { question: "Is Israeli directness rude?", answer: "Not by local standards. Blunt opinions and open disagreement are the normal register, and softening things excessively can come across as evasive rather than polite." },
+      { question: "Should I bring up politics?", answer: "Better not to open with it. The subject is live and personal here, and people may have direct experience of it — let them raise it at their own pace if at all." },
+      { question: "How is the internet connection?", answer: "Very good — strong 4G, widespread 5G, and fast fixed broadband. Connection quality is rarely the limiting factor." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-tel-aviv", label: "Tel Aviv", relation: "city" },
+      { slug: "video-chat-jerusalem", label: "Jerusalem", relation: "city" },
+      { slug: "video-chat-haifa", label: "Haifa", relation: "city" },
+      { slug: "arabic-video-chat", label: "Arabic chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-turkey", label: "Turkey", relation: "sibling" },
+      { slug: "video-chat-uae", label: "the UAE", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-maldives",
+    kind: "country",
+    name: "the Maldives",
+    primaryKeyword: "video chat maldives",
+    title: "Video Chat Maldives — Talk to Strangers Free",
+    description:
+      "Free random video chat with people in the Maldives. Talk in Dhivehi or English — no signup, no download, instant matching.",
+    tagline:
+      "Free video chat with the Maldives. A country of islands where almost everyone lives on one of them — and no account needed.",
+    languages: ["ދިވެހި (Dhivehi)", "English"],
+    peakHours: "21:00 – 00:30 MVT",
+    timezone: "Indian/Maldives",
+    weight: 0.4,
+    places: ["Malé", "Hulhumalé", "Addu City", "Fuvahmulah", "Kulhudhuffushi"],
+    talkingPoints: [
+      "The gap between resort Maldives and local-island Maldives, which are almost entirely separate worlds",
+      "Malé's density — one of the most densely populated cities on earth, packed onto a tiny island",
+      "Sea level and climate change, which is not an abstract political topic here but a direct question about the country's future",
+      "Fishing and tuna, historically the backbone of the economy long before tourism arrived",
+      "Ferry and seaplane logistics, since getting anywhere means crossing water and everyone has an opinion about the schedules",
+    ],
+    connectivityNote:
+      "Dhiraagu and Ooredoo cover Malé and the more populated islands with solid 4G, and undersea cable capacity has improved considerably. More remote islands and atolls are genuinely patchier, where voice and text hold up far better than video.",
+    localNote:
+      "Most visitors only ever see resort islands, which are deliberately separated from where people actually live. Someone you match with here is far more likely to be from Malé or a local island than from a resort — treating the resort image as the whole country is the standard outsider mistake.",
+    safetyNote:
+      "The Maldives is an Islamic country with laws reflecting that, and public criticism of religion carries genuine legal weight rather than just social awkwardness. Worth steering around rather than testing.",
+    etiquette:
+      "Modesty in dress on camera is taken more seriously here than the resort image would suggest — resorts operate under different rules from the rest of the country, and inhabited islands are noticeably more conservative.",
+    spotlights: [
+      {
+        kind: "infra",
+        title: "One of the most crowded cities on earth",
+        body: "Malé packs well over a hundred thousand people onto a couple of square kilometres, making it one of the densest cities anywhere. It is close to the opposite of the empty-beach image the country exports, and residents are usually happy to point that out.",
+      },
+      {
+        kind: "legal",
+        title: "Resort islands run on different rules",
+        body: "Alcohol and swimwear that are normal at a resort are not permitted on inhabited islands, because resorts operate under a separate regulatory regime. It is a real legal split, and it is why the tourist experience tells you almost nothing about daily life here.",
+      },
+      {
+        kind: "seasonal",
+        title: "Sea level is a practical question, not a debate",
+        body: "With most of the country barely a metre or two above sea level, rising seas are a straightforwardly practical issue about the nation's future rather than a political abstraction. People here have thought about it far more concretely than most.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "ކިހިނެއް؟", meaning: "How are you?", say: "ki-hi-neh" },
+      { phrase: "ޝުކުރިއްޔާ", meaning: "Thank you", say: "shu-ku-riy-yaa" },
+      { phrase: "ވަރަށް ސަޅި", meaning: "Very cool / great", say: "va-rah sa-lhi" },
+      { phrase: "ފަހުން ބައްދަލުވާނަން", meaning: "See you later", say: "fa-hun bad-dha-lu-vaa-nan" },
+    ],
+    starters: [
+      { topic: "Real Maldives", ask: "What do people get wrong about the Maldives from the resort photos?", why: "A gap locals are very aware of and usually enjoy correcting." },
+      { topic: "Malé density", ask: "What is living in Malé actually like day to day?", why: "The density surprises everyone who only knows the beach image." },
+      { topic: "Getting around", ask: "Ferry or speedboat, and how long does it actually take you?", why: "Inter-island travel shapes daily life in a way that gets a very specific answer." },
+      { topic: "Fishing", ask: "Does anyone in your family still fish?", why: "Tuna fishing predates tourism as the economic backbone and many families still have that connection." },
+    ],
+    intro: [
+      "The Maldives is a country of roughly a thousand islands, and almost nobody you match with here will be on the one you have seen in photographs. Resort islands operate under a separate regulatory regime from inhabited ones — different rules on alcohol and dress — and are deliberately kept apart from where people actually live.",
+      "Malé, the capital, is close to the opposite of the country's export image: well over a hundred thousand people on a couple of square kilometres, making it one of the most densely populated cities on earth. Residents are usually quick to point out the contrast.",
+      "Sea level is worth understanding before it comes up. Most of the country sits barely a metre or two above the water, so rising seas are a practical question about the nation's future rather than a distant political argument, and people here have thought about it in far more concrete terms than most.",
+      "No account, no download — the call runs directly between browsers, and nothing said or shown during it is ever recorded.",
+    ],
+    faqs: [
+      { question: "Will I match with people at resorts?", answer: "Unlikely. Resort islands are separate from where Maldivians live, so a match here is far more likely to be someone in Malé or on a local island." },
+      { question: "What language do people speak?", answer: "Dhivehi is the national language, written in the Thaana script. English is widely used in business, tourism and education, especially among younger people in Malé." },
+      { question: "How is the internet connection?", answer: "Solid 4G in Malé and the more populated islands via Dhiraagu and Ooredoo, and undersea cable capacity has improved. Remote atolls are patchier — voice and text handle that better than video." },
+      { question: "When is Maldives chat traffic busiest?", answer: "Roughly 21:00 to 00:30 Maldives Time. It is a small country, so the pool is genuinely smaller than most markets here." },
+      { question: "Are there topics to avoid?", answer: "Public criticism of religion carries real legal weight here rather than just social awkwardness. Best steered around entirely." },
+      { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+    ],
+    related: [
+      { slug: "video-chat-male", label: "Malé", relation: "city" },
+      { slug: "video-chat-addu", label: "Addu City", relation: "city" },
+      { slug: "video-chat-hulhumale", label: "Hulhumalé", relation: "city" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "tamil-video-chat", label: "Tamil chat", relation: "language" },
+      { slug: "audio-chat", label: "voice-only chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-sri-lanka", label: "Sri Lanka", relation: "sibling" },
+      { slug: "video-chat-india", label: "India", relation: "sibling" },
+    ],
+  },
+
 ];
 
 export const ENTRY_BY_SLUG: Record<string, DirectoryEntry> = Object.fromEntries(
