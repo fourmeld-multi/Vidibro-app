@@ -595,6 +595,27 @@ export default function VideoContainer({
                 </div>
               )}
 
+              {/* Floating incoming-message bubbles — desktop, bottom-left of your video, auto-clear after 3s */}
+              <AnimatePresence>
+                {!chatOpen && floatingMsgs.length > 0 && (
+                  <div className="absolute bottom-5 left-4 max-w-[75%] z-30 flex flex-col gap-1.5 pointer-events-none">
+                    {floatingMsgs.map((msg) => (
+                      <motion.div
+                        key={msg.id}
+                        initial={{ opacity: 0, y: 12, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 12, scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                        className="rounded-2xl rounded-bl-none px-3.5 py-2 text-xs font-medium shadow-2xl leading-relaxed break-words [word-break:break-word] bg-black/75 backdrop-blur-sm text-white border border-white/20"
+                      >
+                        <span className="text-[9px] block opacity-70 mb-0.5 font-bold">Stranger</span>
+                        <span>{msg.text}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                )}
+              </AnimatePresence>
+
               {/* Top-Left You Badge on Your Video Screen */}
               <div className="absolute top-4 left-4 z-30 flex items-center gap-2 bg-black/65 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/15 shadow-xl">
                 {micEnabled ? (
