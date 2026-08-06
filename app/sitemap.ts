@@ -3,6 +3,12 @@ import { BASE_URL } from "@/lib/seo";
 import { ENTRIES } from "@/lib/directory/entries";
 import { getAllPosts, getAllCategories, getAllTags, tagToSlug } from "@/lib/blog/posts";
 
+const NATIVE_ROUTES = [
+  "/hi", "/kn", "/ta", "/bn",
+  "/ja", "/ko", "/ru", "/pt-br",
+  "/id", "/vi", "/tr", "/zh", "/th",
+];
+
 /**
  * Every indexable URL on the site.
  *
@@ -88,5 +94,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.4,
   }));
 
-  return [...staticEntries, ...directoryEntries, ...blogPostEntries, ...blogCategoryEntries, ...blogTagEntries];
+  const nativeEntries: MetadataRoute.Sitemap = NATIVE_ROUTES.map((route) => ({
+    url: `${BASE_URL}${route}`,
+    lastModified: buildTime,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
+  return [...staticEntries, ...nativeEntries, ...directoryEntries, ...blogPostEntries, ...blogCategoryEntries, ...blogTagEntries];
 }
