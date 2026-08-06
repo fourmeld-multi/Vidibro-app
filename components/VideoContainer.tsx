@@ -613,18 +613,6 @@ export default function VideoContainer({
                   </div>
                 )}
               </div>
-
-              {/* Top-Right Flip Camera Button */}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  flipCamera();
-                }}
-                className="absolute top-4 right-4 z-30 flex h-10 w-10 items-center justify-center rounded-full bg-black/75 hover:bg-black/95 text-cyan-300 backdrop-blur-sm border border-white/20 shadow-2xl transition transform hover:scale-110"
-                title="Flip Camera"
-              >
-                <SwitchCamera size={18} />
-              </button>
             </div>
           </div>
 
