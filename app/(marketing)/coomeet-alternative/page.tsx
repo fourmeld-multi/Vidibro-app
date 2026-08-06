@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import AlternativePageTemplate from "@/components/AlternativePageTemplate";
-import { generatePageSEO } from "@/lib/seo";
+import { generatePageSEO, BASE_URL } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = generatePageSEO({
   title: "Best CooMeet Alternative 2026, Totally Free",
@@ -11,7 +12,18 @@ export const metadata: Metadata = generatePageSEO({
 
 export default function CoomeetAlternativePage() {
   return (
-    <AlternativePageTemplate
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+            { "@type": "ListItem", position: 2, name: "CooMeet Alternative", item: `${BASE_URL}/coomeet-alternative` },
+          ],
+        }}
+      />
+      <AlternativePageTemplate
       competitorName="CooMeet"
       pageTitle="The Best Free CooMeet Alternative in 2026"
       subtitle="CooMeet pairs men with camera-verified women through a paid, per-minute or subscription model — you sign up and pay before you can talk. Vidibro is the opposite by design: anonymous, unrestricted matching that's free from the first second to the last."
@@ -37,5 +49,6 @@ export default function CoomeetAlternativePage() {
         },
       ]}
     />
+    </>
   );
 }

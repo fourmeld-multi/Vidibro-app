@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import AlternativePageTemplate from "@/components/AlternativePageTemplate";
-import { generatePageSEO } from "@/lib/seo";
+import { generatePageSEO, BASE_URL } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = generatePageSEO({
   title: "Best StrangerLine Alternative 2026 (No Signup)",
@@ -11,7 +12,18 @@ export const metadata: Metadata = generatePageSEO({
 
 export default function StrangerlineAlternativePage() {
   return (
-    <AlternativePageTemplate
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+            { "@type": "ListItem", position: 2, name: "StrangerLine Alternative", item: `${BASE_URL}/strangerline-alternative` },
+          ],
+        }}
+      />
+      <AlternativePageTemplate
       competitorName="StrangerLine"
       pageTitle="The Best Free StrangerLine Alternative in 2026"
       subtitle="StrangerLine's pitch is doing more than Omegle ever did — saved chats, friend requests, messages that wait for you after a disconnect. Vidibro takes the opposite bet: nothing is kept, nothing is tied to you, and that's the whole feature."
@@ -37,5 +49,6 @@ export default function StrangerlineAlternativePage() {
         },
       ]}
     />
+    </>
   );
 }

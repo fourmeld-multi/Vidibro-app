@@ -10,6 +10,7 @@ import {
 import { ENTRIES, getEntry, resolvableRelated, hrefFor } from "@/lib/directory/entries";
 import { assertEntryIsPublishable } from "@/lib/directory/types";
 import { generatePageSEO, BASE_URL } from "@/lib/seo";
+import { localeUrl } from "@/lib/directory/locales";
 import { formatPeakHours } from "@/lib/liveCount";
 import JsonLd from "@/components/JsonLd";
 import PeakHoursBar from "@/components/PeakHoursBar";
@@ -27,13 +28,24 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const entry = getEntry(slug);
   if (!entry) return {};
-  return generatePageSEO({
+  const base = generatePageSEO({
     title: entry.title,
     description: entry.description,
     slug: `/directory/${entry.slug}`,
     keywords: [entry.primaryKeyword, `${entry.name} video chat`, `talk to strangers ${entry.name}`],
     image: `${BASE_URL}/directory/${entry.slug}/opengraph-image`,
   });
+  return {
+    ...base,
+    alternates: {
+      ...base.alternates,
+      languages: {
+        "hi": localeUrl(entry.slug, "hi"),
+        "bn": localeUrl(entry.slug, "bn"),
+        "x-default": `${BASE_URL}/directory/${entry.slug}`,
+      },
+    },
+  };
 }
 
 /** Icon and colour per spotlight kind, so the cards read as one family. */

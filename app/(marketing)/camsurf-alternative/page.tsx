@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import AlternativePageTemplate from "@/components/AlternativePageTemplate";
-import { generatePageSEO } from "@/lib/seo";
+import { generatePageSEO, BASE_URL } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = generatePageSEO({
   title: "Best Camsurf Alternative 2026, No Paywall",
@@ -11,7 +12,18 @@ export const metadata: Metadata = generatePageSEO({
 
 export default function CamsurfAlternativePage() {
   return (
-    <AlternativePageTemplate
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+            { "@type": "ListItem", position: 2, name: "Camsurf Alternative", item: `${BASE_URL}/camsurf-alternative` },
+          ],
+        }}
+      />
+      <AlternativePageTemplate
       competitorName="Camsurf"
       pageTitle="The Best Free Camsurf Alternative in 2026"
       subtitle="Camsurf's free tier comes with daily limits on its filters and ads that only go away on Camsurf Premium. Vidibro skips the tiers entirely — one free experience, no ads, no upgrade prompts, no limits ticking down in the background."
@@ -37,5 +49,6 @@ export default function CamsurfAlternativePage() {
         },
       ]}
     />
+    </>
   );
 }

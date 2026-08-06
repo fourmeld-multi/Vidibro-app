@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import AlternativePageTemplate from "@/components/AlternativePageTemplate";
-import { generatePageSEO } from "@/lib/seo";
+import { generatePageSEO, BASE_URL } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = generatePageSEO({
   title: "Best Shagle Alternative 2026 (100% Free)",
@@ -11,7 +12,18 @@ export const metadata: Metadata = generatePageSEO({
 
 export default function ShagleAlternativePage() {
   return (
-    <AlternativePageTemplate
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+            { "@type": "ListItem", position: 2, name: "Shagle Alternative", item: `${BASE_URL}/shagle-alternative` },
+          ],
+        }}
+      />
+      <AlternativePageTemplate
       competitorName="Shagle"
       pageTitle="The Best Free Shagle Alternative in 2026"
       subtitle="Shagle's core chat is genuinely free, but gender and location filters sit behind a paid plan, and its virtual gifts and credits system adds a whole extra layer of spending on top. Vidibro keeps it to one thing: free, anonymous chat, with nothing to buy."
@@ -36,5 +48,6 @@ export default function ShagleAlternativePage() {
         },
       ]}
     />
+    </>
   );
 }

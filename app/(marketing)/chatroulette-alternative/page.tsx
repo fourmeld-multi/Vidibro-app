@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import AlternativePageTemplate from "@/components/AlternativePageTemplate";
-import { generatePageSEO } from "@/lib/seo";
+import { generatePageSEO, BASE_URL } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = generatePageSEO({
   title: "Best Chatroulette Alternative 2026 (Free)",
@@ -11,7 +12,18 @@ export const metadata: Metadata = generatePageSEO({
 
 export default function ChatrouletteAlternativePage() {
   return (
-    <AlternativePageTemplate
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+            { "@type": "ListItem", position: 2, name: "Chatroulette Alternative", item: `${BASE_URL}/chatroulette-alternative` },
+          ],
+        }}
+      />
+      <AlternativePageTemplate
       competitorName="Chatroulette"
       pageTitle="Best Chatroulette Alternative in 2026"
       subtitle="Tired of coin systems, account logins, or long waiting queues? Vidibro pairs you in under a second for instant 1-on-1 video and voice chat with zero fees."
@@ -32,5 +44,6 @@ export default function ChatrouletteAlternativePage() {
         },
       ]}
     />
+    </>
   );
 }

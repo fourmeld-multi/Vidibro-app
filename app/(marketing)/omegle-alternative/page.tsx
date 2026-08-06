@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import AlternativePageTemplate from "@/components/AlternativePageTemplate";
-import { generatePageSEO } from "@/lib/seo";
+import { generatePageSEO, BASE_URL } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = generatePageSEO({
   title: "Best Free Omegle Alternative 2026 (No Signup)",
@@ -11,7 +12,18 @@ export const metadata: Metadata = generatePageSEO({
 
 export default function OmegleAlternativePage() {
   return (
-    <AlternativePageTemplate
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+            { "@type": "ListItem", position: 2, name: "Omegle Alternative", item: `${BASE_URL}/omegle-alternative` },
+          ],
+        }}
+      />
+      <AlternativePageTemplate
       competitorName="Omegle"
       pageTitle="The Best Free Omegle Alternative in 2026"
       subtitle="Since Omegle shut down, millions of users have been searching for a clean, fast, and safe random chat platform. Vidibro brings back the thrill of spontaneous connections with modern WebRTC privacy and zero registration."
@@ -38,5 +50,6 @@ export default function OmegleAlternativePage() {
         },
       ]}
     />
+    </>
   );
 }

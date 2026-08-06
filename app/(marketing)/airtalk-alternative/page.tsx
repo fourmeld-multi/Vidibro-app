@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import AlternativePageTemplate from "@/components/AlternativePageTemplate";
-import { generatePageSEO } from "@/lib/seo";
+import { generatePageSEO, BASE_URL } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = generatePageSEO({
   title: "Best Free AirTALK Alternative 2026 (No Signup)",
@@ -11,7 +12,18 @@ export const metadata: Metadata = generatePageSEO({
 
 export default function AirTalkAlternativePage() {
   return (
-    <AlternativePageTemplate
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+            { "@type": "ListItem", position: 2, name: "AirTALK Alternative", item: `${BASE_URL}/airtalk-alternative` },
+          ],
+        }}
+      />
+      <AlternativePageTemplate
       competitorName="AirTALK"
       pageTitle="Best Free AirTALK Alternative in 2026"
       subtitle="Prefer faceless voice chat or video matching without account barriers? Vidibro gives you instant 1-on-1 audio calls and video matches with real people around the globe — 100% free and private."
@@ -38,5 +50,6 @@ export default function AirTalkAlternativePage() {
         },
       ]}
     />
+    </>
   );
 }

@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import AlternativePageTemplate from "@/components/AlternativePageTemplate";
-import { generatePageSEO } from "@/lib/seo";
+import { generatePageSEO, BASE_URL } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = generatePageSEO({
   title: "Best Emerald Chat Alternative 2026 (Free)",
@@ -11,7 +12,18 @@ export const metadata: Metadata = generatePageSEO({
 
 export default function EmeraldChatAlternativePage() {
   return (
-    <AlternativePageTemplate
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+            { "@type": "ListItem", position: 2, name: "Emerald Chat Alternative", item: `${BASE_URL}/emerald-chat-alternative` },
+          ],
+        }}
+      />
+      <AlternativePageTemplate
       competitorName="Emerald Chat"
       pageTitle="Best Free Emerald Chat Alternative in 2026"
       subtitle="Connect with real people around the globe in video, voice, and text modes with zero signup, anti-bot protection, and fast WebRTC matching."
@@ -31,5 +43,6 @@ export default function EmeraldChatAlternativePage() {
         },
       ]}
     />
+    </>
   );
 }

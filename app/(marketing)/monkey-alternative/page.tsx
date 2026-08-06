@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import AlternativePageTemplate from "@/components/AlternativePageTemplate";
-import { generatePageSEO } from "@/lib/seo";
+import { generatePageSEO, BASE_URL } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = generatePageSEO({
   title: "Best Free Monkey Chat App Alternative 2026",
@@ -11,7 +12,18 @@ export const metadata: Metadata = generatePageSEO({
 
 export default function MonkeyAlternativePage() {
   return (
-    <AlternativePageTemplate
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+            { "@type": "ListItem", position: 2, name: "Monkey Alternative", item: `${BASE_URL}/monkey-alternative` },
+          ],
+        }}
+      />
+      <AlternativePageTemplate
       competitorName="Monkey"
       pageTitle="The Best Free Monkey App Alternative in 2026"
       subtitle="Monkey pairs you for a forced 15-second video call that only continues if both people tap to extend it — a swipe-style format built for quick judgments, not real conversation. Vidibro gives you the full call from the first second, in your browser, for free."
@@ -38,5 +50,6 @@ export default function MonkeyAlternativePage() {
         },
       ]}
     />
+    </>
   );
 }

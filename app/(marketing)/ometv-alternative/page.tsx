@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import AlternativePageTemplate from "@/components/AlternativePageTemplate";
-import { generatePageSEO } from "@/lib/seo";
+import { generatePageSEO, BASE_URL } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = generatePageSEO({
   title: "Best Free OmeTV Alternative 2026 (No App)",
@@ -11,7 +12,18 @@ export const metadata: Metadata = generatePageSEO({
 
 export default function OmeTVAlternativePage() {
   return (
-    <AlternativePageTemplate
+    <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+            { "@type": "ListItem", position: 2, name: "OmeTV Alternative", item: `${BASE_URL}/ometv-alternative` },
+          ],
+        }}
+      />
+      <AlternativePageTemplate
       competitorName="OmeTV"
       pageTitle="Best Free OmeTV Alternative in 2026"
       subtitle="Experience fast 1-on-1 video chat directly in your mobile browser. No app store downloads, no social logins, just instant encrypted matching."
@@ -31,5 +43,6 @@ export default function OmeTVAlternativePage() {
         },
       ]}
     />
+    </>
   );
 }
