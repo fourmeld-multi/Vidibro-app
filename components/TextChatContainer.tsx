@@ -418,7 +418,7 @@ export default function TextChatContainer({
 
             <p className="text-base sm:text-lg font-black text-gray-800 tracking-wide">
               {connectionState === "waiting" && (matchCountdown > 0 ? `Finding your next partner in ${matchCountdown}…` : "Searching for someone to text chat with…")}
-              {connectionState === "connecting" && "Establishing encrypted WebRTC connection…"}
+              {connectionState === "connecting" && "Connecting to your match…"}
               {connectionState === "disconnected" && "Stranger left the chat."}
             </p>
             <p className="text-xs sm:text-sm text-purple-700/80 mt-1 max-w-sm font-medium">

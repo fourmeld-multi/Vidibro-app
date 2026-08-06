@@ -547,7 +547,7 @@ export default function VideoContainer({
                   </div>
                   <p className="text-xl font-black text-white tracking-wide">
                     {connectionState === "waiting" && "Looking for someone to chat with…"}
-                    {connectionState === "connecting" && "Establishing encrypted WebRTC connection…"}
+                    {connectionState === "connecting" && "Connecting to your match…"}
                     {connectionState === "disconnected" && "Stranger left. Finding new match…"}
                     {connectionState === "idle" && "Press Start to match with a stranger."}
                     {connectionState === "waiting" && matchCountdown > 0 && `Finding your next partner in ${matchCountdown}…`}
@@ -659,7 +659,7 @@ export default function VideoContainer({
 
                 <p className="text-sm font-black text-white tracking-wide">
                   {connectionState === "waiting" && "Looking for someone to chat with…"}
-                  {connectionState === "connecting" && "Establishing encrypted WebRTC connection…"}
+                  {connectionState === "connecting" && "Connecting to your match…"}
                   {connectionState === "disconnected" && "Stranger left. Finding new match…"}
                   {connectionState === "idle" && "Press Start to match with a stranger."}
                 </p>
