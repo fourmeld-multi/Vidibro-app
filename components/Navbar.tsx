@@ -46,7 +46,7 @@ export default function Navbar({
 
   return (
     <>
-    <header className="sticky top-0 z-50 bg-[#090518]/95 shadow-md border-b border-purple-400/20">
+    <header className="sticky top-0 z-50 bg-[#090518] shadow-md border-b border-purple-400/20">
       {/* Was a glowing gradient line via an absolutely-positioned child div.
           Removed entirely (not just de-blurred) after that still didn't fix
           reports of the whole bar vanishing during fast scroll on Android —
