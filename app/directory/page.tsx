@@ -29,6 +29,10 @@ const FEATURES = [
   { href: "/directory/random-video-chat", label: "random video chat" },
   { href: "/directory/random-voice-chat", label: "random voice chat" },
   { href: "/directory/anonymous-text-chat", label: "anonymous text chat" },
+  { href: "/directory/talk-to-strangers", label: "talk to strangers" },
+  { href: "/directory/chat-without-signup", label: "chat without signup" },
+  { href: "/directory/late-night-chat", label: "late night chat" },
+  { href: "/directory/safe-chat-with-strangers", label: "safe chat with strangers" },
 ];
 
 const COMPARE = [
@@ -41,6 +45,7 @@ const COMPARE = [
   { href: "/coomeet-alternative", label: "coomeet alternative" },
   { href: "/camsurf-alternative", label: "camsurf alternative" },
   { href: "/shagle-alternative", label: "shagle alternative" },
+  { href: "/strangerline-alternative", label: "strangerline alternative" },
 ];
 
 export default function DirectoryPage() {

@@ -26,6 +26,7 @@ const STATIC_ROUTES = [
   "/coomeet-alternative",
   "/camsurf-alternative",
   "/shagle-alternative",
+  "/strangerline-alternative",
   "/directory",
   "/blog",
   "/about",
