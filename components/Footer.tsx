@@ -21,13 +21,65 @@ export default function Footer({ onStartVideoChat, onStartTextChat, onStartAudio
 
         {/* Brand Banner */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-10 border-b border-white/10">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl overflow-hidden shadow-lg shadow-purple-500/25">
-              <LogoMark size={40} className="h-full w-full object-cover" />
+          <div className="flex flex-col items-center md:items-start gap-3">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl overflow-hidden shadow-lg shadow-purple-500/25">
+                <LogoMark size={40} className="h-full w-full object-cover" />
+              </div>
+              <div className="flex flex-col text-left">
+                <span className="text-2xl font-extrabold text-white font-mono tracking-tight">Vidibro</span>
+                <span className="text-xs text-purple-300">{t.footerTagline}</span>
+              </div>
             </div>
-            <div className="flex flex-col text-left">
-              <span className="text-2xl font-extrabold text-white font-mono tracking-tight">Vidibro</span>
-              <span className="text-xs text-purple-300">{t.footerTagline}</span>
+
+            {/* Social Icons — below logo */}
+            <div className="flex items-center gap-3 mt-1">
+              {/* Instagram */}
+              <a
+                href="https://www.instagram.com/vidibro.chat"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Vidibro on Instagram"
+                className="group"
+              >
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/5 border border-white/10 text-purple-300/70 hover:text-pink-400 hover:border-pink-400/40 transition-all duration-200 group-hover:scale-110">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                  </svg>
+                </div>
+              </a>
+
+              {/* Facebook */}
+              <a
+                href="https://www.facebook.com/share/1JsAbaJ1mp/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Vidibro on Facebook"
+                className="group"
+              >
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/5 border border-white/10 text-purple-300/70 hover:text-blue-400 hover:border-blue-400/40 transition-all duration-200 group-hover:scale-110">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                  </svg>
+                </div>
+              </a>
+
+              {/* X (Twitter) */}
+              <a
+                href="https://x.com/Vidibrochat"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Vidibro on X (Twitter)"
+                className="group"
+              >
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/5 border border-white/10 text-purple-300/70 hover:text-white hover:border-white/30 transition-all duration-200 group-hover:scale-110">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.73-8.835L2.25 2.25h6.865l4.256 5.649 5.872-5.649zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </div>
+              </a>
             </div>
           </div>
 
