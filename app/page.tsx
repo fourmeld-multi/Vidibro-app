@@ -33,6 +33,13 @@ export default function Home() {
   }, []);
 
   return (
+    <>
+    <Navbar
+      currentLang={lang}
+      onSelectLang={setLang}
+      onStartTextChat={() => router.push("/text-chat")}
+      onStartVideoChat={() => router.push("/video-chat")}
+    />
     <div className="relative flex min-h-screen flex-1 flex-col font-sans bg-gradient-to-b from-[#0e0526] via-[#140836] via-[#1b0840] to-[#0a041c] text-white overflow-hidden">
       {/* Thin flowing background lines, purely decorative */}
       <svg
@@ -80,13 +87,6 @@ export default function Home() {
       <div className="absolute top-0 left-1/4 -translate-x-1/2 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-pink-500/25 via-purple-600/20 to-transparent blur-[120px] pointer-events-none animate-pulse" />
       <div className="absolute top-1/3 right-10 h-[450px] w-[450px] rounded-full bg-gradient-to-tr from-cyan-500/20 via-pink-500/20 to-transparent blur-[110px] pointer-events-none" />
       <div className="absolute bottom-10 left-10 h-[500px] w-[500px] rounded-full bg-gradient-to-r from-purple-600/25 via-indigo-500/20 to-transparent blur-[130px] pointer-events-none" />
-
-      <Navbar
-        currentLang={lang}
-        onSelectLang={setLang}
-        onStartTextChat={() => router.push("/text-chat")}
-        onStartVideoChat={() => router.push("/video-chat")}
-      />
 
       <main className="relative z-10 w-full flex-1 flex flex-col mx-auto max-w-5xl px-4 sm:px-6">
         {/* Hero Section */}
@@ -213,5 +213,6 @@ export default function Home() {
         lang={lang}
       />
     </div>
+    </>
   );
 }
