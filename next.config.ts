@@ -7,6 +7,16 @@ const nextConfig: NextConfig = {
   // node_modules tree.
   output: "standalone",
 
+  // Optimize heavy icon and animation package imports so Next.js only bundles
+  // the specific icons/components used rather than the entire library.
+  // This reduces the JS chunk size and Total Blocking Time (PageSpeed fix).
+  experimental: {
+    optimizePackageImports: ["lucide-react", "framer-motion"],
+  },
+
+  // Compress responses for faster transfer over the wire.
+  compress: true,
+
   // Alternate keyword slugs 301 into one canonical page per market, rather than
   // being built as separate competing pages. See lib/directory/redirects.ts.
   async redirects() {
