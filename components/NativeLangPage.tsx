@@ -17,11 +17,13 @@ import {
 } from "@/components/directory/Cards";
 import { BASE_URL } from "@/lib/seo";
 import type { NativeLangData } from "@/lib/native-pages/types";
+import { REVERSE_NATIVE_LINKS } from "@/lib/native-pages/directory-links";
 
 export type { NativeLangData };
 
 export default function NativeLangPage({ data }: { data: NativeLangData }) {
   const url = `${BASE_URL}${data.canonicalSlug}`;
+  const dirLinks = REVERSE_NATIVE_LINKS[data.canonicalSlug] ?? [];
 
   return (
     <main className="w-full">
@@ -59,6 +61,22 @@ export default function NativeLangPage({ data }: { data: NativeLangData }) {
             <ArrowLeft size={15} /> Vidibro
           </Link>
         </nav>
+
+        {/* English directory cross-links */}
+        {dirLinks.length > 0 && (
+          <div className="mb-6 flex flex-wrap items-center gap-2 rounded-xl border border-purple-500/20 bg-purple-500/[0.06] px-4 py-3 text-sm">
+            <span className="text-purple-300/70 shrink-0">Read in English →</span>
+            {dirLinks.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="rounded-full border border-purple-400/30 bg-purple-500/10 px-3 py-1 font-semibold text-purple-200 transition hover:border-purple-400/60 hover:text-white"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </div>
+        )}
 
         {/* ── HERO ── */}
         <article lang={data.lang} dir={data.dir ?? "ltr"}>

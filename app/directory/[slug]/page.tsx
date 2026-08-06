@@ -10,6 +10,7 @@ import {
 import { ENTRIES, getEntry, resolvableRelated, hrefFor } from "@/lib/directory/entries";
 import { assertEntryIsPublishable } from "@/lib/directory/types";
 import { generatePageSEO, BASE_URL } from "@/lib/seo";
+import { NATIVE_LINKS } from "@/lib/native-pages/directory-links";
 import { formatPeakHours } from "@/lib/liveCount";
 import JsonLd from "@/components/JsonLd";
 import PeakHoursBar from "@/components/PeakHoursBar";
@@ -61,6 +62,7 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
   const related = resolvableRelated(entry);
   const group = (rel: string) =>
     related.filter((r) => r.relation === rel).map((r) => ({ href: hrefFor(r.slug), label: r.label }));
+  const nativeLinks = NATIVE_LINKS[slug] ?? [];
 
   const url = `${BASE_URL}/directory/${entry.slug}`;
   const heading = entry.title.split("—")[0].trim();
@@ -145,6 +147,23 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
             <MessageSquare size={19} /> Text chat
           </Link>
         </div>
+
+        {/* Native language cross-links */}
+        {nativeLinks.length > 0 && (
+          <div className="mt-5 flex flex-wrap items-center gap-2 rounded-xl border border-purple-500/20 bg-purple-500/[0.06] px-4 py-3 text-sm">
+            <span className="text-purple-300/70 shrink-0">Also available in →</span>
+            {nativeLinks.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="rounded-full border border-purple-400/30 bg-purple-500/10 px-3 py-1 font-semibold text-purple-200 transition hover:border-purple-400/60 hover:text-white"
+              >
+                <span lang={l.href.replace("/", "")}>{l.label}</span>
+                <span className="ml-1 text-purple-300/60">({l.lang})</span>
+              </Link>
+            ))}
+          </div>
+        )}
 
         {entry.timezone && entry.peakHours && (
           <LiveMarketStatus
