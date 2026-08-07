@@ -2,6 +2,7 @@ import type { NativeLangData } from "./types";
 
 const ptBr: NativeLangData = {
   lang: "pt",
+  hreflang: "pt-BR",
   ogLocale: "pt_BR",
   canonicalSlug: "/pt-br",
   title: "Chat de Vídeo Grátis — Conheça Pessoas do Mundo",

@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Globe2, Users, Video, PhoneCall, MessageSquare, Check, Flame } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
 import dynamic from "next/dynamic";
 
 const AppShowcaseCarousel = dynamic(() => import("@/components/AppShowcaseCarousel"));
@@ -34,6 +35,34 @@ export default function Home() {
 
   return (
     <>
+    <JsonLd
+      data={[
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          url: "https://vidibro.com",
+          name: "Vidibro",
+          description: "Free random video chat — talk to strangers by video, voice or text. No signup, 180+ countries.",
+          potentialAction: {
+            "@type": "SearchAction",
+            target: { "@type": "EntryPoint", urlTemplate: "https://vidibro.com/directory/{search_term_string}" },
+            "query-input": "required name=search_term_string",
+          },
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Vidibro",
+          url: "https://vidibro.com",
+          logo: "https://vidibro.com/icon.png",
+          sameAs: [
+            "https://www.instagram.com/vidibro.chat",
+            "https://www.facebook.com/share/1JsAbaJ1mp/",
+            "https://x.com/Vidibrochat",
+          ],
+        },
+      ]}
+    />
     <Navbar
       currentLang={lang}
       onSelectLang={setLang}

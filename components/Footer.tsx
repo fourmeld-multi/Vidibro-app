@@ -165,6 +165,36 @@ export default function Footer({ onStartVideoChat, onStartTextChat, onStartAudio
           </div>
         </div>
 
+        {/* Language Pages Strip */}
+        <div className="py-6 border-b border-white/10">
+          <p className="mb-3 text-[10px] font-bold uppercase tracking-wider text-purple-300/50">Chat in your language</p>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { href: "/hi",    label: "हिंदी" },
+              { href: "/bn",    label: "বাংলা" },
+              { href: "/ta",    label: "தமிழ்" },
+              { href: "/kn",    label: "ಕನ್ನಡ" },
+              { href: "/ja",    label: "日本語" },
+              { href: "/ko",    label: "한국어" },
+              { href: "/zh",    label: "中文" },
+              { href: "/ru",    label: "Русский" },
+              { href: "/th",    label: "ภาษาไทย" },
+              { href: "/tr",    label: "Türkçe" },
+              { href: "/id",    label: "Bahasa Indonesia" },
+              { href: "/vi",    label: "Tiếng Việt" },
+              { href: "/pt-br", label: "Português" },
+            ].map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="rounded-full border border-purple-500/20 bg-purple-500/[0.06] px-3 py-1 text-[11px] text-purple-200/70 hover:text-white hover:border-purple-400/50 transition"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+
         {/* Bottom Copyright */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 text-[11px] text-purple-300/60">
           <p>© {new Date().getFullYear()} {t.footerCopyright}</p>

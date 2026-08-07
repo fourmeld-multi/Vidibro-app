@@ -37,6 +37,7 @@ export interface FaqItem {
 
 export interface NativeLangData {
   lang: string;
+  hreflang?: string; // overrides lang for hreflang (e.g. "pt-BR" instead of "pt")
   dir?: "ltr" | "rtl";
   ogLocale: string;
   canonicalSlug: string;
