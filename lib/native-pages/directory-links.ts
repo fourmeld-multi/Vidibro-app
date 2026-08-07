@@ -14,7 +14,6 @@ export const NATIVE_LINKS: Record<string, Array<{ href: string; label: string; l
     { href: "/hi", label: "हिंदी", lang: "Hindi" },
     { href: "/kn", label: "ಕನ್ನಡ", lang: "Kannada" },
   ],
-  "video-chat-chennai": [{ href: "/ta", label: "தமிழ்", lang: "Tamil" }],
   "hindi-video-chat": [{ href: "/hi", label: "हिंदी", lang: "Hindi" }],
   "tamil-video-chat": [{ href: "/ta", label: "தமிழ்", lang: "Tamil" }],
   "bengali-video-chat": [{ href: "/bn", label: "বাংলা", lang: "Bengali" }],
@@ -44,7 +43,6 @@ export const REVERSE_NATIVE_LINKS: Record<string, Array<{ href: string; label: s
   ],
   "/ta": [
     { href: "/directory/video-chat-india", label: "India" },
-    { href: "/directory/video-chat-chennai", label: "Chennai" },
     { href: "/directory/tamil-video-chat", label: "Tamil Chat" },
   ],
   "/bn": [
