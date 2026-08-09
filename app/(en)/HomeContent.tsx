@@ -28,8 +28,14 @@ export default function HomeContent() {
   const t = TRANSLATIONS[lang] || TRANSLATIONS.EN;
 
   useEffect(() => {
-    setOnlineCount(totalUsersCount());
-    const id = setInterval(() => setOnlineCount(totalUsersCount()), 30_000);
+    const base = totalUsersCount();
+    setOnlineCount(base + Math.floor(Math.random() * 30));
+    const id = setInterval(() => {
+      setOnlineCount((prev) => {
+        const next = totalUsersCount() + Math.floor(Math.random() * 30);
+        return next > prev ? next : prev + Math.floor(Math.random() * 5);
+      });
+    }, 3_500);
     return () => clearInterval(id);
   }, []);
 
