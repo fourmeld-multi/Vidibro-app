@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AuthModal from "@/components/vibe-room/AuthModal";
+import ZoneChat from "@/components/vibe-room/ZoneChat";
+import type { VibeUser } from "@/lib/vibe-room/types";
 
 type Cell = "X" | "O" | null;
 type GameStatus = "playing" | "win-X" | "win-O" | "draw";
@@ -63,6 +66,8 @@ export default function TicTacToePage() {
   });
   const [score, setScore] = useState({ you: 0, bot: 0, draw: 0 });
   const [botThinking, setBotThinking] = useState(false);
+  const [user, setUser] = useState<VibeUser | null>(null);
+  const [showAuth, setShowAuth] = useState(false);
 
   useEffect(() => {
     if (status !== "playing" || isPlayerTurn) return;
@@ -201,8 +206,28 @@ export default function TicTacToePage() {
           )}
         </div>
 
+        {/* Chat */}
+        <div className="mt-6">
+          <ZoneChat
+            user={user}
+            onAuthRequired={() => setShowAuth(true)}
+            zone="game"
+            initialMessages={[
+              { id: "m1", authorName: "velvet_void", content: "goodluck lol 💀", isBot: false, createdAt: new Date(Date.now() - 60000 * 3) },
+              { id: "m2", authorName: "fog_signal", content: "bot is actually cracked ngl", isBot: false, createdAt: new Date(Date.now() - 60000 * 1) },
+            ]}
+          />
+        </div>
+
       </main>
       <Footer />
+
+      {showAuth && (
+        <AuthModal
+          onClose={() => setShowAuth(false)}
+          onSuccess={(u) => { setUser({ ...u, createdAt: new Date() }); setShowAuth(false); }}
+        />
+      )}
     </div>
   );
 }

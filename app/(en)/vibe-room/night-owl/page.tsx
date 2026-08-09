@@ -5,6 +5,7 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AuthModal from "@/components/vibe-room/AuthModal";
+import ZoneChat from "@/components/vibe-room/ZoneChat";
 import { NIGHT_OWL_PROMPTS, MOCK_NIGHT_OWL_MESSAGES, formatTimeAgo } from "@/lib/vibe-room/mock-data";
 import type { NightOwlMood, NightOwlMessage, VibeUser } from "@/lib/vibe-room/types";
 
@@ -193,6 +194,19 @@ export default function NightOwlPage() {
               </button>
             </div>
           ))}
+        </div>
+
+        {/* Zone chat — quick sidebar chat separate from the mood feed */}
+        <div className="mt-2 mb-4">
+          <ZoneChat
+            user={user}
+            onAuthRequired={() => setShowAuth(true)}
+            zone="default"
+            initialMessages={[
+              { id: "nc1", authorName: "neon_ghost", content: "this chill mode is immaculate rn 🌙", isBot: false, createdAt: new Date(Date.now() - 60000 * 4) },
+              { id: "nc2", authorName: "sleepy_panda", content: "someone change it to deep talk pls 🧠", isBot: false, createdAt: new Date(Date.now() - 60000 * 1) },
+            ]}
+          />
         </div>
 
       </main>

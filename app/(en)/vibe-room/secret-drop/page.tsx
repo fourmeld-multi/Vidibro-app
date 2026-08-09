@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import PostCard from "@/components/vibe-room/PostCard";
 import NewDropForm from "@/components/vibe-room/NewDropForm";
 import AuthModal from "@/components/vibe-room/AuthModal";
+import ZoneChat from "@/components/vibe-room/ZoneChat";
 import { MOCK_DROPS } from "@/lib/vibe-room/mock-data";
 import type { SecretDrop, VibeUser } from "@/lib/vibe-room/types";
 
@@ -99,6 +100,19 @@ export default function SecretDropPage() {
               onAuthRequired={() => setShowAuth(true)}
             />
           ))}
+        </div>
+
+        {/* Zone chat */}
+        <div className="mt-4 mb-20">
+          <ZoneChat
+            user={user}
+            onAuthRequired={() => setShowAuth(true)}
+            zone="default"
+            initialMessages={[
+              { id: "c1", authorName: "amber_static", content: "the one about Spotify 💀 too real", isBot: false, createdAt: new Date(Date.now() - 60000 * 5) },
+              { id: "c2", authorName: "quiet_moth", content: "fr who is saving seats with no explanation 😭", isBot: false, createdAt: new Date(Date.now() - 60000 * 2) },
+            ]}
+          />
         </div>
 
         {replyDropId && (
