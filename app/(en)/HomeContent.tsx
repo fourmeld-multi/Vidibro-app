@@ -29,12 +29,12 @@ export default function HomeContent() {
 
   useEffect(() => {
     const base = totalUsersCount();
-    setOnlineCount(base + Math.floor(Math.random() * 30));
+    let jitter = Math.floor(Math.random() * 20);
+    setOnlineCount(base + jitter);
     const id = setInterval(() => {
-      setOnlineCount((prev) => {
-        const next = totalUsersCount() + Math.floor(Math.random() * 30);
-        return next > prev ? next : prev + Math.floor(Math.random() * 5);
-      });
+      const delta = Math.floor(Math.random() * 19) - 8; // -8 to +10
+      jitter = Math.max(-20, Math.min(30, jitter + delta));
+      setOnlineCount(totalUsersCount() + jitter);
     }, 3_500);
     return () => clearInterval(id);
   }, []);
