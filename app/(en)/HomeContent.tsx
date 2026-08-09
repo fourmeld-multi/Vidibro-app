@@ -218,6 +218,25 @@ export default function HomeContent() {
           </div>
         </div>
 
+        {/* Vibe Room promo section */}
+        <div className="w-full max-w-2xl mx-auto px-4 mt-6 mb-2">
+          <a
+            href="/vibe-room"
+            className="group flex items-center justify-between gap-4 w-full rounded-2xl border border-pink-500/20 bg-gradient-to-r from-pink-950/40 via-violet-950/40 to-transparent px-5 py-4 hover:border-pink-500/40 transition-colors"
+          >
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">✨</span>
+              <div>
+                <p className="text-sm font-semibold text-white">New: Vibe Room</p>
+                <p className="text-xs text-zinc-400">Games · Secret drops · Late-night vibes</p>
+              </div>
+            </div>
+            <span className="text-zinc-500 group-hover:text-zinc-300 transition-colors text-sm font-medium whitespace-nowrap">
+              Enter →
+            </span>
+          </a>
+        </div>
+
         {/* Auto-advancing carousel: Video Calling / Text Chat / Audio Chat */}
         <AppShowcaseCarousel lang={lang} />
 
