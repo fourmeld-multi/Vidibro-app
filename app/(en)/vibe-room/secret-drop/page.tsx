@@ -102,8 +102,15 @@ export default function SecretDropPage() {
           ))}
         </div>
 
-        {/* Zone chat */}
-        <div className="mt-4 mb-20">
+        {/* Divider between Posts and Chat */}
+        <div className="flex items-center gap-3 mt-6">
+          <div className="flex-1 h-px bg-zinc-800" />
+          <span className="text-xs text-zinc-600 font-medium uppercase tracking-wider">Live Chat</span>
+          <div className="flex-1 h-px bg-zinc-800" />
+        </div>
+
+        {/* Zone chat — separate from drops */}
+        <div className="mb-24">
           <ZoneChat
             user={user}
             onAuthRequired={() => setShowAuth(true)}

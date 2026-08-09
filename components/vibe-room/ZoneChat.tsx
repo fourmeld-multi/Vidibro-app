@@ -16,6 +16,8 @@ interface ZoneChatProps {
   onAuthRequired: () => void;
   zone: string;
   initialMessages?: ChatMessage[];
+  suggestedInput?: string;
+  onSuggestedInputConsumed?: () => void;
 }
 
 const STICKERS = ["😂", "🔥", "💀", "😭", "🫶", "👀", "💯", "🤝", "😤", "🫠"];
@@ -25,11 +27,19 @@ const BOT_REACTIONS: Record<string, string[]> = {
   default: ["facts 💯", "lmaooo 😂", "fr fr", "no cap", "vibe check passed 🔥"],
 };
 
-export default function ZoneChat({ user, onAuthRequired, zone, initialMessages = [] }: ZoneChatProps) {
+export default function ZoneChat({ user, onAuthRequired, zone, initialMessages = [], suggestedInput, onSuggestedInputConsumed }: ZoneChatProps) {
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
   const [input, setInput] = useState("");
   const [showStickers, setShowStickers] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (suggestedInput) {
+      if (!user) { onAuthRequired(); return; }
+      setInput(suggestedInput);
+      onSuggestedInputConsumed?.();
+    }
+  }, [suggestedInput]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
