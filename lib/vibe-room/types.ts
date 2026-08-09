@@ -42,3 +42,22 @@ export interface AuthState {
   user: VibeUser | null;
   isLoading: boolean;
 }
+
+export type NightOwlMood = "chill" | "flirt" | "deep-talk";
+
+export interface NightOwlMessage {
+  id: string;
+  content: string;
+  mood: NightOwlMood;
+  authorName: string;
+  authorId: string | null;
+  likes: number;
+  userLiked?: boolean;
+  createdAt: Date;
+}
+
+export interface NightOwlPrompt {
+  id: string;
+  text: string;
+  mood: NightOwlMood;
+}

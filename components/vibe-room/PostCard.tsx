@@ -83,7 +83,7 @@ export default function PostCard({ drop, onReply, isLoggedIn, onAuthRequired }: 
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="text-xs text-zinc-600">{formatTimeAgo(drop.createdAt)}</span>
+          <span className="text-xs text-zinc-600" suppressHydrationWarning>{formatTimeAgo(drop.createdAt)}</span>
           <button
             onClick={handleReply}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium bg-zinc-800 border border-zinc-700 text-zinc-400 hover:border-zinc-500 hover:text-white transition-colors"
