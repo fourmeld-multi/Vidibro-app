@@ -132,7 +132,7 @@ export function generateJsonLdSchema({
     "@type": "Organization",
     name: "Vidibro",
     url: BASE_URL,
-    logo: `${BASE_URL}/logo.svg`,
+    logo: `${BASE_URL}/icon.png`,
     description,
   };
 }

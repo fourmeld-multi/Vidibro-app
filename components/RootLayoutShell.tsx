@@ -42,7 +42,7 @@ export default function RootLayoutShell({
               "@id": `${BASE_URL}/#organization`,
               name: "Vidibro",
               url: BASE_URL,
-              logo: `${BASE_URL}/logo.svg`,
+              logo: `${BASE_URL}/icon.png`,
               description:
                 "Anonymous, zero-login video, voice and text chat with strangers.",
             },
@@ -51,7 +51,7 @@ export default function RootLayoutShell({
               "@type": "WebSite",
               "@id": `${BASE_URL}/#website`,
               name: "Vidibro",
-              alternateName: ["Vidibro App", "Vidibro Chat", "Vidibro.com"],
+              alternateName: ["Vidibro App", "Vidibro Chat"],
               url: BASE_URL,
               publisher: { "@id": `${BASE_URL}/#organization` },
               inLanguage: "en",
