@@ -55,9 +55,12 @@ const HeartBackground = () => (
     <style>{`
       @keyframes hcFloat { from{transform:translateY(0) rotate(-3deg)} to{transform:translateY(12px) rotate(3deg)} }
       @keyframes hcPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
-      @keyframes hcDot1 { 0%,20%{opacity:0} 40%,100%{opacity:1} }
-      @keyframes hcDot2 { 0%,40%{opacity:0} 60%,100%{opacity:1} }
-      @keyframes hcDot3 { 0%,60%{opacity:0} 80%,100%{opacity:1} }
+      @keyframes hcDot1  { 0%,20%{opacity:0}  40%,100%{opacity:1} }
+      @keyframes hcDot2  { 0%,40%{opacity:0}  60%,100%{opacity:1} }
+      @keyframes hcDot3  { 0%,60%{opacity:0}  80%,100%{opacity:1} }
+      @keyframes hcRing  { 0%{transform:scale(1);opacity:0.6} 100%{transform:scale(2.8);opacity:0} }
+      @keyframes hcRing2 { 0%{transform:scale(1);opacity:0.4} 100%{transform:scale(2.2);opacity:0} }
+      @keyframes hcRing3 { 0%{transform:scale(1);opacity:0.25}100%{transform:scale(1.7);opacity:0} }
     `}</style>
   </div>
 );
@@ -111,12 +114,23 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
   const canChat = status === "connected";
 
   const searchingBlock = (
-    <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16, padding: 32 }}>
-      <div style={{ width: 72, height: 72, borderRadius: "50%", background: "rgba(255,255,255,0.12)", border: "2px solid rgba(255,255,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", animation: "hcPulse 2s ease-in-out infinite" }}>
-        <span style={{ fontSize: 32 }}>💘</span>
+    <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 24, padding: 32 }}>
+      {/* Radar rings + heart */}
+      <div style={{ position: "relative", width: 100, height: 100, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        {/* Ring 1 — slowest, largest */}
+        <div style={{ position: "absolute", width: 100, height: 100, borderRadius: "50%", border: "2px solid rgba(255,255,255,0.5)", animation: "hcRing 2s ease-out 0s infinite" }} />
+        {/* Ring 2 */}
+        <div style={{ position: "absolute", width: 100, height: 100, borderRadius: "50%", border: "2px solid rgba(255,255,255,0.4)", animation: "hcRing2 2s ease-out 0.6s infinite" }} />
+        {/* Ring 3 — fastest, smallest expansion */}
+        <div style={{ position: "absolute", width: 100, height: 100, borderRadius: "50%", border: "2px solid rgba(255,255,255,0.3)", animation: "hcRing3 2s ease-out 1.2s infinite" }} />
+        {/* Heart icon in center */}
+        <div style={{ width: 64, height: 64, borderRadius: "50%", background: "rgba(255,255,255,0.15)", border: "2px solid rgba(255,255,255,0.25)", display: "flex", alignItems: "center", justifyContent: "center", animation: "hcPulse 2s ease-in-out infinite", zIndex: 1 }}>
+          <span style={{ fontSize: 28 }}>💘</span>
+        </div>
       </div>
+
       <div style={{ textAlign: "center" }}>
-        <p style={{ fontWeight: 600, fontSize: 15, color: "#fff", marginBottom: 4, display: "flex", alignItems: "center", gap: 1 }}>
+        <p style={{ fontWeight: 600, fontSize: 15, color: "#fff", marginBottom: 6, display: "flex", alignItems: "center", justifyContent: "center", gap: 1 }}>
           Finding your crush
           <span style={{ animation: "hcDot1 1.2s ease-in-out infinite", opacity: 0 }}>.</span>
           <span style={{ animation: "hcDot2 1.2s ease-in-out infinite", opacity: 0 }}>.</span>
@@ -162,6 +176,11 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
           ) : status === "connected" ? "Crush connected 💘" : status === "disconnected" ? "Crush left 💔" : "Find Your Crush"}
           </span>
         </div>
+        {status === "searching" && (
+          <button onClick={() => { if (searchTimerRef.current) clearTimeout(searchTimerRef.current); setStatus("idle"); }} style={{ marginLeft: "auto", width: 32, height: 32, borderRadius: "50%", background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)", color: "rgba(255,255,255,0.8)", fontSize: 16, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", lineHeight: 1 }}>
+            ✕
+          </button>
+        )}
         {status === "connected" && (
           <button onClick={disconnect} style={{ marginLeft: "auto", fontSize: 12, padding: "4px 12px", borderRadius: 20, background: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.7)", border: "1px solid rgba(255,255,255,0.2)", cursor: "pointer" }}>
             Skip
