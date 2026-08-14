@@ -1,13 +1,16 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 
 type Status = "idle" | "searching" | "connected" | "disconnected";
 
 interface ChatMessage {
   id: string;
   from: "me" | "stranger" | "system";
-  content: string;
+  text?: string;
+  sticker?: string;
+  imageUrl?: string;
   createdAt: Date;
 }
 
@@ -16,7 +19,20 @@ interface HeartChatProps {
   onBack?: () => void;
 }
 
-const HEART_STICKERS = ["💕", "💗", "💘", "💝", "🥰", "😍", "💌", "🫶", "❤️", "💓"];
+const HEART_STICKERS = [
+  { id: "heart",   emoji: "💕", label: "Love" },
+  { id: "rose",    emoji: "🌹", label: "Rose" },
+  { id: "kiss",    emoji: "😘", label: "Kiss" },
+  { id: "hug",     emoji: "🤗", label: "Hug" },
+  { id: "blush",   emoji: "🥰", label: "Smitten" },
+  { id: "cupid",   emoji: "💘", label: "Cupid" },
+  { id: "letter",  emoji: "💌", label: "Love Letter" },
+  { id: "hands",   emoji: "🫶", label: "Heart Hands" },
+  { id: "sparkle", emoji: "✨", label: "Sparkle" },
+  { id: "cherry",  emoji: "🍒", label: "Cherry" },
+  { id: "confetti",emoji: "🎊", label: "Confetti" },
+  { id: "rainbow", emoji: "🌈", label: "Rainbow" },
+];
 
 const STRANGER_REPLIES = [
   "omg same 🥺", "sending love 💕", "ur not alone here", "felt that fr",
@@ -38,14 +54,14 @@ const HeartBackground = () => (
       ))}
     </svg>
     {[
-      { right:"6%",  top:"3%",  size:60, delay:"0s"   },
-      { right:"14%", top:"24%", size:42, delay:"0.5s" },
-      { left:"4%",   top:"52%", size:66, delay:"0.9s" },
-      { left:"8%",   top:"70%", size:46, delay:"0.3s" },
-      { right:"5%",  top:"63%", size:38, delay:"1.2s" },
+      { right:"6%",  top:"8%",  size:56, delay:"0s"   },
+      { right:"14%", top:"28%", size:40, delay:"0.5s" },
+      { left:"4%",   top:"52%", size:62, delay:"0.9s" },
+      { left:"8%",   top:"70%", size:44, delay:"0.3s" },
+      { right:"5%",  top:"63%", size:36, delay:"1.2s" },
     ].map((h, i) => (
       <div key={i} style={{ position:"absolute", ...(h.left ? {left:h.left} : {right:h.right}), top:h.top, animation:`hcFloat 4s ease-in-out ${h.delay} infinite alternate` }}>
-        <div style={{ width:"1.5px", height:"24px", background:"rgba(255,255,255,0.45)", margin:"0 auto" }} />
+        <div style={{ width:"1.5px", height:"22px", background:"rgba(255,255,255,0.4)", margin:"0 auto" }} />
         <svg width={h.size} height={h.size} viewBox="0 0 60 60">
           <path d="M30,52 C30,52 4,36 4,20 C4,10 12,4 20,8 C24,10 28,14 30,18 C32,14 36,10 40,8 C48,4 56,10 56,20 C56,36 30,52 30,52 Z" fill="#f093a8" />
           <path d="M30,52 C30,52 4,36 4,20 C4,10 12,4 20,8 L30,18 L30,52 Z" fill="#f4b8c8" opacity="0.9" />
@@ -53,14 +69,14 @@ const HeartBackground = () => (
       </div>
     ))}
     <style>{`
-      @keyframes hcFloat { from{transform:translateY(0) rotate(-3deg)} to{transform:translateY(12px) rotate(3deg)} }
-      @keyframes hcPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
-      @keyframes hcDot1  { 0%,20%{opacity:0}  40%,100%{opacity:1} }
-      @keyframes hcDot2  { 0%,40%{opacity:0}  60%,100%{opacity:1} }
-      @keyframes hcDot3  { 0%,60%{opacity:0}  80%,100%{opacity:1} }
-      @keyframes hcRing  { 0%{transform:scale(1);opacity:0.6} 100%{transform:scale(2.8);opacity:0} }
-      @keyframes hcRing2 { 0%{transform:scale(1);opacity:0.4} 100%{transform:scale(2.2);opacity:0} }
-      @keyframes hcRing3 { 0%{transform:scale(1);opacity:0.25}100%{transform:scale(1.7);opacity:0} }
+      @keyframes hcFloat  { from{transform:translateY(0) rotate(-3deg)} to{transform:translateY(12px) rotate(3deg)} }
+      @keyframes hcPulse  { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
+      @keyframes hcDot1   { 0%,20%{opacity:0}  40%,100%{opacity:1} }
+      @keyframes hcDot2   { 0%,40%{opacity:0}  60%,100%{opacity:1} }
+      @keyframes hcDot3   { 0%,60%{opacity:0}  80%,100%{opacity:1} }
+      @keyframes hcRing   { 0%{transform:scale(1);opacity:0.6} 100%{transform:scale(2.8);opacity:0} }
+      @keyframes hcRing2  { 0%{transform:scale(1);opacity:0.4} 100%{transform:scale(2.2);opacity:0} }
+      @keyframes hcRing3  { 0%{transform:scale(1);opacity:0.25}100%{transform:scale(1.7);opacity:0} }
     `}</style>
   </div>
 );
@@ -68,200 +84,308 @@ const HeartBackground = () => (
 export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [input, setInput] = useState("");
-  const [showStickers, setShowStickers] = useState(false);
-  const bottomRef = useRef<HTMLDivElement>(null);
-  const searchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [draft, setDraft] = useState("");
+  const [stickersOpen, setStickersOpen] = useState(false);
+  const [attachmentOpen, setAttachmentOpen] = useState(false);
+  const [showCamera, setShowCamera] = useState(false);
+
+  const bottomRef   = useRef<HTMLDivElement>(null);
+  const listRef     = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const videoRef    = useRef<HTMLVideoElement>(null);
+  const searchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const streamRef   = useRef<MediaStream | null>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  useEffect(() => () => { if (searchTimerRef.current) clearTimeout(searchTimerRef.current); }, []);
+  useEffect(() => () => { if (searchTimer.current) clearTimeout(searchTimer.current); }, []);
 
   function startSearch() {
     setStatus("searching");
     setMessages([]);
-    searchTimerRef.current = setTimeout(() => {
+    searchTimer.current = setTimeout(() => {
       setStatus("connected");
-      setMessages([{ id: "sys-conn", from: "system", content: "crush found 💘 say something", createdAt: new Date() }]);
+      setMessages([{ id: "sys-conn", from: "system", text: "crush found 💘 say hi!", createdAt: new Date() }]);
     }, 2000 + Math.random() * 2000);
   }
 
-  function disconnect() {
-    if (searchTimerRef.current) clearTimeout(searchTimerRef.current);
-    setStatus("disconnected");
-    setMessages(prev => [...prev, { id: "sys-disc", from: "system", content: "crush disconnected", createdAt: new Date() }]);
+  function cancelSearch() {
+    if (searchTimer.current) clearTimeout(searchTimer.current);
+    setStatus("idle");
   }
 
-  function sendMessage(content: string) {
-    if (!content.trim() || status !== "connected") return;
-    setMessages(prev => [...prev, { id: Date.now().toString(), from: "me", content, createdAt: new Date() }]);
-    setInput("");
-    setShowStickers(false);
+  function endChat() {
+    if (searchTimer.current) clearTimeout(searchTimer.current);
+    setStatus("disconnected");
+    setMessages(prev => [...prev, { id: "sys-disc", from: "system", text: "crush disconnected 💔", createdAt: new Date() }]);
+  }
+
+  function sendText(e: React.FormEvent) {
+    e.preventDefault();
+    if (!draft.trim() || status !== "connected") return;
+    addOutgoing({ text: draft.trim() });
+    setDraft("");
+  }
+
+  function sendSticker(emoji: string) {
+    if (status !== "connected") return;
+    addOutgoing({ sticker: emoji });
+    setStickersOpen(false);
+  }
+
+  function addOutgoing(payload: { text?: string; sticker?: string; imageUrl?: string }) {
+    const msg: ChatMessage = { id: Date.now().toString(), from: "me", ...payload, createdAt: new Date() };
+    setMessages(prev => [...prev, msg]);
     if (Math.random() < 0.5) {
       setTimeout(() => {
         setMessages(prev => [...prev, {
-          id: Date.now().toString() + "-s",
+          id: Date.now() + "-s",
           from: "stranger",
-          content: STRANGER_REPLIES[Math.floor(Math.random() * STRANGER_REPLIES.length)],
+          text: STRANGER_REPLIES[Math.floor(Math.random() * STRANGER_REPLIES.length)],
           createdAt: new Date(),
         }]);
       }, 800 + Math.random() * 1200);
     }
   }
 
+  function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > 2 * 1024 * 1024) { alert("Image must be under 2MB"); return; }
+    const reader = new FileReader();
+    reader.onload = ev => { if (ev.target?.result) addOutgoing({ imageUrl: ev.target.result as string }); };
+    reader.readAsDataURL(file);
+    setAttachmentOpen(false);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  }
+
+  async function openCamera() {
+    setAttachmentOpen(false);
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false });
+      streamRef.current = stream;
+      setShowCamera(true);
+      setTimeout(() => { if (videoRef.current) videoRef.current.srcObject = stream; }, 100);
+    } catch { alert("Could not access camera"); }
+  }
+
+  function closeCamera() {
+    streamRef.current?.getTracks().forEach(t => t.stop());
+    streamRef.current = null;
+    setShowCamera(false);
+  }
+
+  function capturePhoto() {
+    const video = videoRef.current;
+    if (!video) return;
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth || 640;
+    canvas.height = video.videoHeight || 480;
+    canvas.getContext("2d")?.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
+    addOutgoing({ imageUrl: dataUrl });
+    closeCamera();
+  }
+
   const canChat = status === "connected";
 
-  const searchingBlock = (
-    <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 24, padding: 32 }}>
-      {/* Radar rings + heart */}
+  const header = (
+    <div style={{ position: "relative", zIndex: 1, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 16px", background: "linear-gradient(90deg,#9b1239,#c0184f,#e91e63)", borderBottom: "1px solid rgba(255,255,255,0.1)", flexShrink: 0 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        {onBack && (
+          <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.7)", fontSize: 18, lineHeight: 1, padding: "0 4px 0 0" }}>←</button>
+        )}
+        {/* Logo */}
+        <div style={{ width: 40, height: 40, borderRadius: "50%", overflow: "hidden", border: "2px solid rgba(255,255,255,0.35)", flexShrink: 0 }}>
+          <Image src="/icon.png" alt="Vidibro" width={40} height={40} style={{ objectFit: "cover" }} />
+        </div>
+        <div>
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <span style={{ fontWeight: 700, fontSize: 14, color: "#fff" }}>Vidibro Chat</span>
+            <span style={{ width: 9, height: 9, borderRadius: "50%", background: status === "connected" ? "#4ade80" : status === "searching" ? "#fbbf24" : "rgba(255,255,255,0.35)", display: "inline-block", flexShrink: 0 }} />
+          </div>
+          <span style={{ fontSize: 11, color: "rgba(255,255,255,0.8)" }}>
+            {status === "idle" && "Press Find to start"}
+            {status === "searching" && "Finding your crush..."}
+            {status === "connected" && "Crush connected 💘"}
+            {status === "disconnected" && "Crush left 💔"}
+          </span>
+        </div>
+      </div>
+      {/* Right action */}
+      {status === "searching" && (
+        <button onClick={cancelSearch} style={{ width: 34, height: 34, borderRadius: "50%", background: "rgba(255,255,255,0.18)", border: "1px solid rgba(255,255,255,0.3)", color: "#fff", fontSize: 15, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>✕</button>
+      )}
+      {status === "connected" && (
+        <button onClick={endChat} title="End chat" style={{ width: 36, height: 36, borderRadius: "50%", background: "#e53e3e", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 8px rgba(229,62,62,0.55)", flexShrink: 0 }}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+            <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.5 11.5 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z" transform="rotate(135 12 12)"/>
+          </svg>
+        </button>
+      )}
+    </div>
+  );
+
+  const searchingView = (
+    <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 24, padding: 32, position: "relative", zIndex: 1 }}>
       <div style={{ position: "relative", width: 100, height: 100, display: "flex", alignItems: "center", justifyContent: "center" }}>
-        {/* Ring 1 — slowest, largest */}
         <div style={{ position: "absolute", width: 100, height: 100, borderRadius: "50%", border: "2px solid rgba(255,255,255,0.5)", animation: "hcRing 2s ease-out 0s infinite" }} />
-        {/* Ring 2 */}
-        <div style={{ position: "absolute", width: 100, height: 100, borderRadius: "50%", border: "2px solid rgba(255,255,255,0.4)", animation: "hcRing2 2s ease-out 0.6s infinite" }} />
-        {/* Ring 3 — fastest, smallest expansion */}
-        <div style={{ position: "absolute", width: 100, height: 100, borderRadius: "50%", border: "2px solid rgba(255,255,255,0.3)", animation: "hcRing3 2s ease-out 1.2s infinite" }} />
-        {/* Heart icon in center */}
-        <div style={{ width: 64, height: 64, borderRadius: "50%", background: "rgba(255,255,255,0.15)", border: "2px solid rgba(255,255,255,0.25)", display: "flex", alignItems: "center", justifyContent: "center", animation: "hcPulse 2s ease-in-out infinite", zIndex: 1 }}>
+        <div style={{ position: "absolute", width: 100, height: 100, borderRadius: "50%", border: "2px solid rgba(255,255,255,0.35)", animation: "hcRing2 2s ease-out 0.6s infinite" }} />
+        <div style={{ position: "absolute", width: 100, height: 100, borderRadius: "50%", border: "2px solid rgba(255,255,255,0.2)", animation: "hcRing3 2s ease-out 1.2s infinite" }} />
+        <div style={{ width: 64, height: 64, borderRadius: "50%", background: "rgba(255,255,255,0.15)", border: "2px solid rgba(255,255,255,0.3)", display: "flex", alignItems: "center", justifyContent: "center", animation: "hcPulse 2s ease-in-out infinite", zIndex: 1 }}>
           <span style={{ fontSize: 28 }}>💘</span>
         </div>
       </div>
-
       <div style={{ textAlign: "center" }}>
-        <p style={{ fontWeight: 600, fontSize: 15, color: "#fff", marginBottom: 6, display: "flex", alignItems: "center", justifyContent: "center", gap: 1 }}>
+        <p style={{ fontWeight: 700, fontSize: 16, color: "#fff", marginBottom: 6, display: "flex", alignItems: "center", justifyContent: "center" }}>
           Finding your crush
           <span style={{ animation: "hcDot1 1.2s ease-in-out infinite", opacity: 0 }}>.</span>
           <span style={{ animation: "hcDot2 1.2s ease-in-out infinite", opacity: 0 }}>.</span>
           <span style={{ animation: "hcDot3 1.2s ease-in-out infinite", opacity: 0 }}>.</span>
         </p>
-        <p style={{ fontSize: 13, color: "rgba(255,255,255,0.55)" }}>anonymous · no judgement · send love 💕</p>
+        <p style={{ fontSize: 13, color: "rgba(255,255,255,0.6)" }}>anonymous · no judgement · send love 💕</p>
       </div>
     </div>
   );
 
-  const idleBlock = (
-    <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16, padding: 32 }}>
-      <div style={{ width: 72, height: 72, borderRadius: "50%", background: "rgba(255,255,255,0.12)", border: "2px solid rgba(255,255,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+  const idleView = (
+    <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 20, padding: 32, position: "relative", zIndex: 1 }}>
+      <div style={{ width: 72, height: 72, borderRadius: "50%", background: "rgba(255,255,255,0.15)", border: "2px solid rgba(255,255,255,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <span style={{ fontSize: 32 }}>💘</span>
       </div>
       <div style={{ textAlign: "center" }}>
-        <p style={{ fontWeight: 600, fontSize: 15, color: "#fff", marginBottom: 4 }}>Find Your Crush</p>
-        <p style={{ fontSize: 13, color: "rgba(255,255,255,0.55)" }}>anonymous · no judgement · send love 💕</p>
+        <p style={{ fontWeight: 700, fontSize: 16, color: "#fff", marginBottom: 6 }}>Find Your Crush</p>
+        <p style={{ fontSize: 13, color: "rgba(255,255,255,0.6)" }}>anonymous · no judgement · send love 💕</p>
+      </div>
+    </div>
+  );
+
+  const messagesView = (
+    <div ref={listRef} style={{ flex: 1, overflowY: "auto", padding: "14px 16px", display: "flex", flexDirection: "column", gap: 10, scrollbarWidth: "none", position: "relative", zIndex: 1 }}>
+      {messages.map((m) => {
+        if (m.from === "system") return (
+          <div key={m.id} style={{ textAlign: "center" }}>
+            <span style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", background: "rgba(0,0,0,0.2)", padding: "3px 14px", borderRadius: 20 }}>{m.text}</span>
+          </div>
+        );
+        const isMe = m.from === "me";
+        return (
+          <div key={m.id} style={{ display: "flex", flexDirection: "column", alignItems: isMe ? "flex-end" : "flex-start" }}>
+            {m.sticker ? (
+              <span style={{ fontSize: 52, filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.3))" }}>{m.sticker}</span>
+            ) : m.imageUrl ? (
+              <div style={{ maxWidth: "72%", borderRadius: 16, overflow: "hidden", border: "2px solid rgba(255,255,255,0.2)", background: "rgba(0,0,0,0.2)" }}>
+                <img src={m.imageUrl} alt="Shared" style={{ width: "100%", maxHeight: 220, objectFit: "cover", display: "block" }} />
+              </div>
+            ) : (
+              <div style={{
+                maxWidth: "75%", padding: "9px 14px", fontSize: 14, color: "#fff", wordBreak: "break-word",
+                borderRadius: isMe ? "18px 18px 4px 18px" : "18px 18px 18px 4px",
+                background: isMe ? "rgba(255,255,255,0.22)" : "rgba(0,0,0,0.28)",
+                border: isMe ? "1px solid rgba(255,255,255,0.2)" : "1px solid rgba(255,255,255,0.1)",
+              }}>{m.text}</div>
+            )}
+          </div>
+        );
+      })}
+      <div ref={bottomRef} />
+    </div>
+  );
+
+  // Find New Crush bar (disconnected / idle)
+  const findBar = (status === "idle" || status === "disconnected") && (
+    <div style={{ position: "relative", zIndex: 1, display: "flex", justifyContent: "center", padding: "10px 16px", borderTop: "1px solid rgba(255,255,255,0.1)", background: "rgba(0,0,0,0.15)", flexShrink: 0 }}>
+      <button onClick={startSearch} style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 32px", borderRadius: 28, background: "linear-gradient(90deg,#ec4899,#d946ef)", color: "#fff", fontSize: 14, fontWeight: 700, border: "none", cursor: "pointer", boxShadow: "0 2px 12px rgba(236,72,153,0.45)" }}>
+        <span style={{ fontSize: 16 }}>💘</span>
+        {status === "disconnected" ? "Find New Crush" : "Find Your Crush"}
+      </button>
+    </div>
+  );
+
+  // Sticker drawer
+  const stickerDrawer = stickersOpen && canChat && (
+    <div style={{ position: "relative", zIndex: 2, display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 8, padding: "12px 16px", borderTop: "1px solid rgba(255,255,255,0.1)", background: "rgba(0,0,0,0.3)", flexShrink: 0 }}>
+      {HEART_STICKERS.map(s => (
+        <button key={s.id} onClick={() => sendSticker(s.emoji)} title={s.label}
+          style={{ fontSize: 26, background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 12, padding: 6, cursor: "pointer", transition: "transform 0.1s" }}
+          onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.25)")}
+          onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
+        >{s.emoji}</button>
+      ))}
+    </div>
+  );
+
+  // Attachment popup
+  const attachPopup = attachmentOpen && canChat && (
+    <div style={{ position: "absolute", bottom: 64, left: 16, zIndex: 10, background: "rgba(30,10,20,0.95)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 16, padding: 8, display: "flex", flexDirection: "column", gap: 2, backdropFilter: "blur(10px)", boxShadow: "0 8px 32px rgba(0,0,0,0.4)" }}>
+      <button onClick={openCamera} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 16px", borderRadius: 12, background: "none", border: "none", cursor: "pointer", color: "#fff", fontSize: 13, fontWeight: 600 }}
+        onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.08)")}
+        onMouseLeave={e => (e.currentTarget.style.background = "none")}>
+        <span style={{ width: 30, height: 30, borderRadius: "50%", background: "rgba(236,72,153,0.25)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>📷</span>
+        Take Camera Photo
+      </button>
+      <button onClick={() => { setAttachmentOpen(false); fileInputRef.current?.click(); }} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 16px", borderRadius: 12, background: "none", border: "none", cursor: "pointer", color: "#fff", fontSize: 13, fontWeight: 600 }}
+        onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.08)")}
+        onMouseLeave={e => (e.currentTarget.style.background = "none")}>
+        <span style={{ width: 30, height: 30, borderRadius: "50%", background: "rgba(167,139,250,0.25)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>🖼️</span>
+        Upload Gallery Image
+      </button>
+    </div>
+  );
+
+  // Input bar
+  const inputBar = (
+    <div style={{ position: "relative", zIndex: 1, padding: "10px 12px", borderTop: "1px solid rgba(255,255,255,0.1)", background: "rgba(0,0,0,0.3)", flexShrink: 0 }} onClick={() => setAttachmentOpen(false)}>
+      {attachPopup}
+      <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileUpload} style={{ display: "none" }} />
+      <form onSubmit={sendText} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        {/* Sticker */}
+        <button type="button" onClick={e => { e.stopPropagation(); if (!canChat) return; setAttachmentOpen(false); setStickersOpen(v => !v); }} disabled={!canChat}
+          style={{ width: 38, height: 38, borderRadius: "50%", background: stickersOpen ? "#ec4899" : "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", fontSize: 18, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, opacity: canChat ? 1 : 0.4 }}>
+          💕
+        </button>
+        {/* Attachment + */}
+        <button type="button" onClick={e => { e.stopPropagation(); if (!canChat) return; setStickersOpen(false); setAttachmentOpen(v => !v); }} disabled={!canChat}
+          style={{ width: 38, height: 38, borderRadius: "50%", background: attachmentOpen ? "#a855f7" : "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", fontSize: 20, fontWeight: 300, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, opacity: canChat ? 1 : 0.4, transform: attachmentOpen ? "rotate(45deg)" : "none", transition: "transform 0.2s" }}>
+          +
+        </button>
+        {/* Input */}
+        <input value={draft} onChange={e => setDraft(e.target.value)} disabled={!canChat} onFocus={() => { setAttachmentOpen(false); setStickersOpen(false); }}
+          placeholder={status === "searching" ? "Finding your crush..." : canChat ? "whisper something..." : "press Find to connect"}
+          maxLength={300}
+          style={{ flex: 1, background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.18)", borderRadius: 24, padding: "9px 16px", fontSize: 14, color: "#fff", outline: "none", opacity: canChat ? 1 : 0.5 }} />
+        {/* Send */}
+        <button type="submit" disabled={!draft.trim() || !canChat}
+          style={{ width: 38, height: 38, borderRadius: "50%", background: draft.trim() && canChat ? "#ec4899" : "rgba(255,255,255,0.12)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, opacity: draft.trim() && canChat ? 1 : 0.4, transition: "background 0.2s" }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+        </button>
+      </form>
+    </div>
+  );
+
+  // Camera modal
+  const cameraModal = showCamera && (
+    <div style={{ position: "fixed", inset: 0, zIndex: 100, background: "rgba(0,0,0,0.9)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16 }}>
+      <video ref={videoRef} autoPlay playsInline muted style={{ width: "100%", maxWidth: 400, borderRadius: 16, background: "#000" }} />
+      <div style={{ display: "flex", gap: 16 }}>
+        <button onClick={capturePhoto} style={{ padding: "12px 28px", borderRadius: 28, background: "#ec4899", color: "#fff", fontSize: 14, fontWeight: 700, border: "none", cursor: "pointer" }}>📸 Capture</button>
+        <button onClick={closeCamera} style={{ padding: "12px 28px", borderRadius: 28, background: "rgba(255,255,255,0.15)", color: "#fff", fontSize: 14, border: "1px solid rgba(255,255,255,0.2)", cursor: "pointer" }}>Cancel</button>
       </div>
     </div>
   );
 
   const content = (
     <>
-      {/* Header */}
-      <div style={{ position: "relative", zIndex: 1, display: "flex", alignItems: "center", gap: 12, padding: "14px 20px", background: "rgba(0,0,0,0.28)", borderBottom: "1px solid rgba(255,255,255,0.1)", flexShrink: 0 }}>
-        {onBack && (
-          <button onClick={onBack} style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.65)", fontSize: 13, display: "flex", alignItems: "center", gap: 4, padding: 0 }}>
-            ← Back
-          </button>
-        )}
-        {onBack && <span style={{ color: "rgba(255,255,255,0.2)" }}>•</span>}
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <div style={{ width: 8, height: 8, borderRadius: "50%", background: status === "connected" ? "#4ade80" : status === "searching" ? "#fbbf24" : "#6b7280", boxShadow: status === "connected" ? "0 0 6px #4ade80" : undefined, flexShrink: 0 }} />
-          <span style={{ fontWeight: 600, fontSize: 14, color: "#fff" }}>
-            {status === "searching" ? (
-            <span style={{ display: "flex", alignItems: "center", gap: 1 }}>
-              Finding your crush
-              <span style={{ animation: "hcDot1 1.2s ease-in-out infinite", opacity: 0 }}>.</span>
-              <span style={{ animation: "hcDot2 1.2s ease-in-out infinite", opacity: 0 }}>.</span>
-              <span style={{ animation: "hcDot3 1.2s ease-in-out infinite", opacity: 0 }}>.</span>
-            </span>
-          ) : status === "connected" ? "Crush connected 💘" : status === "disconnected" ? "Crush left 💔" : "Find Your Crush"}
-          </span>
-        </div>
-        {status === "searching" && (
-          <button onClick={() => { if (searchTimerRef.current) clearTimeout(searchTimerRef.current); setStatus("idle"); }} style={{ marginLeft: "auto", width: 32, height: 32, borderRadius: "50%", background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)", color: "rgba(255,255,255,0.8)", fontSize: 16, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", lineHeight: 1 }}>
-            ✕
-          </button>
-        )}
-        {status === "connected" && (
-          <button onClick={disconnect} title="End chat" style={{ marginLeft: "auto", width: 36, height: 36, borderRadius: "50%", background: "#e53e3e", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 8px rgba(229,62,62,0.5)", flexShrink: 0 }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
-              <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.5 11.5 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z" transform="rotate(135 12 12)"/>
-            </svg>
-          </button>
-        )}
-      </div>
-
-      {/* Messages or idle/searching */}
-      {(status === "idle") && <div style={{ position: "relative", zIndex: 1, flex: 1, display: "flex", flexDirection: "column" }}>{idleBlock}</div>}
-      {(status === "searching") && <div style={{ position: "relative", zIndex: 1, flex: 1, display: "flex", flexDirection: "column" }}>{searchingBlock}</div>}
-      {(status === "connected" || status === "disconnected") && (
-        <div style={{ position: "relative", zIndex: 1, flex: 1, overflowY: "auto", padding: "16px 20px", display: "flex", flexDirection: "column", gap: 10, scrollbarWidth: "none" }}>
-          {messages.map((m) => {
-            if (m.from === "system") return (
-              <div key={m.id} style={{ textAlign: "center" }}>
-                <span style={{ fontSize: 12, color: "rgba(255,255,255,0.45)", background: "rgba(0,0,0,0.2)", padding: "3px 12px", borderRadius: 20 }}>{m.content}</span>
-              </div>
-            );
-            const isMe = m.from === "me";
-            return (
-              <div key={m.id} style={{ display: "flex", justifyContent: isMe ? "flex-end" : "flex-start" }}>
-                <div style={{
-                  maxWidth: "72%", padding: "9px 14px", borderRadius: isMe ? "18px 18px 4px 18px" : "18px 18px 18px 4px",
-                  background: isMe ? "rgba(255,255,255,0.22)" : "rgba(0,0,0,0.28)",
-                  border: isMe ? "1px solid rgba(255,255,255,0.2)" : "1px solid rgba(255,255,255,0.08)",
-                  fontSize: 14, color: "#fff", wordBreak: "break-word",
-                }}>
-                  {m.content}
-                </div>
-              </div>
-            );
-          })}
-          <div ref={bottomRef} />
-        </div>
-      )}
-
-      {/* Find New Crush button */}
-      {(status === "idle" || status === "disconnected") && (
-        <div style={{ position: "relative", zIndex: 1, padding: "12px 20px", display: "flex", justifyContent: "center", flexShrink: 0 }}>
-          <button onClick={startSearch} style={{ padding: "12px 36px", borderRadius: 28, background: "rgba(255,255,255,0.2)", color: "#fff", border: "1px solid rgba(255,255,255,0.35)", fontSize: 14, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 8 }}>
-            💘 {status === "disconnected" ? "Find New Crush" : "Find Your Crush"}
-          </button>
-        </div>
-      )}
-
-      {/* Sticker tray */}
-      {showStickers && canChat && (
-        <div style={{ position: "relative", zIndex: 1, display: "flex", gap: 8, padding: "10px 20px", flexWrap: "wrap", borderTop: "1px solid rgba(255,255,255,0.1)", background: "rgba(0,0,0,0.2)", flexShrink: 0 }}>
-          {HEART_STICKERS.map((s) => (
-            <button key={s} onClick={() => sendMessage(s)}
-              style={{ fontSize: 22, background: "none", border: "none", cursor: "pointer", transition: "transform 0.1s" }}
-              onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.3)")}
-              onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
-            >{s}</button>
-          ))}
-        </div>
-      )}
-
-      {/* Input bar */}
-      <div style={{ position: "relative", zIndex: 1, display: "flex", gap: 10, padding: "12px 20px", borderTop: "1px solid rgba(255,255,255,0.1)", background: "rgba(0,0,0,0.3)", flexShrink: 0, alignItems: "center" }}>
-        <button type="button" onClick={() => canChat && setShowStickers(v => !v)}
-          style={{ fontSize: 20, background: "none", border: "none", cursor: canChat ? "pointer" : "default", opacity: canChat ? (showStickers ? 1 : 0.6) : 0.3, flexShrink: 0 }}>
-          💕
-        </button>
-        <form onSubmit={(e) => { e.preventDefault(); sendMessage(input); }} style={{ flex: 1, display: "flex", gap: 10, alignItems: "center", background: "rgba(255,255,255,0.1)", borderRadius: 24, padding: "8px 16px", border: "1px solid rgba(255,255,255,0.15)" }}>
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            disabled={!canChat}
-            placeholder={status === "searching" ? "Finding your crush..." : status === "connected" ? "whisper something..." : "press Find to connect"}
-            maxLength={200}
-            style={{ flex: 1, background: "transparent", border: "none", outline: "none", fontSize: 14, color: "#fff", opacity: canChat ? 1 : 0.5 }}
-          />
-          <button type="submit" disabled={!input.trim() || !canChat}
-            style={{ fontSize: 13, padding: "5px 16px", borderRadius: 20, background: "rgba(255,255,255,0.25)", color: "#fff", border: "1px solid rgba(255,255,255,0.3)", cursor: "pointer", opacity: (!input.trim() || !canChat) ? 0.3 : 1, flexShrink: 0 }}>
-            Send
-          </button>
-        </form>
-      </div>
+      {header}
+      {status === "idle"       && idleView}
+      {status === "searching"  && searchingView}
+      {(status === "connected" || status === "disconnected") && messagesView}
+      {findBar}
+      {stickerDrawer}
+      {inputBar}
+      {cameraModal}
     </>
   );
 
@@ -275,7 +399,7 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
   }
 
   return (
-    <div style={{ position: "relative", borderRadius: "1rem", overflow: "hidden", display: "flex", flexDirection: "column", background: "#c0184f" }}>
+    <div style={{ position: "relative", display: "flex", flexDirection: "column", background: "#c0184f", borderRadius: "1rem", overflow: "hidden" }}>
       <HeartBackground />
       {content}
     </div>
