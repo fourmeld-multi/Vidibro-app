@@ -19,7 +19,7 @@ const GAMES = [
     desc: "Drop bombs, sink fleets. No mercy.",
     tags: ["strategy", "vs bot", "2 min"],
     online: 157,
-    ready: false,
+    ready: true,
   },
   {
     href: "/vibe-room/play-zone/stacktris",
