@@ -182,8 +182,10 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
           </button>
         )}
         {status === "connected" && (
-          <button onClick={disconnect} style={{ marginLeft: "auto", fontSize: 12, padding: "4px 12px", borderRadius: 20, background: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.7)", border: "1px solid rgba(255,255,255,0.2)", cursor: "pointer" }}>
-            Skip
+          <button onClick={disconnect} title="End chat" style={{ marginLeft: "auto", width: 36, height: 36, borderRadius: "50%", background: "#e53e3e", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 2px 8px rgba(229,62,62,0.5)", flexShrink: 0 }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+              <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.5 11.5 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.58a1 1 0 01-.25 1.01l-2.2 2.2z" transform="rotate(135 12 12)"/>
+            </svg>
           </button>
         )}
       </div>
