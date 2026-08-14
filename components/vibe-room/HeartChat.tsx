@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { Sticker as StickerIcon, Camera, ImageIcon, Plus, Send } from "lucide-react";
+import { Sticker as StickerIcon, Camera, ImageIcon, Plus, Send, Mic, Video } from "lucide-react";
 
 type Status = "idle" | "searching" | "connected" | "disconnected";
 
@@ -12,6 +12,8 @@ interface ChatMessage {
   text?: string;
   sticker?: string;
   imageUrl?: string;
+  audioUrl?: string;
+  videoUrl?: string;
   createdAt: Date;
 }
 
@@ -89,13 +91,20 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
   const [stickersOpen, setStickersOpen] = useState(false);
   const [attachmentOpen, setAttachmentOpen] = useState(false);
   const [showCamera, setShowCamera] = useState(false);
+  const [audioRecording, setAudioRecording] = useState(false);
+  const [videoRecording, setVideoRecording] = useState(false);
+  const [videoSeconds, setVideoSeconds] = useState(0);
 
-  const bottomRef   = useRef<HTMLDivElement>(null);
-  const listRef     = useRef<HTMLDivElement>(null);
+  const bottomRef    = useRef<HTMLDivElement>(null);
+  const listRef      = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const videoRef    = useRef<HTMLVideoElement>(null);
-  const searchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const streamRef   = useRef<MediaStream | null>(null);
+  const videoRef     = useRef<HTMLVideoElement>(null);
+  const liveVideoRef = useRef<HTMLVideoElement>(null);
+  const searchTimer  = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const streamRef    = useRef<MediaStream | null>(null);
+  const mediaRecRef  = useRef<MediaRecorder | null>(null);
+  const recChunks    = useRef<Blob[]>([]);
+  const videoTimer   = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -136,7 +145,72 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
     setStickersOpen(false);
   }
 
-  function addOutgoing(payload: { text?: string; sticker?: string; imageUrl?: string }) {
+  // ── Audio recording (hold to record) ──────────────────────────────
+  async function startAudio() {
+    if (status !== "connected") return;
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      recChunks.current = [];
+      const mr = new MediaRecorder(stream);
+      mr.ondataavailable = e => { if (e.data.size > 0) recChunks.current.push(e.data); };
+      mr.onstop = () => {
+        stream.getTracks().forEach(t => t.stop());
+        const blob = new Blob(recChunks.current, { type: "audio/webm" });
+        const url = URL.createObjectURL(blob);
+        addOutgoing({ audioUrl: url });
+      };
+      mr.start();
+      mediaRecRef.current = mr;
+      setAudioRecording(true);
+    } catch { alert("Microphone access denied"); }
+  }
+
+  function stopAudio() {
+    mediaRecRef.current?.stop();
+    mediaRecRef.current = null;
+    setAudioRecording(false);
+  }
+
+  // ── 30-sec video recording ─────────────────────────────────────────
+  async function startVideoRec() {
+    if (status !== "connected") return;
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: true });
+      streamRef.current = stream;
+      if (liveVideoRef.current) liveVideoRef.current.srcObject = stream;
+      recChunks.current = [];
+      const mr = new MediaRecorder(stream);
+      mr.ondataavailable = e => { if (e.data.size > 0) recChunks.current.push(e.data); };
+      mr.onstop = () => {
+        stream.getTracks().forEach(t => t.stop());
+        streamRef.current = null;
+        const blob = new Blob(recChunks.current, { type: "video/webm" });
+        const url = URL.createObjectURL(blob);
+        addOutgoing({ videoUrl: url });
+        setVideoRecording(false);
+        setVideoSeconds(0);
+        if (videoTimer.current) clearInterval(videoTimer.current);
+      };
+      mr.start();
+      mediaRecRef.current = mr;
+      setVideoRecording(true);
+      setVideoSeconds(0);
+      let s = 0;
+      videoTimer.current = setInterval(() => {
+        s += 1;
+        setVideoSeconds(s);
+        if (s >= 30) stopVideoRec();
+      }, 1000);
+    } catch { alert("Camera/mic access denied"); }
+  }
+
+  function stopVideoRec() {
+    if (videoTimer.current) clearInterval(videoTimer.current);
+    mediaRecRef.current?.stop();
+    mediaRecRef.current = null;
+  }
+
+  function addOutgoing(payload: { text?: string; sticker?: string; imageUrl?: string; audioUrl?: string; videoUrl?: string }) {
     const msg: ChatMessage = { id: Date.now().toString(), from: "me", ...payload, createdAt: new Date() };
     setMessages(prev => [...prev, msg]);
     if (Math.random() < 0.5) {
@@ -280,6 +354,22 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
               <div style={{ maxWidth: "72%", borderRadius: 16, overflow: "hidden", border: "2px solid rgba(255,255,255,0.2)", background: "rgba(0,0,0,0.2)" }}>
                 <img src={m.imageUrl} alt="Shared" style={{ width: "100%", maxHeight: 220, objectFit: "cover", display: "block" }} />
               </div>
+            ) : m.audioUrl ? (
+              <div style={{ background: isMe ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.25)", borderRadius: 16, padding: "8px 12px", border: "1px solid rgba(255,255,255,0.15)" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+                  <Mic size={14} color="rgba(255,255,255,0.7)" />
+                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.6)" }}>Voice message</span>
+                </div>
+                <audio src={m.audioUrl} controls style={{ height: 32, width: 200, accentColor: "#ec4899" }} />
+              </div>
+            ) : m.videoUrl ? (
+              <div style={{ maxWidth: "75%", borderRadius: 16, overflow: "hidden", border: "2px solid rgba(255,255,255,0.2)" }}>
+                <video src={m.videoUrl} controls style={{ width: "100%", maxHeight: 280, display: "block", background: "#000" }} />
+                <div style={{ background: "rgba(0,0,0,0.4)", padding: "4px 10px", display: "flex", alignItems: "center", gap: 6 }}>
+                  <Video size={12} color="rgba(255,255,255,0.6)" />
+                  <span style={{ fontSize: 11, color: "rgba(255,255,255,0.6)" }}>30s video</span>
+                </div>
+              </div>
             ) : (
               <div style={{
                 maxWidth: "75%", padding: "9px 14px", fontSize: 14, color: "#fff", wordBreak: "break-word",
@@ -357,6 +447,23 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
           <Plus size={18} color="#fff" />
         </button>
         {/* Input */}
+        {/* Mic — hold to record */}
+        <button type="button"
+          onPointerDown={() => canChat && startAudio()}
+          onPointerUp={() => audioRecording && stopAudio()}
+          onPointerLeave={() => audioRecording && stopAudio()}
+          disabled={!canChat} title="Hold to record voice"
+          style={{ width: 38, height: 38, borderRadius: "50%", background: audioRecording ? "#e53e3e" : "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, opacity: canChat ? 1 : 0.4, animation: audioRecording ? "hcPulse 1s infinite" : undefined }}>
+          <Mic size={17} color="#fff" />
+        </button>
+        {/* 30-sec video */}
+        <button type="button"
+          onClick={() => canChat && (videoRecording ? stopVideoRec() : startVideoRec())}
+          disabled={!canChat} title="30-second video"
+          style={{ width: 38, height: 38, borderRadius: "50%", background: videoRecording ? "#e53e3e" : "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, opacity: canChat ? 1 : 0.4, position: "relative" }}>
+          <Video size={17} color="#fff" />
+          {videoRecording && <span style={{ position: "absolute", top: -6, right: -6, fontSize: 10, background: "#e53e3e", color: "#fff", borderRadius: 10, padding: "1px 4px", fontWeight: 700 }}>{30 - videoSeconds}s</span>}
+        </button>
         <input value={draft} onChange={e => setDraft(e.target.value)} disabled={!canChat} onFocus={() => { setAttachmentOpen(false); setStickersOpen(false); }}
           placeholder={status === "searching" ? "Finding your crush..." : canChat ? "whisper something..." : "press Find to connect"}
           maxLength={300}
@@ -391,6 +498,20 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
       {stickerDrawer}
       {inputBar}
       {cameraModal}
+      {/* Live video recording overlay */}
+      {videoRecording && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 200, background: "rgba(0,0,0,0.9)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 20 }}>
+          <div style={{ color: "#fff", fontSize: 13, opacity: 0.7, letterSpacing: 1 }}>RECORDING</div>
+          <video ref={liveVideoRef} autoPlay playsInline muted style={{ width: "100%", maxWidth: 360, borderRadius: 16, background: "#111", display: "block" }} />
+          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <div style={{ width: 10, height: 10, borderRadius: "50%", background: "#e53e3e", animation: "hcPulse 1s infinite" }} />
+              <span style={{ color: "#fff", fontSize: 20, fontWeight: 700, fontVariantNumeric: "tabular-nums" }}>{30 - videoSeconds}s</span>
+            </div>
+            <button onClick={stopVideoRec} style={{ padding: "10px 28px", borderRadius: 28, background: "#e53e3e", color: "#fff", fontSize: 14, fontWeight: 700, border: "none", cursor: "pointer" }}>Stop &amp; Send</button>
+          </div>
+        </div>
+      )}
     </>
   );
 
