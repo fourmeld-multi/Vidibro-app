@@ -55,7 +55,9 @@ const HeartBackground = () => (
     <style>{`
       @keyframes hcFloat { from{transform:translateY(0) rotate(-3deg)} to{transform:translateY(12px) rotate(3deg)} }
       @keyframes hcPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.15)} }
-      @keyframes hcSpin  { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+      @keyframes hcDot1 { 0%,20%{opacity:0} 40%,100%{opacity:1} }
+      @keyframes hcDot2 { 0%,40%{opacity:0} 60%,100%{opacity:1} }
+      @keyframes hcDot3 { 0%,60%{opacity:0} 80%,100%{opacity:1} }
     `}</style>
   </div>
 );
@@ -114,7 +116,12 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
         <span style={{ fontSize: 32 }}>💘</span>
       </div>
       <div style={{ textAlign: "center" }}>
-        <p style={{ fontWeight: 600, fontSize: 15, color: "#fff", marginBottom: 4 }}>Finding your crush...</p>
+        <p style={{ fontWeight: 600, fontSize: 15, color: "#fff", marginBottom: 4, display: "flex", alignItems: "center", gap: 1 }}>
+          Finding your crush
+          <span style={{ animation: "hcDot1 1.2s ease-in-out infinite", opacity: 0 }}>.</span>
+          <span style={{ animation: "hcDot2 1.2s ease-in-out infinite", opacity: 0 }}>.</span>
+          <span style={{ animation: "hcDot3 1.2s ease-in-out infinite", opacity: 0 }}>.</span>
+        </p>
         <p style={{ fontSize: 13, color: "rgba(255,255,255,0.55)" }}>anonymous · no judgement · send love 💕</p>
       </div>
     </div>
@@ -145,7 +152,14 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <div style={{ width: 8, height: 8, borderRadius: "50%", background: status === "connected" ? "#4ade80" : status === "searching" ? "#fbbf24" : "#6b7280", boxShadow: status === "connected" ? "0 0 6px #4ade80" : undefined, flexShrink: 0 }} />
           <span style={{ fontWeight: 600, fontSize: 14, color: "#fff" }}>
-            {status === "searching" ? "Finding your crush..." : status === "connected" ? "Crush connected 💘" : status === "disconnected" ? "Crush left 💔" : "Find Your Crush"}
+            {status === "searching" ? (
+            <span style={{ display: "flex", alignItems: "center", gap: 1 }}>
+              Finding your crush
+              <span style={{ animation: "hcDot1 1.2s ease-in-out infinite", opacity: 0 }}>.</span>
+              <span style={{ animation: "hcDot2 1.2s ease-in-out infinite", opacity: 0 }}>.</span>
+              <span style={{ animation: "hcDot3 1.2s ease-in-out infinite", opacity: 0 }}>.</span>
+            </span>
+          ) : status === "connected" ? "Crush connected 💘" : status === "disconnected" ? "Crush left 💔" : "Find Your Crush"}
           </span>
         </div>
         {status === "connected" && (
