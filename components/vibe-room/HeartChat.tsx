@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import { Sticker as StickerIcon, Camera, ImageIcon, Plus, Send } from "lucide-react";
 
 type Status = "idle" | "searching" | "connected" | "disconnected";
 
@@ -319,17 +320,21 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
 
   // Attachment popup
   const attachPopup = attachmentOpen && canChat && (
-    <div style={{ position: "absolute", bottom: 64, left: 16, zIndex: 10, background: "rgba(30,10,20,0.95)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 16, padding: 8, display: "flex", flexDirection: "column", gap: 2, backdropFilter: "blur(10px)", boxShadow: "0 8px 32px rgba(0,0,0,0.4)" }}>
-      <button onClick={openCamera} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 16px", borderRadius: 12, background: "none", border: "none", cursor: "pointer", color: "#fff", fontSize: 13, fontWeight: 600 }}
+    <div onClick={e => e.stopPropagation()} style={{ position: "absolute", bottom: 68, left: 12, zIndex: 20, background: "rgba(20,5,15,0.96)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 16, padding: 8, display: "flex", flexDirection: "column", gap: 2, backdropFilter: "blur(12px)", boxShadow: "0 8px 32px rgba(0,0,0,0.5)" }}>
+      <button onClick={() => { setAttachmentOpen(false); openCamera(); }} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 16px", borderRadius: 12, background: "none", border: "none", cursor: "pointer", color: "#fff", fontSize: 13, fontWeight: 600, whiteSpace: "nowrap" }}
         onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.08)")}
         onMouseLeave={e => (e.currentTarget.style.background = "none")}>
-        <span style={{ width: 30, height: 30, borderRadius: "50%", background: "rgba(236,72,153,0.25)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>📷</span>
+        <span style={{ width: 30, height: 30, borderRadius: "50%", background: "rgba(236,72,153,0.3)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <Camera size={15} color="#fff" />
+        </span>
         Take Camera Photo
       </button>
-      <button onClick={() => { setAttachmentOpen(false); fileInputRef.current?.click(); }} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 16px", borderRadius: 12, background: "none", border: "none", cursor: "pointer", color: "#fff", fontSize: 13, fontWeight: 600 }}
+      <button onClick={() => { setAttachmentOpen(false); fileInputRef.current?.click(); }} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 16px", borderRadius: 12, background: "none", border: "none", cursor: "pointer", color: "#fff", fontSize: 13, fontWeight: 600, whiteSpace: "nowrap" }}
         onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.08)")}
         onMouseLeave={e => (e.currentTarget.style.background = "none")}>
-        <span style={{ width: 30, height: 30, borderRadius: "50%", background: "rgba(167,139,250,0.25)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15 }}>🖼️</span>
+        <span style={{ width: 30, height: 30, borderRadius: "50%", background: "rgba(167,139,250,0.3)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <ImageIcon size={15} color="#fff" />
+        </span>
         Upload Gallery Image
       </button>
     </div>
@@ -342,14 +347,14 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
       <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileUpload} style={{ display: "none" }} />
       <form onSubmit={sendText} style={{ display: "flex", alignItems: "center", gap: 8 }}>
         {/* Sticker */}
-        <button type="button" onClick={e => { e.stopPropagation(); if (!canChat) return; setAttachmentOpen(false); setStickersOpen(v => !v); }} disabled={!canChat}
-          style={{ width: 38, height: 38, borderRadius: "50%", background: stickersOpen ? "#ec4899" : "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", fontSize: 18, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, opacity: canChat ? 1 : 0.4 }}>
-          💕
+        <button type="button" onClick={e => { e.stopPropagation(); if (!canChat) return; setAttachmentOpen(false); setStickersOpen(v => !v); }} disabled={!canChat} title="Stickers"
+          style={{ width: 38, height: 38, borderRadius: "50%", background: stickersOpen ? "#ec4899" : "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, opacity: canChat ? 1 : 0.4 }}>
+          <StickerIcon size={18} color="#fff" />
         </button>
         {/* Attachment + */}
-        <button type="button" onClick={e => { e.stopPropagation(); if (!canChat) return; setStickersOpen(false); setAttachmentOpen(v => !v); }} disabled={!canChat}
-          style={{ width: 38, height: 38, borderRadius: "50%", background: attachmentOpen ? "#a855f7" : "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", fontSize: 20, fontWeight: 300, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, opacity: canChat ? 1 : 0.4, transform: attachmentOpen ? "rotate(45deg)" : "none", transition: "transform 0.2s" }}>
-          +
+        <button type="button" onClick={e => { e.stopPropagation(); if (!canChat) return; setStickersOpen(false); setAttachmentOpen(v => !v); }} disabled={!canChat} title="Camera / Gallery"
+          style={{ width: 38, height: 38, borderRadius: "50%", background: attachmentOpen ? "#a855f7" : "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, opacity: canChat ? 1 : 0.4, transition: "transform 0.2s", transform: attachmentOpen ? "rotate(45deg)" : "none" }}>
+          <Plus size={18} color="#fff" />
         </button>
         {/* Input */}
         <input value={draft} onChange={e => setDraft(e.target.value)} disabled={!canChat} onFocus={() => { setAttachmentOpen(false); setStickersOpen(false); }}
@@ -357,9 +362,9 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
           maxLength={300}
           style={{ flex: 1, background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.18)", borderRadius: 24, padding: "9px 16px", fontSize: 14, color: "#fff", outline: "none", opacity: canChat ? 1 : 0.5 }} />
         {/* Send */}
-        <button type="submit" disabled={!draft.trim() || !canChat}
+        <button type="submit" disabled={!draft.trim() || !canChat} title="Send"
           style={{ width: 38, height: 38, borderRadius: "50%", background: draft.trim() && canChat ? "#ec4899" : "rgba(255,255,255,0.12)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, opacity: draft.trim() && canChat ? 1 : 0.4, transition: "background 0.2s" }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+          <Send size={16} color="#fff" />
         </button>
       </form>
     </div>
