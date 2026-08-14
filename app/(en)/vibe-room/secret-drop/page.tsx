@@ -120,83 +120,19 @@ export default function SecretDropPage() {
   // Full screen Find Your Crash
   if (mode === "crash") {
     return (
-      <div className="fixed inset-0 z-50 flex flex-col" style={{ background: "#c0184f" }}>
-        {/* Ambient heart background */}
-        <svg viewBox="0 0 800 900" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0.25 }} preserveAspectRatio="xMidYMid slice">
-          <path d="M0 180 Q200 120 400 180 Q600 240 800 180 L800 0 L0 0 Z" fill="#a0103f" />
-          <path d="M0 850 Q200 790 400 850 Q600 910 800 850 L800 900 L0 900 Z" fill="#a0103f" />
-          {[
-            [80,200],[200,120],[380,280],[500,150],[650,300],
-            [100,450],[300,520],[500,480],[700,420],[180,650],
-            [400,700],[600,650],[250,800],[550,780],[750,700],
-          ].map(([cx,cy],i) => (
-            <g key={i} transform={`translate(${cx},${cy})`} opacity="0.45">
-              <path d="M0,-18 C-10,-28 -26,-28 -26,-13 C-26,3 0,20 0,20 C0,20 26,3 26,-13 C26,-28 10,-28 0,-18 Z" fill="none" stroke="#e0305a" strokeWidth="1.5" />
-            </g>
-          ))}
-          {[[150,350],[420,400],[680,350],[300,600],[580,560]].map(([cx,cy],i) => (
-            <g key={i} transform={`translate(${cx},${cy}) scale(0.45)`} opacity="0.4">
-              <path d="M0,-18 C-10,-28 -26,-28 -26,-13 C-26,3 0,20 0,20 C0,20 26,3 26,-13 C26,-28 10,-28 0,-18 Z" fill="#a0103f" />
-            </g>
-          ))}
-        </svg>
-
-        {/* Floating hearts */}
-        {[
-          { right:"8%",  top:"2%",  size:64, delay:"0s"   },
-          { right:"12%", top:"20%", size:46, delay:"0.5s" },
-          { left:"5%",   top:"55%", size:70, delay:"0.9s" },
-          { left:"9%",   top:"72%", size:50, delay:"0.3s" },
-          { right:"6%",  top:"60%", size:42, delay:"1.2s" },
-        ].map((h, i) => (
-          <div key={i} style={{ position:"absolute", ...{left: h.left, right: h.right, top: h.top}, animation:`fh 4s ease-in-out ${h.delay} infinite alternate`, zIndex:0 }}>
-            <div style={{ width:"1.5px", height:"28px", background:"rgba(255,255,255,0.55)", margin:"0 auto" }} />
-            <svg width={h.size} height={h.size} viewBox="0 0 60 60">
-              <path d="M30,52 C30,52 4,36 4,20 C4,10 12,4 20,8 C24,10 28,14 30,18 C32,14 36,10 40,8 C48,4 56,10 56,20 C56,36 30,52 30,52 Z" fill="#f093a8" />
-              <path d="M30,52 C30,52 4,36 4,20 C4,10 12,4 20,8 L30,18 L30,52 Z" fill="#f4b8c8" opacity="0.9" />
-            </svg>
-          </div>
-        ))}
-
-        <style>{`@keyframes fh { from{transform:translateY(0) rotate(-3deg)} to{transform:translateY(12px) rotate(3deg)} }`}</style>
-
-        {/* Header */}
-        <div style={{ position:"relative", zIndex:1, display:"flex", alignItems:"center", gap:12, padding:"14px 20px", borderBottom:"1px solid rgba(255,255,255,0.15)", background:"rgba(0,0,0,0.2)" }}>
-          <button onClick={() => setMode(null)} style={{ fontSize:13, color:"rgba(255,255,255,0.6)", background:"none", border:"none", cursor:"pointer" }}>
-            ← Back
-          </button>
-          <span style={{ fontSize:13, color:"rgba(255,255,255,0.3)" }}>/</span>
-          <span style={{ fontSize:13, fontWeight:600, color:"#fff" }}>💘 Find Your Crash</span>
-          {user && (
-            <div style={{ marginLeft:"auto", display:"flex", alignItems:"center", gap:8, padding:"4px 12px", background:"rgba(0,0,0,0.25)", border:"1px solid rgba(255,255,255,0.2)", borderRadius:20 }}>
-              <span style={{ fontSize:11, color:"rgba(255,255,255,0.7)" }}>@{user.username}</span>
-              <button onClick={() => setUser(null)} style={{ fontSize:11, color:"rgba(255,255,255,0.4)", background:"none", border:"none", cursor:"pointer" }}>sign out</button>
-            </div>
-          )}
-        </div>
-
-        {/* HeartChat full screen */}
-        <div style={{ position:"relative", zIndex:1, flex:1, display:"flex", flexDirection:"column", maxWidth:680, width:"100%", margin:"0 auto", padding:"0 16px 16px" }}>
-          <div style={{ padding:"16px 0 8px" }}>
-            <p style={{ fontSize:13, color:"rgba(255,255,255,0.65)", textAlign:"center" }}>
-              anonymous · no judgement · send love 💕
-            </p>
-          </div>
-          <div style={{ flex:1 }}>
-            <HeartChat
-              user={user}
-              onAuthRequired={() => setShowAuth(true)}
-              initialMessages={[
-                { id:"h1", authorName:"rose_phantom", content:"finally a place that feels safe 💕", isBot:false, createdAt: new Date(Date.now() - 60000*6) },
-                { id:"h2", authorName:"velvet_note",  content:"sending love to whoever needs it 🫶", isBot:false, createdAt: new Date(Date.now() - 60000*2) },
-              ]}
-              fullScreen
-            />
-          </div>
-        </div>
-
+      <>
+        <HeartChat
+          user={user}
+          onAuthRequired={() => setShowAuth(true)}
+          initialMessages={[
+            { id:"h1", authorName:"rose_phantom", content:"finally a place that feels safe 💕", isBot:false, createdAt: new Date(Date.now() - 60000*6) },
+            { id:"h2", authorName:"velvet_note",  content:"sending love to whoever needs it 🫶", isBot:false, createdAt: new Date(Date.now() - 60000*2) },
+          ]}
+          fullScreen
+          onBack={() => setMode(null)}
+        />
         {showAuth && <AuthModal onClose={() => setShowAuth(false)} onSuccess={handleAuthSuccess} />}
-      </div>
+      </>
     );
   }
 
