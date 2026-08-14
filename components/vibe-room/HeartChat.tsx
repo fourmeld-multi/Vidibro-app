@@ -92,6 +92,7 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
   const [attachmentOpen, setAttachmentOpen] = useState(false);
   const [showCamera, setShowCamera] = useState(false);
   const [audioRecording, setAudioRecording] = useState(false);
+  const [audioSeconds, setAudioSeconds] = useState(0);
   const [videoRecording, setVideoRecording] = useState(false);
   const [videoSeconds, setVideoSeconds] = useState(0);
 
@@ -105,6 +106,7 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
   const mediaRecRef  = useRef<MediaRecorder | null>(null);
   const recChunks    = useRef<Blob[]>([]);
   const videoTimer   = useRef<ReturnType<typeof setInterval> | null>(null);
+  const audioTimer   = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -155,20 +157,39 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
       mr.ondataavailable = e => { if (e.data.size > 0) recChunks.current.push(e.data); };
       mr.onstop = () => {
         stream.getTracks().forEach(t => t.stop());
+        if (audioTimer.current) { clearInterval(audioTimer.current); audioTimer.current = null; }
         const blob = new Blob(recChunks.current, { type: "audio/webm" });
         const url = URL.createObjectURL(blob);
         addOutgoing({ audioUrl: url });
+        setAudioSeconds(0);
       };
       mr.start();
       mediaRecRef.current = mr;
       setAudioRecording(true);
+      setAudioSeconds(0);
+      let s = 0;
+      audioTimer.current = setInterval(() => { s += 1; setAudioSeconds(s); }, 1000);
     } catch { alert("Microphone access denied"); }
   }
 
   function stopAudio() {
+    if (audioTimer.current) { clearInterval(audioTimer.current); audioTimer.current = null; }
     mediaRecRef.current?.stop();
     mediaRecRef.current = null;
     setAudioRecording(false);
+    setAudioSeconds(0);
+  }
+
+  function cancelAudio() {
+    if (audioTimer.current) { clearInterval(audioTimer.current); audioTimer.current = null; }
+    if (mediaRecRef.current) {
+      // Override onstop so blob is NOT sent
+      mediaRecRef.current.onstop = null;
+      mediaRecRef.current.stop();
+      mediaRecRef.current = null;
+    }
+    setAudioRecording(false);
+    setAudioSeconds(0);
   }
 
   // ── 30-sec video recording ─────────────────────────────────────────
@@ -430,49 +451,73 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
     </div>
   );
 
-  // Input bar — WhatsApp style: mic when empty, send when typing; camera icon in bar
+  // Format seconds as M:SS
+  const fmtAudio = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+
+  // Input bar — WhatsApp style
   const inputBar = (
-    <div style={{ position: "relative", zIndex: 1, padding: "10px 12px", borderTop: "1px solid rgba(255,255,255,0.1)", background: "rgba(0,0,0,0.3)", flexShrink: 0 }} onClick={() => setAttachmentOpen(false)}>
+    <div style={{ position: "relative", zIndex: 1, padding: "10px 12px", borderTop: "1px solid rgba(255,255,255,0.1)", background: "rgba(0,0,0,0.3)", flexShrink: 0 }} onClick={() => { if (!audioRecording) setAttachmentOpen(false); }}>
       {attachPopup}
       <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileUpload} style={{ display: "none" }} />
-      <form onSubmit={sendText} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-        {/* Sticker */}
-        <button type="button" onClick={e => { e.stopPropagation(); if (!canChat) return; setAttachmentOpen(false); setStickersOpen(v => !v); }} disabled={!canChat} title="Stickers"
-          style={{ width: 38, height: 38, borderRadius: "50%", background: stickersOpen ? "#ec4899" : "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, opacity: canChat ? 1 : 0.4 }}>
-          <StickerIcon size={18} color="#fff" />
-        </button>
-        {/* + Attachment */}
-        <button type="button" onClick={e => { e.stopPropagation(); if (!canChat) return; setStickersOpen(false); setAttachmentOpen(v => !v); }} disabled={!canChat} title="Attach"
-          style={{ width: 38, height: 38, borderRadius: "50%", background: attachmentOpen ? "#a855f7" : "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, opacity: canChat ? 1 : 0.4, transition: "transform 0.2s", transform: attachmentOpen ? "rotate(45deg)" : "none" }}>
-          <Plus size={18} color="#fff" />
-        </button>
-        {/* Text input */}
-        <input value={draft} onChange={e => setDraft(e.target.value)} disabled={!canChat} onFocus={() => { setAttachmentOpen(false); setStickersOpen(false); }}
-          placeholder={status === "searching" ? "Finding your crush..." : canChat ? "whisper something..." : "press Find to connect"}
-          maxLength={300}
-          style={{ flex: 1, background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.18)", borderRadius: 24, padding: "9px 16px", fontSize: 14, color: "#fff", outline: "none", opacity: canChat ? 1 : 0.5 }} />
-        {/* Camera — always visible when no draft */}
-        {!draft.trim() && (
-          <button type="button" onClick={e => { e.stopPropagation(); if (!canChat) return; setAttachmentOpen(false); openCamera(); }} disabled={!canChat} title="Camera"
-            style={{ width: 38, height: 38, borderRadius: "50%", background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, opacity: canChat ? 1 : 0.4 }}>
-            <Camera size={18} color="#fff" />
+
+      {/* Recording bar — shown while audioRecording */}
+      {audioRecording ? (
+        <div style={{ display: "flex", alignItems: "center", gap: 10, height: 46 }}>
+          {/* Pulsing red dot + timer */}
+          <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
+            <div style={{ width: 10, height: 10, borderRadius: "50%", background: "#e53e3e", animation: "hcPulse 1s infinite", flexShrink: 0 }} />
+            <span style={{ color: "#fff", fontSize: 16, fontWeight: 700, fontVariantNumeric: "tabular-nums", minWidth: 36 }}>{fmtAudio(audioSeconds)}</span>
+          </div>
+          {/* Slide to cancel */}
+          <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 6, opacity: 0.55 }}>
+            <span style={{ fontSize: 18, color: "#fff" }}>‹</span>
+            <span style={{ fontSize: 13, color: "#fff" }}>Slide to cancel</span>
+          </div>
+          {/* Big mic button — tap to stop & send */}
+          <button type="button" onClick={stopAudio}
+            style={{ width: 46, height: 46, borderRadius: "50%", background: "#e53e3e", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, boxShadow: "0 0 0 6px rgba(229,62,62,0.25)", animation: "hcPulse 1.2s infinite" }}>
+            <Mic size={22} color="#fff" />
           </button>
-        )}
-        {/* Mic (no draft) → Send (has draft) */}
-        {draft.trim() ? (
-          <button type="submit" disabled={!canChat} title="Send"
-            style={{ width: 38, height: 38, borderRadius: "50%", background: "#ec4899", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "background 0.15s" }}>
-            <Send size={16} color="#fff" />
+        </div>
+      ) : (
+        <form onSubmit={sendText} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          {/* Sticker */}
+          <button type="button" onClick={e => { e.stopPropagation(); if (!canChat) return; setAttachmentOpen(false); setStickersOpen(v => !v); }} disabled={!canChat} title="Stickers"
+            style={{ width: 38, height: 38, borderRadius: "50%", background: stickersOpen ? "#ec4899" : "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, opacity: canChat ? 1 : 0.4 }}>
+            <StickerIcon size={18} color="#fff" />
           </button>
-        ) : (
-          <button type="button"
-            onPointerDown={e => { e.stopPropagation(); if (!canChat) return; audioRecording ? stopAudio() : startAudio(); }}
-            disabled={!canChat} title={audioRecording ? "Stop & send" : "Hold to record"}
-            style={{ width: 38, height: 38, borderRadius: "50%", background: audioRecording ? "#e53e3e" : "#ec4899", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, animation: audioRecording ? "hcPulse 1s infinite" : undefined, transition: "background 0.15s" }}>
-            <Mic size={18} color="#fff" />
+          {/* + Attachment */}
+          <button type="button" onClick={e => { e.stopPropagation(); if (!canChat) return; setStickersOpen(false); setAttachmentOpen(v => !v); }} disabled={!canChat} title="Attach"
+            style={{ width: 38, height: 38, borderRadius: "50%", background: attachmentOpen ? "#a855f7" : "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, opacity: canChat ? 1 : 0.4, transition: "transform 0.2s", transform: attachmentOpen ? "rotate(45deg)" : "none" }}>
+            <Plus size={18} color="#fff" />
           </button>
-        )}
-      </form>
+          {/* Text input */}
+          <input value={draft} onChange={e => setDraft(e.target.value)} disabled={!canChat} onFocus={() => { setAttachmentOpen(false); setStickersOpen(false); }}
+            placeholder={status === "searching" ? "Finding your crush..." : canChat ? "whisper something..." : "press Find to connect"}
+            maxLength={300}
+            style={{ flex: 1, background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.18)", borderRadius: 24, padding: "9px 16px", fontSize: 14, color: "#fff", outline: "none", opacity: canChat ? 1 : 0.5 }} />
+          {/* Camera — only when no draft */}
+          {!draft.trim() && (
+            <button type="button" onClick={e => { e.stopPropagation(); if (!canChat) return; setAttachmentOpen(false); openCamera(); }} disabled={!canChat} title="Camera"
+              style={{ width: 38, height: 38, borderRadius: "50%", background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, opacity: canChat ? 1 : 0.4 }}>
+              <Camera size={18} color="#fff" />
+            </button>
+          )}
+          {/* Mic (no draft) → Send (has draft) */}
+          {draft.trim() ? (
+            <button type="submit" disabled={!canChat} title="Send"
+              style={{ width: 38, height: 38, borderRadius: "50%", background: "#ec4899", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <Send size={16} color="#fff" />
+            </button>
+          ) : (
+            <button type="button" onClick={e => { e.stopPropagation(); if (!canChat) return; startAudio(); }}
+              disabled={!canChat} title="Record voice"
+              style={{ width: 38, height: 38, borderRadius: "50%", background: "#ec4899", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <Mic size={18} color="#fff" />
+            </button>
+          )}
+        </form>
+      )}
     </div>
   );
 
