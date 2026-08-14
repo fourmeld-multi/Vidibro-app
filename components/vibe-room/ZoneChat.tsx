@@ -27,8 +27,11 @@ const BOT_REACTIONS: Record<string, string[]> = {
   default: ["facts 💯", "lmaooo 😂", "fr fr", "no cap", "vibe check passed 🔥"],
 };
 
+const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+const isWithin24h = (d: Date) => Date.now() - d.getTime() < ONE_DAY_MS;
+
 export default function ZoneChat({ user, onAuthRequired, zone, initialMessages = [], suggestedInput, onSuggestedInputConsumed }: ZoneChatProps) {
-  const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
+  const [messages, setMessages] = useState<ChatMessage[]>(initialMessages.filter(m => isWithin24h(m.createdAt)));
   const [input, setInput] = useState("");
   const [showStickers, setShowStickers] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -95,7 +98,7 @@ export default function ZoneChat({ user, onAuthRequired, zone, initialMessages =
         {messages.length === 0 && (
           <p className="text-xs text-zinc-700 text-center mt-auto">No messages yet. Say something 👋</p>
         )}
-        {messages.map((m) => (
+        {messages.filter(m => isWithin24h(m.createdAt)).map((m) => (
           <div key={m.id} className="flex items-baseline gap-1.5 min-w-0">
             <span className={`text-[11px] font-semibold shrink-0 ${m.isBot ? "text-violet-400" : "text-zinc-400"}`}>
               {m.authorName === user?.username ? "you" : m.authorName}

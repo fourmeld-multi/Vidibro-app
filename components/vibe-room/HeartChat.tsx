@@ -131,7 +131,7 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
   function endChat() {
     if (searchTimer.current) clearTimeout(searchTimer.current);
     setStatus("disconnected");
-    setMessages(prev => [...prev, { id: "sys-disc", from: "system", text: "crush disconnected 💔", createdAt: new Date() }]);
+    setMessages([]);
   }
 
   function sendText(e: React.FormEvent) {
