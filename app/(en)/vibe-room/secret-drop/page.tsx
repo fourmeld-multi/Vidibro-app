@@ -122,12 +122,6 @@ export default function SecretDropPage() {
     return (
       <>
         <HeartChat
-          user={user}
-          onAuthRequired={() => setShowAuth(true)}
-          initialMessages={[
-            { id:"h1", authorName:"rose_phantom", content:"finally a place that feels safe 💕", isBot:false, createdAt: new Date(Date.now() - 60000*6) },
-            { id:"h2", authorName:"velvet_note",  content:"sending love to whoever needs it 🫶", isBot:false, createdAt: new Date(Date.now() - 60000*2) },
-          ]}
           fullScreen
           onBack={() => setMode(null)}
         />
