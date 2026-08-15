@@ -456,7 +456,7 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
 
   // Input bar — WhatsApp style
   const inputBar = (
-    <div style={{ position: "relative", zIndex: 1, padding: "10px 12px", borderTop: "1px solid rgba(255,255,255,0.1)", background: "rgba(0,0,0,0.3)", flexShrink: 0 }} onClick={() => { if (!audioRecording) setAttachmentOpen(false); }}>
+    <div style={{ position: "relative", zIndex: 1, padding: "10px 12px", paddingBottom: "max(10px, env(safe-area-inset-bottom, 0px))", borderTop: "1px solid rgba(255,255,255,0.1)", background: "rgba(0,0,0,0.3)", flexShrink: 0 }} onClick={() => { if (!audioRecording) setAttachmentOpen(false); }}>
       {attachPopup}
       <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileUpload} style={{ display: "none" }} />
 
@@ -561,7 +561,7 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
 
   if (fullScreen) {
     return (
-      <div style={{ position: "fixed", inset: 0, zIndex: 50, display: "flex", flexDirection: "column", background: "#c0184f" }}>
+      <div style={{ position: "fixed", inset: 0, zIndex: 1000, display: "flex", flexDirection: "column", background: "#c0184f", paddingTop: "env(safe-area-inset-top, 0px)" }}>
         <HeartBackground />
         {content}
       </div>
