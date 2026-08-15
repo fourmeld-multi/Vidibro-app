@@ -117,14 +117,23 @@ export default function SecretDropPage() {
     );
   }
 
-  // Full screen Find Your Crash
+  // Find Your Crash
   if (mode === "crash") {
     return (
       <>
-        <HeartChat
-          fullScreen
-          onBack={() => setMode(null)}
-        />
+        {/* Desktop — card inside page layout */}
+        <div className="hidden md:flex min-h-screen flex-col bg-black text-white">
+          <Navbar />
+          <main className="flex-1 flex items-center justify-center px-4 py-6">
+            <div style={{ width: "100%", maxWidth: 760, height: "calc(100vh - 130px)", borderRadius: 20, overflow: "hidden", display: "flex", flexDirection: "column", boxShadow: "0 8px 60px rgba(192,24,79,0.22)" }}>
+              <HeartChat onBack={() => setMode(null)} />
+            </div>
+          </main>
+        </div>
+        {/* Mobile — fullscreen */}
+        <div className="md:hidden">
+          <HeartChat fullScreen onBack={() => setMode(null)} />
+        </div>
         {showAuth && <AuthModal onClose={() => setShowAuth(false)} onSuccess={handleAuthSuccess} />}
       </>
     );

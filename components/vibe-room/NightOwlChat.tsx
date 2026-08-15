@@ -36,36 +36,36 @@ const MOOD_CONFIG: Record<Mood, {
 }> = {
   sad: {
     searchText: "Finding someone who gets it",
-    connectMsg: "someone found you 🌙 you're not alone",
-    starterMsg: "Hey, feeling a bit low tonight. Here to listen if you want to talk 🌙",
+    connectMsg: "Partner is having a low night 🌙 be their comfort",
+    starterMsg: "Hey, not doing so great tonight. Just needed someone to talk to...",
     placeholder: "share what's on your mind...",
     replies: ["same here 🌙", "felt that", "you're not alone 💙", "here for u", "tell me more", "i feel u fr"],
   },
   boring: {
     searchText: "Finding someone to vibe with",
-    connectMsg: "night just got interesting ✨ say something",
-    starterMsg: "Completely bored rn, let's make tonight interesting ✨",
+    connectMsg: "Partner is bored tonight 😴 make their night interesting!",
+    starterMsg: "Honestly so bored rn, what's good? 😴",
     placeholder: "say something random...",
     replies: ["lol same 😴", "so bored omg", "tell me something weird", "let's talk nonsense 💀", "plot twist: same energy"],
   },
   romantic: {
     searchText: "Finding your romantic match",
-    connectMsg: "your night match is here 🌹",
-    starterMsg: "The night feels romantic... glad I found you 🌹",
+    connectMsg: "Partner is in a romantic mood 🌹 make it magical",
+    starterMsg: "The night is so beautiful... glad I'm not alone tonight 🌹",
     placeholder: "whisper something sweet...",
     replies: ["omg same 🌹", "the night is perfect ✨", "tell me more...", "💘", "you're sweet", "stargazing tonight?"],
   },
   chill: {
     searchText: "Finding a chill night owl",
-    connectMsg: "fellow night owl found 😎 just vibe",
-    starterMsg: "Chilling tonight, wanted some company 😎🌙",
+    connectMsg: "Partner wants to chill 😎 just vibe together",
+    starterMsg: "Just chilling with good music, what about you? 😎🌙",
     placeholder: "just vibe...",
     replies: ["good vibes 🌙", "same fr", "just vibing", "no rush at all", "😎 chill night", "this is nice"],
   },
   flirty: {
     searchText: "Finding a flirty night owl",
-    connectMsg: "a flirty owl found you 😏 your move",
-    starterMsg: "Night owl looking for some flirty conversation 😏",
+    connectMsg: "Partner is feeling flirty 😏 your move!",
+    starterMsg: "Heyy night owl... what are you up to? 😏",
     placeholder: "be bold...",
     replies: ["😏 oh really", "haha okay then", "you're fun ngl", "tell me more 😉", "🔥", "cute for that"],
   },
@@ -414,7 +414,7 @@ export default function NightOwlChat({ fullScreen = false, onBack }: NightOwlCha
   }
 
   return (
-    <div style={{ position: "relative", display: "flex", flexDirection: "column", background: bgGrad, borderRadius: "1rem", overflow: "hidden", minHeight: 500 }}>
+    <div style={{ position: "relative", display: "flex", flexDirection: "column", background: bgGrad, height: "100%", overflow: "hidden" }}>
       <NightBackground />
       {content}
     </div>

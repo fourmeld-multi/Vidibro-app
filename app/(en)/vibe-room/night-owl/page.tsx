@@ -35,7 +35,23 @@ export default function NightOwlPage() {
   const [suggested, setSuggested] = useState("");
 
   if (privateMode) {
-    return <NightOwlChat fullScreen onBack={() => setPrivateMode(false)} />;
+    return (
+      <>
+        {/* Desktop — card inside page layout */}
+        <div className="hidden md:flex min-h-screen flex-col bg-black text-white">
+          <Navbar />
+          <main className="flex-1 flex items-center justify-center px-4 py-6">
+            <div style={{ width: "100%", maxWidth: 760, height: "calc(100vh - 130px)", borderRadius: 20, overflow: "hidden", display: "flex", flexDirection: "column", boxShadow: "0 8px 60px rgba(100,80,200,0.18)" }}>
+              <NightOwlChat onBack={() => setPrivateMode(false)} />
+            </div>
+          </main>
+        </div>
+        {/* Mobile — fullscreen */}
+        <div className="md:hidden">
+          <NightOwlChat fullScreen onBack={() => setPrivateMode(false)} />
+        </div>
+      </>
+    );
   }
 
   const activeMood = MOODS.find((m) => m.key === mood)!;

@@ -569,7 +569,7 @@ export default function HeartChat({ fullScreen = false, onBack }: HeartChatProps
   }
 
   return (
-    <div style={{ position: "relative", display: "flex", flexDirection: "column", background: "#c0184f", borderRadius: "1rem", overflow: "hidden" }}>
+    <div style={{ position: "relative", display: "flex", flexDirection: "column", background: "#c0184f", height: "100%", overflow: "hidden" }}>
       <HeartBackground />
       {content}
     </div>
