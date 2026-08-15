@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AuthModal from "@/components/vibe-room/AuthModal";
 import ZoneChat from "@/components/vibe-room/ZoneChat";
+import NightOwlChat from "@/components/vibe-room/NightOwlChat";
 import { NIGHT_OWL_PROMPTS } from "@/lib/vibe-room/mock-data";
 import type { NightOwlMood, VibeUser } from "@/lib/vibe-room/types";
 
@@ -27,10 +28,15 @@ const INITIAL_MESSAGES = [
 ];
 
 export default function NightOwlPage() {
+  const [privateMode, setPrivateMode] = useState(false);
   const [mood, setMood] = useState<NightOwlMood>("chill");
   const [user, setUser] = useState<VibeUser | null>(null);
   const [showAuth, setShowAuth] = useState(false);
   const [suggested, setSuggested] = useState("");
+
+  if (privateMode) {
+    return <NightOwlChat fullScreen onBack={() => setPrivateMode(false)} />;
+  }
 
   const activeMood = MOODS.find((m) => m.key === mood)!;
   const prompts = NIGHT_OWL_PROMPTS.filter((p) => p.mood === mood);
@@ -111,7 +117,32 @@ export default function NightOwlPage() {
           </div>
         </div>
 
-        {/* Chat */}
+        {/* Private mood chat */}
+        <button
+          onClick={() => setPrivateMode(true)}
+          className="w-full text-left rounded-2xl overflow-hidden transition-all"
+          style={{ background: "linear-gradient(135deg, #0d0828 0%, #1a0f40 55%, #0f1a30 100%)", border: "1px solid rgba(160,130,255,0.22)" }}
+        >
+          <div className="p-5" style={{ position: "relative" }}>
+            <div style={{ position: "absolute", right: 16, top: 8,  opacity: 0.28, fontSize: 22 }}>🌙</div>
+            <div style={{ position: "absolute", right: 42, bottom: 8, opacity: 0.18, fontSize: 13 }}>✨</div>
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-xl">🦉</span>
+                  <h2 className="text-base font-semibold text-white">Private Mood Chat</h2>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full font-medium" style={{ background: "rgba(160,130,255,0.15)", color: "rgba(180,160,255,0.8)", border: "1px solid rgba(160,130,255,0.25)" }}>NEW</span>
+                </div>
+                <p className="text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>
+                  Pick your mood — get matched 1-on-1 with someone who feels the same.
+                </p>
+              </div>
+              <span style={{ color: "rgba(160,130,255,0.6)", fontSize: 18, flexShrink: 0 }}>→</span>
+            </div>
+          </div>
+        </button>
+
+        {/* Group Chat */}
         <ZoneChat
           user={user}
           onAuthRequired={() => setShowAuth(true)}

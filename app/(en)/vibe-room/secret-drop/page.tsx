@@ -9,11 +9,10 @@ import NewDropForm from "@/components/vibe-room/NewDropForm";
 import AuthModal from "@/components/vibe-room/AuthModal";
 import ZoneChat from "@/components/vibe-room/ZoneChat";
 import HeartChat from "@/components/vibe-room/HeartChat";
-import NightOwlChat from "@/components/vibe-room/NightOwlChat";
 import { MOCK_DROPS } from "@/lib/vibe-room/mock-data";
 import type { SecretDrop, VibeUser } from "@/lib/vibe-room/types";
 
-type Mode = null | "drop" | "crash" | "owl";
+type Mode = null | "drop" | "crash";
 
 export default function SecretDropPage() {
   const [mode, setMode] = useState<Mode>(null);
@@ -131,11 +130,6 @@ export default function SecretDropPage() {
     );
   }
 
-  // Full screen Night Owl
-  if (mode === "owl") {
-    return <NightOwlChat fullScreen onBack={() => setMode(null)} />;
-  }
-
   // Hub — two option cards
   return (
     <div className="min-h-screen flex flex-col bg-black text-white">
@@ -211,35 +205,6 @@ export default function SecretDropPage() {
             </div>
           </button>
 
-          {/* Night Owl card */}
-          <button
-            onClick={() => setMode("owl")}
-            className="group w-full text-left rounded-2xl overflow-hidden transition-all"
-            style={{ background: "linear-gradient(135deg, #0d0828 0%, #1a0f40 50%, #0f1a30 100%)", border: "1px solid rgba(160,130,255,0.25)" }}
-          >
-            <div className="p-6" style={{ position: "relative" }}>
-              <div style={{ position:"absolute", right:18, top:8,  opacity:0.3, fontSize:24, lineHeight:1 }}>🌙</div>
-              <div style={{ position:"absolute", right:48, bottom:10, opacity:0.2, fontSize:14, lineHeight:1 }}>✨</div>
-              <div style={{ position:"absolute", right:34, top:28, opacity:0.18, fontSize:10, lineHeight:1 }}>⭐</div>
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-2xl">🦉</span>
-                    <h2 className="text-lg font-semibold text-white">Night Owl Chat</h2>
-                  </div>
-                  <p className="text-sm leading-relaxed" style={{ color:"rgba(255,255,255,0.6)" }}>
-                    Pick your mood. Get matched with someone who feels the same. Private, anonymous, after dark.
-                  </p>
-                  <div className="flex gap-2 mt-3 flex-wrap">
-                    {["mood match","private chat","night vibes"].map(t => (
-                      <span key={t} className="text-[11px] px-2 py-0.5 rounded-full" style={{ background:"rgba(160,130,255,0.12)", color:"rgba(180,160,255,0.7)", border:"1px solid rgba(160,130,255,0.2)" }}>{t}</span>
-                    ))}
-                  </div>
-                </div>
-                <span className="text-xl mt-1 transition-colors" style={{ color:"rgba(160,130,255,0.5)" }}>→</span>
-              </div>
-            </div>
-          </button>
         </div>
       </main>
       <Footer />
