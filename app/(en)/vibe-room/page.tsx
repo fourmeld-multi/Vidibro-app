@@ -8,172 +8,192 @@ export const metadata: Metadata = {
 };
 
 const GAMES = [
-  { e: "⭕", n: "Tic-Tac-Toe", p: 284, col: "rgba(248,113,113,.2)",  dot: "#f87171" },
-  { e: "🚢", n: "Battleship",   p: 157, col: "rgba(96,165,250,.2)",   dot: "#60a5fa" },
-  { e: "🧱", n: "Stacktris",    p: 93,  col: "rgba(251,146,60,.2)",   dot: "#f59e0b" },
-  { e: "🦕", n: "Dino Race",    p: 512, col: "rgba(52,211,153,.2)",   dot: "#34d399" },
-];
-
-const MOODS = [
-  { e: "😔", l: "Sad",      bg: "rgba(96,165,250,.14)",  c: "rgba(96,165,250,.8)"  },
-  { e: "😴", l: "Boring",   bg: "rgba(251,191,36,.12)",  c: "rgba(251,191,36,.8)"  },
-  { e: "💕", l: "Romantic", bg: "rgba(251,113,133,.14)", c: "rgba(251,113,133,.8)" },
-  { e: "😌", l: "Chill",    bg: "rgba(52,211,153,.12)",  c: "rgba(52,211,153,.8)"  },
-  { e: "😏", l: "Flirty",   bg: "rgba(196,181,253,.14)", c: "rgba(196,181,253,.8)" },
+  { e: "⭕", n: "Tic-Tac-Toe" },
+  { e: "🚢", n: "Battleship" },
+  { e: "🧱", n: "Stacktris" },
+  { e: "🦕", n: "Dino Race" },
 ];
 
 export default function VibeRoomPage() {
   return (
     <div className="min-h-screen flex flex-col text-white">
       <VrHubBg />
-      <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-10" style={{ position: "relative", zIndex: 1 }}>
+      <main className="flex-1 max-w-2xl mx-auto w-full px-4 pt-8 pb-12" style={{ position: "relative", zIndex: 1 }}>
 
-        <div className="mb-8">
-          <Link href="/" className="text-zinc-500 hover:text-zinc-300 text-sm transition-colors">
-            ← Vidibro
-          </Link>
+        {/* Back nav */}
+        <div className="mb-10">
+          <Link href="/" className="text-zinc-500 hover:text-zinc-300 text-sm transition-colors">← Vidibro</Link>
         </div>
 
-        <div className="mb-8">
-          <div className="flex items-end gap-3 mb-2">
-            <h1 className="text-4xl font-black tracking-tight">Vibe Room</h1>
-            <div className="flex items-center gap-1.5 mb-1" style={{ padding: "3px 10px 3px 8px", borderRadius: 20, background: "rgba(52,211,153,.12)", border: "1px solid rgba(52,211,153,.28)" }}>
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#34d399", boxShadow: "0 0 7px #34d399", display: "inline-block" }} />
-              <span style={{ fontSize: 10, fontWeight: 800, color: "rgba(52,211,153,.9)", letterSpacing: "0.06em" }}>LIVE</span>
-            </div>
+        {/* ═══ HERO ═══════════════════════════════════════════ */}
+        <div className="text-center mb-10">
+          {/* live badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-5" style={{ background: "rgba(52,211,153,.1)", border: "1px solid rgba(52,211,153,.28)" }}>
+            <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#34d399", boxShadow: "0 0 8px #34d399", display: "inline-block" }} />
+            <span style={{ fontSize: 12, fontWeight: 600, color: "rgba(52,211,153,.9)" }}>1,046 people vibing right now</span>
           </div>
-          <p className="text-zinc-500 text-sm">Games. Secrets. Late-night energy. All anonymous.</p>
+
+          {/* Title */}
+          <h1 className="text-5xl font-black tracking-tight mb-3">
+            Vibe Room <span style={{ background: "linear-gradient(90deg,#a78bfa,#ec4899,#f59e0b)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>✦</span>
+          </h1>
+          <p className="text-base leading-relaxed mx-auto mb-6" style={{ color: "rgba(255,255,255,.48)", maxWidth: 300 }}>
+            Play games, drop anonymous secrets &amp; vibe late-night with strangers. No signup. No pressure.
+          </p>
+
+          {/* Feature pills */}
+          <div className="flex items-center justify-center gap-2 flex-wrap">
+            {["🎮 Mini games", "💌 Anonymous", "🌙 Late-night", "⚡ No login"].map((f) => (
+              <span key={f} className="text-xs font-medium px-3 py-1.5 rounded-full" style={{ background: "rgba(255,255,255,.07)", border: "1px solid rgba(255,255,255,.1)", color: "rgba(255,255,255,.55)" }}>
+                {f}
+              </span>
+            ))}
+          </div>
         </div>
 
+        {/* ═══ CARDS ═══════════════════════════════════════════ */}
         <div className="flex flex-col gap-4">
 
-          {/* ═══ PLAY ZONE ═══════════════════════════════════ */}
+          {/* ── PLAY ZONE ── emerald */}
           <Link href="/vibe-room/play-zone" className="block group" style={{ borderRadius: 24 }}>
-            <div style={{ background: "linear-gradient(145deg,#051a0e 0%,#061510 60%,#030c08 100%)", border: "1px solid rgba(52,211,153,.22)", borderRadius: 24, overflow: "hidden", position: "relative" }}>
-              {/* top-left corner glow */}
-              <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 50% at -10% 0%, rgba(52,211,153,.18) 0%, transparent 100%)", pointerEvents: "none" }} />
+            <div style={{ background: "linear-gradient(145deg,#064e3b 0%,#065f46 45%,#047857 100%)", borderRadius: 24, overflow: "hidden", position: "relative", boxShadow: "0 8px 40px rgba(5,150,105,.22)" }}>
+              {/* ghosted bg icon */}
+              <div style={{ position: "absolute", right: -12, bottom: -20, fontSize: 130, opacity: 0.09, lineHeight: 1, pointerEvents: "none", userSelect: "none" }}>🎮</div>
+              {/* shine top */}
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent)" }} />
 
-              <div style={{ padding: 20 }}>
+              <div style={{ padding: "22px 22px 20px" }}>
+                {/* header */}
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <span style={{ fontSize: 18 }}>🎮</span>
-                    <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.16em", color: "rgba(52,211,153,.9)", textTransform: "uppercase" }}>Play Zone</span>
+                    <span style={{ fontSize: 26 }}>🎮</span>
+                    <div>
+                      <div style={{ fontSize: 18, fontWeight: 800, color: "#fff", lineHeight: 1.1 }}>Play Zone</div>
+                      <div style={{ fontSize: 11, color: "rgba(255,255,255,.5)", marginTop: 2 }}>1v1 icebreaker mini-games</div>
+                    </div>
                   </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                    <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#34d399", boxShadow: "0 0 6px #34d399", display: "inline-block" }} />
-                    <span style={{ fontSize: 11, color: "rgba(52,211,153,.55)" }}>1,046 playing</span>
+                  <div style={{ display: "flex", alignItems: "center", gap: 5, padding: "5px 10px", borderRadius: 20, background: "rgba(0,0,0,.2)", border: "1px solid rgba(255,255,255,.12)" }}>
+                    <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#6ee7b7", boxShadow: "0 0 5px #6ee7b7", display: "inline-block" }} />
+                    <span style={{ fontSize: 11, color: "rgba(255,255,255,.75)", fontWeight: 600 }}>1,046</span>
                   </div>
                 </div>
 
-                {/* Game tiles — each unique color */}
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 8, marginBottom: 16 }}>
+                {/* game tiles */}
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 8, marginBottom: 18 }}>
                   {GAMES.map((g) => (
-                    <div key={g.n} style={{ borderRadius: 14, padding: "12px 4px 10px", textAlign: "center", background: g.col, border: `1px solid ${g.dot}40` }}>
+                    <div key={g.n} style={{ borderRadius: 14, padding: "12px 4px 10px", textAlign: "center", background: "rgba(0,0,0,.22)", border: "1px solid rgba(255,255,255,.1)" }}>
                       <div style={{ fontSize: 26, marginBottom: 6 }}>{g.e}</div>
-                      <div style={{ fontSize: 9, color: "rgba(255,255,255,.5)", lineHeight: 1.3, fontWeight: 500 }}>{g.n}</div>
-                      <div style={{ fontSize: 9, color: g.dot, marginTop: 4, fontWeight: 600, opacity: 0.9 }}>{g.p}</div>
+                      <div style={{ fontSize: 9, color: "rgba(255,255,255,.6)", lineHeight: 1.3, fontWeight: 500 }}>{g.n}</div>
                     </div>
                   ))}
                 </div>
 
+                {/* cta */}
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span style={{ fontSize: 11, color: "rgba(255,255,255,.28)" }}>1v1 icebreaker games · No login</span>
-                  <span style={{ fontSize: 12, fontWeight: 700, color: "rgba(52,211,153,.85)" }}>Play →</span>
+                  <span style={{ fontSize: 11, color: "rgba(255,255,255,.38)" }}>No downloads · No login needed</span>
+                  <span style={{ fontSize: 13, fontWeight: 800, color: "#fff", display: "flex", alignItems: "center", gap: 4 }}>Play Now <span style={{ fontSize: 14 }}>→</span></span>
                 </div>
               </div>
             </div>
           </Link>
 
-          {/* ═══ SECRET DROP ═════════════════════════════════ */}
+          {/* ── SECRET DROP ── rose */}
           <Link href="/vibe-room/secret-drop" className="block group" style={{ borderRadius: 24 }}>
-            <div style={{ background: "linear-gradient(145deg,#140408 0%,#0e0306 60%,#0a0205 100%)", border: "1px solid rgba(190,18,60,.24)", borderRadius: 24, overflow: "hidden", position: "relative" }}>
-              {/* top-right corner glow */}
-              <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 50% at 110% 0%, rgba(190,18,60,.2) 0%, transparent 100%)", pointerEvents: "none" }} />
+            <div style={{ background: "linear-gradient(145deg,#4c0519 0%,#881337 45%,#9f1239 100%)", borderRadius: 24, overflow: "hidden", position: "relative", boxShadow: "0 8px 40px rgba(159,18,57,.24)" }}>
+              <div style={{ position: "absolute", right: -12, bottom: -20, fontSize: 130, opacity: 0.09, lineHeight: 1, pointerEvents: "none", userSelect: "none" }}>💌</div>
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent)" }} />
 
-              <div style={{ padding: 20 }}>
+              <div style={{ padding: "22px 22px 20px" }}>
+                {/* header */}
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <span style={{ fontSize: 18 }}>💌</span>
-                    <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.16em", color: "rgba(251,113,133,.9)", textTransform: "uppercase" }}>Secret Drop</span>
+                    <span style={{ fontSize: 26 }}>💌</span>
+                    <div>
+                      <div style={{ fontSize: 18, fontWeight: 800, color: "#fff", lineHeight: 1.1 }}>Secret Drop</div>
+                      <div style={{ fontSize: 11, color: "rgba(255,255,255,.5)", marginTop: 2 }}>Drop secrets · React · Find your crash</div>
+                    </div>
                   </div>
-                  <span style={{ fontSize: 10, fontWeight: 600, padding: "3px 10px", borderRadius: 20, background: "rgba(190,18,60,.15)", color: "rgba(251,113,133,.75)", border: "1px solid rgba(190,18,60,.28)" }}>Anonymous</span>
+                  <span style={{ fontSize: 10, fontWeight: 700, padding: "5px 10px", borderRadius: 20, background: "rgba(0,0,0,.22)", color: "rgba(255,255,255,.75)", border: "1px solid rgba(255,255,255,.12)" }}>Anonymous</span>
                 </div>
 
-                {/* Mock secret post */}
-                <div style={{ borderRadius: 16, padding: "14px", background: "rgba(190,18,60,.09)", border: "1px solid rgba(190,18,60,.18)", marginBottom: 10 }}>
-                  <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 10 }}>
-                    <span style={{ fontSize: 15, flexShrink: 0, marginTop: 1 }}>💌</span>
-                    <p style={{ fontSize: 12, color: "rgba(255,255,255,.62)", lineHeight: 1.55, margin: 0 }}>
-                      "I actually have feelings for my best friend&apos;s ex and it&apos;s been eating me alive for months..."
+                {/* mock post */}
+                <div style={{ borderRadius: 14, padding: "12px 14px", background: "rgba(0,0,0,.25)", border: "1px solid rgba(255,255,255,.1)", marginBottom: 10 }}>
+                  <div style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 8 }}>
+                    <span style={{ fontSize: 14, flexShrink: 0 }}>💌</span>
+                    <p style={{ fontSize: 12, color: "rgba(255,255,255,.65)", lineHeight: 1.55, margin: 0 }}>
+                      &quot;I actually have feelings for my best friend&apos;s ex and it&apos;s been eating me alive...&quot;
                     </p>
                   </div>
-                  <div style={{ display: "flex", gap: 14 }}>
-                    <span style={{ fontSize: 11, color: "rgba(248,113,113,.75)" }}>🚩 32</span>
-                    <span style={{ fontSize: 11, color: "rgba(74,222,128,.75)" }}>🟩 156</span>
-                    <span style={{ fontSize: 11, color: "rgba(255,255,255,.28)" }}>💬 14</span>
+                  <div style={{ display: "flex", gap: 12 }}>
+                    <span style={{ fontSize: 11, color: "rgba(252,165,165,.8)" }}>🚩 32</span>
+                    <span style={{ fontSize: 11, color: "rgba(134,239,172,.8)" }}>🟩 156</span>
+                    <span style={{ fontSize: 11, color: "rgba(255,255,255,.35)" }}>💬 14</span>
                   </div>
                 </div>
 
-                {/* Find Your Crash row */}
-                <div style={{ borderRadius: 16, padding: "12px 14px", background: "linear-gradient(135deg,rgba(190,18,60,.22) 0%,rgba(120,8,36,.18) 100%)", border: "1px solid rgba(255,100,130,.16)", display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                    <span style={{ fontSize: 20 }}>💘</span>
+                {/* find your crash */}
+                <div style={{ borderRadius: 14, padding: "10px 14px", background: "rgba(0,0,0,.2)", border: "1px solid rgba(255,255,255,.1)", display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ fontSize: 18 }}>💘</span>
                     <div>
-                      <div style={{ fontSize: 12, fontWeight: 700, color: "#fff", marginBottom: 2 }}>Find Your Crash</div>
-                      <div style={{ fontSize: 10, color: "rgba(255,255,255,.35)" }}>Heart-to-heart anonymous chat</div>
+                      <div style={{ fontSize: 12, fontWeight: 700, color: "#fff" }}>Find Your Crash</div>
+                      <div style={{ fontSize: 10, color: "rgba(255,255,255,.4)" }}>Heart-to-heart anonymous chat</div>
                     </div>
                   </div>
-                  <span style={{ fontSize: 16, color: "rgba(251,113,133,.5)" }}>→</span>
+                  <span style={{ fontSize: 14, color: "rgba(255,255,255,.45)" }}>→</span>
                 </div>
 
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span style={{ fontSize: 11, color: "rgba(255,255,255,.28)" }}>No names, no shame</span>
-                  <span style={{ fontSize: 12, fontWeight: 700, color: "rgba(251,113,133,.85)" }}>Enter →</span>
+                  <span style={{ fontSize: 11, color: "rgba(255,255,255,.38)" }}>No names, no shame</span>
+                  <span style={{ fontSize: 13, fontWeight: 800, color: "#fff", display: "flex", alignItems: "center", gap: 4 }}>Enter <span style={{ fontSize: 14 }}>→</span></span>
                 </div>
               </div>
             </div>
           </Link>
 
-          {/* ═══ NIGHT OWL ═══════════════════════════════════ */}
+          {/* ── NIGHT OWL ── indigo */}
           <Link href="/vibe-room/night-owl" className="block group" style={{ borderRadius: 24 }}>
-            <div style={{ background: "linear-gradient(145deg,#030510 0%,#050819 60%,#020410 100%)", border: "1px solid rgba(99,102,241,.22)", borderRadius: 24, overflow: "hidden", position: "relative" }}>
-              {/* top-centre glow */}
-              <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 45% at 50% -10%, rgba(99,102,241,.18) 0%, transparent 100%)", pointerEvents: "none" }} />
+            <div style={{ background: "linear-gradient(145deg,#1e1b4b 0%,#312e81 45%,#3730a3 100%)", borderRadius: 24, overflow: "hidden", position: "relative", boxShadow: "0 8px 40px rgba(55,48,163,.28)" }}>
+              <div style={{ position: "absolute", right: -12, bottom: -20, fontSize: 130, opacity: 0.09, lineHeight: 1, pointerEvents: "none", userSelect: "none" }}>🌙</div>
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent)" }} />
 
-              <div style={{ padding: 20 }}>
+              <div style={{ padding: "22px 22px 20px" }}>
+                {/* header */}
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <span style={{ fontSize: 18 }}>🌙</span>
-                    <span style={{ fontSize: 11, fontWeight: 800, letterSpacing: "0.16em", color: "rgba(165,180,252,.9)", textTransform: "uppercase" }}>Night Owl</span>
+                    <span style={{ fontSize: 26 }}>🌙</span>
+                    <div>
+                      <div style={{ fontSize: 18, fontWeight: 800, color: "#fff", lineHeight: 1.1 }}>Night Owl</div>
+                      <div style={{ fontSize: 11, color: "rgba(255,255,255,.5)", marginTop: 2 }}>Late-night chill + flirt zone</div>
+                    </div>
                   </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                    <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#818cf8", boxShadow: "0 0 6px #818cf8", display: "inline-block" }} />
-                    <span style={{ fontSize: 11, color: "rgba(165,180,252,.5)" }}>Late-night vibes</span>
+                  <div style={{ display: "flex", alignItems: "center", gap: 5, padding: "5px 10px", borderRadius: 20, background: "rgba(0,0,0,.22)", border: "1px solid rgba(255,255,255,.12)" }}>
+                    <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#a5b4fc", boxShadow: "0 0 5px #a5b4fc", display: "inline-block" }} />
+                    <span style={{ fontSize: 11, color: "rgba(255,255,255,.75)", fontWeight: 600 }}>Live</span>
                   </div>
                 </div>
 
-                {/* Mood chips — single scrollable row */}
-                <div className="scrollbar-none" style={{ display: "flex", gap: 8, overflowX: "auto", paddingBottom: 4, marginBottom: 14 }}>
-                  {MOODS.map((m) => (
-                    <div key={m.l} style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: 6, padding: "7px 13px", borderRadius: 20, background: m.bg, border: `1px solid ${m.c.replace(".8)", ".22)")}`, color: m.c, fontSize: 12, fontWeight: 600, whiteSpace: "nowrap" }}>
-                      <span>{m.e}</span>
-                      <span>{m.l}</span>
+                {/* mood chips */}
+                <div className="scrollbar-none" style={{ display: "flex", gap: 8, overflowX: "auto", paddingBottom: 4, marginBottom: 12 }}>
+                  {[
+                    { e: "😔", l: "Sad" }, { e: "😴", l: "Boring" }, { e: "💕", l: "Romantic" },
+                    { e: "😌", l: "Chill" }, { e: "😏", l: "Flirty" },
+                  ].map((m) => (
+                    <div key={m.l} style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: 6, padding: "7px 13px", borderRadius: 20, background: "rgba(0,0,0,.22)", border: "1px solid rgba(255,255,255,.14)", color: "rgba(255,255,255,.75)", fontSize: 12, fontWeight: 600, whiteSpace: "nowrap" }}>
+                      <span>{m.e}</span><span>{m.l}</span>
                     </div>
                   ))}
                 </div>
 
-                {/* Private Mood Chat row */}
-                <div style={{ borderRadius: 16, padding: "12px 14px", background: "rgba(99,102,241,.1)", border: "1px solid rgba(99,102,241,.2)", display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
-                  <div>
-                    <span style={{ fontSize: 12, fontWeight: 700, color: "#fff" }}>🦉 Private Mood Chat</span>
-                    <span style={{ fontSize: 10, color: "rgba(165,180,252,.4)", marginLeft: 8 }}>matched 1-on-1</span>
-                  </div>
-                  <span style={{ fontSize: 10, fontWeight: 700, padding: "3px 9px", borderRadius: 20, background: "rgba(99,102,241,.2)", color: "rgba(165,180,252,.9)", border: "1px solid rgba(99,102,241,.3)" }}>NEW</span>
+                {/* private mood chat */}
+                <div style={{ borderRadius: 14, padding: "10px 14px", background: "rgba(0,0,0,.22)", border: "1px solid rgba(255,255,255,.1)", display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 }}>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: "#fff" }}>🦉 Private Mood Chat — matched 1-on-1</span>
+                  <span style={{ fontSize: 10, fontWeight: 800, padding: "3px 8px", borderRadius: 20, background: "rgba(165,180,252,.2)", color: "#c7d2fe", border: "1px solid rgba(165,180,252,.3)" }}>NEW</span>
                 </div>
 
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span style={{ fontSize: 11, color: "rgba(255,255,255,.28)" }}>Pick your mood · find your match</span>
-                  <span style={{ fontSize: 12, fontWeight: 700, color: "rgba(165,180,252,.85)" }}>Enter →</span>
+                  <span style={{ fontSize: 11, color: "rgba(255,255,255,.38)" }}>Pick your mood · find your match</span>
+                  <span style={{ fontSize: 13, fontWeight: 800, color: "#fff", display: "flex", alignItems: "center", gap: 4 }}>Enter <span style={{ fontSize: 14 }}>→</span></span>
                 </div>
               </div>
             </div>
