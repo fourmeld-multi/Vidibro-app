@@ -124,11 +124,13 @@ const NightBackground = () => (
 );
 
 export default function NightOwlChat({ fullScreen = false, onBack }: NightOwlChatProps) {
-  const [chatStatus, setChatStatus]   = useState<ChatStatus>("mood-pick");
-  const [mood, setMood]               = useState<Mood | null>(null);
-  const [messages, setMessages]       = useState<ChatMessage[]>([]);
-  const [draft, setDraft]             = useState("");
-  const [stickersOpen, setStickersOpen] = useState(false);
+  const [chatStatus, setChatStatus]       = useState<ChatStatus>("mood-pick");
+  const [mood, setMood]                   = useState<Mood | null>(null);
+  const [messages, setMessages]           = useState<ChatMessage[]>([]);
+  const [draft, setDraft]                 = useState("");
+  const [stickersOpen, setStickersOpen]   = useState(false);
+  // "find-new" = "stay or find new?" confirm  |  "mood-choice" = "same mood or change?" screen
+  const [confirmModal, setConfirmModal]   = useState<null | "find-new" | "mood-choice">(null);
 
   const bottomRef   = useRef<HTMLDivElement>(null);
   const searchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -145,6 +147,7 @@ export default function NightOwlChat({ fullScreen = false, onBack }: NightOwlCha
     setMessages([]);
     setChatStatus("searching");
     setStickersOpen(false);
+    setConfirmModal(null);
     const cfg = MOOD_CONFIG[m];
     searchTimer.current = setTimeout(() => {
       setChatStatus("connected");
@@ -155,7 +158,14 @@ export default function NightOwlChat({ fullScreen = false, onBack }: NightOwlCha
     }, 1800 + Math.random() * 2000);
   }
 
-  function endChat() {
+  // Fully exit — redirect to previous page
+  function handleEnd() {
+    if (searchTimer.current) clearTimeout(searchTimer.current);
+    onBack?.();
+  }
+
+  // Partner disconnected / session ended naturally
+  function partnerLeft() {
     if (searchTimer.current) clearTimeout(searchTimer.current);
     setChatStatus("disconnected");
     setMessages([]);
@@ -167,11 +177,17 @@ export default function NightOwlChat({ fullScreen = false, onBack }: NightOwlCha
     setMood(null);
   }
 
-  function findSameMood() {
-    if (mood) selectMood(mood);
-  }
-
-  function changeMood() {
+  // Step 1: show "Stay or Find New?" confirm
+  function handleFindNew() { setConfirmModal("find-new"); }
+  // Step 1 → No: stay
+  function stayInChat() { setConfirmModal(null); }
+  // Step 1 → Yes: show "Same mood or Change?"
+  function confirmFindNew() { setConfirmModal("mood-choice"); }
+  // Step 2 → Same mood
+  function pickSameMood() { if (mood) selectMood(mood); }
+  // Step 2 → Change mood
+  function pickNewMood() {
+    setConfirmModal(null);
     setChatStatus("mood-pick");
     setMood(null);
     setMessages([]);
@@ -215,7 +231,7 @@ export default function NightOwlChat({ fullScreen = false, onBack }: NightOwlCha
     <div style={{ position: "relative", zIndex: 1, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 16px", background: "rgba(0,0,0,0.45)", borderBottom: "1px solid rgba(255,255,255,0.07)", backdropFilter: "blur(10px)", flexShrink: 0 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
         <button
-          onClick={chatStatus === "connected" ? onBack : chatStatus === "searching" ? cancelSearch : chatStatus === "disconnected" ? changeMood : onBack}
+          onClick={chatStatus === "searching" ? cancelSearch : handleEnd}
           style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.55)", fontSize: 18, lineHeight: 1, padding: "0 4px 0 0" }}
         >←</button>
         <div style={{ width: 36, height: 36, borderRadius: "50%", background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.13)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>🦉</div>
@@ -229,19 +245,30 @@ export default function NightOwlChat({ fullScreen = false, onBack }: NightOwlCha
             )}
           </div>
           <span style={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}>
-            {chatStatus === "mood-pick"     && "pick your vibe"}
-            {chatStatus === "searching"     && "finding your match..."}
-            {chatStatus === "connected"     && "night owl connected 🌙"}
-            {chatStatus === "disconnected"  && "owl flew away"}
+            {chatStatus === "mood-pick"    && "pick your vibe"}
+            {chatStatus === "searching"    && "finding your match..."}
+            {chatStatus === "connected"    && "night owl connected 🌙"}
+            {chatStatus === "disconnected" && "owl flew away"}
           </span>
         </div>
       </div>
-      {chatStatus === "searching" && (
-        <button onClick={cancelSearch} style={{ width: 32, height: 32, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", color: "#fff", fontSize: 14, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>✕</button>
-      )}
-      {chatStatus === "connected" && (
-        <button onClick={endChat} style={{ padding: "5px 14px", borderRadius: 20, background: "rgba(239,68,68,0.18)", border: "1px solid rgba(239,68,68,0.35)", color: "#fca5a5", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>End</button>
-      )}
+      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        {chatStatus === "searching" && (
+          <button onClick={cancelSearch} style={{ width: 32, height: 32, borderRadius: "50%", background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", color: "#fff", fontSize: 14, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>✕</button>
+        )}
+        {chatStatus === "connected" && (
+          <>
+            {/* Find New — triggers confirm flow */}
+            <button onClick={handleFindNew} style={{ padding: "5px 12px", borderRadius: 20, background: `${accent}22`, border: `1px solid ${accent}50`, color: accent, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
+              Next 🔄
+            </button>
+            {/* End — exits to previous page */}
+            <button onClick={handleEnd} style={{ padding: "5px 12px", borderRadius: 20, background: "rgba(239,68,68,0.18)", border: "1px solid rgba(239,68,68,0.35)", color: "#fca5a5", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
+              End
+            </button>
+          </>
+        )}
+      </div>
     </div>
   );
 
@@ -336,14 +363,53 @@ export default function NightOwlChat({ fullScreen = false, onBack }: NightOwlCha
         <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)" }}>the night&apos;s not over though</p>
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 10, width: "100%", maxWidth: 280, marginTop: 8 }}>
-        {moodData && (
-          <button onClick={findSameMood} style={{ padding: "12px 24px", borderRadius: 28, background: accent, color: "#fff", fontSize: 14, fontWeight: 700, border: "none", cursor: "pointer", boxShadow: `0 4px 14px ${accent}40` }}>
-            {moodData.emoji} Same mood again
-          </button>
-        )}
-        <button onClick={changeMood} style={{ padding: "11px 24px", borderRadius: 28, background: "rgba(255,255,255,0.08)", color: "#fff", fontSize: 14, border: "1px solid rgba(255,255,255,0.15)", cursor: "pointer" }}>
-          Change mood
+        <button onClick={handleFindNew} style={{ padding: "12px 24px", borderRadius: 28, background: accent, color: "#fff", fontSize: 14, fontWeight: 700, border: "none", cursor: "pointer", boxShadow: `0 4px 14px ${accent}40` }}>
+          Find New Owl 🔄
         </button>
+        <button onClick={handleEnd} style={{ padding: "11px 24px", borderRadius: 28, background: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.7)", fontSize: 14, border: "1px solid rgba(255,255,255,0.15)", cursor: "pointer" }}>
+          Leave for tonight
+        </button>
+      </div>
+    </div>
+  );
+
+  // ── Confirm modals (absolute overlays inside the chat container) ────────
+  const findNewModal = confirmModal === "find-new" && (
+    <div style={{ position: "absolute", inset: 0, zIndex: 20, background: "rgba(0,0,0,0.75)", backdropFilter: "blur(8px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+      <div style={{ background: "#0f0828", border: "1px solid rgba(160,130,255,0.3)", borderRadius: 22, padding: "28px 24px", maxWidth: 300, width: "100%", textAlign: "center" }}>
+        <div style={{ fontSize: 38, marginBottom: 12 }}>🦉</div>
+        <p style={{ fontWeight: 700, fontSize: 16, color: "#fff", marginBottom: 6 }}>Find a new Night Owl?</p>
+        <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginBottom: 22 }}>This will end your current chat</p>
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          <button onClick={confirmFindNew} style={{ padding: "12px 24px", borderRadius: 28, background: accent, color: "#fff", fontSize: 14, fontWeight: 700, border: "none", cursor: "pointer", boxShadow: `0 4px 14px ${accent}35` }}>
+            Yes, find new 🔄
+          </button>
+          <button onClick={stayInChat} style={{ padding: "11px 24px", borderRadius: 28, background: "rgba(255,255,255,0.07)", color: "rgba(255,255,255,0.7)", fontSize: 14, border: "1px solid rgba(255,255,255,0.13)", cursor: "pointer" }}>
+            Stay 🌙
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  const moodChoiceModal = confirmModal === "mood-choice" && (
+    <div style={{ position: "absolute", inset: 0, zIndex: 20, background: "rgba(0,0,0,0.75)", backdropFilter: "blur(8px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+      <div style={{ background: "#0f0828", border: "1px solid rgba(160,130,255,0.3)", borderRadius: 22, padding: "28px 24px", maxWidth: 300, width: "100%", textAlign: "center" }}>
+        <div style={{ fontSize: 38, marginBottom: 12 }}>{moodData?.emoji ?? "🦉"}</div>
+        <p style={{ fontWeight: 700, fontSize: 16, color: "#fff", marginBottom: 6 }}>Same mood or switch?</p>
+        <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginBottom: 22 }}>
+          Keep your <span style={{ color: accent }}>{moodData?.label.toLowerCase()}</span> vibe or pick something new
+        </p>
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          {moodData && (
+            <button onClick={pickSameMood} style={{ padding: "12px 24px", borderRadius: 28, background: accent, color: "#fff", fontSize: 14, fontWeight: 700, border: "none", cursor: "pointer", boxShadow: `0 4px 14px ${accent}35` }}>
+              {moodData.emoji} Same — {moodData.label}
+            </button>
+          )}
+          <button onClick={pickNewMood} style={{ padding: "11px 24px", borderRadius: 28, background: "rgba(255,255,255,0.07)", color: "rgba(255,255,255,0.7)", fontSize: 14, border: "1px solid rgba(255,255,255,0.13)", cursor: "pointer" }}>
+            Choose different mood
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -401,6 +467,9 @@ export default function NightOwlChat({ fullScreen = false, onBack }: NightOwlCha
       {chatStatus === "disconnected" && disconnectedView}
       {stickerDrawer}
       {inputBar}
+      {/* Confirm modals — absolute overlays */}
+      {findNewModal}
+      {moodChoiceModal}
     </>
   );
 
