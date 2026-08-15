@@ -1,6 +1,4 @@
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -48,8 +46,12 @@ const ZONES = [
 export default function VibeRoomPage() {
   return (
     <div className="min-h-screen flex flex-col bg-black text-white">
-      <Navbar />
       <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-10">
+        <div className="flex items-center gap-3 mb-6">
+          <Link href="/" className="text-zinc-500 hover:text-zinc-300 text-sm transition-colors">
+            ← Vidibro
+          </Link>
+        </div>
         <div className="mb-8">
           <h1 className="text-3xl font-bold tracking-tight mb-2">Vibe Room</h1>
           <p className="text-zinc-400 text-base">Games. Secrets. Late-night energy. All anonymous.</p>
@@ -89,7 +91,6 @@ export default function VibeRoomPage() {
           ))}
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

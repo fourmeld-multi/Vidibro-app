@@ -3,8 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import FloatingChat from "@/components/vibe-room/FloatingChat";
 import StrangerBar from "@/components/vibe-room/StrangerBar";
 import { useStranger } from "@/hooks/useStranger";
@@ -163,7 +161,6 @@ export default function TicTacToePage() {
   return (
     <div className="min-h-screen flex flex-col text-white"
       style={{ background: "linear-gradient(160deg, #0c1a2e 0%, #0f2240 50%, #0c1a2e 100%)" }}>
-      <Navbar />
       <main className="flex-1 max-w-sm mx-auto w-full px-4 py-8">
 
         <div className="flex items-center gap-3 mb-6">
@@ -343,7 +340,6 @@ export default function TicTacToePage() {
         />
 
       </main>
-      <Footer />
     </div>
   );
 }

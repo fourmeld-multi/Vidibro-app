@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import AuthModal from "@/components/vibe-room/AuthModal";
 import ZoneChat from "@/components/vibe-room/ZoneChat";
 import NightOwlChat from "@/components/vibe-room/NightOwlChat";
@@ -39,9 +37,8 @@ export default function NightOwlPage() {
       <>
         {/* Desktop — card inside page layout */}
         <div className="hidden md:flex min-h-screen flex-col bg-black text-white">
-          <Navbar />
           <main className="flex-1 flex items-center justify-center px-4 py-6">
-            <div style={{ width: "100%", maxWidth: 760, height: "calc(100vh - 130px)", borderRadius: 20, overflow: "hidden", display: "flex", flexDirection: "column", boxShadow: "0 8px 60px rgba(100,80,200,0.18)" }}>
+            <div style={{ width: "100%", maxWidth: 760, height: "calc(100vh - 80px)", borderRadius: 20, overflow: "hidden", display: "flex", flexDirection: "column", boxShadow: "0 8px 60px rgba(100,80,200,0.18)" }}>
               <NightOwlChat onBack={() => setPrivateMode(false)} />
             </div>
           </main>
@@ -64,8 +61,6 @@ export default function NightOwlPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-black text-white">
-      <Navbar />
-
       <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-8 flex flex-col gap-5">
 
         {/* Breadcrumb */}
@@ -169,8 +164,6 @@ export default function NightOwlPage() {
         />
 
       </main>
-
-      <Footer />
 
       {showAuth && (
         <AuthModal

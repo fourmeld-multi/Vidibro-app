@@ -3,8 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import FloatingChat from "@/components/vibe-room/FloatingChat";
 import StrangerBar from "@/components/vibe-room/StrangerBar";
 import { useStranger } from "@/hooks/useStranger";
@@ -403,7 +401,6 @@ export default function BattleshipPage() {
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "linear-gradient(180deg,#0369a1 0%,#0284c7 40%,#0ea5e9 100%)" }}>
-      <Navbar />
       <main className="flex-1 max-w-md mx-auto w-full px-4 py-5">
 
         <div className="flex items-center gap-2 mb-4">
@@ -623,7 +620,6 @@ export default function BattleshipPage() {
           noAuth
         />
       </main>
-      <Footer />
     </div>
   );
 }
