@@ -28,7 +28,16 @@ const GAMES = [
     desc: "Stack tiles before the grid fills up.",
     tags: ["puzzle", "solo", "chill"],
     online: 93,
-    ready: false,
+    ready: true,
+  },
+  {
+    href: "/vibe-room/play-zone/dino-race",
+    emoji: "🦕",
+    name: "Dino Race",
+    desc: "Jump over cacti. Outlast the stranger. Higher score wins.",
+    tags: ["runner", "vs stranger", "endless"],
+    online: 512,
+    ready: true,
   },
 ];
 
