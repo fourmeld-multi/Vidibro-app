@@ -1,4 +1,5 @@
 import Link from "next/link";
+import PlayZoneBg from "@/components/vibe-room/PlayZoneBg";
 
 const GAMES = [
   {
@@ -41,8 +42,9 @@ const GAMES = [
 
 export default function PlayZonePage() {
   return (
-    <div className="min-h-screen flex flex-col bg-black text-white">
-      <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-8">
+    <div className="min-h-screen flex flex-col text-white">
+      <PlayZoneBg />
+      <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-8" style={{ position:"relative", zIndex:1 }}>
 
         <div className="flex items-center gap-3 mb-6">
           <Link href="/vibe-room" className="text-zinc-500 hover:text-zinc-300 text-sm transition-colors">

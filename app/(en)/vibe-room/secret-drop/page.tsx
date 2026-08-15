@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import PostCard from "@/components/vibe-room/PostCard";
+import SecretDropBg from "@/components/vibe-room/SecretDropBg";
 import NewDropForm from "@/components/vibe-room/NewDropForm";
 import AuthModal from "@/components/vibe-room/AuthModal";
 import ZoneChat from "@/components/vibe-room/ZoneChat";
@@ -40,8 +41,9 @@ export default function SecretDropPage() {
   // Full screen Secret Msg Drop
   if (mode === "drop") {
     return (
-      <div className="fixed inset-0 bg-black text-white z-50 flex flex-col overflow-y-auto">
-        <div className="max-w-2xl mx-auto w-full px-4 py-6 flex-1">
+      <div className="fixed inset-0 text-white z-50 flex flex-col overflow-y-auto" style={{ background:"#0a0208" }}>
+        <SecretDropBg />
+        <div className="max-w-2xl mx-auto w-full px-4 py-6 flex-1" style={{ position:"relative", zIndex:1 }}>
           <div className="flex items-center gap-3 mb-6">
             <button onClick={() => setMode(null)} className="text-zinc-500 hover:text-zinc-300 text-sm transition-colors">
               ← Back
@@ -138,8 +140,9 @@ export default function SecretDropPage() {
 
   // Hub — two option cards
   return (
-    <div className="min-h-screen flex flex-col bg-black text-white">
-      <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-8">
+    <div className="min-h-screen flex flex-col text-white" style={{ background:"#0a0208" }}>
+      <SecretDropBg />
+      <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-8" style={{ position:"relative", zIndex:1 }}>
 
         <div className="flex items-center gap-3 mb-6">
           <Link href="/vibe-room" className="text-zinc-500 hover:text-zinc-300 text-sm transition-colors">

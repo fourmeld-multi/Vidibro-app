@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import AuthModal from "@/components/vibe-room/AuthModal";
+import NightOwlBg from "@/components/vibe-room/NightOwlBg";
 import ZoneChat from "@/components/vibe-room/ZoneChat";
 import NightOwlChat from "@/components/vibe-room/NightOwlChat";
 import { NIGHT_OWL_PROMPTS } from "@/lib/vibe-room/mock-data";
@@ -36,8 +37,9 @@ export default function NightOwlPage() {
     return (
       <>
         {/* Desktop — card inside page layout */}
-        <div className="hidden md:flex min-h-screen flex-col bg-black text-white">
-          <main className="flex-1 flex items-center justify-center px-4 py-6">
+        <div className="hidden md:flex min-h-screen flex-col text-white" style={{ background:"#020510" }}>
+          <NightOwlBg />
+          <main className="flex-1 flex items-center justify-center px-4 py-6" style={{ position:"relative", zIndex:1 }}>
             <div style={{ width: "100%", maxWidth: 760, height: "calc(100vh - 80px)", borderRadius: 20, overflow: "hidden", display: "flex", flexDirection: "column", boxShadow: "0 8px 60px rgba(100,80,200,0.18)" }}>
               <NightOwlChat onBack={() => setPrivateMode(false)} />
             </div>
@@ -60,8 +62,9 @@ export default function NightOwlPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-black text-white">
-      <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-8 flex flex-col gap-5">
+    <div className="min-h-screen flex flex-col text-white" style={{ background:"#020510" }}>
+      <NightOwlBg />
+      <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-8 flex flex-col gap-5" style={{ position:"relative", zIndex:1 }}>
 
         {/* Breadcrumb */}
         <div className="flex items-center gap-3">

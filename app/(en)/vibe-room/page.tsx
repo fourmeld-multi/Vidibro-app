@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import VrHubBg from "@/components/vibe-room/VrHubBg";
 
 export const metadata: Metadata = {
   title: "Vibe Room — Vidibro",
@@ -45,8 +46,9 @@ const ZONES = [
 
 export default function VibeRoomPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-black text-white">
-      <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-10">
+    <div className="min-h-screen flex flex-col text-white">
+      <VrHubBg />
+      <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-10" style={{ position:"relative", zIndex:1 }}>
         <div className="flex items-center gap-3 mb-6">
           <Link href="/" className="text-zinc-500 hover:text-zinc-300 text-sm transition-colors">
             ← Vidibro
