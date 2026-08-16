@@ -721,11 +721,11 @@ export default function PenFightPage() {
 
       const g = G.current;
       const isLS = w > h;
-      const tableTopY = h * (isLS ? 0.62 : 0.45);
-      const tableBotY = h * (isLS ? 0.92 : 0.88);
+      const tableTopY = h * (isLS ? 0.58 : 0.45);
+      const tableBotY = h * (isLS ? 0.98 : 0.88);
       if (g.phase === "idle") {
-        if (g.p1.y < tableTopY || g.p1.y > tableBotY) g.p1.y = tableBotY - 55;
-        if (g.p2.y < tableTopY || g.p2.y > tableBotY) g.p2.y = tableTopY + 55;
+        if (g.p1.y < tableTopY || g.p1.y > tableBotY) g.p1.y = tableBotY - (isLS ? 30 : 55);
+        if (g.p2.y < tableTopY || g.p2.y > tableBotY) g.p2.y = tableTopY + (isLS ? 30 : 55);
         g.p1.x = w / 2;
         g.p2.x = w / 2;
       }
@@ -745,12 +745,13 @@ export default function PenFightPage() {
     const g = G.current;
     const w = sizeRef.current.w, h = sizeRef.current.h;
     const isLS = w > h;
-    const tableTopY = h * (isLS ? 0.62 : 0.45);
-    const tableBotY = h * (isLS ? 0.92 : 0.88);
+    const tableTopY = h * (isLS ? 0.58 : 0.45);
+    const tableBotY = h * (isLS ? 0.98 : 0.88);
 
     if (g.tmr) { clearTimeout(g.tmr); g.tmr = null; }
-    g.p1 = mkP(w / 2 + (Math.random() - 0.5) * (w * 0.20), tableBotY - 55 + (Math.random() - 0.5) * 20, (Math.random() - 0.5) * 0.5);
-    g.p2 = mkP(w / 2 + (Math.random() - 0.5) * (w * 0.20), tableTopY + 55 + (Math.random() - 0.5) * 20, (Math.random() - 0.5) * 0.5);
+    const off = isLS ? 30 : 55;
+    g.p1 = mkP(w / 2 + (Math.random() - 0.5) * (w * 0.20), tableBotY - off + (Math.random() - 0.5) * 20, (Math.random() - 0.5) * 0.5);
+    g.p2 = mkP(w / 2 + (Math.random() - 0.5) * (w * 0.20), tableTopY + off + (Math.random() - 0.5) * 20, (Math.random() - 0.5) * 0.5);
     g.phase = "idle"; g.lastPhase = null; g.drag = null; g.contact = null;
     g.msg = "Your turn — pull back & release!";
   }
@@ -839,8 +840,8 @@ export default function PenFightPage() {
 
           // Table boundaries — portrait vs landscape
           const isLS = cw > ch;
-          const tableTopY = ch * (isLS ? 0.62 : 0.45);
-          const tableBotY = ch * (isLS ? 0.92 : 0.88);
+          const tableTopY = ch * (isLS ? 0.58 : 0.45);
+          const tableBotY = ch * (isLS ? 0.98 : 0.88);
           const topW = cw * (isLS ? 0.54 : 0.82), botW = cw * (isLS ? 1.0 : 1.0);
           const topX1 = (cw - topW) / 2, topX2 = topX1 + topW;
           const botX1 = (cw - botW) / 2, botX2 = botX1 + botW;
