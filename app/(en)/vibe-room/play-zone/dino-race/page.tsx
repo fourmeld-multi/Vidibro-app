@@ -286,9 +286,16 @@ export default function DinoRacePage() {
   function stopRunSound() {
     try {
       if (!runNodeRef.current) return;
-      runNodeRef.current.gain.gain.setTargetAtTime(0, audioCtxRef.current!.currentTime, 0.1);
-      setTimeout(() => { try { runNodeRef.current?.osc.stop(); } catch {} runNodeRef.current = null; }, 300);
+      const { osc, gain } = runNodeRef.current;
+      runNodeRef.current = null;
+      gain.gain.setTargetAtTime(0, audioCtxRef.current!.currentTime, 0.06);
+      setTimeout(() => { try { osc.stop(); osc.disconnect(); gain.disconnect(); } catch {} }, 150);
     } catch {}
+  }
+
+  function killAudio() {
+    stopRunSound();
+    try { audioCtxRef.current?.close(); audioCtxRef.current = null; } catch {}
   }
 
   function playHitSound() {
@@ -324,11 +331,13 @@ export default function DinoRacePage() {
   const strangerName = stranger?.username ?? "Stranger";
   const rematchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // ── Cleanup audio on unmount ──────────────────────────────────────────────
+  // ── Cleanup audio on unmount / page hide ─────────────────────────────────
   useEffect(() => {
+    const onHide = () => killAudio();
+    document.addEventListener("visibilitychange", onHide);
     return () => {
-      stopRunSound();
-      try { audioCtxRef.current?.close(); } catch {}
+      killAudio();
+      document.removeEventListener("visibilitychange", onHide);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -338,7 +347,7 @@ export default function DinoRacePage() {
     const next = !soundOnRef.current;
     soundOnRef.current = next;
     setSoundOn(next);
-    if (!next) stopRunSound();
+    if (!next) killAudio();
     else if (phaseRef.current === "playing") startRunSound();
   }
 
@@ -421,6 +430,7 @@ export default function DinoRacePage() {
   }
 
   function handleCloseGame() {
+    killAudio();
     close();
     cancelAnimationFrame(rafRef.current);
     if (rematchTimerRef.current) clearTimeout(rematchTimerRef.current);
