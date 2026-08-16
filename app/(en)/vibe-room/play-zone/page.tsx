@@ -24,17 +24,6 @@ const GAMES = [
     glow: "rgba(219,39,119,.28)",
   },
   {
-    href: "/vibe-room/play-zone/stacktris",
-    illus: "🧱",
-    name: "Stacktris",
-    category: "PUZZLE",
-    desc: "Stack tiles before the grid fills up. Chill and meditative.",
-    online: 93,
-    grad: "linear-gradient(145deg,#5b21b6 0%,#7c3aed 55%,#a78bfa 100%)",
-    textDark: false,
-    glow: "rgba(124,58,237,.28)",
-  },
-  {
     href: "/vibe-room/play-zone/dino-race",
     illus: "🦕",
     name: "Dino Race",

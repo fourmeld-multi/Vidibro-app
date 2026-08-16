@@ -721,11 +721,13 @@ export default function PenFightPage() {
 
       const g = G.current;
       const isLS = w > h;
-      const tableTopY = h * (isLS ? 0.58 : 0.45);
-      const tableBotY = h * (isLS ? 0.98 : 0.88);
+      const tableTopY = h * (isLS ? 0.68 : 0.45);
+      const tableBotY = h * (isLS ? 0.97 : 0.88);
       if (g.phase === "idle") {
-        if (g.p1.y < tableTopY || g.p1.y > tableBotY) g.p1.y = tableBotY - (isLS ? 30 : 55);
-        if (g.p2.y < tableTopY || g.p2.y > tableBotY) g.p2.y = tableTopY + (isLS ? 30 : 55);
+        const off = isLS ? 30 : 55;
+        // Always reposition both pens so they're properly spaced on any screen size
+        g.p1.y = tableBotY - off;
+        g.p2.y = tableTopY + off;
         g.p1.x = w / 2;
         g.p2.x = w / 2;
       }
@@ -745,8 +747,8 @@ export default function PenFightPage() {
     const g = G.current;
     const w = sizeRef.current.w, h = sizeRef.current.h;
     const isLS = w > h;
-    const tableTopY = h * (isLS ? 0.58 : 0.45);
-    const tableBotY = h * (isLS ? 0.98 : 0.88);
+    const tableTopY = h * (isLS ? 0.68 : 0.45);
+    const tableBotY = h * (isLS ? 0.97 : 0.88);
 
     if (g.tmr) { clearTimeout(g.tmr); g.tmr = null; }
     const off = isLS ? 30 : 55;
@@ -840,9 +842,9 @@ export default function PenFightPage() {
 
           // Table boundaries — portrait vs landscape
           const isLS = cw > ch;
-          const tableTopY = ch * (isLS ? 0.58 : 0.45);
-          const tableBotY = ch * (isLS ? 0.98 : 0.88);
-          const topW = cw * (isLS ? 0.54 : 0.82), botW = cw * (isLS ? 1.0 : 1.0);
+          const tableTopY = ch * (isLS ? 0.68 : 0.45);
+          const tableBotY = ch * (isLS ? 0.97 : 0.88);
+          const topW = cw * (isLS ? 0.66 : 0.82), botW = cw * (isLS ? 1.0 : 1.0);
           const topX1 = (cw - topW) / 2, topX2 = topX1 + topW;
           const botX1 = (cw - botW) / 2, botX2 = botX1 + botW;
 
@@ -945,8 +947,9 @@ export default function PenFightPage() {
     if (dist > 6) {
       const launchX = -pullX;
       const launchY = -pullY;
-      const MAX_V = 9.5;
-      const pwr = Math.min(dist / 14, MAX_V);
+      const isLS = sizeRef.current.w > sizeRef.current.h;
+      const MAX_V = isLS ? 14.0 : 9.5;
+      const pwr = Math.min(dist / (isLS ? 10 : 14), MAX_V);
 
       p.vx = (launchX / dist) * pwr;
       p.vy = (launchY / dist) * pwr;
