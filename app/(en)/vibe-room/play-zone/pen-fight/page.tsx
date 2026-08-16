@@ -712,8 +712,10 @@ export default function PenFightPage() {
     function handleResize() {
       if (!containerRef.current) return;
       const w = containerRef.current.clientWidth || window.innerWidth;
-      // Use canvas container height (flex-1 div) to avoid clipping from header
-      const h = cvs.current?.parentElement?.clientHeight || containerRef.current.clientHeight || window.innerHeight;
+      // Subtract header height so canvas doesn't overflow below visible area
+      const headerEl = containerRef.current.querySelector("header");
+      const headerH = headerEl ? headerEl.getBoundingClientRect().height : 44;
+      const h = (containerRef.current.clientHeight || window.innerHeight) - headerH;
       sizeRef.current = { w, h };
       if (cvs.current) { cvs.current.width = w; cvs.current.height = h; }
 
@@ -790,7 +792,8 @@ export default function PenFightPage() {
     const { p1, p2 } = g;
 
     const ang = Math.atan2(p1.y - p2.y, p1.x - p2.x) + (Math.random() - 0.5) * 0.35;
-    const pwr = 5.5 + Math.random() * 3.5;
+    const isLS = sizeRef.current.w > sizeRef.current.h;
+    const pwr = isLS ? 8.0 + Math.random() * 4.5 : 5.5 + Math.random() * 3.5;
 
     p2.vx = Math.cos(ang) * pwr;
     p2.vy = Math.sin(ang) * pwr;
