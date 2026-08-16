@@ -844,7 +844,7 @@ export default function PenFightPage() {
           const isLS = cw > ch;
           const tableTopY = ch * (isLS ? 0.68 : 0.45);
           const tableBotY = ch * (isLS ? 0.97 : 0.88);
-          const topW = cw * (isLS ? 0.66 : 0.82), botW = cw * (isLS ? 1.0 : 1.0);
+          const topW = cw * (isLS ? 0.66 : 0.74), botW = cw * (isLS ? 1.0 : 1.0);
           const topX1 = (cw - topW) / 2, topX2 = topX1 + topW;
           const botX1 = (cw - botW) / 2, botX2 = botX1 + botW;
 
@@ -854,7 +854,7 @@ export default function PenFightPage() {
             const ratio = (p.y - tableTopY) / (tableBotY - tableTopY);
             const lx = topX1 + (botX1 - topX1) * ratio;
             const rx = topX2 + (botX2 - topX2) * ratio;
-            return p.x < lx - 10 || p.x > rx + 10;
+            return p.x < lx || p.x > rx;
           }
 
           if (!p1.out && checkOff(p1)) { p1.out = true; p1.vx = p1.vy = p1.va = 0; }
