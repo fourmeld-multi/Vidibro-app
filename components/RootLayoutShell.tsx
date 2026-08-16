@@ -77,10 +77,12 @@ export default function RootLayoutShell({
           strategy="afterInteractive"
         />
         <Script id="ga-init" strategy="afterInteractive">
-          {`window.dataLayer = window.dataLayer || [];
+          {`if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+            window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-BSGKV3MTVF');`}
+            gtag('config', 'G-BSGKV3MTVF');
+          }`}
         </Script>
         <PathTracker />
         <Background />
