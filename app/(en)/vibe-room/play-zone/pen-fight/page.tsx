@@ -686,8 +686,8 @@ export default function PenFightPage() {
   const [muted, setMuted] = useState(false);
 
   const G = useRef<GS>({
-    p1: mkP(200, 630, -0.1),
-    p2: mkP(200, 420, 0.1),
+    p1: mkP(200, 560, -0.1),
+    p2: mkP(200, 370, 0.1),
     phase: "idle", lastPhase: null, drag: null, contact: null, s1: 0, s2: 0,
     msg: "👉 Touch ANY part of your white pen & pull back to flick!",
     tmr: null, clackAt: 0,
@@ -712,11 +712,11 @@ export default function PenFightPage() {
       if (cvs.current) { cvs.current.width = w; cvs.current.height = h; }
 
       const g = G.current;
-      const tableTopY = h * 0.52;
-      const tableBotY = h * 0.95;
+      const tableTopY = h * 0.45;
+      const tableBotY = h * 0.88;
       if (g.phase === "idle") {
-        if (g.p1.y < tableTopY || g.p1.y > tableBotY) g.p1.y = tableBotY - 60;
-        if (g.p2.y < tableTopY || g.p2.y > tableBotY) g.p2.y = tableTopY + 60;
+        if (g.p1.y < tableTopY || g.p1.y > tableBotY) g.p1.y = tableBotY - 55;
+        if (g.p2.y < tableTopY || g.p2.y > tableBotY) g.p2.y = tableTopY + 55;
         g.p1.x = w / 2;
         g.p2.x = w / 2;
       }
@@ -735,12 +735,12 @@ export default function PenFightPage() {
   function resetRound() {
     const g = G.current;
     const w = sizeRef.current.w, h = sizeRef.current.h;
-    const tableTopY = h * 0.52;
-    const tableBotY = h * 0.95;
+    const tableTopY = h * 0.45;
+    const tableBotY = h * 0.88;
 
     if (g.tmr) { clearTimeout(g.tmr); g.tmr = null; }
-    g.p1 = mkP(w / 2 + (Math.random() - 0.5) * (w * 0.22), tableBotY - 60 + (Math.random() - 0.5) * 25, (Math.random() - 0.5) * 0.5);
-    g.p2 = mkP(w / 2 + (Math.random() - 0.5) * (w * 0.22), tableTopY + 60 + (Math.random() - 0.5) * 25, (Math.random() - 0.5) * 0.5);
+    g.p1 = mkP(w / 2 + (Math.random() - 0.5) * (w * 0.20), tableBotY - 55 + (Math.random() - 0.5) * 20, (Math.random() - 0.5) * 0.5);
+    g.p2 = mkP(w / 2 + (Math.random() - 0.5) * (w * 0.20), tableTopY + 55 + (Math.random() - 0.5) * 20, (Math.random() - 0.5) * 0.5);
     g.phase = "idle"; g.lastPhase = null; g.drag = null; g.contact = null;
     g.msg = "Your turn — pull back & release!";
   }
@@ -827,9 +827,9 @@ export default function PenFightPage() {
           }
 
           // Table boundaries (28% to 90%)
-          const tableTopY = ch * 0.52;
-          const tableBotY = ch * 0.95;
-          const topW = cw * 0.72, botW = cw * 0.98;
+          const tableTopY = ch * 0.45;
+          const tableBotY = ch * 0.88;
+          const topW = cw * 0.82, botW = cw * 1.0;
           const topX1 = (cw - topW) / 2, topX2 = topX1 + topW;
           const botX1 = (cw - botW) / 2, botX2 = botX1 + botW;
 
