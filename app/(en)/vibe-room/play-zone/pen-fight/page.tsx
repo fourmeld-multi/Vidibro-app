@@ -682,18 +682,25 @@ export default function PenFightPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const cvs = useRef<HTMLCanvasElement>(null);
   const raf = useRef(0);
-  const [size, setSize] = useState({ w: 400, h: 700 });
+  const sizeRef = useRef({ w: 400, h: 700 });
   const [muted, setMuted] = useState(false);
 
   const G = useRef<GS>({
-    p1: mkP(200, 480, -0.1),
-    p2: mkP(200, 300, 0.1),
+    p1: mkP(200, 630, -0.1),
+    p2: mkP(200, 420, 0.1),
     phase: "idle", lastPhase: null, drag: null, contact: null, s1: 0, s2: 0,
     msg: "👉 Touch ANY part of your white pen & pull back to flick!",
     tmr: null, clackAt: 0,
   });
 
   const audio = useRef<ReturnType<typeof makeActionAudio> | null>(null);
+  const bgImg = useRef<HTMLImageElement | null>(null);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = "/pen-fight.png";
+    img.onload = () => { bgImg.current = img; };
+  }, []);
 
   // Resize canvas to fill container
   useEffect(() => {
@@ -701,14 +708,15 @@ export default function PenFightPage() {
       if (!containerRef.current) return;
       const w = containerRef.current.clientWidth || window.innerWidth;
       const h = containerRef.current.clientHeight || window.innerHeight;
-      setSize({ w, h });
+      sizeRef.current = { w, h };
+      if (cvs.current) { cvs.current.width = w; cvs.current.height = h; }
 
       const g = G.current;
-      const tableTopY = h * 0.28;
-      const tableBotY = h * 0.90;
+      const tableTopY = h * 0.52;
+      const tableBotY = h * 0.95;
       if (g.phase === "idle") {
-        if (g.p1.y < tableTopY || g.p1.y > tableBotY) g.p1.y = tableBotY - 75;
-        if (g.p2.y < tableTopY || g.p2.y > tableBotY) g.p2.y = tableTopY + 75;
+        if (g.p1.y < tableTopY || g.p1.y > tableBotY) g.p1.y = tableBotY - 60;
+        if (g.p2.y < tableTopY || g.p2.y > tableBotY) g.p2.y = tableTopY + 60;
         g.p1.x = w / 2;
         g.p2.x = w / 2;
       }
@@ -726,13 +734,13 @@ export default function PenFightPage() {
 
   function resetRound() {
     const g = G.current;
-    const w = size.w, h = size.h;
-    const tableTopY = h * 0.28;
-    const tableBotY = h * 0.90;
+    const w = sizeRef.current.w, h = sizeRef.current.h;
+    const tableTopY = h * 0.52;
+    const tableBotY = h * 0.95;
 
     if (g.tmr) { clearTimeout(g.tmr); g.tmr = null; }
-    g.p1 = mkP(w / 2 + (Math.random() - 0.5) * (w * 0.22), tableBotY - 80 + (Math.random() - 0.5) * 25, (Math.random() - 0.5) * 0.5);
-    g.p2 = mkP(w / 2 + (Math.random() - 0.5) * (w * 0.22), tableTopY + 80 + (Math.random() - 0.5) * 25, (Math.random() - 0.5) * 0.5);
+    g.p1 = mkP(w / 2 + (Math.random() - 0.5) * (w * 0.22), tableBotY - 60 + (Math.random() - 0.5) * 25, (Math.random() - 0.5) * 0.5);
+    g.p2 = mkP(w / 2 + (Math.random() - 0.5) * (w * 0.22), tableTopY + 60 + (Math.random() - 0.5) * 25, (Math.random() - 0.5) * 0.5);
     g.phase = "idle"; g.lastPhase = null; g.drag = null; g.contact = null;
     g.msg = "Your turn — pull back & release!";
   }
@@ -792,7 +800,7 @@ export default function PenFightPage() {
       const c = cvs.current;
       if (c) {
         const ctx = c.getContext("2d")!;
-        const cw = size.w, ch = size.h;
+        const cw = c.width, ch = c.height;
         const g = G.current;
         const { PL, PR } = getPenDimensions(cw, ch);
 
@@ -819,9 +827,9 @@ export default function PenFightPage() {
           }
 
           // Table boundaries (28% to 90%)
-          const tableTopY = ch * 0.28;
-          const tableBotY = ch * 0.90;
-          const topW = cw * 0.78, botW = cw * 0.92;
+          const tableTopY = ch * 0.52;
+          const tableBotY = ch * 0.95;
+          const topW = cw * 0.72, botW = cw * 0.98;
           const topX1 = (cw - topW) / 2, topX2 = topX1 + topW;
           const botX1 = (cw - botW) / 2, botX2 = botX1 + botW;
 
@@ -848,8 +856,12 @@ export default function PenFightPage() {
 
         // Render Everything to fill Screen
         ctx.clearRect(0, 0, cw, ch);
-        drawClassroomScene(ctx, cw, ch, g);
-        drawWoodenDesk(ctx, cw, ch);
+        if (bgImg.current) {
+          ctx.drawImage(bgImg.current, 0, 0, cw, ch);
+        } else {
+          ctx.fillStyle = "#2c3b2c";
+          ctx.fillRect(0, 0, cw, ch);
+        }
         drawPen(ctx, g.p2, false, false, PL, PR);
         drawPen(ctx, g.p1, true, g.phase === "idle", PL, PR);
         drawAimTrajectory(ctx, g);
@@ -861,7 +873,7 @@ export default function PenFightPage() {
     raf.current = requestAnimationFrame(tick);
     return () => { alive = false; cancelAnimationFrame(raf.current); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [size, muted]);
+  }, [muted]);
 
   useEffect(() => {
     const el = cvs.current!;
@@ -878,7 +890,7 @@ export default function PenFightPage() {
   }
 
   function isTouchOnPen(pos: Vector2D, p: Pen): boolean {
-    const { PL, PR } = getPenDimensions(size.w, size.h);
+    const { PL, PR } = getPenDimensions(sizeRef.current.w, sizeRef.current.h);
     const dx = pos.x - p.x;
     const dy = pos.y - p.y;
     const cos = Math.cos(p.a), sin = Math.sin(p.a);
@@ -976,8 +988,6 @@ export default function PenFightPage() {
       <div className="flex-1 w-full relative">
         <canvas
           ref={cvs}
-          width={size.w}
-          height={size.h}
           className="w-full h-full block cursor-pointer"
           onMouseDown={onDown}
           onMouseMove={onMove}
