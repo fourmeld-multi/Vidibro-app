@@ -256,6 +256,59 @@ export default function DinoRacePage() {
   const gsRef      = useRef<GameState>(freshState());
   const rafRef     = useRef<number>(0);
   const phaseRef   = useRef<Phase>("idle");
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const runNodeRef  = useRef<{ osc: OscillatorNode; gain: GainNode } | null>(null);
+  const [soundOn, setSoundOn] = useState(true);
+  const soundOnRef = useRef(true);
+
+  function getAudioCtx() {
+    if (!audioCtxRef.current) audioCtxRef.current = new AudioContext();
+    return audioCtxRef.current;
+  }
+
+  function startRunSound() {
+    if (!soundOnRef.current) return;
+    try {
+      const ctx = getAudioCtx();
+      if (ctx.state === "suspended") ctx.resume();
+      if (runNodeRef.current) return;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.value = 48;
+      gain.gain.value = 0.08;
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.start();
+      runNodeRef.current = { osc, gain };
+    } catch {}
+  }
+
+  function stopRunSound() {
+    try {
+      if (!runNodeRef.current) return;
+      runNodeRef.current.gain.gain.setTargetAtTime(0, audioCtxRef.current!.currentTime, 0.1);
+      setTimeout(() => { try { runNodeRef.current?.osc.stop(); } catch {} runNodeRef.current = null; }, 300);
+    } catch {}
+  }
+
+  function playHitSound() {
+    if (!soundOnRef.current) return;
+    try {
+      const ctx = getAudioCtx();
+      if (ctx.state === "suspended") ctx.resume();
+      const buf = ctx.createBuffer(1, ctx.sampleRate * 0.35, ctx.sampleRate);
+      const data = buf.getChannelData(0);
+      for (let i = 0; i < data.length; i++) {
+        const t = i / ctx.sampleRate;
+        data[i] = (Math.random() * 2 - 1) * Math.exp(-t * 18) * 0.6
+                + Math.sin(2 * Math.PI * 80 * t) * Math.exp(-t * 12) * 0.4;
+      }
+      const src = ctx.createBufferSource();
+      const gain = ctx.createGain();
+      gain.gain.value = 0.7;
+      src.buffer = buf; src.connect(gain); gain.connect(ctx.destination); src.start();
+    } catch {}
+  }
 
   const [phase, setPhase]           = useState<Phase>("idle");
   const [countdown, setCountdown]   = useState<number | null>(null);
@@ -270,6 +323,24 @@ export default function DinoRacePage() {
 
   const strangerName = stranger?.username ?? "Stranger";
   const rematchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // ── Cleanup audio on unmount ──────────────────────────────────────────────
+  useEffect(() => {
+    return () => {
+      stopRunSound();
+      try { audioCtxRef.current?.close(); } catch {}
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // ── Sound toggle ──────────────────────────────────────────────────────────
+  function toggleSound() {
+    const next = !soundOnRef.current;
+    soundOnRef.current = next;
+    setSoundOn(next);
+    if (!next) stopRunSound();
+    else if (phaseRef.current === "playing") startRunSound();
+  }
 
   // ── Idle canvas on mount ──────────────────────────────────────────────────
   useEffect(() => {
@@ -325,6 +396,7 @@ export default function DinoRacePage() {
     phaseRef.current = "playing";
     setPhase("playing"); setScore(0); setBotScore(0);
     setWinner(null); setPlayerDead(false); setRematchState("none");
+    startRunSound();
     rafRef.current = requestAnimationFrame(tick);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -443,6 +515,7 @@ export default function DinoRacePage() {
       if (g.playerAlive && PX + 5 + M < cRight && PX + 5 + DW - M > c.x && g.playerY + 5 + DH > cTop + M) {
         g.playerAlive = false; g.playerScore = Math.floor(g.frame / 5);
         setPlayerDead(true); setScore(g.playerScore);
+        stopRunSound(); playHitSound();
       }
       if (g.botAlive && BX + M < cRight && BX + DW - M > c.x && g.botY + 5 + DH > cTop + M) {
         g.botAlive = false; g.botScore = Math.floor(g.frame / 5); setBotScore(g.botScore);
@@ -454,6 +527,7 @@ export default function DinoRacePage() {
     }
 
     if (!g.playerAlive || !g.botAlive) {
+      stopRunSound();
       phaseRef.current = "done";
       const w: Winner = !g.playerAlive ? "bot" : "player";
       setPhase("done"); setWinner(w);
@@ -506,7 +580,16 @@ export default function DinoRacePage() {
           ) : playerDead ? (
             <span style={{ fontSize:11, color:"#f87171", fontWeight:600 }}>You fell 💀</span>
           ) : (
-            <span style={{ fontSize:12, color:"rgba(255,255,255,0.18)", fontWeight:700, letterSpacing:"0.12em" }}>VS</span>
+            <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+              <span style={{ fontSize:12, color:"rgba(255,255,255,0.18)", fontWeight:700, letterSpacing:"0.12em" }}>VS</span>
+              <button
+                onClick={toggleSound}
+                title={soundOn ? "Mute sound" : "Unmute sound"}
+                style={{ background:"none", border:"none", cursor:"pointer", padding:"2px 4px", borderRadius:6, color: soundOn ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.2)", fontSize:16, lineHeight:1, transition:"color 0.2s" }}
+              >
+                {soundOn ? "🔊" : "🔇"}
+              </button>
+            </div>
           )}
           <div style={{ display:"flex", alignItems:"center", gap:7 }}>
             <span style={{ fontFamily:"'Courier New',monospace", fontSize:20, fontWeight:900, letterSpacing:"0.08em", color:"#818cf8", minWidth:58, textAlign:"right" }}>
