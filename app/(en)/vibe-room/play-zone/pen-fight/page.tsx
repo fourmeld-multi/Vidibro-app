@@ -1,479 +1,1013 @@
 "use client";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 
-/* ── physics constants (realistic, short-slide) ─── */
-const W = 360, H = 560;
-const PL = 44, PR = 4.2;
-const FRIC  = 0.93;   // high friction — pens stop quickly like real desk
-const AFRIC = 0.88;
-const MAX_V = 8;      // low max speed
-const WIN   = 3;
+/* ── Types & Interfaces ────────────────────────────── */
+type Phase = "idle" | "aiming" | "moving" | "cpu_wait" | "cpu_move" | "round_end" | "game_over";
 
-type Phase = "idle"|"aiming"|"moving"|"cpu_wait"|"cpu_move"|"round_end"|"game_over";
-interface Pen { x:number;y:number;a:number;vx:number;vy:number;va:number;out:boolean }
+interface Pen {
+  x: number; y: number; a: number;
+  vx: number; vy: number; va: number;
+  out: boolean;
+}
+
+interface Vector2D { x: number; y: number }
+
 interface GS {
-  p1:Pen; p2:Pen; phase:Phase; lastPhase:"moving"|"cpu_move"|null;
-  drag:{x:number;y:number}|null; s1:number; s2:number; msg:string;
-  tmr:ReturnType<typeof setTimeout>|null;
-  clackAt:number; // cooldown for clack sound
+  p1: Pen; p2: Pen;
+  phase: Phase; lastPhase: "moving" | "cpu_move" | null;
+  drag: Vector2D | null;
+  contact: Vector2D | null;
+  s1: number; s2: number;
+  msg: string;
+  tmr: ReturnType<typeof setTimeout> | null;
+  clackAt: number;
 }
 
-const mkP=(x:number,y:number,a:number):Pen=>({x,y,a,vx:0,vy:0,va:0,out:false});
+const mkP = (x: number, y: number, a: number): Pen => ({
+  x, y, a, vx: 0, vy: 0, va: 0, out: false,
+});
 
-function penEnds(p:Pen):[number,number,number,number]{
-  const c=Math.cos(p.a),s=Math.sin(p.a);
-  return[p.x-c*PL,p.y-s*PL,p.x+c*PL,p.y+s*PL];
+/* ── Geometry & Rigid Body Physics ─────────────────── */
+function getPenDimensions(cw: number, ch: number) {
+  const base = Math.min(cw, ch);
+  const PL = Math.max(38, Math.min(52, base * 0.082));
+  const PR = PL * 0.11;
+  return { PL, PR };
 }
-function closestOnSeg(px:number,py:number,ax:number,ay:number,bx:number,by:number):[number,number]{
-  const dx=bx-ax,dy=by-ay,l2=dx*dx+dy*dy;
-  if(l2<1e-4)return[ax,ay];
-  const t=Math.max(0,Math.min(1,((px-ax)*dx+(py-ay)*dy)/l2));
-  return[ax+t*dx,ay+t*dy];
+
+function getPenCorners(p: Pen, PL: number, PR: number): Vector2D[] {
+  const cos = Math.cos(p.a), sin = Math.sin(p.a);
+  const ux = cos, uy = sin;
+  const vx = -sin, vy = cos;
+  return [
+    { x: p.x - PL * ux - PR * vx, y: p.y - PL * uy - PR * vy },
+    { x: p.x + PL * ux - PR * vx, y: p.y + PL * uy - PR * vy },
+    { x: p.x + PL * ux + PR * vx, y: p.y + PL * uy + PR * vy },
+    { x: p.x - PL * ux + PR * vx, y: p.y - PL * uy + PR * vx },
+  ];
 }
-function capsuleCollide(a:Pen,b:Pen):boolean{
-  if(a.out||b.out)return false;
-  const[a1x,a1y,a2x,a2y]=penEnds(a);
-  const[b1x,b1y,b2x,b2y]=penEnds(b);
-  let md=1e9,cpax=0,cpay=0,cpbx=0,cpby=0;
-  for(let t=0;t<=1;t+=0.05){
-    const px=a1x+(a2x-a1x)*t,py=a1y+(a2y-a1y)*t;
-    const[qx,qy]=closestOnSeg(px,py,b1x,b1y,b2x,b2y);
-    const d=Math.hypot(px-qx,py-qy);
-    if(d<md){md=d;cpax=px;cpay=py;cpbx=qx;cpby=qy;}
+
+function getAxes(corners: Vector2D[]): Vector2D[] {
+  const axes: Vector2D[] = [];
+  for (let i = 0; i < 2; i++) {
+    const p1 = corners[i], p2 = corners[i + 1];
+    const edge = { x: p2.x - p1.x, y: p2.y - p1.y };
+    const len = Math.hypot(edge.x, edge.y) || 1;
+    axes.push({ x: -edge.y / len, y: edge.x / len });
   }
-  const MIN=PR*2.5;
-  if(md>=MIN||md<0.01)return false;
-  const nx=(cpax-cpbx)/md,ny=(cpay-cpby)/md;
-  const rv=(a.vx-b.vx)*nx+(a.vy-b.vy)*ny;
-  if(rv>=0)return false;
-  const j=-(1.1)*rv/2;  // low restitution = less bounce
-  a.vx+=j*nx;a.vy+=j*ny;b.vx-=j*nx;b.vy-=j*ny;
-  a.va+=((cpax-a.x)*ny-(cpay-a.y)*nx)*0.04;
-  b.va-=((cpbx-b.x)*ny-(cpby-b.y)*nx)*0.04;
-  const ov=MIN-md;
-  a.x+=nx*ov*.55;a.y+=ny*ov*.55;b.x-=nx*ov*.45;b.y-=ny*ov*.45;
+  return axes;
+}
+
+function projectCorners(corners: Vector2D[], axis: Vector2D): { min: number; max: number } {
+  let min = corners[0].x * axis.x + corners[0].y * axis.y;
+  let max = min;
+  for (let i = 1; i < corners.length; i++) {
+    const proj = corners[i].x * axis.x + corners[i].y * axis.y;
+    if (proj < min) min = proj;
+    if (proj > max) max = proj;
+  }
+  return { min, max };
+}
+
+/* SAT Collision Resolution (Fixes Orbiting Bug) */
+function resolvePenCollision(a: Pen, b: Pen, PL: number, PR: number): boolean {
+  if (a.out || b.out) return false;
+
+  const cA = getPenCorners(a, PL, PR);
+  const cB = getPenCorners(b, PL, PR);
+  const axes = [...getAxes(cA), ...getAxes(cB)];
+
+  let minOverlap = Infinity;
+  let mtv: Vector2D = { x: 0, y: 0 };
+
+  for (const axis of axes) {
+    const projA = projectCorners(cA, axis);
+    const projB = projectCorners(cB, axis);
+
+    const overlap = Math.min(projA.max, projB.max) - Math.max(projA.min, projB.min);
+    if (overlap <= 0) return false;
+
+    if (overlap < minOverlap) {
+      minOverlap = overlap;
+      const dir = (b.x - a.x) * axis.x + (b.y - a.y) * axis.y;
+      mtv = { x: axis.x * (dir < 0 ? -1 : 1), y: axis.y * (dir < 0 ? -1 : 1) };
+    }
+  }
+
+  // Position separation
+  const sepMargin = minOverlap + 0.6;
+  a.x -= mtv.x * sepMargin * 0.5;
+  a.y -= mtv.y * sepMargin * 0.5;
+  b.x += mtv.x * sepMargin * 0.5;
+  b.y += mtv.y * sepMargin * 0.5;
+
+  // Impulse physics
+  const nx = mtv.x, ny = mtv.y;
+  const contactX = (a.x + b.x) / 2;
+  const contactY = (a.y + b.y) / 2;
+
+  const raX = contactX - a.x, raY = contactY - a.y;
+  const rbX = contactX - b.x, rbY = contactY - b.y;
+
+  const vA_cX = a.vx - a.va * raY, vA_cY = a.vy + a.va * raX;
+  const vB_cX = b.vx - b.va * rbY, vB_cY = b.vy + b.va * rbX;
+
+  const relVx = vA_cX - vB_cX;
+  const relVy = vA_cY - vB_cY;
+  const velAlongNormal = relVx * nx + relVy * ny;
+
+  if (velAlongNormal > 0) return true;
+
+  const I_A = (PL * PL + PR * PR) / 3;
+  const I_B = I_A;
+  const mA = 1, mB = 1;
+
+  const raCrossN = raX * ny - raY * nx;
+  const rbCrossN = rbX * ny - rbY * nx;
+
+  const invMassSum = (1 / mA) + (1 / mB) + (raCrossN * raCrossN) / I_A + (rbCrossN * rbCrossN) / I_B;
+  const restitution = 0.38;
+
+  const j = -(1 + restitution) * velAlongNormal / invMassSum;
+
+  a.vx += (j * nx) / mA; a.vy += (j * ny) / mA; a.va += (raCrossN * j) / I_A;
+  b.vx -= (j * nx) / mB; b.vy -= (j * ny) / mB; b.va -= (rbCrossN * j) / I_B;
+
+  // Contact Friction
+  const tx = -ny, ty = nx;
+  const velAlongTangent = relVx * tx + relVy * ty;
+  const raCrossT = raX * ty - raY * tx;
+  const rbCrossT = rbX * ty - rbY * tx;
+
+  const invMassTangentSum = (1 / mA) + (1 / mB) + (raCrossT * raCrossT) / I_A + (rbCrossT * rbCrossT) / I_B;
+  const frictionCoef = 0.42;
+  let jt = -velAlongTangent / invMassTangentSum;
+  jt = Math.max(-frictionCoef * j, Math.min(frictionCoef * j, jt));
+
+  a.vx += (jt * tx) / mA; a.vy += (jt * ty) / mA; a.va += (raCrossT * jt) / I_A;
+  b.vx -= (jt * tx) / mB; b.vy -= (jt * ty) / mB; b.va -= (rbCrossT * jt) / I_B;
+
+  const MAX_VA = 0.22;
+  a.va = Math.max(-MAX_VA, Math.min(MAX_VA, a.va));
+  b.va = Math.max(-MAX_VA, Math.min(MAX_VA, b.va));
+
   return true;
 }
 
-/* ── rrect helper ──────────────────────────────── */
-function rr(ctx:CanvasRenderingContext2D,x:number,y:number,w:number,h:number,r:number){
+/* Round Rect Helper */
+function rr(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
   ctx.beginPath();
-  ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.arc(x+w-r,y+r,r,-Math.PI/2,0);
-  ctx.lineTo(x+w,y+h-r);ctx.arc(x+w-r,y+h-r,r,0,Math.PI/2);
-  ctx.lineTo(x+r,y+h);ctx.arc(x+r,y+h-r,r,Math.PI/2,Math.PI);
-  ctx.lineTo(x,y+r);ctx.arc(x+r,y+r,r,Math.PI,-Math.PI/2);
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.arc(x + w - r, y + r, r, -Math.PI / 2, 0);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.arc(x + w - r, y + h - r, r, 0, Math.PI / 2);
+  ctx.lineTo(x + r, y + h);
+  ctx.arc(x + r, y + h - r, r, Math.PI / 2, Math.PI);
+  ctx.lineTo(x, y + r);
+  ctx.arc(x + r, y + r, r, Math.PI, -Math.PI / 2);
   ctx.closePath();
 }
 
-/* ── pen drawing ─────────────────────────────── */
-function drawPen(ctx:CanvasRenderingContext2D,pen:Pen,isP:boolean,idle:boolean){
-  if(pen.out)return;
-  ctx.save();ctx.translate(pen.x,pen.y);ctx.rotate(pen.a);
-  const L=PL,R=PR,W2=R*2;
+/* ── Fullscreen Rendering Functions ────────────────── */
 
-  // shadow
-  ctx.save();ctx.shadowColor="rgba(0,0,0,.5)";ctx.shadowBlur=7;ctx.shadowOffsetX=2;ctx.shadowOffsetY=4;
-  ctx.fillStyle="rgba(0,0,0,.01)";rr(ctx,-L,-R,L*2,W2,R);ctx.fill();ctx.restore();
+function drawClassroomScene(ctx: CanvasRenderingContext2D, cw: number, ch: number, g: GS) {
+  const wallH = ch * 0.28; // Reduced green wall gap!
 
-  if(isP){
-    // body
-    const bg=ctx.createLinearGradient(0,-R,0,R);
-    bg.addColorStop(0,"#082e80");bg.addColorStop(.2,"#1565c0");bg.addColorStop(.45,"#3a90e8");
-    bg.addColorStop(.58,"#2878d4");bg.addColorStop(.82,"#114db0");bg.addColorStop(1,"#061a50");
-    ctx.fillStyle=bg;rr(ctx,-L,-R,L*2,W2,R);ctx.fill();
-    // cap
-    const cg=ctx.createLinearGradient(0,-R,0,R);
-    cg.addColorStop(0,"#061a50");cg.addColorStop(.4,"#0c3070");cg.addColorStop(1,"#030c28");
-    ctx.fillStyle=cg;rr(ctx,-L,-R,18,W2,R);ctx.fill();
-    // ink window
-    ctx.fillStyle="rgba(225,238,255,.84)";rr(ctx,-L+24,-R+1.2,22,W2-2.4,1.2);ctx.fill();
-    ctx.fillStyle="rgba(28,95,215,.42)";rr(ctx,-L+25.5,-R+2,19,W2-4,.8);ctx.fill();
-    // grip ribs
-    const gg=ctx.createLinearGradient(0,-R,0,R);
-    gg.addColorStop(0,"#0c3070");gg.addColorStop(.4,"#1a5cb0");gg.addColorStop(1,"#071e50");
-    ctx.fillStyle=gg;rr(ctx,L-24,-R-.5,20,W2+1,R);ctx.fill();
-    ctx.strokeStyle="rgba(4,16,64,.5)";ctx.lineWidth=.7;
-    for(let i=0;i<4;i++){ctx.beginPath();ctx.moveTo(L-22+i*4,-R-.2);ctx.lineTo(L-22+i*4,R+.2);ctx.stroke();}
-    // nib
-    const ng=ctx.createLinearGradient(0,-R,0,R);
-    ng.addColorStop(0,"#888");ng.addColorStop(.3,"#d8d8d8");ng.addColorStop(.5,"#f0f0f0");ng.addColorStop(.7,"#c0c0c0");ng.addColorStop(1,"#666");
-    ctx.fillStyle=ng;ctx.beginPath();ctx.moveTo(L-4,-R*.62);ctx.lineTo(L+11,0);ctx.lineTo(L-4,R*.62);ctx.closePath();ctx.fill();
-    ctx.fillStyle="#111";ctx.beginPath();ctx.arc(L+10,0,1,0,Math.PI*2);ctx.fill();
-    // text
-    ctx.save();ctx.fillStyle="rgba(255,255,255,.22)";ctx.font="bold 3.5px sans-serif";
-    ctx.fillText("REYNOLDS 045",-L+23,-R+4.2);ctx.restore();
-    // clip
-    ctx.fillStyle="#bbb";ctx.fillRect(-L+1,-R-1.5,30,1.4);
-    ctx.fillStyle="#ccc";ctx.beginPath();ctx.arc(-L+31,-R-.8,1.8,0,Math.PI*2);ctx.fill();
-    // glow on idle
-    if(idle){ctx.shadowColor="rgba(66,165,245,.7)";ctx.shadowBlur=20;ctx.strokeStyle="rgba(66,165,245,.55)";ctx.lineWidth=1.5;rr(ctx,-L,-R,L*2,W2,R);ctx.stroke();ctx.shadowBlur=0;}
-  } else {
-    // black body
-    const bg=ctx.createLinearGradient(0,-R,0,R);
-    bg.addColorStop(0,"#0a0a0a");bg.addColorStop(.2,"#1e1e1e");bg.addColorStop(.44,"#303030");
-    bg.addColorStop(.58,"#1c1c1c");bg.addColorStop(.82,"#0d0d0d");bg.addColorStop(1,"#040404");
-    ctx.fillStyle=bg;rr(ctx,-L,-R,L*2,W2,R);ctx.fill();
-    // cap
-    ctx.fillStyle="#060606";rr(ctx,-L,-R,18,W2,R);ctx.fill();
-    // ink window
-    ctx.fillStyle="rgba(215,215,215,.72)";rr(ctx,-L+24,-R+1.2,22,W2-2.4,1.2);ctx.fill();
-    ctx.fillStyle="rgba(18,18,18,.5)";rr(ctx,-L+25.5,-R+2,19,W2-4,.8);ctx.fill();
-    // red band
-    const rg=ctx.createLinearGradient(0,-R,0,R);
-    rg.addColorStop(0,"#7a0000");rg.addColorStop(.4,"#cc0000");rg.addColorStop(.6,"#e53030");rg.addColorStop(1,"#580000");
-    ctx.fillStyle=rg;rr(ctx,L-27,-R-.3,8,W2+.6,1.5);ctx.fill();
-    // grip
-    const gg2=ctx.createLinearGradient(0,-R,0,R);
-    gg2.addColorStop(0,"#111");gg2.addColorStop(.4,"#222");gg2.addColorStop(1,"#080808");
-    ctx.fillStyle=gg2;rr(ctx,L-19,-R-.5,18,W2+1,R);ctx.fill();
-    ctx.strokeStyle="rgba(255,255,255,.07)";ctx.lineWidth=.7;
-    for(let i=0;i<4;i++){ctx.beginPath();ctx.moveTo(L-18+i*4,-R-.2);ctx.lineTo(L-18+i*4,R+.2);ctx.stroke();}
-    // nib
-    const ng2=ctx.createLinearGradient(0,-R,0,R);
-    ng2.addColorStop(0,"#7a7a7a");ng2.addColorStop(.3,"#c8c8c8");ng2.addColorStop(.5,"#e8e8e8");ng2.addColorStop(.7,"#b0b0b0");ng2.addColorStop(1,"#5a5a5a");
-    ctx.fillStyle=ng2;ctx.beginPath();ctx.moveTo(L-4,-R*.62);ctx.lineTo(L+11,0);ctx.lineTo(L-4,R*.62);ctx.closePath();ctx.fill();
-    ctx.fillStyle="#111";ctx.beginPath();ctx.arc(L+10,0,1,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle="#3a3a3a";ctx.fillRect(-L+1,-R-1.5,30,1.4);
-    ctx.fillStyle="#484848";ctx.beginPath();ctx.arc(-L+31,-R-.8,1.8,0,Math.PI*2);ctx.fill();
+  // 1. Green Classroom Wall
+  const wallGrad = ctx.createLinearGradient(0, 0, 0, wallH);
+  wallGrad.addColorStop(0, "#2c3b2c");
+  wallGrad.addColorStop(1, "#212d21");
+  ctx.fillStyle = wallGrad;
+  ctx.fillRect(0, 0, cw, wallH);
+
+  // 2. Blackboard
+  const boardM = Math.max(8, cw * 0.03);
+  const boardY = Math.max(4, ch * 0.012);
+  const boardW = cw - boardM * 2;
+  const boardH = Math.min(130, wallH * 0.68); // Fits neatly
+
+  // Outer wood frame
+  ctx.fillStyle = "#3e2410";
+  ctx.fillRect(boardM - 4, boardY - 4, boardW + 8, boardH + 8);
+  ctx.fillStyle = "#1e1208";
+  ctx.fillRect(boardM - 2, boardY - 2, boardW + 4, boardH + 4);
+
+  // Board surface
+  ctx.fillStyle = "#1b251d";
+  ctx.fillRect(boardM, boardY, boardW, boardH);
+  ctx.strokeStyle = "rgba(255,255,255,0.07)";
+  ctx.lineWidth = 1;
+  ctx.strokeRect(boardM + 4, boardY + 4, boardW - 8, boardH - 8);
+
+  // Orange "PEN FIGHT Reynolds 045" Top-Left Badge
+  ctx.save();
+  ctx.fillStyle = "#d9731e";
+  rr(ctx, boardM + 6, boardY + 6, Math.min(95, boardW * 0.28), 22, 5);
+  ctx.fill();
+  ctx.fillStyle = "#ffffff"; ctx.font = "bold 9px sans-serif";
+  ctx.fillText("PEN FIGHT", boardM + 12, boardY + 16);
+  ctx.fillStyle = "rgba(255,255,255,0.75)"; ctx.font = "7px sans-serif";
+  ctx.fillText("Reynolds 045", boardM + 12, boardY + 23);
+
+  // Top-Right Music Icon
+  ctx.fillStyle = "rgba(0,0,0,0.45)";
+  ctx.strokeStyle = "rgba(255,255,255,0.25)";
+  ctx.lineWidth = 1;
+  rr(ctx, boardM + boardW - 24, boardY + 6, 18, 18, 4);
+  ctx.fill(); ctx.stroke();
+  ctx.fillStyle = "#fff"; ctx.font = "9px sans-serif";
+  ctx.fillText("🎵", boardM + boardW - 20, boardY + 18);
+  ctx.restore();
+
+  // Chalkboard Hand-written Notes & Scoreboard
+  ctx.save();
+  ctx.fillStyle = "rgba(255,255,255,0.72)";
+  ctx.font = "10px 'Comic Sans MS', cursive, sans-serif";
+  ctx.fillText("Thought for the Day :", boardM + boardW * 0.36, boardY + 16);
+  ctx.font = "italic 9px 'Comic Sans MS', cursive, sans-serif";
+  ctx.fillText('"Practice makes a man perfect"', boardM + boardW * 0.39, boardY + 28);
+
+  // Left Score Chalk Text
+  ctx.font = "bold 11px sans-serif"; ctx.fillStyle = "#e5c07b";
+  ctx.fillText("PEN FIGHT", boardM + 8, boardY + 44);
+  ctx.font = "8px sans-serif"; ctx.fillStyle = "rgba(255,255,255,0.55)";
+  ctx.fillText("best of 5", boardM + 74, boardY + 44);
+  ctx.strokeStyle = "rgba(255,255,255,0.4)"; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(boardM + 8, boardY + 48); ctx.lineTo(boardM + 110, boardY + 48); ctx.stroke();
+
+  // Chalk Tally Scores
+  ctx.font = "bold 15px sans-serif"; ctx.fillStyle = "#ffffff";
+  ctx.fillText(`T t t t  ${g.s1}`, boardM + 8, boardY + 68);
+  ctx.fillText(`bunty   ${g.s2}`, boardM + 8, boardY + 88);
+
+  // Chalk Sketches
+  ctx.strokeStyle = "rgba(255,255,255,0.38)"; ctx.lineWidth = 1;
+  const sx = boardM + boardW * 0.54, sy = boardY + 44;
+  ctx.beginPath();
+  ctx.moveTo(sx, sy + 25); ctx.lineTo(sx + 20, sy); ctx.lineTo(sx + 40, sy + 25); ctx.closePath();
+  ctx.stroke();
+
+  ctx.font = "8px cursive"; ctx.fillStyle = "rgba(255,255,255,0.38)";
+  ctx.fillText("Map of India", boardM + boardW * 0.72, boardY + 62);
+  ctx.fillText("H.W Ch.4 Q.1-5", boardM + boardW * 0.72, boardY + 18);
+  ctx.fillText("Monitor : Rinku", boardM + boardW * 0.72, boardY + 90);
+  ctx.restore();
+
+  // 3. Tiled Floor (Middle to Bottom Background)
+  ctx.fillStyle = "#d4cdbc";
+  ctx.fillRect(0, wallH, cw, ch - wallH);
+
+  // Tile Grid Lines
+  ctx.strokeStyle = "rgba(130,120,105,0.25)";
+  ctx.lineWidth = 1;
+  const tileSize = Math.max(28, cw / 10);
+  for (let x = 0; x < cw; x += tileSize) {
+    ctx.beginPath(); ctx.moveTo(x, wallH); ctx.lineTo(x, ch); ctx.stroke();
   }
-  // highlight streak
-  const sh=ctx.createLinearGradient(-L,0,L,0);
-  sh.addColorStop(0,"rgba(255,255,255,0)");sh.addColorStop(.15,"rgba(255,255,255,.28)");
-  sh.addColorStop(.85,"rgba(255,255,255,.28)");sh.addColorStop(1,"rgba(255,255,255,0)");
-  ctx.fillStyle=sh;rr(ctx,-L+4,-R,L*2-8,R*.52,.4);ctx.fill();
+  for (let y = wallH; y < ch; y += tileSize * 0.75) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(cw, y); ctx.stroke();
+  }
+
+  // 4. Wooden Bench Back Mounted on Wall
+  const tableTopY = ch * 0.28; // Table starts right below blackboard
+  const topW = cw * 0.78;
+  const topX1 = (cw - topW) / 2;
+  ctx.fillStyle = "#5c3716";
+  ctx.fillRect(topX1 - 10, tableTopY - 20, topW + 20, 20);
+  ctx.fillStyle = "#3a200a";
+  ctx.fillRect(topX1 - 10, tableTopY - 20, topW + 20, 4);
+
+  // 5. 3D Wooden Plate Mounted IN CENTER OF GREEN WALL
+  if (g.phase !== "game_over") {
+    const gapTop = boardY + boardH;
+    const badgeY = gapTop + (tableTopY - gapTop) / 2 - 14;
+    const bx = cw / 2 - 55, bw = 110, bh = 28;
+
+    ctx.save();
+    // 3D Shadow on green wall
+    ctx.fillStyle = "rgba(0, 0, 0, 0.45)";
+    rr(ctx, bx + 2, badgeY + 4, bw, bh, 6); ctx.fill();
+
+    // 3D Wooden Plate Bevel Outer Frame (Dark Mahogany Wood)
+    ctx.fillStyle = "#3a1e0b";
+    rr(ctx, bx - 2, badgeY - 2, bw + 4, bh + 4, 7); ctx.fill();
+
+    // Wooden Plate Surface (Rich Oak Grain Gradient)
+    const woodGrad = ctx.createLinearGradient(bx, badgeY, bx, badgeY + bh);
+    woodGrad.addColorStop(0, "#7c451b");
+    woodGrad.addColorStop(0.5, "#653613");
+    woodGrad.addColorStop(1, "#4b250a");
+    ctx.fillStyle = woodGrad;
+    rr(ctx, bx, badgeY, bw, bh, 5); ctx.fill();
+
+    // Golden / Brass Inner Inset Border Line
+    ctx.strokeStyle = "rgba(235, 185, 120, 0.45)";
+    ctx.lineWidth = 1;
+    rr(ctx, bx + 2.5, badgeY + 2.5, bw - 5, bh - 5, 3.5); ctx.stroke();
+
+    // Corner Brass Rivets/Screws
+    ctx.fillStyle = "#d4a755";
+    [ [bx + 5, badgeY + 6], [bx + bw - 5, badgeY + 6],
+      [bx + 5, badgeY + bh - 6], [bx + bw - 5, badgeY + bh - 6] ].forEach(([rx, ry]) => {
+      ctx.beginPath(); ctx.arc(rx, ry, 1.4, 0, Math.PI * 2); ctx.fill();
+    });
+
+    // White Letters: "your turn" or "partner turn"
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 12px sans-serif";
+    ctx.textAlign = "center";
+    ctx.shadowColor = "rgba(0,0,0,0.6)";
+    ctx.shadowBlur = 3;
+    ctx.shadowOffsetY = 1;
+
+    const turnText = (g.phase === "cpu_wait" || g.phase === "cpu_move") ? "partner turn" : "your turn";
+    ctx.fillText(turnText, cw / 2, badgeY + 18);
+    ctx.restore();
+  }
+}
+
+/* Draw Perspective Wooden Desk & Shadow (Increased Height!) */
+function drawWoodenDesk(ctx: CanvasRenderingContext2D, cw: number, ch: number) {
+  const tableTopY = ch * 0.28; // Table starts higher up (reduced green gap!)
+  const tableBotY = ch * 0.90; // Table extends nicely down (increased desk height!)
+  const topW = cw * 0.78;
+  const botW = cw * 0.92;
+
+  const topX1 = (cw - topW) / 2, topX2 = topX1 + topW;
+  const botX1 = (cw - botW) / 2, botX2 = botX1 + botW;
+
+  // 1. Table Shadow on Floor
+  ctx.fillStyle = "rgba(0,0,0,0.36)";
+  ctx.beginPath();
+  ctx.moveTo(topX1 - 14, tableTopY + 10);
+  ctx.lineTo(topX2 + 14, tableTopY + 10);
+  ctx.lineTo(botX2 + 18, tableBotY + 22);
+  ctx.lineTo(botX1 - 18, tableBotY + 22);
+  ctx.closePath();
+  ctx.fill();
+
+  // 2. Desk Legs
+  ctx.fillStyle = "#1c1208";
+  ctx.fillRect(botX1 + 12, tableBotY, 24, ch * 0.07);
+  ctx.fillRect(botX2 - 36, tableBotY, 24, ch * 0.07);
+
+  // 3. Desk Front Apron Thickness
+  ctx.fillStyle = "#4a2910";
+  ctx.beginPath();
+  ctx.moveTo(botX1, tableBotY);
+  ctx.lineTo(botX2, tableBotY);
+  ctx.lineTo(botX2 + 2, tableBotY + 12);
+  ctx.lineTo(botX1 - 2, tableBotY + 12);
+  ctx.closePath();
+  ctx.fill();
+
+  // 4. Desk Surface Trapezoid
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(topX1, tableTopY);
+  ctx.lineTo(topX2, tableTopY);
+  ctx.lineTo(botX2, tableBotY);
+  ctx.lineTo(botX1, tableBotY);
+  ctx.closePath();
+
+  // Wood Texture Gradient
+  const woodGrad = ctx.createLinearGradient(0, tableTopY, 0, tableBotY);
+  woodGrad.addColorStop(0, "#df9849");
+  woodGrad.addColorStop(0.3, "#d48d3e");
+  woodGrad.addColorStop(0.7, "#c97e2f");
+  woodGrad.addColorStop(1, "#b5681c");
+  ctx.fillStyle = woodGrad;
+  ctx.fill();
+
+  // Wood Grain Lines
+  ctx.strokeStyle = "rgba(90,45,10,0.11)";
+  ctx.lineWidth = 1.2;
+  for (let y = tableTopY + 10; y < tableBotY; y += 14) {
+    ctx.beginPath();
+    ctx.moveTo(topX1, y);
+    ctx.bezierCurveTo(cw * 0.35, y + 4, cw * 0.65, y - 3, botX2, y + 2);
+    ctx.stroke();
+  }
+
+  // Sheen Highlight
+  const sheen = ctx.createRadialGradient(cw * 0.5, (tableTopY + tableBotY) / 2, 30, cw * 0.5, (tableTopY + tableBotY) / 2, cw * 0.55);
+  sheen.addColorStop(0, "rgba(255,242,215,0.18)");
+  sheen.addColorStop(1, "rgba(255,242,215,0)");
+  ctx.fillStyle = sheen;
+  ctx.fill();
+
+  // Pencil Carvings & Scratches
+  ctx.strokeStyle = "rgba(75,35,5,0.36)";
+  ctx.fillStyle = "rgba(75,35,5,0.36)";
+  ctx.font = "italic bold 11px sans-serif";
+
+  // Carved text
+  ctx.fillText("Raju", botX1 + 30, tableBotY - 80);
+  ctx.fillText("AJ", botX2 - 65, tableBotY - 45);
+  ctx.fillText("golu", topX1 + 35, tableTopY + 110);
+  ctx.fillText("18 ROCKS", topX2 - 95, tableTopY + 80);
+
+  // Tic-tac-toe `#`
+  const tx = topX1 + 55, ty = tableTopY + 40;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(tx - 10, ty - 4); ctx.lineTo(tx + 10, ty - 4);
+  ctx.moveTo(tx - 10, ty + 4); ctx.lineTo(tx + 10, ty + 4);
+  ctx.moveTo(tx - 4, ty - 10); ctx.lineTo(tx - 4, ty + 10);
+  ctx.moveTo(tx + 4, ty - 10); ctx.lineTo(tx + 4, ty + 10);
+  ctx.stroke();
+
+  // Cup stain ring
+  ctx.beginPath();
+  ctx.arc(topX2 - 80, tableTopY + 50, 18, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // Scratches & Arrow
+  [[cw * 0.3, tableTopY + 60, cw * 0.55, tableTopY + 75],
+   [cw * 0.45, tableTopY + 160, cw * 0.68, tableTopY + 170],
+   [cw * 0.2, tableBotY - 130, cw * 0.38, tableBotY - 115]].forEach(([x1, y1, x2, y2]) => {
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+  });
+
+  // Table rim bevel
+  ctx.strokeStyle = "#f3d4a4"; ctx.lineWidth = 2; ctx.stroke();
+  ctx.strokeStyle = "#5a300a"; ctx.lineWidth = 3; ctx.stroke();
   ctx.restore();
 }
 
-/* ── table drawing ──────────────────────────── */
-function drawTable(ctx:CanvasRenderingContext2D,g:GS){
-  const bg=ctx.createLinearGradient(0,0,W,H);
-  bg.addColorStop(0,"#b5722a");bg.addColorStop(.35,"#c88748");bg.addColorStop(.65,"#d4955a");bg.addColorStop(1,"#b06228");
-  ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
-  const zone=ctx.createRadialGradient(W*.6,H*.4,60,W*.6,H*.4,340);
-  zone.addColorStop(0,"rgba(220,165,90,.22)");zone.addColorStop(1,"rgba(80,40,8,.1)");
-  ctx.fillStyle=zone;ctx.fillRect(0,0,W,H);
-  // grain
-  const gc=["rgba(100,52,8,.13)","rgba(80,38,4,.1)","rgba(140,78,20,.07)","rgba(60,28,2,.15)","rgba(170,100,35,.06)"];
-  for(let p=0;p<5;p++){
-    ctx.strokeStyle=gc[p];ctx.lineWidth=p%2===0?.8:1.1;
-    const sd=p*37;
-    for(let i=0;i<H;i+=7+p*3){
-      const y=i+(sd%11);
-      ctx.beginPath();ctx.moveTo(0,y+Math.sin(y*.04+sd)*5);
-      ctx.bezierCurveTo(W*.25,y+Math.cos(y*.03+sd)*8,W*.65,y+Math.sin(y*.025+sd*.7)*6,W,y+Math.cos(y*.05+sd)*4);
+/* Draw 3D Pen Artwork */
+function drawPen(ctx: CanvasRenderingContext2D, pen: Pen, isPlayer: boolean, isTurn: boolean, PL: number, PR: number) {
+  if (pen.out) return;
+
+  ctx.save();
+  ctx.translate(pen.x, pen.y);
+  ctx.rotate(pen.a);
+
+  const L = PL, R = PR, W2 = R * 2;
+
+  // Drop Shadow
+  ctx.save();
+  ctx.shadowColor = "rgba(0,0,0,0.42)";
+  ctx.shadowBlur = 7;
+  ctx.shadowOffsetX = 3;
+  ctx.shadowOffsetY = 5;
+  ctx.fillStyle = "rgba(0,0,0,0.01)";
+  rr(ctx, -L, -R, L * 2, W2, R);
+  ctx.fill();
+  ctx.restore();
+
+  if (isPlayer) {
+    // Player 1: Reynolds 045 (White body, translucent blue cap)
+    const bodyGrad = ctx.createLinearGradient(0, -R, 0, R);
+    bodyGrad.addColorStop(0, "#e8edf5");
+    bodyGrad.addColorStop(0.3, "#ffffff");
+    bodyGrad.addColorStop(0.7, "#f0f4fa");
+    bodyGrad.addColorStop(1, "#c5d0e0");
+    ctx.fillStyle = bodyGrad;
+    rr(ctx, -L, -R, L * 2, W2, R);
+    ctx.fill();
+
+    // Cap
+    const capGrad = ctx.createLinearGradient(0, -R, 0, R);
+    capGrad.addColorStop(0, "#082e80");
+    capGrad.addColorStop(0.3, "#1a6bd4");
+    capGrad.addColorStop(0.7, "#1251ab");
+    capGrad.addColorStop(1, "#061a50");
+    ctx.fillStyle = capGrad;
+    rr(ctx, -L, -R, L * 0.45, W2, R);
+    ctx.fill();
+
+    // Ink Window
+    ctx.fillStyle = "rgba(200,225,255,0.85)";
+    rr(ctx, -L + L * 0.55, -R + 1.2, L * 0.5, W2 - 2.4, 1.2);
+    ctx.fill();
+
+    // Blue Grip Ribs
+    ctx.fillStyle = capGrad;
+    rr(ctx, L - L * 0.55, -R - 0.5, L * 0.45, W2 + 1, R);
+    ctx.fill();
+
+    // Nib Tip
+    const nibGrad = ctx.createLinearGradient(0, -R, 0, R);
+    nibGrad.addColorStop(0, "#999"); nibGrad.addColorStop(0.5, "#ffffff"); nibGrad.addColorStop(1, "#666");
+    ctx.fillStyle = nibGrad;
+    ctx.beginPath();
+    ctx.moveTo(L - 4, -R * 0.65);
+    ctx.lineTo(L + 11, 0);
+    ctx.lineTo(L - 4, R * 0.65);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.fillStyle = "#111";
+    ctx.beginPath(); ctx.arc(L + 10, 0, 1.2, 0, Math.PI * 2); ctx.fill();
+
+    // Clip
+    ctx.fillStyle = "#d0d8e0";
+    ctx.fillRect(-L + 2, -R - 1.6, L * 0.65, 1.5);
+
+    // Turn Glow
+    if (isTurn) {
+      ctx.shadowColor = "rgba(66,165,245,0.75)";
+      ctx.shadowBlur = 16;
+      ctx.strokeStyle = "rgba(66,165,245,0.65)";
+      ctx.lineWidth = 1.6;
+      rr(ctx, -L, -R, L * 2, W2, R);
       ctx.stroke();
+      ctx.shadowBlur = 0;
     }
+  } else {
+    // Player 2 / CPU: Black Body, Blue Cap, Red Accent
+    const bodyGrad = ctx.createLinearGradient(0, -R, 0, R);
+    bodyGrad.addColorStop(0, "#151515");
+    bodyGrad.addColorStop(0.3, "#333333");
+    bodyGrad.addColorStop(0.7, "#222222");
+    bodyGrad.addColorStop(1, "#080808");
+    ctx.fillStyle = bodyGrad;
+    rr(ctx, -L, -R, L * 2, W2, R);
+    ctx.fill();
+
+    // Cap
+    ctx.fillStyle = "#0c0c0c";
+    rr(ctx, -L, -R, L * 0.45, W2, R);
+    ctx.fill();
+
+    // Red Accent Band
+    const redGrad = ctx.createLinearGradient(0, -R, 0, R);
+    redGrad.addColorStop(0, "#990000"); redGrad.addColorStop(0.5, "#ff3333"); redGrad.addColorStop(1, "#660000");
+    ctx.fillStyle = redGrad;
+    rr(ctx, L - L * 0.6, -R - 0.4, 8, W2 + 0.8, 1.2);
+    ctx.fill();
+
+    // Grip
+    ctx.fillStyle = "#1e1e1e";
+    rr(ctx, L - L * 0.42, -R - 0.5, L * 0.4, W2 + 1, R);
+    ctx.fill();
+
+    // Nib
+    const nibGrad = ctx.createLinearGradient(0, -R, 0, R);
+    nibGrad.addColorStop(0, "#777"); nibGrad.addColorStop(0.5, "#eee"); nibGrad.addColorStop(1, "#444");
+    ctx.fillStyle = nibGrad;
+    ctx.beginPath();
+    ctx.moveTo(L - 4, -R * 0.65);
+    ctx.lineTo(L + 11, 0);
+    ctx.lineTo(L - 4, R * 0.65);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.fillStyle = "#000";
+    ctx.beginPath(); ctx.arc(L + 10, 0, 1.2, 0, Math.PI * 2); ctx.fill();
+
+    // Clip
+    ctx.fillStyle = "#0066cc";
+    ctx.fillRect(-L + 2, -R - 1.6, L * 0.65, 1.5);
   }
-  // knots
-  [[W*.78,H*.18,.3],[W*.22,H*.78,-.25]].forEach(([kx,ky,ka])=>{
-    ctx.save();ctx.translate(kx,ky);
-    for(let r=16;r>2;r-=4){ctx.strokeStyle=`rgba(78,36,3,${.04+(16-r)*.006})`;ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(0,0,r,r*.55,ka,0,Math.PI*2);ctx.stroke();}
-    ctx.restore();
-  });
-  // scratches
-  ctx.strokeStyle="rgba(80,38,4,.1)";ctx.lineWidth=.6;
-  [[W*.35,H*.52,W*.55,H*.49],[W*.6,H*.3,W*.75,H*.32],[W*.15,H*.65,W*.3,H*.63]].forEach(([x1,y1,x2,y2])=>{
-    ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
-  });
-  // sheen
-  const sh=ctx.createRadialGradient(W*.5,H*.5,10,W*.5,H*.5,220);
-  sh.addColorStop(0,"rgba(255,238,195,.07)");sh.addColorStop(1,"rgba(255,238,195,0)");
-  ctx.fillStyle=sh;ctx.fillRect(0,0,W,H);
-  // edge shadows
-  [["l",0,0,18,H],["r",W-18,0,18,H],["t",0,0,W,18],["b",0,H-18,W,18]].forEach(([d,x,y,w,h])=>{
-    const eg=d==="l"?ctx.createLinearGradient(0,0,18,0):d==="r"?ctx.createLinearGradient(W,0,W-18,0):d==="t"?ctx.createLinearGradient(0,0,0,18):ctx.createLinearGradient(0,H,0,H-18);
-    eg.addColorStop(0,"rgba(0,0,0,.32)");eg.addColorStop(1,"rgba(0,0,0,0)");
-    ctx.fillStyle=eg;ctx.fillRect(x as number,y as number,w as number,h as number);
-  });
-  // border
-  ctx.strokeStyle="#7a4010";ctx.lineWidth=10;ctx.strokeRect(5,5,W-10,H-10);
-  ctx.strokeStyle="#9a5a22";ctx.lineWidth=3;ctx.strokeRect(5,5,W-10,H-10);
-  ctx.strokeStyle="rgba(255,200,130,.22)";ctx.lineWidth=1;ctx.strokeRect(6,6,W-12,H-12);
-  // center divider
-  ctx.save();ctx.setLineDash([14,12]);ctx.strokeStyle="rgba(80,38,4,.25)";ctx.lineWidth=1.5;
-  ctx.beginPath();ctx.moveTo(22,H/2);ctx.lineTo(W-22,H/2);ctx.stroke();ctx.setLineDash([]);ctx.restore();
-  // aim
-  if(g.phase==="aiming"&&g.drag){
-    const p=g.p1,d=g.drag;
-    const dx=d.x-p.x,dy=d.y-p.y,dist=Math.hypot(dx,dy);
-    const pwr=Math.min(dist/60,1);
-    ctx.save();
-    ctx.strokeStyle=`rgba(255,230,80,${.35+pwr*.5})`;ctx.lineWidth=1.8;ctx.setLineDash([9,8]);
-    ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x+dx*2,p.y+dy*2);ctx.stroke();
-    ctx.setLineDash([]);
-    ctx.strokeStyle=`rgba(255,210,0,${.45+pwr*.35})`;ctx.lineWidth=3;
-    ctx.beginPath();ctx.arc(p.x,p.y,22,0,Math.PI*2*pwr);ctx.stroke();
-    ctx.restore();
-  }
+
+  // Highlight Reflection Streak
+  const streak = ctx.createLinearGradient(-L, 0, L, 0);
+  streak.addColorStop(0, "rgba(255,255,255,0)");
+  streak.addColorStop(0.2, "rgba(255,255,255,0.3)");
+  streak.addColorStop(0.8, "rgba(255,255,255,0.3)");
+  streak.addColorStop(1, "rgba(255,255,255,0)");
+  ctx.fillStyle = streak;
+  rr(ctx, -L + 4, -R, L * 2 - 8, R * 0.5, 0.4);
+  ctx.fill();
+
+  ctx.restore();
 }
 
-/* ── audio ──────────────────────────────────── */
+/* ── Draw Aiming Slingshot & Trajectory Arrow ─────── */
+function drawAimTrajectory(ctx: CanvasRenderingContext2D, g: GS) {
+  if (g.phase !== "aiming" || !g.drag || !g.contact) return;
+
+  const contact = g.contact;
+  const drag = g.drag;
+
+  const pullX = drag.x - contact.x;
+  const pullY = drag.y - contact.y;
+  const dist = Math.hypot(pullX, pullY);
+
+  if (dist < 3) return;
+
+  // Opposite Launch Vector
+  const launchX = -pullX;
+  const launchY = -pullY;
+
+  ctx.save();
+
+  // 1. Elastic Slingshot Pull Line (Contact Point to Finger)
+  ctx.strokeStyle = "rgba(255, 90, 60, 0.85)";
+  ctx.lineWidth = 2.5;
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.moveTo(contact.x, contact.y);
+  ctx.lineTo(drag.x, drag.y);
+  ctx.stroke();
+
+  // Drag handle circle
+  ctx.fillStyle = "rgba(255, 90, 60, 0.9)";
+  ctx.beginPath();
+  ctx.arc(drag.x, drag.y, 7, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Force Aura Ring around contact point
+  const powerRatio = Math.min(dist / 120, 1);
+  ctx.strokeStyle = `rgba(255, 210, 0, ${0.4 + powerRatio * 0.5})`;
+  ctx.lineWidth = 2.5;
+  ctx.setLineDash([]);
+  ctx.beginPath();
+  ctx.arc(contact.x, contact.y, 16 + powerRatio * 14, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // 2. Trajectory Dotted Line (Launching FORWARD in Opposite Direction)
+  const lineLen = Math.min(dist * 2.2, 200);
+  const targetX = contact.x + (launchX / dist) * lineLen;
+  const targetY = contact.y + (launchY / dist) * lineLen;
+
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.95)";
+  ctx.lineWidth = 2.5;
+  ctx.setLineDash([8, 6]);
+  ctx.beginPath();
+  ctx.moveTo(contact.x, contact.y);
+  ctx.lineTo(targetX, targetY);
+  ctx.stroke();
+
+  // Arrow Head at Trajectory Tip
+  const angle = Math.atan2(launchY, launchX);
+  const arrowLen = 14;
+  ctx.setLineDash([]);
+  ctx.fillStyle = "#ffffff";
+  ctx.beginPath();
+  ctx.moveTo(targetX, targetY);
+  ctx.lineTo(targetX - arrowLen * Math.cos(angle - Math.PI / 6), targetY - arrowLen * Math.sin(angle - Math.PI / 6));
+  ctx.lineTo(targetX - arrowLen * Math.cos(angle + Math.PI / 6), targetY - arrowLen * Math.sin(angle + Math.PI / 6));
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.restore();
+}
+
+/* ── Realistic Action Audio Engine (No Ambient Noise) ─ */
 type AC = AudioContext & { webkitAudioContext?: never };
-function makeAudio(){
-  const ctx=new (window.AudioContext||(window as unknown as{webkitAudioContext:typeof AudioContext}).webkitAudioContext)() as AC;
 
-  /* classroom ambience — layered pink noise + murmur oscillators */
-  function startAmbience(){
-    const rate=ctx.sampleRate;
-    const buf=ctx.createBuffer(1,rate*4,rate);
-    const d=buf.getChannelData(0);
-    let b=[0,0,0,0,0,0,0];
-    for(let i=0;i<d.length;i++){
-      const w=Math.random()*2-1;
-      b[0]=.99886*b[0]+w*.0555179;b[1]=.99332*b[1]+w*.0750759;
-      b[2]=.96900*b[2]+w*.1538520;b[3]=.86650*b[3]+w*.3104856;
-      b[4]=.55000*b[4]+w*.5329522;b[5]=-.7616*b[5]-w*.0168980;
-      d[i]=(b[0]+b[1]+b[2]+b[3]+b[4]+b[5]+b[6]+w*.5362)*.11;
-      b[6]=w*.115926;
-    }
-    const src=ctx.createBufferSource();src.buffer=buf;src.loop=true;
-    const bp=ctx.createBiquadFilter();bp.type="bandpass";bp.frequency.value=700;bp.Q.value=0.35;
-    const g=ctx.createGain();g.gain.value=0.045;
-    src.connect(bp);bp.connect(g);g.connect(ctx.destination);src.start();
+function makeActionAudio() {
+  const ctx = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)() as AC;
 
-    /* distant chair/student murmur — slow-modulated oscillators */
-    [130,220,310].forEach((freq,i)=>{
-      const osc=ctx.createOscillator();
-      const lfo=ctx.createOscillator();
-      const lfoG=ctx.createGain();
-      const g2=ctx.createGain();
-      osc.type="sine";osc.frequency.value=freq;
-      lfo.type="sine";lfo.frequency.value=0.15+i*0.07;
-      lfoG.gain.value=freq*0.35;
-      lfo.connect(lfoG);lfoG.connect(osc.frequency);
-      g2.gain.value=0.012;
-      osc.connect(g2);g2.connect(ctx.destination);
-      osc.start(ctx.currentTime+i*0.4);
-      lfo.start();
-    });
+  // Single clean percussive flick & hit sound
+  function playFlick() {
+    try {
+      const t = ctx.currentTime;
+      const len = Math.floor(ctx.sampleRate * 0.07);
+      const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+      const d = buf.getChannelData(0);
+      for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.5);
+      const src = ctx.createBufferSource(); src.buffer = buf;
+      const hp = ctx.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 1800;
+      const g = ctx.createGain(); g.gain.setValueAtTime(0.35, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.06);
+      src.connect(hp); hp.connect(g); g.connect(ctx.destination);
+      src.start(t);
+    } catch (e) { void e; }
   }
 
-  /* pen flick — finger snap + swish */
-  function playFlick(){
-    const t=ctx.currentTime;
-    const len=Math.floor(ctx.sampleRate*.07);
-    const buf=ctx.createBuffer(1,len,ctx.sampleRate);
-    const d=buf.getChannelData(0);
-    for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.5);
-    const src=ctx.createBufferSource();src.buffer=buf;
-    const hp=ctx.createBiquadFilter();hp.type="highpass";hp.frequency.value=1800;
-    const g=ctx.createGain();g.gain.value=0.35;
-    src.connect(hp);hp.connect(g);g.connect(ctx.destination);src.start(t);
-  }
-
-  /* pen-on-pen clack — plastic percussive hit */
-  function playClack(){
-    const t=ctx.currentTime;
-    const osc=ctx.createOscillator();
-    const g=ctx.createGain();
-    const bp=ctx.createBiquadFilter();
-    osc.type="square";osc.frequency.setValueAtTime(900,t);osc.frequency.exponentialRampToValueAtTime(280,t+.09);
-    bp.type="bandpass";bp.frequency.value=1400;bp.Q.value=1.2;
-    g.gain.setValueAtTime(.45,t);g.gain.exponentialRampToValueAtTime(.001,t+.13);
-    osc.connect(bp);bp.connect(g);g.connect(ctx.destination);
-    osc.start(t);osc.stop(t+.14);
-    // noise component
-    const nlen=Math.floor(ctx.sampleRate*.07);
-    const nbuf=ctx.createBuffer(1,nlen,ctx.sampleRate);
-    const nd=nbuf.getChannelData(0);
-    for(let i=0;i<nlen;i++) nd[i]=(Math.random()*2-1)*Math.pow(1-i/nlen,3.5);
-    const ns=ctx.createBufferSource();ns.buffer=nbuf;
-    const ng=ctx.createGain();ng.gain.value=.18;
-    ns.connect(ng);ng.connect(ctx.destination);ns.start(t);
-  }
-
-  /* score chime */
-  function playScore(){
-    const t=ctx.currentTime;
-    [523,659,784].forEach((f,i)=>{
-      const o=ctx.createOscillator();const g=ctx.createGain();
-      o.type="sine";o.frequency.value=f;
-      g.gain.setValueAtTime(0,t+i*.1);g.gain.linearRampToValueAtTime(.22,t+i*.1+.05);
-      g.gain.exponentialRampToValueAtTime(.001,t+i*.1+.32);
-      o.connect(g);g.connect(ctx.destination);o.start(t+i*.1);o.stop(t+i*.1+.35);
-    });
-  }
-
-  /* fail thud */
-  function playThud(){
-    const t=ctx.currentTime;
-    const o=ctx.createOscillator();const g=ctx.createGain();
-    o.type="sine";o.frequency.setValueAtTime(180,t);o.frequency.exponentialRampToValueAtTime(60,t+.15);
-    g.gain.setValueAtTime(.4,t);g.gain.exponentialRampToValueAtTime(.001,t+.18);
-    o.connect(g);g.connect(ctx.destination);o.start(t);o.stop(t+.2);
-  }
-
-  return{startAmbience,playFlick,playClack,playScore,playThud,resume:()=>ctx.state==="suspended"&&ctx.resume()};
+  return {
+    playFlick,
+    playClack: playFlick, // Use the exact same 1st sound when hitting
+    resume: () => ctx.state === "suspended" && ctx.resume()
+  };
 }
 
-/* ── component ──────────────────────────────── */
-export default function PenFightPage(){
-  const cvs  = useRef<HTMLCanvasElement>(null);
-  const raf  = useRef(0);
-  const G    = useRef<GS>({
-    p1:mkP(W/2,H*.73,.2), p2:mkP(W/2,H*.27,-.15),
-    phase:"idle", lastPhase:null, drag:null, s1:0, s2:0,
-    msg:"👆 Tap your blue pen and drag to flick!", tmr:null, clackAt:0,
+/* ── Main Full-Screen Component ───────────────────── */
+export default function PenFightPage() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cvs = useRef<HTMLCanvasElement>(null);
+  const raf = useRef(0);
+  const [size, setSize] = useState({ w: 400, h: 700 });
+  const [muted, setMuted] = useState(false);
+
+  const G = useRef<GS>({
+    p1: mkP(200, 480, -0.1),
+    p2: mkP(200, 300, 0.1),
+    phase: "idle", lastPhase: null, drag: null, contact: null, s1: 0, s2: 0,
+    msg: "👉 Touch ANY part of your white pen & pull back to flick!",
+    tmr: null, clackAt: 0,
   });
-  const audio    = useRef<ReturnType<typeof makeAudio>|null>(null);
-  const msgEl    = useRef<HTMLDivElement>(null);
-  const btnEl    = useRef<HTMLButtonElement>(null);
 
-  function sync(){
-    const g=G.current;
-    if(msgEl.current) msgEl.current.textContent=g.msg;
-    if(cvs.current)   cvs.current.style.cursor=g.phase==="idle"?"pointer":"default";
-    if(btnEl.current) btnEl.current.style.display=g.phase==="game_over"?"block":"none";
-  }
+  const audio = useRef<ReturnType<typeof makeActionAudio> | null>(null);
 
-  function initAudio(){
-    if(audio.current)return;
-    try{ audio.current=makeAudio(); audio.current.startAmbience(); }catch(e){ void e; }
-  }
+  // Resize canvas to fill container
+  useEffect(() => {
+    function handleResize() {
+      if (!containerRef.current) return;
+      const w = containerRef.current.clientWidth || window.innerWidth;
+      const h = containerRef.current.clientHeight || window.innerHeight;
+      setSize({ w, h });
 
-  function resetRound(){
-    const g=G.current;
-    if(g.tmr){clearTimeout(g.tmr);g.tmr=null;}
-    g.p1=mkP(W/2+(Math.random()-.5)*70,H*.73+(Math.random()-.5)*28,(Math.random()-.5)*.7);
-    g.p2=mkP(W/2+(Math.random()-.5)*70,H*.27+(Math.random()-.5)*28,(Math.random()-.5)*.7);
-    g.phase="idle";g.lastPhase=null;g.drag=null;
-    g.msg="Your turn — flick your pen!";sync();
-  }
-
-  function endRound(){
-    const g=G.current;const{p1,p2}=g;
-    let scored=false;
-    if(p1.out&&!p2.out){g.s2++;g.msg="You fell off! CPU scores 😅";scored=true;audio.current?.playThud();}
-    else if(p2.out&&!p1.out){g.s1++;g.msg="CPU fell! You score 🎉";scored=true;audio.current?.playScore();}
-    else if(p1.out&&p2.out){g.msg="Both fell! Resetting...";scored=true;}
-    sync();
-    if(g.s1>=WIN||g.s2>=WIN){
-      g.phase="game_over";
-      g.msg=g.s1>=WIN?`🏆 You win ${g.s1}–${g.s2}!`:`💻 CPU wins ${g.s2}–${g.s1}. Try again!`;
-      sync();return;
-    }
-    if(scored){g.phase="round_end";g.tmr=setTimeout(resetRound,1500);return;}
-    if(g.lastPhase==="moving"){
-      g.phase="cpu_wait";g.msg="CPU thinking... 🤔";sync();
-      g.tmr=setTimeout(cpuFlick,700+Math.random()*600);
-    } else {
-      g.phase="idle";g.msg="Your turn — flick your pen!";sync();
-    }
-  }
-
-  function cpuFlick(){
-    const g=G.current;if(g.phase!=="cpu_wait")return;
-    const{p1,p2}=g;
-    const ang=Math.atan2(p1.y-p2.y,p1.x-p2.x)+(Math.random()-.5)*.5;
-    const pwr=5+Math.random()*4; // CPU also uses realistic speed
-    p2.vx=Math.cos(ang)*pwr;p2.vy=Math.sin(ang)*pwr;p2.va=(Math.random()-.5)*.12;
-    g.phase="cpu_move";g.msg="CPU attacks! 💥";sync();
-    audio.current?.playFlick();
-  }
-
-  function draw(){
-    const c=cvs.current;if(!c)return;
-    const ctx=c.getContext("2d")!;
-    const g=G.current;
-    drawTable(ctx,g);
-    drawPen(ctx,g.p2,false,false);
-    drawPen(ctx,g.p1,true,g.phase==="idle");
-  }
-
-  useEffect(()=>{
-    let alive=true;
-    function tick(){
-      if(!alive)return;
-      const g=G.current;
-      const moving=g.phase==="moving"||g.phase==="cpu_move";
-      if(moving){
-        const{p1,p2}=g;
-        p1.x+=p1.vx;p1.y+=p1.vy;p1.a+=p1.va;
-        p2.x+=p2.vx;p2.y+=p2.vy;p2.a+=p2.va;
-        p1.vx*=FRIC;p1.vy*=FRIC;p1.va*=AFRIC;
-        p2.vx*=FRIC;p2.vy*=FRIC;p2.va*=AFRIC;
-        const hit=capsuleCollide(p1,p2);
-        if(hit){ const now=Date.now(); if(now-g.clackAt>120){g.clackAt=now;audio.current?.playClack();} }
-        const E=10;
-        if(!p1.out&&(p1.x<E||p1.x>W-E||p1.y<E||p1.y>H-E)){p1.out=true;p1.vx=p1.vy=p1.va=0;}
-        if(!p2.out&&(p2.x<E||p2.x>W-E||p2.y<E||p2.y>H-E)){p2.out=true;p2.vx=p2.vy=p2.va=0;}
-        const s1=Math.hypot(p1.vx,p1.vy),s2=Math.hypot(p2.vx,p2.vy);
-        if((s1<.1&&s2<.1&&Math.abs(p1.va)<.008&&Math.abs(p2.va)<.008)||(p1.out&&p2.out)){
-          p1.vx=p1.vy=p1.va=0;p2.vx=p2.vy=p2.va=0;
-          g.lastPhase=g.phase as "moving"|"cpu_move";
-          g.phase="round_end";endRound();
-        }
+      const g = G.current;
+      const tableTopY = h * 0.28;
+      const tableBotY = h * 0.90;
+      if (g.phase === "idle") {
+        if (g.p1.y < tableTopY || g.p1.y > tableBotY) g.p1.y = tableBotY - 75;
+        if (g.p2.y < tableTopY || g.p2.y > tableBotY) g.p2.y = tableTopY + 75;
+        g.p1.x = w / 2;
+        g.p2.x = w / 2;
       }
-      draw();
-      raf.current=requestAnimationFrame(tick);
     }
-    raf.current=requestAnimationFrame(tick);
-    return()=>{alive=false;cancelAnimationFrame(raf.current);};
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
 
-  useEffect(()=>{
-    const el=cvs.current!;
-    const fn=(e:TouchEvent)=>{if(G.current.phase==="aiming")e.preventDefault();};
-    el.addEventListener("touchmove",fn,{passive:false});
-    return()=>el.removeEventListener("touchmove",fn);
-  },[]);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-  function getPos(e:React.MouseEvent|React.TouchEvent){
-    const c=cvs.current!,r=c.getBoundingClientRect();
-    const sx=W/r.width,sy=H/r.height;
-    const cl="touches"in e?e.changedTouches[0]:e;
-    return{x:(cl.clientX-r.left)*sx,y:(cl.clientY-r.top)*sy};
-  }
-  function onDown(e:React.MouseEvent|React.TouchEvent){
-    initAudio();audio.current?.resume();
-    const g=G.current;if(g.phase!=="idle")return;
-    const pos=getPos(e);
-    if(Math.hypot(pos.x-g.p1.x,pos.y-g.p1.y)<65){g.drag={x:pos.x,y:pos.y};g.phase="aiming";}
-  }
-  function onMove(e:React.MouseEvent|React.TouchEvent){
-    const g=G.current;if(g.phase!=="aiming"||!g.drag)return;
-    const pos=getPos(e);g.drag={x:pos.x,y:pos.y};
-  }
-  function onUp(){
-    const g=G.current;if(g.phase!=="aiming"||!g.drag)return;
-    const p=g.p1,d=g.drag;
-    const dx=d.x-p.x,dy=d.y-p.y,dist=Math.hypot(dx,dy);
-    g.drag=null;
-    if(dist>6){
-      const pwr=Math.min(dist/12,MAX_V); // less power per drag distance
-      p.vx=(dx/dist)*pwr;p.vy=(dy/dist)*pwr;p.va=(Math.random()-.5)*.1;
-      g.phase="moving";g.msg="Pen flying! 💨";sync();
-      audio.current?.playFlick();
-    } else { g.phase="idle"; }
+  function initAudio() {
+    if (audio.current || muted) return;
+    try { audio.current = makeActionAudio(); } catch (e) { void e; }
   }
 
-  return(
-    <div style={{minHeight:"100vh",background:"#131008",display:"flex",flexDirection:"column",alignItems:"center",paddingTop:14,paddingBottom:24,color:"#fff"}}>
-      <div style={{width:"100%",maxWidth:W,padding:"0 16px 10px"}}>
-        <Link href="/vibe-room/play-zone" style={{color:"rgba(255,255,255,.33)",fontSize:13,textDecoration:"none"}}>← Play Zone</Link>
-      </div>
-      <div ref={msgEl} style={{fontSize:13,fontWeight:600,color:"rgba(255,255,255,.62)",marginBottom:10,textAlign:"center",minHeight:22,padding:"0 20px"}}>👆 Tap your blue pen and drag to flick!</div>
-      <canvas ref={cvs} width={W} height={H}
-        style={{borderRadius:6,boxShadow:"0 20px 70px rgba(0,0,0,.8),0 4px 12px rgba(0,0,0,.5)",maxWidth:"94vw",display:"block",touchAction:"none",cursor:"pointer"}}
-        onMouseDown={onDown} onMouseMove={onMove} onMouseUp={onUp}
-        onTouchStart={onDown} onTouchMove={onMove} onTouchEnd={onUp}
-      />
-      <div style={{display:"flex",gap:22,marginTop:14}}>
-        <div style={{display:"flex",alignItems:"center",gap:7}}>
-          <div style={{width:32,height:8,borderRadius:4,background:"linear-gradient(90deg,#071e50,#3a90e8,#071e50)"}}/>
-          <span style={{fontSize:11,color:"rgba(255,255,255,.32)"}}>Your pen</span>
+  function resetRound() {
+    const g = G.current;
+    const w = size.w, h = size.h;
+    const tableTopY = h * 0.28;
+    const tableBotY = h * 0.90;
+
+    if (g.tmr) { clearTimeout(g.tmr); g.tmr = null; }
+    g.p1 = mkP(w / 2 + (Math.random() - 0.5) * (w * 0.22), tableBotY - 80 + (Math.random() - 0.5) * 25, (Math.random() - 0.5) * 0.5);
+    g.p2 = mkP(w / 2 + (Math.random() - 0.5) * (w * 0.22), tableTopY + 80 + (Math.random() - 0.5) * 25, (Math.random() - 0.5) * 0.5);
+    g.phase = "idle"; g.lastPhase = null; g.drag = null; g.contact = null;
+    g.msg = "Your turn — pull back & release!";
+  }
+
+  function endRound() {
+    const g = G.current; const { p1, p2 } = g;
+    let scored = false;
+
+    if (p1.out && !p2.out) {
+      g.s2++; g.msg = "You fell off the table! CPU scores 😅"; scored = true;
+    } else if (p2.out && !p1.out) {
+      g.s1++; g.msg = "CPU fell off! You score 🎉"; scored = true;
+    } else if (p1.out && p2.out) {
+      g.msg = "Both pens fell off! Resetting round..."; scored = true;
+    }
+
+    if (g.s1 >= 3 || g.s2 >= 3) {
+      g.phase = "game_over";
+      g.msg = g.s1 >= 3 ? `🏆 YOU WIN ${g.s1}–${g.s2}!` : `💻 CPU WINS ${g.s2}–${g.s1}. Try again!`;
+      return;
+    }
+
+    if (scored) {
+      g.phase = "round_end";
+      g.tmr = setTimeout(resetRound, 1500);
+      return;
+    }
+
+    if (g.lastPhase === "moving") {
+      g.phase = "cpu_wait"; g.msg = "CPU thinking... 🤔";
+      g.tmr = setTimeout(cpuFlick, 750 + Math.random() * 550);
+    } else {
+      g.phase = "idle"; g.msg = "Your turn — pull back & release!";
+    }
+  }
+
+  function cpuFlick() {
+    const g = G.current; if (g.phase !== "cpu_wait") return;
+    const { p1, p2 } = g;
+
+    const ang = Math.atan2(p1.y - p2.y, p1.x - p2.x) + (Math.random() - 0.5) * 0.35;
+    const pwr = 5.5 + Math.random() * 3.5;
+
+    p2.vx = Math.cos(ang) * pwr;
+    p2.vy = Math.sin(ang) * pwr;
+    p2.va = (Math.random() - 0.5) * 0.15;
+
+    g.phase = "cpu_move"; g.msg = "CPU attacks! 💥";
+    if (!muted) audio.current?.playFlick();
+  }
+
+  /* Animation Loop */
+  useEffect(() => {
+    let alive = true;
+    function tick() {
+      if (!alive) return;
+      const c = cvs.current;
+      if (c) {
+        const ctx = c.getContext("2d")!;
+        const cw = size.w, ch = size.h;
+        const g = G.current;
+        const { PL, PR } = getPenDimensions(cw, ch);
+
+        const moving = g.phase === "moving" || g.phase === "cpu_move";
+
+        if (moving) {
+          const { p1, p2 } = g;
+
+          p1.x += p1.vx; p1.y += p1.vy; p1.a += p1.va;
+          p2.x += p2.vx; p2.y += p2.vy; p2.a += p2.va;
+
+          const FRIC = 0.938, AFRIC = 0.88;
+          p1.vx *= FRIC; p1.vy *= FRIC; p1.va *= AFRIC;
+          p2.vx *= FRIC; p2.vy *= FRIC; p2.va *= AFRIC;
+
+          // Collision Resolution
+          const hit = resolvePenCollision(p1, p2, PL, PR);
+          if (hit) {
+            const now = Date.now();
+            if (now - g.clackAt > 400) {
+              g.clackAt = now;
+              if (!muted) audio.current?.playClack();
+            }
+          }
+
+          // Table boundaries (28% to 90%)
+          const tableTopY = ch * 0.28;
+          const tableBotY = ch * 0.90;
+          const topW = cw * 0.78, botW = cw * 0.92;
+          const topX1 = (cw - topW) / 2, topX2 = topX1 + topW;
+          const botX1 = (cw - botW) / 2, botX2 = botX1 + botW;
+
+          function checkOff(p: Pen) {
+            if (p.out) return true;
+            if (p.y < tableTopY || p.y > tableBotY) return true;
+            const ratio = (p.y - tableTopY) / (tableBotY - tableTopY);
+            const lx = topX1 + (botX1 - topX1) * ratio;
+            const rx = topX2 + (botX2 - topX2) * ratio;
+            return p.x < lx - 10 || p.x > rx + 10;
+          }
+
+          if (!p1.out && checkOff(p1)) { p1.out = true; p1.vx = p1.vy = p1.va = 0; }
+          if (!p2.out && checkOff(p2)) { p2.out = true; p2.vx = p2.vy = p2.va = 0; }
+
+          const s1 = Math.hypot(p1.vx, p1.vy), s2 = Math.hypot(p2.vx, p2.vy);
+          if ((s1 < 0.12 && s2 < 0.12 && Math.abs(p1.va) < 0.008 && Math.abs(p2.va) < 0.008) || (p1.out && p2.out)) {
+            p1.vx = p1.vy = p1.va = 0; p2.vx = p2.vy = p2.va = 0;
+            g.lastPhase = g.phase as "moving" | "cpu_move";
+            g.phase = "round_end";
+            endRound();
+          }
+        }
+
+        // Render Everything to fill Screen
+        ctx.clearRect(0, 0, cw, ch);
+        drawClassroomScene(ctx, cw, ch, g);
+        drawWoodenDesk(ctx, cw, ch);
+        drawPen(ctx, g.p2, false, false, PL, PR);
+        drawPen(ctx, g.p1, true, g.phase === "idle", PL, PR);
+        drawAimTrajectory(ctx, g);
+      }
+
+      raf.current = requestAnimationFrame(tick);
+    }
+
+    raf.current = requestAnimationFrame(tick);
+    return () => { alive = false; cancelAnimationFrame(raf.current); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [size, muted]);
+
+  useEffect(() => {
+    const el = cvs.current!;
+    if (!el) return;
+    const fn = (e: TouchEvent) => { if (G.current.phase === "aiming") e.preventDefault(); };
+    el.addEventListener("touchmove", fn, { passive: false });
+    return () => el.removeEventListener("touchmove", fn);
+  }, []);
+
+  function getPos(e: React.MouseEvent | React.TouchEvent): Vector2D {
+    const c = cvs.current!, r = c.getBoundingClientRect();
+    const cl = "touches" in e ? e.changedTouches[0] : e;
+    return { x: cl.clientX - r.left, y: cl.clientY - r.top };
+  }
+
+  function isTouchOnPen(pos: Vector2D, p: Pen): boolean {
+    const { PL, PR } = getPenDimensions(size.w, size.h);
+    const dx = pos.x - p.x;
+    const dy = pos.y - p.y;
+    const cos = Math.cos(p.a), sin = Math.sin(p.a);
+    const localX = dx * cos + dy * sin;
+    const localY = -dx * sin + dy * cos;
+    return Math.abs(localX) <= PL + 14 && Math.abs(localY) <= PR + 14;
+  }
+
+  function onDown(e: React.MouseEvent | React.TouchEvent) {
+    initAudio(); if (!muted) audio.current?.resume();
+    const g = G.current; if (g.phase !== "idle") return;
+    const pos = getPos(e);
+
+    if (isTouchOnPen(pos, g.p1)) {
+      g.contact = { x: pos.x, y: pos.y };
+      g.drag = { x: pos.x, y: pos.y };
+      g.phase = "aiming";
+    }
+  }
+
+  function onMove(e: React.MouseEvent | React.TouchEvent) {
+    const g = G.current; if (g.phase !== "aiming" || !g.drag) return;
+    const pos = getPos(e);
+    g.drag = { x: pos.x, y: pos.y };
+  }
+
+  function onUp() {
+    const g = G.current; if (g.phase !== "aiming" || !g.drag || !g.contact) return;
+    const p = g.p1, contact = g.contact, drag = g.drag;
+
+    const pullX = drag.x - contact.x;
+    const pullY = drag.y - contact.y;
+    const dist = Math.hypot(pullX, pullY);
+
+    g.drag = null; g.contact = null;
+
+    if (dist > 6) {
+      const launchX = -pullX;
+      const launchY = -pullY;
+      const MAX_V = 9.5;
+      const pwr = Math.min(dist / 14, MAX_V);
+
+      p.vx = (launchX / dist) * pwr;
+      p.vy = (launchY / dist) * pwr;
+
+      const offsetX = contact.x - p.x;
+      const offsetY = contact.y - p.y;
+      const torque = offsetX * launchY - offsetY * launchX;
+      const MAX_VA = 0.22;
+      p.va = Math.max(-MAX_VA, Math.min(MAX_VA, (torque / dist) * 0.003));
+
+      g.phase = "moving"; g.msg = "Pen launched! 💨";
+      if (!muted) audio.current?.playFlick();
+    } else {
+      g.phase = "idle";
+    }
+  }
+
+  return (
+    <div ref={containerRef} className="w-full h-screen fixed inset-0 overflow-hidden bg-[#212d21] select-none touch-none flex flex-col">
+      {/* Top Dedicated Navigation Header Bar */}
+      <header className="w-full bg-[#1b251d] border-b border-white/10 px-4 py-2.5 flex items-center justify-between z-30 shrink-0 shadow-md">
+        <Link
+          href="/vibe-room/play-zone"
+          className="text-white/80 hover:text-white text-xs font-bold bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-full border border-white/10 transition-all flex items-center gap-1.5"
+        >
+          ← Play Zone
+        </Link>
+
+        <div className="text-sm font-black text-amber-300 tracking-wide">
+          ✏️ PEN FIGHT
         </div>
-        <div style={{display:"flex",alignItems:"center",gap:7}}>
-          <div style={{width:32,height:8,borderRadius:4,background:"linear-gradient(90deg,#0a0a0a,#c62828,#0a0a0a)"}}/>
-          <span style={{fontSize:11,color:"rgba(255,255,255,.32)"}}>CPU pen</span>
+
+        <div className="flex items-center gap-2">
+          {/* Sound Toggle */}
+          <button
+            onClick={() => setMuted(!muted)}
+            className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center text-xs text-white transition-all"
+            title={muted ? "Unmute Sound" : "Mute Sound"}
+          >
+            {muted ? "🔇" : "🔊"}
+          </button>
+          {/* Close Direct Exit Button */}
+          <Link
+            href="/vibe-room/play-zone"
+            className="w-8 h-8 rounded-full bg-red-600/80 hover:bg-red-500 border border-red-400/30 flex items-center justify-center text-xs font-bold text-white transition-all"
+            title="Exit Game"
+          >
+            ✕
+          </Link>
         </div>
+      </header>
+
+      {/* Canvas Container */}
+      <div className="flex-1 w-full relative">
+        <canvas
+          ref={cvs}
+          width={size.w}
+          height={size.h}
+          className="w-full h-full block cursor-pointer"
+          onMouseDown={onDown}
+          onMouseMove={onMove}
+          onMouseUp={onUp}
+          onTouchStart={onDown}
+          onTouchMove={onMove}
+          onTouchEnd={onUp}
+        />
       </div>
-      <button ref={btnEl} onClick={()=>{const g=G.current;g.s1=0;g.s2=0;resetRound();}}
-        style={{display:"none",marginTop:20,padding:"12px 32px",borderRadius:50,background:"#c8873a",color:"#fff",fontSize:14,fontWeight:800,border:"none",cursor:"pointer",boxShadow:"0 4px 16px rgba(200,135,58,.4)"}}>
-        Play Again
-      </button>
+
+      {/* Game Over Overlay */}
+      {G.current.phase === "game_over" && (
+        <div className="absolute inset-0 z-40 flex flex-col items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+          <div className="text-2xl font-black text-amber-300 mb-2">{G.current.msg}</div>
+          <div className="flex gap-3 mt-4">
+            <button
+              onClick={() => { const g = G.current; g.s1 = 0; g.s2 = 0; resetRound(); }}
+              className="px-6 py-2.5 rounded-full bg-amber-600 hover:bg-amber-500 text-white font-black text-sm shadow-lg transition-all transform active:scale-95"
+            >
+              Play Again 🔄
+            </button>
+            <Link
+              href="/vibe-room/play-zone"
+              className="px-6 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 transition-all"
+            >
+              Exit to Play Zone
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
