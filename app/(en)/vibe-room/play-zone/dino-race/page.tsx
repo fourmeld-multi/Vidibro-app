@@ -262,40 +262,39 @@ export default function DinoRacePage() {
   const soundOnRef = useRef(true);
 
   function getAudioCtx() {
-    if (!audioCtxRef.current) audioCtxRef.current = new AudioContext();
+    if (!audioCtxRef.current || audioCtxRef.current.state === "closed")
+      audioCtxRef.current = new AudioContext();
     return audioCtxRef.current;
+  }
+
+  function stopRunSound() {
+    if (!runNodeRef.current) return;
+    const { osc, gain } = runNodeRef.current;
+    runNodeRef.current = null;
+    try { gain.gain.cancelScheduledValues(0); gain.gain.setValueAtTime(0, 0); osc.stop(); osc.disconnect(); gain.disconnect(); } catch {}
   }
 
   function startRunSound() {
     if (!soundOnRef.current) return;
+    stopRunSound();
     try {
       const ctx = getAudioCtx();
       if (ctx.state === "suspended") ctx.resume();
-      if (runNodeRef.current) return;
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.type = "sine";
       osc.frequency.value = 48;
-      gain.gain.value = 0.08;
+      gain.gain.value = 0.07;
       osc.connect(gain); gain.connect(ctx.destination);
       osc.start();
       runNodeRef.current = { osc, gain };
     } catch {}
   }
 
-  function stopRunSound() {
-    try {
-      if (!runNodeRef.current) return;
-      const { osc, gain } = runNodeRef.current;
-      runNodeRef.current = null;
-      gain.gain.setTargetAtTime(0, audioCtxRef.current!.currentTime, 0.06);
-      setTimeout(() => { try { osc.stop(); osc.disconnect(); gain.disconnect(); } catch {} }, 150);
-    } catch {}
-  }
-
-  function killAudio() {
+  function destroyAudio() {
     stopRunSound();
-    try { audioCtxRef.current?.close(); audioCtxRef.current = null; } catch {}
+    try { audioCtxRef.current?.close(); } catch {}
+    audioCtxRef.current = null;
   }
 
   function playHitSound() {
@@ -333,10 +332,10 @@ export default function DinoRacePage() {
 
   // ── Cleanup audio on unmount / page hide ─────────────────────────────────
   useEffect(() => {
-    const onHide = () => killAudio();
+    const onHide = () => { if (document.hidden) stopRunSound(); };
     document.addEventListener("visibilitychange", onHide);
     return () => {
-      killAudio();
+      destroyAudio();
       document.removeEventListener("visibilitychange", onHide);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -347,7 +346,7 @@ export default function DinoRacePage() {
     const next = !soundOnRef.current;
     soundOnRef.current = next;
     setSoundOn(next);
-    if (!next) killAudio();
+    if (!next) stopRunSound();
     else if (phaseRef.current === "playing") startRunSound();
   }
 
@@ -430,7 +429,7 @@ export default function DinoRacePage() {
   }
 
   function handleCloseGame() {
-    killAudio();
+    destroyAudio();
     close();
     cancelAnimationFrame(rafRef.current);
     if (rematchTimerRef.current) clearTimeout(rematchTimerRef.current);
