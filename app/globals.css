@@ -158,6 +158,7 @@ body {
   border-radius: 9999px;
   filter: blur(90px);
   opacity: 0.45;
+  will-change: transform;
 }
 
 .blob-float {
@@ -166,6 +167,16 @@ body {
 
 .blob-float-reverse {
   animation: blob-float-reverse 18s ease-in-out infinite;
+}
+
+/* Pause blob animations on mobile — filter:blur + continuous transform is not
+   GPU-composited on mobile CPUs, causing main-thread repaints every frame.
+   Static blobs still show; desktop animations are completely unaffected. */
+@media (max-width: 768px) {
+  .blob-float,
+  .blob-float-reverse {
+    animation: none;
+  }
 }
 
 /* The pulsing CTA glow used to live here. It animated box-shadow, which is one
