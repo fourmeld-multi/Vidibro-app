@@ -7,7 +7,7 @@ const ptBr: NativeLangData = {
   canonicalSlug: "/pt-br",
   title: "Chat de Vídeo Grátis Brasil | Videochamada Aleatória - Vidibro",
   description:
-    "Vidibro — vídeo chat gratuito e videochamada aleatória sem cadastro. Chat ao vivo grátis com pessoas do Brasil e do mundo. Chamada de vídeo grátis 1 a 1. Comece agora.",
+    "Vidibro — vídeo chat gratuito e videochamada aleatória sem cadastro. Chat ao vivo grátis com pessoas do Brasil e do mundo. Chamada de vídeo grátis 1 a 1.",
   h1: "Chat de Vídeo Grátis — Videochamada Aleatória Brasil",
   tagline: "Sem cadastro. Chat ao vivo grátis com pessoas do Brasil e do mundo agora mesmo.",
   intro:
