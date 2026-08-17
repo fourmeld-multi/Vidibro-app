@@ -844,9 +844,16 @@ export default function PenFightPage() {
           const isLS = cw > ch;
           const tableTopY = ch * (isLS ? 0.68 : 0.45);
           const tableBotY = ch * (isLS ? 0.97 : 0.88);
-          const topW = cw * (isLS ? 0.66 : 0.74), botW = cw * (isLS ? 1.0 : 1.0);
-          const topX1 = (cw - topW) / 2, topX2 = topX1 + topW;
-          const botX1 = (cw - botW) / 2, botX2 = botX1 + botW;
+          // Portrait: absolute x% matching desk image edges (not centered trapezoid)
+          let topX1: number, topX2: number, botX1: number, botX2: number;
+          if (isLS) {
+            const topW = cw * 0.66;
+            topX1 = (cw - topW) / 2; topX2 = topX1 + topW;
+            botX1 = 0; botX2 = cw;
+          } else {
+            topX1 = cw * 0.11; topX2 = cw * 0.76;
+            botX1 = 0; botX2 = cw;
+          }
 
           function checkOff(p: Pen) {
             if (p.out) return true;
