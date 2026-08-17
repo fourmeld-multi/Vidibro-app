@@ -780,10 +780,10 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "city",
     name: "Delhi",
     parent: "India",
-    primaryKeyword: "delhi video chat",
-    title: "Delhi Video Chat — Talk to Strangers in Delhi Free",
+    primaryKeyword: "delhi video call",
+    title: "Delhi Video Call Free — Random Video Chat with Strangers | Vidibro",
     description:
-      "Random video chat with people in Delhi and NCR. Free, anonymous, no signup — meet strangers in Hindi, Punjabi or English.",
+      "Free Delhi video call with strangers — no signup, no download. Random video chat with people in Delhi and NCR in Hindi, Punjabi or English. Start instantly.",
     languages: ["हिन्दी (Hindi)", "English", "ਪੰਜਾਬੀ (Punjabi)", "اردو (Urdu)"],
     peakHours: "21:30 – 01:00 IST",
     timezone: "Asia/Kolkata",
