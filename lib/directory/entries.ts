@@ -781,7 +781,7 @@ export const ENTRIES: DirectoryEntry[] = [
     name: "Delhi",
     parent: "India",
     primaryKeyword: "delhi video call",
-    title: "Delhi Video Call Free — Random Video Chat with Strangers | Vidibro",
+    title: "Delhi Video Call Free — Random Video Chat",
     description:
       "Free Delhi video call with strangers — no signup, no download. Random video chat with people in Delhi and NCR in Hindi, Punjabi or English. Start instantly.",
     languages: ["हिन्दी (Hindi)", "English", "ਪੰਜਾਬੀ (Punjabi)", "اردو (Urdu)"],
