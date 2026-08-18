@@ -568,6 +568,33 @@ export const ENTRIES: DirectoryEntry[] = [
       { question: "Why does Nepal have such a large diaspora on video chat?", answer: "Nepal has one of the highest labour migration rates in Asia, with large communities in Qatar, UAE, Saudi Arabia and Malaysia. Many Vidibro users from Nepal are actually connecting from abroad, or are family members at home staying in contact with people who are." },
       { question: "Does video call work in mountain areas of Nepal?", answer: "In major trekking hubs like Namche Bazaar there is wifi, but remote mountain areas have limited or no mobile data. Urban and lowland Nepal has good 4G through Ncell and NTC. Vidibro drops video quality rather than the call when the signal is weak." },
     ],
+    quickFacts: [
+      {
+        emoji: "🏳️",
+        title: "Only Non-Rectangular Flag",
+        body: "Nepal's double-pennant flag is the only national flag in the world that isn't a rectangle. Every Nepali knows this and most can tell you exactly why.",
+      },
+      {
+        emoji: "⏰",
+        title: "UTC+5:45 — The 15-Min Offset",
+        body: "Nepal runs fifteen minutes ahead of India — one of only a handful of countries with a 45-minute timezone offset. It came from an astronomical calculation, not colonial borders.",
+      },
+      {
+        emoji: "🏔️",
+        title: "8 of the World's 14 Peaks",
+        body: "Eight of the fourteen mountains above 8,000 m are in Nepal, including Everest. Yet most Nepalis you meet have never been near them — those peaks are for tourists and elite climbers.",
+      },
+      {
+        emoji: "✈️",
+        title: "500k+ Nepalis in the Gulf",
+        body: "Qatar, UAE and Saudi Arabia have massive Nepali labour communities. Whoever you connect with might be calling from Doha, not Kathmandu — or they have family there.",
+      },
+      {
+        emoji: "🎉",
+        title: "Dashain Stops Everything",
+        body: "Nepal's biggest festival (usually October) pulls workers home from the Gulf and students back from India. Two weeks where the entire country reorganises around family.",
+      },
+    ],
     related: [
       { slug: "video-chat-kathmandu", label: "Kathmandu", relation: "city" },
       { slug: "video-chat-pokhara", label: "Pokhara", relation: "city" },

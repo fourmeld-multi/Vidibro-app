@@ -16,6 +16,10 @@ export type DirectoryKind = "country" | "city" | "language" | "topic";
 
 export type FAQ = { question: string; answer: string };
 
+/** Optional per-market cultural fact cards — rendered as a visual strip on the page.
+ *  Only add where the facts are genuinely specific to the market. */
+export type QuickFact = { emoji: string; title: string; body: string };
+
 /** A contextual in-content link. See LINKING_RULES for the required minimums. */
 export type RelatedLink = {
   slug: string;
@@ -118,6 +122,10 @@ export type DirectoryEntry = {
   intro: string[];
   /** Market-specific questions, not the same five with a name swapped. */
   faqs: FAQ[];
+
+  /** Cultural fact cards — shown as a visual strip. Only populate where facts are
+   *  genuinely specific and surprising about this market. */
+  quickFacts?: QuickFact[];
 
   // --- Linking -------------------------------------------------------------
   related: RelatedLink[];

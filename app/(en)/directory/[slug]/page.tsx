@@ -300,6 +300,29 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
           </section>
         )}
 
+        {entry.quickFacts && entry.quickFacts.length > 0 && (
+          <section className="mt-14">
+            <SectionHead
+              tone="purple"
+              icon={<Globe2 size={18} />}
+              title={`${entry.name} — quick facts`}
+              blurb="Stuff that is actually true here and genuinely surprising if you didn't know."
+            />
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {entry.quickFacts.map((fact) => (
+                <div
+                  key={fact.title}
+                  className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5 flex flex-col gap-2"
+                >
+                  <span className="text-3xl leading-none">{fact.emoji}</span>
+                  <p className="font-semibold text-sm text-[var(--foreground)]">{fact.title}</p>
+                  <p className="text-sm text-[var(--muted)] leading-relaxed">{fact.body}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         <section className="mt-14">
           <SectionHead tone="cyan" icon={<Zap size={18} />} title="How it works" />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
