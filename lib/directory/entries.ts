@@ -481,6 +481,384 @@ export const ENTRIES: DirectoryEntry[] = [
   },
 
   {
+    slug: "video-chat-nepal",
+    kind: "country",
+    name: "Nepal",
+    primaryKeyword: "nepal video call",
+    title: "Nepal Video Call Free — Random Video Chat with Strangers",
+    description:
+      "Free random video call with people in Nepal — no signup, no app. Chat with strangers in Kathmandu, Pokhara and beyond. Nepali, English, Newari. Start instantly.",
+    tagline: "No account. Instant random video call with Nepal — mountains, festivals, and people who actually want to talk.",
+    languages: ["नेपाली (Nepali)", "English", "नेवारी (Newari)", "मैथिली (Maithili)"],
+    peakHours: "21:00 – 01:30 NST",
+    timezone: "Asia/Kathmandu",
+    weight: 0.6,
+    places: ["Kathmandu", "Pokhara", "Lalitpur", "Biratnagar", "Bharatpur", "Dharan"],
+    talkingPoints: [
+      "The flag — Nepal is the only country in the world with a non-rectangular national flag, and most Nepalis have a genuinely warm story about why that matters to them",
+      "Dashain, the biggest festival of the year, which pulls families together from across the country and from Qatar, UAE and every Gulf city where Nepalis work — it is the one event that reshapes the online queue entirely",
+      "The Gulf diaspora — a huge share of Nepali adults have spent time working in Qatar, Saudi Arabia or the UAE, and asking about that experience opens a conversation that goes somewhere real",
+      "Everest — not just as a mountain to climb but as something people here have complicated feelings about: pride, commercialisation, crowded queues of wealthy tourists, and local Sherpa lives that rarely make the documentaries",
+      "Load shedding — power cuts are a lived experience in many Nepali homes, and asking whether the electricity is on tonight is a completely normal question that gets a completely real answer",
+    ],
+    connectivityNote:
+      "Nepal runs on Ncell and NTC, with solid 4G in Kathmandu, Pokhara and the main cities. Outside those centres — especially in mountain areas — connectivity drops off sharply. Vidibro scales video quality down automatically rather than cutting the call, which matters more here than in most markets. If someone switches to voice or text mid-call, it is almost certainly the signal, not the conversation.",
+    localNote:
+      "Nepal sits at UTC+5:45 — one of only a handful of countries with a fifteen-minute timezone offset. That quarter-hour gap from India is a small, specific thing that Nepalis tend to bring up unprompted when India or time zones come up. The evening peak lands around 9 PM and runs past midnight, later on weekends and during festivals.",
+    safetyNote:
+      "A large Nepali workforce is based in Gulf countries, and job recruitment scams targeting that community are common. Anyone offering overseas work, visa help, or 'agent fees' through a random video call is running one of these. Report and skip.",
+    etiquette:
+      "Namaste works as both hello and goodbye and is genuinely appreciated rather than performed. Nepali conversations tend to warm up quickly — small talk about where you are in Nepal and what the weather is like there right now is a real opener, not a filler.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "The only non-rectangular flag on Earth",
+        body: "Nepal's double-pennant flag is the one flag in the world that isn't a rectangle or square. Most Nepalis know this and are quietly proud of it. It is a small, specific fact that opens a conversation about identity and history — and almost nobody outside Nepal knows the reason behind it.",
+      },
+      {
+        kind: "diaspora",
+        title: "Half a million Nepalis in the Gulf",
+        body: "Qatar, UAE and Saudi Arabia have enormous Nepali worker communities. A significant share of Vidibro users connecting from Nepal are actually calling from abroad — or are family members back home whose evenings are shaped by Gulf time zones and the remittance economy. Asking whether someone has worked abroad or has family there is not intrusive; it is often the most relevant question.",
+      },
+      {
+        kind: "seasonal",
+        title: "Dashain shifts everything",
+        body: "Dashain, Nepal's biggest festival (usually October), draws workers home from the Gulf, students back from India, and diaspora from everywhere. The queue pattern changes completely for those two weeks — more people, later hours, more energy. If you connect with someone during Dashain, that context is worth asking about.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "नमस्ते", meaning: "Hello / goodbye — works both ways", say: "nuh-muh-stay" },
+      { phrase: "कस्तो छ?", meaning: "How are you? — the standard opener", say: "kus-to cha" },
+      { phrase: "राम्रो छ", meaning: "It's good / nice", say: "rum-ro cha" },
+      { phrase: "धन्यवाद", meaning: "Thank you", say: "dhan-ya-baad" },
+    ],
+    starters: [
+      {
+        topic: "The flag",
+        ask: "Why is Nepal the only country with a non-rectangular flag — do you actually know the history behind it?",
+        why: "Most Nepalis know, are proud, and enjoy explaining it to someone who genuinely doesn't.",
+      },
+      {
+        topic: "Gulf diaspora",
+        ask: "Do you have family working in Qatar or the UAE, or have you been yourself?",
+        why: "The Gulf migration is a major part of Nepali life — the question lands as real, not intrusive.",
+      },
+      {
+        topic: "Load shedding",
+        ask: "Is the electricity actually on where you are right now?",
+        why: "Power cuts are a genuine lived experience — the question gets a genuine, often funny answer.",
+      },
+      {
+        topic: "Everest",
+        ask: "What do people in Nepal actually think about the crowds of tourists climbing Everest every year?",
+        why: "Moves past the 'world's highest mountain' fact into something people have real opinions about.",
+      },
+    ],
+    intro: [
+      "Nepal has one of the youngest populations in South Asia — the median age is under twenty-five — and social media and video calling are completely normal parts of daily life here, not something older generations have to be convinced to use. The queue connects fast and the conversations tend to go somewhere.",
+      "The country runs at UTC+5:45, one of the few fifteen-minute timezone offsets in the world, which means the evening peak lands at roughly 9 PM local time and runs late. Weekends and festival periods — especially Dashain in October — push that peak later and bigger.",
+      "A significant part of the Nepali user base is abroad. Nepal has one of the largest labour migration rates in Asia, with hundreds of thousands of workers in Qatar, UAE and Saudi Arabia. When you connect with someone from Nepal, there is a reasonable chance they are calling from the Gulf, or that their family situation is shaped by someone who is.",
+      "Connectivity is solid in Kathmandu and Pokhara, patchier outside the main cities. Mountain areas can be very limited. Vidibro adjusts video quality rather than dropping the call, so a weaker signal produces a lower-resolution picture, not a disconnection — which matters in a country where the terrain varies that much.",
+    ],
+    faqs: [
+      { question: "Is nepal video call free on Vidibro?", answer: "Completely free, no account, no subscription. Just open the site and start." },
+      { question: "What language do people in Nepal speak on video calls?", answer: "Nepali is the national language and almost everyone speaks it. English is common among students and younger people in Kathmandu and Pokhara. In the Kathmandu Valley you may also encounter Newari." },
+      { question: "When is the best time to connect with Nepal?", answer: "Around 9 PM to 1 AM Nepal Standard Time (UTC+5:45). Nepal runs fifteen minutes ahead of India, so if you know India's timezone you can adjust from there." },
+      { question: "Do Nepali users speak English on video chat?", answer: "Younger users in cities usually do, especially students. Outside Kathmandu and Pokhara, English is less consistent — starting in Nepali or keeping sentences simple helps a lot." },
+      { question: "Why does Nepal have such a large diaspora on video chat?", answer: "Nepal has one of the highest labour migration rates in Asia, with large communities in Qatar, UAE, Saudi Arabia and Malaysia. Many Vidibro users from Nepal are actually connecting from abroad, or are family members at home staying in contact with people who are." },
+      { question: "Does video call work in mountain areas of Nepal?", answer: "In major trekking hubs like Namche Bazaar there is wifi, but remote mountain areas have limited or no mobile data. Urban and lowland Nepal has good 4G through Ncell and NTC. Vidibro drops video quality rather than the call when the signal is weak." },
+    ],
+    related: [
+      { slug: "video-chat-kathmandu", label: "Kathmandu", relation: "city" },
+      { slug: "video-chat-pokhara", label: "Pokhara", relation: "city" },
+      { slug: "video-chat-lalitpur", label: "Lalitpur (Patan)", relation: "city" },
+      { slug: "hindi-video-chat", label: "Hindi video chat", relation: "language" },
+      { slug: "bengali-video-chat", label: "Bengali video chat", relation: "language" },
+      { slug: "audio-chat", label: "voice chat without camera", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-india", label: "India", relation: "sibling" },
+      { slug: "video-chat-bangladesh", label: "Bangladesh", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-kathmandu",
+    kind: "city",
+    name: "Kathmandu",
+    parent: "Nepal",
+    primaryKeyword: "kathmandu video chat",
+    title: "Kathmandu Video Chat — Talk to Strangers Free",
+    description:
+      "Random video chat with people in Kathmandu — free, no signup. Students, artists, locals in the valley. Talk in Nepali, Newari or English.",
+    tagline: "Kathmandu's queue runs late and moves fast. No account needed — just show up.",
+    languages: ["नेपाली (Nepali)", "नेवारी (Newari)", "English"],
+    peakHours: "21:30 – 02:00 NST",
+    timezone: "Asia/Kathmandu",
+    weight: 0.5,
+    places: ["Thamel", "Patan", "Boudhanath", "Pashupatinath", "Swayambhunath", "New Road"],
+    talkingPoints: [
+      "The valley's traffic is genuinely legendary — Kathmandu has some of the worst urban congestion in South Asia, and everyone who lives there has a story about being stuck somewhere for two hours",
+      "The 2015 earthquake left marks that are still visible and still discussed — rebuilt temples, cracked walls, and a generation who remember exactly where they were",
+      "Newari culture and food — the original inhabitants of the Kathmandu Valley have a distinct language, architecture and cuisine that most outsiders confuse with generic 'Nepali' culture, and locals notice the difference",
+      "The rooftop culture — Kathmanduites eat, socialise and escape the noise on rooftops in a way that shapes the whole feel of the city after dark",
+    ],
+    connectivityNote:
+      "Kathmandu has decent 4G through Ncell and NTC across most of the valley, though congestion during peak hours can slow things down. The older parts of the city — narrow lanes around Thamel and the historic core — sometimes have patchy indoor signal. Video quality adjusts automatically.",
+    localNote:
+      "Kathmandu is a city of students and young professionals from across Nepal who moved here for university or work. 'Where are you originally from in Nepal?' is the standard second question — almost nobody in Kathmandu is actually from Kathmandu.",
+    safetyNote:
+      "Air quality in the valley is a genuine health concern during winter and pre-monsoon, and it comes up in conversation naturally. Mentioning it is not rude — it is the most current shared experience in the city.",
+    etiquette:
+      "Conversations open warmly and move quickly to personal topics — where you're from, what you do, what music you listen to. Younger Kathmandu users are online-native and comfortable with casual, direct exchanges.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "A city that came from everywhere else",
+        body: "Kathmandu draws students, workers and job-seekers from every district in Nepal. The person you meet is unlikely to be a Kathmandu native — they are far more likely to be from Pokhara, a hill district, or the Terai, which means their experience of the city is partly about being an outsider in their own capital.",
+      },
+      {
+        kind: "seasonal",
+        title: "Festival season fills the streets",
+        body: "The Kathmandu Valley hosts more festivals per calendar year than almost any city its size — Indra Jatra, Bisket Jatra, Dashain, Tihar, Losar. The city's character shifts noticeably around each one. If you connect during a festival week, that is always worth asking about directly.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "कता जाने?", meaning: "Where are you going? — Kathmandu's casual street opener", say: "ka-ta jaa-ne" },
+      { phrase: "छ छैन?", meaning: "Is it there / is it available?", say: "cha chain" },
+      { phrase: "सिधा जानुस्", meaning: "Go straight — the most common direction given", say: "si-dha jaa-nus" },
+      { phrase: "यस्तै हो", meaning: "It is what it is — the local shrug", say: "yes-tai ho" },
+    ],
+    starters: [
+      {
+        topic: "Origin",
+        ask: "Are you actually from Kathmandu, or did you move here — and what brought you?",
+        why: "Almost nobody is originally from Kathmandu. The answer is always a real story.",
+      },
+      {
+        topic: "Traffic",
+        ask: "What is the worst traffic situation you have ever been stuck in in Kathmandu?",
+        why: "A shared, specific grievance that everyone has a version of.",
+      },
+      {
+        topic: "Earthquake",
+        ask: "Do you remember the 2015 earthquake — where were you when it hit?",
+        why: "A genuine collective memory for anyone old enough. People want to talk about it.",
+      },
+    ],
+    intro: [
+      "Kathmandu sits in a bowl-shaped valley surrounded by hills, which is beautiful in the abstract and catastrophic for air circulation. The city is dense, loud, layered with history, and home to a university population that runs online late into the night.",
+      "Most people you meet here are not from Kathmandu. They moved from a hill district for college, or from the Terai for work, or from somewhere that had less opportunity. That migration story — and the gap between where someone is from and where they live now — is one of the most reliable conversation threads in the city.",
+      "The valley has Newari culture running underneath its modern surface. The Newar people are the original inhabitants of Kathmandu, and their language, festivals, temples and food are distinct from the Nepali national culture that arrived later. Most tourists walk past this entirely; most locals are aware of it.",
+      "The 2015 earthquake rebuilt some parts of Kathmandu and left others mid-repair over a decade later. It is a living part of the city's story, not a historical event that has been processed and filed away.",
+    ],
+    faqs: [
+      { question: "Do people in Kathmandu speak English on video chat?", answer: "Younger people and students often do, especially around university areas. Nepali is more reliable as an opener — most people will switch if they can." },
+      { question: "What time is Kathmandu's chat queue busiest?", answer: "Around 9:30 PM to 2 AM Nepal Standard Time. The city runs late, especially among students." },
+      { question: "Is video chat free for people in Kathmandu?", answer: "Yes, completely free. No account, no subscription. The only cost is data." },
+      { question: "What is the best thing to ask someone from Kathmandu?", answer: "Ask where they are originally from in Nepal — almost nobody was born in the capital, and the answer always goes somewhere." },
+      { question: "Does Vidibro work on mobile in Kathmandu?", answer: "Yes, Ncell and NTC both have decent 4G across the valley. Older parts of the city with narrow lanes can have patchy indoor signal." },
+      { question: "Is Kathmandu a good city for random video chat?", answer: "Very good. It has a large young population, high social media use, and a mix of cultures that makes for interesting conversations." },
+    ],
+    related: [
+      { slug: "video-chat-pokhara", label: "Pokhara", relation: "city" },
+      { slug: "video-chat-lalitpur", label: "Lalitpur (Patan)", relation: "city" },
+      { slug: "video-chat-nepal", label: "Nepal", relation: "city" },
+      { slug: "hindi-video-chat", label: "Hindi video chat", relation: "language" },
+      { slug: "bengali-video-chat", label: "Bengali video chat", relation: "language" },
+      { slug: "audio-chat", label: "voice chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-india", label: "India", relation: "sibling" },
+      { slug: "video-chat-bangladesh", label: "Bangladesh", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-pokhara",
+    kind: "city",
+    name: "Pokhara",
+    parent: "Nepal",
+    primaryKeyword: "pokhara video chat",
+    title: "Pokhara Video Chat — Talk to Strangers Free",
+    description:
+      "Free random video chat with people in Pokhara, Nepal — no signup needed. Lakeside vibes, trekkers, locals. Chat in Nepali or English.",
+    tagline: "Pokhara is Nepal's most laid-back city. The chat queue is the same.",
+    languages: ["नेपाली (Nepali)", "English", "Gurung"],
+    peakHours: "20:00 – 00:30 NST",
+    timezone: "Asia/Kathmandu",
+    weight: 0.35,
+    places: ["Lakeside", "Damside", "Bagar", "Chipledhunga", "Seti Gorge", "Sarangkot"],
+    talkingPoints: [
+      "Paragliding over Phewa Lake is so common in Pokhara that locals stop noticing it — but asking someone whether they have jumped off a hill in the name of tourism gets a genuine reaction",
+      "The Annapurna circuit starts here, which means Pokhara has constant traffic of people mid-trek or just finished — exhausted, elated, and full of stories from the mountain",
+      "Phewa Lake and the Annapurna range reflection at dawn — a view that people who live here see every day and still talk about as if they saw it for the first time",
+      "The city is noticeably more relaxed than Kathmandu — smaller, cleaner air, quieter traffic — and Pokhara locals tend to have opinions about why that gap exists and who is responsible for it",
+    ],
+    connectivityNote:
+      "Lakeside and the main tourist area have reliable 4G and good wifi at most cafes. Further from the tourist belt, connectivity is more variable. Vidibro handles the difference automatically — a weaker connection gets lower video quality, not a dropped call.",
+    localNote:
+      "Pokhara is both a local city and a global backpacker hub, which means the people you meet here are used to talking to strangers from everywhere. The Lakeside area runs on its own time — later nights, slower mornings — and that rhythm extends to who is online and when.",
+    safetyNote:
+      "Pokhara gets a lot of budget travellers and trekkers, and some of them have had things stolen or gone wrong. Being cautious about sharing your exact location or plans with strangers online is reasonable here, not paranoid.",
+    etiquette:
+      "Conversations here are noticeably more relaxed than in Kathmandu. People are used to cross-cultural exchanges and tend to be patient with language gaps and direct questions.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "The city at the base of everything",
+        body: "Every major trek in the Annapurna region starts from Pokhara. The city has a constant flow of people who are about to do something significant, or just finished. That mix of anticipation and exhausted arrival gives Pokhara a particular energy that is different from any other city its size.",
+      },
+      {
+        kind: "infra",
+        title: "The lake that reflects the mountains",
+        body: "Phewa Lake sits in the middle of the city with the Annapurna range behind it, and on a clear day the reflection is visible from the water. Locals know which mornings the view is clear and which are fogged. It is a small, real piece of local knowledge worth asking about.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "तालको किनार", meaning: "Lakeside — the heart of Pokhara", say: "taal-ko ki-naar" },
+      { phrase: "हिमाल देखियो?", meaning: "Can you see the mountains?", say: "hi-maal dek-hi-yo" },
+      { phrase: "चिसो छ आज", meaning: "It's cold today", say: "chi-so cha aa-j" },
+      { phrase: "मस्त छ", meaning: "It's great / all good — the Pokhara mood", say: "must cha" },
+    ],
+    starters: [
+      {
+        topic: "Paragliding",
+        ask: "Have you actually gone paragliding over the lake, or do you just watch the tourists do it?",
+        why: "A local/tourist divide that gets a real, often funny answer.",
+      },
+      {
+        topic: "Mountains",
+        ask: "Which morning this week has had the clearest view of the Annapurna range?",
+        why: "A hyperlocal question that only someone actually there can answer.",
+      },
+      {
+        topic: "Kathmandu vs Pokhara",
+        ask: "Do you prefer living here to Kathmandu, or would you move there if you could?",
+        why: "A genuine identity question that people in Pokhara have strong opinions about.",
+      },
+    ],
+    intro: [
+      "Pokhara is the city Nepalis go to when they want to slow down. It sits beside Phewa Lake with the Annapurna range visible on clear mornings, and its pace is noticeably different from Kathmandu's — fewer horns, cleaner air, a sense that there is slightly more time.",
+      "It is also the starting and ending point for some of the most famous treks in the world, which means the city has a constant population of people in transit — arriving dusty from the mountains, or loading up before a three-week walk. That mix of locals and exhausted trekkers creates a particular social atmosphere that is hard to find elsewhere.",
+      "The Lakeside area is where most tourists end up, and it runs on tourist time — late nights, slow mornings, lots of people watching the world pass by from a rooftop cafe. The local Pokhari community exists alongside this bubble but is separate from it, with its own rhythms and priorities.",
+      "Gurung culture is significant in this region — Pokhara is close to traditional Gurung hill communities, and some Gurungs have become internationally known as Gorkha soldiers. That military connection, and what it means for families here, is a real and ongoing part of local identity.",
+    ],
+    faqs: [
+      { question: "Is video chat free from Pokhara?", answer: "Yes, completely. No account or subscription. Just open Vidibro and start." },
+      { question: "Do people in Pokhara speak English?", answer: "More than average for Nepal, because Lakeside is a major tourist hub and English is widely used in that economy. Locally, Nepali is the first language." },
+      { question: "What time is Pokhara's chat queue busiest?", answer: "Around 8 PM to 12:30 AM Nepal Standard Time — slightly earlier than Kathmandu, which fits the city's more relaxed rhythm." },
+      { question: "Is connectivity good enough for video chat in Pokhara?", answer: "In and around Lakeside, yes — 4G is solid and cafes have wifi. Further from the tourist area it varies. Vidibro adjusts quality automatically." },
+      { question: "What is Pokhara famous for that I can ask about?", answer: "Paragliding over Phewa Lake, the Annapurna trek starting point, the mountain views on clear mornings, and being Nepal's most relaxed major city." },
+      { question: "Can I meet trekkers or travellers on video chat from Pokhara?", answer: "Possibly — Pokhara has a large transient population of trekkers and backpackers, some of whom use Vidibro during long cafe afternoons between treks." },
+    ],
+    related: [
+      { slug: "video-chat-kathmandu", label: "Kathmandu", relation: "city" },
+      { slug: "video-chat-lalitpur", label: "Lalitpur (Patan)", relation: "city" },
+      { slug: "video-chat-nepal", label: "Nepal", relation: "city" },
+      { slug: "hindi-video-chat", label: "Hindi video chat", relation: "language" },
+      { slug: "bengali-video-chat", label: "Bengali video chat", relation: "language" },
+      { slug: "audio-chat", label: "voice chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-india", label: "India", relation: "sibling" },
+      { slug: "video-chat-bangladesh", label: "Bangladesh", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-lalitpur",
+    kind: "city",
+    name: "Lalitpur",
+    parent: "Nepal",
+    primaryKeyword: "lalitpur video chat",
+    title: "Lalitpur Video Chat — Talk to Strangers Free",
+    description:
+      "Free random video chat with people in Lalitpur (Patan), Nepal. No signup. Chat with locals in the heart of Newari culture — Nepali and English.",
+    tagline: "Lalitpur is Kathmandu's quieter twin — same valley, different soul. No account needed.",
+    languages: ["नेपाली (Nepali)", "नेवारी (Newari)", "English"],
+    peakHours: "21:00 – 01:00 NST",
+    timezone: "Asia/Kathmandu",
+    weight: 0.3,
+    places: ["Patan Durbar Square", "Mangal Bazar", "Jawalakhel", "Pulchowk", "Kupondole", "Ekantakuna"],
+    talkingPoints: [
+      "Newari identity — Lalitpur is the most Newari of the three valley cities, and its residents often have a stronger sense of cultural distinction from the rest of Nepal than anywhere else in the country",
+      "Metal and woodwork craft — Patan has been a centre of metalwork for centuries, and the craftsmanship here is genuinely different from mass-produced tourist goods. Asking about it is not a tourist question here — it is a pride question",
+      "Patan Durbar Square survived the 2015 earthquake better than Kathmandu's main square, and locals notice and talk about the difference in restoration and preservation",
+      "The rivalry with Kathmandu — Lalitpur is technically a separate city but sits right against the capital, and its residents have nuanced feelings about being the overlooked part of the valley",
+    ],
+    connectivityNote:
+      "Lalitpur has the same Ncell and NTC coverage as Kathmandu — generally solid 4G across the main areas. Pulchowk and Jawalakhel, which house engineering colleges and tech offices, tend to have particularly good connectivity.",
+    localNote:
+      "Lalitpur is home to one of Nepal's main engineering campuses (Pulchowk Campus), which means a significant student and early-career tech population is online here in the evenings. Conversations tend to be direct and curious.",
+    safetyNote:
+      "Lalitpur is a safe, well-established city with no particular concerns beyond the standard common sense for random video chat. The population skews educated and urban.",
+    etiquette:
+      "Newari culture in Lalitpur is hospitable and community-oriented. People here tend to take pride in explaining what makes their city different from Kathmandu — and they are right that it is different. Ask and then listen.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "The Newari heartland",
+        body: "Lalitpur — also called Patan — is the oldest of the three Kathmandu Valley cities and has the strongest surviving Newari cultural identity. The language, the architecture, the metalwork, the festivals — they are all more intact here than in Kathmandu proper. Asking someone what makes Lalitpur different from Kathmandu gets you a real answer, not a shrug.",
+      },
+      {
+        kind: "infra",
+        title: "Engineering colleges and a tech-adjacent crowd",
+        body: "Pulchowk Campus, Nepal's most prestigious engineering college, sits in Lalitpur, which gives the city a disproportionate number of tech-literate young people relative to its size. Evening conversations here are often with people who are studying computer science, electrical engineering, or working in Nepal's growing IT sector.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "ललितपुर", meaning: "Lalitpur — locals often prefer this over 'Patan'", say: "la-lit-pur" },
+      { phrase: "नेवार संस्कृति", meaning: "Newari culture — a source of local pride", say: "ne-waar suns-kri-ti" },
+      { phrase: "धातु काम", meaning: "Metalwork — what Patan is known for", say: "dhaa-tu kaam" },
+      { phrase: "मेरो सहर", meaning: "My city — the possessive locals use", say: "me-ro sa-har" },
+    ],
+    starters: [
+      {
+        topic: "Newari identity",
+        ask: "What actually makes Lalitpur different from Kathmandu — is it just the Durbar Square, or is it something deeper?",
+        why: "Residents have strong feelings about this and appreciate being asked seriously.",
+      },
+      {
+        topic: "Metalwork",
+        ask: "Is the traditional metalwork and craftsmanship still actually practised here, or is it mostly for tourists now?",
+        why: "An honest question that gets an honest and nuanced answer.",
+      },
+      {
+        topic: "Earthquake",
+        ask: "How did Patan Durbar Square survive the 2015 earthquake compared to Kathmandu's?",
+        why: "A specific, real question that shows you know something about the place.",
+      },
+    ],
+    intro: [
+      "Lalitpur — more often called Patan by outsiders, though locals tend to use both — sits immediately south of Kathmandu, separated by a river and a very different sense of identity. It is technically a separate city, though the urban sprawl has erased any obvious border. The difference is cultural, not geographical.",
+      "Patan is the Newari city. The Newar people are the original inhabitants of the Kathmandu Valley, and Lalitpur is where their language, architecture and craft traditions are most visibly intact. Patan Durbar Square has some of the most intricate woodwork and metalwork of any historic site in Nepal, and the people who live around it know the difference between what is genuine and what is restoration.",
+      "The city also has Pulchowk Campus, Nepal's leading engineering college, which creates a specific evening population of students and recent graduates who are online-native, technically curious and used to talking to people they have not met before. It is one of the more interesting random chat demographics in South Asia.",
+      "Lalitpur runs at the same timezone and roughly the same hours as Kathmandu — the peak is around 9 PM to 1 AM Nepal Standard Time. The mood is quieter than Kathmandu and the conversations tend to go deeper faster, partly because this is a smaller city where people are not performing for an anonymous crowd.",
+    ],
+    faqs: [
+      { question: "Is Lalitpur the same as Patan?", answer: "Yes, Lalitpur and Patan refer to the same city. Lalitpur is the official name; Patan is historically used and still common, especially among tourists and older residents." },
+      { question: "What language do people in Lalitpur speak?", answer: "Nepali is universal. Newari is still spoken here more than anywhere else in Nepal, especially among older residents and in Newari cultural contexts. English is common among students at Pulchowk Campus." },
+      { question: "Is video chat free from Lalitpur?", answer: "Completely free. No account, no signup, no subscription." },
+      { question: "When is Lalitpur's chat queue busiest?", answer: "Around 9 PM to 1 AM Nepal Standard Time — the same as the broader Kathmandu Valley." },
+      { question: "What is Lalitpur known for that I can ask about?", answer: "Newari culture and identity, traditional metalwork and woodcraft, Patan Durbar Square, and Pulchowk Campus engineering college. All of these get real, detailed answers." },
+      { question: "Is Lalitpur different from Kathmandu for video chat?", answer: "The user base skews slightly more tech-literate due to the engineering campus, and conversations tend to have a stronger local identity thread — people here know what makes their city distinct and are happy to explain it." },
+    ],
+    related: [
+      { slug: "video-chat-kathmandu", label: "Kathmandu", relation: "city" },
+      { slug: "video-chat-pokhara", label: "Pokhara", relation: "city" },
+      { slug: "video-chat-nepal", label: "Nepal", relation: "city" },
+      { slug: "hindi-video-chat", label: "Hindi video chat", relation: "language" },
+      { slug: "bengali-video-chat", label: "Bengali video chat", relation: "language" },
+      { slug: "audio-chat", label: "voice chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-india", label: "India", relation: "sibling" },
+      { slug: "video-chat-bangladesh", label: "Bangladesh", relation: "sibling" },
+    ],
+  },
+
+  {
     slug: "video-chat-pakistan",
     kind: "country",
     name: "Pakistan",
