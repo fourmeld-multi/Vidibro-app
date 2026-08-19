@@ -6263,6 +6263,635 @@ export const ENTRIES: DirectoryEntry[] = [
     ],
   },
 
+  // ── Hong Kong ──────────────────────────────────────────────────────────────
+
+  {
+    slug: "video-chat-hong-kong",
+    kind: "country",
+    name: "Hong Kong",
+    primaryKeyword: "hong kong video chat",
+    title: "Hong Kong Video Chat — Free, No Registration",
+    description:
+      "Free random video chat with people in Hong Kong. Cantonese and English speakers, no signup, no app. Connect from Kowloon, HK Island and beyond.",
+    tagline: "Cantonese, English, and conversations that move fast. No account — just connect.",
+    languages: ["粵語 (Cantonese)", "English", "中文 (Mandarin)"],
+    peakHours: "21:00 – 01:00 HKT",
+    timezone: "Asia/Hong_Kong",
+    weight: 0.6,
+    places: ["Kowloon", "Mong Kok", "Tsim Sha Tsui", "Wan Chai", "Central", "Causeway Bay"],
+    talkingPoints: [
+      "Cantonese vs Mandarin — Cantonese is Hong Kong's everyday language and identity marker; most locals feel the difference matters, and it opens a real conversation about what that means now",
+      "Cha chaan teng (Hong Kong-style cafes) culture — the mix of British colonial and Chinese, which produced its own food, its own tea culture and its own visual style that you can't find anywhere else",
+      "Hong Kong cinema — from Bruce Lee to Wong Kar-wai to Jackie Chan; there is a specific golden era (1980s–90s) that shaped cinema globally and locals are proud of it",
+      "The MTR — consistently one of the world's most on-time metro systems, which Hongkongers cite with a quiet but firm pride compared to subway systems elsewhere",
+      "Property prices — among the highest in the world per square foot; the conversation about living space, flat-sharing and what people can actually afford is a genuine shared experience",
+    ],
+    connectivityNote:
+      "Hong Kong has some of the fastest mobile internet in Asia. CSL, SmarTone and 3HK all run dense 5G and 4G networks with excellent indoor coverage, including in the MTR. Video quality is rarely the issue — the queue connects fast and stays stable.",
+    localNote:
+      "Hongkongers tend to be direct and time-efficient in conversation — small talk is shorter here than in mainland China, and getting to the point faster is not considered rude. English is widely spoken especially among younger and educated users, and switching between Cantonese and English mid-sentence is completely normal.",
+    safetyNote:
+      "Avoid asking directly about 2019 as an opener — it is not that the topic is banned, it is that it is genuinely heavy for most people who lived through it, and a stranger asking about it first usually does not land well. Let it come up naturally if it does.",
+    etiquette:
+      "Starting with Cantonese — even just 'nei hou' — is noticed and appreciated. Hongkongers are used to international contacts and do not expect Cantonese fluency, but the attempt signals respect for the local language over Mandarin.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Cantonese is not a dialect — it is a language",
+        body: "Cantonese and Mandarin are not mutually intelligible in speech. Hongkongers are particular about this distinction and it matters to their identity, especially now. Asking which language someone grew up speaking at home is not a linguistic question — it is a cultural one.",
+      },
+      {
+        kind: "infra",
+        title: "The world's most efficient metro",
+        body: "The MTR runs at over 99.9% on-time performance. Hongkongers quote this with a specific local pride and use it as a benchmark when discussing public transport anywhere else. It is a real, genuine talking point — not just trivia.",
+      },
+      {
+        kind: "cost",
+        title: "One of the world's most expensive housing markets",
+        body: "The average Hong Kong flat is tiny by most standards, and buying is out of reach for most residents. The conversation around what you actually live in — flat size, flat-sharing, where the rent comes from — is honest, specific and something most Hongkongers have thought about seriously.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "你好", meaning: "Hello (Cantonese: nei hou)", say: "nay ho" },
+      { phrase: "唔該", meaning: "Thank you / excuse me", say: "mm goi" },
+      { phrase: "係咁先", meaning: "That's it for now / goodbye", say: "hai gam sin" },
+      { phrase: "好正", meaning: "Really good / awesome", say: "ho jeng" },
+    ],
+    starters: [
+      {
+        topic: "Language",
+        ask: "Do you speak Cantonese at home, or Mandarin, or both — and does that feel like an important distinction to you?",
+        why: "Opens genuine identity conversation without going near politics directly.",
+      },
+      {
+        topic: "Housing",
+        ask: "What is your flat actually like — how many people share it and how big is it in square feet?",
+        why: "Housing is the shared stress. People are honest about it and have a lot to say.",
+      },
+      {
+        topic: "Cinema",
+        ask: "Is Hong Kong cinema from the 90s something people your age still actually watch, or is it nostalgia for older generations?",
+        why: "Splits the conversation generationally in an interesting way.",
+      },
+    ],
+    intro: [
+      "Hong Kong is a city of seven and a half million people packed into a geography that forces density in every direction — high-rises on steep hills, a harbour that divides the peninsula from the island, and a metro system efficient enough that most people have not thought about owning a car.",
+      "The language here is Cantonese, not Mandarin, and that distinction is not a technicality — it is something most Hongkongers feel. Cantonese has its own sounds, its own slang and its own written culture that does not reduce to the mainland version. If you are matched with someone from Hong Kong and you start in Mandarin, switching to English is often the more natural pivot.",
+      "Cha chaan teng — Hong Kong-style cafes that combine British colonial food history with Cantonese flavour — are a genuinely specific local institution. Milk tea, pineapple bun, toast with butter: it is a cuisine that could only have come from this city's particular history and it is something Hongkongers talk about with real affection.",
+    ],
+    faqs: [
+      { question: "Do people in Hong Kong speak English on video chat?", answer: "Yes, English is widely spoken especially by younger and educated users. Many Hongkongers switch fluently between Cantonese and English in the same conversation." },
+      { question: "Is hong kong video chat free on Vidibro?", answer: "Completely free. No account, no app, no subscription. Open the site and connect." },
+      { question: "What language do most Hong Kong users speak?", answer: "Cantonese is the everyday language. English is common especially among younger users. Mandarin is understood but not everyone prefers it." },
+      { question: "When is the best time to connect with Hong Kong?", answer: "Around 9 PM to 1 AM Hong Kong Time (UTC+8). The queue is busiest in that window on weeknights and later on weekends." },
+      { question: "Does video chat work well in Hong Kong?", answer: "Very well. Hong Kong has some of Asia's fastest mobile internet. CSL, SmarTone and 3HK all run dense 5G networks with strong indoor coverage." },
+      { question: "What is a good conversation opener with someone from Hong Kong?", answer: "Ask about their favourite cha chaan teng, or what their flat is actually like. Both go somewhere real quickly." },
+    ],
+    related: [
+      { slug: "video-chat-kowloon", label: "Kowloon", relation: "city" },
+      { slug: "video-chat-mong-kok", label: "Mong Kok", relation: "city" },
+      { slug: "video-chat-tsim-sha-tsui", label: "Tsim Sha Tsui", relation: "city" },
+      { slug: "cantonese-video-chat", label: "Cantonese video chat", relation: "language" },
+      { slug: "chinese-video-chat", label: "Mandarin video chat", relation: "language" },
+      { slug: "audio-chat", label: "voice chat without camera", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-china", label: "China", relation: "sibling" },
+      { slug: "video-chat-taiwan", label: "Taiwan", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-kowloon",
+    kind: "city",
+    name: "Kowloon",
+    parent: "Hong Kong",
+    primaryKeyword: "kowloon video chat",
+    title: "Kowloon Video Chat — Talk to Strangers Free",
+    description:
+      "Random video chat with people in Kowloon, Hong Kong. Cantonese and English, no signup. Dense, fast, and genuinely interesting.",
+    tagline: "Kowloon runs all night. No account needed — just show up.",
+    languages: ["粵語 (Cantonese)", "English", "中文 (Mandarin)"],
+    peakHours: "21:30 – 01:30 HKT",
+    timezone: "Asia/Hong_Kong",
+    weight: 0.35,
+    places: ["Mong Kok", "Tsim Sha Tsui", "Sham Shui Po", "Jordan", "Yau Ma Tei", "Nathan Road"],
+    talkingPoints: [
+      "Mong Kok — reputedly one of the world's most densely populated districts, and a place Kowloon residents have strong opinions about whether they love or hate",
+      "Nathan Road, Kowloon's main artery, runs the length of the peninsula and is a landmark most residents have a specific memory attached to",
+      "The Kowloon vs Hong Kong Island divide — a real cultural distinction between the working-class peninsula and the more corporate island, and most Kowloon residents are happy to defend their side",
+    ],
+    connectivityNote:
+      "Kowloon has excellent 5G and 4G coverage across all major districts. The MTR stations are some of the busiest in Asia but signal remains strong underground. Video calls run reliably from anywhere in the peninsula.",
+    localNote:
+      "Kowloon is the less glossy, more local side of Hong Kong. People here tend to be more direct and less internationally polished than the Central or Admiralty crowd, which makes conversations feel more genuine and less transactional.",
+    safetyNote:
+      "Same as HK broadly — political topics from 2019 are best left to come up naturally rather than asked about upfront.",
+    etiquette:
+      "Cantonese even badly attempted goes down well. Kowloon residents are used to tourists but appreciate when someone is not treating them as a backdrop.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "The Kowloon–Hong Kong Island divide",
+        body: "Most Hongkongers have an opinion on which side of the harbour is the real city. Kowloon residents tend to see the island as polished and corporate; island residents see Kowloon as authentic and slightly chaotic. Both sides are right.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "你好", meaning: "Hello", say: "nay ho" },
+      { phrase: "唔該", meaning: "Thank you / excuse me", say: "mm goi" },
+      { phrase: "幾錢?", meaning: "How much?", say: "gei chin" },
+      { phrase: "好味", meaning: "Delicious", say: "ho mei" },
+    ],
+    starters: [
+      { topic: "Peninsula pride", ask: "Kowloon or Hong Kong Island — and why is the answer obviously Kowloon?", why: "A friendly local rivalry that everyone has a position on." },
+      { topic: "Mong Kok", ask: "What do you actually think of Mong Kok — do you go there willingly or avoid it?", why: "Divides people neatly and everyone has a reason." },
+    ],
+    intro: [
+      "Kowloon is the mainland-connected peninsula that faces Hong Kong Island across Victoria Harbour. It is denser, louder and less corporate than the island, and most Kowloon residents would not have it any other way.",
+      "The districts here — Mong Kok, Tsim Sha Tsui, Sham Shui Po, Jordan — are among the most walkable and vibrant in Asia. Street markets, noodle shops, electronics stalls: Kowloon at night is the Hong Kong that existed before the finance industry rebranded the city.",
+      "Most users here are younger, Cantonese-speaking, and comfortable on video. English works fine, especially with anyone under thirty-five, but Cantonese even badly attempted earns immediate goodwill.",
+    ],
+    faqs: [
+      { question: "Is video chat with Kowloon free?", answer: "Yes, completely free. No account or app required." },
+      { question: "What language do people in Kowloon speak?", answer: "Cantonese predominantly. English is common among younger users. Mandarin is understood but not the first choice." },
+      { question: "When is Kowloon's video chat queue busiest?", answer: "9:30 PM to 1:30 AM Hong Kong Time. The peninsula runs late." },
+      { question: "What is the best opener with someone from Kowloon?", answer: "The Kowloon vs HK Island debate. Everyone has a position and will defend it." },
+      { question: "Does mobile video work well in Kowloon?", answer: "Excellent. 5G and 4G coverage is dense throughout the peninsula including underground in the MTR." },
+      { question: "Is Kowloon different from Hong Kong Island?", answer: "Yes — culturally and economically. Kowloon is more working-class and local; the island is more corporate and international. Kowloon residents tend to see this as a point of pride." },
+    ],
+    related: [
+      { slug: "video-chat-mong-kok", label: "Mong Kok", relation: "city" },
+      { slug: "video-chat-tsim-sha-tsui", label: "Tsim Sha Tsui", relation: "city" },
+      { slug: "video-chat-hong-kong", label: "Hong Kong", relation: "city" },
+      { slug: "cantonese-video-chat", label: "Cantonese video chat", relation: "language" },
+      { slug: "chinese-video-chat", label: "Mandarin video chat", relation: "language" },
+      { slug: "audio-chat", label: "voice chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-china", label: "China", relation: "sibling" },
+      { slug: "video-chat-taiwan", label: "Taiwan", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-mong-kok",
+    kind: "city",
+    name: "Mong Kok",
+    parent: "Hong Kong",
+    primaryKeyword: "mong kok video chat",
+    title: "Mong Kok Video Chat — Talk to Strangers Free",
+    description:
+      "Random video chat with people in Mong Kok, Hong Kong. One of the world's densest districts — Cantonese speakers, street culture, no signup.",
+    tagline: "Mong Kok doesn't sleep. Neither does this queue.",
+    languages: ["粵語 (Cantonese)", "English"],
+    peakHours: "22:00 – 02:00 HKT",
+    timezone: "Asia/Hong_Kong",
+    weight: 0.25,
+    places: ["Ladies' Market", "Goldfish Market", "Flower Market", "Langham Place", "Sneaker Street", "Fa Yuen Street"],
+    talkingPoints: [
+      "The markets — Ladies' Market, Goldfish Market, Flower Market all within walking distance — which one is worth going to and which is purely for tourists is a genuine local debate",
+      "Density — Mong Kok is often cited as one of the most densely populated urban areas on Earth, which shapes everything from the noise level to the social energy",
+      "Street food and milk tea — what is worth eating at 11 PM in Mong Kok specifically",
+    ],
+    connectivityNote:
+      "Mong Kok has excellent mobile coverage despite the density. 5G is available from all major carriers. The street level and MTR station both have strong signal.",
+    localNote:
+      "Mong Kok is street-level Hong Kong — louder, more chaotic and more fun than the corporate parts of the city. Users here tend to be younger, direct, and unbothered by the city's polished reputation.",
+    safetyNote:
+      "The area is safe. The night market crowds thin out by 1–2 AM but the district stays lively. No specific concerns for video chat users.",
+    etiquette:
+      "Cantonese is the default here more than anywhere else in HK. Opening in English is fine but Cantonese gets a warmer start.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Possibly the world's most densely populated district",
+        body: "Mong Kok regularly appears in lists of the world's most densely populated urban areas. This is not an abstraction — it means people here are used to constant noise, small spaces and an intensity of street life that is a specific feature of the neighbourhood rather than a problem with it.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "你好", meaning: "Hello", say: "nay ho" },
+      { phrase: "唔該", meaning: "Thanks / excuse me", say: "mm goi" },
+      { phrase: "好正", meaning: "Really good", say: "ho jeng" },
+      { phrase: "幾好", meaning: "Pretty good", say: "gei ho" },
+    ],
+    starters: [
+      { topic: "Markets", ask: "Which Mong Kok market is actually worth going to and which is just for tourists?", why: "Locals have strong opinions and the tourist vs local divide is interesting." },
+      { topic: "Density", ask: "What is it actually like living in one of the world's most densely populated areas day to day?", why: "Most people have never been asked this directly and have a real answer." },
+    ],
+    intro: [
+      "Mong Kok is one of the most discussed districts in Hong Kong — cited as one of the world's most densely populated urban areas, home to a cluster of themed street markets, and busy enough at midnight to feel like the city has not noticed the time.",
+      "It is also, depending on who you ask, either the most authentically Hongkonger part of Kowloon or the most overrun by tourists. Both things are true at different times of day.",
+      "Users from Mong Kok tend to be young, Cantonese-speaking and online late. The conversations move fast and the local references come early.",
+    ],
+    faqs: [
+      { question: "Is video chat with Mong Kok users free?", answer: "Completely free. No account, no app, no signup." },
+      { question: "What language do Mong Kok users speak?", answer: "Cantonese is the dominant language. English works fine with younger users. Mandarin is less common here than in other HK districts." },
+      { question: "What time is Mong Kok's queue busiest?", answer: "Around 10 PM to 2 AM HKT. The district runs very late." },
+      { question: "Why is Mong Kok famous?", answer: "It is one of the world's most densely populated urban areas, home to several themed street markets, and considered the most local and non-touristy part of central Kowloon by many Hongkongers." },
+      { question: "Does video call work in Mong Kok?", answer: "Yes, mobile coverage is excellent despite the density. All major HK carriers run 5G across the district." },
+      { question: "What is a good question to ask someone from Mong Kok?", answer: "Ask which market they would actually recommend and which they avoid. Everyone has a view." },
+    ],
+    related: [
+      { slug: "video-chat-kowloon", label: "Kowloon", relation: "city" },
+      { slug: "video-chat-tsim-sha-tsui", label: "Tsim Sha Tsui", relation: "city" },
+      { slug: "video-chat-hong-kong", label: "Hong Kong", relation: "city" },
+      { slug: "cantonese-video-chat", label: "Cantonese video chat", relation: "language" },
+      { slug: "chinese-video-chat", label: "Mandarin video chat", relation: "language" },
+      { slug: "audio-chat", label: "voice chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-china", label: "China", relation: "sibling" },
+      { slug: "video-chat-taiwan", label: "Taiwan", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-tsim-sha-tsui",
+    kind: "city",
+    name: "Tsim Sha Tsui",
+    parent: "Hong Kong",
+    primaryKeyword: "tsim sha tsui video chat",
+    title: "Tsim Sha Tsui Video Chat — Talk to Strangers Free",
+    description:
+      "Random video chat with people in Tsim Sha Tsui, Hong Kong. Waterfront district, Cantonese and English speakers, no signup needed.",
+    tagline: "Victoria Harbour on one side, the rest of Hong Kong on the other. No account needed.",
+    languages: ["粵語 (Cantonese)", "English", "中文 (Mandarin)"],
+    peakHours: "21:00 – 01:00 HKT",
+    timezone: "Asia/Hong_Kong",
+    weight: 0.25,
+    places: ["Victoria Harbour", "Avenue of Stars", "Salisbury Road", "Canton Road", "K11 Musea", "Clock Tower"],
+    talkingPoints: [
+      "The Victoria Harbour view — the TST waterfront looks directly at the HK Island skyline, and the nightly light show is something most locals have seen dozens of times but still walk past",
+      "Canton Road — one of the most famous luxury shopping streets in Asia, where the ratio of local to tourist shifts depending on the hour and the economy",
+      "The mix of international and local in a way that is specific to TST — it is the most visited tourist area in HK but also where a lot of young locals spend evenings because the transport links are exceptional",
+    ],
+    connectivityNote:
+      "Excellent mobile coverage. TST MTR station and the waterfront promenade both have full 5G and 4G signal. One of Hong Kong's best-connected areas.",
+    localNote:
+      "TST is more international than other Kowloon districts — more English is spoken here than in Mong Kok or Sham Shui Po, and the mix of tourists, expats and locals makes it the most varied part of the peninsula for conversations.",
+    safetyNote:
+      "TST is one of Hong Kong's safest and best-policed areas. No specific concerns.",
+    etiquette:
+      "English is more accepted as an opener here than in Mong Kok. The area is used to international contacts.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "The best view of Hong Kong Island",
+        body: "The TST waterfront promenade looks directly across Victoria Harbour at the HK Island skyline — arguably the most recognisable city view in Asia. Most locals have walked it so many times it has become background. Asking someone what they actually think of living within walking distance of that view gets a more honest answer than the postcard version.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "你好", meaning: "Hello", say: "nay ho" },
+      { phrase: "唔該", meaning: "Thank you / excuse me", say: "mm goi" },
+      { phrase: "係咁先", meaning: "That's it for now", say: "hai gam sin" },
+      { phrase: "靚", meaning: "Beautiful / nice", say: "leng" },
+    ],
+    starters: [
+      { topic: "Harbour view", ask: "Do you ever actually stop and look at the harbour view, or does it just become wallpaper when you live near it?", why: "A real question about familiarity vs wonder that gets a genuine answer." },
+      { topic: "Canton Road", ask: "Do you shop on Canton Road or is that purely tourists and mainland visitors?", why: "The class and culture divide around luxury shopping in HK is a real conversation." },
+    ],
+    intro: [
+      "Tsim Sha Tsui is the southern tip of Kowloon — the part facing Hong Kong Island across Victoria Harbour. It is the most internationally recognisable part of the peninsula: the waterfront promenade, the clock tower, the lights from the island across the water.",
+      "It is also where the gap between tourist Hong Kong and local Hong Kong is most visible. Canton Road hosts some of the highest-grossing luxury retail in Asia; one street back, cha chaan tengs serve milk tea at prices that have not changed in years.",
+      "Users from TST tend to be comfortable in English as well as Cantonese — it is the most internationally exposed part of Kowloon, and the most likely place to find someone who has lived or studied abroad.",
+    ],
+    faqs: [
+      { question: "Is video chat with Tsim Sha Tsui free?", answer: "Completely free. No account, no subscription." },
+      { question: "What language do TST users speak?", answer: "Cantonese and English both work well here. TST is more internationally exposed than other Kowloon districts." },
+      { question: "When is the TST queue busiest?", answer: "9 PM to 1 AM Hong Kong Time. The area stays active late with both locals and visitors." },
+      { question: "What makes Tsim Sha Tsui different from Mong Kok?", answer: "TST is the international face of Kowloon — waterfront, luxury shopping, tourist areas. Mong Kok is denser, more local and more chaotic. Both are in Kowloon but feel like different cities." },
+      { question: "Does mobile video work well in TST?", answer: "Excellent. Full 5G coverage. The MTR station and waterfront promenade both have strong signal." },
+      { question: "What should I ask someone from Tsim Sha Tsui?", answer: "Whether they actually look at the harbour view or it has become wallpaper. Locals have a genuine answer." },
+    ],
+    related: [
+      { slug: "video-chat-kowloon", label: "Kowloon", relation: "city" },
+      { slug: "video-chat-mong-kok", label: "Mong Kok", relation: "city" },
+      { slug: "video-chat-hong-kong", label: "Hong Kong", relation: "city" },
+      { slug: "cantonese-video-chat", label: "Cantonese video chat", relation: "language" },
+      { slug: "chinese-video-chat", label: "Mandarin video chat", relation: "language" },
+      { slug: "audio-chat", label: "voice chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-china", label: "China", relation: "sibling" },
+      { slug: "video-chat-taiwan", label: "Taiwan", relation: "sibling" },
+    ],
+  },
+
+  // ── Taiwan ─────────────────────────────────────────────────────────────────
+
+  {
+    slug: "video-chat-taiwan",
+    kind: "country",
+    name: "Taiwan",
+    primaryKeyword: "taiwan video chat",
+    title: "Taiwan Video Chat — Free Random Chat, No Registration",
+    description:
+      "Free random video chat with people in Taiwan. Mandarin speakers, night market culture, no signup. Connect with Taipei, Kaohsiung and beyond.",
+    tagline: "Night markets, bubble tea and conversations that go places. No account needed.",
+    languages: ["中文 (Mandarin)", "台語 (Taiwanese/Hokkien)", "English"],
+    peakHours: "20:00 – 00:00 CST",
+    timezone: "Asia/Taipei",
+    weight: 0.7,
+    places: ["Taipei", "Kaohsiung", "Taichung", "Tainan", "Hsinchu", "Keelung"],
+    talkingPoints: [
+      "Night markets — every Taiwanese city has its own and residents have strong, specific opinions on which stalls are worth queuing for and which are for tourists",
+      "Bubble tea — Taiwan is where it started and the conversation about which brand, which style and which topping is genuinely divisive in the way that only food debates can be",
+      "Japanese cultural influence — Taiwan was a Japanese colony for 50 years (1895–1945) and the traces are visible in architecture, food, convenience store culture and how older Taiwanese feel about Japan",
+      "Military service — all Taiwanese men serve, which is a shared experience that comes up in conversation often and carries more weight than it might seem from outside",
+      "Scooters — Taiwan has one of the highest scooter densities in the world and most adults have strong opinions on riding them, the traffic, and the new electric ones",
+    ],
+    connectivityNote:
+      "Taiwan has excellent mobile internet. Chunghwa Telecom, FarEasTone and Taiwan Mobile all run dense 4G and 5G networks with good rural coverage relative to its size. City coverage is near-total. Vidibro runs well across the island.",
+    localNote:
+      "Taiwanese users tend to be warm, patient and more willing to speak English than users in mainland China. Younger users especially are familiar with international online culture. Conversations here tend to start easily and go somewhere real.",
+    safetyNote:
+      "Taiwan's political status relative to mainland China is a topic many Taiwanese feel strongly about. It is not off-limits, but asking upfront how someone feels about cross-strait relations is a lot of weight to open with — let it come up if it does.",
+    etiquette:
+      "Taiwanese conversational style is considered warmer and less rushed than mainland Chinese — there is more small talk before getting to the point, and genuine curiosity about where you are from is common.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Where bubble tea was invented",
+        body: "Taichung in the 1980s is where pearl milk tea (珍珠奶茶) started. Taiwan takes this seriously — there are regional debates about which city does it best, which brand is authentic and which toppings are acceptable. It is one of the most reliable conversation threads in the country.",
+      },
+      {
+        kind: "culture",
+        title: "50 years of Japanese colonial history",
+        body: "Japan colonised Taiwan from 1895 to 1945, and the influence runs deeper than architecture — it shaped food culture, convenience store design, public hygiene standards and how older Taiwanese feel about Japan. Asking about this history opens a conversation that is rarely simple.",
+      },
+      {
+        kind: "infra",
+        title: "Scooter nation",
+        body: "Taiwan has one of the highest scooter-to-person ratios anywhere in the world. Morning rush hour in any Taiwanese city looks like a river of scooters. Most adults ride one, have strong opinions about electric vs petrol, and have at least one story about traffic.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "你好", meaning: "Hello (Mandarin)", say: "nǐ hǎo" },
+      { phrase: "謝謝", meaning: "Thank you", say: "xiè xiè" },
+      { phrase: "你吃飽了嗎?", meaning: "Have you eaten? — the Taiwanese greeting", say: "nǐ chī bǎo le ma" },
+      { phrase: "讚", meaning: "Awesome / thumbs up", say: "zàn" },
+    ],
+    starters: [
+      {
+        topic: "Night market",
+        ask: "What is the one stall at your local night market that you would make someone queue for even if they didn't want to?",
+        why: "Every Taiwanese person has an answer and it is always specific.",
+      },
+      {
+        topic: "Bubble tea",
+        ask: "Which bubble tea brand do you actually drink vs which ones are overhyped — and what toppings?",
+        why: "One of the most reliable Taiwanese conversation starters. People have strong, specific opinions.",
+      },
+      {
+        topic: "Scooters",
+        ask: "Do you ride a scooter, and if so do you have strong opinions about the new electric ones?",
+        why: "Opens a conversation about daily life, infrastructure and generational change.",
+      },
+    ],
+    intro: [
+      "Taiwan is an island of 23 million people with a food culture that punches well above its size — night markets in every city, bubble tea that started here in the 1980s, and a convenience store network that most residents use daily as a combination of bank, post office and lunch spot.",
+      "The language is Mandarin, written in traditional characters — a visual difference from mainland China that is more than aesthetic to many Taiwanese. Taiwanese Hokkien is also spoken, especially in southern Taiwan and among older residents, giving the island its own linguistic texture.",
+      "Japanese influence runs through Taiwan in ways that are visible and felt — 50 years of colonial history left traces in architecture, food, and a cultural familiarity with Japan that is genuinely warmer and more complex than in most of the region.",
+      "No account needed, no download — just connect.",
+    ],
+    faqs: [
+      { question: "Is taiwan video chat free on Vidibro?", answer: "Completely free. No account, no subscription, no app to install." },
+      { question: "What language do people in Taiwan speak on video chat?", answer: "Mandarin is the official language and everyone speaks it. Some users also speak Taiwanese (Hokkien), especially in southern Taiwan. English is common among younger and educated users." },
+      { question: "When is the best time to connect with Taiwan?", answer: "Around 8 PM to midnight Taiwan Standard Time (UTC+8). The queue picks up from early evening and stays busy into the early morning at weekends." },
+      { question: "Is bubble tea really from Taiwan?", answer: "Yes — specifically from Taichung in the 1980s. It is one of the few modern food inventions with a reasonably clear origin story, and Taiwanese people are quietly proud of it." },
+      { question: "Do Taiwanese users speak English?", answer: "Many younger users do, especially in Taipei and university towns. Taiwan has strong English education. Starting in Mandarin is safer but switching to English is often welcomed." },
+      { question: "What is the difference between Taiwanese Mandarin and mainland Mandarin?", answer: "They are mutually intelligible but have different vocabulary, accent and tone. Taiwanese Mandarin is generally considered softer in accent, uses traditional characters in writing, and includes Taiwanese slang borrowings." },
+    ],
+    related: [
+      { slug: "video-chat-taipei", label: "Taipei", relation: "city" },
+      { slug: "video-chat-kaohsiung", label: "Kaohsiung", relation: "city" },
+      { slug: "video-chat-taichung", label: "Taichung", relation: "city" },
+      { slug: "chinese-video-chat", label: "Mandarin video chat", relation: "language" },
+      { slug: "cantonese-video-chat", label: "Cantonese video chat", relation: "language" },
+      { slug: "audio-chat", label: "voice chat without camera", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-hong-kong", label: "Hong Kong", relation: "sibling" },
+      { slug: "video-chat-japan", label: "Japan", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-taipei",
+    kind: "city",
+    name: "Taipei",
+    parent: "Taiwan",
+    primaryKeyword: "taipei video chat",
+    title: "Taipei Video Chat — Talk to Strangers Free",
+    description:
+      "Random video chat with people in Taipei — free, no signup. Students, young professionals, night market regulars. Mandarin and English.",
+    tagline: "Taipei's queue is young, online-native and busy late. No account needed.",
+    languages: ["中文 (Mandarin)", "English", "台語 (Taiwanese)"],
+    peakHours: "20:30 – 00:30 CST",
+    timezone: "Asia/Taipei",
+    weight: 0.4,
+    places: ["Ximending", "Da'an District", "Zhongshan", "Shilin Night Market", "Taipei 101", "Gongguan"],
+    talkingPoints: [
+      "Ximending — Taipei's youth culture hub, modelled partly on Tokyo's Harajuku, where trends start and where most young Taipei residents have spent time",
+      "Taipei 101 — once the world's tallest building, now a backdrop rather than a landmark for most locals, and asking what residents actually think of it gets an interesting answer",
+      "Shilin Night Market — the most famous in Taiwan but debated hard by locals on whether it is still actually good or has become entirely tourist-facing",
+    ],
+    connectivityNote:
+      "Taipei has excellent 5G and 4G coverage from all major operators. The MRT system has full signal throughout. University areas like Gongguan and Da'an have dense coverage from student and cafe wifi too.",
+    localNote:
+      "Taipei has a large student and young professional population from across Taiwan. It is the most internationally connected city on the island and the most comfortable with English. Conversations start easily and tend to go somewhere.",
+    safetyNote:
+      "Taipei is one of the safest capital cities in Asia. No specific concerns for video chat users.",
+    etiquette:
+      "Taipei users are online-native and comfortable with casual, fast-moving conversations. Starting in English is more accepted here than almost anywhere else in the Chinese-speaking world.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Ximending — Taiwan's youth culture centre",
+        body: "Ximending is the district where trends emerge in Taiwan — street fashion, food experiments, youth subcultures. It is modelled partly on Tokyo's Harajuku and the Japanese influence is visible. Asking a young Taipei resident about their relationship with Ximending — do they still go, do they find it too commercial — opens a real conversation.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "你好", meaning: "Hello", say: "nǐ hǎo" },
+      { phrase: "謝謝", meaning: "Thank you", say: "xiè xiè" },
+      { phrase: "沒問題", meaning: "No problem", say: "méi wèntí" },
+      { phrase: "超讚", meaning: "Super awesome", say: "chāo zàn" },
+    ],
+    starters: [
+      { topic: "Shilin", ask: "Is Shilin Night Market still actually good or has it become purely for tourists?", why: "Every Taipei person has a strong view on this and will name somewhere else they go instead." },
+      { topic: "Taipei 101", ask: "Do you ever actually look at Taipei 101, or does it become invisible when you live near it?", why: "Familiarity with landmarks is a real question about urban life." },
+    ],
+    intro: [
+      "Taipei is Taiwan's capital and its most densely international city — MRT lines that actually run on time, a night market scene that is the most famous on the island if not the most locally respected, and a young population that is extremely online.",
+      "The city has a specific energy that comes from being both very modern and very aware of its own cultural history. Ximending looks like parts of Tokyo; the old temples in Da'an sit next to bubble tea chains and concept stores. The mix is not awkward — it is specific to Taipei.",
+      "Users here tend to be young, comfortable in English, and willing to go somewhere real in conversation quickly. The queue picks up from early evening and runs late on weekends.",
+    ],
+    faqs: [
+      { question: "Is taipei video chat free?", answer: "Completely free. No account or app needed." },
+      { question: "What language do Taipei users speak?", answer: "Mandarin is the default. English is widely spoken especially among students and young professionals. Some users also speak Taiwanese Hokkien." },
+      { question: "When is the best time to connect with Taipei?", answer: "8:30 PM to 12:30 AM Taiwan Standard Time. The queue is busy from early evening and runs later on weekends." },
+      { question: "What is Ximending?", answer: "Taipei's youth culture district — fashion, street food, night life. Think Tokyo's Harajuku but Taiwanese. Most young Taipei residents have a strong opinion on whether it is still worth going to." },
+      { question: "Does mobile video call work well in Taipei?", answer: "Excellent. Taipei has dense 5G and 4G coverage, and the MRT system maintains signal underground." },
+      { question: "What is a good conversation opener with someone from Taipei?", answer: "Ask about their favourite night market stall — but be ready for them to tell you Shilin is overrated and name somewhere better." },
+    ],
+    related: [
+      { slug: "video-chat-kaohsiung", label: "Kaohsiung", relation: "city" },
+      { slug: "video-chat-taichung", label: "Taichung", relation: "city" },
+      { slug: "video-chat-taiwan", label: "Taiwan", relation: "city" },
+      { slug: "chinese-video-chat", label: "Mandarin video chat", relation: "language" },
+      { slug: "cantonese-video-chat", label: "Cantonese video chat", relation: "language" },
+      { slug: "audio-chat", label: "voice chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-hong-kong", label: "Hong Kong", relation: "sibling" },
+      { slug: "video-chat-japan", label: "Japan", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-kaohsiung",
+    kind: "city",
+    name: "Kaohsiung",
+    parent: "Taiwan",
+    primaryKeyword: "kaohsiung video chat",
+    title: "Kaohsiung Video Chat — Talk to Strangers Free",
+    description:
+      "Random video chat with people in Kaohsiung — free, no signup. Taiwan's southern port city, known for warmth, seafood and the Love River.",
+    tagline: "Kaohsiung people are warmer than Taipei people. They will tell you that themselves.",
+    languages: ["中文 (Mandarin)", "台語 (Taiwanese/Hokkien)", "English"],
+    peakHours: "20:00 – 00:00 CST",
+    timezone: "Asia/Taipei",
+    weight: 0.3,
+    places: ["Pier-2 Art Center", "Love River", "Liuhe Night Market", "Zuoying", "Cijin Island", "Fengjia nearby"],
+    talkingPoints: [
+      "Kaohsiung vs Taipei — a genuine north–south rivalry where Kaohsiung residents claim to be warmer, more relaxed and more authentic than the capital, and they will make this case unprompted",
+      "Taiwanese Hokkien (台語) is more commonly spoken in Kaohsiung than in Taipei — older residents especially, and younger people often switch into it comfortably",
+      "Pier-2 Art Center — a former warehouse district turned creative space that is a source of local pride and a useful conversation about what the city is becoming",
+    ],
+    connectivityNote:
+      "Kaohsiung has good 4G and expanding 5G coverage. The KMRT system covers central areas well. Cijin Island and coastal areas have slightly weaker signal but city centre coverage is solid.",
+    localNote:
+      "Kaohsiung is Taiwan's second city but has a strong identity of its own — more southern, more Taiwanese-speaking, more port-city than capital. Residents tend to be warmer and less rushed than Taipei users, and conversations here often last longer.",
+    safetyNote:
+      "One of Taiwan's safest cities. No specific concerns for video chat users.",
+    etiquette:
+      "Taiwanese Hokkien (台語) is more present here than in Taipei. Knowing that it exists and is different from Mandarin earns genuine respect.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "The north–south personality divide",
+        body: "Kaohsiung residents believe, as a matter of quiet consensus, that they are warmer and more genuine than Taipei people. This is a real cultural difference, not just civic pride — the southern accent, the Hokkien presence, the port-city roots. Asking someone from Kaohsiung what they actually think of Taipei residents gets an honest and entertaining answer.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "你好", meaning: "Hello (Mandarin)", say: "nǐ hǎo" },
+      { phrase: "謝謝", meaning: "Thank you", say: "xiè xiè" },
+      { phrase: "恁好", meaning: "Hello (Taiwanese)", say: "lín hó" },
+      { phrase: "真讚", meaning: "Really great (Taiwanese)", say: "tsin tsàn" },
+    ],
+    starters: [
+      { topic: "North vs south", ask: "Do Kaohsiung people really think they are warmer than Taipei people — and are they right?", why: "This will get a confident and detailed answer every time." },
+      { topic: "Taiwanese", ask: "Do you speak Taiwanese (台語) or mainly Mandarin?", why: "Opens a real conversation about language, identity and generational change in southern Taiwan." },
+    ],
+    intro: [
+      "Kaohsiung is Taiwan's second city and its largest port — southern, warmer in climate and in character, and home to a strong local identity that defines itself partly in contrast to Taipei.",
+      "Taiwanese Hokkien is more alive here than in the north. Older residents speak it as a first language; younger people switch into it naturally. The southern accent is distinct and locals are not bothered about it.",
+      "The city has been reinventing itself — the Pier-2 Art Center turned a derelict warehouse district into a creative space, and the Love River riverfront is where people go in the evening. Kaohsiung is genuinely in motion in a way that is worth asking about.",
+    ],
+    faqs: [
+      { question: "Is kaohsiung video chat free?", answer: "Completely free. No account, no subscription, no app." },
+      { question: "What language do Kaohsiung users speak?", answer: "Mandarin is standard, but Taiwanese Hokkien (台語) is more common here than in northern Taiwan. Many residents switch between both." },
+      { question: "When is the best time to connect with Kaohsiung?", answer: "8 PM to midnight Taiwan Standard Time. Kaohsiung's queue is slightly earlier than Taipei's." },
+      { question: "What makes Kaohsiung different from Taipei?", answer: "Kaohsiung is Taiwan's southern port city — more relaxed, more Taiwanese-speaking, more working-class in its roots. Residents tend to be warmer and less rushed than the capital." },
+      { question: "Does video call work well in Kaohsiung?", answer: "Yes. Good 4G coverage across the city and expanding 5G. KMRT areas have the best signal." },
+      { question: "What is a good opener with someone from Kaohsiung?", answer: "Ask whether Kaohsiung people are really warmer than Taipei people. The answer will be confident and specific." },
+    ],
+    related: [
+      { slug: "video-chat-taipei", label: "Taipei", relation: "city" },
+      { slug: "video-chat-taichung", label: "Taichung", relation: "city" },
+      { slug: "video-chat-taiwan", label: "Taiwan", relation: "city" },
+      { slug: "chinese-video-chat", label: "Mandarin video chat", relation: "language" },
+      { slug: "cantonese-video-chat", label: "Cantonese video chat", relation: "language" },
+      { slug: "audio-chat", label: "voice chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-hong-kong", label: "Hong Kong", relation: "sibling" },
+      { slug: "video-chat-japan", label: "Japan", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-taichung",
+    kind: "city",
+    name: "Taichung",
+    parent: "Taiwan",
+    primaryKeyword: "taichung video chat",
+    title: "Taichung Video Chat — Talk to Strangers Free",
+    description:
+      "Random video chat with people in Taichung — free, no signup. The city where bubble tea started, Taiwan's third largest, young crowd.",
+    tagline: "Taichung invented bubble tea. They have not let anyone forget it.",
+    languages: ["中文 (Mandarin)", "台語 (Taiwanese)", "English"],
+    peakHours: "20:30 – 00:30 CST",
+    timezone: "Asia/Taipei",
+    weight: 0.25,
+    places: ["Feng Chia Night Market", "Rainbow Village", "National Taichung Theater", "Zhonghua Road", "Yizhong Street", "Calligraphy Greenway"],
+    talkingPoints: [
+      "Bubble tea origin — Taichung is where pearl milk tea was invented in the 1980s, and locals are proud of this in a way that comes up quickly when the topic of food arises",
+      "Feng Chia Night Market — one of the largest in Taiwan and a source of genuine local pride, with Taichung residents arguing it is better than Shilin in Taipei",
+      "The National Taichung Theater — a genuinely extraordinary building by Toyo Ito, and a point of local pride about the city's cultural ambition beyond its food reputation",
+    ],
+    connectivityNote:
+      "Taichung has good 4G coverage across the city and expanding 5G in central districts. The city's layout is more spread out than Taipei so coverage varies slightly by area. Central and university districts are consistently well-covered.",
+    localNote:
+      "Taichung is Taiwan's third city and has a reputation as a city of good food, young people and a slightly more relaxed pace than Taipei. University culture is strong here and the online queue reflects it — young, active, and running late.",
+    safetyNote:
+      "Safe city. No specific concerns for video chat users.",
+    etiquette:
+      "Taichung residents are friendly and often curious about visitors. The city is less internationally connected than Taipei so genuine interest in where you are from is common.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Where bubble tea was born",
+        body: "Pearl milk tea was invented in Taichung in the 1980s — specifically at the Chun Shui Tang teahouse, which is still open and still serves it. Taichung residents treat this fact as both trivia and identity. Asking which bubble tea shop is actually the best in the city will get a detailed, confident and probably food-photograph-backed answer.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "你好", meaning: "Hello", say: "nǐ hǎo" },
+      { phrase: "謝謝", meaning: "Thank you", say: "xiè xiè" },
+      { phrase: "真的假的", meaning: "Really? / No way!", say: "zhēn de jiǎ de" },
+      { phrase: "讚啦", meaning: "Awesome!", say: "zàn la" },
+    ],
+    starters: [
+      { topic: "Bubble tea", ask: "If I came to Taichung specifically to try the original bubble tea, where should I actually go and in what order?", why: "Taichung people love this question. They will give you a specific and enthusiastic answer." },
+      { topic: "Feng Chia", ask: "Is Feng Chia Night Market actually better than Shilin in Taipei, or is that just local pride?", why: "A friendly inter-city rivalry that gets a genuine and energetic response." },
+    ],
+    intro: [
+      "Taichung is Taiwan's third largest city and the one with the strongest food identity — it is where bubble tea was invented in the 1980s, and where Feng Chia Night Market, one of Taiwan's largest, draws visitors from across the island.",
+      "The city has a large university population and a slightly more relaxed energy than Taipei — less rushed, more willing to linger. The online queue reflects this, with users active from early evening and running late into the night.",
+      "The National Taichung Theater, designed by Japanese architect Toyo Ito, gave the city a cultural landmark that shifted how it sees itself — no longer just a food city but one with serious design ambition. Locals are proud of it in a way that is worth asking about.",
+    ],
+    faqs: [
+      { question: "Is taichung video chat free?", answer: "Completely free. No account, no subscription." },
+      { question: "What language do Taichung users speak?", answer: "Mandarin is the standard. Some users speak Taiwanese Hokkien. English is less common here than in Taipei but works fine with younger users." },
+      { question: "When is the best time to connect with Taichung?", answer: "8:30 PM to 12:30 AM Taiwan Standard Time. University crowd runs late." },
+      { question: "Did bubble tea really come from Taichung?", answer: "Yes. The Chun Shui Tang teahouse in Taichung is credited with inventing pearl milk tea in the 1980s. The shop is still open." },
+      { question: "Does video call work well in Taichung?", answer: "Good 4G across the city, expanding 5G in the centre. Slightly less dense than Taipei but reliable in urban areas." },
+      { question: "What is a good opener with someone from Taichung?", answer: "Ask where to get the best bubble tea in the city. They will have a very specific and enthusiastic answer." },
+    ],
+    related: [
+      { slug: "video-chat-taipei", label: "Taipei", relation: "city" },
+      { slug: "video-chat-kaohsiung", label: "Kaohsiung", relation: "city" },
+      { slug: "video-chat-taiwan", label: "Taiwan", relation: "city" },
+      { slug: "chinese-video-chat", label: "Mandarin video chat", relation: "language" },
+      { slug: "cantonese-video-chat", label: "Cantonese video chat", relation: "language" },
+      { slug: "audio-chat", label: "voice chat", relation: "mode" },
+      { slug: "text-chat", label: "text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-hong-kong", label: "Hong Kong", relation: "sibling" },
+      { slug: "video-chat-japan", label: "Japan", relation: "sibling" },
+    ],
+  },
+
 ];
 
 export const ENTRY_BY_SLUG: Record<string, DirectoryEntry> = Object.fromEntries(
