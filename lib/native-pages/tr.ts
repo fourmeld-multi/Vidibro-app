@@ -4,10 +4,10 @@ const tr: NativeLangData = {
   lang: "tr",
   ogLocale: "tr_TR",
   canonicalSlug: "/tr",
-  title: "Ücretsiz Görüntülü Sohbet — Yabancılarla Tanış",
+  title: "Rastgele Görüntülü Sohbet — Ücretsiz, Kayıtsız",
   description:
     "Vidibro — kayıtsız ücretsiz rastgele görüntülü sohbet. Türkiye'den ve 180'den fazla ülkeden insanlarla 1'e 1 bağlan. Hemen başla, hesap gerekmez.",
-  h1: "Vidibro — Ücretsiz Görüntülü Sohbet",
+  h1: "Vidibro — Rastgele Görüntülü Sohbet",
   tagline: "Kayıt yok. Türkiye'den ve tüm dünyadan yabancılarla hemen konuş.",
   intro:
     "Vidibro, hesap oluşturmadan ve kişisel bilgi girmeden kullanabileceğiniz tamamen ücretsiz bir rastgele görüntülü sohbet platformudur. Görüntülü arama, sesli sohbet ve metin sohbeti olmak üzere üç mod sunar; tüm bunlar uygulama yüklemeden doğrudan tarayıcıdan çalışır. 180'den fazla ülkeden kullanıcı gerçek zamanlı olarak buluşur ve hiçbir konuşma kaydedilmez. Dil pratiği, kültürel keşif veya sıradan bir sohbet için mükemmel bir platform.",
