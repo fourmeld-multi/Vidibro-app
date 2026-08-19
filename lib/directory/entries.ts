@@ -3171,17 +3171,17 @@ export const ENTRIES: DirectoryEntry[] = [
     slug: "video-chat-china",
     kind: "country",
     name: "China",
-    primaryKeyword: "video chat china",
-    title: "Video Chat China — Talk to Strangers Free",
+    primaryKeyword: "chinese video chat",
+    title: "Chinese Video Chat — Mandarin & Cantonese, Free",
     description:
-      "Free random video chat with people from China. Talk in Mandarin or English — no signup, no download, works in any browser with a VPN.",
+      "Free random video chat with Chinese speakers worldwide — Taiwan, Hong Kong, Singapore and diaspora. Mandarin and Cantonese. No account, works in browser.",
     tagline:
-      "Free video chat with China. One time zone, over a billion people, and a conversation that starts with no account and no download.",
+      "Video chat with Chinese speakers anywhere in the world — Taiwan, Hong Kong, Singapore, diaspora. No account, no download.",
     languages: ["中文 (Mandarin)", "粵語 (Cantonese)", "English"],
     peakHours: "21:00 – 01:00 CST",
     timezone: "Asia/Shanghai",
     weight: 2.2,
-    places: ["Shanghai", "Beijing", "Guangzhou", "Shenzhen", "Chengdu", "Hangzhou"],
+    places: ["Shanghai", "Beijing", "Guangzhou", "Taipei", "Hong Kong", "Singapore"],
     talkingPoints: [
       "Regional food, which varies far more than the export version suggests — Sichuan heat, Cantonese dim sum, Beijing roast duck are barely the same cuisine",
       "Mobile payment culture: cash is nearly obsolete in most cities, everything runs through WeChat Pay or Alipay",
