@@ -6410,6 +6410,7 @@ export const ENTRIES: DirectoryEntry[] = [
       "Kowloon is the mainland-connected peninsula that faces Hong Kong Island across Victoria Harbour. It is denser, louder and less corporate than the island, and most Kowloon residents would not have it any other way.",
       "The districts here — Mong Kok, Tsim Sha Tsui, Sham Shui Po, Jordan — are among the most walkable and vibrant in Asia. Street markets, noodle shops, electronics stalls: Kowloon at night is the Hong Kong that existed before the finance industry rebranded the city.",
       "Most users here are younger, Cantonese-speaking, and comfortable on video. English works fine, especially with anyone under thirty-five, but Cantonese even badly attempted earns immediate goodwill.",
+      "The evening peak here starts later than the rest of Hong Kong and runs further — the street markets, the noodle bars and the general noise of Kowloon tend to keep people up. Expect the queue to be active well past midnight on weeknights and into the early hours on weekends.",
     ],
     faqs: [
       { question: "Is video chat with Kowloon free?", answer: "Yes, completely free. No account or app required." },
@@ -6482,6 +6483,7 @@ export const ENTRIES: DirectoryEntry[] = [
       "Mong Kok is one of the most discussed districts in Hong Kong — cited as one of the world's most densely populated urban areas, home to a cluster of themed street markets, and busy enough at midnight to feel like the city has not noticed the time.",
       "It is also, depending on who you ask, either the most authentically Hongkonger part of Kowloon or the most overrun by tourists. Both things are true at different times of day.",
       "Users from Mong Kok tend to be young, Cantonese-speaking and online late. The conversations move fast and the local references come early.",
+      "The night market clusters — Ladies' Market, Flower Market, Goldfish Market — are within walking distance of each other and most stay open late. Every local has a fixed opinion on which is worth visiting after dark and which is purely for daytime tourists, and they will share it without being asked.",
     ],
     faqs: [
       { question: "Is video chat with Mong Kok users free?", answer: "Completely free. No account, no app, no signup." },
@@ -6797,6 +6799,7 @@ export const ENTRIES: DirectoryEntry[] = [
       "Kaohsiung is Taiwan's second city and its largest port — southern, warmer in climate and in character, and home to a strong local identity that defines itself partly in contrast to Taipei.",
       "Taiwanese Hokkien is more alive here than in the north. Older residents speak it as a first language; younger people switch into it naturally. The southern accent is distinct and locals are not bothered about it.",
       "The city has been reinventing itself — the Pier-2 Art Center turned a derelict warehouse district into a creative space, and the Love River riverfront is where people go in the evening. Kaohsiung is genuinely in motion in a way that is worth asking about.",
+      "No account, no download — the call runs directly between browsers, which matters here because Kaohsiung's 4G coverage is reliable and the peer-to-peer connection keeps quality high without burning data.",
     ],
     faqs: [
       { question: "Is kaohsiung video chat free?", answer: "Completely free. No account, no subscription, no app." },
