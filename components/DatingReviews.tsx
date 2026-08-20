@@ -18,8 +18,8 @@ const reviews = [
   },
   {
     text: "I started with voice-only mode because I was nervous. Felt much safer. Now I use video all the time.",
-    name: "Priya",
-    country: "🇮🇳 India",
+    name: "Selin",
+    country: "🇹🇷 Turkey",
   },
   {
     text: "Connected with someone from Japan. We have been teaching each other our languages for weeks.",
@@ -48,7 +48,6 @@ export default function DatingReviews() {
 
   return (
     <section className="mb-14">
-      <h2 className="text-2xl font-bold text-white mb-6">What people are saying</h2>
       <div className="overflow-hidden relative">
         {/* fade edges */}
         <div className="pointer-events-none absolute inset-y-0 left-0 w-12 z-10 bg-gradient-to-r from-[var(--background)] to-transparent" />
