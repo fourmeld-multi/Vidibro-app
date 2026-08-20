@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { BASE_URL } from "@/lib/seo";
 import DatingReviews from "@/components/DatingReviews";
+import OnlineBadge from "@/components/OnlineBadge";
 
 export const metadata: Metadata = {
   title: "Random Video Chat Dating — Meet Strangers Online Free",
@@ -174,6 +175,10 @@ export default function DatingPage() {
                 <Star key={i} size={16} className="text-amber-400 fill-amber-400" />
               ))}
               <span className="text-sm text-[var(--muted)] ml-2">Loved by users in 180+ countries</span>
+            </div>
+
+            <div className="flex justify-center mb-6">
+              <OnlineBadge />
             </div>
 
             <div className="flex flex-wrap justify-center gap-3">
