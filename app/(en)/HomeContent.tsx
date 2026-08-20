@@ -230,12 +230,28 @@ export default function HomeContent() {
         {/* Section 3: Why Vidibro is the Best Omegle Alternative */}
         <WhyVidibro lang={lang} />
 
-        {/* FAQ accordion */}
+        {/* Dating CTA — mid-page, well away from chat buttons above and below */}
+        <section className="mx-auto mt-14 max-w-2xl rounded-3xl border border-pink-500/25 bg-pink-500/[0.06] p-7 text-center sm:p-10">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-pink-500/30 bg-pink-500/10 px-4 py-1.5 text-xs font-semibold text-pink-300">
+            <span className="h-1.5 w-1.5 rounded-full bg-pink-400" /> Meet someone new
+          </div>
+          <h2 className="text-xl font-black tracking-tight text-white sm:text-2xl">
+            Looking to meet someone?
+          </h2>
+          <p className="mx-auto mt-2 max-w-sm text-sm text-purple-200/70">
+            Random video chat — real face-to-face connections, no fake profiles, no signup.
+          </p>
+          <a
+            href="/dating"
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 px-7 py-3 text-sm font-extrabold text-white shadow-lg hover:opacity-90 transition"
+          >
+            Try video chat dating →
+          </a>
+        </section>
+
         <PopularDestinations />
 
         <FAQAccordion lang={lang} />
-
-        {/* Full Global Directory Section at Bottom of Homepage */}
 
         {/* Final call-to-action band before the footer */}
         <FinalCTASection lang={lang} />

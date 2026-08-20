@@ -12,12 +12,21 @@ import OnlineBadge from "@/components/OnlineBadge";
 
 export const metadata: Metadata = {
   title: "Random Video Chat Dating — Meet Strangers Online Free",
-  description: "Meet new people through random video chat. No signup, no fake profiles — just real face-to-face connections with strangers worldwide. Free video, voice, and text chat.",
+  description: "Meet strangers by random video chat — no signup, no fake profiles. Real face-to-face connections worldwide. Free video, voice, and text chat.",
   alternates: { canonical: `${BASE_URL}/dating` },
   openGraph: {
     title: "Random Video Chat Dating — Meet Strangers Online Free",
-    description: "Meet new people through random video chat. No signup, no fake profiles — just real face-to-face connections.",
+    description: "Meet strangers by random video chat — no signup, no fake profiles. Real face-to-face connections worldwide. Free video, voice, and text chat.",
     url: `${BASE_URL}/dating`,
+    type: "website",
+    images: [
+      {
+        url: `${BASE_URL}/logo.png`,
+        width: 1200,
+        height: 630,
+        alt: "Vidibro — Random Video Chat Dating",
+      },
+    ],
   },
 };
 

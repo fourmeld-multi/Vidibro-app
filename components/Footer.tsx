@@ -184,6 +184,7 @@ export default function Footer({ onStartVideoChat, onStartTextChat, onStartAudio
               { href: "/id",    label: "Bahasa Indonesia" },
               { href: "/vi",    label: "Tiếng Việt" },
               { href: "/pt-br", label: "Português" },
+              { href: "/es",    label: "Español" },
             ].map((l) => (
               <Link
                 key={l.href}
