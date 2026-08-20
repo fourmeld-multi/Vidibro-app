@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Video, Mic, MessageSquare, ShieldCheck, Heart, Eye, Zap, Users } from "lucide-react";
 import { BASE_URL } from "@/lib/seo";
+import DatingReviews from "@/components/DatingReviews";
 
 export const metadata: Metadata = {
   title: "Random Video Chat Dating — Meet Strangers Online Free",
@@ -151,6 +152,9 @@ export default function DatingPage() {
             ))}
           </div>
         </section>
+
+        {/* Reviews */}
+        <DatingReviews />
 
         {/* How it works */}
         <section className="mb-14">
