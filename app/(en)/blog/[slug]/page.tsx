@@ -7,6 +7,7 @@ import { getAllPosts, getPostBySlug, tagToSlug } from "@/lib/blog/posts";
 import { CATEGORY_LABELS } from "@/lib/blog/types";
 import { generatePageSEO, BASE_URL } from "@/lib/seo";
 import PostIllustration from "@/components/blog/PostIllustration";
+import FaqItem from "@/components/blog/FaqItem";
 import JsonLd from "@/components/JsonLd";
 
 export function generateStaticParams() {
@@ -29,10 +30,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 const mdxComponents = {
   h2: (props: React.ComponentProps<"h2">) => (
-    <h2 className="mt-10 mb-4 text-2xl font-black text-white" {...props} />
+    <h2 className="mt-12 mb-4 flex items-center gap-3 text-xl sm:text-2xl font-black text-white border-l-4 border-purple-500 pl-4" {...props} />
   ),
   h3: (props: React.ComponentProps<"h3">) => (
-    <h3 className="mt-8 mb-3 text-xl font-bold text-white" {...props} />
+    <h3 className="mt-8 mb-3 text-lg font-bold text-white" {...props} />
   ),
   p: (props: React.ComponentProps<"p">) => (
     <p className="mb-5 leading-relaxed text-purple-100/85" {...props} />
@@ -41,7 +42,10 @@ const mdxComponents = {
     <ul className="mb-5 ml-5 list-disc space-y-2 text-purple-100/85" {...props} />
   ),
   ol: (props: React.ComponentProps<"ol">) => (
-    <ol className="mb-5 ml-5 list-decimal space-y-2 text-purple-100/85" {...props} />
+    <ol className="mb-5 space-y-3 text-purple-100/85 counter-reset-[step]" {...props} />
+  ),
+  li: (props: React.ComponentProps<"li">) => (
+    <li className="flex gap-3 items-start" {...props} />
   ),
   strong: (props: React.ComponentProps<"strong">) => (
     <strong className="font-bold text-white" {...props} />
@@ -52,6 +56,21 @@ const mdxComponents = {
   blockquote: (props: React.ComponentProps<"blockquote">) => (
     <blockquote className="my-6 border-l-2 border-purple-400/40 pl-4 italic text-purple-200/80" {...props} />
   ),
+  table: (props: React.ComponentProps<"table">) => (
+    <div className="my-6 overflow-x-auto rounded-xl border border-white/10">
+      <table className="w-full text-sm text-left" {...props} />
+    </div>
+  ),
+  thead: (props: React.ComponentProps<"thead">) => (
+    <thead className="bg-white/[0.06] text-purple-300 uppercase text-xs tracking-wider" {...props} />
+  ),
+  th: (props: React.ComponentProps<"th">) => (
+    <th className="px-4 py-3 font-bold" {...props} />
+  ),
+  td: (props: React.ComponentProps<"td">) => (
+    <td className="px-4 py-3 border-t border-white/[0.06] text-purple-100/85" {...props} />
+  ),
+  FaqItem,
 };
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
