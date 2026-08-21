@@ -7,7 +7,7 @@ const es: NativeLangData = {
   canonicalSlug: "/es",
   title: "Videollamada Aleatoria Gratis | Chat de Video Sin Registro - Vidibro",
   description:
-    "Vidibro — videollamada aleatoria gratis sin registro. Chat de video aleatorio 1 a 1 con personas de España y de todo el mundo. Sin descargas, sin cuenta. Empieza ya.",
+    "Vidibro — videollamada aleatoria gratis sin registro. Chat de video aleatorio 1 a 1 con personas de España y del mundo. Sin descargas, sin cuenta.",
   h1: "Videollamada Aleatoria Gratis — Chat de Video Sin Registro",
   tagline: "Sin registro. Chat de video gratis con desconocidos de España y del mundo ahora mismo.",
   intro:

@@ -19,7 +19,7 @@ export const ENTRIES: DirectoryEntry[] = [
     primaryKeyword: "video call india free",
     title: "Video Call India Free — Random Video Chat, No Registration",
     description:
-      "Free video call India — random video chat with strangers in Mumbai, Delhi, Bangalore and Kolkata. No account, no download, works on Jio and Airtel. Omegle alternative for India.",
+      "Free video call India — random video chat with strangers in Mumbai, Delhi and Kolkata. No account, no download, works on Jio and Airtel.",
     tagline:
       "The best free video chat in India. Connect with people across the country, make new friends, talk in your own language — no signup, no download, no waiting.",
     languages: [

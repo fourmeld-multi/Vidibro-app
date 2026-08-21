@@ -18,6 +18,7 @@ const ALL_LANG_ALTERNATES: Record<string, string> = {
   "id": `${BASE_URL}/id`,
   "vi": `${BASE_URL}/vi`,
   "pt-BR": `${BASE_URL}/pt-br`,
+  "es": `${BASE_URL}/es`,
   "x-default": BASE_URL,
 };
 
