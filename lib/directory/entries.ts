@@ -17,7 +17,7 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "country",
     name: "India",
     primaryKeyword: "video call india free",
-    title: "Video Call India Free — Random Video Chat, No Registration",
+    title: "Video Call India Free — Random Video Chat, No Signup",
     description:
       "Free video call India — random video chat with strangers in Mumbai, Delhi and Kolkata. No account, no download, works on Jio and Airtel.",
     tagline:
@@ -6370,7 +6370,7 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "country",
     name: "Hong Kong",
     primaryKeyword: "hong kong video chat",
-    title: "Hong Kong Video Chat — Free, No Registration",
+    title: "Hong Kong Video Chat — Free, No Signup",
     description:
       "Free random video chat with people in Hong Kong. Cantonese and English speakers, no signup, no app. Connect from Kowloon, HK Island and beyond.",
     tagline: "Cantonese, English, and conversations that move fast. No account — just connect.",
@@ -6686,7 +6686,7 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "country",
     name: "Taiwan",
     primaryKeyword: "taiwan video chat",
-    title: "Taiwan Video Chat — Free Random Chat, No Registration",
+    title: "Taiwan Video Chat — Free Random Chat, No Signup",
     description:
       "Free random video chat with people in Taiwan. Mandarin speakers, night market culture, no signup. Connect with Taipei, Kaohsiung and beyond.",
     tagline: "Night markets, bubble tea and conversations that go places. No account needed.",

@@ -16,7 +16,7 @@ import { generatePageSEO } from "@/lib/seo";
  * use it. Leaving both indexable would put them in competition for one query.
  */
 export const metadata: Metadata = generatePageSEO({
-  title: "Anonymous Text Chat with Strangers — Free, No Registration",
+  title: "Anonymous Text Chat with Strangers — Free, No Signup",
   description:
     "Chat by text with random strangers instantly. Fully anonymous, no registration, no chat history kept. Type to someone new the moment you land on the page.",
   slug: "/text-chat",
