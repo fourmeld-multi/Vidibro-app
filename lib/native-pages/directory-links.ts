@@ -44,6 +44,7 @@ export const REVERSE_NATIVE_LINKS: Record<string, Array<{ href: string; label: s
   ],
   "/ml": [
     { href: "/directory/video-chat-india", label: "India" },
+    { href: "/directory/malayalam-video-chat", label: "Malayalam Chat" },
   ],
   "/ta": [
     { href: "/directory/video-chat-india", label: "India" },

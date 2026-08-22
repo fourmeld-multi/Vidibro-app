@@ -1873,6 +1873,104 @@ export const ENTRIES: DirectoryEntry[] = [
   },
 
   {
+    slug: "malayalam-video-chat",
+    kind: "language",
+    name: "Malayalam",
+    primaryKeyword: "malayalam video chat",
+    title: "Malayalam Video Chat — Mallu Video Chat Free",
+    description:
+      "Free Malayalam video chat. Meet Kerala strangers and Malayalam speakers worldwide — no signup, no app. Mallu video chat, voice or text.",
+    languages: ["മലയാളം (Malayalam)", "English", "हिन्दी (Hindi)"],
+    peakHours: "20:00 – 00:00 IST",
+    timezone: "Asia/Kolkata",
+    weight: 1.2,
+    tagline:
+      "Free Malayalam video chat with strangers from Kerala and the Malayalee diaspora worldwide. No account, no app, no filter.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Kerala — God's Own Country",
+        body: "Kerala has one of India's highest literacy rates and one of the most active online populations relative to its size. Backwaters, Onam, Mollywood — it is a culture with a lot to talk about and people who are comfortable doing so.",
+      },
+      {
+        kind: "diaspora",
+        title: "A diaspora that spans the Gulf to the UK",
+        body: "There are large Malayalee communities in the UAE, Qatar, Saudi Arabia, the UK and the US. A Malayalam conversation on Vidibro is as likely to reach Dubai or London as Thiruvananthapuram — the evening peaks overlap.",
+      },
+    ],
+    localPhrases: [
+      { phrase: "നമസ്കാരം", meaning: "Hello", say: "Namaskaram" },
+      { phrase: "സുഖമാണോ?", meaning: "How are you?", say: "Sukhamano?" },
+      { phrase: "നന്ദി", meaning: "Thank you", say: "Nandi" },
+      { phrase: "വീണ്ടും കാണാം", meaning: "See you again", say: "Veendum kanam" },
+    ],
+    starters: [
+      {
+        topic: "Mollywood",
+        ask: "Mohanlal or Mammootty — who do you rate more?",
+        why: "The defining rivalry in Malayalam cinema, always a real answer.",
+      },
+      {
+        topic: "Onam",
+        ask: "How does your family celebrate Onam — traditional Sadhya?",
+        why: "Onam is Kerala's biggest festival, celebrated worldwide by the diaspora.",
+      },
+      {
+        topic: "Kerala food",
+        ask: "Appam and stew, or Puttu and kadala — which side are you on?",
+        why: "Kerala breakfast arguments are surprisingly passionate.",
+      },
+      {
+        topic: "Gulf connection",
+        ask: "Are you in Kerala or abroad?",
+        why: "A huge share of the Malayalee population works in the Gulf — the answer changes the conversation.",
+      },
+    ],
+    places: ["Thiruvananthapuram", "Kochi", "Kozhikode", "Thrissur", "Dubai", "London"],
+    talkingPoints: [
+      "Mollywood — Mohanlal and Mammootty are genuine legends, and newer stars like Fahadh Faasil have global cult followings",
+      "Onam, the 10-day harvest festival celebrated by Malayalees worldwide with Sadhya and Pookalam",
+      "Kerala's Gulf diaspora — a huge share of the state's economy comes from remittances, and many families are split across continents",
+      "Backwaters and tourism — Alleppey houseboats, Munnar tea estates, Kovalam beach",
+      "Kerala's unusually high literacy rate and progressive social history",
+    ],
+    connectivityNote:
+      "Kerala has strong 4G and 5G coverage across most of the state — Jio, Airtel and BSNL all perform well. Gulf and UK diaspora connections are on fast fixed broadband. Vidibro adapts video quality to whichever end is weaker.",
+    localNote:
+      "Malayalam speakers are split between Kerala and a large diaspora — UAE, Qatar, Saudi Arabia, UK, US, Singapore. Evening peaks in Kerala (8–11 PM IST) overlap with late-afternoon in the Gulf and early morning in the UK on weekends. The variety spoken in Thiruvananthapuram and Kozhikode are distinct enough that people place each other.",
+    safetyNote:
+      "Standard rules apply — no personal details, no financial information. Calls are peer-to-peer and never recorded.",
+    etiquette:
+      "Kerala has a strong progressive tradition and education is valued. Assuming someone from Kerala is the same as a generic 'Indian' is a reliable way to lose a conversation quickly.",
+    intro: [
+      "Malayalam has around 38 million native speakers, nearly all in Kerala, with a substantial diaspora in the Gulf states, the UK, and North America. The Gulf connection is significant — a large share of Kerala's economy runs on remittances, and many families have members in multiple countries.",
+      "Kerala is one of India's most educated states, with one of the highest literacy rates in the country. That translates to a population that is comfortable online, on mobile, and in conversation.",
+      "Mollywood — Malayalam cinema — has its own star system and has produced films that travel well beyond India. Mohanlal and Mammootty are genuine icons, and more recent films like Manjummel Boys have broken records outside the language.",
+      "There is no language filter on Vidibro, so this page describes what to expect rather than guaranteeing it. No account, nothing installed, nothing recorded.",
+    ],
+    faqs: [
+      { question: "Can I find Malayalam speakers on random video chat?", answer: "Regularly, particularly during the Kerala evening peak (8–11 PM IST). There is no language filter so no individual match is guaranteed, but Malayalam is one of the more active Indian language communities." },
+      { question: "Is mallu video chat really free?", answer: "Yes, completely. No account, no subscription, no credits. A browser on any phone or laptop is all you need." },
+      { question: "Will I reach people in Kerala or the Gulf?", answer: "Either — and UK or US too. The Malayalee diaspora is large and active. Evening in Kerala overlaps with late afternoon in the Gulf, so both communities are reachable in the same window." },
+      { question: "Can I practise Malayalam with strangers?", answer: "Yes. Most Malayalees are patient with learners and will often switch to English to help. Voice chat suits practice well." },
+      { question: "What time is best for Malayalam conversations?", answer: "Between 20:00 and 00:00 IST for Kerala-based users. Gulf diaspora is reachable from around 17:00 IST (equivalent to late afternoon Gulf time)." },
+      { question: "Is it safe?", answer: "The usual rules apply: no full name, no address, no financial details. Calls are peer-to-peer and never recorded, and the report button ends a conversation immediately." },
+    ],
+    related: [
+      { slug: "video-chat-mumbai", label: "Mumbai", relation: "city" },
+      { slug: "video-chat-delhi", label: "Delhi", relation: "city" },
+      { slug: "video-chat-bangalore", label: "Bangalore", relation: "city" },
+      { slug: "video-chat-india", label: "India", relation: "sibling" },
+      { slug: "video-chat-uae", label: "UAE", relation: "sibling" },
+      { slug: "tamil-video-chat", label: "Tamil video chat", relation: "language" },
+      { slug: "hindi-video-chat", label: "Hindi video chat", relation: "language" },
+      { slug: "audio-chat", label: "Malayalam voice chat", relation: "mode" },
+      { slug: "text-chat", label: "Malayalam text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+    ],
+  },
+
+  {
     slug: "urdu-video-chat",
     kind: "language",
     name: "Urdu",
