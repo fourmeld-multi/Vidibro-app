@@ -74,9 +74,9 @@ export default function RootLayoutShell({
         </Script>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-BSGKV3MTVF"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="ga-init" strategy="afterInteractive">
+        <Script id="ga-init" strategy="lazyOnload">
           {`if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
