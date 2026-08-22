@@ -175,6 +175,7 @@ export default function Footer({ onStartVideoChat, onStartTextChat, onStartAudio
               { href: "/bn",    label: "বাংলা" },
               { href: "/ta",    label: "தமிழ்" },
               { href: "/kn",    label: "ಕನ್ನಡ" },
+              { href: "/ml",    label: "മലയാളം" },
               { href: "/ja",    label: "日本語" },
               { href: "/ko",    label: "한국어" },
               { href: "/zh",    label: "中文" },
