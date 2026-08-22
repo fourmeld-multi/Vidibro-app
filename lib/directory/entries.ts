@@ -28,6 +28,8 @@ export const ENTRIES: DirectoryEntry[] = [
       "தமிழ் (Tamil)",
       "తెలుగు (Telugu)",
       "मराठी (Marathi)",
+      "മലയാളം (Malayalam)",
+      "ಕನ್ನಡ (Kannada)",
       "English",
     ],
     peakHours: "21:00 – 01:00 IST",
