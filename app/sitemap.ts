@@ -7,7 +7,7 @@ const NATIVE_ROUTES = [
   "/hi", "/kn", "/ta", "/bn",
   "/ja", "/ko", "/ru", "/pt-br",
   "/id", "/vi", "/tr", "/zh", "/th",
-  "/es", "/ml",
+  "/es", "/ml", "/ar",
 ];
 
 /**

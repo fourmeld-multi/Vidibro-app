@@ -22,13 +22,16 @@ const geistMono = Geist_Mono({
 export default function RootLayoutShell({
   children,
   lang = "en",
+  dir,
 }: {
   children: ReactNode;
   lang?: string;
+  dir?: "ltr" | "rtl";
 }) {
   return (
     <html
       lang={lang}
+      dir={dir}
       data-theme="dark"
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}

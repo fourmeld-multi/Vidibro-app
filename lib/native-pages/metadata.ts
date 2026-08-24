@@ -20,6 +20,7 @@ const ALL_LANG_ALTERNATES: Record<string, string> = {
   "pt-BR": `${BASE_URL}/pt-br`,
   "es": `${BASE_URL}/es`,
   "ml": `${BASE_URL}/ml`,
+  "ar": `${BASE_URL}/ar`,
   "x-default": BASE_URL,
 };
 
