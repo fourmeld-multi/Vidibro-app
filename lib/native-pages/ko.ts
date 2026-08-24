@@ -4,7 +4,7 @@ const ko: NativeLangData = {
   lang: "ko",
   ogLocale: "ko_KR",
   canonicalSlug: "/ko",
-  title: "영상채팅 무료 | 랜덤 화상채팅 사이트 - Vidibro",
+  title: "무료 랜덤 화상채팅, 가입 없이 — Vidibro",
   description:
     "Vidibro — 무료 영상채팅·화상채팅 사이트. 회원가입 없이 랜덤 영상통화 즉시 시작. 랜덤 화상채팅으로 전 세계 낯선 사람과 1대1 실시간 대화. 앱 설치 없이 스마트폰·PC 모두 지원. 계정 불필요, 완전 무료.",
   h1: "무료 영상채팅 — 랜덤 화상채팅 사이트",
