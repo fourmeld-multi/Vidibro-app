@@ -27,9 +27,6 @@ export const NATIVE_LINKS: Record<string, Array<{ href: string; label: string; l
   "video-chat-turkey": [{ href: "/tr", label: "Türkçe", lang: "Turkish" }],
   "video-chat-china": [{ href: "/zh", label: "中文", lang: "Chinese" }],
   "video-chat-thailand": [{ href: "/th", label: "ภาษาไทย", lang: "Thai" }],
-  "video-chat-egypt": [{ href: "/ar", label: "العربية", lang: "Arabic" }],
-  "video-chat-saudi-arabia": [{ href: "/ar", label: "العربية", lang: "Arabic" }],
-  "video-chat-uae": [{ href: "/ar", label: "العربية", lang: "Arabic" }],
 };
 
 /** Maps a native-page slug → English directory pages for that market */
@@ -68,9 +65,4 @@ export const REVERSE_NATIVE_LINKS: Record<string, Array<{ href: string; label: s
   "/tr": [{ href: "/directory/video-chat-turkey", label: "Turkey" }],
   "/zh": [{ href: "/directory/video-chat-china", label: "China" }],
   "/th": [{ href: "/directory/video-chat-thailand", label: "Thailand" }],
-  "/ar": [
-    { href: "/directory/video-chat-egypt", label: "Egypt" },
-    { href: "/directory/video-chat-saudi-arabia", label: "Saudi Arabia" },
-    { href: "/directory/video-chat-uae", label: "UAE" },
-  ],
 };
