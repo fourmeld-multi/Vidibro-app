@@ -1,4 +1,6 @@
 import { ImageResponse } from "next/og";
+import { readFileSync } from "fs";
+import path from "path";
 
 /**
  * Generates the social share card at build time.
@@ -15,6 +17,8 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OpengraphImage() {
+  const iconData = readFileSync(path.join(process.cwd(), "public/icon.png"));
+
   return new ImageResponse(
     (
       <div
@@ -32,16 +36,17 @@ export default async function OpengraphImage() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: 28,
+            gap: 32,
             marginBottom: 28,
           }}
         >
-          {/* Same mark as LogoMark: two chevrons meeting at a centre dot. */}
-          <svg width="96" height="96" viewBox="0 0 24 24" fill="none" stroke="#c084fc" strokeWidth="2.2" strokeLinecap="round">
-            <path d="M4 8l4 4-4 4" />
-            <path d="M20 8l-4 4 4 4" />
-            <circle cx="12" cy="12" r="1.6" fill="#c084fc" stroke="none" />
-          </svg>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`data:image/png;base64,${Buffer.from(iconData).toString("base64")}`}
+            width={110}
+            height={110}
+            style={{ borderRadius: 24 }}
+          />
           <div style={{ fontSize: 92, fontWeight: 800, color: "white", letterSpacing: -2 }}>
             Vidibro
           </div>
