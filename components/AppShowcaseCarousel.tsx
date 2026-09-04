@@ -7,9 +7,9 @@ import { motion } from "framer-motion";
 import { TRANSLATIONS, type LanguageCode } from "@/lib/translations";
 
 const IMAGES = {
-  video: "https://images.unsplash.com/photo-1752650733337-cb0189176fb9?auto=format&fit=crop&w=800&q=80",
-  text: "https://images.unsplash.com/photo-1758874383881-cd90c326058e?auto=format&fit=crop&w=800&q=80",
-  audio: "https://images.unsplash.com/photo-1555965435-f88618f05915?auto=format&fit=crop&w=800&q=80",
+  video: "/images/showcase-video.jpg",
+  text: "/images/showcase-text.jpg",
+  audio: "/images/showcase-audio.jpg",
 };
 
 const ACCENTS = {
