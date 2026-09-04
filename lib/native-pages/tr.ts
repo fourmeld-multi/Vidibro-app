@@ -10,7 +10,7 @@ const tr: NativeLangData = {
   h1: "Vidibro — Rastgele Görüntülü Sohbet",
   tagline: "Kayıt yok. Türkiye'den ve tüm dünyadan yabancılarla hemen konuş.",
   intro:
-    "Vidibro, hesap oluşturmadan ve kişisel bilgi girmeden kullanabileceğiniz tamamen ücretsiz bir rastgele görüntülü sohbet platformudur. Görüntülü arama, sesli sohbet ve metin sohbeti olmak üzere üç mod sunar; tüm bunlar uygulama yüklemeden doğrudan tarayıcıdan çalışır. 180'den fazla ülkeden kullanıcı gerçek zamanlı olarak buluşur ve hiçbir konuşma kaydedilmez. Dil pratiği, kültürel keşif veya sıradan bir sohbet için mükemmel bir platform.",
+    "Vidibro, hesap oluşturmadan ve kişisel bilgi girmeden kullanabileceğiniz tamamen ücretsiz bir rastgele görüntülü sohbet platformudur. Görüntülü arama, sesli sohbet ve metin sohbeti olmak üzere üç mod sunar; tüm bunlar uygulama yüklemeden doğrudan tarayıcıdan çalışır. 180'den fazla ülkeden kullanıcı gerçek zamanlı olarak buluşur ve hiçbir konuşma kaydedilmez. 2026 yılında en hızlı büyüyen ücretsiz görüntülü sohbet platformu olarak dil pratiği, kültürel keşif veya sıradan bir sohbet için mükemmel bir seçenek.",
   btnVideo: "Görüntülü Sohbet",
   btnVoice: "Sesli Sohbet",
   btnText: "Metin Sohbeti",
@@ -65,6 +65,7 @@ const tr: NativeLangData = {
     "İstanbul'a gittin mi? Nasıldı?",
     "Hangi Türk dizilerini izliyorsunuz?",
     "Ramazan'da hangi gelenekleri yaşatıyorsunuz?",
+    "Hangi müzik türünü seviyorsunuz — Türk pop mu arabesk mi?",
   ],
   connectivity:
     "Türkiye'nin büyük şehirlerinde 4G ve genişleyen 5G altyapısıyla hızlı internet bulunmaktadır. Vidibro bağlantı hızına göre video kalitesini otomatik ayarlar.",
@@ -124,6 +125,7 @@ const tr: NativeLangData = {
     { question: "Telefonda kullanılabilir mi?", answer: "Evet, iOS ve Android'de tarayıcı üzerinden çalışır. Uygulama kurulumu gerekmez." },
     { question: "Türkçe konuşan biriyle karşılaşabilir miyim?", answer: "Dil filtresi yoktur ancak akşam saatlerinde Türkçe konuşan kullanıcıyla karşılaşma ihtimali daha yüksektir." },
     { question: "Görüşmeler kaydediliyor mu?", answer: "Hayır. P2P bağlantı sayesinde hiçbir veri sunucularımızdan geçmez ve kaydedilmez." },
+    { question: "Omegle'a en iyi Türkçe alternatif hangisi?", answer: "Vidibro, Türkçe arayüzü ve kayıt gerektirmeyen yapısıyla Omegle'a en iyi ücretsiz alternatiftir. Görüntülü, sesli ve metin sohbeti modlarıyla 2026'da Türk kullanıcıların tercihi haline gelmiştir." },
   ],
   ctaTitle: "Yeni Biriyle Tanışmaya Hazır mısınız?",
   ctaBody: "Kayıt yok, geçmiş yok. Sadece henüz tanımadığınız biriyle bir sohbet.",
