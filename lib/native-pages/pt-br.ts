@@ -11,7 +11,7 @@ const ptBr: NativeLangData = {
   h1: "Chat de Vídeo Grátis — Videochamada Aleatória Brasil",
   tagline: "Sem cadastro. Chat ao vivo grátis com pessoas do Brasil e do mundo agora mesmo.",
   intro:
-    "O Vidibro é um vídeo chat gratuito e videochamada aleatória sem necessidade de cadastro. Você pode escolher entre chamada de vídeo grátis, chat de voz ou chat de texto — tudo funcionando direto no navegador, sem instalar nada. São mais de 180 países conectados em tempo real com chat ao vivo grátis, com total privacidade: nenhuma conversa é armazenada. Ideal para brasileiros que querem praticar idiomas, conhecer culturas diferentes ou simplesmente bater um papo com alguém do outro lado do mundo.",
+    "O Vidibro é um vídeo chat gratuito e videochamada aleatória sem necessidade de cadastro. Você pode escolher entre chamada de vídeo grátis, chat de voz ou chat de texto — tudo funcionando direto no navegador, sem instalar nada. São mais de 180 países conectados em tempo real com chat ao vivo grátis, com total privacidade: nenhuma conversa é armazenada. Em 2026, é a plataforma de videochamada aleatória que mais cresce no Brasil — ideal para praticar idiomas, conhecer culturas diferentes ou bater um papo com alguém do outro lado do mundo.",
   btnVideo: "Iniciar vídeo",
   btnVoice: "Chat de voz",
   btnText: "Chat de texto",
@@ -66,6 +66,7 @@ const ptBr: NativeLangData = {
     "Qual é a sua comida brasileira favorita?",
     "Você ouve forró, samba ou funk?",
     "Qual cidade do Brasil você quer conhecer?",
+    "Você prefere Netflix, YouTube ou TV aberta?",
   ],
   connectivity:
     "O Brasil tem cobertura 4G nas principais cidades e está expandindo o 5G. O Vidibro ajusta automaticamente a qualidade do vídeo para garantir uma boa chamada mesmo em conexões mais lentas.",
@@ -126,6 +127,7 @@ const ptBr: NativeLangData = {
     { question: "Posso falar com brasileiros no chat de vídeo?", answer: "Não há filtro de idioma, mas no horário de pico (19h–00h BRT) é mais provável encontrar falantes de português do Brasil." },
     { question: "As chamadas de vídeo são gravadas?", answer: "Não. A conexão P2P garante que nenhum vídeo chat passe pelos nossos servidores. Nada é armazenado." },
     { question: "Chat vídeo chamada gratuito — como funciona?", answer: "O Vidibro conecta dois usuários aleatórios via P2P direto no navegador. É um chat vídeo chamada gratuito sem servidor intermediário, por isso é rápido e privado." },
+    { question: "Qual a melhor alternativa ao Omegle em português?", answer: "O Vidibro é a melhor alternativa ao Omegle em 2026 para brasileiros — vídeo chat gratuito, sem cadastro, com videochamada aleatória direto no navegador." },
   ],
   ctaTitle: "Pronto para conhecer alguém novo?",
   ctaBody: "Sem cadastro, sem histórico. Só uma conversa com quem você ainda não conhece.",
