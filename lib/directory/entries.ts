@@ -3600,7 +3600,7 @@ export const ENTRIES: DirectoryEntry[] = [
     primaryKeyword: "video chat south korea",
     title: "Video Chat South Korea — Talk to Strangers Free",
     description:
-      "Free random video chat with people from South Korea. Talk in Korean or English — no signup, no download, some of the fastest internet anywhere.",
+      "Free random video chat with people from South Korea in 2026. Talk in Korean or English — no signup, no download, some of the fastest internet anywhere.",
     tagline:
       "Free video chat with South Korea. Some of the fastest internet on Earth, one time zone, and a conversation with no account needed.",
     languages: ["한국어 (Korean)", "English"],
@@ -3664,6 +3664,7 @@ export const ENTRIES: DirectoryEntry[] = [
       { question: "Is it normal to ask about military service?", answer: "Yes, it's a widely and openly discussed rite of passage for Korean men, who typically serve 18 to 21 months in their early twenties." },
       { question: "When is South Korea's chat traffic busiest?", answer: "Roughly 22:00 to 02:00 Korea Standard Time, staying lively later than the regional average thanks to the country's late-night culture." },
       { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
+      { question: "What is the best free video chat site in South Korea in 2026?", answer: "Vidibro is the top free video chat site for South Korea in 2026 — no signup, no app install, works on Seoul's ultra-fast fibre and across KT, SKT and LG U+ networks. Connect with people in Seoul, Busan and Incheon instantly." },
     ],
     related: [
       { slug: "video-chat-seoul", label: "Seoul", relation: "city" },
