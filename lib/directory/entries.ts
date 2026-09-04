@@ -391,7 +391,7 @@ export const ENTRIES: DirectoryEntry[] = [
     primaryKeyword: "video chat bangladesh",
     title: "Video Chat Bangladesh — Talk to Strangers Free",
     description:
-      "Free random video chat with people across Bangladesh. Match with strangers in Dhaka, Chittagong and Sylhet — no signup, works on Grameenphone and Robi.",
+      "Free random video chat with people across Bangladesh in 2026. Match with strangers in Dhaka, Chittagong and Sylhet — no signup, works on Grameenphone and Robi.",
     languages: ["বাংলা (Bengali)", "English", "সিলেটি (Sylheti)"],
     peakHours: "22:30 – 01:30 BST",
     timezone: "Asia/Dhaka",
@@ -467,6 +467,7 @@ export const ENTRIES: DirectoryEntry[] = [
       { question: "What time is busiest in Bangladesh?", answer: "Between 22:30 and 01:30 BST. Bangladesh is thirty minutes ahead of India, so its peak overlaps almost exactly with West Bengal's — good news if you want a Bangla conversation." },
       { question: "Can I chat with people in Kolkata from Dhaka?", answer: "Often, yes. There is no country filter, and the shared evening peak means cross-border Bangla conversations are common. The differences between Dhaka and Kolkata Bengali usually become the conversation." },
       { question: "Is it free and anonymous?", answer: "Both. No account, no phone number, no payment. Calls are peer-to-peer and never recorded." },
+      { question: "What is the best free video chat site in Bangladesh in 2026?", answer: "Vidibro is the top free video chat site for Bangladesh in 2026 — no signup, no app install, works on Grameenphone, Robi and Banglalink. Connect with people in Dhaka, Chittagong and Sylhet instantly." },
     ],
     related: [
       { slug: "video-chat-dhaka", label: "Dhaka", relation: "city" },
