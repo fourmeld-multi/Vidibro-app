@@ -55,16 +55,11 @@ const ja: NativeLangData = {
     "仕事や学校が終わった夜の時間帯が最もアクティブです。特に週末の深夜は待ち時間が短くなります。",
   phrases: [
     { native: "こんにちは", romanized: "Konnichiwa", meaning: "Hello / Good afternoon" },
-    { native: "よろしくお願いします", romanized: "Yoroshiku onegaishimasu", meaning: "Nice to meet you" },
-    { native: "ありがとうございます", romanized: "Arigatou gozaimasu", meaning: "Thank you" },
-    { native: "また話しましょう", romanized: "Mata hanashimashou", meaning: "Let's talk again" },
+    { native: "すごい！", romanized: "Sugoi!", meaning: "Amazing / Wow!" },
   ],
   starters: [
     "好きなアニメは何ですか？",
-    "どのゲームをしていますか？",
     "おすすめのラーメンは？",
-    "好きなJ-POPアーティストは？",
-    "最近どんな映画を観ましたか？",
   ],
   connectivity:
     "日本は世界最高水準の5G・光ファイバー網を誇ります。都市部では超高速接続が普及しており、ビデオ通話品質は非常に安定しています。",
@@ -98,6 +93,8 @@ const ja: NativeLangData = {
     { step: 3, title: "マッチングされる", body: "数秒のカウントダウン後、ランダムに相手が決まります。ピーク時は数秒で繋がります。" },
     { step: 4, title: "次へ、いつでも", body: "「次へ」ボタン一つで別の相手に切り替え。説明不要でいつでも次の出会いへ。" },
   ],
+  showJapanExtra: true,
+  hideCloneSection: true,
   whatIsTitle: "ランダムビデオチャットとは？",
   whatIsBody:
     "ランダムビデオチャットとは、インターネット上で見知らぬ人とリアルタイムでビデオ通話できるサービスです。Vidibroでは1対1のマッチングを採用し、世界中のユーザーと偶発的な出会いができます。かつてOmegle（オメグル）として知られていたこのスタイルのサービスは、語学練習・異文化交流・純粋な暇つぶしに利用されています。Vidibroは登録不要で個人情報の入力も一切不要です。",

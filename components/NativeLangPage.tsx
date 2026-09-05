@@ -346,6 +346,47 @@ export default function NativeLangPage({ data }: { data: NativeLangData }) {
             </>
           )}
 
+          {/* ── JAPAN EXTRA: 4-card + prose (ja only) ── */}
+          {data.showJapanExtra && (
+            <>
+              <section className="mt-14">
+                <p className="mb-2 text-xs font-bold uppercase tracking-widest text-purple-400">日本のビデオチャット</p>
+                <h2 className="mb-8 text-2xl sm:text-3xl font-black tracking-tight text-white">
+                  日本のビデオチャット — <span className="text-pink-400">ここだけの特徴</span>
+                </h2>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                  {[
+                    { emoji: "🎌", title: "三つの文字体系", body: "ひらがな・カタカナ・漢字が1つの文中に共存します。チャットで少しでも日本語を使うと、相手は温かく反応してくれます。" },
+                    { emoji: "🌸", title: "季節文化がリアル", body: "花見・夏祭り・紅葉・雪まつり――日本の季節行事は実際の生活に根付いています。「今年の花見どうだった？」が自然な会話のきっかけに。" },
+                    { emoji: "🎲", title: "1対1・完全ランダム", body: "プロフィール一覧も検索フィルターもなし。次の相手はキューが決めます――完全にランダムで、それがこの仕組みの核心です。" },
+                    { emoji: "⚡", title: "アカウント不要・永久無料", body: "日本のビデオ通話は一切無料で、何も求めません。メール・電話番号・アプリ不要。ページを開けばすぐ始まります。" },
+                  ].map((c) => (
+                    <div key={c.title} className="dir-card rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center flex flex-col items-center">
+                      <div className="mb-4 text-4xl">{c.emoji}</div>
+                      <h3 className="mb-2 text-base font-black text-white">{c.title}</h3>
+                      <p className="text-sm leading-relaxed text-purple-100/70">{c.body}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section className="mt-14 rounded-2xl border border-purple-500/20 bg-purple-500/[0.05] p-7 sm:p-8">
+                <h2 className="mb-4 text-xl sm:text-2xl font-black tracking-tight text-white">
+                  日本のランダムビデオチャット — 待ち時間なし、登録なし
+                </h2>
+                <p className="mb-4 text-base leading-relaxed text-purple-100/80">
+                  日本はNTTドコモ・SoftBank・auが世界最高水準の4G・5Gカバレッジを展開しており、ビデオ通話品質は世界トップクラスです。東京の地下鉄の中でも地方都市でも、接続が安定しているのが日本の強みです。
+                </p>
+                <p className="mb-4 text-base leading-relaxed text-purple-100/80">
+                  このページには様々な検索から来ることができます――ランダムビデオチャット・ビデオ通話無料・見知らぬ人とビデオチャット・Omegle代替。どれも同じ結果にたどり着きます：数秒でライブマッチング、どのデバイスでも、アカウント不要。東京・大阪・名古屋など全国から参加者がいます。
+                </p>
+                <p className="text-base leading-relaxed text-purple-100/80">
+                  会話のペースは他の市場と少し違います。沈黙が不自然ではなく、個人的な話題への移行はゆっくりが自然です。相手がカメラを持っていない場合はテキストから始めるのも良い選択です。忍耐は報われます。
+                </p>
+              </section>
+            </>
+          )}
+
           {/* ── WHAT IS ── */}
           <section className="mt-14">
             <SectionHead tone="purple" icon={<HelpCircle size={18} />} title={data.whatIsTitle} />

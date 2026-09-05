@@ -87,6 +87,7 @@ export interface NativeLangData {
   /* Clone comparison */
   hideCloneSection?: boolean;
   showBrazilExtra?: boolean;
+  showJapanExtra?: boolean;
   cloneTitle: string;
   cloneBlurb: string;
   cloneRows: CloneRow[];
