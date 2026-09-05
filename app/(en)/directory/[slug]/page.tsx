@@ -66,7 +66,7 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
 
   const url = `${BASE_URL}/directory/${entry.slug}`;
   const heading = entry.title.split("—")[0].trim();
-  const newDesign = entry.slug === "video-chat-nepal" || entry.slug === "video-chat-south-korea" || entry.slug === "video-chat-bangladesh" || entry.slug === "video-chat-turkey" || entry.slug === "video-chat-brazil" || entry.slug === "video-chat-tokyo";
+  const newDesign = entry.slug === "video-chat-nepal" || entry.slug === "video-chat-south-korea" || entry.slug === "video-chat-bangladesh" || entry.slug === "video-chat-turkey" || entry.slug === "video-chat-brazil" || entry.slug === "video-chat-tokyo" || entry.slug === "video-chat-japan";
 
   return (
     <main className="w-full">
@@ -281,6 +281,37 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
                   bg: "bg-emerald-500/20 text-emerald-300",
                   title: "No Account, No Trace",
                   body: "Calls run browser-to-browser. Nothing is recorded or stored on our side. Leave any time — no history, no account, nothing left behind.",
+                },
+              ].map((card) => (
+                <div key={card.title} className="dir-card rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+                  <div className={`mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl ${card.bg}`}>
+                    {card.icon}
+                  </div>
+                  <h3 className="mb-2 text-lg font-black text-white">{card.title}</h3>
+                  <p className="text-sm leading-relaxed text-purple-100/75">{card.body}</p>
+                </div>
+              ))}
+            </div>
+          ) : entry.slug === "video-chat-japan" ? (
+            <div className="grid gap-4 sm:grid-cols-3 text-left">
+              {[
+                {
+                  icon: <Wifi size={24} />,
+                  bg: "bg-purple-500/20 text-purple-300",
+                  title: "World-Class Networks",
+                  body: "NTT Docomo, SoftBank and au run some of the densest, fastest 4G and 5G coverage on Earth. Video calls from Japan hold full quality — in Tokyo's subways and beyond.",
+                },
+                {
+                  icon: <Globe2 size={24} />,
+                  bg: "bg-pink-500/20 text-pink-300",
+                  title: "Anime, Konbini & Last Trains",
+                  body: "Anime is mainstream, not niche. Konbini culture is a genuine daily ritual. And a missed last train at midnight means staying out until 5am — ask about any of these and you're in.",
+                },
+                {
+                  icon: <ShieldCheck size={24} />,
+                  bg: "bg-emerald-500/20 text-emerald-300",
+                  title: "No Account, No Trace",
+                  body: "Calls run peer-to-peer on NTT Docomo, SoftBank or au. Nothing is recorded or stored on our side. Leave any time — no history, no account, nothing left behind.",
                 },
               ].map((card) => (
                 <div key={card.title} className="dir-card rounded-2xl border border-white/10 bg-white/[0.04] p-6">
@@ -614,6 +645,48 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
           </div>
         </section>
 
+        {entry.slug === "video-chat-japan" && (
+          <>
+            {/* ── JAPAN: 4-card differentiator grid ── */}
+            <section className="mt-14">
+              <p className="mb-2 text-xs font-bold uppercase tracking-widest text-purple-400">Why Japan</p>
+              <h2 className="mb-8 text-2xl sm:text-3xl font-black tracking-tight text-white">
+                Japan Video Chat — <span className="text-pink-400">What Makes It Different</span>
+              </h2>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {[
+                  { emoji: "🎌", title: "Three Writing Systems at Once", body: "Hiragana, katakana and kanji — used together in a single sentence. Even typing a few Japanese words into chat earns genuine warmth and often a patient correction." },
+                  { emoji: "🌸", title: "Seasonal Culture Is Real", body: "Hanami (cherry blossoms), summer festivals, onsen trips — Japan's seasons shape real daily plans. Ask what someone is doing this season and you get a real answer, not a generic one." },
+                  { emoji: "🎲", title: "One Person at a Time", body: "No profile grids, no search filters. The next Japan video chat is whoever the queue pairs you with — completely random, which is what makes it work." },
+                  { emoji: "⚡", title: "Free — No Account Ever", body: "A Japan video call costs nothing and asks for nothing. No email, no phone number, no app. Open the page on NTT Docomo, SoftBank or au and you are already in." },
+                ].map((c) => (
+                  <div key={c.title} className="dir-card rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center flex flex-col items-center">
+                    <div className="mb-4 text-4xl">{c.emoji}</div>
+                    <h3 className="mb-2 text-base font-black text-white">{c.title}</h3>
+                    <p className="text-sm leading-relaxed text-purple-100/70">{c.body}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* ── JAPAN: SEO prose section ── */}
+            <section className="mt-14 rounded-2xl border border-purple-500/20 bg-purple-500/[0.05] p-7 sm:p-8">
+              <h2 className="mb-4 text-xl sm:text-2xl font-black tracking-tight text-white">
+                Random Video Chat in Japan — No Waiting, No Account
+              </h2>
+              <p className="mb-4 text-base leading-relaxed text-purple-100/80">
+                Japan has some of the most reliable mobile infrastructure on Earth — NTT Docomo, SoftBank and au run dense 4G and 5G coverage that makes dropped calls genuinely uncommon. That reliability translates directly to video call quality: what you get here is consistent, wherever the person on the other side happens to be sitting.
+              </p>
+              <p className="mb-4 text-base leading-relaxed text-purple-100/80">
+                Searches reach this page under a dozen names — Japan video chat, Japanese video call, video chat Japan free, random video call Japan — and every one of them lands the same thing: a live match in seconds, on any device, no account created, nothing stored. The pool concentrates in Tokyo, Osaka and Yokohama but covers every prefecture.
+              </p>
+              <p className="text-base leading-relaxed text-purple-100/80">
+                Pacing is different here than in most markets. Comfortable silence is not awkward — it is normal. A slower build to personal topics goes further than blunt directness. And if there is a language gap, text mode is a gentler opening than voice. Patience tends to be rewarded here in a way it is not everywhere else.
+              </p>
+            </section>
+          </>
+        )}
+
         {entry.slug === "video-chat-brazil" && (
           <>
             {/* ── BRAZIL: 4-card differentiator grid ── */}
@@ -668,7 +741,7 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
           </section>
         )}
 
-        {entry.slug !== "video-chat-turkey" && entry.slug !== "video-chat-brazil" && <section className="mt-14">
+        {entry.slug !== "video-chat-turkey" && entry.slug !== "video-chat-brazil" && entry.slug !== "video-chat-japan" && <section className="mt-14">
           <SectionHead
             tone="amber"
             icon={<Scale size={18} />}
