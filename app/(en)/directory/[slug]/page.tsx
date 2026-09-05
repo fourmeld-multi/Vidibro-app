@@ -181,27 +181,24 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
           {entry.intro[0]}
         </p>
 
-        {/* One grid of six rather than two grids of three. Split across two
-            grids, the second row of the first grid held a single tile with a
-            dead column beside it on mobile. Six items divide evenly into two
-            columns on a phone and three on a wider screen, so no row is ever
-            left with a gap. */}
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
-          <StatTile tone="emerald" value="None" label="Signup required" />
-          <StatTile
-            tone="cyan"
-            value={entry.peakHours ? formatPeakHours(entry.peakHours.split("/")[0].trim()) : "Any hour"}
-            label={entry.peakHours ? "Busiest window" : "When it works"}
-          />
-          <StatTile tone="purple" value={`${entry.languages.length}`} label="Languages you'll hear" />
-          <StatTile tone="amber" value="180+" label="Countries" />
-          <StatTile tone="pink" value="300k+" label="Daily matches" />
-          <StatTile tone="emerald" value="99.9%" label="Uptime" />
+        <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {[
+            { value: "1M+", label: "Active Users", tone: "purple" as const },
+            { value: "180+", label: "Countries", tone: "cyan" as const },
+            { value: "300k+", label: "Daily Matches", tone: "pink" as const },
+            { value: "99.9%", label: "Uptime", tone: "emerald" as const },
+          ].map((s) => (
+            <StatTile key={s.label} tone={s.tone} value={s.value} label={s.label} />
+          ))}
         </div>
 
-        <section className="mt-14">
-          <SectionHead tone="purple" icon={<Zap size={18} />} title={`Why use Vidibro in ${entry.whyName ?? entry.name}?`} blurb={entry.intro[1]} />
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <section className="mt-14 text-center">
+          <p className="mb-2 text-xs font-bold uppercase tracking-widest text-purple-400">Why us</p>
+          <h2 className="mb-2 text-2xl sm:text-3xl font-black tracking-tight text-white">
+            Why Choose <span className="text-pink-400">Vidibro</span>?
+          </h2>
+          {entry.intro[1] && <p className="mb-8 text-base text-purple-200/70 max-w-xl mx-auto">{entry.intro[1]}</p>}
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-left">
             <IconCard icon={<Lock size={16} />} title="Nothing is stored" tone="emerald">
               Calls run browser to browser. There is no account, so there is no profile for a
               conversation to attach to and nothing for us to keep.
