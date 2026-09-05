@@ -5,7 +5,7 @@ import {
   Video, Mic, MessageSquare, Clock, Languages, Signal, ShieldCheck, Zap,
   Lock, Smartphone, MousePointerClick, Camera, Users, Compass, Scale, HelpCircle, Sunrise, Handshake, ArrowLeft,
   Plane, Snowflake, Gavel, Wallet, Sparkles, Wifi, Clock3,
-  Sticker, CheckCheck, Globe2, Activity,
+  Sticker, CheckCheck, Globe2, Activity, Star,
 } from "lucide-react";
 import { ENTRIES, getEntry, resolvableRelated, hrefFor } from "@/lib/directory/entries";
 import { assertEntryIsPublishable } from "@/lib/directory/types";
@@ -200,7 +200,7 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
         </div>
 
         <section className="mt-14">
-          <SectionHead tone="purple" icon={<Zap size={18} />} title={`Why use Vidibro in ${entry.name}?`} blurb={entry.intro[1]} />
+          <SectionHead tone="purple" icon={<Zap size={18} />} title={`Why use Vidibro in ${entry.whyName ?? entry.name}?`} blurb={entry.intro[1]} />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             <IconCard icon={<Lock size={16} />} title="Nothing is stored" tone="emerald">
               Calls run browser to browser. There is no account, so there is no profile for a
@@ -341,15 +341,17 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
           </div>
         </section>
 
-        <section className="mt-14">
-          <SectionHead tone="purple" icon={<HelpCircle size={18} />} title={whatIsHeading(entry.kind, entry.name)} />
-          {entry.intro[2] && (
-            <p className="max-w-3xl text-base sm:text-lg leading-relaxed text-purple-100/80">
-              {entry.intro[2]}
-            </p>
-          )}
-          <MatchingDiagram />
-        </section>
+        {!entry.hideWhatIs && (
+          <section className="mt-14">
+            <SectionHead tone="purple" icon={<HelpCircle size={18} />} title={whatIsHeading(entry.kind, entry.name)} />
+            {entry.intro[2] && (
+              <p className="max-w-3xl text-base sm:text-lg leading-relaxed text-purple-100/80">
+                {entry.intro[2]}
+              </p>
+            )}
+            <MatchingDiagram />
+          </section>
+        )}
 
         <section className="mt-14">
           <SectionHead
@@ -408,6 +410,20 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
           <SectionHead tone="amber" icon={<HelpCircle size={18} />} title="Frequently asked questions" />
           <FaqAccordion items={entry.faqs} />
         </section>
+
+        {entry.reviews && entry.reviews.length > 0 && (
+          <section className="mt-14">
+            <SectionHead tone="pink" icon={<Star size={18} />} title="What users say" />
+            <div className="grid gap-4 sm:grid-cols-3">
+              {entry.reviews.map((r, i) => (
+                <div key={i} className="rounded-2xl border border-pink-400/20 bg-pink-500/[0.06] p-5">
+                  <p className="text-base leading-relaxed text-purple-100/85 italic">&ldquo;{r.text}&rdquo;</p>
+                  <p className="mt-3 text-sm font-semibold text-pink-300">{r.flag} {r.name}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         <section className="mt-14 rounded-3xl border border-purple-500/20 bg-purple-500/[0.07] p-7 text-center sm:p-10">
           <h2 className="text-xl sm:text-3xl font-black tracking-tight text-white">

@@ -3597,12 +3597,14 @@ export const ENTRIES: DirectoryEntry[] = [
     slug: "video-chat-south-korea",
     kind: "country",
     name: "South Korea",
-    primaryKeyword: "video chat south korea",
-    title: "Video Chat South Korea — Talk to Strangers Free",
+    primaryKeyword: "korean video chat",
+    title: "Korean Video Chat — Free Random Video Chat South Korea",
     description:
-      "Free random video chat with people from South Korea in 2026. Talk in Korean or English — no signup, no download, some of the fastest internet anywhere.",
+      "Korean video chat free — talk to people from South Korea in 2026. No signup, no download. Works on SK Telecom, KT and LG U+ — some of the fastest internet anywhere.",
     tagline:
-      "Free video chat with South Korea. Some of the fastest internet on Earth, one time zone, and a conversation with no account needed.",
+      "Korean video chat free. Some of the fastest internet on Earth, one time zone, and a conversation with no account needed.",
+    whyName: "Korea",
+    hideWhatIs: true,
     languages: ["한국어 (Korean)", "English"],
     peakHours: "22:00 – 02:00 KST",
     timezone: "Asia/Seoul",
@@ -3642,7 +3644,6 @@ export const ENTRIES: DirectoryEntry[] = [
     ],
     localPhrases: [
       { phrase: "안녕하세요", meaning: "Hello (polite)", say: "an-nyeong-ha-se-yo" },
-      { phrase: "반가워요", meaning: "Nice to meet you", say: "ban-ga-wo-yo" },
       { phrase: "대박", meaning: "Wow / no way (very common slang)", say: "dae-bak" },
       { phrase: "잘 가요", meaning: "Goodbye (to someone leaving)", say: "jal ga-yo" },
     ],
@@ -3666,6 +3667,11 @@ export const ENTRIES: DirectoryEntry[] = [
       { question: "Is it free?", answer: "Completely — no account, no subscription, no credits." },
       { question: "What is the best free video chat site in South Korea in 2026?", answer: "Vidibro is the top free video chat site for South Korea in 2026 — no signup, no app install, works on Seoul's ultra-fast fibre and across KT, SKT and LG U+ networks. Connect with people in Seoul, Busan and Incheon instantly." },
     ],
+    reviews: [
+      { name: "Minji K.", flag: "🇰🇷", text: "Finally a site that works on my phone without lag. Matched someone from Brazil in seconds." },
+      { name: "James T.", flag: "🇺🇸", text: "I use this to practise Korean. People here are patient and actually want to talk." },
+      { name: "Arjun S.", flag: "🇮🇳", text: "K-drama fan — chatting with people from Seoul is so much fun. No signup needed is a big plus." },
+    ],
     related: [
       { slug: "video-chat-seoul", label: "Seoul", relation: "city" },
       { slug: "video-chat-busan", label: "Busan", relation: "city" },
@@ -3677,6 +3683,9 @@ export const ENTRIES: DirectoryEntry[] = [
       { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
       { slug: "video-chat-japan", label: "Japan", relation: "sibling" },
       { slug: "video-chat-china", label: "China", relation: "sibling" },
+      { slug: "video-chat-thailand", label: "Thailand", relation: "sibling" },
+      { slug: "video-chat-vietnam", label: "Vietnam", relation: "sibling" },
+      { slug: "video-chat-india", label: "India", relation: "sibling" },
     ],
   },
 

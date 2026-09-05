@@ -127,6 +127,15 @@ export type DirectoryEntry = {
    *  genuinely specific and surprising about this market. */
   quickFacts?: QuickFact[];
 
+  /** Override the "Why use Vidibro in {name}?" heading with a shorter local name. */
+  whyName?: string;
+
+  /** Hide the "What is random video chat in X?" section. */
+  hideWhatIs?: boolean;
+
+  /** User reviews shown in a "What Users Say" section. */
+  reviews?: Array<{ name: string; flag: string; text: string }>;
+
   // --- Linking -------------------------------------------------------------
   related: RelatedLink[];
 };
