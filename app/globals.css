@@ -287,3 +287,13 @@ body {
     animation: none;
   }
 }
+
+/* 3D lift on all directory cards */
+.dir-card {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  will-change: transform;
+}
+.dir-card:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255,255,255,0.08);
+}

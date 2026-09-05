@@ -46,34 +46,41 @@ export function SectionHead({
   );
 }
 
-/** Big number + label. Facts only — nothing here should be unverifiable. */
+/** Big number + label with icon block. Facts only — nothing here should be unverifiable. */
 export function StatTile({
   value,
   label,
   tone = "purple",
+  icon,
 }: {
   value: string;
   label: string;
   tone?: Tone;
+  icon?: ReactNode;
 }) {
-  const ring: Record<Tone, string> = {
-    purple: "border-purple-400/20 bg-purple-500/[0.07]",
-    cyan: "border-cyan-400/20 bg-cyan-500/[0.07]",
-    emerald: "border-emerald-400/25 bg-emerald-500/[0.09]",
-    amber: "border-amber-400/20 bg-amber-500/[0.07]",
-    pink: "border-pink-400/20 bg-pink-500/[0.07]",
+  const iconBg: Record<Tone, string> = {
+    purple: "bg-purple-500/20 text-purple-300",
+    cyan: "bg-cyan-500/20 text-cyan-300",
+    emerald: "bg-emerald-500/20 text-emerald-300",
+    amber: "bg-amber-500/20 text-amber-300",
+    pink: "bg-pink-500/20 text-pink-300",
   };
   const text: Record<Tone, string> = {
-    purple: "text-purple-100",
-    cyan: "text-cyan-200",
-    emerald: "text-emerald-300",
-    amber: "text-amber-200",
-    pink: "text-pink-200",
+    purple: "text-white",
+    cyan: "text-white",
+    emerald: "text-white",
+    amber: "text-white",
+    pink: "text-white",
   };
   return (
-    <div className={`rounded-2xl border px-4 py-5 text-center ${ring[tone]}`}>
-      <div className={`text-xl sm:text-2xl font-black leading-tight ${text[tone]}`}>{value}</div>
-      <div className="mt-1.5 text-[13px] font-bold uppercase tracking-wider text-purple-300/60">
+    <div className="dir-card rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-6 flex flex-col items-center text-center">
+      {icon && (
+        <div className={`mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl ${iconBg[tone]}`}>
+          {icon}
+        </div>
+      )}
+      <div className={`text-3xl sm:text-4xl font-black leading-tight ${text[tone]}`}>{value}</div>
+      <div className="mt-2 text-sm font-semibold text-purple-300/70">
         {label}
       </div>
     </div>

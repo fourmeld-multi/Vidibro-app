@@ -130,6 +130,9 @@ export type DirectoryEntry = {
   /** Override the "Why use Vidibro in {name}?" heading with a shorter local name. */
   whyName?: string;
 
+  /** Main mobile/ISP providers in this market — shown as pill badges on the connectivity card. */
+  providers?: string[];
+
   /** Hide the "What is random video chat in X?" section. */
   hideWhatIs?: boolean;
 

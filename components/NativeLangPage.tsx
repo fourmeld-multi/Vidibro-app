@@ -1,9 +1,9 @@
 import Link from "next/link";
 import {
   Video, Mic, MessageSquare, Clock, ShieldCheck, Zap,
-  Lock, Smartphone, Sticker, CheckCheck, Globe2,
+  Lock, Globe2, Languages, Signal, Activity,
   MousePointerClick, Camera, Users, ArrowLeft, Sparkles,
-  Scale, HelpCircle, Compass,
+  Scale, HelpCircle, Compass, Star,
 } from "lucide-react";
 import JsonLd from "@/components/JsonLd";
 import FaqAccordion from "@/components/directory/FaqAccordion";
@@ -11,15 +11,46 @@ import PeakHoursBar from "@/components/PeakHoursBar";
 import {
   SectionHead,
   StatTile,
-  IconCard,
   StepCard,
   CompareTable,
 } from "@/components/directory/Cards";
 import { BASE_URL } from "@/lib/seo";
 import type { NativeLangData } from "@/lib/native-pages/types";
 import { REVERSE_NATIVE_LINKS } from "@/lib/native-pages/directory-links";
+import type { Tone } from "@/components/directory/Cards";
+import type { ReactNode } from "react";
 
 export type { NativeLangData };
+
+const TONE_BG: Record<Tone, string> = {
+  purple: "bg-purple-500/20 text-purple-300",
+  cyan: "bg-cyan-500/20 text-cyan-300",
+  emerald: "bg-emerald-500/20 text-emerald-300",
+  amber: "bg-amber-500/20 text-amber-300",
+  pink: "bg-pink-500/20 text-pink-300",
+};
+
+const TONE_ICON: Record<Tone, ReactNode> = {
+  purple: <Zap size={24} />,
+  cyan: <Globe2 size={24} />,
+  emerald: <Lock size={24} />,
+  amber: <Languages size={24} />,
+  pink: <Star size={24} />,
+};
+
+const PHRASE_ACCENTS = [
+  "border-l-amber-400 bg-amber-500/[0.07]",
+  "border-l-cyan-400 bg-cyan-500/[0.07]",
+  "border-l-pink-400 bg-pink-500/[0.07]",
+  "border-l-purple-400 bg-purple-500/[0.07]",
+];
+
+const STARTER_COLORS = [
+  { dot: "bg-pink-400", text: "text-pink-300", border: "border-pink-400/40", bg: "bg-pink-500/10" },
+  { dot: "bg-cyan-400", text: "text-cyan-300", border: "border-cyan-400/40", bg: "bg-cyan-500/10" },
+  { dot: "bg-amber-400", text: "text-amber-300", border: "border-amber-400/40", bg: "bg-amber-500/10" },
+  { dot: "bg-purple-400", text: "text-purple-300", border: "border-purple-400/40", bg: "bg-purple-500/10" },
+];
 
 export default function NativeLangPage({ data }: { data: NativeLangData }) {
   const url = `${BASE_URL}${data.canonicalSlug}`;
@@ -96,7 +127,7 @@ export default function NativeLangPage({ data }: { data: NativeLangData }) {
               <Video size={19} /> {data.btnVideo}
             </Link>
             <Link
-              href="/audio-chat"
+              href="/random-voice-chat"
               className="inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-sky-500 px-7 py-4 text-base font-extrabold text-white shadow-lg shadow-cyan-500/25 transition hover:brightness-110 sm:w-auto"
             >
               <Mic size={19} /> {data.btnVoice}
@@ -114,43 +145,37 @@ export default function NativeLangPage({ data }: { data: NativeLangData }) {
             {data.intro}
           </p>
 
-          {/* Stats grid */}
-          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
-            <StatTile tone="emerald" value="None" label="Signup required" />
-            <StatTile tone="cyan" value={data.peakHoursDisplay} label="Busiest window" />
-            <StatTile tone="purple" value={data.langCount} label="Languages you'll hear" />
-            <StatTile tone="amber" value="180+" label="Countries" />
-            <StatTile tone="pink" value="300k+" label="Daily matches" />
-            <StatTile tone="emerald" value="99.9%" label="Uptime" />
+          {/* Stats — 4 tiles with icons */}
+          <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {[
+              { value: "1M+",   label: "Active Users",  tone: "purple"  as Tone, icon: <Users size={24} /> },
+              { value: "180+",  label: "Countries",     tone: "cyan"    as Tone, icon: <Globe2 size={24} /> },
+              { value: "300k+", label: "Daily Matches", tone: "pink"    as Tone, icon: <Activity size={24} /> },
+              { value: "99.9%", label: "Uptime",        tone: "emerald" as Tone, icon: <Zap size={24} /> },
+            ].map((s) => (
+              <StatTile key={s.label} tone={s.tone} value={s.value} label={s.label} icon={s.icon} />
+            ))}
           </div>
 
-          {/* ── WHY VIDIBRO ── */}
-          <section className="mt-14">
-            <SectionHead
-              tone="purple"
-              icon={<Zap size={18} />}
-              title={data.whyTitle}
-              blurb={data.whyBlurb}
-            />
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              <IconCard icon={<Lock size={16} />} title={data.whyCards[0].title} tone={data.whyCards[0].tone}>
-                {data.whyCards[0].body}
-              </IconCard>
-              <IconCard icon={<Smartphone size={16} />} title={data.whyCards[1].title} tone={data.whyCards[1].tone}>
-                {data.whyCards[1].body}
-              </IconCard>
-              <IconCard icon={<Sticker size={16} />} title={data.whyCards[2].title} tone={data.whyCards[2].tone}>
-                {data.whyCards[2].body}
-              </IconCard>
-              <IconCard icon={<CheckCheck size={16} />} title={data.whyCards[3].title} tone={data.whyCards[3].tone}>
-                {data.whyCards[3].body}
-              </IconCard>
-              <IconCard icon={<Globe2 size={16} />} title={data.whyCards[4].title} tone={data.whyCards[4].tone}>
-                {data.whyCards[4].body}
-              </IconCard>
-              <IconCard icon={<MousePointerClick size={16} />} title={data.whyCards[5].title} tone={data.whyCards[5].tone}>
-                {data.whyCards[5].body}
-              </IconCard>
+          {/* ── WHY VIDIBRO — SillyChat-style 3-column big cards ── */}
+          <section className="mt-14 text-center">
+            <p className="mb-2 text-xs font-bold uppercase tracking-widest text-purple-400">Why us</p>
+            <h2 className="mb-2 text-2xl sm:text-3xl font-black tracking-tight text-white">
+              Why Choose <span className="text-pink-400">Vidibro</span>?
+            </h2>
+            {data.whyBlurb && (
+              <p className="mb-8 text-base text-purple-200/70 max-w-xl mx-auto">{data.whyBlurb}</p>
+            )}
+            <div className="grid gap-4 sm:grid-cols-3 text-left">
+              {data.whyCards.slice(0, 3).map((card) => (
+                <div key={card.title} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+                  <div className={`mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl ${TONE_BG[card.tone]}`}>
+                    {TONE_ICON[card.tone]}
+                  </div>
+                  <h3 className="mb-2 text-lg font-black text-white">{card.title}</h3>
+                  <p className="text-sm leading-relaxed text-purple-100/75">{card.body}</p>
+                </div>
+              ))}
             </div>
           </section>
 
@@ -160,67 +185,87 @@ export default function NativeLangPage({ data }: { data: NativeLangData }) {
               tone="pink"
               icon={<Compass size={18} />}
               title={data.localTitle}
-              blurb={data.connectivity}
             />
 
-            <div className="grid gap-3 lg:grid-cols-2">
-              {/* Peak hours card */}
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                <div className="mb-1 flex items-center gap-2">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-300">
-                    <Clock size={15} />
+            <div className="grid gap-4 lg:grid-cols-2">
+              {/* Best Time to Chat */}
+              <div className="rounded-2xl border border-white/10 bg-white/[0.07] p-6">
+                <div className="mb-3 flex items-center gap-2.5">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-300">
+                    <Clock size={18} />
                   </span>
-                  <h3 className="text-base font-black text-white">Peak match hours</h3>
+                  <h3 className="text-base font-black text-white">Best Time to Chat</h3>
                 </div>
-                <div className="mt-3 text-2xl sm:text-3xl font-black text-emerald-300">{data.peakHoursDisplay}</div>
-                <p className="mt-2 text-sm leading-relaxed text-purple-100/80">{data.peakNote}</p>
+                <div className="text-3xl sm:text-4xl font-black text-emerald-300">{data.peakHoursDisplay}</div>
+                <p className="mt-2 text-sm leading-relaxed text-purple-100/75">{data.peakNote}</p>
                 <PeakHoursBar peakHours={data.peakHoursDisplay} />
               </div>
 
-              {/* Phrases card */}
+              {/* Works on Your Network */}
+              <div className="rounded-2xl border border-white/10 bg-white/[0.07] p-6">
+                <div className="mb-3 flex items-center gap-2.5">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan-500/20 text-cyan-300">
+                    <Signal size={18} />
+                  </span>
+                  <h3 className="text-base font-black text-white">Works on Your Network</h3>
+                </div>
+                <p className="text-sm leading-relaxed text-purple-100/75">{data.connectivity}</p>
+              </div>
+
+              {/* Phrases */}
               {data.phrases && data.phrases.length > 0 && (
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                  <div className="mb-3 flex items-center gap-2">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-amber-500/15 text-amber-300">
-                      <MessageSquare size={15} />
+                <div className="rounded-2xl border border-white/10 bg-white/[0.07] p-6">
+                  <div className="mb-4 flex items-center gap-3">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-500/20 text-amber-300">
+                      <Languages size={20} />
                     </span>
-                    <h3 className="text-base font-black text-white">Useful phrases</h3>
+                    <div>
+                      <h3 className="text-lg font-black text-white">Speak Local</h3>
+                      <p className="text-xs text-purple-300/60">Phrases that open conversations</p>
+                    </div>
                   </div>
-                  <ul className="space-y-3">
-                    {data.phrases.map((p) => (
-                      <li key={p.native} className="flex items-start gap-3">
-                        <span className="text-lg font-bold leading-tight text-white">{p.native}</span>
-                        <div className="text-sm leading-tight text-purple-100/70">
-                          {p.romanized && <div className="italic">{p.romanized}</div>}
-                          <div>{p.meaning}</div>
-                        </div>
-                      </li>
+                  <div className="space-y-3">
+                    {data.phrases.map((p, i) => (
+                      <div key={p.native} className={`rounded-xl border-l-4 px-4 py-3 ${PHRASE_ACCENTS[i % PHRASE_ACCENTS.length]}`}>
+                        <div className="text-xl font-black text-white">{p.native}</div>
+                        {p.romanized && <div className="mt-0.5 text-xs italic text-purple-300/55">{p.romanized}</div>}
+                        <div className="mt-1 text-sm font-semibold text-purple-100/85">{p.meaning}</div>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               )}
 
               {/* Conversation starters */}
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                <div className="mb-3 flex items-center gap-2">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-purple-500/15 text-purple-300">
-                    <Sparkles size={15} />
+              <div className="rounded-2xl border border-white/10 bg-white/[0.07] p-6">
+                <div className="mb-4 flex items-center gap-3">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-pink-500/20 text-pink-300">
+                    <MessageSquare size={20} />
                   </span>
-                  <h3 className="text-base font-black text-white">Conversation starters</h3>
+                  <div>
+                    <h3 className="text-lg font-black text-white">Conversation Starters</h3>
+                    <p className="text-xs text-purple-300/60">Copy and use mid-call</p>
+                  </div>
                 </div>
-                <ul className="space-y-2">
-                  {data.starters.map((s) => (
-                    <li key={s} className="flex items-center gap-2 text-sm text-purple-100/80">
-                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-purple-400/60" />
-                      {s}
-                    </li>
-                  ))}
-                </ul>
+                <div className="space-y-2.5">
+                  {data.starters.map((s, i) => {
+                    const c = STARTER_COLORS[i % STARTER_COLORS.length];
+                    return (
+                      <div key={s} className={`rounded-xl border ${c.border} ${c.bg} px-4 py-3`}>
+                        <div className={`mb-1 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest ${c.text}`}>
+                          <span className={`h-1.5 w-1.5 rounded-full ${c.dot}`} />
+                          Starter
+                        </div>
+                        <p className="text-sm font-semibold text-white">&ldquo;{s}&rdquo;</p>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </section>
 
-          {/* ── FAMOUS FACTS ── */}
+          {/* ── FAMOUS FACTS — SillyChat big cards ── */}
           <section className="mt-14">
             <SectionHead
               tone="amber"
@@ -228,11 +273,15 @@ export default function NativeLangPage({ data }: { data: NativeLangData }) {
               title={data.famousTitle}
               blurb="Things unique to this language and culture — context that only matters here."
             />
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-2">
               {data.famousFacts.map((f) => (
-                <IconCard key={f.title} icon={<Sparkles size={16} />} title={f.title} tone={f.tone}>
-                  {f.body}
-                </IconCard>
+                <div key={f.title} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+                  <div className={`mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl ${TONE_BG[f.tone]}`}>
+                    {TONE_ICON[f.tone]}
+                  </div>
+                  <h3 className="mb-2 text-lg font-black text-white">{f.title}</h3>
+                  <p className="text-sm leading-relaxed text-purple-100/75">{f.body}</p>
+                </div>
               ))}
             </div>
           </section>
@@ -256,6 +305,47 @@ export default function NativeLangPage({ data }: { data: NativeLangData }) {
             </div>
           </section>
 
+          {/* ── BRAZIL EXTRA: 4-card + prose (pt-br only) ── */}
+          {data.showBrazilExtra && (
+            <>
+              <section className="mt-14">
+                <p className="mb-2 text-xs font-bold uppercase tracking-widest text-purple-400">Por que o Brasil</p>
+                <h2 className="mb-8 text-2xl sm:text-3xl font-black tracking-tight text-white">
+                  Vídeo Chat Brasileiro — <span className="text-pink-400">O que o Torna Diferente</span>
+                </h2>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                  {[
+                    { emoji: "🇧🇷", title: "Maior Pool da América Latina", body: "O Brasil tem mais usuários online ao mesmo tempo do que qualquer vizinho. Combinações chegam rápido, mesmo fora do horário de pico — raramente mais de alguns segundos." },
+                    { emoji: "🗣️", title: "Português, Não Espanhol", body: "O Brasil é o único país da região que fala português. Diga 'oi' e 'tudo bem' — mesmo uma tentativa simples gera uma reação calorosa na maioria das vezes." },
+                    { emoji: "🎲", title: "Uma Pessoa por Vez", body: "Sem filtros de busca, sem grades de perfil. O próximo vídeo chat do Brasil é quem a fila parear com você — aleatório por design, e esse é o ponto." },
+                    { emoji: "⚡", title: "Grátis — Sem Conta, Nunca", body: "Uma videochamada no Brasil não custa nada e não pede nada. Sem e-mail, sem telefone, sem app store. Abra a página e você já está dentro." },
+                  ].map((c) => (
+                    <div key={c.title} className="dir-card rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center flex flex-col items-center">
+                      <div className="mb-4 text-4xl">{c.emoji}</div>
+                      <h3 className="mb-2 text-base font-black text-white">{c.title}</h3>
+                      <p className="text-sm leading-relaxed text-purple-100/70">{c.body}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section className="mt-14 rounded-2xl border border-purple-500/20 bg-purple-500/[0.05] p-7 sm:p-8">
+                <h2 className="mb-4 text-xl sm:text-2xl font-black tracking-tight text-white">
+                  Vídeo Chat Aleatório no Brasil — Sem Espera, Sem Conta
+                </h2>
+                <p className="mb-4 text-base leading-relaxed text-purple-100/80">
+                  O Brasil é o único país desta região que fala português em vez de espanhol — e é de longe o maior pool da América Latina, o que significa que um vídeo chat no Brasil raramente te faz esperar. Uma pessoa por vez, câmera ou texto, sem cadastro, sem instalar nada.
+                </p>
+                <p className="mb-4 text-base leading-relaxed text-purple-100/80">
+                  As buscas chegam a esta página de várias formas — vídeo chat Brasil, videochat brasileiro, chat video Brasil, videochamada aleatória Brasil — e todas resultam na mesma coisa: uma combinação ao vivo em segundos, em qualquer dispositivo, pela Vivo, Claro ou TIM. O pool se concentra em São Paulo, Rio e Belo Horizonte, mas cobre todos os estados.
+                </p>
+                <p className="text-base leading-relaxed text-purple-100/80">
+                  Se a conversa não render, um toque te leva para outra — sem despedida estranha, sem limite de quantas vezes você pode fazer isso. Se render, o Brasil costuma se alongar. Os brasileiros estão entre os usuários mais comunicativos em qualquer plataforma, e isso aparece já na primeira troca.
+                </p>
+              </section>
+            </>
+          )}
+
           {/* ── WHAT IS ── */}
           <section className="mt-14">
             <SectionHead tone="purple" icon={<HelpCircle size={18} />} title={data.whatIsTitle} />
@@ -265,6 +355,7 @@ export default function NativeLangPage({ data }: { data: NativeLangData }) {
           </section>
 
           {/* ── CLONE COMPARISON ── */}
+          {!data.hideCloneSection && (
           <section className="mt-14">
             <SectionHead
               tone="amber"
@@ -274,6 +365,7 @@ export default function NativeLangPage({ data }: { data: NativeLangData }) {
             />
             <CompareTable rows={data.cloneRows} />
           </section>
+          )}
 
           {/* ── STAYING SAFE ── */}
           <section className="mt-14">
@@ -283,11 +375,6 @@ export default function NativeLangPage({ data }: { data: NativeLangData }) {
                 {data.safetyNote}
               </p>
               <p className="text-base leading-relaxed text-purple-100/85">{data.safetyBody}</p>
-              <p className="mt-3 text-base leading-relaxed text-purple-100/85">
-                A report button sits in the top bar throughout every call. It ends the conversation
-                immediately and moves you on — use it early rather than sitting through something
-                uncomfortable.
-              </p>
               <Link
                 href="/guidelines"
                 className="mt-4 inline-block text-sm font-bold text-emerald-300 underline underline-offset-2 hover:text-emerald-200"
@@ -301,25 +388,6 @@ export default function NativeLangPage({ data }: { data: NativeLangData }) {
           <section className="mt-14" id="faq">
             <SectionHead tone="amber" icon={<HelpCircle size={18} />} title={data.faqTitle} />
             <FaqAccordion items={data.faqs} />
-          </section>
-
-          {/* ── DATING CTA ── */}
-          <section className="mt-14 rounded-3xl border border-pink-500/25 bg-pink-500/[0.06] p-7 text-center sm:p-10">
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-pink-500/30 bg-pink-500/10 px-4 py-1.5 text-xs font-semibold text-pink-300">
-              <span className="h-1.5 w-1.5 rounded-full bg-pink-400" /> Meet someone new
-            </div>
-            <h2 className="text-xl font-black tracking-tight text-white sm:text-2xl">
-              Looking to meet someone?
-            </h2>
-            <p className="mx-auto mt-2 max-w-sm text-sm text-purple-200/70">
-              Random video chat — real face-to-face connections, no fake profiles, no signup.
-            </p>
-            <Link
-              href="/dating"
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 px-7 py-3 text-sm font-extrabold text-white shadow-lg hover:opacity-90 transition"
-            >
-              Try video chat dating →
-            </Link>
           </section>
 
           {/* ── FINAL CTA ── */}
