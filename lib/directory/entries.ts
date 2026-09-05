@@ -389,9 +389,9 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "country",
     name: "Bangladesh",
     primaryKeyword: "video chat bangladesh",
-    title: "Bangladesh Free Random Video Chat & Video Call — Vidibro",
+    title: "Bangladesh Free Random Video Chat & Video Call",
     description:
-      "Free random video chat with people in Bangladesh — no signup, no app, no account. Chat with strangers in Dhaka, Chittagong and Sylhet. Works on Grameenphone, Robi and Banglalink. Start instantly.",
+      "Free random video chat with people in Bangladesh. No signup, no account. Chat in Dhaka, Chittagong and Sylhet. Works on Grameenphone, Robi and Banglalink.",
     tagline: "No account. Instant random video chat with Bangladesh — cricket, Ramadan, Dhaka nights, and people who actually want to talk.",
     hideWhatIs: true,
     providers: ["Grameenphone", "Robi", "Banglalink"],
@@ -508,9 +508,9 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "country",
     name: "Nepal",
     primaryKeyword: "nepal video call",
-    title: "Nepal Video Call Free — Random Video Chat with Nepali Strangers | Vidibro",
+    title: "Nepal Video Call Free — Random Video Chat with Nepali Strangers",
     description:
-      "Free random video call with people in Nepal — no signup, no app, no account. Chat with strangers in Kathmandu, Pokhara and beyond. Works on Ncell and NTC. Nepali, English, Newari. Start instantly.",
+      "Free random video call in Nepal — no signup, no account. Strangers in Kathmandu, Pokhara and beyond. Works on Ncell and NTC. Nepali, English, Newari.",
     tagline: "No account. Instant random video call with Nepal — Dashain, Everest, Gulf diaspora, and people who actually want to talk.",
     providers: ["Ncell", "NTC"],
     hideWhatIs: true,
@@ -2177,7 +2177,7 @@ export const ENTRIES: DirectoryEntry[] = [
     primaryKeyword: "anonymous text chat",
     title: "Anonymous Text Chat — Free, No Camera, No Account",
     description:
-      "Free anonymous text chat with strangers in 2026. No camera, no microphone, no account — just typing to someone new. Double-tick read receipts. Nothing kept when you close.",
+      "Free anonymous text chat — no camera, no account. Just type to someone new. Double-tick read receipts. Nothing saved when you close.",
     tagline:
       "No camera. No mic. No account. Open the page and start typing — nothing is stored when you leave.",
     hideWhatIs: true,
@@ -2796,9 +2796,9 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "country",
     name: "Turkey",
     primaryKeyword: "video chat turkey",
-    title: "Turkey Free Random Video Chat & Video Call — Vidibro",
+    title: "Turkey Free Random Video Chat & Video Call",
     description:
-      "Free random video chat with people in Turkey — no signup, no app, no account. Chat with strangers in Istanbul, Ankara and Izmir. Works on Turkcell, Vodafone and Türk Telekom. Start instantly.",
+      "Free random video chat in Turkey — no signup, no account. Strangers in Istanbul, Ankara and Izmir. Works on Turkcell, Vodafone and Türk Telekom.",
     tagline: "No account. Instant random video chat with Turkey — çay, dizi, football rivalries, and people who actually want to talk.",
     hideWhatIs: true,
     providers: ["Turkcell", "Vodafone", "Türk Telekom"],
@@ -3180,9 +3180,9 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "country",
     name: "Brazil",
     primaryKeyword: "video chat brazil",
-    title: "Brazil Free Random Video Chat & Video Call — Vidibro",
+    title: "Brazil Free Random Video Chat & Video Call",
     description:
-      "Free random video chat with people in Brazil — no signup, no app, no account. Chat with strangers in São Paulo, Rio and Salvador. Works on Vivo, Claro and TIM. Start instantly in 2026.",
+      "Free random video chat in Brazil — no signup, no account. Chat with strangers in São Paulo, Rio and Salvador. Works on Vivo, Claro and TIM.",
     tagline: "No account. Instant random video chat with Brazil — futebol, Carnival, churrasco, and people who actually want to talk.",
     hideWhatIs: true,
     providers: ["Vivo", "Claro", "TIM"],
@@ -3558,9 +3558,9 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "country",
     name: "Japan",
     primaryKeyword: "video chat japan",
-    title: "Japan Free Random Video Chat & Video Call — Vidibro",
+    title: "Japan Free Random Video Chat & Video Call",
     description:
-      "Free random video chat with people from Japan — no signup, no download. Works on NTT Docomo, SoftBank and au. Talk to strangers in Japanese or English. Start instantly in 2026.",
+      "Free random video chat from Japan — no signup, no download. Works on NTT Docomo, SoftBank and au. Talk to strangers in Japanese or English.",
     hideWhatIs: true,
     providers: ["NTT Docomo", "SoftBank", "au (KDDI)"],
     tagline:
@@ -3664,9 +3664,9 @@ export const ENTRIES: DirectoryEntry[] = [
     name: "Tokyo",
     parent: "Japan",
     primaryKeyword: "tokyo video chat",
-    title: "Tokyo Free Random Video Chat & Video Call — Vidibro",
+    title: "Tokyo Free Random Video Chat & Video Call",
     description:
-      "Free random video chat with people in Tokyo — no signup, no app, no account. Works on NTT Docomo, SoftBank and au. Chat with strangers in Shibuya, Akihabara and Shinjuku. Start instantly.",
+      "Free random video chat in Tokyo — no signup, no account. Works on NTT Docomo, SoftBank and au. Chat in Shibuya, Akihabara and Shinjuku.",
     hideWhatIs: true,
     providers: ["NTT Docomo", "SoftBank", "au (KDDI)"],
     languages: ["日本語 (Japanese)", "English"],
@@ -3764,7 +3764,7 @@ export const ENTRIES: DirectoryEntry[] = [
     primaryKeyword: "korean video chat",
     title: "Free Random Korean Video Chat & Video Call",
     description:
-      "Korean video chat free — talk to people from South Korea in 2026. No signup, no download. Works on SK Telecom, KT and LG U+ — some of the fastest internet anywhere.",
+      "Korean video chat free — talk to people from South Korea. No signup, no download. Works on SK Telecom, KT and LG U+ — some of the fastest networks anywhere.",
     tagline:
       "Korean video chat free. Some of the fastest internet on Earth, one time zone, and a conversation with no account needed.",
     whyName: "Korea",

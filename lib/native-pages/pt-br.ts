@@ -7,7 +7,7 @@ const ptBr: NativeLangData = {
   canonicalSlug: "/pt-br",
   title: "Brasil Vídeo Chat Grátis Aleatório & Videochamada — Vidibro",
   description:
-    "Vidibro — vídeo chat grátis e videochamada aleatória sem cadastro no Brasil. Funciona na Claro, Vivo e TIM. O melhor alternativo ao Omegle em 2026 para brasileiros.",
+    "Vidibro — vídeo chat grátis e videochamada aleatória sem cadastro no Brasil. Funciona na Claro, Vivo e TIM. O melhor alternativo ao Omegle em 2026.",
   h1: "Brasil Vídeo Chat Grátis Aleatório & Videochamada",
   tagline: "Sem cadastro. Videochamada aleatória grátis com pessoas do Brasil e do mundo — agora mesmo.",
   intro:

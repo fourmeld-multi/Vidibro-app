@@ -6,7 +6,7 @@ const tr: NativeLangData = {
   canonicalSlug: "/tr",
   title: "Türkiye Ücretsiz Rastgele Görüntülü Sohbet & Video Görüşme — Vidibro",
   description:
-    "Vidibro — Türkiye'nin en hızlı büyüyen ücretsiz rastgele görüntülü sohbet sitesi. Kayıt yok, uygulama yok. Turkcell, Vodafone ve Türk Telekom'da direkt başla. 2026'da Omegle'ın en iyi Türkçe alternatifi.",
+    "Vidibro — Türkiye'nin en hızlı büyüyen ücretsiz görüntülü sohbet sitesi. Kayıt yok, uygulama yok. Turkcell, Vodafone ve Türk Telekom'da başla.",
   h1: "Türkiye Ücretsiz Rastgele Görüntülü Sohbet & Video Görüşme",
   tagline: "Kayıt yok. Türkiye'den dünyayla anında bağlan — Turkcell, Vodafone veya Türk Telekom'da.",
   intro:

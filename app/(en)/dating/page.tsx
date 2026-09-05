@@ -14,12 +14,12 @@ import JsonLd from "@/components/JsonLd";
 import FaqAccordion from "@/components/directory/FaqAccordion";
 
 export const metadata: Metadata = {
-  title: "Free Video Chat Dating — Meet Strangers Online, No Signup | Vidibro",
-  description: "Free video chat dating — no signup, no fake profiles, no subscription. Meet real strangers face-to-face via live video call. Better than Tinder, Bumble or any dating app. Start in seconds.",
+  title: "Free Video Chat Dating — Meet Strangers Online, No Signup",
+  description: "Free video chat dating — no signup, no fake profiles. Meet real strangers face-to-face via live video call. Better than Tinder or Bumble. Start in seconds.",
   alternates: { canonical: `${BASE_URL}/dating` },
   openGraph: {
     title: "Free Video Chat Dating — Meet Strangers Online, No Signup | Vidibro",
-    description: "Free video chat dating — no signup, no fake profiles, no subscription. Meet real strangers face-to-face via live video call. Start in seconds.",
+    description: "Free video chat dating — no signup, no fake profiles. Meet real strangers face-to-face via live video call. Better than Tinder or Bumble. Start in seconds.",
     url: `${BASE_URL}/dating`,
     type: "website",
     images: [
