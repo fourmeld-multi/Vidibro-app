@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: entry.description,
     slug: `/directory/${entry.slug}`,
     keywords: [entry.primaryKeyword, `${entry.name} video chat`, `talk to strangers ${entry.name}`],
-    image: `${BASE_URL}/directory/${entry.slug}/opengraph-image`,
+    image: `${BASE_URL}/og-default.png`,
   });
 }
 
