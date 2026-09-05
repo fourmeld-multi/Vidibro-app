@@ -3598,7 +3598,7 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "country",
     name: "South Korea",
     primaryKeyword: "korean video chat",
-    title: "Korean Video Chat — Free Random Video Chat South Korea",
+    title: "Free Random Korean Video Chat & Video Call",
     description:
       "Korean video chat free — talk to people from South Korea in 2026. No signup, no download. Works on SK Telecom, KT and LG U+ — some of the fastest internet anywhere.",
     tagline:
