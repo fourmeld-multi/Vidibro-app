@@ -412,15 +412,32 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
         </section>
 
         {entry.reviews && entry.reviews.length > 0 && (
-          <section className="mt-14">
-            <SectionHead tone="pink" icon={<Star size={18} />} title="What users say" />
-            <div className="grid gap-4 sm:grid-cols-3">
-              {entry.reviews.map((r, i) => (
-                <div key={i} className="rounded-2xl border border-pink-400/20 bg-pink-500/[0.06] p-5">
-                  <p className="text-base leading-relaxed text-purple-100/85 italic">&ldquo;{r.text}&rdquo;</p>
-                  <p className="mt-3 text-sm font-semibold text-pink-300">{r.flag} {r.name}</p>
-                </div>
-              ))}
+          <section className="mt-14 text-center">
+            <p className="mb-2 text-xs font-bold uppercase tracking-widest text-purple-400">Loved by users</p>
+            <h2 className="mb-8 text-2xl sm:text-3xl font-black tracking-tight text-white">
+              What Users <span className="text-pink-400">Say</span>
+            </h2>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 text-left">
+              {entry.reviews.map((r, i) => {
+                const colors = ["bg-pink-500", "bg-cyan-500", "bg-amber-500", "bg-purple-500"];
+                return (
+                  <div key={i} className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 flex flex-col justify-between">
+                    <div>
+                      <div className="mb-3 flex gap-0.5 text-amber-400 text-sm">{"★★★★★"}</div>
+                      <p className="text-sm leading-relaxed text-purple-100/85 italic">&ldquo;{r.text}&rdquo;</p>
+                    </div>
+                    <div className="mt-4 flex items-center gap-3">
+                      <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white ${colors[i % colors.length]}`}>
+                        {r.flag}
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-white">{r.name}</p>
+                        <p className="text-xs text-purple-300/70">{r.role}</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </section>
         )}

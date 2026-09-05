@@ -3668,9 +3668,10 @@ export const ENTRIES: DirectoryEntry[] = [
       { question: "What is the best free video chat site in South Korea in 2026?", answer: "Vidibro is the top free video chat site for South Korea in 2026 — no signup, no app install, works on Seoul's ultra-fast fibre and across KT, SKT and LG U+ networks. Connect with people in Seoul, Busan and Incheon instantly." },
     ],
     reviews: [
-      { name: "Minji K.", flag: "🇰🇷", text: "Finally a site that works on my phone without lag. Matched someone from Brazil in seconds." },
-      { name: "James T.", flag: "🇺🇸", text: "I use this to practise Korean. People here are patient and actually want to talk." },
-      { name: "Arjun S.", flag: "🇮🇳", text: "K-drama fan — chatting with people from Seoul is so much fun. No signup needed is a big plus." },
+      { name: "Minji K.", flag: "🇰🇷", role: "Student", text: "Finally a site that works on my phone without lag. Matched someone from Brazil in seconds." },
+      { name: "James T.", flag: "🇺🇸", role: "Language Learner", text: "I use this to practise Korean. People here are patient and actually want to talk." },
+      { name: "Arjun S.", flag: "🇮🇳", role: "K-drama Fan", text: "Chatting with people from Seoul is so much fun. No signup needed is a big plus." },
+      { name: "Sofia R.", flag: "🇧🇷", role: "Traveler", text: "Met so many interesting people from Korea here. The connection quality is incredible." },
     ],
     related: [
       { slug: "video-chat-seoul", label: "Seoul", relation: "city" },

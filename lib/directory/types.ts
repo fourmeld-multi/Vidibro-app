@@ -134,7 +134,7 @@ export type DirectoryEntry = {
   hideWhatIs?: boolean;
 
   /** User reviews shown in a "What Users Say" section. */
-  reviews?: Array<{ name: string; flag: string; text: string }>;
+  reviews?: Array<{ name: string; flag: string; text: string; role: string }>;
 
   // --- Linking -------------------------------------------------------------
   related: RelatedLink[];
