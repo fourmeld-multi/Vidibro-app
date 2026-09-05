@@ -3705,15 +3705,17 @@ export const ENTRIES: DirectoryEntry[] = [
     ],
     localPhrases: [
       { phrase: "こんばんは", meaning: "Good evening", say: "kon-ban-wa" },
-      { phrase: "本当に?", meaning: "Really?", say: "hon-tou ni" },
-      { phrase: "頑張って", meaning: "Good luck / do your best", say: "gan-bat-te" },
       { phrase: "おつかれさま", meaning: "Thanks for your effort (very common sign-off)", say: "o-tsu-ka-re-sa-ma" },
     ],
     starters: [
       { topic: "Wards", ask: "Which ward do you live in, and what's it actually like?", why: "Tokyo's 23 wards genuinely differ enough that this gets a specific, real answer." },
-      { topic: "Last train", ask: "What happens when you miss the last train?", why: "A shared, slightly dreaded experience for most Tokyo residents." },
       { topic: "Ramen", ask: "Tonkotsu or shoyu — and where's the best bowl in your area?", why: "Ramen is deeply serious here and everyone has a strong opinion." },
-      { topic: "Anime", ask: "What are you watching right now, and where should I start?", why: "In Tokyo it's a mainstream question, not a niche one." },
+    ],
+    reviews: [
+      { name: "Lucas B.", flag: "🇫🇷", role: "Gap year traveler", text: "Asked which ward to stay in for my Tokyo trip. Got a 45-minute breakdown of Shimokitazawa vs Nakameguro. Way better than any travel blog I've read." },
+      { name: "Ji-ho L.", flag: "🇰🇷", role: "Anime fan", text: "Matched with someone from Akihabara who walked me through current seasonal anime and figure releases. We talked for over an hour — completely lost track of time." },
+      { name: "Sofía R.", flag: "🇲🇽", role: "Food blogger", text: "The ramen debate got intense fast. Tonkotsu vs shoyu with specific shop names and queue times included. This is the research I actually needed before my trip." },
+      { name: "Aarav P.", flag: "🇮🇳", role: "Language learner", text: "My Japanese is basic but they switched between Japanese and English patiently the whole call. The queue after 11pm JST is very active — highly recommend that window." },
     ],
     places: ["Shibuya", "Shinjuku", "Akihabara", "Asakusa", "Ginza", "Ikebukuro"],
     talkingPoints: [

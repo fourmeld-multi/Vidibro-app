@@ -645,6 +645,48 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
           </div>
         </section>
 
+        {entry.slug === "video-chat-tokyo" && (
+          <>
+            {/* ── TOKYO: 4-card differentiator grid ── */}
+            <section className="mt-14">
+              <p className="mb-2 text-xs font-bold uppercase tracking-widest text-purple-400">Why Tokyo</p>
+              <h2 className="mb-8 text-2xl sm:text-3xl font-black tracking-tight text-white">
+                Tokyo Video Chat — <span className="text-pink-400">What Makes It Different</span>
+              </h2>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {[
+                  { emoji: "🗼", title: "23 Wards, 23 Personalities", body: "Shibuya, Akihabara, Asakusa and Shinjuku are all Tokyo but feel like entirely different cities. Ask which ward someone lives in and you already know something real about them." },
+                  { emoji: "🌃", title: "Active After Midnight", body: "Last trains stop at midnight — so people either head home or stay out until 5am. The Tokyo queue runs later than almost any other city. Best window: 22:30 to 02:30 JST." },
+                  { emoji: "🗣️", title: "Language Exchange Scene", body: "Tokyo has one of Asia's strongest English-practice communities. Many users here are actively looking for English conversation — mention it upfront and the call opens immediately." },
+                  { emoji: "⚡", title: "Free — No Account, No App", body: "A Tokyo video call costs nothing and requires nothing. No email, no phone number, no download. Works directly on NTT Docomo, SoftBank or au — open the page and you're in." },
+                ].map((c) => (
+                  <div key={c.title} className="dir-card rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center flex flex-col items-center">
+                    <div className="mb-4 text-4xl">{c.emoji}</div>
+                    <h3 className="mb-2 text-base font-black text-white">{c.title}</h3>
+                    <p className="text-sm leading-relaxed text-purple-100/70">{c.body}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* ── TOKYO: SEO prose section ── */}
+            <section className="mt-14 rounded-2xl border border-purple-500/20 bg-purple-500/[0.05] p-7 sm:p-8">
+              <h2 className="mb-4 text-xl sm:text-2xl font-black tracking-tight text-white">
+                Tokyo Video Chat — No Account, No Waiting
+              </h2>
+              <p className="mb-4 text-base leading-relaxed text-purple-100/80">
+                Tokyo is not a city that sleeps at midnight — it just moves indoors. After the last trains stop, people stay out in karaoke rooms, ramen shops and izakayas until the first morning trains run at 5am. That gap is exactly when the Tokyo chat queue fills up, which is why 22:30 to 02:30 JST is consistently the most active window on Vidibro for this city.
+              </p>
+              <p className="mb-4 text-base leading-relaxed text-purple-100/80">
+                Searches reach this page under a range of terms — Tokyo video chat, Tokyo random video call, chat with strangers Tokyo, Tokyo cam chat — and every one lands the same result: a live match in seconds, on any device, across NTT Docomo, SoftBank and au (KDDI). The pool covers all 23 wards: Shibuya, Shinjuku, Akihabara, Ikebukuro, Asakusa, Ginza and everywhere in between.
+              </p>
+              <p className="text-base leading-relaxed text-purple-100/80">
+                Tokyo users skew toward language exchange more than the Japanese national average — many are actively practising English and will stay in a call much longer once they know you are a native or fluent speaker. Mention it in the first sentence and the conversation shifts immediately. If the call goes nowhere, one tap moves you to the next person — no limit, no goodbye required.
+              </p>
+            </section>
+          </>
+        )}
+
         {entry.slug === "video-chat-japan" && (
           <>
             {/* ── JAPAN: 4-card differentiator grid ── */}
@@ -741,7 +783,7 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
           </section>
         )}
 
-        {entry.slug !== "video-chat-turkey" && entry.slug !== "video-chat-brazil" && entry.slug !== "video-chat-japan" && <section className="mt-14">
+        {entry.slug !== "video-chat-turkey" && entry.slug !== "video-chat-brazil" && entry.slug !== "video-chat-japan" && entry.slug !== "video-chat-tokyo" && <section className="mt-14">
           <SectionHead
             tone="amber"
             icon={<Scale size={18} />}
