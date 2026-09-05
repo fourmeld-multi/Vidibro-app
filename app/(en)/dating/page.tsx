@@ -11,6 +11,7 @@ import { BASE_URL } from "@/lib/seo";
 import DatingReviews from "@/components/DatingReviews";
 import OnlineBadge from "@/components/OnlineBadge";
 import JsonLd from "@/components/JsonLd";
+import FaqAccordion from "@/components/directory/FaqAccordion";
 
 export const metadata: Metadata = {
   title: "Free Video Chat Dating — Meet Strangers Online, No Signup | Vidibro",
@@ -490,14 +491,7 @@ export default function DatingPage() {
               <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">Frequently asked questions</h2>
               <p className="text-[var(--muted)]">Everything you need to know about free video chat dating on Vidibro.</p>
             </div>
-            <div className="divide-y divide-[var(--border)] rounded-xl border border-[var(--border)] overflow-hidden">
-              {faqs.map((f) => (
-                <div key={f.q} className="bg-[var(--surface)] px-6 py-5">
-                  <p className="font-semibold text-white mb-2">{f.q}</p>
-                  <p className="text-sm text-[var(--muted)] leading-relaxed">{f.a}</p>
-                </div>
-              ))}
-            </div>
+            <FaqAccordion items={faqs.map((f) => ({ question: f.q, answer: f.a }))} />
           </section>
 
           {/* ── RELATED LINKS ── */}
