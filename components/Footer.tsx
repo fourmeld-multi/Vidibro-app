@@ -120,7 +120,6 @@ export default function Footer({ onStartVideoChat, onStartTextChat, onStartAudio
               {t.footerVideoHeading}
             </h2>
             <button onClick={onStartVideoChat} className="text-left hover:text-white transition">HD Random Video Call</button>
-            <button onClick={onStartVideoChat} className="text-left hover:text-white transition">Girls Video Chat</button>
             <button onClick={onStartVideoChat} className="text-left hover:text-white transition">Global Video Match</button>
             <button onClick={onStartVideoChat} className="text-left hover:text-white transition">Stranger Cam Chat</button>
             <button onClick={onStartVideoChat} className="text-left hover:text-white transition">1-on-1 Video Call</button>
