@@ -198,32 +198,35 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
             Why Choose <span className="text-pink-400">Vidibro</span>?
           </h2>
           {entry.intro[1] && <p className="mb-8 text-base text-purple-200/70 max-w-xl mx-auto">{entry.intro[1]}</p>}
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-left">
-            <IconCard icon={<Lock size={16} />} title="Nothing is stored" tone="emerald">
-              Calls run browser to browser. There is no account, so there is no profile for a
-              conversation to attach to and nothing for us to keep.
-            </IconCard>
-            <IconCard icon={<Smartphone size={16} />} title="Built for mobile data" tone="cyan">
-              {entry.connectivityNote
-                ? entry.connectivityNote.split(".").slice(0, 2).join(".") + "."
-                : "Video is capped near 600 kbps and adapts downward, so a call softens on a weak signal instead of freezing or dropping."}
-            </IconCard>
-            <IconCard icon={<Sticker size={16} />} title="Stickers and reactions" tone="pink">
-              Send emoji stickers and full-screen reactions mid-call — the fastest way to say
-              something when you do not share a language.
-            </IconCard>
-            <IconCard icon={<CheckCheck size={16} />} title="Double-tick receipts" tone="purple">
-              Text chat shows when your message has actually been read, so you are never guessing
-              whether the other person saw it.
-            </IconCard>
-            <IconCard icon={<Globe2 size={16} />} title={`Languages in ${entry.name}`} tone="amber">
-              {entry.languages.join(" · ")} — and no language filter, so which one you get is
-              genuinely down to who is online.
-            </IconCard>
-            <IconCard icon={<MousePointerClick size={16} />} title="One tap to leave" tone="emerald">
-              Next moves you on instantly, and the report button ends a conversation the moment you
-              want out of it.
-            </IconCard>
+          <div className="grid gap-4 sm:grid-cols-3 text-left">
+            {[
+              {
+                icon: <Zap size={24} />,
+                bg: "bg-amber-500/20 text-amber-300",
+                title: "Instant Connections",
+                body: "No waiting rooms. Our algorithm matches you in seconds — at peak hours it's near-instant.",
+              },
+              {
+                icon: <Globe2 size={24} />,
+                bg: "bg-cyan-500/20 text-cyan-300",
+                title: "Global Community",
+                body: `Meet people from 180+ countries. No language filter — whoever is online is who you get.`,
+              },
+              {
+                icon: <ShieldCheck size={24} />,
+                bg: "bg-emerald-500/20 text-emerald-300",
+                title: "Privacy First",
+                body: "No account, no stored video. Calls run browser-to-browser. Leave any time with one tap.",
+              },
+            ].map((card) => (
+              <div key={card.title} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+                <div className={`mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl ${card.bg}`}>
+                  {card.icon}
+                </div>
+                <h3 className="mb-2 text-lg font-black text-white">{card.title}</h3>
+                <p className="text-sm leading-relaxed text-purple-100/75">{card.body}</p>
+              </div>
+            ))}
           </div>
         </section>
 
