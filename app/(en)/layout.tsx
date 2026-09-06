@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: "%s | Vidibro",
   },
   description:
-    "Anonymous, zero-login video chat. Get matched instantly, play quick games, and connect — no account, no history, just a real conversation.",
+    "Free random video chat — talk to strangers instantly, no signup, no account. Video chat with strangers worldwide in live 1-on-1 calls. Works on any browser.",
   applicationName: "Vidibro",
   alternates: { canonical: "/" },
   robots: {
