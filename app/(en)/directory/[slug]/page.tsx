@@ -66,7 +66,7 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
 
   const url = `${BASE_URL}/directory/${entry.slug}`;
   const heading = entry.title.split("—")[0].trim();
-  const newDesign = entry.slug === "video-chat-nepal" || entry.slug === "video-chat-south-korea" || entry.slug === "video-chat-bangladesh" || entry.slug === "video-chat-turkey" || entry.slug === "video-chat-brazil" || entry.slug === "video-chat-tokyo" || entry.slug === "video-chat-japan";
+  const newDesign = entry.slug === "video-chat-nepal" || entry.slug === "video-chat-south-korea" || entry.slug === "video-chat-bangladesh" || entry.slug === "video-chat-turkey" || entry.slug === "video-chat-brazil" || entry.slug === "video-chat-tokyo" || entry.slug === "video-chat-japan" || entry.slug === "tamil-video-chat";
 
   return (
     <main className="w-full">
@@ -771,6 +771,48 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
           </>
         )}
 
+        {entry.slug === "tamil-video-chat" && (
+          <>
+            {/* ── TAMIL: 4-card differentiator grid ── */}
+            <section className="mt-14">
+              <p className="mb-2 text-xs font-bold uppercase tracking-widest text-purple-400">Why Tamil</p>
+              <h2 className="mb-8 text-2xl sm:text-3xl font-black tracking-tight text-white">
+                Tamil Video Chat — <span className="text-pink-400">What Makes It Different</span>
+              </h2>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {[
+                  { emoji: "🌏", title: "Four-Country Language", body: "Tamil is official in India, Sri Lanka and Singapore, with a large established community in Malaysia. One conversation can reach Chennai, Jaffna, Kuala Lumpur or Singapore — no filter, no restriction." },
+                  { emoji: "🎬", title: "Kollywood Has No Bollywood", body: "Rajini, Kamal, Vijay, Ajith — Kollywood has its own stars, its own rivalries and its own box-office records, entirely independent of Hindi cinema. No neutrals exist. Asking which side they are on opens the conversation immediately." },
+                  { emoji: "🎲", title: "One Person at a Time", body: "No profile grids, no language filters. The next Tamil video chat is whoever the queue pairs you with — random by design, and that is exactly the point." },
+                  { emoji: "⚡", title: "Free — No Account, No App", body: "Tamil video chat on Vidibro costs nothing and requires nothing. No email, no phone number, no download. Works directly on Jio, Airtel, Dialog and SingTel — open the page and you are in." },
+                ].map((c) => (
+                  <div key={c.title} className="dir-card rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center flex flex-col items-center">
+                    <div className="mb-4 text-4xl">{c.emoji}</div>
+                    <h3 className="mb-2 text-base font-black text-white">{c.title}</h3>
+                    <p className="text-sm leading-relaxed text-purple-100/70">{c.body}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* ── TAMIL: SEO prose section ── */}
+            <section className="mt-14 rounded-2xl border border-purple-500/20 bg-purple-500/[0.05] p-7 sm:p-8">
+              <h2 className="mb-4 text-xl sm:text-2xl font-black tracking-tight text-white">
+                Tamil Video Chat Online — No Waiting, No Account
+              </h2>
+              <p className="mb-4 text-base leading-relaxed text-purple-100/80">
+                Tamil is one of the world&apos;s oldest living languages and the only one with official status in three separate countries — India, Sri Lanka and Singapore. That distribution matters for a chat platform: a Tamil conversation on Vidibro is as likely to reach Jaffna or Kuala Lumpur as Chennai or Coimbatore, and the regional varieties are distinct enough that people usually place each other within a sentence or two.
+              </p>
+              <p className="mb-4 text-base leading-relaxed text-purple-100/80">
+                Searches reach this page under several names — Tamil video chat, Tamil chat strangers, Tamil random video call, Tamil video call free — and every one lands the same result: a live match in seconds, on any device, with no account created and nothing stored. The pool covers Tamil Nadu, Sri Lanka, Malaysia and the Gulf, with a strong peak between 21:00 and 00:30 IST when Indian and Sri Lankan users overlap.
+              </p>
+              <p className="text-base leading-relaxed text-purple-100/80">
+                Tanglish is fully accepted here — Tamil words in English letters, the way most people type on a phone keyboard without a Tamil layout installed. Nobody is going to correct you for it. If you want to practise proper Tamil script, most speakers are patient with learners who make a genuine effort. Voice chat suits language practice well: camera off, lower pressure, the conversation stays natural.
+              </p>
+            </section>
+          </>
+        )}
+
         {!entry.hideWhatIs && (
           <section className="mt-14">
             <SectionHead tone="purple" icon={<HelpCircle size={18} />} title={whatIsHeading(entry.kind, entry.name)} />
@@ -783,7 +825,7 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
           </section>
         )}
 
-        {entry.slug !== "video-chat-turkey" && entry.slug !== "video-chat-brazil" && entry.slug !== "video-chat-japan" && entry.slug !== "video-chat-tokyo" && <section className="mt-14">
+        {entry.slug !== "video-chat-turkey" && entry.slug !== "video-chat-brazil" && entry.slug !== "video-chat-japan" && entry.slug !== "video-chat-tokyo" && entry.slug !== "tamil-video-chat" && <section className="mt-14">
           <SectionHead
             tone="amber"
             icon={<Scale size={18} />}
