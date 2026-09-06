@@ -508,7 +508,7 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "country",
     name: "Nepal",
     primaryKeyword: "nepal video call",
-    title: "Nepal Video Call Free — Random Video Chat with Nepali Strangers",
+    title: "Random Video Chat Nepal — Free, No Signup",
     description:
       "Free random video call in Nepal — no signup, no account. Strangers in Kathmandu, Pokhara and beyond. Works on Ncell and NTC. Nepali, English, Newari.",
     tagline: "No account. Instant random video call with Nepal — Dashain, Everest, Gulf diaspora, and people who actually want to talk.",
