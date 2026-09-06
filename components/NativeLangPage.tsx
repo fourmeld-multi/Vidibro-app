@@ -387,6 +387,47 @@ export default function NativeLangPage({ data }: { data: NativeLangData }) {
             </>
           )}
 
+          {/* ── TAMIL EXTRA: 4-card + prose (ta only) ── */}
+          {data.showTamilExtra && (
+            <>
+              <section className="mt-14">
+                <p className="mb-2 text-xs font-bold uppercase tracking-widest text-purple-400">தமிழ் வீடியோ சாட்</p>
+                <h2 className="mb-8 text-2xl sm:text-3xl font-black tracking-tight text-white">
+                  தமிழ் வீடியோ சாட் — <span className="text-pink-400">ஏன் வேறுபட்டது?</span>
+                </h2>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                  {[
+                    { emoji: "🌏", title: "உலகம் முழுவதும் தமிழர்கள்", body: "தமிழகம், மலேசியா, சிங்கப்பூர், இலங்கை, இலண்டன், டோரண்டோ, துபாய் — உலகம் முழுவதும் தமிழர்கள் ஒரே தளத்தில் இணைகிறார்கள். சந்திப்பு வேகமானது, நேரம் வீணாகாது." },
+                    { emoji: "🎬", title: "கொலிவுட் கலாச்சாரம்", body: "ரஜினி, கமல், விஜய், அஜித், நயன்தாரா — கொலிவுட் பற்றி பேசுவது எந்த தமிழரையும் உடனடியாக நெருக்கமாக்கும். படங்கள், பாடல்கள், வசனங்கள் — உரையாடலுக்கு பஞ்சமில்லை." },
+                    { emoji: "🎲", title: "ஒருவருக்கு ஒருவர்", body: "சுயவிவர பட்டியல் இல்லை, தேடல் வடிகட்டி இல்லை. அடுத்தவர் யார் என்று தெரியாது — அது தான் Vidibro-வின் ஆர்வமூட்டும் அம்சம். முழு கவனம் உரையாடலில்." },
+                    { emoji: "⚡", title: "இலவசம் — கணக்கின்றி", body: "தமிழ் வீடியோ சாட்க்கு எந்தக் கட்டணமும் இல்லை, எந்தத் தகவலும் தேவையில்லை. மின்னஞ்சல் இல்லை, ஃபோன் இல்லை, பயன்பாடு இல்லை. தளம் திறந்தால் போதும் — நீங்கள் உள்ளே." },
+                  ].map((c) => (
+                    <div key={c.title} className="dir-card rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center flex flex-col items-center">
+                      <div className="mb-4 text-4xl">{c.emoji}</div>
+                      <h3 className="mb-2 text-base font-black text-white">{c.title}</h3>
+                      <p className="text-sm leading-relaxed text-purple-100/70">{c.body}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section className="mt-14 rounded-2xl border border-purple-500/20 bg-purple-500/[0.05] p-7 sm:p-8">
+                <h2 className="mb-4 text-xl sm:text-2xl font-black tracking-tight text-white">
+                  தமிழ் வீடியோ சாட் — காத்திருக்காமல், பதிவின்றி
+                </h2>
+                <p className="mb-4 text-base leading-relaxed text-purple-100/80">
+                  தமிழ் பேசும் மக்கள் தமிழகத்தில் மட்டுமில்லை — மலேசியா, சிங்கப்பூர், இலங்கை, ஐக்கிய இராச்சியம், கனடா, ஆஸ்திரேலியா, வளைகுடா நாடுகள் என உலகம் முழுவதும் பரவியிருக்கிறார்கள். Vidibro இந்த வலைப்பின்னலை ஒரே தளத்தில் இணைக்கிறது — சென்னையில் இருப்பவர் குவாலாலம்பூரில் வாழும் தமிழரிடம் பேசலாம், யாழ்ப்பாணத்தில் இருப்பவர் லண்டனில் இருப்பவருடன் இணையலாம்.
+                </p>
+                <p className="mb-4 text-base leading-relaxed text-purple-100/80">
+                  தமிழ் எழுத்தில் தட்டச்சு செய்ய முடியாவிட்டாலும் பரவாயில்லை — Tanglish (தமிழ் வார்த்தைகளை ஆங்கில எழுத்துக்களில்) அனைவரும் ஏற்கிறார்கள். "Vanakkam", "Eppadi irukkeenga" என்று தொடங்கினாலே போதும் — மறுபக்கம் அதே மொழியில் பதில் வரும். மொழித் தடை Vidibro-வில் தடையில்லை.
+                </p>
+                <p className="text-base leading-relaxed text-purple-100/80">
+                  மாலை 8 மணி முதல் நள்ளிரவு வரை (IST) தமிழகத்திலிருந்து அதிக பயனர்கள் இணைகிறார்கள். மலேசியா மற்றும் சிங்கப்பூரில் இரவு நேரம் (IST-ல் மாலை 5–8 மணி) கூடுதல் இணைப்புகள் கிடைக்கும். வாரத்தின் ஏதேனும் நேரத்தில் தொடங்கினாலும் — தமிழ் பேசும் யாரோடாவது சந்திப்பு கிட்டத்தட்ட உறுதி.
+                </p>
+              </section>
+            </>
+          )}
+
           {/* ── WHAT IS ── */}
           <section className="mt-14">
             <SectionHead tone="purple" icon={<HelpCircle size={18} />} title={data.whatIsTitle} />
