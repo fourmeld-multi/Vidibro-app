@@ -1925,6 +1925,7 @@ export const ENTRIES: DirectoryEntry[] = [
     related: [
       { slug: "video-chat-chennai", label: "Chennai", relation: "city" },
       { slug: "video-chat-coimbatore", label: "Coimbatore", relation: "city" },
+      { slug: "video-chat-bangalore", label: "Bangalore", relation: "city" },
       { slug: "video-chat-india", label: "India", relation: "sibling" },
       { slug: "video-chat-sri-lanka", label: "Sri Lanka", relation: "sibling" },
       { slug: "hindi-video-chat", label: "Hindi video chat", relation: "language" },
