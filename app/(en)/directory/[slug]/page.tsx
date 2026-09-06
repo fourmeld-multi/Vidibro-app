@@ -884,7 +884,7 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
         </section>
 
         <section className="mt-14">
-          <SectionHead tone="cyan" icon={<Compass size={18} />} title="Random chat" />
+          <SectionHead tone="cyan" icon={<Compass size={18} />} title={entry.slug === "tamil-video-chat" ? "Random chat" : "Explore related topics"} />
           <RelatedGroup label="Cities" items={group("city")} />
           <RelatedGroup label="Languages" items={group("language")} />
           <RelatedGroup label="Other ways to chat" items={group("mode")} />
