@@ -825,7 +825,7 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
           </section>
         )}
 
-        {entry.slug !== "video-chat-turkey" && entry.slug !== "video-chat-brazil" && entry.slug !== "video-chat-japan" && entry.slug !== "video-chat-tokyo" && entry.slug !== "tamil-video-chat" && entry.slug !== "video-chat-united-states" && <section className="mt-14">
+        {entry.slug !== "video-chat-turkey" && entry.slug !== "video-chat-brazil" && entry.slug !== "video-chat-japan" && entry.slug !== "video-chat-tokyo" && entry.slug !== "tamil-video-chat" && entry.slug !== "video-chat-united-states" && entry.slug !== "video-chat-canada" && entry.slug !== "video-chat-delhi" && entry.slug !== "video-chat-uk" && entry.slug !== "video-chat-france" && entry.slug !== "video-chat-spain" && entry.slug !== "video-chat-russia" && <section className="mt-14">
           <SectionHead
             tone="amber"
             icon={<Scale size={18} />}
