@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, Menu, X, Globe, Video, Zap, ShieldAlert } from "lucide-react";
 import LogoMark from "@/components/LogoMark";
 import ReportUsModal from "@/components/ReportUsModal";
@@ -94,34 +93,27 @@ export default function Navbar({
               <span className="text-[9px] text-purple-300">▼</span>
             </button>
 
-            <AnimatePresence>
-              {langOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 5 }}
-                  className="absolute right-0 mt-2 w-44 rounded-2xl bg-[#120a2e] border border-white/20 p-1.5 shadow-2xl z-50 text-xs max-h-64 overflow-y-auto"
-                >
-                  {LANGUAGES.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => {
-                        onSelectLang?.(lang.code);
-                        setLangOpen(false);
-                      }}
-                      className={`w-full flex items-center justify-between px-3 py-2 rounded-xl transition text-left ${
-                        lang.code === currentLang
-                          ? "bg-purple-600/50 text-white font-bold"
-                          : "text-purple-200/80 hover:bg-white/10 hover:text-white"
-                      }`}
-                    >
-                      <span>{lang.label}</span>
-                      <span className="text-[10px] text-purple-300">{lang.code}</span>
-                    </button>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {langOpen && (
+              <div className="absolute right-0 mt-2 w-44 rounded-2xl bg-[#120a2e] border border-white/20 p-1.5 shadow-2xl z-50 text-xs max-h-64 overflow-y-auto animate-fade-in">
+                {LANGUAGES.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => {
+                      onSelectLang?.(lang.code);
+                      setLangOpen(false);
+                    }}
+                    className={`w-full flex items-center justify-between px-3 py-2 rounded-xl transition text-left ${
+                      lang.code === currentLang
+                        ? "bg-purple-600/50 text-white font-bold"
+                        : "text-purple-200/80 hover:bg-white/10 hover:text-white"
+                    }`}
+                  >
+                    <span>{lang.label}</span>
+                    <span className="text-[10px] text-purple-300">{lang.code}</span>
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           <button

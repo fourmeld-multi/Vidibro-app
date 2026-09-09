@@ -1,6 +1,4 @@
-"use client";
-
-/** Cosmic dark space background with ambient glowing nebula blobs, starfield dust grid, 
+/** Cosmic dark space background with ambient glowing nebula blobs, starfield dust grid,
  * and floating subtle particles matching Whisperly theme. */
 export default function Background() {
   return (

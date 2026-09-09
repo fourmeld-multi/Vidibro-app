@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
 import { Globe2, Users, Video, PhoneCall, MessageSquare, Check, Flame } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -128,15 +127,10 @@ export default function HomeContent() {
         <div className="flex flex-col items-center justify-center text-center py-16 sm:py-24 max-w-3xl mx-auto gap-6 sm:gap-7">
 
           {/* Top Tagline Pill Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.5 }}
-            className="glass-pill flex items-center gap-2 rounded-full px-5 py-2 text-xs sm:text-sm font-semibold text-purple-100 shadow-xl border border-purple-500/30 bg-purple-950/40"
-          >
+          <div className="glass-pill flex items-center gap-2 rounded-full px-5 py-2 text-xs sm:text-sm font-semibold text-purple-100 shadow-xl border border-purple-500/30 bg-purple-950/40 animate-fade-in">
             <Flame size={14} className="text-pink-400" />
             <span>{t.heroTag}</span>
-          </motion.div>
+          </div>
 
           {/* Main Headline Title */}
           <h1 className="text-5xl font-black tracking-tight text-white sm:text-7xl lg:text-8xl leading-none">
@@ -164,43 +158,37 @@ export default function HomeContent() {
           {/* Primary Mode Action Buttons (Concept 1: Hero Video + Side-by-Side Cards on Mobile) */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full max-w-md sm:max-w-none pt-2">
             {/* Full-Width Featured Video Match Button */}
-            <motion.button
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
+            <button
               onClick={() => router.push("/video-chat")}
-              className="btn-gradient flex w-full sm:w-auto items-center justify-center gap-3 rounded-full px-9 py-4 text-base sm:text-lg font-extrabold text-white shadow-2xl shadow-purple-500/30 transition uppercase tracking-wider"
+              className="btn-gradient flex w-full sm:w-auto items-center justify-center gap-3 rounded-full px-9 py-4 text-base sm:text-lg font-extrabold text-white shadow-2xl shadow-purple-500/30 transition hover:scale-[1.04] active:scale-[0.96] uppercase tracking-wider"
             >
               <Video size={22} />
               {t.startVideo}
-            </motion.button>
+            </button>
 
             {/* Side-by-Side Cards Grid for Mobile (Voice Chat & Text Chat) */}
             <div className="grid grid-cols-2 gap-3 w-full sm:flex sm:w-auto items-stretch">
               {/* Voice Chat Button with Cyan/Blue Gradient Border */}
-              <motion.button
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.96 }}
+              <button
                 onClick={() => router.push("/audio-chat")}
-                className="relative p-[1.5px] rounded-2xl sm:rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/50 transition w-full sm:w-auto flex flex-col justify-center"
+                className="relative p-[1.5px] rounded-2xl sm:rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/50 hover:scale-[1.04] active:scale-[0.96] transition w-full sm:w-auto flex flex-col justify-center"
               >
                 <div className="flex h-full w-full sm:w-auto items-center justify-center gap-1.5 sm:gap-2 rounded-[14px] sm:rounded-full bg-[#130835] hover:bg-[#1a0b47] px-2 sm:px-7 py-3.5 text-[11px] sm:text-base font-bold text-white backdrop-blur-xl transition">
                   <PhoneCall size={15} className="text-cyan-300 animate-pulse shrink-0" />
                   <span className="whitespace-nowrap">{t.startAudio}</span>
                 </div>
-              </motion.button>
+              </button>
 
               {/* Text Chat Button with Pink/Purple Gradient Border */}
-              <motion.button
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.96 }}
+              <button
                 onClick={() => router.push("/text-chat")}
-                className="relative p-[1.5px] rounded-2xl sm:rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-400 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/50 transition w-full sm:w-auto flex flex-col justify-center"
+                className="relative p-[1.5px] rounded-2xl sm:rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-400 shadow-lg shadow-purple-500/25 hover:shadow-purple-500/50 hover:scale-[1.04] active:scale-[0.96] transition w-full sm:w-auto flex flex-col justify-center"
               >
                 <div className="flex h-full w-full sm:w-auto items-center justify-center gap-1.5 sm:gap-2 rounded-[14px] sm:rounded-full bg-[#130835] hover:bg-[#1a0b47] px-2 sm:px-7 py-3.5 text-[11px] sm:text-base font-bold text-white backdrop-blur-xl transition">
                   <MessageSquare size={15} className="text-pink-300 shrink-0" />
                   <span className="whitespace-nowrap">{t.startText}</span>
                 </div>
-              </motion.button>
+              </button>
             </div>
           </div>
 
