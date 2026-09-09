@@ -29,6 +29,15 @@ const MAIN = [
   { href: "/directory/bengali-video-chat", label: "Bengali Video Chat" },
 ];
 
+const COUNTRIES = [
+  { href: "/directory/video-chat-canada", label: "Video Chat Canada" },
+  { href: "/directory/video-chat-uk", label: "Video Chat UK" },
+  { href: "/directory/video-chat-france", label: "Video Chat France" },
+  { href: "/directory/video-chat-spain", label: "Video Chat Spain" },
+  { href: "/directory/video-chat-russia", label: "Video Chat Russia" },
+  { href: "/directory/video-chat-delhi", label: "Video Chat Delhi" },
+];
+
 const ALSO = [
   { href: "/omegle-alternative", label: "Omegle Alternative" },
   { href: "/chatroulette-alternative", label: "Chatroulette Alternative" },
@@ -69,6 +78,15 @@ export default function PopularDestinations() {
         >
           Explore Full Directory <ArrowRight size={15} />
         </Link>
+      </div>
+
+      <div className="mx-auto mt-10 max-w-4xl px-4">
+        <div className="mb-4 text-center text-sm text-purple-300/55">Chat by country</div>
+        <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+          {COUNTRIES.map((d) => (
+            <Chip key={d.href} {...d} />
+          ))}
+        </div>
       </div>
 
       <div className="mx-auto mt-12 max-w-4xl border-t border-white/[0.07] px-4 pt-10">
