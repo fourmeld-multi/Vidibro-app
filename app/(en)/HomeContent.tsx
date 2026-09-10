@@ -133,8 +133,9 @@ export default function HomeContent() {
           </div>
 
           {/* Main Headline Title */}
-          <h1 className="text-5xl font-black tracking-tight text-white sm:text-7xl lg:text-8xl leading-none">
-            <span className="gradient-text">Vidibro</span>
+          <h1 className="flex flex-col items-center gap-2 font-black tracking-tight text-white leading-none">
+            <span className="gradient-text text-5xl sm:text-7xl lg:text-8xl">Vidibro</span>
+            <span className="text-xl sm:text-2xl font-bold text-purple-200/80 tracking-wide">Free Random Video Chat — No Signup</span>
           </h1>
 
           {/* Subtitle */}

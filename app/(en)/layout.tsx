@@ -4,11 +4,11 @@ import RootLayoutShell from "@/components/RootLayoutShell";
 export const metadata: Metadata = {
   metadataBase: new URL("https://vidibro.com"),
   title: {
-    default: "Vidibro — Talk to a Random Stranger, Instantly",
+    default: "Vidibro — Free Random Video Chat. No Signup. Talk to Strangers.",
     template: "%s | Vidibro",
   },
   description:
-    "Free random video chat — talk to strangers instantly, no signup, no account. Video chat with strangers worldwide in live 1-on-1 calls. Works on any browser.",
+    "Free random video chat with strangers — no signup, no account. Anonymous 1-on-1 video, voice and text chat. Instant match, works on any browser, 180+ countries.",
   applicationName: "Vidibro",
   alternates: { canonical: "/" },
   robots: {
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     siteName: "Vidibro",
     locale: "en_US",
     url: "https://vidibro.com",
-    title: "Vidibro — Talk to a Random Stranger, Instantly",
+    title: "Vidibro — Free Random Video Chat. No Signup. Talk to Strangers.",
     description:
       "Anonymous, zero-login video chat. Get matched instantly — no account, no history, just a real conversation.",
     images: [
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vidibro — Talk to a Random Stranger, Instantly",
+    title: "Vidibro — Free Random Video Chat. No Signup. Talk to Strangers.",
     description:
       "Anonymous, zero-login video chat. Get matched instantly — no account, no history, just a real conversation.",
     images: ["https://vidibro.com/logo.png"],
