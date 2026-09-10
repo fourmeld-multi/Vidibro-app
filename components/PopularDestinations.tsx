@@ -39,6 +39,7 @@ const COUNTRIES = [
 ];
 
 const ALSO = [
+  { href: "/dating", label: "Video Chat Dating" },
   { href: "/omegle-alternative", label: "Omegle Alternative" },
   { href: "/chatroulette-alternative", label: "Chatroulette Alternative" },
   { href: "/ometv-alternative", label: "OmeTV Alternative" },
@@ -91,7 +92,7 @@ export default function PopularDestinations() {
 
       <div className="mx-auto mt-12 max-w-4xl border-t border-white/[0.07] px-4 pt-10">
         <div className="mb-4 text-center text-sm text-purple-300/55">Also explore</div>
-        <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-5">
           {ALSO.map((d) => (
             <Chip key={d.href} {...d} />
           ))}

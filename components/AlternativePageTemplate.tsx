@@ -3,8 +3,21 @@
 import { motion } from "framer-motion";
 import { Video, PhoneCall, MessageSquare, ShieldCheck, Zap, Lock, Check, X, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
+const RELATED_LINKS = [
+  { href: "/video-chat", label: "Random Video Chat" },
+  { href: "/audio-chat", label: "Voice Chat" },
+  { href: "/text-chat", label: "Text Chat" },
+  { href: "/dating", label: "Video Chat Dating" },
+  { href: "/directory/random-video-chat", label: "Random Video Chat Sites" },
+  { href: "/directory/anonymous-text-chat", label: "Anonymous Text Chat" },
+  { href: "/omegle-alternative", label: "Omegle Alternative" },
+  { href: "/chatroulette-alternative", label: "Chatroulette Alternative" },
+  { href: "/ometv-alternative", label: "OmeTV Alternative" },
+];
 
 type Props = {
   competitorName: string;
@@ -123,6 +136,23 @@ export default function AlternativePageTemplate({
               <p className="whitespace-pre-line text-purple-200/80 leading-relaxed">{sec.content}</p>
             </div>
           ))}
+        </div>
+
+        {/* Related Links */}
+        <div>
+          <p className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-4">Explore Vidibro</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+            {RELATED_LINKS.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-medium text-purple-100/85 hover:border-purple-400/30 hover:bg-white/[0.08] hover:text-white transition"
+              >
+                <ArrowRight size={13} className="text-purple-400 shrink-0" />
+                {l.label}
+              </Link>
+            ))}
+          </div>
         </div>
 
         {/* Bottom Call to Action */}
