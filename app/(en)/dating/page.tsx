@@ -39,6 +39,22 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
+      name: "What is video chat dating?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Video chat dating is a way to meet potential romantic partners through live, face-to-face video calls rather than text messages or dating app profiles. Instead of swiping through photos, you connect with a real stranger by video and know within seconds whether there is chemistry. Sites like Vidibro offer free video chat dating with no signup required.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What is the best free video chat dating site in 2026?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Vidibro is one of the best free video chat dating sites in 2026 — no account, no subscription, no fake profiles. You connect live with a real stranger by video, voice, or text in under 10 seconds. Other popular options include Camloo, OmeTV, and Chatroulette, but most require accounts or have ads between calls.",
+      },
+    },
+    {
+      "@type": "Question",
       name: "Is Vidibro a dating app?",
       acceptedAnswer: {
         "@type": "Answer",
@@ -228,6 +244,8 @@ const steps = [
 ];
 
 const faqs = [
+  { q: "What is video chat dating?", a: "Video chat dating is a way to meet potential romantic partners through live, face-to-face video calls rather than text messages or dating app profiles. Instead of swiping through photos, you connect with a real stranger by video and know within seconds whether there is chemistry. Sites like Vidibro offer free video chat dating with no signup required." },
+  { q: "What is the best free video chat dating site in 2026?", a: "Vidibro is one of the best free video chat dating sites in 2026 — no account, no subscription, no fake profiles. You connect live with a real stranger by video, voice, or text in under 10 seconds. Other popular options include Camloo, OmeTV, and Chatroulette, but most require accounts or have ads between calls." },
   { q: "Is this a dating app?", a: "No — Vidibro is a random video chat platform. There are no profiles, no swipes, no matches. You connect instantly with real strangers by live video. Whether that leads to friendship, romance, or a great conversation is entirely up to you." },
   { q: "Is video chat dating on Vidibro free?", a: "Completely free. No subscription, no credit card, no premium tier. Video chat, voice chat, and text chat — all three at zero cost, forever." },
   { q: "Do I need to register or create an account?", a: "No account, no email, no phone number. Open the site and start talking within seconds — nothing to fill in." },
@@ -288,6 +306,16 @@ export default function DatingPage() {
                 <Mic size={18} /> Voice Only
               </Link>
             </div>
+          </div>
+        </div>
+
+        {/* ── DEFINITION ── */}
+        <div className="mx-auto max-w-4xl px-5 sm:px-6 py-8">
+          <div className="rounded-2xl border border-purple-500/20 bg-purple-500/[0.06] p-6 sm:p-8">
+            <h2 className="text-lg sm:text-xl font-bold text-white mb-3">What is video chat dating?</h2>
+            <p className="text-base leading-relaxed text-purple-100/80">
+              Video chat dating is a way to meet potential romantic partners through live, face-to-face video calls rather than text messages or dating app profiles. Instead of swiping through photos, you connect with a real stranger by video and know within seconds whether there is chemistry — no curated bios, no filtered photos, no weeks of texting before you hear someone's voice. Vidibro offers free video chat dating with no signup required, connecting you with strangers from 180+ countries instantly.
+            </p>
           </div>
         </div>
 
