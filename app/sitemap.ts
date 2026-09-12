@@ -25,6 +25,9 @@ const STATIC_ROUTES = [
   // noindex application screens. The content pages that target those terms live
   // in the directory and are included below.
   "/dating",
+  "/free-video-chat",
+  "/free-random-video-chat",
+  "/random-text-chat",
   "/omegle-alternative",
   "/airtalk-alternative",
   "/chatroulette-alternative",
