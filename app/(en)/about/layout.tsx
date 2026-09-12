@@ -7,11 +7,11 @@ import { generatePageSEO } from "@/lib/seo";
  * title.
  */
 export const metadata: Metadata = generatePageSEO({
-  title: "About Vidibro — Free Anonymous Chat, No Signup",
+  title: "About Vidibro — Free Random Video Chat, No Signup Required",
   description:
-    "What Vidibro is, how peer-to-peer video chat keeps calls private, and why there are no accounts, filters or paid tiers.",
+    "Vidibro is a free random video chat app — talk to strangers instantly with no signup, no camera required for text mode. Peer-to-peer encrypted, 180+ countries, always 100% free.",
   slug: "/about",
-  keywords: ["about vidibro", "anonymous video chat", "peer to peer chat"],
+  keywords: ["about vidibro", "what is vidibro", "vidibro review", "anonymous video chat", "peer to peer chat"],
 });
 
 export default function AboutLayout({ children }: { children: React.ReactNode }) {

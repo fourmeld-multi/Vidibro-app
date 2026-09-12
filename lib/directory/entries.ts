@@ -2215,20 +2215,20 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "topic",
     name: "anonymous text chat",
     primaryKeyword: "anonymous text chat",
-    title: "Anonymous Text Chat — Free, No Camera, No Account",
+    title: "Anonymous Text Chat with Strangers — No Login, No Camera",
     description:
-      "Free anonymous text chat — no camera, no account. Just type to someone new. Double-tick read receipts. Nothing saved when you close.",
+      "Chat anonymously with strangers — no login, no camera, no mic required. Instant matching, double-tick read receipts, nothing saved. The best free Omegle text chat alternative in 2026.",
     tagline:
-      "No camera. No mic. No account. Open the page and start typing — nothing is stored when you leave.",
+      "No camera. No login. No account. Just open the page and start typing — you are matched in seconds and nothing is saved when you leave.",
     hideWhatIs: true,
     languages: ["Any — there is no language filter"],
     talkingPoints: [],
     safetyNote:
       "Text is the easiest mode to screenshot and the easiest to be talked into oversharing on, because it feels low-stakes and there is no face to read. Never move a conversation onto another app at a stranger's request — that is how nearly every scam on a platform like this begins.",
     intro: [
-      "No camera. No mic. No awkward silences. Just you, a stranger, and a blinking cursor — the most fun you can have with your shirt still on. Open the page, get matched in seconds, and start a conversation that could go absolutely anywhere.",
-      "No camera means no pressure. It works anywhere — a shared room, a commute, the middle of the night. People practising a language get time to compose. People who find video exhausting get to read instead of perform. There is no wrong reason to prefer it.",
-      "Messages show a double tick when the other person has actually read them, so you are never guessing. Nothing is stored on our side — close the tab and the conversation is gone. No account means nothing it could have been attached to.",
+      "No camera. No mic. No awkward silences. Just you, a stranger, and a blinking cursor — open the page, get matched in seconds, and start a conversation that could go absolutely anywhere. No login, no account, no registration. Works on any phone, tablet or desktop, right in the browser.",
+      "Not having a camera is not a limitation — it is the whole point. Anonymous text chat works from a shared room, a commute, a library, or the middle of the night when you do not want to wake anyone. People practising a second language get a few seconds to compose instead of speaking on the spot. People who find video exhausting get to read and think instead of perform. There is no wrong reason to prefer it. No other chat mode strips away as much friction: no permissions popup, no loading a webcam driver, no worrying about what is visible behind you.",
+      "Every message shows a double tick the moment the other person reads it — not just when it is delivered, but when their browser has actually displayed it. It is the same idea as WhatsApp read receipts, applied to a conversation with a complete stranger. Close the tab and it is all gone: no message history, no conversation log, nothing stored on our side, no account the conversation was ever attached to.",
     ],
     faqs: [
       { question: "Is anonymous text chat on Vidibro completely free?", answer: "Completely free — no account, no subscription, no hidden tiers. Open the page and start immediately with no payment needed." },
@@ -2237,7 +2237,10 @@ export const ENTRIES: DirectoryEntry[] = [
       { question: "Are my messages saved anywhere?", answer: "No. Messages travel directly between the two browsers and are held only in the open tab. Closing the page ends it — there is no history to retrieve, by you or by us." },
       { question: "What is the double tick?", answer: "One tick means sent. Two ticks mean the other person's browser has actually displayed your message. It exists so you are not left wondering if it landed — the same idea as WhatsApp's read receipts." },
       { question: "Can I send emoji or stickers in text chat?", answer: "Yes — there is a set of emoji stickers, plus full-screen reactions. More useful than they sound when you and the other person do not share a language well." },
-      { question: "What is the best free anonymous text chat site in 2026?", answer: "Vidibro is the top free anonymous text chat site in 2026 — no camera, no account, double-tick read receipts, and nothing stored. Works on any device, any browser." },
+      { question: "What is the best free anonymous text chat site in 2026?", answer: "Vidibro is the top free anonymous text chat site in 2026 — no login, no camera, double-tick read receipts, and nothing stored. Works on any device, any browser." },
+      { question: "Is Vidibro a good Omegle text chat alternative?", answer: "Yes — Vidibro is the closest free alternative to Omegle's text mode. No login, no camera required, instant random matching with strangers, and nothing stored when you close. It works on any browser without an app." },
+      { question: "How do I chat anonymously with strangers online?", answer: "Open vidibro.com, select Text Chat, and you are matched with a stranger in seconds. No registration, no email, no phone number. Just type. Nothing you say is stored anywhere after the conversation ends." },
+      { question: "Can I use anonymous text chat on my phone?", answer: "Yes. Vidibro's text chat is fully responsive and works on iOS and Android in any mobile browser — Safari, Chrome, Firefox. No app install required." },
     ],
     related: [
       { slug: "video-chat", label: "random video chat", relation: "mode" },
@@ -3802,12 +3805,12 @@ export const ENTRIES: DirectoryEntry[] = [
     slug: "video-chat-south-korea",
     kind: "country",
     name: "South Korea",
-    primaryKeyword: "korean video chat",
-    title: "Free Random Korean Video Chat & Video Call",
+    primaryKeyword: "video chat south korea",
+    title: "Video Chat South Korea — Free Korean Random Video Chat",
     description:
-      "Korean video chat free — talk to people from South Korea. No signup, no download. Works on SK Telecom, KT and LG U+ — some of the fastest networks anywhere.",
+      "Free random video chat with people from South Korea — no signup, no app. Talk to strangers in Seoul, Busan and Incheon instantly. Works on SK Telecom, KT and LG U+.",
     tagline:
-      "Korean video chat free. Some of the fastest internet on Earth, one time zone, and a conversation with no account needed.",
+      "Connect with people from South Korea — no signup, no download. World-class networks, late-night culture, and a conversation that starts in seconds.",
     whyName: "Korea",
     hideWhatIs: true,
     providers: ["SK Telecom", "KT", "LG U+"],

@@ -1,22 +1,27 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Video, PhoneCall, MessageSquare, ShieldCheck, Zap, Lock, Check, X, ArrowRight } from "lucide-react";
+import { Video, PhoneCall, MessageSquare, ShieldCheck, Zap, Lock, Check, X, ArrowRight, HelpCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FaqAccordion from "@/components/directory/FaqAccordion";
 
 const RELATED_LINKS = [
   { href: "/video-chat", label: "Random Video Chat" },
   { href: "/audio-chat", label: "Voice Chat" },
   { href: "/text-chat", label: "Text Chat" },
   { href: "/dating", label: "Video Chat Dating" },
+  { href: "/free-video-chat", label: "Free Video Chat" },
+  { href: "/free-random-video-chat", label: "Free Random Video Chat" },
+  { href: "/random-text-chat", label: "Random Text Chat" },
   { href: "/directory/random-video-chat", label: "Random Video Chat Sites" },
   { href: "/directory/anonymous-text-chat", label: "Anonymous Text Chat" },
   { href: "/omegle-alternative", label: "Omegle Alternative" },
   { href: "/chatroulette-alternative", label: "Chatroulette Alternative" },
   { href: "/ometv-alternative", label: "OmeTV Alternative" },
+  { href: "/emerald-chat-alternative", label: "Emerald Chat Alternative" },
 ];
 
 type Props = {
@@ -33,6 +38,7 @@ type Props = {
     heading: string;
     content: string;
   }>;
+  faqs?: Array<{ question: string; answer: string }>;
 };
 
 export default function AlternativePageTemplate({
@@ -41,6 +47,7 @@ export default function AlternativePageTemplate({
   subtitle,
   comparisonFeatures,
   sections,
+  faqs,
 }: Props) {
   const router = useRouter();
 
@@ -137,6 +144,19 @@ export default function AlternativePageTemplate({
             </div>
           ))}
         </div>
+
+        {/* FAQ Accordion */}
+        {faqs && faqs.length > 0 && (
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/20 text-amber-300">
+                <HelpCircle size={18} />
+              </span>
+              <h2 className="text-xl sm:text-2xl font-black tracking-tight text-white">Frequently Asked Questions</h2>
+            </div>
+            <FaqAccordion items={faqs} />
+          </div>
+        )}
 
         {/* Related Links */}
         <div>

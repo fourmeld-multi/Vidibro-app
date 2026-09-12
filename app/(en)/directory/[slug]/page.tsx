@@ -602,14 +602,14 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
             Features of <span className="text-pink-400">Vidibro</span> Text Chat
           </h2>
           <p className="mb-6 text-base text-purple-200/70 max-w-2xl">
-            Anonymous text chat built for real conversations — no camera, no account, nothing stored.
+            Anonymous text chat built for real conversations — no camera, no login, nothing stored.
           </p>
           <div className="flex flex-col gap-3">
             {[
               { title: "Zero Camera Setup", body: "No permission prompts, no video, no mic. Open the page and start typing — works on any device, any browser." },
               { title: "Double-Tick Read Receipts", body: "Know exactly when your message is read, not just sent. One tick = delivered. Two ticks = read." },
               { title: "Emoji Stickers & Full-Screen Reactions", body: "Send emoji stickers and full-screen reactions during chat — the fastest way to communicate without a shared language." },
-              { title: "Private by Default", body: "No account, no history, no stored messages. Close the tab and the conversation is gone — for both of you." },
+              { title: "Private by Default", body: "No login, no history, no stored messages. Close the tab and the conversation is gone — for both of you." },
             ].map((f) => (
               <div
                 key={f.title}
@@ -626,6 +626,47 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
             ))}
           </div>
         </section>}
+
+        {/* ── ANONYMOUS TEXT CHAT: SEO prose + 4-card grid ── */}
+        {entry.slug === "anonymous-text-chat" && (
+          <>
+            <section className="mt-14">
+              <p className="mb-2 text-xs font-bold uppercase tracking-widest text-purple-400">Why text chat</p>
+              <h2 className="mb-8 text-2xl sm:text-3xl font-black tracking-tight text-white">
+                Anonymous Text Chat — <span className="text-pink-400">What Makes It Different</span>
+              </h2>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {[
+                  { emoji: "🙈", title: "No Face, No Pressure", body: "No camera means no performance anxiety. You can be tired, unshowered, or in a loud house and nobody knows. The conversation is all there is." },
+                  { emoji: "💬", title: "Think Before You Send", body: "Unlike voice, text lets you compose. People practising a language, people who are shy, people who just had a long day — text chat gives everyone a breath before they reply." },
+                  { emoji: "🔒", title: "Nothing Left Behind", body: "No login, no account, no message log. When you close the tab, both sides of the conversation are gone — not archived somewhere, just gone." },
+                  { emoji: "⚡", title: "Instant Random Match", body: "Open the page and you are matched with a stranger in seconds. No waiting room, no filters, no profile to fill in. One person at a time." },
+                ].map((c) => (
+                  <div key={c.title} className="dir-card rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center flex flex-col items-center">
+                    <div className="mb-4 text-4xl">{c.emoji}</div>
+                    <h3 className="mb-2 text-base font-black text-white">{c.title}</h3>
+                    <p className="text-sm leading-relaxed text-purple-100/70">{c.body}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section className="mt-14 rounded-2xl border border-purple-500/20 bg-purple-500/[0.05] p-7 sm:p-8">
+              <h2 className="mb-4 text-xl sm:text-2xl font-black tracking-tight text-white">
+                The Best Omegle Text Chat Alternative — No Login, No Camera
+              </h2>
+              <p className="mb-4 text-base leading-relaxed text-purple-100/80">
+                When Omegle shut down, millions of users lost their go-to anonymous text chat. Most of the replacements that appeared require a camera, push paid tiers, or collect an email address before you can say a word. Vidibro&apos;s text mode is the closest thing to what Omegle&apos;s text section actually was: open the page, get matched with a random stranger in seconds, type, and leave whenever you want. No login. No registration. Nothing saved.
+              </p>
+              <p className="mb-4 text-base leading-relaxed text-purple-100/80">
+                The differences that matter: read receipts tell you the moment your message is seen — not just delivered, but actually read. Emoji stickers and full-screen reactions mean a language gap is never a conversation stopper. And unlike most alternatives, text chat on Vidibro never requests camera or microphone permissions, not even once. There is nothing to accidentally turn on.
+              </p>
+              <p className="text-base leading-relaxed text-purple-100/80">
+                Searches reach this page under a range of terms — anonymous chat with strangers, text chat no login, free random text chat, chat with strangers no account — and they all land the same thing. One person at a time, matched at random, from 180+ countries, on any device. If the conversation goes nowhere, one tap moves you to the next person. If it does go somewhere, nothing has to end it but you.
+              </p>
+            </section>
+          </>
+        )}
 
         <section className="mt-14">
           <SectionHead tone="cyan" icon={<Zap size={18} />} title="How it works" />
