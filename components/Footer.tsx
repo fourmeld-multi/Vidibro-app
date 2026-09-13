@@ -164,6 +164,8 @@ export default function Footer({ onStartVideoChat, onStartTextChat, onStartAudio
                 nav entry point at all. */}
             <Link href="/blog" className="hover:text-white transition">Blog</Link>
             <Link href="/directory" className="hover:text-white transition">Directory</Link>
+            <Link href="/free-video-chat" className="hover:text-white transition">Free Video Chat</Link>
+            <Link href="/free-random-video-chat" className="hover:text-white transition">Free Random Video Chat</Link>
             <Link href="/dating" className="hover:text-white transition">Dating</Link>
             <Link href="/about" className="hover:text-white transition">About</Link>
           </div>
