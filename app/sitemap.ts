@@ -29,6 +29,7 @@ const STATIC_ROUTES = [
   "/free-random-video-chat",
   "/random-text-chat",
   "/omegle-alternative",
+  "/sites-like-omegle",
   "/airtalk-alternative",
   "/chatroulette-alternative",
   "/ometv-alternative",
