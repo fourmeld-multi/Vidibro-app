@@ -6,7 +6,7 @@ const tr: NativeLangData = {
   canonicalSlug: "/tr",
   title: "Ücretsiz Görüntülü Sohbet — Rastgele Kameralı Chat | Vidibro",
   description:
-    "Vidibro — ücretsiz görüntülü sohbet ve kameralı sohbet sitesi. Rastgele yabancılarla kayıt olmadan anında bağlan. Görüntülü sohbet siteleri arasında en hızlı eşleşme — Turkcell, Vodafone, Türk Telekom destekli.",
+    "Vidibro — ücretsiz görüntülü sohbet sitesi. Rastgele yabancılarla kayıt olmadan anında bağlan. Turkcell, Vodafone, Türk Telekom destekli.",
   h1: "Ücretsiz Görüntülü Sohbet — Rastgele Kameralı Chat, Kayıtsız",
   tagline: "Kayıt yok, uygulama yok. Kameralı sohbet ve görüntülü sohbet siteleri arasında en hızlı eşleşme — Türkiye'den dünyayla anında bağlan.",
   intro:

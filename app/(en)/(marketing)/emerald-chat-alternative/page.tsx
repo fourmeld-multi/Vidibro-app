@@ -4,7 +4,7 @@ import { generatePageSEO, BASE_URL } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = generatePageSEO({
-  title: "Best Free Emerald Chat Alternative 2026 — No Signup, No Karma",
+  title: "Best Emerald Chat Alternative 2026 — Free, No Karma",
   description:
     "The best free Emerald Chat alternative in 2026 — no signup, no karma system, instant random video, voice and text chat. Works on any device, 100% anonymous.",
   slug: "/emerald-chat-alternative",

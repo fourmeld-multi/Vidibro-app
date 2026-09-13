@@ -23,6 +23,7 @@ const RELATED_LINKS = [
   { href: "/chatroulette-alternative", label: "Chatroulette Alternative" },
   { href: "/ometv-alternative", label: "OmeTV Alternative" },
   { href: "/emerald-chat-alternative", label: "Emerald Chat Alternative" },
+  { href: "/strangerline-alternative", label: "StrangerLine Alternative" },
 ];
 
 type Props = {

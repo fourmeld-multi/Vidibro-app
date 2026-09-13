@@ -4,9 +4,9 @@ import JsonLd from "@/components/JsonLd";
 import RandomTextChatContent from "./RandomTextChatContent";
 
 export const metadata: Metadata = generatePageSEO({
-  title: "Random Text Chat with Strangers — No Camera, No Signup (2026)",
+  title: "Random Text Chat — No Camera, No Signup (2026)",
   description:
-    "Free random text chat with strangers — no camera, no signup, no mic. Anonymous text matching with real people worldwide. Double-tick read receipts, nothing saved.",
+    "Free random text chat — no camera, no signup, no mic. Anonymous matching worldwide. Double-tick read receipts, nothing saved.",
   slug: "/random-text-chat",
 });
 

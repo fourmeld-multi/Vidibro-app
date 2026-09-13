@@ -6,7 +6,7 @@ import JsonLd from "@/components/JsonLd";
 export const metadata: Metadata = generatePageSEO({
   title: "Best Free OmeTV Alternative 2026 — No App, No Login",
   description:
-    "The best free OmeTV alternative in 2026 — no app download, no social login, instant random video chat in your browser. Works on iPhone and Android, 180+ countries.",
+    "The best free OmeTV alternative in 2026 — no app, no login, instant random video chat in your browser. Works on iPhone and Android, 180+ countries.",
   slug: "/ometv-alternative",
 });
 

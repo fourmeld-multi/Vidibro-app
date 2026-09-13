@@ -4,9 +4,9 @@ import JsonLd from "@/components/JsonLd";
 import FreeVideoChatContent from "./FreeVideoChatContent";
 
 export const metadata: Metadata = generatePageSEO({
-  title: "Free Video Chat with Strangers — No Signup, No Download (2026)",
+  title: "Free Video Chat — No Signup, No Download (2026)",
   description:
-    "Free video chat with strangers online — no signup, no download, no coins. Instant random video matching with real people from 180+ countries. Works in any browser.",
+    "Free video chat with strangers — no signup, no download, no coins. Instant random matching with real people from 180+ countries.",
   slug: "/free-video-chat",
 });
 

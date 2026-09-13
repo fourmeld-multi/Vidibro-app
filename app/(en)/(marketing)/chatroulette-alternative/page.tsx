@@ -4,7 +4,7 @@ import { generatePageSEO, BASE_URL } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = generatePageSEO({
-  title: "Best Free Chatroulette Alternative 2026 — No Coins, No Signup",
+  title: "Best Chatroulette Alternative 2026 — Free, No Coins",
   description:
     "The best free Chatroulette alternative in 2026 — no coin system, no signup, instant random video chat with strangers. Works on any device, 180+ countries.",
   slug: "/chatroulette-alternative",

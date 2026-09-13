@@ -4,9 +4,9 @@ import JsonLd from "@/components/JsonLd";
 import SitesLikeOmegleContent from "./SitesLikeOmegleContent";
 
 export const metadata: Metadata = generatePageSEO({
-  title: "Top 10 Sites Like Omegle 2026 — Best Free Replacements Ranked",
+  title: "Top 10 Sites Like Omegle 2026 — Best Free Picks",
   description:
-    "We tested 40+ sites like Omegle so you don't have to. Here are the 10 best Omegle replacements in 2026 — ranked by speed, safety, and genuinely free features. Vidibro ranked #1.",
+    "We tested 40+ sites like Omegle. Here are the 10 best replacements in 2026 — ranked by speed, safety, and free features. Vidibro ranked #1.",
   slug: "/sites-like-omegle",
 });
 

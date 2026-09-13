@@ -9,7 +9,7 @@ import { generatePageSEO } from "@/lib/seo";
 export const metadata: Metadata = generatePageSEO({
   title: "About Vidibro — Free Random Video Chat, No Signup Required",
   description:
-    "Vidibro is a free random video chat app — talk to strangers instantly with no signup, no camera required for text mode. Peer-to-peer encrypted, 180+ countries, always 100% free.",
+    "Vidibro is a free random video chat app — talk to strangers with no signup. Peer-to-peer encrypted, 180+ countries, always 100% free.",
   slug: "/about",
   keywords: ["about vidibro", "what is vidibro", "vidibro review", "anonymous video chat", "peer to peer chat"],
 });

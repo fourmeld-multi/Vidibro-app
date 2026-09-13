@@ -139,6 +139,8 @@ export const ENTRIES: DirectoryEntry[] = [
       { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
       { slug: "video-chat-bangladesh", label: "Bangladesh", relation: "sibling" },
       { slug: "video-chat-pakistan", label: "Pakistan", relation: "sibling" },
+      { slug: "video-chat-maldives", label: "Maldives", relation: "sibling" },
+      { slug: "video-chat-malaysia", label: "Malaysia", relation: "sibling" },
     ],
   },
 
@@ -2217,7 +2219,7 @@ export const ENTRIES: DirectoryEntry[] = [
     primaryKeyword: "anonymous text chat",
     title: "Anonymous Text Chat with Strangers — No Login, No Camera",
     description:
-      "Chat anonymously with strangers — no login, no camera, no mic required. Instant matching, double-tick read receipts, nothing saved. The best free Omegle text chat alternative in 2026.",
+      "Chat anonymously with strangers — no login, no camera, no mic. Instant matching, double-tick read receipts, nothing saved. Free Omegle text alternative.",
     tagline:
       "No camera. No login. No account. Just open the page and start typing — you are matched in seconds and nothing is saved when you leave.",
     hideWhatIs: true,
@@ -2334,6 +2336,7 @@ export const ENTRIES: DirectoryEntry[] = [
       { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
       { slug: "video-chat-philippines", label: "the Philippines", relation: "sibling" },
       { slug: "video-chat-india", label: "India", relation: "sibling" },
+      { slug: "video-chat-malaysia", label: "Malaysia", relation: "sibling" },
     ],
   },
 
@@ -2933,6 +2936,7 @@ export const ENTRIES: DirectoryEntry[] = [
       { slug: "video-chat-greece", label: "random chat Greece", relation: "sibling" },
       { slug: "video-chat-germany", label: "random chat Germany", relation: "sibling" },
       { slug: "video-chat-iran", label: "random chat Iran", relation: "sibling" },
+      { slug: "video-chat-israel", label: "Israel", relation: "sibling" },
     ],
     reviews: [
       {
@@ -3216,6 +3220,7 @@ export const ENTRIES: DirectoryEntry[] = [
       { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
       { slug: "video-chat-russia", label: "Russia", relation: "sibling" },
       { slug: "video-chat-turkey", label: "Turkey", relation: "sibling" },
+      { slug: "video-chat-switzerland", label: "Switzerland", relation: "sibling" },
     ],
   },
 
@@ -3808,7 +3813,7 @@ export const ENTRIES: DirectoryEntry[] = [
     primaryKeyword: "video chat south korea",
     title: "Video Chat South Korea — Free Korean Random Video Chat",
     description:
-      "Free random video chat with people from South Korea — no signup, no app. Talk to strangers in Seoul, Busan and Incheon instantly. Works on SK Telecom, KT and LG U+.",
+      "Free random video chat with South Korea — no signup, no app. Talk to strangers in Seoul, Busan and Incheon instantly. Mobile-ready.",
     tagline:
       "Connect with people from South Korea — no signup, no download. World-class networks, late-night culture, and a conversation that starts in seconds.",
     whyName: "Korea",
@@ -4553,6 +4558,8 @@ export const ENTRIES: DirectoryEntry[] = [
       { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
       { slug: "video-chat-uk", label: "random chat UK", relation: "sibling" },
       { slug: "video-chat-spain", label: "random chat Spain", relation: "sibling" },
+      { slug: "video-chat-switzerland", label: "Switzerland", relation: "sibling" },
+      { slug: "video-chat-portugal", label: "Portugal", relation: "sibling" },
     ],
   },
 
@@ -4717,6 +4724,7 @@ export const ENTRIES: DirectoryEntry[] = [
       { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
       { slug: "video-chat-france", label: "random chat France", relation: "sibling" },
       { slug: "video-chat-italy", label: "random chat Italy", relation: "sibling" },
+      { slug: "video-chat-portugal", label: "Portugal", relation: "sibling" },
     ],
   },
 

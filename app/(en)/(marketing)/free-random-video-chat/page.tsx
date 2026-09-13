@@ -6,7 +6,7 @@ import RandomVideoChatContent from "./RandomVideoChatContent";
 export const metadata: Metadata = generatePageSEO({
   title: "Free Random Video Chat with Strangers — No Signup (2026)",
   description:
-    "Free random video chat with strangers — no signup, no download, instant match. Talk to real people worldwide via video, voice, or text. Works on any device, 180+ countries.",
+    "Free random video chat — no signup, no download, instant match. Video, voice, or text with real people from 180+ countries. Any device.",
   slug: "/free-random-video-chat",
 });
 
