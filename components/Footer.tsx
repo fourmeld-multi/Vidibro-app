@@ -166,6 +166,7 @@ export default function Footer({ onStartVideoChat, onStartTextChat, onStartAudio
             <Link href="/directory" className="hover:text-white transition">Directory</Link>
             <Link href="/free-video-chat" className="hover:text-white transition">Free Video Chat</Link>
             <Link href="/free-random-video-chat" className="hover:text-white transition">Free Random Video Chat</Link>
+            <Link href="/sites-like-omegle" className="hover:text-white transition">Sites Like Omegle</Link>
             <Link href="/dating" className="hover:text-white transition">Dating</Link>
             <Link href="/about" className="hover:text-white transition">About</Link>
           </div>

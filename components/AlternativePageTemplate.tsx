@@ -19,6 +19,7 @@ const RELATED_LINKS = [
   { href: "/directory/random-video-chat", label: "Random Video Chat Sites" },
   { href: "/directory/anonymous-text-chat", label: "Anonymous Text Chat" },
   { href: "/omegle-alternative", label: "Omegle Alternative" },
+  { href: "/sites-like-omegle", label: "Sites Like Omegle" },
   { href: "/chatroulette-alternative", label: "Chatroulette Alternative" },
   { href: "/ometv-alternative", label: "OmeTV Alternative" },
   { href: "/emerald-chat-alternative", label: "Emerald Chat Alternative" },
