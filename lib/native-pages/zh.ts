@@ -4,7 +4,7 @@ const zh: NativeLangData = {
   lang: "zh",
   ogLocale: "zh_CN",
   canonicalSlug: "/zh",
-  title: "免费随机视频聊天 — 认识全球华人陌生人",
+  title: "免费随机视频聊天 — 认识全球华人陌生人 | Vidibro",
   description:
     "Vidibro — 免费随机视频聊天，无需注册账号，无需安装任何应用程序。与台湾、香港、新加坡及全球180多个国家的华人进行1对1实时视频通话，普通话与粤语均可使用，手机或电脑浏览器直接开始，所有对话全程不被录制或保存，完全免费。",
   h1: "Vidibro — 免费随机视频聊天",
