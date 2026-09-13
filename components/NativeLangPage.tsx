@@ -78,6 +78,17 @@ export default function NativeLangPage({ data }: { data: NativeLangData }) {
               acceptedAnswer: { "@type": "Answer", text: f.answer },
             })),
           },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "@id": `${url}#app`,
+            name: "Vidibro",
+            url: BASE_URL,
+            applicationCategory: "CommunicationApplication",
+            operatingSystem: "Any",
+            browserRequirements: "Requires a modern browser with WebRTC support",
+            offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+          },
         ]}
       />
 

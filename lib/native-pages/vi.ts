@@ -4,7 +4,7 @@ const vi: NativeLangData = {
   lang: "vi",
   ogLocale: "vi_VN",
   canonicalSlug: "/vi",
-  title: "Trò Chuyện Video Miễn Phí — Kết Bạn Khắp Thế Giới",
+  title: "Trò Chuyện Video Miễn Phí — Kết Bạn Khắp Thế Giới | Vidibro",
   description:
     "Vidibro — trò chuyện video ngẫu nhiên miễn phí, không cần đăng ký. Kết nối 1-1 với người Việt và bạn bè quốc tế ngay lập tức. Bắt đầu ngay hôm nay.",
   h1: "Vidibro — Trò Chuyện Video Miễn Phí",

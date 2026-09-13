@@ -4,7 +4,7 @@ const ja: NativeLangData = {
   lang: "ja",
   ogLocale: "ja_JP",
   canonicalSlug: "/ja",
-  title: "無料ランダムビデオチャット — 登録不要で今すぐ",
+  title: "無料ランダムビデオチャット — 登録不要で今すぐ | Vidibro",
   description:
     "Vidibro — 登録不要・完全無料のランダムビデオチャット。スマホ・PCのブラウザで即マッチング、アプリなし。日本語話者も世界180カ国以上のユーザーと1対1でリアルタイム会話。今すぐ始められる。",
   h1: "Vidibro — 無料ランダムビデオチャット",

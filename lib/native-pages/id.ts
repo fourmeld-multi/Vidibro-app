@@ -4,7 +4,7 @@ const id: NativeLangData = {
   lang: "id",
   ogLocale: "id_ID",
   canonicalSlug: "/id",
-  title: "Obrolan Video Gratis — Bertemu Orang Baru",
+  title: "Obrolan Video Gratis — Bertemu Orang Baru | Vidibro",
   description:
     "Vidibro — obrolan video acak gratis tanpa daftar. Hubungkan diri Anda dengan orang-orang dari Indonesia dan 180+ negara secara langsung. Mulai sekarang.",
   h1: "Vidibro — Obrolan Video Gratis",
