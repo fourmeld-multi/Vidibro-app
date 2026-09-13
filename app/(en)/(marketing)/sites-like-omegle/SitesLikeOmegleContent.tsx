@@ -10,7 +10,7 @@ import { ShieldCheck, Zap, Globe, HelpCircle, Star, CheckCircle2, XCircle, Troph
 const STATS = [
   { label: "Sites Tested", value: "40+" },
   { label: "Hours Spent", value: "60+" },
-  { label: "Best Picks", value: "11" },
+  { label: "Best Picks", value: "10" },
   { label: "Updated", value: "Sep 2026" },
 ];
 
@@ -24,7 +24,6 @@ const COMPARISON = [
   { site: "Bazoocam", cost: "Free", login: "No", video: true, voice: false, text: false, mobile: false, rating: 2 },
   { site: "Camsurf", cost: "Free", login: "No", video: true, voice: false, text: false, mobile: true, rating: 2.5 },
   { site: "CooMeet", cost: "Paid", login: "Yes", video: true, voice: false, text: false, mobile: true, rating: 2 },
-  { site: "Monkey", cost: "Free", login: "Social", video: true, voice: false, text: false, mobile: true, rating: 2 },
   { site: "SillyChat", cost: "Freemium", login: "No", video: true, voice: false, text: false, mobile: true, rating: 1.5 },
 ];
 
@@ -185,41 +184,25 @@ const SITES = [
   },
   {
     rank: 10,
-    name: "Monkey",
+    name: "SillyChat",
     badge: "#10",
     badgeColor: "bg-white/10 text-gray-300 border-white/20",
-    tagline: "Popular with Gen Z — But Requires Login",
-    quote: "Social-first video chat popular on TikTok, but far from anonymous.",
-    pros: ["Large Gen Z user base", "Active and growing community", "Clean modern interface"],
-    cons: ["Requires social media login — no anonymity", "App required on mobile", "Too social-media-like for Omegle users"],
-    verdict: "Popular with younger users but fundamentally different from Omegle. Requires login, social profiles, and an app download — the opposite of frictionless.",
-    accentFrom: "from-pink-500",
-    accentTo: "to-fuchsia-500",
-    borderColor: "border-pink-500/20",
-    bgColor: "bg-pink-500/5",
-    isWinner: false,
-  },
-  {
-    rank: 11,
-    name: "SillyChat",
-    badge: "#11 ⚠ Warning",
-    badgeColor: "bg-red-500/20 text-red-300 border-red-500/40",
-    tagline: "Inflated Stats, Fake Features & Adult Content — Avoid",
-    quote: "Claims millions of users and 'advanced filters' — almost none of it is real.",
-    pros: ["Fast initial connection (mostly bots)", "No registration required"],
+    tagline: "Hyped But Disappointing — Fake Stats & Poor Moderation",
+    quote: "Claims millions of users and advanced filters — our tests told a very different story.",
+    pros: ["No registration required", "Fast initial connection speed"],
     cons: [
-      "Inflated and fake user statistics — numbers don't match reality",
-      "Advertised 'gender filter' and 'interest tags' are non-functional or broken",
-      "Adult and pornographic content visible without any age verification",
-      "Bot accounts make up a large portion of 'active users'",
-      "Misleading premium upgrade pushes with features that don't work after payment",
-      "No real AI moderation — inappropriate content goes completely unchecked",
+      "User statistics appear heavily inflated — far fewer real users than advertised",
+      "Advertised features like gender filter and interest tags don't work as described",
+      "Adult and sexually explicit content visible with zero age verification",
+      "Bot accounts make up a large share of 'active users'",
+      "Premium upgrade pushes throughout — paid features often don't deliver",
+      "No meaningful AI moderation — inappropriate content goes unchecked",
     ],
-    verdict: "SillyChat advertises features it doesn't have and statistics that are clearly inflated. Adult content is visible with zero verification, bots outnumber real users, and paid upgrades deliver nothing advertised. We strongly recommend avoiding this platform.",
-    accentFrom: "from-red-600",
-    accentTo: "to-orange-600",
-    borderColor: "border-red-500/30",
-    bgColor: "bg-red-500/5",
+    verdict: "SillyChat rides on strong SEO but underdelivers badly. Our testers encountered bots, explicit content with no age gate, and broken premium features. The real user count is a fraction of what's advertised. Skip it — Vidibro does everything SillyChat claims to do, for free.",
+    accentFrom: "from-orange-500",
+    accentTo: "to-red-500",
+    borderColor: "border-orange-500/20",
+    bgColor: "bg-orange-500/5",
     isWinner: false,
   },
 ];
@@ -276,14 +259,14 @@ export default function SitesLikeOmegleContent({ faqs }: Props) {
             <Trophy size={12} /> Reviewed & Ranked — September 2026
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
-            Top 11 Sites Like Omegle<br />
+            Top 10 Sites Like Omegle<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
               in 2026 — Ranked & Reviewed
             </span>
           </h1>
           <p className="text-lg text-gray-300 max-w-2xl leading-relaxed">
             Omegle is gone forever. We tested 40+ random chat sites so you don't have to.
-            Here are 11 worth knowing about — including one to avoid entirely.
+            Here are the only 10 worth your time — and one clear winner.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 mt-1">
             <button
@@ -369,7 +352,7 @@ export default function SitesLikeOmegleContent({ faqs }: Props) {
 
         {/* Full reviews */}
         <div className="flex flex-col gap-5">
-          <h2 className="text-xl sm:text-2xl font-black text-white">The Full Top 11 Reviews</h2>
+          <h2 className="text-xl sm:text-2xl font-black text-white">The Full Top 10 Reviews</h2>
           {SITES.map((site) => (
             <div
               key={site.name}

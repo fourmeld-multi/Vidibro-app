@@ -74,9 +74,9 @@ export default function SitesLikeOmeglePage() {
           {
             "@context": "https://schema.org",
             "@type": "ItemList",
-            name: "Top 11 Sites Like Omegle 2026",
+            name: "Top 10 Sites Like Omegle 2026",
             description: "The best Omegle alternatives tested and ranked in 2026",
-            numberOfItems: 11,
+            numberOfItems: 10,
             itemListElement: [
               { "@type": "ListItem", position: 1, name: "Vidibro", url: BASE_URL },
               { "@type": "ListItem", position: 2, name: "OmeTV", url: "https://ome.tv" },
@@ -87,8 +87,7 @@ export default function SitesLikeOmeglePage() {
               { "@type": "ListItem", position: 7, name: "Bazoocam", url: "https://bazoocam.org" },
               { "@type": "ListItem", position: 8, name: "Camsurf", url: "https://camsurf.com" },
               { "@type": "ListItem", position: 9, name: "CooMeet", url: "https://coomeet.com" },
-              { "@type": "ListItem", position: 10, name: "Monkey", url: "https://monkey.app" },
-              { "@type": "ListItem", position: 11, name: "SillyChat", url: "https://silly.chat" },
+              { "@type": "ListItem", position: 10, name: "SillyChat", url: "https://silly.chat" },
             ],
           },
         ]}
