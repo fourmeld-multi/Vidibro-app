@@ -194,8 +194,6 @@ const SITES = [
       "User statistics appear heavily inflated — far fewer real users than advertised",
       "Advertised features like gender filter and interest tags don't work as described",
       "Adult and sexually explicit content visible with zero age verification",
-      "Bot accounts make up a large share of 'active users'",
-      "Premium upgrade pushes throughout — paid features often don't deliver",
       "No meaningful AI moderation — inappropriate content goes unchecked",
     ],
     verdict: "SillyChat rides on strong SEO but underdelivers badly. Our testers encountered bots, explicit content with no age gate, and broken premium features. The real user count is a fraction of what's advertised. Skip it — Vidibro does everything SillyChat claims to do, for free.",
