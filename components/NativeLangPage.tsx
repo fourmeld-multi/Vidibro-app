@@ -138,7 +138,7 @@ export default function NativeLangPage({ data }: { data: NativeLangData }) {
               <Video size={19} /> {data.btnVideo}
             </Link>
             <Link
-              href="/random-voice-chat"
+              href="/directory/random-voice-chat"
               className="inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-sky-500 px-7 py-4 text-base font-extrabold text-white shadow-lg shadow-cyan-500/25 transition hover:brightness-110 sm:w-auto"
             >
               <Mic size={19} /> {data.btnVoice}
