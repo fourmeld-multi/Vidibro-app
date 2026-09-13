@@ -10,7 +10,7 @@ import { ShieldCheck, Zap, Globe, HelpCircle, Star, CheckCircle2, XCircle, Troph
 const STATS = [
   { label: "Sites Tested", value: "40+" },
   { label: "Hours Spent", value: "60+" },
-  { label: "Best Picks", value: "10" },
+  { label: "Best Picks", value: "11" },
   { label: "Updated", value: "Sep 2026" },
 ];
 
@@ -25,6 +25,7 @@ const COMPARISON = [
   { site: "Camsurf", cost: "Free", login: "No", video: true, voice: false, text: false, mobile: true, rating: 2.5 },
   { site: "CooMeet", cost: "Paid", login: "Yes", video: true, voice: false, text: false, mobile: true, rating: 2 },
   { site: "Monkey", cost: "Free", login: "Social", video: true, voice: false, text: false, mobile: true, rating: 2 },
+  { site: "SillyChat", cost: "Freemium", login: "No", video: true, voice: false, text: false, mobile: true, rating: 1.5 },
 ];
 
 const SITES = [
@@ -198,6 +199,29 @@ const SITES = [
     bgColor: "bg-pink-500/5",
     isWinner: false,
   },
+  {
+    rank: 11,
+    name: "SillyChat",
+    badge: "#11 ⚠ Warning",
+    badgeColor: "bg-red-500/20 text-red-300 border-red-500/40",
+    tagline: "Inflated Stats, Fake Features & Adult Content — Avoid",
+    quote: "Claims millions of users and 'advanced filters' — almost none of it is real.",
+    pros: ["Fast initial connection (mostly bots)", "No registration required"],
+    cons: [
+      "Inflated and fake user statistics — numbers don't match reality",
+      "Advertised 'gender filter' and 'interest tags' are non-functional or broken",
+      "Adult and pornographic content visible without any age verification",
+      "Bot accounts make up a large portion of 'active users'",
+      "Misleading premium upgrade pushes with features that don't work after payment",
+      "No real AI moderation — inappropriate content goes completely unchecked",
+    ],
+    verdict: "SillyChat advertises features it doesn't have and statistics that are clearly inflated. Adult content is visible with zero verification, bots outnumber real users, and paid upgrades deliver nothing advertised. We strongly recommend avoiding this platform.",
+    accentFrom: "from-red-600",
+    accentTo: "to-orange-600",
+    borderColor: "border-red-500/30",
+    bgColor: "bg-red-500/5",
+    isWinner: false,
+  },
 ];
 
 const FAQS = [
@@ -252,14 +276,14 @@ export default function SitesLikeOmegleContent({ faqs }: Props) {
             <Trophy size={12} /> Reviewed & Ranked — September 2026
           </div>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
-            Top 10 Sites Like Omegle<br />
+            Top 11 Sites Like Omegle<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
               in 2026 — Ranked & Reviewed
             </span>
           </h1>
           <p className="text-lg text-gray-300 max-w-2xl leading-relaxed">
             Omegle is gone forever. We tested 40+ random chat sites so you don't have to.
-            Here are the only 10 worth your time — and one clear winner.
+            Here are 11 worth knowing about — including one to avoid entirely.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 mt-1">
             <button
@@ -345,7 +369,7 @@ export default function SitesLikeOmegleContent({ faqs }: Props) {
 
         {/* Full reviews */}
         <div className="flex flex-col gap-5">
-          <h2 className="text-xl sm:text-2xl font-black text-white">The Full Top 10 Reviews</h2>
+          <h2 className="text-xl sm:text-2xl font-black text-white">The Full Top 11 Reviews</h2>
           {SITES.map((site) => (
             <div
               key={site.name}
