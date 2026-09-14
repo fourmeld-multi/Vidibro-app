@@ -219,6 +219,20 @@ export default function Footer({ onStartVideoChat, onStartTextChat, onStartAudio
         {/* Bottom Copyright */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 text-[11px] text-purple-300/60">
           <p>© {new Date().getFullYear()} {t.footerCopyright}</p>
+          <a
+            href="https://alternativeto.net/software/vidibro/about/?utm_source=badge&utm_medium=referral"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Vidibro listed on AlternativeTo"
+          >
+            <img
+              src="https://alternativeto.net/static/badges/badge-compact-dark.svg"
+              alt="Vidibro | AlternativeTo"
+              width="120"
+              height="41"
+              style={{ width: "120px", height: "41px" }}
+            />
+          </a>
           <p className="flex items-center gap-1.5">
             <Heart size={12} className="text-pink-500 fill-pink-500 shrink-0" />
             {t.footerBuiltWith}
