@@ -3,6 +3,9 @@ import { BASE_URL } from "@/lib/seo";
 import HomeContent from "./HomeContent";
 
 export const metadata: Metadata = {
+  title: "Vidibro — Free Random Video Chat with Strangers, No Signup",
+  description:
+    "Free random video chat with strangers — no account, no coins, instant match. Anonymous 1-on-1 video, voice & text chat from 180+ countries. The best Omegle alternative in 2026.",
   alternates: {
     canonical: BASE_URL,
     languages: {

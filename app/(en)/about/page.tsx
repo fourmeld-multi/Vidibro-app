@@ -1,9 +1,16 @@
-"use client";
-
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import { Info, ArrowLeft, Video, Lock, Ban, MessageSquare } from "lucide-react";
+import { BASE_URL } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: "About Vidibro — Peer-to-Peer Video Chat, No Account",
+  description:
+    "Vidibro is a free anonymous video chat platform — peer-to-peer, no account, nothing recorded. Three modes: video, voice-only, and text. Built for honest conversations with strangers.",
+  alternates: { canonical: `${BASE_URL}/about` },
+};
 
 export default function AboutPage() {
   return (

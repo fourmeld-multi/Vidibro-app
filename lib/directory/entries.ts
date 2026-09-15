@@ -1816,10 +1816,10 @@ export const ENTRIES: DirectoryEntry[] = [
     slug: "tamil-video-chat",
     kind: "language",
     name: "Tamil",
-    primaryKeyword: "tamil video chat",
-    title: "Tamil Video Chat — Free, No Signup",
+    primaryKeyword: "tamil video call online free",
+    title: "Tamil Video Call Online Free — Random Chat, No Signup",
     description:
-      "Free Tamil video chat — talk to strangers from Tamil Nadu, Sri Lanka, Malaysia and Singapore. No signup, no app. Works on Jio, Airtel and BSNL.",
+      "Free Tamil video call online — talk to Tamil speakers from Tamil Nadu, Sri Lanka, Malaysia and Singapore. No signup, no app. Instant random match.",
     languages: ["தமிழ் (Tamil)", "English", "Tanglish"],
     peakHours: "21:00 – 00:30 IST",
     timezone: "Asia/Kolkata",
