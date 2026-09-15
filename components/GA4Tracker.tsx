@@ -8,8 +8,6 @@ export default function GA4Tracker() {
 
   useEffect(() => {
     if (
-      typeof window === "undefined" ||
-      typeof window.gtag !== "function" ||
       location.hostname === "localhost" ||
       location.hostname === "127.0.0.1"
     )

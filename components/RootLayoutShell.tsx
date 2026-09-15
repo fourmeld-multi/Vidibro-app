@@ -78,14 +78,17 @@ export default function RootLayoutShell({
         <Script id="theme-init" strategy="beforeInteractive">
           {`document.documentElement.setAttribute('data-theme','dark');`}
         </Script>
+        {/* Define gtag queue synchronously so GA4Tracker never races it */}
+        <Script id="ga-queue" strategy="beforeInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+window.gtag = function gtag(){dataLayer.push(arguments);};`}
+        </Script>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-BSGKV3MTVF"
           strategy="afterInteractive"
         />
         <Script id="ga-init" strategy="afterInteractive">
           {`if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-BSGKV3MTVF', { send_page_view: false });
           }`}
