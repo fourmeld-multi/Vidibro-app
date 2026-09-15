@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import Background from "@/components/Background";
 import PathTracker from "@/components/PathTracker";
+import GA4Tracker from "@/components/GA4Tracker";
 import JsonLd from "@/components/JsonLd";
 import { BASE_URL } from "@/lib/seo";
 import "@/app/globals.css";
@@ -79,17 +80,18 @@ export default function RootLayoutShell({
         </Script>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-BSGKV3MTVF"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
         />
-        <Script id="ga-init" strategy="lazyOnload">
+        <Script id="ga-init" strategy="afterInteractive">
           {`if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-BSGKV3MTVF');
+            gtag('config', 'G-BSGKV3MTVF', { send_page_view: false });
           }`}
         </Script>
         <PathTracker />
+        <GA4Tracker />
         <Background />
         {children}
       </body>
