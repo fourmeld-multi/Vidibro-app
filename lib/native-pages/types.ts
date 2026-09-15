@@ -48,6 +48,7 @@ export interface NativeLangData {
 
   /* Hero */
   h1: string;
+  heroBadge?: string;
   tagline: string;
   intro: string;
 

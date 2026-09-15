@@ -125,6 +125,12 @@ export default function NativeLangPage({ data }: { data: NativeLangData }) {
           <h1 className="max-w-4xl text-[2rem] leading-[1.1] sm:text-5xl sm:leading-[1.08] font-black tracking-tight text-white">
             {data.h1}
           </h1>
+          {data.heroBadge && (
+            <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-4 py-1.5 text-sm font-bold text-emerald-300">
+              <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
+              {data.heroBadge}
+            </p>
+          )}
           <p className="mt-5 max-w-3xl text-lg sm:text-xl font-bold leading-snug text-purple-100">
             {data.tagline}
           </p>
