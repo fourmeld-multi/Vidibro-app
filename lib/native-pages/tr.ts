@@ -4,10 +4,10 @@ const tr: NativeLangData = {
   lang: "tr",
   ogLocale: "tr_TR",
   canonicalSlug: "/tr",
-  title: "Ücretsiz Görüntülü Sohbet — Rastgele Kameralı Chat | Vidibro",
+  title: "Rastgele Görüntülü Sohbet — Ücretsiz, Kayıtsız, Jeton Yok | Vidibro",
   description:
-    "Vidibro — ücretsiz görüntülü sohbet sitesi. Rastgele yabancılarla kayıt olmadan anında bağlan. Turkcell, Vodafone, Türk Telekom destekli.",
-  h1: "Ücretsiz Görüntülü Sohbet — Rastgele Kameralı Chat, Kayıtsız",
+    "Rastgele görüntülü sohbet — ücretsiz, kayıtsız, jeton yok. Yabancılarla anında bağlan, kamera veya metin. Turkcell, Vodafone, Türk Telekom destekli.",
+  h1: "Rastgele Görüntülü Sohbet — Ücretsiz ve Kayıtsız",
   tagline: "Kayıt yok, uygulama yok. Kameralı sohbet ve görüntülü sohbet siteleri arasında en hızlı eşleşme — Türkiye'den dünyayla anında bağlan.",
   intro:
     "Vidibro, 2026'da Türkiye'nin en hızlı ücretsiz görüntülü sohbet ve kameralı sohbet sitesidir. Hesap oluşturmadan, uygulama indirmeden tarayıcıdan direkt başlayın. Rastgele yabancılarla görüntülü, sesli veya metin sohbeti — üç mod da tamamen ücretsiz. Turkcell, Vodafone Türkiye veya Türk Telekom fark etmez, tüm görüşmeler P2P bağlantıyla çalışır ve hiçbir konuşma kaydedilmez. Görüntülü sohbet siteleri arasında Vidibro'yu öne çıkaran şey: coin yok, ücretli filtre yok, reklam yok — sadece anında bağlantı.",
