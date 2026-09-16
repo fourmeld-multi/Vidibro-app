@@ -4,9 +4,9 @@ import { generatePageSEO, BASE_URL } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = generatePageSEO({
-  title: "Best Free Omegle Alternative 2026 — No Signup, Instant Match",
+  title: "Omegle Alternative — Free Random Video Chat, No Signup | Vidibro",
   description:
-    "The best free Omegle alternative in 2026 — no signup, no bots, instant random video, voice and text chat with strangers. 100% anonymous, works on any device.",
+    "Omegle alternative — free random video, voice and text chat with strangers. No signup, no bots, 180+ countries. The closest replacement to Omegle in 2026.",
   slug: "/omegle-alternative",
 });
 
@@ -75,9 +75,9 @@ export default function OmegleAlternativePage() {
       />
       <AlternativePageTemplate
         competitorName="Omegle"
-        pageTitle="The Best Free Omegle Alternative in 2026"
+        pageTitle="Omegle Alternative — Free Random Video Chat, No Signup"
         subtitle="Omegle shut down in November 2023. Vidibro is the closest free replacement — instant random video, voice and text chat with real strangers, zero signup, 180+ countries."
-        metaDescription="The best free Omegle alternative in 2026 — no signup, instant random video, voice and text chat with strangers worldwide. 100% anonymous."
+        metaDescription="Omegle alternative — free random video, voice and text chat with strangers. No signup, no bots, 180+ countries. The closest replacement to Omegle in 2026."
         comparisonFeatures={[
           { feature: "Zero registration required", vidibro: true, competitor: true },
           { feature: "Voice-only mode (no camera)", vidibro: true, competitor: false },

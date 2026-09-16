@@ -2217,9 +2217,9 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "topic",
     name: "anonymous text chat",
     primaryKeyword: "anonymous text chat",
-    title: "Anonymous Text Chat with Strangers — No Login, No Camera",
+    title: "Anonymous Text Chat with Strangers — Free, No Account 2026",
     description:
-      "Chat anonymously with strangers — no login, no camera, no mic. Instant matching, double-tick read receipts, nothing saved. Free Omegle text alternative.",
+      "Anonymous text chat with strangers — no login, no camera, instant match. Free, nothing stored, works on any device. The best Omegle text chat alternative in 2026.",
     tagline:
       "No camera. No login. No account. Just open the page and start typing — you are matched in seconds and nothing is saved when you leave.",
     hideWhatIs: true,
