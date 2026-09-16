@@ -78,21 +78,19 @@ export default function RootLayoutShell({
         <Script id="theme-init" strategy="beforeInteractive">
           {`document.documentElement.setAttribute('data-theme','dark');`}
         </Script>
-        {/* Define gtag queue synchronously so GA4Tracker never races it */}
+        {/* Queue gtag + config before any useEffect fires so session source is set first */}
         <Script id="ga-queue" strategy="beforeInteractive">
           {`window.dataLayer = window.dataLayer || [];
-window.gtag = function gtag(){dataLayer.push(arguments);};`}
+window.gtag = function gtag(){dataLayer.push(arguments);};
+if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+  gtag('js', new Date());
+  gtag('config', 'G-BSGKV3MTVF', { send_page_view: false });
+}`}
         </Script>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-BSGKV3MTVF"
           strategy="afterInteractive"
         />
-        <Script id="ga-init" strategy="afterInteractive">
-          {`if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
-            gtag('js', new Date());
-            gtag('config', 'G-BSGKV3MTVF', { send_page_view: false });
-          }`}
-        </Script>
         <PathTracker />
         <GA4Tracker />
         <Background />
