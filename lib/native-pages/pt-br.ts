@@ -5,10 +5,10 @@ const ptBr: NativeLangData = {
   hreflang: "pt-BR",
   ogLocale: "pt_BR",
   canonicalSlug: "/pt-br",
-  title: "Brasil Vídeo Chat Grátis Aleatório & Videochamada — Vidibro",
+  title: "Videochamada Aleatória Grátis — Sem Cadastro, Sem Moedas | Vidibro",
   description:
-    "Vidibro — vídeo chat grátis e videochamada aleatória sem cadastro no Brasil. Funciona na Claro, Vivo e TIM. O melhor alternativo ao Omegle em 2026.",
-  h1: "Brasil Vídeo Chat Grátis Aleatório & Videochamada",
+    "Videochamada aleatória grátis sem cadastro — sem moedas, sem anúncios. Conecte 1 a 1 com desconhecidos do Brasil e de 180+ países. Funciona na Claro, Vivo e TIM.",
+  h1: "Videochamada Aleatória — Grátis e Sem Cadastro",
   tagline: "Sem cadastro. Videochamada aleatória grátis com pessoas do Brasil e do mundo — agora mesmo.",
   intro:
     "Vidibro é a plataforma de vídeo chat aleatório que mais cresce no Brasil em 2026 — sem cadastro e sem precisar instalar nada. Claro, Vivo ou TIM: funciona em qualquer operadora, direto no navegador do celular ou PC. Todas as chamadas são P2P, nenhuma conversa é gravada ou salva em servidor. Copa do Mundo 2026, futebol, churrasco, Carnaval ou vida em São Paulo — fale sobre o que é genuinamente brasileiro com pessoas de mais de 180 países agora.",
