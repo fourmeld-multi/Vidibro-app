@@ -3443,10 +3443,10 @@ export const ENTRIES: DirectoryEntry[] = [
     slug: "video-chat-china",
     kind: "country",
     name: "China",
-    primaryKeyword: "china video chat",
-    title: "China Video Chat Free — Random Video Call, No Signup | Vidibro",
+    primaryKeyword: "china random video chat",
+    title: "China Random Video Chat Free — No Signup | Vidibro",
     description:
-      "China video chat free — random 1-on-1 video call with Chinese speakers worldwide. Mandarin, Cantonese, English. Taiwan, Hong Kong, Singapore, diaspora. No signup, no download.",
+      "China random video chat free — 1-on-1 video call with Chinese speakers worldwide. Mandarin, Cantonese, English. Taiwan, Hong Kong, Singapore, diaspora. No signup, no download.",
     tagline:
       "Video chat with Chinese speakers anywhere in the world — Taiwan, Hong Kong, Singapore, diaspora. No account, no download.",
     languages: ["中文 (Mandarin)", "粵語 (Cantonese)", "English"],
