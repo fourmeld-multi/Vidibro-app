@@ -391,9 +391,9 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "country",
     name: "Bangladesh",
     primaryKeyword: "video chat bangladesh",
-    title: "Bangladesh Free Random Video Chat & Video Call",
+    title: "Video Chat Bangladesh Free — Random Video Call, No Signup | Vidibro",
     description:
-      "Free random video chat with people in Bangladesh. No signup, no account. Chat in Dhaka, Chittagong and Sylhet. Works on Grameenphone, Robi and Banglalink.",
+      "Video chat Bangladesh free — random 1-on-1 video call with people in Dhaka, Chittagong and Sylhet. No signup, no account. Works on Grameenphone, Robi and Banglalink.",
     tagline: "No account. Instant random video chat with Bangladesh — cricket, Ramadan, Dhaka nights, and people who actually want to talk.",
     hideWhatIs: true,
     providers: ["Grameenphone", "Robi", "Banglalink"],

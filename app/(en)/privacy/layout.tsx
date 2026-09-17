@@ -7,9 +7,9 @@ import { generatePageSEO } from "@/lib/seo";
  * and nine pages sharing one title get collapsed in search results.
  */
 export const metadata: Metadata = generatePageSEO({
-  title: "Privacy Policy",
+  title: "Vidibro Privacy Policy — No Account, No Stored Conversations",
   description:
-    "What Vidibro collects and what it does not. Calls are peer-to-peer, no account is required, and conversations are never stored.",
+    "Vidibro privacy policy — calls are peer-to-peer, no account required, no conversations stored. Here is exactly what we collect and what we do not.",
   slug: "/privacy",
   keywords: [
     "privacy policy",
