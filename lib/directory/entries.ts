@@ -4152,9 +4152,9 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "country",
     name: "Sri Lanka",
     primaryKeyword: "video chat sri lanka",
-    title: "Video Chat Sri Lanka — Talk to Strangers Free",
+    title: "Video Chat Sri Lanka Free — Random Video Call, No Signup | Vidibro",
     description:
-      "Free random video chat with people from Sri Lanka. Talk in Sinhala, Tamil or English — no signup, no download, instant matching.",
+      "Video chat Sri Lanka free — random 1-on-1 video call with people from Colombo, Kandy and Galle. No signup, no download. Talk in Sinhala, Tamil or English.",
     tagline:
       "Free video chat with Sri Lanka. Same time offset as India, three languages in daily use, and a conversation with no account needed.",
     languages: ["සිංහල (Sinhala)", "தமிழ் (Tamil)", "English"],
