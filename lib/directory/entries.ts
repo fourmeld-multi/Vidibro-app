@@ -4590,6 +4590,13 @@ export const ENTRIES: DirectoryEntry[] = [
         body: "Paris has one of the densest metro networks in the world relative to its size — most points in the city are within a short walk of a station, which shapes how compactly Parisians think about distance.",
       },
     ],
+    quickFacts: [
+      { emoji: "🗼", title: "20 Arrondissements, 20 Personalities", body: "Paris spirals outward from the 1st in the centre to the 20th on the edge. Locals identify strongly with their number — 'which arrondissement?' is always a real question." },
+      { emoji: "🚇", title: "One of the World's Densest Metros", body: "More stations per km² than almost any city on Earth. Most Parisians walk no more than 5 minutes to a station — it shapes how they think about distance entirely." },
+      { emoji: "☕", title: "Café Terrace Culture Is Real Life", body: "A coffee on a terrace isn't a tourist experience — it's how Parisians start the day and end it. Ask about someone's regular café and you'll get a genuine, specific answer." },
+      { emoji: "🥐", title: "Boulangerie Every 300 Metres", body: "France legally regulates bakeries. Paris has over 1,200 boulangeries — a fresh baguette on the way home is a lived daily habit, not a cliché." },
+      { emoji: "🌙", title: "Runs Later Than Most of France", body: "Dinner in Paris rarely starts before 8pm. The chat queue here stays active past midnight — later than comparable cities, in line with the actual evening rhythm." },
+    ],
     localPhrases: [
       { phrase: "Coucou", meaning: "Hi (very casual, friendly)", say: "koo-KOO" },
       { phrase: "C'est chaud", meaning: "That's tough / intense (slang)", say: "say SHOH" },
@@ -4600,6 +4607,12 @@ export const ENTRIES: DirectoryEntry[] = [
       { topic: "Arrondissement", ask: "Which arrondissement, and would you actually recommend living there?", why: "A specific, genuinely revealing question locals enjoy answering." },
       { topic: "Tourist spots", ask: "Do you ever actually go to the Eiffel Tower, or is that purely a tourist thing now?", why: "Separates lived experience from the postcard image of the city." },
       { topic: "Café life", ask: "What's your regular café, and what do you always order?", why: "Gets a specific, personal answer rather than a generic one about Parisian cafés." },
+    ],
+    reviews: [
+      { name: "Mateus O.", flag: "🇧🇷", role: "Language student", text: "Practised my French for over an hour. The person I matched with was patient and kept switching between French and English depending on how I was doing. Much better than a language app." },
+      { name: "Yuna K.", flag: "🇯🇵", role: "Travel planner", text: "Asked about the best arrondissement to stay in versus tourist prices. Got a detailed, honest breakdown of Le Marais vs Belleville. I changed my entire booking because of that call." },
+      { name: "Cillian B.", flag: "🇮🇪", role: "Film fan", text: "Talked about French cinema for 45 minutes — specific directors, titles I'd never heard of. The kind of recommendation list you can't get from any algorithm." },
+      { name: "Asel N.", flag: "🇰🇿", role: "Student abroad", text: "Was nervous my French wasn't good enough but they were completely relaxed about it. We talked about café culture and it felt like I actually understood the city before arriving." },
     ],
     places: ["Le Marais", "Montmartre", "Latin Quarter", "Champs-Élysées", "Belleville", "Bastille"],
     talkingPoints: [
