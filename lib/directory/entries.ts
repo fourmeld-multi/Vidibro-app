@@ -4569,9 +4569,9 @@ export const ENTRIES: DirectoryEntry[] = [
     name: "Paris",
     parent: "France",
     primaryKeyword: "paris video chat",
-    title: "Paris Video Chat — Talk to Strangers Free",
+    title: "Paris Video Chat Free — Random Chat Online, No Signup | Vidibro",
     description:
-      "Random video chat with people in Paris. Free, anonymous, no signup — talk in French or English, day or night, no download needed.",
+      "Paris video chat free — random 1-on-1 chat online with people in Paris. No signup, no download. Talk in French or English, day or night.",
     languages: ["Français (French)", "English"],
     peakHours: "20:30 – 00:30 CET",
     timezone: "Europe/Paris",
