@@ -3713,9 +3713,9 @@ export const ENTRIES: DirectoryEntry[] = [
     name: "Tokyo",
     parent: "Japan",
     primaryKeyword: "tokyo video chat",
-    title: "Tokyo Free Random Video Chat & Video Call",
+    title: "Tokyo Video Chat Free — Random Match, No Signup | Vidibro",
     description:
-      "Free random video chat in Tokyo — no signup, no account. Works on NTT Docomo, SoftBank and au. Chat in Shibuya, Akihabara and Shinjuku.",
+      "Tokyo video chat free — random 1-on-1 match with strangers, no signup. Works on NTT Docomo, SoftBank and au. Chat in Japanese or English.",
     hideWhatIs: true,
     providers: ["NTT Docomo", "SoftBank", "au (KDDI)"],
     languages: ["日本語 (Japanese)", "English"],
