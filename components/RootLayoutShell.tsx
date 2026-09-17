@@ -84,7 +84,11 @@ export default function RootLayoutShell({
 window.gtag = function gtag(){dataLayer.push(arguments);};
 if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
   gtag('js', new Date());
-  gtag('config', 'G-BSGKV3MTVF', { send_page_view: false });
+  gtag('config', 'G-BSGKV3MTVF', {
+    send_page_view: false,
+    page_location: location.href,
+    page_referrer: document.referrer
+  });
 }`}
         </Script>
         <Script
