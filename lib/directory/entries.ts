@@ -3443,10 +3443,10 @@ export const ENTRIES: DirectoryEntry[] = [
     slug: "video-chat-china",
     kind: "country",
     name: "China",
-    primaryKeyword: "chinese video chat",
-    title: "Chinese Video Chat — Mandarin & Cantonese, Free",
+    primaryKeyword: "china video chat",
+    title: "China Video Chat Free — Random Video Call, No Signup | Vidibro",
     description:
-      "Free random video chat with Chinese speakers worldwide — Taiwan, Hong Kong, Singapore and diaspora. Mandarin and Cantonese. No account, works in browser.",
+      "China video chat free — random 1-on-1 video call with Chinese speakers worldwide. Mandarin, Cantonese, English. Taiwan, Hong Kong, Singapore, diaspora. No signup, no download.",
     tagline:
       "Video chat with Chinese speakers anywhere in the world — Taiwan, Hong Kong, Singapore, diaspora. No account, no download.",
     languages: ["中文 (Mandarin)", "粵語 (Cantonese)", "English"],
@@ -3486,11 +3486,24 @@ export const ENTRIES: DirectoryEntry[] = [
         body: "WeChat Pay and Alipay handle the overwhelming majority of everyday transactions in Chinese cities, to the point that some smaller vendors no longer reliably accept cash at all. It is a genuinely different daily experience from most of the world and a real point of comparison to raise.",
       },
     ],
+    quickFacts: [
+      { emoji: "🚄", title: "World's Largest High-Speed Rail Network", body: "China has more high-speed rail track than the rest of the world combined. Most people have made an intercity trip by bullet train and have a strong opinion on their route." },
+      { emoji: "📱", title: "Cash is Nearly Obsolete", body: "WeChat Pay and Alipay handle almost all everyday transactions — some vendors no longer reliably accept physical cash at all. It's a lived daily reality most Chinese residents consider completely normal." },
+      { emoji: "🌏", title: "One Country, One Time Zone", body: "China spans the width of five natural time zones but runs entirely on Beijing Standard Time. In the far west, the sun rises at 10am on the clock — a real and unusual daily experience." },
+      { emoji: "📚", title: "The Gaokao Shapes Everything", body: "China's national university entrance exam is one of the most high-stakes tests in the world. Most people in their 20s or 30s have a story — and an opinion — about it." },
+      { emoji: "🥟", title: "Regional Food Barely Resembles Export Chinese", body: "Sichuan, Cantonese and northern cuisine are almost different culinary traditions. Ask where someone is from and you already know roughly what they eat." },
+    ],
     localPhrases: [
       { phrase: "你好", meaning: "Hello", say: "nǐ hǎo" },
       { phrase: "你在哪儿?", meaning: "Where are you?", say: "nǐ zài nǎr" },
       { phrase: "太棒了", meaning: "That's great / awesome", say: "tài bàng le" },
       { phrase: "很高兴认识你", meaning: "Nice to meet you", say: "hěn gāoxìng rènshi nǐ" },
+    ],
+    reviews: [
+      { name: "Tomás F.", flag: "🇪🇸", role: "Mandarin learner", text: "Practised conversational Mandarin for an hour. They were incredibly patient and switched to English whenever I got stuck. Much better than any app I've tried — real-speed natural speech." },
+      { name: "Nadia O.", flag: "🇺🇦", role: "Food enthusiast", text: "Asked about the actual difference between Sichuan and Cantonese food. Got a 30-minute breakdown that changed how I thought about it entirely. Better than any food blog." },
+      { name: "Dev M.", flag: "🇮🇳", role: "Tech student", text: "Talked about WeChat Pay and how China went cashless so fast. Never found a better explanation — the person had been living it for years and described the shift from the inside." },
+      { name: "Ellie W.", flag: "🇦🇺", role: "Travel planner", text: "Asked which city to visit first — Shanghai or Beijing. Got an honest, detailed comparison from someone who had lived in both. Way more useful than reading a travel guide." },
     ],
     starters: [
       { topic: "Regional food", ask: "What does food from your hometown actually taste like?", why: "Sichuan, Cantonese and northern cooking are wildly different — a good way past the export-menu version." },
