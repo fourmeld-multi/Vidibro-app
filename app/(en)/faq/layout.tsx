@@ -9,9 +9,9 @@ import { TRANSLATIONS } from "@/lib/translations";
  * and nine pages sharing one title get collapsed in search results.
  */
 export const metadata: Metadata = generatePageSEO({
-  title: "Frequently Asked Questions",
+  title: "Vidibro FAQ — Free? No Signup? Safe? All Answered",
   description:
-    "How Vidibro works, whether it is really free, what we store, how matching happens, and how to stay safe chatting with strangers. Straight answers, no marketing.",
+    "Is Vidibro really free? Do you need to sign up? Is random video chat safe? Yes, yes, and yes — straight answers with no marketing fluff.",
   slug: "/faq",
   keywords: [
     "vidibro faq",

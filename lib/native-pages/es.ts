@@ -5,10 +5,10 @@ const es: NativeLangData = {
   hreflang: "es",
   ogLocale: "es_ES",
   canonicalSlug: "/es",
-  title: "Videollamada Aleatoria Gratis | Chat de Video Sin Registro - Vidibro",
+  title: "Videollamada Sin Registro — Chat de Video Aleatorio Gratis | Vidibro",
   description:
-    "Vidibro — videollamada aleatoria gratis sin registro. Chat de video aleatorio 1 a 1 con personas de España y del mundo. Sin descargas, sin cuenta.",
-  h1: "Videollamada Aleatoria Gratis — Chat de Video Sin Registro",
+    "Videollamada sin registro — chat de video aleatorio gratis sin cuenta. Conecta 1 a 1 con desconocidos de España y del mundo. Sin descargas, sin monedas.",
+  h1: "Videollamada Sin Registro — Chat de Video Aleatorio Gratis",
   tagline: "Sin registro. Chat de video gratis con desconocidos de España y del mundo ahora mismo.",
   intro:
     "Vidibro es una videollamada aleatoria gratis sin necesidad de registro ni descarga. Elige entre chat de video, chat de voz o chat de texto — todo funciona directamente en el navegador del móvil o del ordenador. Más de 180 países conectados en tiempo real con total privacidad: ninguna conversación se almacena ni se graba. Perfecto para practicar idiomas, conocer culturas nuevas o simplemente charlar con alguien al otro lado del mundo.",
