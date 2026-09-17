@@ -1219,10 +1219,10 @@ export const ENTRIES: DirectoryEntry[] = [
     kind: "city",
     name: "Delhi",
     parent: "India",
-    primaryKeyword: "random video chat Delhi",
-    title: "Random Video Chat Delhi — Free, No Signup",
+    primaryKeyword: "delhi video call free",
+    title: "Delhi Video Call Free — Random Chat Strangers, No Signup",
     description:
-      "Free random video chat Delhi — talk to strangers in Delhi NCR live, 1-on-1, no signup. Chat in Hindi, Punjabi or English. Works on Jio, Airtel and BSNL.",
+      "Delhi video call free — random 1-on-1 chat with Delhi strangers, no signup. Chat in Hindi, Punjabi or English. Works on Jio, Airtel and BSNL.",
     hideWhatIs: true,
     languages: ["हिन्दी (Hindi)", "English", "ਪੰਜਾਬੀ (Punjabi)", "اردو (Urdu)"],
     peakHours: "21:30 – 01:00 IST",
@@ -3606,10 +3606,10 @@ export const ENTRIES: DirectoryEntry[] = [
     slug: "video-chat-japan",
     kind: "country",
     name: "Japan",
-    primaryKeyword: "video chat japan",
-    title: "Japan Free Random Video Chat & Video Call",
+    primaryKeyword: "japan video chat",
+    title: "Japan Video Chat Free — Random Match, No Signup | Vidibro",
     description:
-      "Free random video chat from Japan — no signup, no download. Works on NTT Docomo, SoftBank and au. Talk to strangers in Japanese or English.",
+      "Japan video chat free — random 1-on-1 match with strangers, no signup. Works on NTT Docomo, SoftBank and au. Chat in Japanese or English.",
     hideWhatIs: true,
     providers: ["NTT Docomo", "SoftBank", "au (KDDI)"],
     tagline:
