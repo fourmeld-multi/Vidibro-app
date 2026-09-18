@@ -7266,6 +7266,107 @@ export const ENTRIES: DirectoryEntry[] = [
     ],
   },
 
+  {
+    slug: "video-chat-congo",
+    kind: "country",
+    name: "Congo",
+    primaryKeyword: "random video chat congo",
+    title: "Random Video Chat Congo DRC — Free, No Signup | Vidibro",
+    description:
+      "Random video chat Congo DRC free — meet people from Kinshasa, Lubumbashi and Goma. No account, no download. Talk in French, Lingala or Swahili. Chat vidéo Congo gratuit.",
+    tagline:
+      "Free random video chat with Congo DRC. Africa's second-largest country, four languages in daily use, and a conversation that needs no account.",
+    languages: ["Français (French)", "Lingala", "Swahili", "Kikongo"],
+    peakHours: "19:00 – 23:00 WAT",
+    timezone: "Africa/Kinshasa",
+    weight: 0.7,
+    places: ["Kinshasa", "Lubumbashi", "Goma", "Mbuji-Mayi", "Kisangani"],
+    talkingPoints: [
+      "Music — Congo is the birthplace of soukous and Afrobeats, and Kinshasa's music scene is one of the most alive in Africa",
+      "Football, followed passionately across the country with both the national team and European club football intensely discussed",
+      "The Congo River, the world's second-deepest river, which shapes geography, transport and daily life across the country",
+      "The incredible biodiversity — DRC contains more than half of Africa's rainforest and is one of the most ecologically rich places on Earth",
+      "The resilience of daily life in Kinshasa, one of Africa's fastest-growing megacities, with a culture and energy unlike anywhere else on the continent",
+    ],
+    connectivityNote:
+      "Mobile internet is widely available in Kinshasa and other major cities via Airtel, Orange and Vodacom, with decent 4G coverage in urban areas. Connectivity drops significantly in rural and forested regions — video chat holds up well in Kinshasa; text chat is more reliable in smaller towns.",
+    localNote:
+      "DRC spans two time zones — Kinshasa and the west use WAT (UTC+1), while the eastern provinces including Lubumbashi use CAT (UTC+2). Most users come from Kinshasa, so WAT is the working assumption for peak hours.",
+    safetyNote:
+      "The eastern DRC (North and South Kivu provinces) has had long-running conflict that is a sensitive and difficult topic for many Congolese. Let people raise it if they choose rather than asking directly.",
+    etiquette:
+      "Greetings are important and unhurried — jumping straight into a topic without a proper greeting reads as rude. French is standard in formal and educated contexts; Lingala is the lingua franca in Kinshasa and carries warmth when you know even a word. Asking where in Congo someone is from gets an engaged answer — regional identity is real and matters.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Kinshasa: Africa's second-largest city",
+        body: "With over 17 million people, Kinshasa is one of the largest cities in the world and by far the largest French-speaking city on Earth — bigger than Paris. It has a distinct culture, energy and music scene that most people outside Africa have never engaged with, which makes it genuinely interesting conversation territory.",
+      },
+      {
+        kind: "culture",
+        title: "The birthplace of Congolese rumba",
+        body: "Congolese rumba — the foundation of much of modern African pop music — originated in Kinshasa and Brazzaville in the 1940s and spread across the continent. Asking what music someone listens to almost always gets an animated reply here.",
+      },
+      {
+        kind: "infra",
+        title: "Four languages, all genuinely in use",
+        body: "French is official, Lingala dominates Kinshasa street life, Swahili is spoken widely in the east, and Kikongo in the west. Someone from Kinshasa likely uses at least three of these in a typical day — it's a genuinely multilingual daily reality rather than a policy formality.",
+      },
+    ],
+    quickFacts: [
+      { emoji: "🏙️", title: "Capital", body: "Kinshasa — world's largest French-speaking city, bigger than Paris" },
+      { emoji: "👥", title: "Population", body: "~105 million — 2nd most populous country in sub-Saharan Africa" },
+      { emoji: "🗣️", title: "Official language", body: "French, plus Lingala, Swahili, Kikongo and Tshiluba in daily use" },
+      { emoji: "🌊", title: "Congo River", body: "World's second-deepest river, shapes geography and daily life across the country" },
+      { emoji: "🎵", title: "Music heritage", body: "Birthplace of Congolese rumba and soukous — foundation of modern African pop" },
+    ],
+    reviews: [
+      { flag: "🇨🇩", name: "User from Kinshasa", role: "Local user", text: "Finally a video chat that works well here. Connected to someone in Europe in seconds." },
+      { flag: "🇫🇷", name: "User from France", role: "International user", text: "Chatted with someone from Kinshasa — we both spoke French, easy conversation, really interesting perspective." },
+      { flag: "🇨🇩", name: "User from Lubumbashi", role: "Local user", text: "Good quality call, no signup needed. I tried it from my phone and it worked perfectly." },
+      { flag: "🇧🇪", name: "User from Belgium", role: "International user", text: "As a French speaker I matched with someone from Congo within a minute. Great conversation." },
+    ],
+    localPhrases: [
+      { phrase: "Mbote", meaning: "Hello (Lingala)", say: "m-BOH-teh" },
+      { phrase: "Sango nini?", meaning: "What's up? / How are you? (Lingala)", say: "SAN-go NEE-nee" },
+      { phrase: "Bonjour", meaning: "Hello / Good day (French)", say: "bon-ZHOOR" },
+      { phrase: "Merci beaucoup", meaning: "Thank you very much (French)", say: "mer-SEE boh-KOO" },
+    ],
+    starters: [
+      { topic: "Music", ask: "What Congolese music are you listening to lately?", why: "Congo's music scene is a genuine source of national pride — this always gets an engaged reply." },
+      { topic: "Kinshasa", ask: "Is Kinshasa as big and chaotic as people say?", why: "Residents love talking about their city's energy and reality, which is very different from outside perceptions." },
+      { topic: "French", ask: "Is French your main language or do you use Lingala more day to day?", why: "A real, specific question here that people think about — gets a genuine answer." },
+      { topic: "Congo River", ask: "Have you ever crossed the Congo River to Brazzaville?", why: "The two Congos share the river and many people have crossed — it's a surprisingly interesting story." },
+      { topic: "Football", ask: "Are you following the national team or more into European clubs?", why: "Football is passionately followed and most Congolese have a strong club allegiance worth asking about." },
+    ],
+    intro: [
+      "Congo DRC is one of the most linguistically rich countries on Earth — French is the official language, Lingala fills Kinshasa's streets, Swahili dominates the eastern provinces, and Kikongo is spoken in the west. Most people here move fluently between several of these languages in a single ordinary day, which makes opening even a French conversation feel immediate and natural.",
+      "Kinshasa is the world's largest French-speaking city — bigger than Paris — and carries a culture, energy and music scene that most people outside Africa have never had a reason to discover. The city gave the world Congolese rumba and soukous, which spread across the continent and became the foundation of much of modern African popular music.",
+      "The Congo River, the world's second-deepest, runs through the country and defines both its geography and daily life. Two separate countries share its banks — DRC and the Republic of Congo — a source of genuine curiosity for people on both sides.",
+      "No account, no download — the call runs directly between browsers on WebRTC, so nothing said or shown during it is ever recorded, stored, or routed through a server after the connection opens.",
+    ],
+    faqs: [
+      { question: "What language will people speak?", answer: "French is the safe common language and works reliably with most educated Congolese users. Many in Kinshasa will also know Lingala — even a word like 'Mbote' (hello) is warmly received." },
+      { question: "Is the internet connection good enough for video chat?", answer: "In Kinshasa and other major cities yes — Airtel, Orange and Vodacom have good 4G urban coverage. Outside cities, text chat is more reliable than video." },
+      { question: "Is Congo DRC the same as Congo-Brazzaville?", answer: "No — they are two different countries sharing the Congo River. This page is for the Democratic Republic of Congo (DRC/Kinshasa). Congo-Brazzaville is the smaller Republic of Congo on the other bank." },
+      { question: "Is it free?", answer: "Completely free — no account, no subscription, no app download." },
+      { question: "What are good conversation topics?", answer: "Music is always safe and enthusiastic territory. Football, Kinshasa city life, and asking what languages someone uses day to day all work well as openers." },
+    ],
+    related: [
+      { slug: "video-chat-kinshasa", label: "Kinshasa", relation: "city" },
+      { slug: "video-chat-lubumbashi", label: "Lubumbashi", relation: "city" },
+      { slug: "video-chat-goma", label: "Goma", relation: "city" },
+      { slug: "french-video-chat", label: "French chat", relation: "language" },
+      { slug: "lingala-video-chat", label: "Lingala chat", relation: "language" },
+      { slug: "random-voice-chat", label: "random voice chat", relation: "mode" },
+      { slug: "text-chat", label: "random text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-france", label: "random chat France", relation: "sibling" },
+      { slug: "video-chat-nigeria", label: "random chat Nigeria", relation: "sibling" },
+      { slug: "video-chat-india", label: "random chat India", relation: "sibling" },
+    ],
+  },
+
 ];
 
 export const ENTRY_BY_SLUG: Record<string, DirectoryEntry> = Object.fromEntries(
