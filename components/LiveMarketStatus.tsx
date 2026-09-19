@@ -72,7 +72,7 @@ export default function LiveMarketStatus({
   }, [slug, timezone, peakHours, weight]);
 
   if (!state) {
-    return <div className="mt-8 h-[86px] rounded-2xl border border-white/10 bg-white/[0.03]" />;
+    return <div className="mt-8 h-[86px] rounded-2xl border border-purple-500/20 bg-[#130F2A]" />;
   }
 
   const { time, peak, count, offsetLabel, sameZone } = state;
@@ -81,15 +81,15 @@ export default function LiveMarketStatus({
     <div
       className={`mt-8 rounded-2xl border px-5 py-4 sm:px-6 ${
         peak
-          ? "border-emerald-400/25 bg-emerald-500/[0.07]"
-          : "border-white/10 bg-white/[0.03]"
+          ? "border-emerald-500/40 bg-emerald-950/80"
+          : "border-purple-500/20 bg-[#130F2A]"
       }`}
     >
       <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
         {!sameZone && (
           <div className="flex items-center gap-2">
-            <Clock size={15} className={peak ? "text-emerald-300" : "text-purple-300/70"} />
-            <span className="text-base text-purple-100">
+            <Clock size={15} className={peak ? "text-emerald-300" : "text-white/60"} />
+            <span className="text-base text-white">
               <strong className="font-bold text-white">{time}</strong> in {name}
             </span>
           </div>
@@ -101,7 +101,7 @@ export default function LiveMarketStatus({
               peak ? "bg-emerald-400 animate-pulse motion-reduce:animate-none" : "bg-purple-400/50"
             }`}
           />
-          <span className="text-base text-purple-100">
+          <span className="text-base text-white">
             {peak ? (
               <>
                 <strong className="font-bold text-emerald-300">Peak hours</strong> — best time to
@@ -114,14 +114,14 @@ export default function LiveMarketStatus({
         </div>
 
         <div className="flex items-center gap-2">
-          <Users size={15} className="text-purple-300/70" />
-          <span className="text-base text-purple-100">
+          <Users size={15} className="text-white/60" />
+          <span className="text-base text-white">
             <strong className="font-bold text-white">{count}</strong> online
           </span>
         </div>
       </div>
 
-      <p className="mt-2.5 flex items-center gap-1.5 text-sm text-purple-300/60">
+      <p className="mt-2.5 flex items-center gap-1.5 text-sm text-white/70">
         <Sunrise size={13} />
         {sameZone ? (
           <>It is {time} where you are · busiest {formatPeakHours(peakHours)}</>

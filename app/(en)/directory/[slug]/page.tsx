@@ -67,6 +67,18 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
   const url = `${BASE_URL}/directory/${entry.slug}`;
   const heading = entry.title.split("—")[0].trim();
   const newDesign = entry.slug === "video-chat-nepal" || entry.slug === "video-chat-south-korea" || entry.slug === "video-chat-bangladesh" || entry.slug === "video-chat-turkey" || entry.slug === "video-chat-brazil" || entry.slug === "video-chat-tokyo" || entry.slug === "video-chat-japan" || entry.slug === "tamil-video-chat";
+  const ARAB_REDESIGN = new Set(["video-chat-congo", "video-chat-tunisia", "video-chat-algeria", "video-chat-egypt", "video-chat-syria"]);
+  const isRedesign = ARAB_REDESIGN.has(entry.slug);
+
+  const SPOTLIGHT_CARD_THEME: Record<string, { bg: string; m1: string; m2: string; glow: string; accent: string }> = {
+    diaspora: { bg: "linear-gradient(170deg,#1a0533 0%,#3b1060 55%,#6d28d9 100%)", m1: "rgba(109,40,217,0.45)", m2: "rgba(26,5,51,0.85)", glow: "#c4b5fd", accent: "#a78bfa" },
+    seasonal:  { bg: "linear-gradient(170deg,#0a2540 0%,#0369a1 55%,#38bdf8 100%)", m1: "rgba(3,105,161,0.50)", m2: "rgba(10,37,64,0.85)", glow: "#bae6fd", accent: "#38bdf8" },
+    legal:     { bg: "linear-gradient(170deg,#422006 0%,#92400e 55%,#d97706 100%)", m1: "rgba(146,64,14,0.50)", m2: "rgba(66,32,6,0.85)", glow: "#fef08a", accent: "#fbbf24" },
+    cost:      { bg: "linear-gradient(170deg,#052e16 0%,#065f46 55%,#10b981 100%)", m1: "rgba(6,95,70,0.50)", m2: "rgba(5,46,22,0.85)", glow: "#6ee7b7", accent: "#34d399" },
+    culture:   { bg: "linear-gradient(170deg,#4a044e 0%,#9d174d 55%,#ec4899 100%)", m1: "rgba(157,23,77,0.50)", m2: "rgba(74,4,78,0.85)", glow: "#fbcfe8", accent: "#f9a8d4" },
+    infra:     { bg: "linear-gradient(170deg,#0f0a2e 0%,#1e40af 55%,#6366f1 100%)", m1: "rgba(30,64,175,0.50)", m2: "rgba(15,10,46,0.85)", glow: "#c7d2fe", accent: "#818cf8" },
+    time:      { bg: "linear-gradient(170deg,#431407 0%,#c2410c 55%,#fb923c 100%)", m1: "rgba(194,65,12,0.50)", m2: "rgba(67,20,7,0.85)", glow: "#fed7aa", accent: "#fdba74" },
+  };
 
   return (
     <main className="w-full">
@@ -94,7 +106,7 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
         ]}
       />
 
-      <div className="mx-auto max-w-4xl px-5 sm:px-6 py-10 sm:py-14">
+      <div className="mx-auto max-w-6xl px-5 sm:px-6 py-10 sm:py-14">
         {/* Up-navigation rather than "back". Most readers arrive here from
             search, where there is no history to go back to, but the parent is
             still the right place to send them. Both links stay so the
@@ -112,41 +124,90 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
           </Link>
         </nav>
 
-        {/* ---------- HERO ---------- */}
-        <h1 className="max-w-4xl text-[2rem] leading-[1.1] sm:text-5xl sm:leading-[1.08] font-black tracking-tight text-white">
-          {entry.title.replace(/\s*\|\s*Vidibro$/, "")}
-        </h1>
+        {/* ---------- HERO — unified for all pages ---------- */}
+        <div className="flex flex-col lg:flex-row lg:items-center lg:gap-8 xl:gap-12">
+          {/* Left: text + CTAs */}
+          <div className="flex-1 min-w-0 lg:max-w-[520px]">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-purple-500/[0.08] px-4 py-1.5 text-sm font-semibold text-purple-300">
+              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+              Free &middot; No Signup &middot; No Account
+            </div>
 
-        {/* Bold lead line. Deliberately a <p>: the competitor repeats its H1 as
-            an H2 here, which spends a heading on a duplicate string. */}
-        {entry.tagline && (
-          <p className="mt-5 max-w-3xl text-lg sm:text-xl font-bold leading-snug text-purple-100">
-            {entry.tagline}
-          </p>
-        )}
+            <h1 className="text-[2rem] leading-[1.08] sm:text-5xl font-black tracking-tight text-white">
+              {entry.title.replace(/\s*\|\s*Vidibro$/, "")}
+            </h1>
 
-        {/* Full width and stacked on mobile — three pills wrapping onto ragged
-            lines reads as an accident. Each mode gets its own gradient so none
-            of them looks like the secondary option. */}
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <Link
-            href="/video-chat"
-            className="inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-7 py-4 text-base font-extrabold text-white shadow-lg shadow-fuchsia-500/25 transition hover:brightness-110 sm:w-auto"
-          >
-            <Video size={19} /> Video chat
-          </Link>
-          <Link
-            href="/audio-chat"
-            className="inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-cyan-500 to-sky-500 px-7 py-4 text-base font-extrabold text-white shadow-lg shadow-cyan-500/25 transition hover:brightness-110 sm:w-auto"
-          >
-            <Mic size={19} /> Voice chat
-          </Link>
-          <Link
-            href="/text-chat"
-            className="inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 px-7 py-4 text-base font-extrabold text-white shadow-lg shadow-pink-500/25 transition hover:brightness-110 sm:w-auto"
-          >
-            <MessageSquare size={19} /> Text chat
-          </Link>
+            {entry.tagline && (
+              <p className="mt-4 text-base sm:text-lg font-medium leading-relaxed text-purple-100/75">
+                {entry.tagline}
+              </p>
+            )}
+
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/video-chat"
+                className="inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 px-8 py-5 text-lg font-extrabold text-white shadow-lg shadow-fuchsia-500/25 transition hover:brightness-110 sm:w-auto"
+              >
+                <Video size={22} /> Start Video Chat
+              </Link>
+              <Link
+                href="/text-chat"
+                className="inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-pink-500/40 bg-pink-500/10 px-8 py-5 text-lg font-extrabold text-pink-200 transition hover:border-pink-400/60 hover:text-white sm:w-auto"
+              >
+                <MessageSquare size={22} /> Text Chat
+              </Link>
+              <Link
+                href="/audio-chat"
+                className="inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-cyan-500/30 bg-cyan-500/[0.08] px-8 py-5 text-lg font-extrabold text-cyan-200 transition hover:border-cyan-400/50 hover:text-white sm:w-auto"
+              >
+                <Mic size={22} /> Voice Chat
+              </Link>
+            </div>
+
+            <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-sm text-purple-300/55">
+              <span className="flex items-center gap-1.5"><ShieldCheck size={13} /> No account required</span>
+              <span className="flex items-center gap-1.5"><Smartphone size={13} /> Works on any device</span>
+              <span className="flex items-center gap-1.5"><Lock size={13} /> Nothing stored</span>
+            </div>
+          </div>
+
+          {/* Right: illustration — desktop only */}
+          <div className="hidden lg:block shrink-0 w-[380px] xl:w-[420px] select-none">
+            <div className="relative">
+              <div className="absolute inset-0 -z-10 rounded-3xl bg-violet-600/25 blur-2xl scale-110" />
+              <div className="absolute -inset-[2px] rounded-3xl bg-gradient-to-br from-violet-500/40 via-fuchsia-500/25 to-transparent pointer-events-none" />
+              <img
+                src="/video-chat-illustration.jpg"
+                alt="Video chat illustration"
+                className="w-full h-auto rounded-3xl relative block"
+              />
+              {/* Bubble 1 — girl side (left), floating — phrase from entry data */}
+              {entry.localPhrases?.[0] ? (
+                <div className="absolute left-[12%] bottom-[32%] animate-float">
+                  <span className="inline-flex items-center gap-1.5 rounded-2xl rounded-bl-none bg-violet-600 px-3 py-1.5 text-xs font-bold text-white shadow-xl shadow-violet-900/60 whitespace-nowrap">
+                    💬 {entry.localPhrases[0].phrase}
+                  </span>
+                </div>
+              ) : (
+                <div className="absolute left-[12%] bottom-[32%] animate-float">
+                  <span className="inline-flex items-center gap-1.5 rounded-2xl rounded-bl-none bg-violet-600 px-3 py-1.5 text-xs font-bold text-white shadow-xl shadow-violet-900/60 whitespace-nowrap">
+                    💬 Hello! 👋
+                  </span>
+                </div>
+              )}
+              {/* Bubble 2 — boy side (right), typing animation — phrase from entry data */}
+              <div className="absolute right-[8%] top-[48%] flex flex-col items-end gap-1">
+                {entry.localPhrases?.[1] && (
+                  <span className="inline-flex items-center gap-1.5 rounded-2xl rounded-br-none bg-fuchsia-600 px-3 py-1.5 text-xs font-bold text-white shadow-xl shadow-fuchsia-900/60 whitespace-nowrap">
+                    💬 {entry.localPhrases[1].phrase}
+                  </span>
+                )}
+                <span className="inline-flex items-center gap-1 rounded-2xl rounded-br-none bg-fuchsia-700/80 px-3 py-2 shadow-lg dot-bounce text-fuchsia-200">
+                  <span /><span /><span />
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Native language cross-links */}
@@ -192,8 +253,19 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
             <StatTile key={s.label} tone={s.tone} value={s.value} label={s.label} icon={s.icon} />
           ))}
         </div>
+      </div>{/* end max-w-6xl hero/intro */}
 
-        <section className="mt-14 text-center">
+      {/* ── SECTION CARD: Why Choose → FAQ ── */}
+      <div className="mx-auto max-w-4xl px-5 sm:px-6 mt-14">
+        <div className="relative rounded-3xl border border-white/[0.08] bg-[#0A0720] overflow-hidden px-6 py-12 sm:px-10">
+          {/* subtle inner glow top */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-violet-500/50 to-transparent" />
+          {/* dot grid overlay */}
+          <div className="pointer-events-none absolute inset-0 opacity-20" style={{backgroundImage:"radial-gradient(circle, rgba(139,92,246,0.25) 1px, transparent 1px)", backgroundSize:"24px 24px"}} />
+          {/* corner glow */}
+          <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-48 rounded-full bg-violet-600/10 blur-3xl" />
+
+        <section className="pb-0 text-center relative">
           <p className="mb-2 text-xs font-bold uppercase tracking-widest text-purple-400">Why us</p>
           <h2 className="mb-2 text-2xl sm:text-3xl font-black tracking-tight text-white">
             Why Choose <span className="text-pink-400">Vidibro</span>?
@@ -385,6 +457,41 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
                 </div>
               ))}
             </div>
+          ) : isRedesign ? (
+            <div className="grid gap-5 sm:grid-cols-3 text-left">
+              {[
+                {
+                  icon: <ShieldCheck size={26} />,
+                  iconColor: "text-violet-400",
+                  accent: "bg-violet-500",
+                  title: "No Account Needed",
+                  body: "Jump straight in. No sign-up, no email, no profile — nothing stored on our end after the call ends.",
+                },
+                {
+                  icon: <Video size={26} />,
+                  iconColor: "text-fuchsia-400",
+                  accent: "bg-fuchsia-500",
+                  title: "Video & Text Chat",
+                  body: `Meet people from ${entry.name} over video or stick to text. Both modes work instantly, camera-optional.`,
+                },
+                {
+                  icon: <Smartphone size={26} />,
+                  iconColor: "text-purple-400",
+                  accent: "bg-purple-500",
+                  title: "Works on Any Device",
+                  body: "Open the page on your phone, tablet, or laptop — no download, no app install, no permissions beyond your camera.",
+                },
+              ].map((card) => (
+                <div key={card.title} className="relative overflow-hidden rounded-2xl bg-[#0C0920] border border-white/8 p-6 hover:border-purple-500/30 transition-colors">
+                  <div className={`absolute inset-x-0 top-0 h-[3px] ${card.accent}`}/>
+                  <div className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white/[0.06] ${card.iconColor}`}>
+                    {card.icon}
+                  </div>
+                  <h3 className="mb-2 text-lg font-black text-white">{card.title}</h3>
+                  <p className="text-sm leading-relaxed text-purple-100/65">{card.body}</p>
+                </div>
+              ))}
+            </div>
           ) : (
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-left">
               <IconCard icon={<Lock size={16} />} title="Nothing is stored" tone="emerald">
@@ -430,22 +537,24 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
 
           <div className="grid gap-4 lg:grid-cols-2">
             {/* Best Time to Chat */}
-            <div className="rounded-2xl border border-white/10 bg-white/[0.07] p-6">
+            <div className={isRedesign ? "relative overflow-hidden rounded-2xl bg-[#0C0920] border border-white/8 p-6" : "rounded-2xl border border-white/10 bg-white/[0.07] p-6"}>
+              {isRedesign && <div className="absolute inset-x-0 top-0 h-[3px] bg-emerald-400"/>}
               <div className="mb-3 flex items-center gap-2.5">
-                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-300">
+                <span className={`flex h-9 w-9 items-center justify-center rounded-xl ${isRedesign ? "bg-emerald-500/15 text-emerald-400" : "bg-emerald-500/20 text-emerald-300"}`}>
                   <Clock size={18} />
                 </span>
                 <h3 className="text-base font-black text-white">Best Time to Chat</h3>
               </div>
-              <div className="text-3xl sm:text-4xl font-black text-emerald-300">{formatPeakHours(entry.peakHours!)}</div>
-              <p className="mt-2 text-sm leading-relaxed text-purple-100/75">{entry.localNote}</p>
-              <PeakHoursBar peakHours={entry.peakHours!} />
+              <div className="text-3xl sm:text-4xl font-black text-emerald-400">{formatPeakHours(entry.peakHours!)}</div>
+              <p className="mt-2 text-sm leading-relaxed text-purple-100/65">{entry.localNote}</p>
+              {!isRedesign && <PeakHoursBar peakHours={entry.peakHours!} />}
             </div>
 
             {/* Works on Your Network */}
-            <div className="rounded-2xl border border-white/10 bg-white/[0.07] p-6">
+            <div className={isRedesign ? "relative overflow-hidden rounded-2xl bg-[#0C0920] border border-white/8 p-6" : "rounded-2xl border border-white/10 bg-white/[0.07] p-6"}>
+              {isRedesign && <div className="absolute inset-x-0 top-0 h-[3px] bg-cyan-400"/>}
               <div className="mb-3 flex items-center gap-2.5">
-                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan-500/20 text-cyan-300">
+                <span className={`flex h-9 w-9 items-center justify-center rounded-xl ${isRedesign ? "bg-cyan-500/15 text-cyan-400" : "bg-cyan-500/20 text-cyan-300"}`}>
                   <Signal size={18} />
                 </span>
                 <h3 className="text-base font-black text-white">Works on Your Network</h3>
@@ -453,34 +562,35 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
               {entry.providers && entry.providers.length > 0 && (
                 <div className="mb-3 flex flex-wrap gap-2">
                   {entry.providers.map((p) => (
-                    <span key={p} className="rounded-full border border-white/15 bg-white/[0.07] px-3 py-1 text-xs font-semibold text-white/80">
+                    <span key={p} className={`rounded-full px-3 py-1 text-xs font-semibold ${isRedesign ? "bg-white/[0.08] border border-white/10 text-cyan-300" : "border border-white/15 bg-white/[0.07] text-white/80"}`}>
                       {p}
                     </span>
                   ))}
                 </div>
               )}
-              <p className="text-sm leading-relaxed text-purple-100/75">{entry.connectivityNote}</p>
+              <p className="text-sm leading-relaxed text-purple-100/65">{entry.connectivityNote}</p>
             </div>
 
             {entry.localPhrases?.length ? (
-              <SpeakLocal name={entry.name} phrases={entry.localPhrases} />
+              <SpeakLocal name={entry.name} phrases={isRedesign ? entry.localPhrases.slice(0, 2) : entry.localPhrases} />
             ) : (
               <IconCard icon={<Languages size={15} />} title="Languages you'll hear" tone="amber">
                 {entry.languages.join(" · ")}
               </IconCard>
             )}
 
-            {entry.starters?.length ? <ConversationStarters name={entry.name} starters={entry.starters} /> : null}
+            {entry.starters?.length ? <ConversationStarters name={entry.name} starters={isRedesign ? entry.starters.slice(0, 2) : entry.starters} /> : null}
 
             {entry.places && (
-              <div className="rounded-2xl border border-white/10 bg-white/[0.07] p-6">
+              <div className={isRedesign ? "relative overflow-hidden rounded-2xl bg-[#0C0920] border border-white/8 p-6" : "rounded-2xl border border-white/10 bg-white/[0.07] p-6"}>
+                {isRedesign && <div className="absolute inset-x-0 top-0 h-[3px] bg-violet-400"/>}
                 <div className="mb-3 flex items-center gap-2.5">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-purple-500/20 text-purple-300">
+                  <span className={`flex h-9 w-9 items-center justify-center rounded-xl ${isRedesign ? "bg-violet-500/15 text-violet-400" : "bg-purple-500/20 text-purple-300"}`}>
                     <Users size={18} />
                   </span>
                   <h3 className="text-base font-black text-white">Where people are</h3>
                 </div>
-                <p className="text-sm leading-relaxed text-purple-100/75">{entry.places.join(" · ")}</p>
+                <p className="text-sm leading-relaxed text-purple-100/65">{entry.places.join(" · ")}</p>
               </div>
             )}
           </div>
@@ -489,22 +599,38 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
 
         {entry.spotlights && entry.spotlights.length > 0 && (
           <section className="mt-14">
-            {newDesign ? (
-              <SectionHead
-                tone="amber"
-                icon={<Sparkles size={18} />}
-                title={`What makes ${entry.name} unique`}
-                blurb={`Specific things that shape every conversation with someone from ${entry.name} — context most visitors don't know.`}
-              />
-            ) : (
-              <SectionHead
-                tone="amber"
-                icon={<Sparkles size={18} />}
-                title={`What is different about ${entry.name}`}
-                blurb="Things that are true here and not in most other markets."
-              />
-            )}
-            {newDesign ? (
+            <SectionHead
+              tone="amber"
+              icon={<Sparkles size={18} />}
+              title={isRedesign || newDesign ? `What makes ${entry.name} unique` : `What is different about ${entry.name}`}
+              blurb={isRedesign || newDesign
+                ? `Specific things that shape every conversation with someone from ${entry.name} — context most visitors don't know.`
+                : "Things that are true here and not in most other markets."}
+            />
+            {isRedesign ? (
+              <div className="grid gap-5 sm:grid-cols-2">
+                {entry.spotlights.map((sp) => {
+                  const style = SPOTLIGHT_STYLE[sp.kind];
+                  const theme = SPOTLIGHT_CARD_THEME[sp.kind] ?? SPOTLIGHT_CARD_THEME.infra;
+                  return (
+                    <div key={sp.title} className="relative overflow-hidden rounded-2xl" style={{ background: theme.bg, minHeight: "200px" }}>
+                      <div className="absolute top-5 right-5 h-14 w-14 rounded-full opacity-70 pointer-events-none" style={{ background: theme.glow, filter: "blur(16px)" }} />
+                      <svg viewBox="0 0 400 110" className="absolute bottom-0 left-0 w-full pointer-events-none" preserveAspectRatio="none" aria-hidden="true">
+                        <polygon points="0,110 70,52 145,82 240,22 320,62 400,12 400,110" fill={theme.m1}/>
+                        <polygon points="0,110 55,80 125,104 205,58 285,88 365,52 400,68 400,110" fill={theme.m2}/>
+                      </svg>
+                      <div className="relative z-10 p-6 pb-20">
+                        <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-2xl" style={{ background: "rgba(255,255,255,0.13)", color: theme.accent }}>
+                          {style.icon}
+                        </div>
+                        <h3 className="mb-2 text-lg font-black text-white leading-tight">{sp.title}</h3>
+                        <p className="text-sm leading-relaxed text-white/70">{sp.body}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : newDesign ? (
               <div className="grid gap-4 sm:grid-cols-2">
                 {entry.spotlights.map((sp) => {
                   const style = SPOTLIGHT_STYLE[sp.kind];
@@ -545,16 +671,21 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
               blurb="Things that are genuinely true here and worth knowing before you connect."
             />
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {entry.quickFacts.map((fact) => (
-                <div
-                  key={fact.title}
-                  className="dir-card rounded-2xl border border-white/10 bg-white/[0.04] p-6 shadow-lg shadow-black/30 flex flex-col gap-3"
-                >
-                  <span className="text-4xl leading-none">{fact.emoji}</span>
-                  <p className="text-base font-black text-white">{fact.title}</p>
-                  <p className="text-sm text-purple-100/75 leading-relaxed">{fact.body}</p>
-                </div>
-              ))}
+              {entry.quickFacts.map((fact) => {
+                return (
+                  <div
+                    key={fact.title}
+                    className={isRedesign
+                      ? "relative overflow-hidden rounded-2xl bg-[#0C0920] border border-white/8 p-6 flex flex-col gap-3 hover:border-purple-500/30 transition-colors"
+                      : "dir-card rounded-2xl border border-white/10 bg-white/[0.04] p-6 shadow-lg shadow-black/30 flex flex-col gap-3"}
+                  >
+                    {isRedesign && <div className="absolute inset-x-0 top-0 h-[2px] bg-purple-400/60"/>}
+                    <span className="text-4xl leading-none">{fact.emoji}</span>
+                    <p className="text-base font-black text-white">{fact.title}</p>
+                    <p className="text-sm text-purple-100/75 leading-relaxed">{fact.body}</p>
+                  </div>
+                );
+              })}
             </div>
           </section>
         )}
@@ -854,7 +985,7 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
           </>
         )}
 
-        {!entry.hideWhatIs && (
+        {!entry.hideWhatIs && !isRedesign && (
           <section className="mt-14">
             <SectionHead tone="purple" icon={<HelpCircle size={18} />} title={whatIsHeading(entry.kind, entry.name)} />
             {entry.intro[2] && (
@@ -866,7 +997,7 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
           </section>
         )}
 
-        {entry.slug !== "video-chat-turkey" && entry.slug !== "video-chat-brazil" && entry.slug !== "video-chat-japan" && entry.slug !== "video-chat-tokyo" && entry.slug !== "tamil-video-chat" && entry.slug !== "video-chat-united-states" && entry.slug !== "video-chat-canada" && entry.slug !== "video-chat-delhi" && entry.slug !== "video-chat-uk" && entry.slug !== "video-chat-france" && entry.slug !== "video-chat-spain" && entry.slug !== "video-chat-russia" && <section className="mt-14">
+        {entry.slug !== "video-chat-turkey" && entry.slug !== "video-chat-brazil" && entry.slug !== "video-chat-japan" && entry.slug !== "video-chat-tokyo" && entry.slug !== "tamil-video-chat" && entry.slug !== "video-chat-united-states" && entry.slug !== "video-chat-canada" && entry.slug !== "video-chat-delhi" && entry.slug !== "video-chat-uk" && entry.slug !== "video-chat-france" && entry.slug !== "video-chat-spain" && entry.slug !== "video-chat-russia" && !isRedesign && <section className="mt-14">
           <SectionHead
             tone="amber"
             icon={<Scale size={18} />}
@@ -938,31 +1069,48 @@ export default async function DirectoryEntryPage({ params }: { params: Promise<{
           <FaqAccordion items={entry.faqs} />
         </section>
 
-      </div>
+        </div>{/* end section card inner */}
+      </div>{/* end section card wrapper */}
 
       {entry.reviews && entry.reviews.length > 0 && (
-        <section className="mt-14 w-full bg-white/[0.025] py-14 text-center">
-          <p className="mb-2 text-xs font-bold uppercase tracking-widest text-purple-400">Loved by users</p>
-          <h2 className="mb-8 text-2xl sm:text-3xl font-black tracking-tight text-white">
+        <section className="mt-14 py-14">
+          <p className="mb-2 text-center text-xs font-bold uppercase tracking-widest text-purple-400">Loved by users</p>
+          <h2 className="mb-10 text-center text-2xl sm:text-3xl font-black tracking-tight text-white">
             What Users <span className="text-pink-400">Say</span>
           </h2>
-          <div className="mx-auto grid max-w-7xl gap-4 px-5 sm:px-8 sm:grid-cols-2 lg:grid-cols-4 text-left">
+          <div className="mx-auto grid max-w-7xl items-stretch gap-5 px-5 sm:px-8 sm:grid-cols-2 lg:grid-cols-4">
             {entry.reviews.map((r, i) => {
-              const colors = ["bg-pink-500", "bg-cyan-500", "bg-amber-500", "bg-purple-500"];
+              const REVIEW_BG = [
+                "linear-gradient(135deg,#ff7b7b,#e53535)",
+                "linear-gradient(135deg,#ff85c2,#d4178a)",
+                "linear-gradient(135deg,#c87eff,#8020e0)",
+                "linear-gradient(135deg,#7bc4ff,#1a6fff)",
+              ];
+              const ACCENT_COLOR = ["#e53535", "#d4178a", "#8020e0", "#1a6fff"];
+              const bg = REVIEW_BG[i % REVIEW_BG.length];
+              const accent = ACCENT_COLOR[i % ACCENT_COLOR.length];
               return (
-                <div key={i} className="dir-card rounded-2xl border border-white/10 bg-white/[0.05] p-5 flex flex-col justify-between aspect-square">
-                  <div>
-                    <div className="mb-3 flex gap-0.5 text-amber-400 text-sm">{"★★★★★"}</div>
-                    <p className="text-sm leading-relaxed text-purple-100/85 italic">&ldquo;{r.text}&rdquo;</p>
+                <div key={i} className="flex flex-col overflow-hidden rounded-2xl shadow-xl shadow-black/40">
+                  {/* Colored top — grows so all cards match height */}
+                  <div className="relative flex flex-1 flex-col px-5 pt-5 pb-10" style={{ background: bg }}>
+                    <span className="text-5xl font-bold leading-none text-white/80 select-none" style={{ fontFamily: "Georgia,serif" }}>&ldquo;</span>
+                    <p className="mt-0.5 mb-3 flex-1 text-sm leading-relaxed text-white font-medium">{r.text}</p>
+                    <div className="text-base text-yellow-200 tracking-wider">{"★★★★★"}</div>
+                    {/* Wave into white section */}
+                    <svg viewBox="0 0 400 38" className="absolute bottom-0 left-0 w-full" preserveAspectRatio="none" aria-hidden="true">
+                      <path d="M0,38 Q80,4 200,22 Q320,38 400,8 L400,38 Z" fill="white"/>
+                    </svg>
                   </div>
-                  <div className="mt-4 flex items-center gap-3">
-                    <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white ${colors[i % colors.length]}`}>
-                      {r.flag}
+                  {/* White bottom — fixed height */}
+                  <div className="flex items-center justify-between bg-white px-5 py-4">
+                    <div className="flex items-center gap-2.5">
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-base" style={{ background: bg }}>{r.flag}</span>
+                      <div>
+                        <p className="text-sm font-bold text-gray-900">{r.name}</p>
+                        <p className="text-xs text-gray-500">{r.role}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm font-semibold text-white">{r.name}</p>
-                      <p className="text-xs text-purple-300/70">{r.role}</p>
-                    </div>
+                    <span className="text-3xl font-bold leading-none select-none" style={{ fontFamily: "Georgia,serif", color: accent }}>&rdquo;</span>
                   </div>
                 </div>
               );

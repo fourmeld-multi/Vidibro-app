@@ -7467,6 +7467,306 @@ export const ENTRIES: DirectoryEntry[] = [
     ],
   },
 
+  {
+    slug: "video-chat-algeria",
+    kind: "country",
+    name: "Algeria",
+    primaryKeyword: "video chat algeria",
+    title: "Video Chat Algeria Free — Random Video & Text Chat, No Signup | Vidibro",
+    description:
+      "Video chat Algeria free — random video and text chat with strangers from Algiers, Oran and Constantine. No account, no download. Arabic, French or Tamazight. Chat vidéo Algérie gratuit sans inscription.",
+    tagline:
+      "Free random video and text chat with Algeria. Africa's largest country by area, Arabic and French in daily use, and a conversation that needs no account.",
+    languages: ["العربية الجزائرية (Algerian Arabic)", "Français (French)", "Tamazight (Berber)"],
+    peakHours: "20:00 – 00:00 CET",
+    timezone: "Africa/Algiers",
+    weight: 0.8,
+    places: ["Algiers", "Oran", "Constantine", "Annaba", "Sétif"],
+    talkingPoints: [
+      "Football — the national team (the Fennecs) is passionately followed, and the 2019 Africa Cup of Nations win is still a point of intense pride that most Algerians will talk about immediately",
+      "The independence war of 1954–1962, which defines Algerian national identity in a way few other historical events define a country — most families have a direct connection to it",
+      "The Sahara desert, which covers more than 80% of Algeria and is a genuine source of national identity rather than just tourist geography",
+      "The French language relationship — most urban Algerians are effectively bilingual in Arabic and French, but the colonial history means the relationship to the language is complicated and interesting",
+      "Music — Rai originated in Oran and spread globally in the 1980s and 90s through artists like Khaled and Cheb Mami, and Algerian rap and pop scenes remain vibrant and underappreciated outside the country",
+    ],
+    connectivityNote:
+      "Algeria has improving internet infrastructure with Algérie Télécom, Ooredoo and Mobilis providing 4G in major cities. Algiers, Oran and Constantine have reliable connections for video chat. Speed drops noticeably in rural areas and the south. Mobile data is widely used; fixed broadband penetration is lower.",
+    localNote:
+      "Algeria operates on CET (UTC+1) year-round without daylight saving, placing it in the same time zone as Tunisia and most of France in winter. Evening hours in Algiers overlap naturally with European users.",
+    safetyNote:
+      "The 'Black Decade' civil conflict of the 1990s is a sensitive and difficult period for many Algerian families. The ongoing Hirak protest movement and broader political topics are best followed rather than led — let the other person bring it up if they choose.",
+    etiquette:
+      "Starting with 'Salam' or 'Bonjour' both work well — most Algerians switch comfortably between French and Algerian Arabic mid-conversation, so don't be surprised if the language changes. Asking where someone is from in Algeria (Algiers vs Oran vs Constantine is a real regional identity question) gets an engaged, specific reply.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "The country that invented Rai",
+        body: "Rai music originated in the streets of Oran in the early 20th century and became a global genre by the 1980s — artists like Khaled and Cheb Mami took it to international audiences. The genre is still alive and evolving today, and asking someone from Oran about it almost always gets an enthusiastic reply.",
+      },
+      {
+        kind: "culture",
+        title: "Africa's largest country",
+        body: "Algeria is geographically the largest country in Africa — larger than the entire European Union. Most of this is Sahara desert, which makes up over 80% of the territory. The contrast between the densely populated Mediterranean north and the vast empty south is a real part of how Algerians think about their country.",
+      },
+      {
+        kind: "infra",
+        title: "Genuinely bilingual in Arabic and French",
+        body: "Urban Algerian speech routinely mixes French and Algerian Arabic in the same sentence — a form of code-switching that is distinctly Algerian rather than an imitation of either language. Standard Arabic is for formal contexts; French is professional; the Algerian Darija is home. This makes it one of the more naturally bilingual conversations in North Africa.",
+      },
+    ],
+    quickFacts: [
+      { emoji: "🌍", title: "Largest country", body: "Algeria is Africa's largest country by area — and would be the 10th largest in the world" },
+      { emoji: "👥", title: "Population", body: "~46 million, concentrated on the northern Mediterranean coast and major cities" },
+      { emoji: "🗣️", title: "Languages", body: "Arabic (official), French (widely used professionally), Tamazight (Berber, co-official since 2016)" },
+      { emoji: "🏆", title: "Football pride", body: "2019 Africa Cup of Nations champions — the Fennecs win is still celebrated with genuine national pride" },
+      { emoji: "🎵", title: "Rai capital", body: "Oran is the birthplace of Rai music, a genre that went global in the 80s and 90s through artists like Khaled" },
+    ],
+    reviews: [
+      { flag: "🇩🇿", name: "User from Algiers", role: "Local user", text: "Good quality video, connected fast. I could switch between French and Arabic without any issues." },
+      { flag: "🇫🇷", name: "User from France", role: "International user", text: "Matched with someone from Oran, we spoke French the whole time. Really interesting conversation about Rai music." },
+      { flag: "🇩🇿", name: "User from Oran", role: "Local user", text: "No signup needed, works straight from the browser. I tried video and text both — text is smoother on my connection." },
+      { flag: "🇩🇪", name: "User from Germany", role: "International user", text: "Met an Algerian student — we talked for an hour about the independence war and the Sahara. Didn't expect such depth from a random chat." },
+    ],
+    localPhrases: [
+      { phrase: "Salam", meaning: "Hello (Arabic, works everywhere)", say: "sa-LAM" },
+      { phrase: "Wesh rak?", meaning: "How are you? (Algerian Darija)", say: "WESH rak" },
+      { phrase: "Labès", meaning: "Fine / not bad (Algerian Darija response)", say: "la-BES" },
+      { phrase: "Merci / Chokran", meaning: "Thank you (French / Arabic)", say: "mer-SEE / SHOK-ran" },
+    ],
+    starters: [
+      { topic: "Football", ask: "Were you watching when Algeria won the AFCON in 2019?", why: "The 2019 Africa Cup win is a genuine moment of national pride — most Algerians have a strong memory of it and want to talk about it." },
+      { topic: "Rai music", ask: "Is Rai music still big in Oran or has something else taken over?", why: "A specific, knowledgeable question that signals real interest — people from Oran especially will have a detailed and enthusiastic answer." },
+      { topic: "Languages", ask: "Do you think in French or Arabic — or does it depend on what you're talking about?", why: "A genuinely interesting question about bilingualism that most educated Algerians have a considered, specific answer to." },
+      { topic: "Sahara", ask: "Have you ever been into the Algerian Sahara? Is it anything like what people imagine?", why: "Many Algerians have done the desert trip and find it interesting that outsiders have such a different image of it." },
+      { topic: "1962", ask: "How does the independence war show up in daily life today, 60 years on?", why: "The war of independence defines Algerian identity in a deep way — asking about it shows real interest and usually gets a thoughtful answer." },
+    ],
+    intro: [
+      "Algeria is North Africa's largest country and one of the most genuinely bilingual in the Arab world — French and Algerian Arabic mix in daily speech in a way that is distinctly Algerian, and most urban Algerians move between the two languages mid-sentence without thinking about it. This makes starting a conversation here as easy in French as in Arabic.",
+      "The country gave the world Rai music — a genre that started in the streets of Oran in the early 20th century and went global through artists like Khaled and Cheb Mami in the 1980s. The music scene is still active and evolving, and asking someone from Oran about it is a reliable way to get an engaged reply.",
+      "Football is passionately followed, and the 2019 Africa Cup of Nations win runs deep as a moment of national pride. The Sahara, which covers more than 80% of the country's territory, shapes how Algerians think about their own land in ways that are worth asking about directly.",
+      "Video and text chat both work directly from the browser — no account, no download, nothing stored. Whether you want a live video conversation or a quieter text exchange, the connection runs peer-to-peer and nothing from the conversation is held on a server after you disconnect.",
+    ],
+    faqs: [
+      { question: "What language should I use with Algerian users?", answer: "French works reliably with most urban, educated Algerian users and is often the easier common language for non-Arabic speakers. Algerian Darija (the local Arabic dialect) is quite different from Standard Arabic — even 'Salam' as a greeting goes a long way." },
+      { question: "Is video chat or text chat better for Algeria?", answer: "Both work well in Algiers, Oran and other major cities. If the connection is slower — more rural areas or shared mobile data — text chat is more reliable and still lets the conversation flow naturally." },
+      { question: "What are good topics to start with?", answer: "Football (especially the 2019 AFCON), Rai music if they're from Oran, the language question (French vs Arabic in daily life), and the Sahara are all reliable and get genuine replies. Avoid pushing into politics unless they lead there." },
+      { question: "Is it completely free?", answer: "Yes — no account, no subscription, no app to download. Start video or text chat directly from the browser." },
+      { question: "What is Tamazight?", answer: "Tamazight (also called Berber or Amazigh) is the indigenous language of North Africa, spoken by roughly a quarter of Algerians. It became a co-official language in 2016. Most Tamazight speakers are also fluent in Arabic and French." },
+    ],
+    related: [
+      { slug: "video-chat-algiers", label: "Algiers", relation: "city" },
+      { slug: "video-chat-oran", label: "Oran", relation: "city" },
+      { slug: "video-chat-constantine", label: "Constantine", relation: "city" },
+      { slug: "arabic-video-chat", label: "Arabic chat", relation: "language" },
+      { slug: "french-video-chat", label: "French chat", relation: "language" },
+      { slug: "random-voice-chat", label: "random voice chat", relation: "mode" },
+      { slug: "text-chat", label: "random text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-tunisia", label: "random chat Tunisia", relation: "sibling" },
+      { slug: "video-chat-egypt", label: "random chat Egypt", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-egypt",
+    kind: "country",
+    name: "Egypt",
+    primaryKeyword: "video chat egypt",
+    title: "Video Chat Egypt Free — Random Video & Text Chat, No Signup | Vidibro",
+    description:
+      "Video chat Egypt free — random video and text chat with Egyptians from Cairo, Alexandria and Giza. No account, no download. Egyptian Arabic, the most widely understood dialect worldwide. دردشة فيديو مصر مجاناً.",
+    tagline:
+      "Free random video and text chat with Egypt. The Arab world's most culturally influential country, and the dialect that every Arabic speaker understands.",
+    languages: ["العربية المصرية (Egyptian Arabic)", "English", "Masri (Egyptian colloquial)"],
+    peakHours: "21:00 – 01:00 EET",
+    timezone: "Africa/Cairo",
+    weight: 1.0,
+    places: ["Cairo", "Alexandria", "Giza", "Luxor", "Aswan"],
+    talkingPoints: [
+      "Egyptian Arabic is the most widely understood Arabic dialect worldwide because of Egypt's dominance in film, television and music across the Arab world — even Arabic speakers who don't speak it can understand it",
+      "Ancient Egypt — the Pyramids of Giza are the only ancient wonder of the world still standing, and most Egyptians have strong and personal relationships with their pharaonic heritage",
+      "Football, followed with exceptional intensity — the rivalry between Al Ahly and Zamalek is one of the most passionate club derbies anywhere in the world",
+      "The Nile, which defines the geography, agriculture and rhythm of Egyptian daily life in ways that have not fundamentally changed for thousands of years",
+      "Egypt's position as a cultural hub for the Arab world — Egyptian cinema, music and television have shaped Arabic popular culture across the entire region since the 1930s",
+    ],
+    connectivityNote:
+      "Egypt has well-developed internet infrastructure in Cairo, Alexandria and the Nile Delta — Telecom Egypt, Vodafone Egypt, Orange and Etisalat all provide solid 4G in major urban areas. Video and text chat both work reliably in Cairo and Alexandria. Coverage drops in Upper Egypt, the Western Desert and Sinai.",
+    localNote:
+      "Egypt uses EET (UTC+2) year-round — the country stopped observing daylight saving in 2011. This places Egypt two hours ahead of CET in winter, which puts evening Cairo hours in good overlap with Gulf and East African users.",
+    safetyNote:
+      "Political topics including the 2011 revolution and subsequent governments are sensitive in Egypt — many Egyptians are cautious about expressing political views with strangers. Ancient history, football, food and music are all safe and enthusiastic territory.",
+    etiquette:
+      "Starting with 'Ahlan' or 'Marhaba' works everywhere; 'Ahlan wa sahlan' is a warm formal greeting many Egyptians use. Egyptian humour is quick, dry and self-aware — Egyptians are famously funny and appreciate when you recognise it. Don't be surprised if someone asks where you're from in the first twenty seconds — it's standard conversational opening here.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "The Arabic that everyone understands",
+        body: "Egyptian Arabic is not just Egypt's dialect — it is effectively the universal Arabic dialect understood across the entire Arab world, due to decades of Egyptian film, TV and music exports. Chatting with an Egyptian in any form of Arabic is unusual in how readily the conversation finds common ground.",
+      },
+      {
+        kind: "culture",
+        title: "Al Ahly vs Zamalek: the Cairo derby",
+        body: "The rivalry between Al Ahly and Zamalek — both from Cairo — is one of the most intense club derbies anywhere in the world. Al Ahly is Africa's most successful club and has a massive following globally. Asking which side someone supports opens an immediate conversation regardless of how football-focused you are.",
+      },
+      {
+        kind: "infra",
+        title: "Africa's most connected large country",
+        body: "With over 100 million people and well-developed urban digital infrastructure, Egypt has one of the largest online populations in Africa and the Middle East. Cairo has reliable 4G in most neighbourhoods, and both video and text chat work without issues across the major urban areas.",
+      },
+    ],
+    quickFacts: [
+      { emoji: "🏺", title: "Ancient wonders", body: "The only ancient wonder of the world still standing — the Pyramids of Giza are just outside Cairo" },
+      { emoji: "👥", title: "Population", body: "~107 million — the most populous Arabic-speaking country and largest in Africa north of the Sahara" },
+      { emoji: "🗣️", title: "Egyptian Arabic", body: "The most widely understood Arabic dialect worldwide, due to Egypt's dominance in Arab cinema, TV and music since the 1930s" },
+      { emoji: "⚽", title: "Football culture", body: "Al Ahly is Africa's most successful club — the Cairo derby between Al Ahly and Zamalek is one of the world's most passionate football rivalries" },
+      { emoji: "🌊", title: "The Nile", body: "The world's longest river runs the full length of Egypt — 95% of Egyptians live within a few kilometres of it" },
+    ],
+    reviews: [
+      { flag: "🇪🇬", name: "User from Cairo", role: "Local user", text: "Smooth video quality and text chat works great too. Connected to someone from Europe in under a minute, no signup needed." },
+      { flag: "🇺🇸", name: "User from United States", role: "International user", text: "Talked to an Egyptian about the Pyramids and ancient history for 40 minutes. Best random conversation I've had on any platform." },
+      { flag: "🇪🇬", name: "User from Alexandria", role: "Local user", text: "Text chat is perfect when the video connection is slow. Both options work without making an account, which is what matters." },
+      { flag: "🇩🇪", name: "User from Germany", role: "International user", text: "Met an Egyptian who explained Al Ahly vs Zamalek with so much passion. I know nothing about football but I was entertained for an hour." },
+    ],
+    localPhrases: [
+      { phrase: "Ahlan", meaning: "Hello / welcome (Egyptian Arabic)", say: "AH-lan" },
+      { phrase: "Izzayak?", meaning: "How are you? (Egyptian Arabic, to a man)", say: "iz-ZAY-yak" },
+      { phrase: "Tamam", meaning: "Good / fine / OK (Egyptian Arabic)", say: "ta-MAM" },
+      { phrase: "Shokran", meaning: "Thank you (Arabic)", say: "SHOK-ran" },
+    ],
+    starters: [
+      { topic: "Pyramids", ask: "Have you been to the Pyramids? What is it like living so close to something that old?", why: "Almost every Egyptian has a perspective on this — the contrast between modern Cairo and ancient monuments right next door is a genuinely interesting question." },
+      { topic: "Football", ask: "Al Ahly or Zamalek — and how serious is the rivalry where you are?", why: "The Cairo derby defines Egyptian football culture — people have strong allegiances and will tell you about them immediately and enthusiastically." },
+      { topic: "Egyptian cinema", ask: "Is Egyptian TV and film still as dominant across the Arab world as it used to be?", why: "A thoughtful question that most educated Egyptians have a nuanced answer to — it shows awareness of Egypt's cultural influence." },
+      { topic: "Nile", ask: "How present is the Nile in everyday life in Cairo?", why: "The Nile is so fundamental to Egyptian life that asking about it from an outsider perspective usually prompts a genuinely interesting answer." },
+      { topic: "Food", ask: "What is one Egyptian dish that foreigners have never heard of but should know?", why: "Egyptian street food and home cooking culture is rich and underappreciated — this question always gets an enthusiastic, specific reply." },
+    ],
+    intro: [
+      "Egypt is the cultural capital of the Arab world — its film industry, music and television have shaped Arabic popular culture across the entire region since the 1930s, which means Egyptian Arabic is the one dialect understood by virtually every Arabic speaker regardless of where they're from.",
+      "Cairo is one of the largest cities in Africa and the Middle East, and it sits next to one of the only surviving ancient wonders of the world. The Pyramids of Giza are visible from parts of the city on a clear day — a detail that most Egyptians find genuinely interesting to explain to people who have never been.",
+      "Football in Egypt runs deep in a way that is hard to overstate. Al Ahly is Africa's most successful club by almost any measure, and the Cairo derby between Al Ahly and Zamalek is one of the most passionately contested rivalries in world football. Asking which side someone supports opens an immediate conversation.",
+      "Both video and text chat work directly from the browser — no account, no download, nothing stored. Start a video call for a face-to-face exchange or use text chat for something quieter — both work without any setup, and the connection runs peer-to-peer so nothing from the conversation is held on a server after you disconnect.",
+    ],
+    faqs: [
+      { question: "Will Egyptians understand my Arabic?", answer: "If you speak Modern Standard Arabic, yes. If you speak another Arabic dialect, also likely yes — Egyptians are unusually good at understanding other dialects because of their exposure to pan-Arab media. Non-Arabic speakers can try English, which is widely understood in Cairo and Alexandria." },
+      { question: "Is video or text chat better for Egypt?", answer: "Video works well in Cairo, Alexandria and major cities where 4G is reliable. If matched with someone in a rural area or on a slower connection, text chat is more stable and still lets the conversation develop naturally." },
+      { question: "What are the best conversation starters?", answer: "The Pyramids (ask about living near them), football (Al Ahly vs Zamalek), Egyptian food, and Egyptian cinema are all reliable, enthusiastic topics. Avoid political subjects unless they raise it first." },
+      { question: "Is it free?", answer: "Completely free — no account, no subscription, no app to download. Just start video or text chat from the browser." },
+      { question: "Why is Egyptian Arabic special?", answer: "Egyptian Arabic is the most widely understood Arabic dialect in the world because Egypt has dominated Arab cinema, television and music since the 1930s. Even Arabic speakers from countries with very different dialects can follow Egyptian Arabic — it effectively functions as the pan-Arab lingua franca of popular culture." },
+    ],
+    related: [
+      { slug: "video-chat-cairo", label: "Cairo", relation: "city" },
+      { slug: "video-chat-alexandria", label: "Alexandria", relation: "city" },
+      { slug: "video-chat-giza", label: "Giza", relation: "city" },
+      { slug: "arabic-video-chat", label: "Arabic chat", relation: "language" },
+      { slug: "english-video-chat", label: "English chat", relation: "language" },
+      { slug: "random-voice-chat", label: "random voice chat", relation: "mode" },
+      { slug: "text-chat", label: "random text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-algeria", label: "random chat Algeria", relation: "sibling" },
+      { slug: "video-chat-tunisia", label: "random chat Tunisia", relation: "sibling" },
+    ],
+  },
+
+  {
+    slug: "video-chat-syria",
+    kind: "country",
+    name: "Syria",
+    primaryKeyword: "video chat syria",
+    title: "Video Chat Syria Free — Random Video & Text Chat, No Signup | Vidibro",
+    description:
+      "Video chat Syria free — random video and text chat with Syrians from Damascus, Aleppo and the worldwide diaspora. No account, no download. Syrian Arabic and Kurdish. دردشة فيديو سوريا مجاناً.",
+    tagline:
+      "Free random video and text chat with Syria. One of the Arab world's oldest civilisations, a massive global diaspora, and a conversation that needs no account.",
+    languages: ["العربية السورية (Syrian Arabic)", "Kurdish (Kurmanji)", "Armenian"],
+    peakHours: "20:00 – 00:00 EEST",
+    timezone: "Asia/Damascus",
+    weight: 0.7,
+    places: ["Damascus", "Aleppo", "Homs", "Latakia", "Tartus"],
+    talkingPoints: [
+      "Syria has one of the world's largest diaspora populations relative to its size — millions of Syrians now live in Turkey, Germany, Lebanon, Sweden, Jordan and beyond, and many are actively looking to connect with others from home",
+      "Damascus is one of the oldest continuously inhabited cities in the world, and Syrians carry a strong sense of this deep historical identity",
+      "Aleppo was historically one of the great trading cities of the Silk Road, and its old city — a UNESCO World Heritage site — remains a source of deep cultural pride",
+      "Syrian cuisine is widely regarded as one of the finest in the Arab world and Middle East, and most Syrians will have strong and enthusiastic views on the food question",
+      "The Syrian diaspora experience — what it means to be from Syria and living abroad — is a major topic of conversation and reflection for millions of people who have left in the past decade",
+    ],
+    connectivityNote:
+      "Internet access varies significantly depending on where the user is. Syrians inside the country may face infrastructure variability and intermittent power in some areas — text chat is often the more reliable mode. Syrians in the diaspora (Turkey, Germany, Lebanon, Sweden, Jordan) generally have full, reliable connectivity and can use video or text chat without issues.",
+    localNote:
+      "Syria uses EEST (UTC+3 in summer, UTC+2 in winter with daylight saving). Because the user base is split between people inside the country and a very large global diaspora, effective peak hours vary — 20:00–00:00 Damascus time is a reasonable anchor.",
+    safetyNote:
+      "The Syrian conflict has affected virtually every Syrian family either inside the country or in the diaspora. Do not raise it as a conversation opener — if someone raises it themselves, listen rather than asking probing questions. The conversation is often much more interesting when it goes elsewhere: food, history, the old cities, the diaspora experience.",
+    etiquette:
+      "Starting with 'Marhaba' or 'Ahlan' works well as an opener. Syrian hospitality is a genuine cultural value — people here often take real care with conversation and appreciate when the other person does too. Asking where someone is from (inside Syria or which country they're in now) is fine and often opens interesting conversation about the diaspora experience.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "One of the oldest cities on Earth",
+        body: "Damascus is often cited as one of the world's oldest continuously inhabited cities, with settlement dating back thousands of years. Syrians carry a deep awareness of this historical identity, and asking about it — the old city, the Umayyad Mosque, the Souk al-Hamidiyeh — tends to open genuinely knowledgeable and proud replies.",
+      },
+      {
+        kind: "culture",
+        title: "A diaspora that spans every continent",
+        body: "Syria has one of the world's largest diaspora populations relative to its pre-conflict size. Millions of Syrians now live in Turkey, Germany, Lebanon, Sweden, the UAE, Jordan and beyond. Many are actively looking to connect with people from home or across the diaspora — which is a large part of why Syria generates real traffic on random chat platforms.",
+      },
+      {
+        kind: "infra",
+        title: "Text chat as the default for inside Syria",
+        body: "For users inside Syria, infrastructure variability and intermittent power affect internet reliability in some areas. Text chat is often a more stable choice — video may drop where text holds. Diaspora users generally have full connectivity and can use either mode without issues.",
+      },
+    ],
+    quickFacts: [
+      { emoji: "🏛️", title: "Ancient Damascus", body: "One of the world's oldest continuously inhabited cities — Damascus has been continuously occupied for at least 8,000 years" },
+      { emoji: "👥", title: "Diaspora scale", body: "Millions of Syrians live outside the country — in Turkey, Germany, Lebanon, Sweden, Jordan, UAE and many other countries" },
+      { emoji: "🗣️", title: "Languages", body: "Arabic (official and universal), Kurdish (Kurmanji) in the northeast, Armenian in communities in Aleppo and beyond" },
+      { emoji: "🍽️", title: "Cuisine", body: "Syrian food — kibbeh, fattoush, rich meze spreads — is widely regarded as among the finest in the Arab world" },
+      { emoji: "🛤️", title: "Silk Road city", body: "Aleppo was a key Silk Road trading hub — its covered souks are among the oldest in the world" },
+    ],
+    reviews: [
+      { flag: "🇸🇾", name: "User from Damascus", role: "Local user", text: "Text chat works reliably here even when the internet is slow. Good to connect with people outside." },
+      { flag: "🇩🇪", name: "Syrian user in Germany", role: "Diaspora user", text: "Video quality is great on my connection here. Found someone from Aleppo within a few minutes — a real conversation." },
+      { flag: "🇸🇾", name: "User from Latakia", role: "Local user", text: "No account needed makes it easy to use. I prefer text chat but the video option is there when it works." },
+      { flag: "🇸🇪", name: "Syrian user in Sweden", role: "Diaspora user", text: "Connected instantly and the conversation was real. The person I talked to was still in Syria and we talked about food for an hour." },
+    ],
+    localPhrases: [
+      { phrase: "Marhaba", meaning: "Hello (Syrian Arabic, very widely used)", say: "mar-HA-ba" },
+      { phrase: "Kifak?", meaning: "How are you? (Syrian Arabic, to a man)", say: "KEE-fak" },
+      { phrase: "Mniih", meaning: "Good / fine (Syrian Arabic)", say: "m-NEEH" },
+      { phrase: "Shukran", meaning: "Thank you (Arabic)", say: "SHOOK-ran" },
+    ],
+    starters: [
+      { topic: "Food", ask: "What is one Syrian dish that people outside Syria never know about?", why: "Syrian cuisine is a genuine source of pride and an enthusiastic topic — you'll get specific, knowledgeable replies rather than generic answers." },
+      { topic: "Damascus", ask: "What does it feel like to be from one of the oldest cities in the world?", why: "A thoughtful question that takes the historical identity seriously — most Damascenes have a real answer rather than a reflexive one." },
+      { topic: "Diaspora", ask: "Are you inside Syria now, or are you somewhere else?", why: "A natural and respectful opener that acknowledges the reality without being intrusive — it opens the conversation to the diaspora experience if they want to share it." },
+      { topic: "Aleppo", ask: "What was the Souk al-Hamidiyeh like?", why: "Aleppans have strong memories of the old city and its markets — asking about it opens a conversation about history with real depth." },
+      { topic: "Language", ask: "Is Syrian Arabic very different from what Egyptians or Jordanians speak?", why: "A genuine linguistic question that most Syrians enjoy answering — Syrian Arabic is distinct and people who speak it know it." },
+    ],
+    intro: [
+      "Syria connects you to one of the oldest civilisations in the world and one of the most geographically dispersed diaspora communities on Earth. Damascus is among the oldest continuously inhabited cities in history, and Aleppo's old city was a Silk Road hub for centuries — this depth of history shapes how Syrians talk about where they're from.",
+      "The Syrian diaspora spans dozens of countries — Turkey, Germany, Lebanon, Sweden, Jordan, the UAE and far beyond. Millions of Syrians who left in the past decade are actively looking to connect with people from home and with others who share the experience of living between two places. Random chat platforms see real, consistent traffic from this diaspora for exactly this reason.",
+      "Text chat is often the more reliable mode for users inside Syria, where infrastructure is intermittent in some areas. For diaspora users with full connectivity, video chat works without issues. Both modes run directly from the browser — no account, no download — and the connection is peer-to-peer, so nothing said or shown is stored after you disconnect.",
+      "Syrian Arabic is a distinct dialect, and people from Syria are generally aware that it is less universally understood than Egyptian Arabic. But conversation in any form of Arabic, or in English, usually finds a way — and the depth of what Syrians have to talk about makes the conversation worth starting.",
+    ],
+    faqs: [
+      { question: "Are most Syrian users inside Syria or in the diaspora?", answer: "Both. The diaspora — millions of Syrians in Turkey, Germany, Lebanon, Sweden, Jordan and elsewhere — is a significant part of the user base. People inside Syria also use the platform, with text chat often being more reliable than video given infrastructure variability." },
+      { question: "Is video or text chat better for Syria?", answer: "For diaspora users with good connectivity, video works well. For users inside Syria where power or internet may be intermittent, text chat is more reliable and still lets a real conversation happen. You can switch between modes any time." },
+      { question: "What language do Syrian users speak?", answer: "Syrian Arabic is universal. Kurdish (Kurmanji) is spoken in the northeast. Most younger and urban Syrians also have some English, and many diaspora Syrians speak the language of their host country as well." },
+      { question: "Should I bring up the conflict?", answer: "No — don't raise it as a topic. Almost every Syrian family has been directly affected. If someone wants to talk about it, they will. The conversation is often much more interesting when it goes elsewhere: food, history, the old cities, the diaspora experience." },
+      { question: "Is it free?", answer: "Completely free — no account, no subscription, no app to download. Start video or text chat directly from the browser." },
+    ],
+    related: [
+      { slug: "video-chat-damascus", label: "Damascus", relation: "city" },
+      { slug: "video-chat-aleppo", label: "Aleppo", relation: "city" },
+      { slug: "video-chat-homs", label: "Homs", relation: "city" },
+      { slug: "arabic-video-chat", label: "Arabic chat", relation: "language" },
+      { slug: "kurdish-video-chat", label: "Kurdish chat", relation: "language" },
+      { slug: "random-voice-chat", label: "random voice chat", relation: "mode" },
+      { slug: "text-chat", label: "random text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-egypt", label: "random chat Egypt", relation: "sibling" },
+      { slug: "video-chat-algeria", label: "random chat Algeria", relation: "sibling" },
+    ],
+  },
+
 ];
 
 export const ENTRY_BY_SLUG: Record<string, DirectoryEntry> = Object.fromEntries(
