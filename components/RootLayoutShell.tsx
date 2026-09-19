@@ -11,14 +11,14 @@ import "@/app/globals.css";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-  display: "optional",
+  display: "swap",
   preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-  display: "optional",
+  display: "swap",
   preload: false,
 });
 
@@ -79,7 +79,7 @@ export default function RootLayoutShell({
           {`document.documentElement.setAttribute('data-theme','dark');`}
         </Script>
         {/* Queue gtag + config before any useEffect fires so session source is set first */}
-        <Script id="ga-queue" strategy="beforeInteractive">
+        <Script id="ga-queue" strategy="afterInteractive">
           {`window.dataLayer = window.dataLayer || [];
 window.gtag = function gtag(){dataLayer.push(arguments);};
 if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
@@ -93,7 +93,7 @@ if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
         </Script>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-BSGKV3MTVF"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
         <PathTracker />
         <GA4Tracker />
