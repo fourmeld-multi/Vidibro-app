@@ -7367,6 +7367,106 @@ export const ENTRIES: DirectoryEntry[] = [
     ],
   },
 
+  {
+    slug: "video-chat-tunisia",
+    kind: "country",
+    name: "Tunisia",
+    primaryKeyword: "video chat tunisia",
+    title: "Video Chat Tunisia Free — Random Chat Online, No Signup | Vidibro",
+    description:
+      "Video chat Tunisia free — meet people from Tunis, Sfax and Sousse instantly. No account, no download. Talk in Arabic or French. Chat vidéo Tunisie gratuit sans inscription.",
+    tagline:
+      "Free random video chat with Tunisia. North Africa's most connected country, Arabic and French in daily use, and a conversation that needs no account.",
+    languages: ["العربية (Arabic)", "Français (French)", "Darija (Tunisian dialect)"],
+    peakHours: "20:00 – 00:00 CET",
+    timezone: "Africa/Tunis",
+    weight: 0.7,
+    places: ["Tunis", "Sfax", "Sousse", "Bizerte", "Kairouan"],
+    talkingPoints: [
+      "Football — the national team and European club football are followed passionately, and most Tunisians have a strong club allegiance worth asking about",
+      "The ancient Roman ruins at Carthage and Dougga, which most Tunisians have visited and are genuinely proud of",
+      "Tunisia's position as the birthplace of the Arab Spring in 2010 — a defining moment that Tunisians lived through firsthand and will often discuss candidly",
+      "The Sahara desert, which makes up the southern third of the country and is a source of real national identity separate from the Mediterranean coast image",
+      "French and Arabic in genuine daily mixed use — code-switching between the two in a single sentence is completely normal here",
+    ],
+    connectivityNote:
+      "Tunisia has solid internet infrastructure by regional standards — Tunisie Telecom, Ooredoo and Orange all provide good 4G coverage in Tunis and major coastal cities. Speed and reliability drop in the interior and deep south. Video chat works well in urban areas.",
+    localNote:
+      "Tunisia uses CET (UTC+1) year-round — no daylight saving — which puts it one hour ahead of Morocco and aligned with most of Europe in winter. Evening peak hours land at a time that overlaps well with European users.",
+    safetyNote:
+      "The 2010–2011 revolution is a point of real pride for many Tunisians and comes up naturally in conversation. Politics since then, including the 2021 political changes, is more sensitive territory — follow the other person's lead rather than pressing.",
+    etiquette:
+      "Greetings matter and are warm — 'Aslema' (Tunisian Arabic hello) or plain 'Bonjour' both work well as openers. It is normal to mix French and Arabic in the same sentence here, so don't be surprised if someone switches languages mid-reply. Asking where in Tunisia someone is from always gets an engaged, specific answer.",
+    spotlights: [
+      {
+        kind: "culture",
+        title: "Where the Arab Spring started",
+        body: "The wave of uprisings that swept the Arab world in 2010–2011 began in Tunisia with the self-immolation of Mohamed Bouazizi in Sidi Bouzid. Tunisians are acutely aware of this history and genuinely proud of it — the country was the only Arab Spring state to achieve a democratic transition, at least for a period. It comes up in conversation naturally and is worth understanding before it does.",
+      },
+      {
+        kind: "culture",
+        title: "French and Arabic, genuinely mixed",
+        body: "Tunisian daily speech routinely mixes French and Arabic in the same sentence in a way that is distinct from either language alone. Standard Arabic is formal; French is professional; Darija (the Tunisian dialect) is home. Most educated Tunisians move fluently between all three depending on who they're talking to.",
+      },
+      {
+        kind: "infra",
+        title: "Africa's most connected internet market",
+        body: "Tunisia consistently ranks among the top African countries for internet penetration and digital literacy. The tech and startup scene in Tunis has grown steadily, and there is a real, active community of developers and entrepreneurs that most people outside the region are unaware of.",
+      },
+    ],
+    quickFacts: [
+      { emoji: "🏛️", title: "Ancient history", body: "Carthage, once Rome's greatest rival, was located in what is now a Tunis suburb — Roman ruins are a short drive from the capital" },
+      { emoji: "👥", title: "Population", body: "~12 million people — compact, highly urbanised, with most concentrated on the northern coast" },
+      { emoji: "🗣️", title: "Languages", body: "Arabic (official), French (widely used professionally), Darija (Tunisian dialect in daily speech)" },
+      { emoji: "🌍", title: "Arab Spring origin", body: "The 2010–2011 revolution began here — Tunisia was the first and only Arab Spring country to complete a democratic transition" },
+      { emoji: "☀️", title: "Climate zones", body: "Mediterranean coast in the north, Sahara desert in the south — two completely different landscapes in one small country" },
+    ],
+    reviews: [
+      { flag: "🇹🇳", name: "User from Tunis", role: "Local user", text: "Good platform, quick to connect. I matched someone from France and we spoke in French without any issues." },
+      { flag: "🇫🇷", name: "User from France", role: "International user", text: "Talked with a guy from Sfax, great conversation about football and politics. Easy because we both spoke French." },
+      { flag: "🇹🇳", name: "User from Sousse", role: "Local user", text: "No signup needed which is the main thing. Connected on video within seconds, no lag." },
+      { flag: "🇩🇪", name: "User from Germany", role: "International user", text: "Met someone from Tunis who explained the Arab Spring from their perspective — one of the most interesting conversations I've had on a random chat site." },
+    ],
+    localPhrases: [
+      { phrase: "Aslema", meaning: "Hello / peace be upon you (Tunisian Arabic)", say: "as-LEH-ma" },
+      { phrase: "Lebes?", meaning: "How are you? / Everything OK? (Tunisian Darija)", say: "LEH-bes" },
+      { phrase: "Yeslem", meaning: "Thank you / bless you (Tunisian reply to greeting)", say: "yes-LEM" },
+      { phrase: "Bhi", meaning: "Good / fine (Tunisian Darija)", say: "bhi" },
+    ],
+    starters: [
+      { topic: "Football", ask: "Are you more of an Espérance or Club Africain supporter?", why: "Tunisia's two biggest clubs have an intense rivalry — most people have a strong side and will tell you immediately." },
+      { topic: "Carthage", ask: "Have you been to the Carthage ruins? What's it like seeing them right next to Tunis?", why: "Most Tunisians have visited and find it interesting that ancient history sits so close to modern city life." },
+      { topic: "Arab Spring", ask: "What do people in Tunisia say about 2011 now, fifteen years on?", why: "Tunisians are proud of the revolution and generally willing to discuss it thoughtfully — it gives the conversation real depth." },
+      { topic: "Languages", ask: "Do you switch between French and Arabic in the same sentence, or keep them separate?", why: "Code-switching is genuinely interesting here and most Tunisians have a considered, specific answer about their own habits." },
+      { topic: "Sahara", ask: "Have you ever been down to the desert part of the country?", why: "Many northern Tunisians have done the Sahara trip and have strong opinions about it — it often leads to good travel conversation." },
+    ],
+    intro: [
+      "Tunisia sits at the meeting point of the Arab world and the Mediterranean — Arabic and French mix in daily speech in a way that is distinct from either language alone, and most educated Tunisians switch between the two fluently depending on context.",
+      "The country is small but historically dense: Carthage, once Rome's greatest rival, is a suburb of the capital Tunis today, and Roman ruins are a short drive from the city center. This proximity of ancient history to modern life shapes how Tunisians relate to their own country.",
+      "Tunisia was the country where the Arab Spring began in 2010, and it remained the only Arab Spring nation to complete a democratic transition — a source of real, specific pride that comes up naturally in conversation with people who lived through it.",
+      "No account, no download — the call runs directly between browsers, so nothing said or shown during the connection is ever recorded or stored anywhere.",
+    ],
+    faqs: [
+      { question: "What language should I use with Tunisian users?", answer: "French works well with most urban, educated Tunisian users. Arabic works too, though the Tunisian dialect (Darija) is quite different from Standard Arabic. Many Tunisians will mix both languages in the same reply, which is completely normal." },
+      { question: "Is the internet connection good enough for video chat?", answer: "Yes in the cities — Tunis, Sfax and Sousse all have solid 4G coverage. Connection quality drops in rural interior areas and the deep south." },
+      { question: "What are good conversation topics with Tunisians?", answer: "Football (especially the Espérance vs Club Africain rivalry), the Carthage ruins, travel in Tunisia, and the 2011 revolution are all reliable openers that get genuine, engaged replies." },
+      { question: "Is Tunisia safe to talk about politically?", answer: "The 2011 revolution is fine — most Tunisians are proud of it. More recent political changes (2021 onwards) are sensitive territory. Follow the other person's lead." },
+      { question: "Is it completely free?", answer: "Yes — no account, no subscription, no app to download. Just start a video chat directly from the browser." },
+    ],
+    related: [
+      { slug: "video-chat-tunis", label: "Tunis", relation: "city" },
+      { slug: "video-chat-sfax", label: "Sfax", relation: "city" },
+      { slug: "video-chat-sousse", label: "Sousse", relation: "city" },
+      { slug: "arabic-video-chat", label: "Arabic chat", relation: "language" },
+      { slug: "french-video-chat", label: "French chat", relation: "language" },
+      { slug: "random-voice-chat", label: "random voice chat", relation: "mode" },
+      { slug: "text-chat", label: "random text chat", relation: "mode" },
+      { slug: "omegle-alternative", label: "Omegle alternatives", relation: "competitor" },
+      { slug: "video-chat-egypt", label: "random chat Egypt", relation: "sibling" },
+      { slug: "video-chat-france", label: "random chat France", relation: "sibling" },
+    ],
+  },
+
 ];
 
 export const ENTRY_BY_SLUG: Record<string, DirectoryEntry> = Object.fromEntries(
